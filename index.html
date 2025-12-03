@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ezi Nurse | Professional Nursing Education</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* BRAND COLORS */
+            --primary: #01b9f1;       /* Bright Blue (Buttons, Highlights) */
+            --primary-dark: #003b80;  /* Deep Navy (Text, Headers) */
+            --bg-card: #fffffd;       /* Off-White (Card Background) */
+            
+            /* NEUTRALS */
+            --secondary: #334155;     /* Slate 700 (Body Text) */
+            --accent: #f59e0b;        /* Amber 500 (Warnings) */
+            --bg-body: #f1f5f9;       /* Slate 100 (App Background) */
+            --text-main: #003b80;     /* Using Brand Dark Blue for Main Text */
+            --text-muted: #64748b;    /* Slate 500 */
+            --danger: #ef4444;
+            --success: #10b981;
+            
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            
+            --shadow-sm: 0 1px 3px rgba(0,59,128,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,59,128,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,59,128,0.1);
+            
+            --trans-fast: 0.2s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow: hidden; /* App-like feel */
+        }
+
+        /* --- APP CONTAINER --- */
+        #app {
+            width: 100%;
+            max-width: 480px; /* Mobile constraint */
+            background: var(--bg-card);
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* --- NAVIGATION HEADER --- */
+        .header {
+            padding: 20px;
+            background: var(--bg-card);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        
+        .header-title { 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            color: var(--primary-dark); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            letter-spacing: -0.5px;
+            transition: opacity 0.3s ease;
+        }
+        
+        .header-title span { color: var(--primary); } /* Highlight 'Nurse' or 'Ezi' */
+
+        .back-btn { background: none; border: none; font-size: 1.5rem; color: var(--primary-dark); cursor: pointer; display: none; }
+        .logout-btn { font-size: 0.85rem; color: var(--danger); font-weight: 600; cursor: pointer; text-decoration: none; }
+
+        /* --- VIEWS --- */
+        .view {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .view.active { display: flex; flex-direction: column; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- COMPONENTS --- */
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--trans-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary { background: var(--primary); color: white; box-shadow: var(--shadow-md); }
+        .btn-primary:active { background: var(--primary-dark); transform: scale(0.98); }
+        
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-ghost { background: transparent; color: var(--text-muted); font-size: 0.9rem; }
+
+        .card-menu {
+            display: grid;
+            gap: 16px;
+        }
+
+        .menu-item {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: left;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--trans-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .menu-item:hover { border-color: var(--primary); transform: translateX(4px); }
+        .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
+        .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
+        .menu-arrow { color: var(--primary); }
+
+        /* --- FORMS --- */
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            outline: none;
+            transition: var(--trans-fast);
+        }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(1, 185, 241, 0.1); }
+        .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; min-height: 20px; text-align: center; }
+
+        /* --- PAYWALL & PLACEHOLDER --- */
+        .paywall-container, .placeholder-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .icon-large { width: 64px; height: 64px; margin-bottom: 20px; color: var(--text-muted); }
+        .icon-lock { color: var(--accent); }
+        
+        .headline { font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 12px; }
+        .subtext { color: var(--text-muted); line-height: 1.5; margin-bottom: 30px; }
+
+        /* --- LOGO TEXT STYLE --- */
+        .logo-text-large {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+        .logo-text-large span { color: var(--primary); }
+
+        /* --- MODAL (Referral) --- */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            backdrop-filter: blur(2px);
+        }
+        .modal-card {
+            background: white;
+            width: 90%;
+            max-width: 350px;
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            animation: fadeIn 0.2s ease;
+        }
+        .close-modal {
+            position: absolute; top: 15px; right: 15px;
+            background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);
+        }
+
+        /* --- ICONS (SVG) --- */
+        svg { pointer-events: none; }
+
+        /* --- HELPERS --- */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- Header (Dynamic) -->
+    <header class="header" id="app-header">
+        <button class="back-btn" id="btn-back" onclick="app.goBack()">&#8592;</button>
+        <div class="header-title" id="header-branding">
+            Ezi<span>Nurse</span>
+        </div>
+        <div onclick="app.logout()" class="logout-btn" id="btn-logout">Logout</div>
+    </header>
+
+    <!-- VIEW: AUTH (Login/Signup) -->
+    <div id="view-auth" class="view active">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <div class="text-center mb-4">
+                <!-- Text Only Logo -->
+                <div class="logo-text-large">Ezi<span>Nurse</span></div>
+                <h1 class="headline" style="font-size: 1.25rem; opacity: 0.9;">Welcome Back</h1>
+                <p class="subtext">Sign in to access your dashboard</p>
+            </div>
+
+            <!-- Login Form -->
+            <div id="form-login">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="nurse@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="login-pass" class="form-input" placeholder="••••••••">
+                </div>
+                <div id="login-error" class="error-msg"></div>
+                <button class="btn btn-primary" onclick="app.login()">Login Securely</button>
+                <button class="btn btn-ghost" onclick="app.toggleAuthMode()">Don't have an account? Sign Up</button>
+            </div>
+
+            <!-- Signup Form (Hidden initially) -->
+            <div id="form-signup" class="hidden">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="signup-email" class="form-input" placeholder="new@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Create Password</label>
+                    <input type="password" id="signup-pass" class="form-input" placeholder="••••••••">
+                </div>
+                <div id="signup-error" class="error-msg"></div>
+                <button class="btn btn-primary" onclick="app.signup()">Create Account</button>
+                <button class="btn btn-ghost" onclick="app.toggleAuthMode()">Already have an account? Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW: DASHBOARD -->
+    <div id="view-dashboard" class="view">
+        <h2 class="headline">Dashboard</h2>
+        <p class="subtext">Select your course level to begin.</p>
+        
+        <div class="card-menu">
+            <div class="menu-item" onclick="app.navToCourse('MSc')">
+                <div><h3>MSc Nursing</h3><p>Master of Science</p></div>
+                <span class="menu-arrow">&#10095;</span>
+            </div>
+            <div class="menu-item" onclick="app.navToCourse('BSc')">
+                <div><h3>BSc Nursing</h3><p>Bachelor of Science</p></div>
+                <span class="menu-arrow">&#10095;</span>
+            </div>
+            <div class="menu-item" onclick="app.navToCourse('PBBSc')">
+                <div><h3>PBBSc Nursing</h3><p>Post Basic BSc</p></div>
+                <span class="menu-arrow">&#10095;</span>
+            </div>
+            <div class="menu-item" onclick="app.navToCourse('GNM')">
+                <div><h3>GNM</h3><p>General Nursing & Midwifery</p></div>
+                <span class="menu-arrow">&#10095;</span>
+            </div>
+            <div class="menu-item" style="border-color: var(--primary);" onclick="app.navTo3D()">
+                <div><h3 style="color:var(--primary)">3D Models</h3><p>Interactive Anatomy</p></div>
+                <span class="menu-arrow">&#10095;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW: SUBMENU (Years/Semesters) -->
+    <div id="view-submenu" class="view">
+        <h2 class="headline" id="submenu-title">Program Structure</h2>
+        <p class="subtext" id="submenu-subtitle">Select a specific item.</p>
+        <div class="card-menu" id="submenu-list">
+            <!-- Injected by JS -->
+        </div>
+    </div>
+
+    <!-- VIEW: SUBJECT LIST -->
+    <div id="view-subjects" class="view">
+        <h2 class="headline" id="subject-title">Subjects</h2>
+        <p class="subtext">Select a subject to view content.</p>
+        <div class="card-menu" id="subject-list">
+            <!-- Injected by JS -->
+        </div>
+    </div>
+
+    <!-- VIEW: PAYWALL -->
+    <div id="view-paywall" class="view">
+        <div class="paywall-container">
+            <svg class="icon-large icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <h2 class="headline">Premium Access Required</h2>
+            <p class="subtext">Your account does not have permission to access this course material. Purchase access to continue learning.</p>
+            <button class="btn btn-primary" onclick="app.showReferralModal()">Buy Now</button>
+            <button class="btn btn-outline" style="margin-top: 10px;" onclick="app.goBack()">Go Back</button>
+        </div>
+    </div>
+
+    <!-- MODAL: REFERRAL CHECK -->
+    <div id="modal-referral" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 class="headline" style="font-size: 1.25rem;">Referral Code?</h3>
+            <p class="subtext" style="margin-bottom: 20px;">Do you have a discount referral code?</p>
+            
+            <!-- Step 1: Selection -->
+            <div id="referral-step-1">
+                <button class="btn btn-primary" onclick="app.selectReferral(true)">I have a referral code</button>
+                <button class="btn btn-outline" onclick="app.selectReferral(false)">I do not have a code</button>
+                <button class="btn btn-ghost" onclick="app.closeReferralModal()">Cancel</button>
+            </div>
+
+            <!-- Step 2: Input Code -->
+            <div id="referral-step-2" class="hidden">
+                <div class="form-group">
+                    <input type="text" id="referral-input" class="form-input" placeholder="Enter Code (e.g. EZIFLAT25)" style="text-transform: uppercase;">
+                </div>
+                <div id="referral-error" class="error-msg"></div>
+                <button class="btn btn-primary" onclick="app.validateAndRedirect()">Apply & Buy</button>
+                <button class="btn btn-ghost" onclick="app.resetReferralModal()">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW: CONTENT PLACEHOLDER (Leaf Node) -->
+    <div id="view-content" class="view">
+        <div class="placeholder-container">
+            <svg class="icon-large" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <h2 class="headline" id="content-subject-name">Subject Name</h2>
+            <p class="subtext">Content for this subject is currently being curated by our expert faculty. Please check back soon.</p>
+            <div style="padding: 15px; background: #e0f2fe; border-radius: 8px; color: #003b80; font-size: 0.85rem;">
+                Dev Note: Check Source Code for Placeholder
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW: COMING SOON (3D) -->
+    <div id="view-coming-soon" class="view">
+        <div class="placeholder-container">
+            <svg class="icon-large" style="color: var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            <h2 class="headline">Interactive 3D Models</h2>
+            <p class="subtext">Our advanced 3D anatomical viewer is under development. This feature will be available in the next major update.</p>
+            <button class="btn btn-primary" onclick="app.goBack()">Return to Dashboard</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ================================================================
+      EZI NURSE - USER DATABASE
+     ================================================================
+    */
+    const USERS = [
+        {
+            email: "duraivelsamuel@gmail.com",
+            password: "Abinaya@1997",
+            deviceLock: false,
+            // GRANULAR ACCESS: Use an Array for specific years/semesters, or 'true' for all.
+            permissions: { 
+                msc: ['First Year'], 
+                bsc: false, 
+                pbbsc: false, 
+                gnm: false 
+            }
+        }
+    ];
+
+    /* ================================================================
+      COURSE DATA STRUCTURE
+     ================================================================
+    */
+    const COURSES = {
+        'MSc': {
+            'First Year': ['Nursing Education', 'Advanced Nursing Practice', 'Nursing Research & Statistics', 'Clinical Specialty - I'],
+            'Second Year': ['Nursing Management', 'Nursing Research (Dissertation)', 'Clinical Specialty - II']
+        },
+        'BSc': {
+            'Semester 1': ['Communicative English', 'Applied Anatomy', 'Applied Physiology', 'Applied Sociology', 'Nursing Foundations I'],
+            'Semester 2': ['Applied Biochemistry', 'Applied Nutrition & Dietetics', 'Nursing Foundations II', 'Health/Nursing Informatics'],
+            'Semester 3': ['Applied Microbiology', 'Infection Control & Safety', 'Adult Health Nursing I'],
+            'Semester 4': ['Pharmacology', 'Pathology', 'Genetics', 'Adult Health Nursing II', 'Professionalism'],
+            'Semester 5': ['Child Health Nursing I', 'Mental Health Nursing I', 'Community Health Nursing I', 'Educational Tech'],
+            'Semester 6': ['Child Health Nursing II', 'Mental Health Nursing II', 'Midwifery/Obstetrics I'],
+            'Semester 7': ['Community Health Nursing II', 'Midwifery/Obstetrics II', 'Nursing Research & Stats', 'Management of Nursing Services']
+        },
+        'PBBSc': {
+            'First Year': ['Nursing Foundation', 'Nutrition & Dietetics', 'Biochemistry & Biophysics', 'Psychology', 'Maternal Nursing', 'Child Health Nursing', 'Microbiology', 'Medical & Surgical Nursing'],
+            'Second Year': ['Sociology', 'Community Health Nursing', 'Mental Health Nursing', 'Introduction to Nursing Education', 'Introduction to Nursing Administration']
+        },
+        'GNM': {
+            'First Year': ['Bio-Science', 'Behavioral Science', 'Nursing Foundations', 'Community Health Nursing I'],
+            'Second Year': ['Medical Surgical Nursing I', 'Medical Surgical Nursing II', 'Mental Health Nursing', 'Child Health Nursing'],
+            'Third Year': ['Midwifery & Gynaecological Nursing', 'Community Health Nursing II']
+        },
+        '3D': {
+            'Systems': ['Skeletal System', 'Muscular System', 'Cardiovascular System', 'Digestive System', 'Nervous System']
+        }
+    };
+
+    /* ================================================================
+      APP LOGIC
+     ================================================================
+    */
+    const app = {
+        currentUser: null,
+        history: [], 
+        lockedCourseKey: null, // Tracks which course triggered the paywall
+        
+        // --- AUTHENTICATION ---
+        login: function() {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
+            const errorDiv = document.getElementById('login-error');
+            
+            errorDiv.textContent = "";
+
+            const user = USERS.find(u => u.email === email && u.password === pass);
+
+            if (!user) {
+                errorDiv.textContent = "Invalid email or password.";
+                return;
+            }
+
+            if (user.deviceLock) {
+                errorDiv.textContent = "Access Denied: Device Locked. Contact Admin.";
+                return;
+            }
+
+            this.currentUser = user;
+            document.getElementById('login-email').value = "";
+            document.getElementById('login-pass').value = "";
+            this.navTo('view-dashboard', true); 
+        },
+
+        signup: function() {
+            const email = document.getElementById('signup-email').value.trim();
+            const pass = document.getElementById('signup-pass').value.trim();
+            const errorDiv = document.getElementById('signup-error');
+
+            if (!email || !pass) {
+                errorDiv.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            if (USERS.find(u => u.email === email)) {
+                errorDiv.textContent = "User already exists.";
+                return;
+            }
+
+            const newUser = {
+                email: email,
+                password: pass,
+                deviceLock: false,
+                permissions: { msc: false, bsc: false, pbbsc: false, gnm: false }
+            };
+            USERS.push(newUser);
+
+            alert("Account created! Please login.");
+            this.toggleAuthMode();
+        },
+
+        toggleAuthMode: function() {
+            const loginForm = document.getElementById('form-login');
+            const signupForm = document.getElementById('form-signup');
+            const isLogin = !loginForm.classList.contains('hidden');
+
+            if (isLogin) {
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                document.querySelector('#view-auth .headline').textContent = "Create Account";
+                document.querySelector('#view-auth p').textContent = "Join Ezi Nurse today";
+            } else {
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                document.querySelector('#view-auth .headline').textContent = "Welcome Back";
+                document.querySelector('#view-auth p').textContent = "Sign in to access your dashboard";
+            }
+        },
+
+        logout: function() {
+            this.currentUser = null;
+            this.history = [];
+            this.navTo('view-auth', true);
+        },
+
+        // --- NAVIGATION ENGINE ---
+        navTo: function(viewId, clearHistory = false) {
+            document.querySelectorAll('.view').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+
+            if (clearHistory) {
+                this.history = [];
+            } else {
+                if (this.history.length === 0 || this.history[this.history.length - 1] !== viewId) {
+                   // Stack logic handled by specific functions
+                }
+            }
+
+            const backBtn = document.getElementById('btn-back');
+            const logoutBtn = document.getElementById('btn-logout');
+            const headerTitle = document.getElementById('header-branding');
+
+            if (viewId === 'view-auth') {
+                backBtn.style.display = 'none';
+                logoutBtn.style.display = 'none';
+                headerTitle.style.opacity = '0'; 
+                headerTitle.style.pointerEvents = 'none';
+            } else if (viewId === 'view-dashboard') {
+                backBtn.style.display = 'none';
+                logoutBtn.style.display = 'block';
+                headerTitle.style.opacity = '1';
+                headerTitle.style.pointerEvents = 'auto';
+            } else {
+                backBtn.style.display = 'block';
+                logoutBtn.style.display = 'block';
+                headerTitle.style.opacity = '1';
+                headerTitle.style.pointerEvents = 'auto';
+            }
+        },
+
+        pushHistory: function(state) {
+            this.history.push(state);
+        },
+
+        goBack: function() {
+            // If modal is open, close it first
+            const modal = document.getElementById('modal-referral');
+            if (!modal.classList.contains('hidden')) {
+                this.closeReferralModal();
+                return;
+            }
+
+            if (this.history.length === 0) {
+                this.navTo('view-dashboard');
+                return;
+            }
+            const prevState = this.history.pop();
+            
+            if (typeof prevState === 'string') {
+                this.navTo(prevState);
+            } 
+            else if (typeof prevState === 'object') {
+                if (prevState.type === 'submenu') {
+                    this.navToCourse(prevState.course, true);
+                } else if (prevState.type === 'dashboard') {
+                    this.navTo('view-dashboard');
+                }
+            }
+        },
+
+        // --- PAYWALL & REFERRAL LOGIC ---
+        
+        showReferralModal: function() {
+            document.getElementById('modal-referral').classList.remove('hidden');
+            this.resetReferralModal();
+        },
+
+        closeReferralModal: function() {
+            document.getElementById('modal-referral').classList.add('hidden');
+        },
+
+        resetReferralModal: function() {
+            document.getElementById('referral-step-1').classList.remove('hidden');
+            document.getElementById('referral-step-2').classList.add('hidden');
+            document.getElementById('referral-input').value = "";
+            document.getElementById('referral-error').textContent = "";
+        },
+
+        selectReferral: function(hasCode) {
+            if (hasCode) {
+                // Show input
+                document.getElementById('referral-step-1').classList.add('hidden');
+                document.getElementById('referral-step-2').classList.remove('hidden');
+            } else {
+                // No code -> Redirect to No Referral URL
+                this.redirectToRazorpay(false);
+            }
+        },
+
+        validateAndRedirect: function() {
+            const codeInput = document.getElementById('referral-input').value.trim().toUpperCase();
+            const errorDiv = document.getElementById('referral-error');
+            
+            if (codeInput === "EZIFLAT25") {
+                this.redirectToRazorpay(true);
+            } else {
+                errorDiv.textContent = "Invalid referral code.";
+            }
+        },
+
+        redirectToRazorpay: function(hasReferral) {
+            const courseName = this.lockedCourseKey ? this.lockedCourseKey : "course";
+            let url;
+            
+            if (hasReferral) {
+                url = `https://www.razorpay.com/${courseName}_withreferral`;
+            } else {
+                url = `https://www.razorpay.com/${courseName}_withoutreferral`;
+            }
+            
+            this.closeReferralModal();
+            window.open(url, '_blank');
+        },
+
+        // --- COURSE LOGIC ---
+        navToCourse: function(courseKey, isBack = false) {
+            if (!isBack) this.pushHistory({ type: 'dashboard' });
+
+            const submenuList = document.getElementById('submenu-list');
+            const title = document.getElementById('submenu-title');
+            const subTitle = document.getElementById('submenu-subtitle');
+
+            const sections = Object.keys(COURSES[courseKey]);
+            const firstKey = sections[0]; 
+            const isSemester = firstKey.includes('Semester');
+            const timeUnit = isSemester ? 'Semesters' : 'Years';
+            const singularUnit = isSemester ? 'semester' : 'year';
+
+            title.textContent = `${courseKey} ${timeUnit}`;
+            subTitle.textContent = `Select a specific ${singularUnit} to continue.`;
+
+            submenuList.innerHTML = '';
+
+            sections.forEach(section => {
+                const item = document.createElement('div');
+                item.className = 'menu-item';
+                item.innerHTML = `<div><h3>${section}</h3><p>View Subjects</p></div><span class="menu-arrow">&#10095;</span>`;
+                item.onclick = () => this.checkAccessAndOpen(courseKey, section);
+                submenuList.appendChild(item);
+            });
+
+            this.navTo('view-submenu');
+        },
+
+        navTo3D: function() {
+            this.pushHistory({ type: 'dashboard' });
+            
+            const submenuList = document.getElementById('submenu-list');
+            const title = document.getElementById('submenu-title');
+            const subTitle = document.getElementById('submenu-subtitle');
+            
+            title.textContent = "Anatomical Systems";
+            subTitle.textContent = "Select a system to explore.";
+            submenuList.innerHTML = '';
+
+            COURSES['3D']['Systems'].forEach(sys => {
+                const item = document.createElement('div');
+                item.className = 'menu-item';
+                item.innerHTML = `<div><h3>${sys}</h3></div><span class="menu-arrow">&#10095;</span>`;
+                item.onclick = () => {
+                    this.pushHistory({ type: 'submenu', course: '3D' }); 
+                    this.navTo('view-coming-soon');
+                };
+                submenuList.appendChild(item);
+            });
+
+            this.navTo('view-submenu');
+        },
+
+        checkAccessAndOpen: function(course, section) {
+            // Store context for paywall redirection
+            this.lockedCourseKey = course;
+
+            const keyMap = { 'MSc': 'msc', 'BSc': 'bsc', 'PBBSc': 'pbbsc', 'GNM': 'gnm' };
+            const permKey = keyMap[course];
+            const userPerm = this.currentUser.permissions[permKey];
+
+            let hasAccess = false;
+
+            if (userPerm === true) {
+                hasAccess = true;
+            } else if (Array.isArray(userPerm)) {
+                if (userPerm.includes(section)) {
+                    hasAccess = true;
+                }
+            }
+
+            if (hasAccess) {
+                this.openSubjectList(course, section);
+            } else {
+                this.pushHistory({ type: 'submenu', course: course });
+                this.navTo('view-paywall');
+            }
+        },
+
+        openSubjectList: function(course, section) {
+            this.pushHistory({ type: 'submenu', course: course });
+            
+            const listContainer = document.getElementById('subject-list');
+            document.getElementById('subject-title').textContent = section + " Subjects";
+            listContainer.innerHTML = '';
+
+            const subjects = COURSES[course][section];
+
+            subjects.forEach(sub => {
+                const item = document.createElement('div');
+                item.className = 'menu-item';
+                item.innerHTML = `<div><h3>${sub}</h3></div><span class="menu-arrow">&#10095;</span>`;
+                item.onclick = () => this.openContent(sub);
+                listContainer.appendChild(item);
+            });
+
+            this.navTo('view-subjects');
+        },
+
+        openContent: function(subjectName) {
+            this.pushHistory('view-subjects');
+            document.getElementById('content-subject-name').textContent = subjectName;
+            this.navTo('view-content');
+
+            /* =====================================================================
+             PLACEHOLDER: INSERT CHAPTERS + TOPICS + URLS HERE
+             =====================================================================
+            */
+            console.log("Opened placeholder for: " + subjectName);
+        }
+    };
+
+    // Initial State
+    app.navTo('view-auth', true);
+
+</script>
+</body>
+</html>
