@@ -143,19 +143,48 @@
         .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
         .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
         .menu-arrow { color: var(--primary); }
+        
+        /* Specific styles for PDF links */
+        .menu-item.is-pdf { border-left: 4px solid var(--primary); }
+        .menu-item.section-header { background: #f1f5f9; border: none; padding: 10px 0; box-shadow: none; pointer-events: none; }
+        .menu-item.section-header h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- FORMS --- */
+        /* --- FORMS & PASSWORD TOGGLE --- */
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
+        
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
         .form-input {
             width: 100%;
             padding: 14px;
+            padding-right: 45px; /* Space for eye icon */
             border: 1px solid #cbd5e1;
             border-radius: var(--radius-md);
             font-size: 1rem;
             outline: none;
             transition: var(--trans-fast);
         }
+        
+        .toggle-password-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .toggle-password-btn:hover { color: var(--primary); }
+
         .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(1, 185, 241, 0.1); }
         .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; min-height: 20px; text-align: center; }
 
@@ -213,8 +242,24 @@
             background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);
         }
 
+        /* --- PDF VIEWER OVERLAY --- */
+        #pdf-viewer-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 200; background: #000;
+            display: flex; flex-direction: column;
+        }
+        .pdf-header {
+            height: 56px; background: #1e293b; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: white;
+        }
+        .pdf-title { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+        .pdf-close { background: none; border: none; color: white; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        
+        iframe#pdf-frame {
+            width: 100%; height: 100%; border: none; background: #fff;
+        }
+
         /* --- ICONS (SVG) --- */
         svg { pointer-events: none; }
+        .toggle-password-btn svg { pointer-events: none; width: 20px; height: 20px; }
 
         /* --- HELPERS --- */
         .hidden { display: none !important; }
@@ -252,7 +297,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" id="login-pass" class="form-input" placeholder="••••••••">
+                    <div class="password-wrapper">
+                        <input type="password" id="login-pass" class="form-input" placeholder="••••••••">
+                        <button type="button" class="toggle-password-btn" onclick="app.togglePassword('login-pass', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
                 </div>
                 <div id="login-error" class="error-msg"></div>
                 <button class="btn btn-primary" onclick="app.login()">Login Securely</button>
@@ -267,7 +317,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Create Password</label>
-                    <input type="password" id="signup-pass" class="form-input" placeholder="••••••••">
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-pass" class="form-input" placeholder="••••••••">
+                        <button type="button" class="toggle-password-btn" onclick="app.togglePassword('signup-pass', this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
                 </div>
                 <div id="signup-error" class="error-msg"></div>
                 <button class="btn btn-primary" onclick="app.signup()">Create Account</button>
@@ -359,15 +414,21 @@
         </div>
     </div>
 
-    <!-- VIEW: CONTENT PLACEHOLDER (Leaf Node) -->
+    <!-- VIEW: CONTENT (Modified for Real Data) -->
     <div id="view-content" class="view">
-        <div class="placeholder-container">
-            <svg class="icon-large" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <div style="margin-bottom: 20px;">
             <h2 class="headline" id="content-subject-name">Subject Name</h2>
-            <p class="subtext">Content for this subject is currently being curated by our expert faculty. Please check back soon.</p>
-            <div style="padding: 15px; background: #e0f2fe; border-radius: 8px; color: #003b80; font-size: 0.85rem;">
-                Dev Note: Check Source Code for Placeholder
-            </div>
+            <p class="subtext" id="content-subject-desc">Course Materials</p>
+        </div>
+
+        <!-- Dynamic List Container -->
+        <div id="content-list-container" class="card-menu"></div>
+
+        <!-- Fallback Placeholder -->
+        <div id="content-placeholder" class="placeholder-container hidden">
+            <svg class="icon-large" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <h2 class="headline">No Content Yet</h2>
+            <p class="subtext">This subject is currently being updated. Please check back later.</p>
         </div>
     </div>
 
@@ -380,6 +441,18 @@
             <button class="btn btn-primary" onclick="app.goBack()">Return to Dashboard</button>
         </div>
     </div>
+
+    <!-- FULLSCREEN PDF OVERLAY -->
+    <div id="pdf-viewer-overlay" class="hidden">
+        <div class="pdf-header">
+            <span class="pdf-title" id="pdf-viewer-title">Document</span>
+            <button class="pdf-close" onclick="app.closePdf()">
+                Close ✕
+            </button>
+        </div>
+        <iframe id="pdf-frame" src=""></iframe>
+    </div>
+
 </div>
 
 <script>
@@ -401,6 +474,44 @@
             }
         }
     ];
+
+    /* ================================================================
+      CONTENT DATA (Populated)
+     ================================================================
+    */
+    const CONTENT_DATA = {
+        'Nursing Education': [
+            { title: "Syllabus", type: "header" },
+            { title: "Nursing Education Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/10zqzBfgzvczBWDwSr2r3tJiR5amA7xek/view?usp=sharing" },
+            
+            { title: "Units & Notes", type: "header" },
+            { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1hSyBW7h9g7BfWWvx_KKvnpDykuBOmxra/view?usp=sharing" },
+            { title: "UNIT 2 - TEACHING LEARNING PROCESS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1QSQTqFkwHWKE57H8TaY3rcgSxUtrj5nf/view?usp=sharing" },
+            { title: "UNIT 3 - EDUCATIONAL & INSTRUCTIONAL TECHNOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1uB93pTQIRgogNLHxaN0CHH7o1U_Mw1OD/view?usp=sharing" },
+            { title: "UNIT 4 - MEASUREMENT AND EVALUATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1LUu3EJ3GkYx0L2R6JzU79kFVlInFuR6P/view?usp=sharing" },
+            { title: "UNIT 5 - STANDARDIZED & NON-STANDARDIZED TESTS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1luXvr1c8JSm9ay9OO3aqThtv5avBxY5Z/view?usp=sharing" },
+            { title: "UNIT 6 - ADMINISTRATION, SCORING & REPORTING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/13kK8Z75OIQF9WgjmUPrncuT6RXZryBBw/view?usp=sharing" },
+            { title: "UNIT 7 - STANDARDIZED TOOLS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1Xc4-9F5AbVfR16tZwodTGKeF1fC3nkS4/view?usp=sharing" },
+            { title: "UNIT 8 - NURSING EDUCATIONAL PROGRAMS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1L5J9uuzscWr3092RZDRFIy8xb8x_JYZe/view?usp=sharing" },
+            { title: "UNIT 9 - CONTINUING EDUCATION IN NURSING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1X9vR02KnO9SOrlbPEzwS30FEDH760GfC/view?usp=sharing" },
+            { title: "UNIT 10 - CURRICULUM DEVELOPMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1FZzOuC6nyrDOvpBOGm7RwFFuXDn4voNy/view?usp=sharing" },
+            { title: "UNIT 11 - TEACHER PREPARATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/17yhkHsttzvbFB2k2SObCCLMpGof6BH8O/view?usp=drive_link" },
+            { title: "UNIT 12 - GUIDANCE AND COUNSELING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/18iosJA095VbxaoVf_EuwQS-WxN2KYNhn/view?usp=drive_link" },
+            { title: "UNIT 13 - ADMINISTRATION OF NURSING CURRICULUM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1-qVTHpVi-WGKzpJRoZUOSTzmzaDDHjPa/view?usp=drive_link" },
+            { title: "UNIT 14 - MGT OF NURSING EDUCATIONAL INSTITUTIONS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/14JNi3o2DI0mu_QmEnu-xINnWpuGpWbht/view?usp=drive_link" },
+            { title: "UNIT 15 - STANDARDS AND ACCREDITATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1UbbwBTJHGtWksS5Fgo_DyD957Tz8alG5/view?usp=drive_link" },
+
+            { title: "Previous Year Questions", type: "header" },
+            { title: "PYQ - July 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1E14_cVTlgxbJDb5O4r39Osa6ch8Mu5fY/view?usp=drive_link" },
+            { title: "PYQ - September 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1B0YTIZG1n0CxuTdByyT2p4GZ_pHLXu_S/view?usp=drive_link" },
+            { title: "PYQ - July 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/14NlepSQXlIGC1ilN1s7Cf7LC-OlMdk4Z/view?usp=drive_link" },
+            { title: "PYQ - July 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/16AmFz9qgRMlgrRzY-_3u0EQtFeM0AcF6/view?usp=drive_link" },
+            { title: "PYQ - November 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1nMCJKAeJUfOClDO_BojGacABnMUWaGwy/view?usp=drive_link" },
+            { title: "PYQ - January 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1l74MSEIU-IWE74TQWGjlWrgIf1RM5xQ2/view?usp=drive_link" },
+            { title: "PYQ - November 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1TTWNgx9K8sbcAxBbsM51BT-AidcoVrB0/view?usp=drive_link" },
+            { title: "PYQ - July 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1ZjjGKZB750Frrh7bBhIsD4W5C2PqvxCi/view?usp=drive_link" }
+        ]
+    };
 
     /* ================================================================
       COURSE DATA STRUCTURE
@@ -441,7 +552,7 @@
     const app = {
         currentUser: null,
         history: [], 
-        lockedCourseKey: null, // Tracks which course triggered the paywall
+        lockedCourseKey: null, 
         
         // --- AUTHENTICATION ---
         login: function() {
@@ -501,6 +612,12 @@
             const signupForm = document.getElementById('form-signup');
             const isLogin = !loginForm.classList.contains('hidden');
 
+            document.getElementById('login-pass').type = 'password';
+            document.getElementById('signup-pass').type = 'password';
+            
+            const eyeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+            document.querySelectorAll('.toggle-password-btn').forEach(btn => btn.innerHTML = eyeIcon);
+
             if (isLogin) {
                 loginForm.classList.add('hidden');
                 signupForm.classList.remove('hidden');
@@ -511,6 +628,28 @@
                 loginForm.classList.remove('hidden');
                 document.querySelector('#view-auth .headline').textContent = "Welcome Back";
                 document.querySelector('#view-auth p').textContent = "Sign in to access your dashboard";
+            }
+        },
+
+        togglePassword: function(fieldId, btn) {
+            const input = document.getElementById(fieldId);
+            const isPassword = input.type === 'password';
+            input.type = isPassword ? 'text' : 'password';
+            
+            if (isPassword) {
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    </svg>`;
+                btn.style.color = 'var(--primary)';
+            } else {
+                btn.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>`;
+                btn.style.color = 'var(--text-muted)';
             }
         },
 
@@ -529,10 +668,6 @@
 
             if (clearHistory) {
                 this.history = [];
-            } else {
-                if (this.history.length === 0 || this.history[this.history.length - 1] !== viewId) {
-                   // Stack logic handled by specific functions
-                }
             }
 
             const backBtn = document.getElementById('btn-back');
@@ -562,7 +697,13 @@
         },
 
         goBack: function() {
-            // If modal is open, close it first
+            // Check if PDF viewer is open
+            const pdfOverlay = document.getElementById('pdf-viewer-overlay');
+            if (!pdfOverlay.classList.contains('hidden')) {
+                this.closePdf();
+                return;
+            }
+
             const modal = document.getElementById('modal-referral');
             if (!modal.classList.contains('hidden')) {
                 this.closeReferralModal();
@@ -588,7 +729,6 @@
         },
 
         // --- PAYWALL & REFERRAL LOGIC ---
-        
         showReferralModal: function() {
             document.getElementById('modal-referral').classList.remove('hidden');
             this.resetReferralModal();
@@ -607,11 +747,9 @@
 
         selectReferral: function(hasCode) {
             if (hasCode) {
-                // Show input
                 document.getElementById('referral-step-1').classList.add('hidden');
                 document.getElementById('referral-step-2').classList.remove('hidden');
             } else {
-                // No code -> Redirect to No Referral URL
                 this.redirectToRazorpay(false);
             }
         },
@@ -630,13 +768,11 @@
         redirectToRazorpay: function(hasReferral) {
             const courseName = this.lockedCourseKey ? this.lockedCourseKey : "course";
             let url;
-            
             if (hasReferral) {
                 url = `https://www.razorpay.com/${courseName}_withreferral`;
             } else {
                 url = `https://www.razorpay.com/${courseName}_withoutreferral`;
             }
-            
             this.closeReferralModal();
             window.open(url, '_blank');
         },
@@ -697,22 +833,14 @@
         },
 
         checkAccessAndOpen: function(course, section) {
-            // Store context for paywall redirection
             this.lockedCourseKey = course;
-
             const keyMap = { 'MSc': 'msc', 'BSc': 'bsc', 'PBBSc': 'pbbsc', 'GNM': 'gnm' };
             const permKey = keyMap[course];
             const userPerm = this.currentUser.permissions[permKey];
 
             let hasAccess = false;
-
-            if (userPerm === true) {
-                hasAccess = true;
-            } else if (Array.isArray(userPerm)) {
-                if (userPerm.includes(section)) {
-                    hasAccess = true;
-                }
-            }
+            if (userPerm === true) hasAccess = true;
+            else if (Array.isArray(userPerm) && userPerm.includes(section)) hasAccess = true;
 
             if (hasAccess) {
                 this.openSubjectList(course, section);
@@ -747,11 +875,57 @@
             document.getElementById('content-subject-name').textContent = subjectName;
             this.navTo('view-content');
 
-            /* =====================================================================
-             PLACEHOLDER: INSERT CHAPTERS + TOPICS + URLS HERE
-             =====================================================================
-            */
-            console.log("Opened placeholder for: " + subjectName);
+            const listContainer = document.getElementById('content-list-container');
+            const placeholder = document.getElementById('content-placeholder');
+            
+            // Check if we have specific data for this subject
+            if (CONTENT_DATA[subjectName]) {
+                placeholder.classList.add('hidden');
+                listContainer.innerHTML = '';
+                
+                CONTENT_DATA[subjectName].forEach(item => {
+                    if (item.type === 'header') {
+                        const header = document.createElement('div');
+                        header.className = 'menu-item section-header';
+                        header.innerHTML = `<div><h3>${item.title}</h3></div>`;
+                        listContainer.appendChild(header);
+                    } else if (item.type === 'pdf') {
+                        const row = document.createElement('div');
+                        row.className = 'menu-item is-pdf';
+                        row.innerHTML = `<div><h3>${item.title}</h3><p>${item.subtitle}</p></div><span class="menu-arrow">&#10095;</span>`;
+                        row.onclick = () => this.openPdf(item.url, item.title);
+                        listContainer.appendChild(row);
+                    }
+                });
+            } else {
+                // Show placeholder for other subjects
+                listContainer.innerHTML = '';
+                placeholder.classList.remove('hidden');
+            }
+        },
+
+        // --- PDF VIEWER ---
+        openPdf: function(url, title) {
+            const overlay = document.getElementById('pdf-viewer-overlay');
+            const frame = document.getElementById('pdf-frame');
+            const titleEl = document.getElementById('pdf-viewer-title');
+
+            // Transform Google Drive URL to Preview Mode for embedding
+            let embedUrl = url;
+            if (url.includes('drive.google.com') && (url.includes('/view') || url.includes('open?'))) {
+                embedUrl = url.replace(/\/view.*/, '/preview').replace('open?', 'file/d/');
+            }
+
+            titleEl.textContent = title;
+            frame.src = embedUrl;
+            overlay.classList.remove('hidden');
+        },
+
+        closePdf: function() {
+            const overlay = document.getElementById('pdf-viewer-overlay');
+            const frame = document.getElementById('pdf-frame');
+            overlay.classList.add('hidden');
+            frame.src = ""; // Stop loading
         }
     };
 
