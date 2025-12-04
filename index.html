@@ -325,9 +325,20 @@
     /* --- DATA STRUCTURES (Includes MSc First Year for Testing) --- */
     const COURSES = {
         'MSc': {
-            'First Year': ['Nursing Education', 'Advanced Nursing Practice', 'Nursing Research & Statistics', 'Medical Surgical Nursing', 'Community Health Nursing', 'Obstetric & Gynecological Nursing', 'Child Health Nursing', 'Mental Health Nursing I'],
+            // REAL DATA: Uses IDs to prevent conflicts
+            'First Year': [
+                { id: 'MSc_Yr1_Edu', label: 'Nursing Education' },
+                { id: 'MSc_Yr1_AdvNurs', label: 'Advanced Nursing Practice' },
+                { id: 'MSc_Yr1_Research', label: 'Nursing Research & Statistics' },
+                { id: 'MSc_Yr1_MedSurg', label: 'Medical Surgical Nursing' },
+                { id: 'MSc_Yr1_CommHealth', label: 'Community Health Nursing' },
+                { id: 'MSc_Yr1_OBG', label: 'Obstetric & Gynecological Nursing' },
+                { id: 'MSc_Yr1_ChildHealth', label: 'Child Health Nursing' },
+                { id: 'MSc_Yr1_MentalHealth', label: 'Mental Health Nursing I' }
+            ],
             'Second Year': ['Nursing Management', 'Medical Surgical Nursing II', 'Community Health Nursing II', 'Obstetric & Gynecological Nursing II', 'Child Health Nursing II', 'Mental Health Nursing II']
         },
+        // DUMMY DATA: Kept as strings for now
         'BSc': {
             'Semester 1': ['Communicative English', 'Applied Anatomy', 'Applied Physiology', 'Applied Sociology', 'Nursing Foundations I'],
             'Semester 2': ['Applied Biochemistry', 'Applied Nutrition & Dietetics', 'Nursing Foundations II', 'Health/Nursing Informatics'],
