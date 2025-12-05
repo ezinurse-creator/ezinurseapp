@@ -1,1 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gynecology - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Gynecology." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: auto; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Syllabus PDF Link -->
+    <a href="https://drive.google.com/file/d/1Yv9QA7vgXdULMD3P_k_CF-rVl67vfpbx/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 GYNECOLOGY - SYLLABUS
+    </a>
+    
+    <div id="units">
+        
+        <!-- UNIT 1 - INTRODUCTION -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/18xGoeBab-R1cHyEZWjySRi8ixzJ1ZQZr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Gynecology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T88EQ5kHyS_f-dIhckZV6NTJsIWe28rF/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, History Collection & Physical Examination</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QXnXuMiWFpnc-jY_UctgeYi7ShFiJMxE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Systemic & General Examination, Investigations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Af8kbjzNG_cvxgwgZQFLN-yuR2_sAsdu/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Examination and Investigations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ty6szM-8SA1CNV6_WGW616SD27-Gd5Pz/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 - PUBERTY -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - PUBERTY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1CiOubDSqJ7hE_gKZswVtfmcWA9AirxZp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Puberty</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NOg1TaUyPtChzDwMNF_sskp9r2WDvHSe/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Puberty & Genital Organ Changes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AZ0ta6oczTpUZ1ZgR9fSgH-0DiihSsAI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Menstrual Cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/112ERT5uhNWSs6XtShoop6Q1UWKM0U3p8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Puberty & Cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18Yi1Q69aONIgCj-Mm64KVQmNch7U51be/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Disorders of Menstruation & Premenstrual Syndrome</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15Ye8VNvEltM-ukUQUO0fpDGLQsoxssQl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Menstruation Disorders & PMS</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1egK2qe72OLrvPh8J2w5fVrEEMlmTq5iu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Dysmenorrhea</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eQh8BfFeBi4RBu_tJmT8J7VWxk6GD_KL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cryptomenorrhea & Dysfunctional Uterine Bleeding</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qfGPINSz7vcdV49KXh_5DwPsuOZPihRe/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Bleeding Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Unotlic0_pNeXO9F4qCnl1xhdj4P9cqY/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 - FERTILITY AND INFERTILITY -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - FERTILITY AND INFERTILITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1GdamHnbpiTYEzq1hm6UnaDcr8nbQKYXK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Fertility and Infertility</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15-OQGjIbqjQzSLRut1Bn5MSxUTSIgQAy/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition of Fertility & Infertility, Causes- Both in Male and Female and Investigation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DLV2NvvNR2ThskNU6RZV0epcIsRDwF5q/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Fertility Concepts & Investigation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kZTqrDQcEnAQCFLoX6U2FjXsMw2k06aI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management of Infertility & Artificial Reproductive Techniques</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1buF_NgZRDE1X0rF17F3kBEcUVziI2xAM/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Management & ART</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZzJrOqEmsnQKU3POEMei9x2Ch2q3E_4j/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 4 - PELVIC INFECTIONS -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - PELVIC INFECTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1_Cu90ecMSZ0mSnadjMyTQzwCl0QX1QEC/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Pelvic Infections</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WhFbd9LlTFyEITpi6yyfLCYmj7tZR-uo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pelvic Infections: Vulvitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1w-s8eqlmgaXsJeljrVH1KNwQCt9Rjk9i/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bartholinitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17ZBUHvIeVrY8k8KFe_G27LT92azUn-t7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Vulvitis & Bartholinitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wSktZh5sobkPn4jKZBw-d9Zn155dt44P/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vaginitis, Trichomonas Vaginitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11fkXbsYB_xCW-sIgpnuhMVsjUKFB69w2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Moniliasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17ZBUHvIeVrY8k8KFe_G27LT92azUn-t7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Vaginitis & Moniliasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xEQGEfc3-EYihATA4qIJj_Hl98QSMCkt/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Metritis, Salpingitis, Oophritis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J36jGz2kmaJlSm1IUv12Lb2Cy-XO-cdH/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Uterine & Adnexal Infections</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fCWGk0xVg2w8aQlNCN28b2Bj2Vn4P_Pk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cervical Erosions, Pelvic Inflammatory Disease & Pelvic Abscess</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cFO6o9TQ7wHHorCJClgarhlpClDcQQQk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Cervical & PID</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N5EF7PzDAfGWMkBwSXbt2CnNdLPE-YKS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pelvic Tuberculosis, STD: Syphilis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lvGjfPCG7DdcFIvE_rCIaTq6fe3IQEx2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Pelvic TB & Syphilis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iLbocd3uVgXvMhjaNV0W0WYmZV2sRi58/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>STD: Gonorrhea, Warts</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FUwQoMPdOJt5skpjycKFXoICPLjXN24B/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Gonorrhea & Warts</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17f9-wMJq1KMKSBbIB719lcqA8ovaahY3/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>HIV</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1W9i-FfDSwnaK06gg6MM55Tmja6QSA5YU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: HIV</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oitJUZUEpfE6ieJUxzRunosDMeuY66Li/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 5 - GYNAECOLOGICAL DISORDERS -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - GYNAECOLOGICAL DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1nfncIh2vyIStpCq0YYKCkxK3usiWJVwx/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Gynaecological Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lCBrwbC6WZ32yHc1l3PM8WfdQovrIPrr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gynaecological Disorders: Retroversion & Retro Flexion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14QH3-eBgEgz85KeQdgVgmzS3gGkQ2LWT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Retroversion & Retroflexion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GkxhK8ebafu2TuKz4l6ZSasks9I9neCI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fistulas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14mWFKgQKRqGZc2epfsYCdvbnphsGxtcD/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Fistulas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qV5jgDA_vYC8USuUE8zrToJV04uXRLrh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Uterine Displacement & Prolapse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JiIFraMyRd7VswI819IxmXW6G1z8wOys/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Displacement & Prolapse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cDJFy0cPuiCL5pE4zrhjzttgvUIgrPaQ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Uterine Malformations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14w8rs9BLnCLtzVLjD0maXdX5fGpuuHPz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Uterine Malformations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fP7VTJwnBvgz6unO5SGsdsHv_5YvYH8z/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ovarian Cysts & Uterine Fibroids</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K2UfOuO1UQ3ofoAtMv9zXrfjXFs_CT5W/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Ovarian Cysts & Fibroids</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eVXUZxm0pHgpi0FztrRmrg4RZdRhEfqS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Uterine Polyps & Tumors of the reproductive tract: Benign and Malignant</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-V-lhyG4LrjlHDf2Mp0OasIOMnzqfkqa/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Palliative Care and Rehabilitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12pUbK4fxM8mMnYJiMr_t-ZZg0fP-kMQ_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Tumors, Polyps & Palliative Care</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13sngWWm5emLOKo_jc8W6m4rMhwwHbgHH/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 6 - BREAST DISORDERS -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - BREAST DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1GB2alVdkyv0UYtwN1mJ2RcfZ9wvXD6Fv/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Breast Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rCDcV4KrWjFBEgptXHvnCOk5N6Uz74xh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mastitis & Breast Engorgement</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rppzTkMZp-TtTZYE0fe_yfW6bWBivqul/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Breast Abscess</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18U_2dOiCJLJDEke9VukfFkIJUC5yhxLs/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Infections & Engorgement</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UZyeFmbcWZytZrT2Onx8SesRMvVQvibA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Breast Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_K9XWmCuA6GawgqRGi8JWb-iQymac3fa/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Breast Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dR_HqlypQI2-c0VTzvHwfSch87Tf4h91/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 7 - MENOPAUSE -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - MENOPAUSE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Ug9GmklV0wlQ2PRb2DJAagX88x_Q4mSD/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Menopause</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hWSgDFOq8vncEhkXmgwbDoauOdSWjEip/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Menopause</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fk4roecDDHp5uc09-AHcpu7rr7JqsQvf/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Menopause</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16bau6tpD0FPaYGodJaSAXKczWFLMQlTk/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the unit content
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+
+            // Dynamic max-height for smooth collapse animation
+            if (unitContent.classList.contains('active')) {
+                // If expanding, set max-height to scrollHeight
+                unitContent.style.maxHeight = unitContent.scrollHeight + "px";
+            } else {
+                // If collapsing, reset max-height to 0
+                unitContent.style.maxHeight = "0";
+            }
+        }
+        
+        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+        document.addEventListener('DOMContentLoaded', () => {
+             const allUnits = document.querySelectorAll('.unit-header');
+             allUnits.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 
+                 if (index === 0) {
+                     // Unit 1 is active by default
+                     header.setAttribute('aria-expanded', 'true');
+                     content.classList.add('active');
+                     // Set the max-height dynamically for the open unit
+                     // Needs a slight delay to ensure scrollHeight is calculated correctly after CSS application
+                     setTimeout(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                     }, 50);
+                 } else {
+                     // All other units are initially collapsed
+                     header.setAttribute('aria-expanded', 'false');
+                     content.classList.remove('active');
+                     content.style.maxHeight = '0';
+                 }
+             });
+        });
+    </script>
+</body>
+</html>
 
