@@ -1,1 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applied Microbiology And Infection Control Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Microbiology And Infection Control." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brand);
+            margin: 0 0 12px 0;
+            padding-top: 10px;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        .pyq-header {
+            background: var(--accent) !important;
+        }
+        .pyq-header:hover {
+            background: #0092bf !important;
+        }
+
+        .subject-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            padding: 0 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            .subject-title { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://drive.google.com/file/d/14VZ3brthlUjws9b3ozOANxkZTLQxFgT4/view?usp=sharing" class="syllabus-btn" target="_blank">
+        📄 APPLIED MICROBIOLOGY SYLLABUS
+    </a>
+    
+    <div id="units">
+        <h2 class="subject-title">APPLIED MICROBIOLOGY</h2>
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION (SECTION A)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1ivpOICYcFdYxTo8O1Dm7hfXz0zKfO_iE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VQjMg12eqSvo8VuBRSJHmkCBqxQKQIPF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Definition, History of Microbiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qDGatSpcuRvha7kRsjc4NhW7lBhQyq5H/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UX6a8ZBggVZyp46qTAYlpBD39Mr8yW9_/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - GENERAL CHARACTERISTICS OF MICROBES (SECTION A)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1acm4BEOQxK34WQkakVJ7S7_iVdfGZ2Is/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NJSGWt-7y-TDeay8uRipdnN7rR5ZdJc2/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>AM classification of bacteria</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xWanwUFVnK_T2MdEo3wUWjVB-1KBzTNr/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UFspi0JCzimr9Fa6VKs6DoyCVeXeZ8qs/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ultra Structure of Bacterial Cell, Gram Negative and Gram Positive Bacteria Cell wall</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EDsgWI82n6s-V-UEnNJQPhrmQMeF-34p/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Dio8KBMBKpwWSUWJ-LU9rn9xxDZ3E6Nb/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Growth of Microorganisms, Bacterial Growth Curve, Factors Affecting Microbial Growth</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FuY-Hnz-rlrvZLmHVCTDp9rbqavVA48D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NJ7qNs8rR-xOo1bc7UCLGelAYP-moZTz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>AM Staining Technique</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X6ehAFeHfFV7jLvuoRz5-cbZ9F6hmYoX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ykFeLFdPgEQvt8bqaYsCv1QnY93bpN0r/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>AM Culture Methods</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HMvgO3JLae-a6YTB4UvEWOyDOW_2vPLY/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TJu6HnzQC7Gnie7_DdT9ZeBM8JJ6v16g/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - PATHOGENIC ORGANISMS (SECTION A)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1XeN3qoW_bg_szoY5FUqC-IawgdHvHQci/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oaBmJbfUzugBhHDPqvYQ4AIiV67OoCOl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Microorganism, Bacteria</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hDPeQCggTO1ms50TcbMJbdlRTs1syJJt/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Oph24WX3gjV5hgIOzQl1MEkHCB4_Eq6o/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Parasite, Vector and Rodents</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rZLf5CliLt2j8nZhE9kWW-YfIMwPgTtw/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vector and Rodents its sources</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SKRv8p0-CChqtNzngEELbe-y-iIOjo07/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_6jeCGBCFS05P84Nq0JUpy2UJxTS2NlU/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - IMMUNITY (SECTION A)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1sMvClYYuI3EGbsePvJyycqg-gwBTnZ10/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ODv6HroXDQknbJt42PYhbZOUh2iR_Xw4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immunity, Antigen, Antibody, Antigen - Antibody Reaction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AtWGs2PN3R9WVWZgzETy25DJ_0qf7u1h/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypersensitivity - 1, Hypersensitivity - 2, Hypersensitive - 3, Hypersensitivity 4</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/124loH6HCG9EUzJIhHXbG84Bs5oZ0z6iz/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FEyturu2BmtDGVeuxmoiGlKqu51Iyojg/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Serological Test</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zAiwgEDhF2OT_XDUE_nOECFu9EVPu8Ta/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immunoglobulin</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PkrO4stHg0-Bb7V_rdF9vz7LpNu6Hi95/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sNTp0W6idWfhXuuEdHMApaR6twni4zP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️️</span><span>Vaccine, Live Attenuated Vaccines, Inactivated Vaccines, Subunit Vaccines, Toxoid Vaccines, Viral Vector Vaccines</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jAmwATi5Q2-o-MAgx6qWzhmkhlYZwQYn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nucleic Acid Vaccines, Storage and Handling of Vaccine, Cold Chain, Immunization Schedule</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1i62HzO-LrB6cuMH7eIqQDZnQfoqPCl8B/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WXZMCCWJL9vQ_1rVmhgcF21kK1kQ2ile/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="subject-title">INFECTION CONTROL INCLUDING SAFETY</h2>
+        <!-- === UNIT 1 (SECTION B) === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 1 - HAI (HOSPITAL ACQUIRED INFECTION) (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1hXSWi41OkfFixOnbI-vyDI6jeGXh_7Z3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RiRi7SU4pl3IB5i447w0aDi6wBh78gbF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Classification, Source, Mode of Transmission & Types of infection.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jkXdKs0ua98CgybiwkY8xlYwD7ju-oqS/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Classification of Immunity, Definition, Types, Pathophysiology, Symptoms, Diagnosis & Management of HAI</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12hSH1N-NsEFdjcwuuNwxBJEhpKnp7jkV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y9j16dzxCn9_vf3D9mCRcWoMeJp1w2a0/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Causes, Symptoms, Diagnosis & Prevention of VAIs, Definition, Causes, Symptoms, Diagnosis and Prevention of CLABSI, Members & Roles of Infection Control Team</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17TFz_UP4fv2wgz9T6VAARepSI5ovHkEL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Causes, Symptoms, Diagnosis & Prevention of VAIs, Definition, Causes, Symptoms, Diagnosis and Prevention of CLABSI, Members & Roles of Infection Control Team</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P_cUbJfCQsLHCWb4j8kAyeZx1X3EMLVQ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15VxisTRivzeOukq4TED5yJ03BPnAUflX/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 2 (SECTION B) === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - ISOLATION PRECAUTIONS AND USE OF PERSONAL PROTECTIVE EQIPMENT (PPE) (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1cwaHiL-3HH_kfXNt_vfrGiijED6JFO6X/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/150t_Hmvje1cGfny4-I3r7V3xzzLb6B7G/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types of Isolation System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mh06yrdXvPy27AA_fUiZGuYIwAWOM9Xq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Airborne, Droplet & Contact Precautions, Multidrug Resistant Organisms, Epidemiology & Infection Prevention - CDC Guidelines, Use of PPE</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12cBRdd0S-n5_tnrzPrmc_VFq3NB7QviB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L-_P_0xUFUndR_eG3sVZQ4IcRinWka-D/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 (SECTION B) === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - HAND HYGIENE (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/11TWE0cCHuLwQENIegMxKycH49sYIrplH/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cMUEEZh3s-MK3Cm19R1-UDG7U6Ei9RKs/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Types, Moments of Hand Hygiene</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GW9bJ5lVoRPUyMZBlaW-rdycKV3UcyJn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1M1XERaEXv9dAccCOPcVI-0aafYV3P5C6/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 (SECTION B) === -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - DISINFECTION AND STERILIZATION (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1xDFiuJOWGVCxE4_riPA5Uzr-FrYujcrD/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bXX7Axx6Qkn7WIUqFcnEalDESU2Iuzdl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sterilization & Disinfection, Disinfection & Sterilization and Physical Disinfection</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ms43n_KJKqvqdlakodD6-gnWvKZ2UJn4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Filtration Sterilization, Radiation Sterilization, Chemical Agents, and Halogens</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ElCxU2QZ3mNhJL3PnriGe8k9JdczAT7q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H_wEqzbsLpQPSI8Fh7lgVFb4lZ7f_SU9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Surfactants, Guides to use , Compatibility & Testing, Storage & Handling , Documentation & Training of Disinfectants</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VFBJ_7wFujb02MYO4dMgeppYIC5irfBx/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Application Methods, Contact & Dwell Time, Ventilation & Safety Precaution of Disinfection, Spaulding Principle, Critical, Semi Critical & Non Critical Items</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MYR_SPHph665gedp4k2GGH7aa_RssLYK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14YqEu9d6L0kCXDBC8TveD09tH9_2vSfN/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 (SECTION B) === -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - SPECIMEN COLLECTION (REVIEW) (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1aZg5oPzznvebPpTP8Vwkk5xDDb5ByYVE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yTan5kIWnav_eKLgDQC3w2bArohIwMbn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Specimen Collection, Universal Precautions, General principles, Types of Specimen & Collection Techniques, CSF Collection, Sputum Collection, Swab Collection, Specimen Transport and Storage, Staff Precautions,</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15vEmrFEL-o0mEolRqQevqZIqYIC9U6cH/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EvGfmGq9tRogwokgFYqzsGARZWzM1ZTT/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 (SECTION B) === -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - BMW (BIO MEDICAL WASTE MANAGEMENT) (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1t3rRIFHVg-3hbrR0PlSXsM5FvtCwXbdy/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19ubCye0Os6j-f40ollw5I3aK_2ivBhF9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Classification, Process, Treatment and Disposal of Biomedical Waste</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dDpnw_lFWQlgducd9a-gmSNPcHAHMajD/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P1Jm1nG0MOLXW6dAb-9XHGUVX3ijZLRV/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management, Process, Collection, Transport of Laundry and Infection Control and Prevention</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oCgi8D4grp1C1uTWjGm2GG2XuSx864Bn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13oFzPzdDN7RZQ7YqcRraCyibz1NQQFIY/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 7 (SECTION B) === -->
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - ANTIBIOTIC STEWARDSHIP (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1eUXV9sPaOGVsCleRCZQy6D8Hencm02pM/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Cq1PtiOOY5yfEzy_9tTHlJ-BiAd--U9W/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Importance of Antibiotic Stewardship, Definition, Causes, Classification & Common types in Hospitals of Antimicrobial Resistance</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hR4ad6uF9v_ezaAetkOGb2zphVKg9HHS/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition & Diagnosis of MRSA, Definition, Diagnosis & Prevention of MRDO</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N2YpZy-5pu9n8dWrdJk939HfB_jLDbTJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1t5cwJmjUoTJiCewrG0zPrPvYxfOtEdQ5/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 8 (SECTION B) === -->
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - PATIENT SAFETY INDICATORS (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1jwBVW-KH6JPTI6tlWHwGBgk9VVKl2b2z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nMWtlBEXCykH0nCH5dsyvmE21DeKLczn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Vulnerable Patients, Prevention of Latrogenic Injury, Care of lines, Drains & Tublings</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1C2e8-KARSCOa53N4ottvu9-zpOBNYr4j/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Restrain Policy and care - Physical and Chemical, Blood and Blood Transfusion Policy, Prevention of IV Complication & Fall Prevention</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qg-GtwSX1lUuLg1C1O0VK8XpS7iQh9dO/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PgjY5JE3MNYGgQGu8KCgk4yHzHdoHBa8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Prevention of DVT, Shifting and Transporting of Patient & Surgical Safety</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rZ_-i-T47_5dIZZi9nSdSYusG633oFmE/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care Coordination Event Related to Medication Recommendation and Administration, Prevention of Communication Errors & HAI'S & Documentation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nawAtEJPkxoQpuwsP-Api6Ou3IHLhtl2/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z9_i7Vggv0qst5joDH3WGTlzpoFPMK8C/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Capturing of incidents, RCA,CAPA & Report Writing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H-WizdHE0Cq0DUtjNSrdC2HBFU44Z-cF/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Qh3-GnpuGbU_x52p3BeOE8AvcNlF4bOO/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 9 (SECTION B) === -->
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - IPSG (INTERNATIONAL PATIENT SAFETY GOALS) (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1J40wzpmHIhmCvqb7GBN41GmTKhnDZgsR/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rlFWH7z6mgPXx_yMLeYnorVZoWxUbLaH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Patient Safety & International Patient Safety Goals</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cZgQcPLrY9r2F7EjVIaRzQx_Q5pehWOe/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X8Ys0lPmY1RoiOLcyGuHFrdBoBb07CM2/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 10 (SECTION B) === -->
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - SAFETY PROTOCOL (SECTION B)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Uls_asVn6CSZoi-rwf63PUYTXGf1AGVZ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FqrK3n-dU_xrjHSbURQA7iqcatKvO7eR/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Five "S" s, Radiation Safety, Laser Safety, Fire Safety, Hazmat Safety</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ftx0xSMa6Ks_MiLzCVccbhAonDbjILbm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types of Spill & Spill Management, MSDS, Environmental Safety, Maintenance of Temperature & Humidity, Emergency Codes, Employee Safety Indicators, Role of nurse in times of Disaster</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GKTM3o-97x_pcMf3JCq3RNK_3BW_sntK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1boBjTxzS2HudnBkcQ3Gk7hbDdvSLqAB9/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 11 (SECTION B) === -->
+        <div class="unit-container" id="unit15">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - EMPLOYEE SAFETY INDICATORS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1vE39pZGUUXrLiLMA8hLwHHkuvGk61-b8/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mRpVeylz3EU1SgJvhF61vzs6k23uKVNu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Employee Vaccination, Needle Stick Injury</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SyKrdFsvemrtvNvbUbqzIuuMUT_UhP6s/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L4zh2Vx7fa86slZ5iJrQ0sl0qj_HwL16/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fall Prevention and Annual Health Check</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Megb1yuGoxrScS-32XQ98adYgs07FCPk/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Jc_6FU6P5byBwAFSb7wY1YUi46BKHPhx/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the unit content visibility
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        // JavaScript to automatically expand the first unit on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
 
