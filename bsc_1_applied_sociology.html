@@ -1,1 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applied Sociology Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Sociology." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1Zsa4yX9_78mNk3Pjhgfob1Qc5FqjKBIi/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 APPLIED SOCIOLOGY SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - SOCIOLOGY AND SIGNIFICANCE IN NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1BV88-SV64qyZy2AvrAIPGB1ZJD51DAmB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JD-OhAL3WPEq9rnOqqD6kYAhcOUpIObw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Nature and Scope of Sociology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u8bWIpQ5fC3yktDmg66mN38HY-eKCvMh/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12MBeYznRTpkmbHX78NoJLvUJFwp1jWir/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Significance of Sociology in Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u7FU_65guX6RG_Mlt3JbEplwNvIhbMe1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lxVqH1-YNH8hgdFOqgO2C-fEf-ejNiFo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Branches of sociology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QKFdw1TsUUXYdBzkkC3FjN9ZQxBc2enA/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FIaYMQewgyKFu27kFK4m6X9YK0mEmC8y/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - SOCIAL STRUCTURE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1xdwGthzzd0zsASOL8d5okW0uIRW5iqpB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MiXAZIWmMPcInvAUZJsrONySquZ5mEuO/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Basic concept of society, Community, Association and institution, Individual and society, Personal disorganization</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ROsnZsb_YDwsg42DQfyF1AjY3_VmiTZh/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QgctcJ0whzw1HJIg5xsIXs67SKbn8L24/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Social group</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PoWPWXOiyn_jsP4PlSkqM0Adnh5I6qJb/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1otJ2zQThcDNsSKUTC-i8LI6OYJJBTzA8/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Processes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Qqnh3T6MRH8_QrPr9Wcj_wye5kdFn8fF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RU2-56mlGSLCYQeDb49pqZ8rDSZI2FUW/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Socialization & Social Change</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sDQQ4mDZGty2jDR9AAdZPk2_8H5OhqFc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TR8gdH7DonaFTlLPbuVwTv409RBzLi2S/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Community,Major Health Problems , Social Structure in Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1itPbS3rQjYCgoVkziu-7SjJfL71l3JUy/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wTBPEhv-PTzD7jIdZ8_pCvlJeVrkJC2L/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - CULTURE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1HSM8DxMZkWVuBoGRg_15bH9bDwFn3Ojy/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/186CFUt_H2H-SLuW3hTYxaHv1M1GVu-9D/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nature, Characteristic</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qwBedRBUJYa2E7Wku_LXHqP9rOIcktrI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ngy7TNBunLTmFnm2c656j7PpR0irmRlR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Evolution of Culture , Diversity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OYRgp2EqtquaPeP5GFVxDA98jgP5oUi_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ia-NF-yKeO5qhKnDCMSrat58NZ-iwgbB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Culture, Modernization and its Impact on Health and Disease</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mY5o6mf26t_bUaWG-SqIBGuG_QjtcwbF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jrnTzunOCDPhmtcOnbVpIJd-0vphUqcF/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - FAMILY AND MARRIAGE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1aGc5QIEpxEoLyKt1S694Sg6olkcq85FQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15ZNr7Nu81WGMUP-kZWf2BSVEIDMSME90/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Family – Characteristics, Basic Need, Types and Functions of Family</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Hh1nuBy8rjKDmplkhkuvv3oM4tJue1Z7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oUMU2kUUy9odZYV-QnTnopRu9-WnTnkU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Marriage – Forms of Marriage, Social Custom Relating to Marriage and Importance of Marriage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_8g7N7-fL68mUnZKu2lJi1i6nnh2MmnW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EbODYmGqKWP-4IPvh4iw96OJxaVx7-Nz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Legislation on Indian Marriage and Family & Influence</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/165EuJU31dD7e9ybvn9uj4srUc-UEZWqk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sAKZn0q3XXyiOCSIygxj_weK1hQEHlTj/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - SOCIAL STRATIFICATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/12pMCQS7lUnbHZG1gZFoimUHN6FMiA682/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1b7eoASTOSt7pUCGwAKU6JZksklUCmr5c/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction – Characteristics & Forms of Stratification , Indian Caste System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cXo__lQiYPUVVmqBylHtls34PV-JmMW6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qtq5nkhEM1nDwUAnhrnW3itRc9GCUa43/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Class & Social Mobility</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MWv6eDj4KX-xCzEyvB-1sISw-lvXW-V2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OJaulyAJ4JPKMqlq5Ph8dCs1Jt4V7sIE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Race & Influence of class, Caste and Race System on Health</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NbbJreaRt0lvblFGG7CzdSG_hIyIyd2O/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J54QZJjTwUUZxXKCmKM4v1lnB5GkOfsr/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - SOCIAL ORGANIZATION AND DISORGANIZATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1fL3KpQGT5HaHKUBCPoHFpy3LqBU32Ku4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NvEhjO0Avk0dIX2jFw9svWwsS-xOO31X/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social organization – Meaning, Elements and Types</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17w8BCVHA8jhB7svdBHSZ0uBn0QSErZYG/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SlXpxj2WxT-MC1AHFZEaK_IJoTY2QYfD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cl4T75I8T9KppQwfPdJomiK16X6D3gyW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z7SnnUhvRCxQerZXM3F1NXMEW7K6k2Al/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Social Control</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1S5Qkfjy1Gysa78IAwmPqsFXtj02Xk9jf/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IDvi6J0zk-_-vJriqogUUGbRcAmeFFwh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Social control -- Part B</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ck7WWfwv2DCwh7EU1rs0FP5qP85n9kx3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PVbe_ulHfSKaW1yrKV3dohfDQcMYGesc/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Disorganization</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FhfCd7ElY4Pzq0pKSnAiibLIh-Vr4k29/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wcs0Wi0Ouqemb3ZUddgSu3XeA0ELMNyx/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Major Social Problems</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SiIxvKAiaK938EO1bk9UR_WsGHcZ9jj2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1v7kaMB81YADUHMaHz6xBe0NV7NT9paMU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Major social Problems Part B</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15wS_uZZxAvHUIabtqfK8x7QAj467CooD/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QmQTbl6bRIKUsl3HHTc4in3k8VnqrJz9/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Vulnerable Group</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/122_4MA_7JptDPIpsl7aefBRRLiTrVX2v/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MvniSi2Yce0OKbDQJuzlEQJ70fJAF5ai/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Welfare Organization</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KHHdwKLWseLveRv2t0npcd3DM5_M9oAS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sEaWtma4aG2XUilSCBBIvmCyiQ4lM6-y/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span> Role of Nurse in Reducing Social Problem</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TgOSRCoI7G6Ob2bf2E-KN6jJsFt3Vs4U/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NR9A9Zo9StmBaWxUZaPxtlPbE_kdPDCS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Rights Of Childrens</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gFKlQTrT1LeApCIuJ-JfqtyVWGHF0UWI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X7SWGCwBVzrMuou-nM8jUVlcd-ar8fvi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Rights Of Women</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lut_9izqc_W4dWDS6xR6N-LOm-ocY190/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1n4TNNVA8KN_wlT-EtbHYeevMyTJhosGz/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 7 === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - CLINICAL SOCIOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1jMPs_Iy3UO1_8W0lBk2ayHmz0jNdXQo1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12YgrcI7HlYZofmZ0pbBf8dbeXXwKEwcR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Sociological strategies, Use of Clinical Sociology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hTdNZBZyNXMbfNCNl5taVtxx_b9v1tsz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jtapUo-ztoJUo_O9CzFmjxUJf9ZRRJde/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
 
