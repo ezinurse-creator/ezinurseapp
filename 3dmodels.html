@@ -1,1 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Models Library</title>
+    <style>
+        :root {
+            --primary: #01b9f1;
+            --text-dark: #003b80;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
 
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* --- NAVIGATION HEADER (Internal) --- */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+
+        .back-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            margin-right: auto;
+            /* Enhance touch target */
+            padding: 10px 10px 10px 0; 
+        }
+        
+        .back-link.hidden { display: none; }
+
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: 0;
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        /* --- CARD GRID --- */
+        .grid {
+            display: grid;
+            gap: 12px;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+            background-color: #f0f9ff;
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .card .arrow {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- VIEWER CONTAINER --- */
+        .viewer-container {
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Internal Navigation -->
+    <div class="nav-header">
+        <!-- We use history.back() here to stay in sync with physical button -->
+        <div id="btn-back" class="back-link hidden" onclick="window.history.back()">&#8592; Back</div>
+        <h1 id="page-title" class="page-title">Anatomy Systems</h1>
+    </div>
+
+    <!-- VIEW 1: SYSTEMS LIST -->
+    <div id="view-systems" class="grid"></div>
+
+    <!-- VIEW 2: MODELS LIST -->
+    <div id="view-models" class="grid hidden"></div>
+
+    <!-- VIEW 3: 3D VIEWER -->
+    <div id="view-viewer" class="hidden">
+        <div class="viewer-container">
+            <div id="iframe-wrapper"></div>
+        </div>
+        <div style="margin-top:15px; text-align:center; color:#666; font-size:0.9rem;">
+            <p>Interact with the model using touch gestures.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA CONFIGURATION ---
+        const SYSTEMS = [
+            "Cardiovascular System", "Respiratory System", "Urinary System", 
+            "Integumentary System", "Nervous System", "Immune System", 
+            "Digestive System", "Human Eye", "Reproductive System", 
+            "Lymphatic System", "Skeletal System", "Endocrine System"
+        ];
+
+        // The specific viewer code provided
+        const VIEWER_TEMPLATE = `
+            <div> 
+                <p>
+                    <iframe allowfullscreen="true" frameborder="0" id="embedded-human" loading="lazy" 
+                    src="https://human.biodigital.com/viewer/?id=5C83&ui-anatomy-descriptions=true&ui-anatomy-pronunciations=true&ui-anatomy-labels=true&ui-audio=true&ui-chapter-list=false&ui-fullscreen=true&ui-help=true&ui-info=true&ui-label-list=true&ui-layers=true&ui-loader=circle&ui-media-controls=full&ui-menu=true&ui-nav=true&ui-search=true&ui-tools=true&ui-tutorial=false&ui-undo=true&ui-whiteboard=true&initial.none=true&disable-scroll=false&uaid=LnZqE&paid=o_10a88be0&ui-bd.link=false" 
+                    style="aspect-ratio: 3 / 5; width: 100%">
+                    </iframe>
+                </p> 
+            </div> 
+            <p>&nbsp;</p>
+        `;
+
+        // State Tracking
+        let selectedSystem = '';
+
+        // --- INITIALIZATION ---
+        window.onload = function() {
+            // Establish initial history state
+            window.history.replaceState({ view: 'systems' }, 'Systems', '');
+            renderSystems();
+            
+            // Handle Physical Back Button
+            window.onpopstate = function(event) {
+                if(event.state) {
+                    restoreView(event.state);
+                } else {
+                    // Fallback to home if state is lost
+                    restoreView({ view: 'systems' });
+                }
+            };
+        };
+
+        // --- RENDER FUNCTIONS ---
+        function renderSystems() {
+            const container = document.getElementById('view-systems');
+            container.innerHTML = '';
+            
+            SYSTEMS.forEach(sys => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${sys}</h3><span class="arrow">&#10095;</span>`;
+                card.onclick = () => openSystem(sys);
+                container.appendChild(card);
+            });
+        }
+
+        function renderModels(systemName) {
+            const container = document.getElementById('view-models');
+            container.innerHTML = '';
+
+            for(let i = 1; i <= 20; i++) {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${systemName} - Model ${i}</h3><span class="arrow">&#10095;</span>`;
+                card.onclick = () => openViewer(); 
+                container.appendChild(card);
+            }
+        }
+
+        // --- NAVIGATION ACTIONS ---
+
+        function openSystem(name) {
+            selectedSystem = name;
+            // Push State: We are moving DEEPER
+            window.history.pushState({ view: 'models', system: name }, name, '');
+            
+            renderModels(name);
+            updateUI('models', name);
+        }
+
+        function openViewer() {
+            // Push State: We are moving DEEPER
+            window.history.pushState({ view: 'viewer' }, 'Viewer', '');
+            
+            const wrapper = document.getElementById('iframe-wrapper');
+            wrapper.innerHTML = VIEWER_TEMPLATE; 
+            updateUI('viewer', '3D Viewer');
+        }
+
+        // --- VIEW RESTORATION (Back Button Logic) ---
+        function restoreView(state) {
+            // 1. Clean up Viewer if we are leaving it
+            if (state.view !== 'viewer') {
+                document.getElementById('iframe-wrapper').innerHTML = '';
+            }
+
+            // 2. Route logic
+            if (state.view === 'models') {
+                selectedSystem = state.system;
+                renderModels(selectedSystem);
+                updateUI('models', selectedSystem);
+            } else if (state.view === 'viewer') {
+                // Should technically re-inject content, but usually we go back, not forward to viewer via history
+                // Re-inject just in case
+                if(document.getElementById('iframe-wrapper').innerHTML === '') {
+                    document.getElementById('iframe-wrapper').innerHTML = VIEWER_TEMPLATE;
+                }
+                updateUI('viewer', '3D Viewer');
+            } else {
+                // Default to Systems
+                updateUI('systems', 'Anatomy Systems');
+            }
+        }
+
+        // --- UI UPDATER ---
+        function updateUI(viewName, titleText) {
+            // Hide all views
+            document.getElementById('view-systems').classList.add('hidden');
+            document.getElementById('view-models').classList.add('hidden');
+            document.getElementById('view-viewer').classList.add('hidden');
+
+            // Show Target
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+            
+            // Update Header
+            document.getElementById('page-title').textContent = titleText;
+            
+            // Handle Back Button Visibility
+            const backBtn = document.getElementById('btn-back');
+            if(viewName === 'systems') {
+                backBtn.classList.add('hidden');
+            } else {
+                backBtn.classList.remove('hidden');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+    </script>
+</body>
+</html>
