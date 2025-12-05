@@ -1,1 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nursing Foundation II - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Nursing Foundation II." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1OeBg6Srl82dzycAOVB9Nfpj9zNNMu0du/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 NURSING FOUNDATION II - SYLLABUS
+    </a>
+    
+    <div id="units">
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - HEALTH ASSESSMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1IRIr7JLv_wAwvLSPbQeTP6MhXoFMDrMm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qSljyTURRGFDoTkIjJvpPCbEk2YN4Qdo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Assessment: Interview Technique, Observation Techniques, Health Assessment</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CkH8cX5hrf4Zs_jrVUkGc-0BackLMZTL/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13ZrctR1CUoJZGIiQ6EBhgS2p8IQdnAXE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health History</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PCsbg1ajpF8ePZy8vObEuhmN0Ml-oOV_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DeIa3fba_Yxv0e9GJUVx3aP7Y9BvpAJI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physical Examination, Methods of Physical Examination</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Jk_aMCGkQ6xauVzR9cCf0M_gJbhQefv6/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Preparation of Examination: Patient and Unit, Assessment of Body System, Documenting health Assessment Findings</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FkAkktyVZO3gKiqn8dTUjln3lOfB4hGf/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12siOQsRGgwskjaNEAgtRodfID2XpsCGp/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - NURSING PROCESS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1r5cJGS0Bb0V_3Y5ii2gp62_eH0L52ayc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kuWS42Buc-KI7Jx68zMLIqwVm-K5NaPo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Critical Thinking</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1p8iLhkUC71KKF3LXNR5h86Q-Jv0od9v0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Standards of Critical Thinking, Benefits and Barriers of Critical Thinking in Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E2KcYJX4BXpxWZ_3uhpFv0WfuW5sKsNJ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c-n4bBTi2Qqw3O8k_p4ZoaUwG_7P-NwU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Process, Elements of Nursing Process, Nursing Assessment, Nursing Diagnosis, Nursing Goal, Nursing Intervention/ Planning, Nursing Implementation, Nursing Evaluation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rE_A-PBn3nY7K-tC681EY6hMBRsBWZxp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e1_aMdz8ISzYoP3zRCZC_ocdFDBRmfAS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Intervention/ Planning, Types of Goals, Nursing Care Plan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-doPC5856G1IXN5O6KjNvcuxUTaLXxiZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qky8P1MSOc_cDk95kwKnJeeWMZHWxSqp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Diagnosis, NANDA Nursing Diagnosis, Medical Diagnosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qZwZkta-yaZw46pmqQOTJqjVotFMYIra/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1p2BaqgTSMCGxi5vk5NiKfbjvvJgjIJsB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Implementation, Types of Care, Evaluation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qgAqNsKyEQRS1_oZtQnaSgfTwKh64F8v/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Documentation and Reporting</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1meNbekA4jDFoNbVb90Y-pvt8VPa03U2S/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yu4y5cSdEJi7z5-fK2BJ8hlzw9BsA2BN/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - NUTRITIONAL NEEDS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1r5Iyj5T5sSCHm8Z7n21ZVqWca1theosE/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1goT8PhsRx0VsI2YLoj42rX8ZG_fYmK3T/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nutritional Needs, Factors Influencing Nutritional Needs, Assessment of Nutritional Needs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1in-t5UpjTAaAURvvSyytNSa9ZsAHjPuW/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Solid Diet, Liquid Diet, Semisolid Diet, Therapeutic Diet</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fFRKbMWu1ERMcda7eXvmDasqzOSzizlQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DVzZUr3sLmriTjdD7Z_bwskGT4Veho1b/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Patient with Dysphagia, Care of Patient with Anorexia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fYXpwkpMGsrqsR3wev6fdB3q7dhVuAPn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Patient with Nausea and Vomiting, Meeting Nutritional Needs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jYjRCSV3o9LE2VWOjc0UzKT-goQlYS7R/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Meeting Nutritional Need Procedure, Introduction to other Enteral Feeds, Gastrodtomy, Jejunostomy, Total Parental Nutrition</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LWXml-XOyA7_CZeyk4N8DHO1wbqOIhd8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11x6klu3xrAuuvgHuCtLboufbALKe5dxA/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - HYGIENE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1MetvGPdJqIkxVnp34aNHjZsUPDfwhbkn/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13UaZUCNtlXQdPwf-m2pHVnNtWMiuak1p/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hygiene, Factors Influencing, Indication, Purposes, Effects of Neglected Care of Hygiene</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O6kveGhAEcIuFEdPN5XCRB9MR3kj1xJh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Skin, Care of Pressure Points</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_K9u3C36KQB44TrE423W6JBwEaMtFHVy/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10jjCk7CqPHR2hoxm0yqt100x94YDQloP/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pressure ulcer, Assessment of Pressure Ulcer using Braden Scale and Nortan Scale, Causes, symptoms, Stages</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1moRoLEJlFPbGst6Ca7YaWZQZhvyp7aKD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of pressure ulcers, prevention of Pressure ulcers, Perineal care, Metal care, Oral care, Eyes, Ears, Nose, Assistive Device</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Immp8JFYRGpXnKOxULwUNAtIF2ig8oj4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KPAtemCB2LotXT9rMPIBzK_AW9_o9z7G/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - ELIMINATION NEEDS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1OxR4p0P397Km31wyoy6rQWS2bDtAjZrR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kL5DMHdTkIJkN5pUCWNQfQaFRhYmLSHS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Physiology of Urine Elimination, Physical Mechanism of Urination, Composition and Characteristics, Factors Affecting Urination, Uses of Bedpan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15q6wPwnSfPC70WR6mQ5HuOy3I5J2LHH5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Assessment While Facilitating Urination, Types of Urine Elimination Technique, Equipments, Procedures, Uses of Bedpan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1l93RLSXkL6_IttJDGhcKHHx0ksfD5Mp6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B1f3orcf3XhEnskkzLJJbaehHJ_Mh6kd/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Condom Drainage, Intermittent Catheterization, Indwelling Catheter</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k08yYpAgVLtEd-O2nuzuAceidAUc4ygw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Urinary Drainage, Urinary Diversions, Bladder Irrigation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zMmDDZP4umPQmq1iBVWUYg4vsOdJ7H_r/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GnBF7kBRRe5LXllmZiiFotrqu8njLhkn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Physiology of Bowel Elimination, Feces, Characteristics, Factors Affecting Bowel Elimination, Alteration in Bowel Elimination, Facilitating Bowel Elimination, Procedure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DGyQQ3_xaOypgcPisIpC0NUo-LSbPfUp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1keL9DjjkqyWz8bmgXG6y6cHV3TylASgi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Enema, Procedure, Suppository, Bowel wash</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wKh3udadTSDOLVzxiG5ALtO2Y8j3BXVM/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Digital Evaluation of Impacted Feces, Management of Impacted Feces, Care of Patient with Ostomies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JyByw0lustJlMPDSKCaBVZifk5uEEdm8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wLgJIYA6NV0IjQrA7CPvsYcLSk_eSjwu/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - DIAGNOSTIC TESTING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/16y6Vz1gYIuMtJMx3C4zMCPYQiSOQtQ4m/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LMJJ04DBtF20rZ0rFXBc_5lhK8pV9uSB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diagnostic Test, Complete Blood Count</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IOiV0KFzOJ9rLwldy3qEsk-CcIddemV0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Serum Electrolyte Test, Liver Function Test, Lipid Profile Test, Serum Glucose, Glucometer Random Blood Sugar</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1b070S5ygu5cCjousJZRfXGfqHzhpycFp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NeIGtCI6EXFjcsG96qjwKNgyKVE2Wl1o/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Stool Routine Examination, Stool Examination, Urine testing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qctgUra9WOJKRZXy9u2_ne7MBE7RzXIZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Examination of Urine, Urine Culture, Sputum Culture, Radiological and Endoscopic Procedure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K6XDgEL5vmGVW-waY3vXWCGdy1jYvr8d/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XHjgVurjq5g5jHubiF0hGO7sPLmManRm/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - OXYGENATION NEEDS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1CsKHyRwH4b9aogRirS6fSAz1JzeoAA5I/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1f9JYEb9gkENSySLxmvmJ6-hsPZcZ5ahB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Cardiovascular System, Review of Respiratory System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RcPWvtaVUtzxZjth4ooNUeYWp2ACO2cN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mechanism of Breathing, Breathing Cycle, Gas Exchange, Respiratory Volumes, Lung Compliance and Elasticity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gt9_5W1UJXQuYR05OQRofkZAgdwFr9Mb/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cHntvgEZ4ouSK7DqRwDQOVHa-YFx_R_Q/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Factors Affecting Respiratory Functioning, Alteration in Respiratory Functioning, Condition Affecting the Airway</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WrWjH-QkSaE9hxwXzK1-NCT2nou08OfT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Condition Affecting the Movement of Air, Condition Affecting Diffusion and Oxygen Transport, Alteration in Oxygenation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Uk40Aw9zRuii9m6c4gGjF2MsrGU-WV2W/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZikxoyxizVJp408e7Y0gDVlRScikzqOb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Chest Physiotherapy, Percusion Technique, Vibration and Postural Drainage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aONvDSeI3Lar-lblexJLxXvlX5CFLjp2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Chest Drainage: Principles, Process, Purpose, PULSE OXIMETRY</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ANy7hBWMa4-v-CZHZKlXwOYQeb0Ax8nP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RCZQqLEbMxE1eTbBuPL9fptGx4ah6zDn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Intervention to Promote Oxygenation, Types of Oxygenation, Equipment used in Oxygenation Process</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qkhN_9nA1f_IETz_9n46QxmXbp24lS8A/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Procedure of Oxygen Delivery, Important Considerations while Giving Artificial Oxygenation to the Patient</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yUZKaUzZ-Gf60NIZXvmucA8zwaNhoixc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16cHhDEz06c4fy0Tg1ZnSKxrFL8tqUlhk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hydration, Humidification, Coughing Techniques</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1917N0Uvvmt62LJkVcm8irShJ3wiaKHS7/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hydration, Humidification, Coughing Techniques</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IISQzROLvMXwI6OTgL4ZUoj7x2eUB8Co/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E7qgpE8xF3MqtsQY_74doybwXU7FSZKs/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - FLUID ELECTROLYTE AND ACID - BASE BALANCES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1OrmTeVJnKoSPPOoIcXPoAP0SW4LEjp9S/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RrXpGpOCJ2-4V7sWqsKWEJ4GLAYl-jF6/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fluid, Electrolyte and Acid-base Balance, Factors Affecting Fluid, Electrolyte and Acid-base Balance, Disturbance in fluid volume, Hypovolemia, Dehydration, Fluid Excess in Body, Edema</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HFHaXNqrFQI7GD-9IKlrl1JPmalHTUoI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qK-E-JB_du6os4Ak30jzEzZmtkR2dFCt/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Electrolyte, Electrolyte Imbalance, Acid-base Balance</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fzoE4iFoDhZJriCxBSzb8hhIS-q8xUeA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Acid Base Balance, Metabolic Acidosis, Metabolic Alkalosis, Respiratory Acidosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A69GFlsQopzWcl5UrnxZHWLZEOq87J9P/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon">▶️</span><span>Intravenous Therapy (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BJd-T0lZQL3523mX_ALKfGCypM3JUdOA/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon">▶️</span><span>Maintenance Of Fluid and Blood Administration (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Zb2M_s9u-X4v5e-h3R1kfGB328LTKRsr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k4us3qNmnbqlq5lsygGgjhkOw3sOh1aF/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - ADMINISTRATION OF MEDICATIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/19MQgLJXB80aM84-Mh5XQS7GoODoZyAhl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J37XaKgIEyBd6rXcVVmTcvBVao9sgiuJ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Drugs: Introduction, Definition, Sources of Drugs, Forms of Medicine, Purpose of Medicine,Factors Influencing Medication Action, Factors Influencing Medication Dosage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H_AvzzK2G3k5oIRgb_1WMuYFcg0A1nZL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Systems of Measurement, Drug Dose Calculation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NqGUmH8owLjoP7GEKQC82pbLMrCXwRKU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ejppnVcGRB_FRz99tpHDyWlDIop0EmhL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pharmacodynamics, Pharmacokinetics, Routes of Drug Administartion, Medication Orders and Prescription, PRN Medication Order</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1REWrBdvgLwDjlDOI47-LPaN2LAu_3W0X/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RimaFFnltE8VKwg3LHpC2wu-2gQXK8SG/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Rights of Drug Administration, Medication Errors, Causes of Medication Errors, Prevention of Medication Errors, Care of Medicine and Medicine Cupboard, Abbreviation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jE-WUToCBbcmT8QtJ8VzCSumIE9EcUae/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1otbAP-_SmWEnvEW7EkIdWdr4qwX5kf74/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Routes of Drug Administration: Oral Medication, Syringe</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T5rzwKsxu6jpphArzcc2WjxMA4C8rN4f/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Plastic Syringe, Needles, Intramuscular Injection, Subcutaneous Injection</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1h4AM0wpKZTe60HUWIM65Aj7hMiHqi9_C/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gh5Sk9lqdw3b4A5FU8TcR1O6jB3BVUTp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>IV Medication</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15QH7C6ZZPS1JobE0S3YXdzb74pz7Wmsp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>IV Infusion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10arNjktrwWfsWvUdFoZDgLfePzfKcVZA/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10PVnPQve41KzUDunuswWQYiSqALIXRxn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nasal Drop Instillation, Ear Drop Instillation, Eye Drop Instillation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Zc8BFD9eImOxPEVBYZ-UiFP-QJLucEcT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17xLBFkvi-fX3zDP11wHK3r1MOWnFefCy/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vaginal Medication Administration, Administering Rectal Suppositories</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Cvyy2fH7BnBb_DM_nl67xWeuvRJc0dwl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QmsIyCCQ9r1_re7X8F6fSEVHfLLhf_K1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Inhalation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1V80-_q5pFMxwqW3lJ8yrQ7-K2xXPMG0n/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wMxRQG7sW1VZ7M_kLPn148Yap_p-1-_E/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - SENSORY NEEDS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/10hm-q896m2enUIzuSF4DJNiVjh0xqi4F/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZIszF3DTiFYoVuWLqIP5i42jdCOe0tOz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Sensation, Sense Organs, Components of Sensory Experience, Stimulus, Reception, Perception, Sensory Reaction, Arousal Mechanism, Factors Affecting Sensory Function</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10F0PXanGe7yLENKoKjyaqFmnnPjxZ4SK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NpbtwpI8hEekWWtQr7kb1edqHA-KrJ0z/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sensory alterations: sensory deprivation, sensory deficit, sensory overload, Management of Sensory Alterations, Role of Nurse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/136VW7v7MHip2aztJS6_MQQOzBmiZ16-C/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DYrEd_m7mDJBXkkD-umFh6o7DsVn6tiJ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Aphasia, Communicating Patients with Aphasia, Artificial Airway, Visual Impairment, Hearing Impairments</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KTf9s06cW39rUk9E9q2PddEw_Buk2Z8w/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_FCdL3W-yZMLYLKgWlq0mVW0oZj-Eknm/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Unconscious Patients</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/117H7jWJrK8y-3EbWKpnVmkC9rEKBNMC5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Assessment of Unconscious Patients, Management of Unconscious Patients</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1USVXzgKglbaOOGuDd0vJfQu-X1bAvPyq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MGwgM4G1Iv6svumQLjCPjELXwLepKhcr/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - CARE OF TERMINALLY ILL, DEATH AND DYING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1QVxH4ntoP_8LvzVHUCX9v66Kiiivg09f/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Le1BVQEPm9IgNSiwCunk_beEFO9VyFFg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Death, Signs of Impending Death, Dying Patient's Bill of Rights</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iSMNicx0yZdigEs7UkVIancNP2u5Z8Dq/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care of Dying Patient, Autopsy, Embalming, Mortuary, Overview of Medico-Legal Cases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Tr9ZfiDqHC4Lz29obWuISSYUGvG6290l/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K6I0bVSWYPP5Hfw1Zit9kPwHUINPMjYk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Loss, Grief, Bereavement and Mourning, Types of Grief Response</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1chOqRzS8qfWqiZTXJtABcvNS3q8-rxH4/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Kubler Ross Theory of Grief, Dying, R Process Model</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XadZp1-dld4Q2wsoT39s7cPNOebrI9sQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QLzW2PNHoB4Z7rhdnoXnJxsEZZbOFUGx/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - SELF CONCEPT (PSYCHOSOCIAL NEEDS)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1j_H2tMeGJaflMapGwGatBpEcvCeEgieK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19XtJmKCDBajfD8pS9DPd4eWd8kM9B5yB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Self-concept, Domains of Self-Concept, Development of Self-Concept</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HPAe3WxJoab-TcV1USxNO91ndDJ3HdAt/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vwcZkUGx6xvsyupa4slNwGQ_mEZPGQvw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Concepts of Self-Concept, Self Image, Self - Esteem, Ideal Self</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10cHxtpIYBAYJ1q0JMeHV8FbHuaaC3zYP/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Self-Esteem, Nurses Role in Self - Concept</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Wz8UNZLz3FTibxkhgAk3OoV_mXgblzv3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eK35hSJqIbSLutsvhFb-JhACSWNBzarx/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 12 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - SEXUALITY (PSYCHOSOCIAL NEEDS)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1hf0Ui1OdYvZDRR26YGG0Sjml320S3q6t/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KFz1AOTQlg8dGujmNEzWGu-gjqrPbWqg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sexuality, Sexual Health, Sexual Development Through Out Life, Sexual Orientation, Factors Influencing Sexuality</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10DM-3QRnl0VLkatJmKLejrIQG2nkdmkl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qDixZ25QumtAJ1z3VKyQfy6aXIY4HtEn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types of STD's, Transmission, Prevention, Prevention of Unwanted Pregnancy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bNQeTtgXqLWzpRihtccfH9bTMzKbT0ae/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iYR_gIVc-PNJGRPRwNGJ6iIdd0a6MRGI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Prevention of Sexual Harassment, Prevention of Sexual Abuse, Dealing with Inappropriate Sexual Behavior</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10JtIX1LAtEQ70RDeTIGCVd5SN3QdLneT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dq04k4V0nD72CZ1Xm7E1C_x-hTri7-A1/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 13 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - STRESS AND ADAPTATION-INTRODUCTORY CONCEPTS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1jNrObs3O4Kn-fhp4L95YxFIoD9ADe7Oh/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xIeHYVCK1VaIa41VVOYBZjgNOvd4Hlgw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Stress adaptation: Stress, General Adaptation Syndrome, Gas, Coping Strategies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GOYXs7FGk_nbRrxzT9OXDY3C_8yuBq1p/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jon2FnWrItDGDOasjdRAdWfqc7IE_HRs/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 14 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit15">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 15 - CONCEPTS OF CULTURAL DIVERSITY AND SPIRITUALITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1uDcdkKsMu0KwTNh2ZoWq2p3k3dM26v04/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-dsDJi54At9zGpVo-sGbMTZr79XxnF3C/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Culture, Transcultural Nursing, Cultural Competence, Spirituality, Factors Affecting Spirituality, Dealing with Spirituality Problems</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1j15UTYlwzaLRImdFn_5DhsDBhDJ9yQsA/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1owHjXhuBNgPHlAhMimdniyhqb65eGHyR/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 15 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit16">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 16 - NURSING THEORIES : INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Mp06HszafV19MMTQzaIsodAHvvdAEQ1e/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XDhN2z4bGMm8UOz5yU9nDz5uLATYJhMR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Theories: Introduction, Components of Theory, Metaparadigm of Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iXP4Rp0s13zCLDCYTmz1En5uLzTUCxbL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Purpose of Nursing Theories: in Practice, in Research, in Nursing Education</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kyP68qNr7UQtAahckXsREMAGyTlKVMll/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZgEmw9Z61b8JQj8LxcEtjkyn2gv-tKbz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types of Nursing Theory</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1D-fYLCW-__XPe7vtSL2E6Eujhwx7IsGl/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Selected Nursing Theories</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FoPOUCOC1OsqD5_ZLLTpnP4NZjOyWSN9/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hz0nn5AI8AtFDHAZE4bdQIfymby12FP7/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Selected Nursing Theories, Metaparadigm, Other Four Common Nursing Theories</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FNvCYrf-GT5WyufZWu60F3ebOGhpUfi4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1grIu78Yq_565N7HutGSw2ARwWQnxz_Hq/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 16 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
