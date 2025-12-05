@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Child Health Nursing I Syllabus</title>
+  <meta name="description" content="Comprehensive syllabus with detailed notes for Child Health Nursing I." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+  <style>
+    :root {
+      --brand: #003B82;   /* Dark Blue */
+      --accent: #00B9F2;  /* Cyan */
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --arrow-color: #FFA500; /* 🟠 ORANGE TOGGLE ARROW */
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: white;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .syllabus-btn, .unit-header {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      margin: 24px 0;
+      background: var(--brand);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .syllabus-btn:hover, .unit-header:hover {
+      background: #002d63;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .unit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      margin: 16px 0;
+    }
+    .unit-header span:last-child {
+      transition: transform 0.3s ease;
+      color: var(--arrow-color); /* 🟠 ORANGE TOGGLE ARROW */
+    }
+    .unit-header[aria-expanded="true"] span:last-child {
+      transform: rotate(180deg);
+    }
+
+    .unit-content {
+      padding: 0 12px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .unit-content.active {
+      padding: 24px 12px;
+      max-height: none;
+    }
+
+    .subsection {
+      margin: 16px 0;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+    .subsection:hover { box-shadow: var(--shadow-md); }
+
+    .resource-btn {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s ease;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-height: 50px;
+    }
+    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+    .resource-btn.notes:hover { background: #e0f2fe; }
+
+    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+
+    .pyq-header {
+      background: var(--accent) !important;
+    }
+    .pyq-header:hover {
+      background: #0092bf !important;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+      .resource-btn { font-size: 14px; }
+      .subsection { padding: 16px; }
+      .unit-content.active { padding: 16px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 📄 MAIN SYLLABUS BUTTON -->
+  <a href="https://drive.google.com/file/d/1rgyh9yvG8KYd3pGj76KYTA6eXrBDtDgv/view?usp=drive_link" class="syllabus-btn" target="_blank">
+    📄 CHILD HEALTH NURSING I SYLLABUS
+  </a>
+
+  <div id="units">
+
+    <!-- Units 1–12 -->
+    <div class="unit-container" id="unit1">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+        UNIT 1 – Introduction
+        <span>🔽</span>
+      </div>
+      <div class="unit-content active">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1X7htNfDOlqnwA6ak9yOy-2mQZDGSADs8/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit2">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 2 – Assessment of Pediatric Clients
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1GwiQQjr26JHX2W2mVY5y1JXeJo1Oa3Y1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit3">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 3 – Hospitalized Child
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1BAM5EXg3LxEgBSNTuHDjGXuS7tusSJfR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit4">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 4 – Pre-Natal Pediatrics
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1ny2P9ZHhgzavWRgOnpwrpuwhcsVa_S5B/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit5">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 5 – Growth and Development of Children
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1zVOLhHXoDawnP7K9DaeJuSUQzQhPbhaY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit6">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 6 – Behavioral Pediatrics and Pediatric Nursing
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1QpP1JApAnXedWwy7I57MOHxvhr9eTSET/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit7">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 7 – Preventive Pediatrics and Pediatric Nursing
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1uOztwz2zuJRktVofSfu4asmQo1pGmrgI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit8">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 8 – Neonatal Nursing
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1RMz0AkFU7OEXBXzvprgM3aJ6rKOK6fbt/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit9">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 9 – IMNCI
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1O3opAT_2iR154yBD4KH_Q4eRu7G0xcXF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit10">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 10 – Pediatric Emergency
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1sSuwxb9pQEa_zVgKkeBlfXySbHj55iki/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit11">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 11 – Quality Assurance in Pediatric Nursing Care
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1sSuwxb9pQEa_zVgKkeBlfXySbHj55iki/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit12">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 12 – Modification of Nursing Management for Children
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1C4pxv-YpkL04zwwlv5FmoCImns4CBfWz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PYQs -->
+    <div class="unit-container" id="pyq">
+      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        Previous Year Question and Answer
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1IDO6xUMEcfkBo0FsZm9e67pLXXpkun_i/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
+          <a href="https://drive.google.com/file/d/13pRNSS5dd1ftdrg9yCCGHCS8zJ2Nb_0l/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
+          <a href="https://drive.google.com/file/d/1DRViJXCulJElinNODJzK36tegIl_i9rB/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - March 2023</span></a>
+          <a href="https://drive.google.com/file/d/17t8ah3BiNjAL86IzBJIQS1nvXbDObB1x/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
+          <a href="https://drive.google.com/file/d/1pp9j2oOVHLmvrlDCKSsCdbhS1v5kZfug/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2022</span></a>
+          <a href="https://drive.google.com/file/d/137po9CmHx946_Xx3xxfPXpDMlfm4-Ubu/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - August 2021</span></a>
+          <a href="https://drive.google.com/file/d/13KqPvoPUKQUYyUiQPRvmkwcXfE-qpYht/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Toggle script -->
+  <script>
+    function toggleUnit(header) {
+      const content = header.nextElementSibling;
+      const isExpanded = header.getAttribute('aria-expanded') === 'true';
+      header.setAttribute('aria-expanded', !isExpanded);
+      content.classList.toggle('active');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstUnit = document.querySelector('.unit-header');
+      if (firstUnit) {
+        firstUnit.setAttribute('aria-expanded', 'true');
+        firstUnit.nextElementSibling.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
