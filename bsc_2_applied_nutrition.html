@@ -1,1 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applied Nutrition and Dietetics - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Nutrition and Dietetics." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1b1JcWDoEW4B0s_FuXfVj9Vakpw1ggsHd/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 APPLIED NUTRITION AND DIETETICS - SYLLABUS
+    </a>
+    
+    <div id="units">
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION TO NUTRITION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1LtEg0KI6MyNhxjmayarrITsibO5KfGd-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19FP4IYHT-M7D3pMwY01YPMbUi7a52e_g/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Nutrition, Health, Role of Nutrition in Maintaining Health, Classification of Nutrients</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uqHuLiHkcOT2sBx34GCIqvImEVRTc9II/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10Thj5tD2xVPYUON5n5zgNrwDk06txk7y/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Food, Classification of Food, Macronutrients and Micronutrient</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-bzNrM-RhXUHflCSGjeFweHxwLdbtuGT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NKQwOoJ5x4u5RHWn-0JpFYinknTsc5is/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - CARBOHYDRATES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1mA2_KPUro3aX76J1ND9rCyAkmM2HVkS3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IprrlxGn1v4YikY5EgPlchD-yS-rwxXh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Carbohydrate: Introduction, Classification, Daily Requirement of Carbohydrates, Functions, Sources and Energy, Basal Metabolic Rate</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xFaPcpt2dICLqsuWEgE7isOoYef1UEvt/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XGejUo-lgC972CvIkzzhq0C29su6zXKi/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - PROTEINS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1_dz0RqM8iwdNc5UqlAcqbh1Sxj9o7TrS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c3xCXL4MY69rh3WiW1gnskb3S3o6pyLA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Proteins: Introduction, Aminoacids, Types of aminoacids, Classification of proteins, Functions, Sources, Daily requirement of protein</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ctQgl3u3-JgMOSLjCsGGVKYPPuw0Qti9/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ooFH7Jkoi0_iPsUE-SCq76TpIpHqVyML/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - FATS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1inVMmGS1LT_9CS6U6C5A5R8hw8S5URQb/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-EUsyLGT9wvxooEjd3VnZ10o2Gadrjw5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fats: Introduction, Classification of fats, Fatty acids, Types of fatty acids, Caloric value of fat, Functions of fat, Dietary sources of fat, Daily requirement of fat</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KwvurKoSU8kBHXim9ietJLDtFnqTMASr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IlEk--Z4Yu_sWFA0S34ftCZfjgxvm6J4/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - VITAMINS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1rV_HW3DUEwJA3ZouCOKgAzlE7v2h2FWD/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16iXdjCt_I2rqY9lRA-UwHWYeLtZe_1ZE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vitamins: Introduction, Classification, Functions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1luWABRxGhveqwtYr0LdFAAOdh7H9wKfG/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1m6Mokl33zd7hj-YISj8d2BUVQ34sihsQ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vitamin B6, Vitamin B12, Pantothenic acid, Folic acid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G_jI_TXDwIK-q4YENpRWTMG_Zil_pmH1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PwHCVLPFk04FwJFKssShC7qm0Pq__PZV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fat soluble vitamins: Vitamin A, Vitamin D, Vitamin E, Vitamin K</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LwoiORrlrvKPuFp3DFUCwaMELJOPt6KK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uVHIVbetef855GKXUfcJCswlRecjD8U1/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - MINERALS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/14Orrlv5jpHC6E9OD8z_DzgLqivWbmKhH/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xS4k2A8qNOd5B14vIxnDjSViSl-QKvAk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Minerals: Introduction, Classification of minerals, Calcium, Phosphorus, Sodium, Potassium, Magnesium</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hi5Bed78TOKkMNbyZJKfiw12w20U4Jeo/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EQbelP_1eAKnynrWlnGjKdlN2Mimr0L0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Microminerals: Iron, Copper, Iodine, Zinc, Manganese</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z3o7kmn15J2L4Jt4F8oXOj8ssZvBjpZq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qLrs_QdikGRv06j1_HksUbRSQrAiuAcL/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - BALANCED DIET
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1tFLtE2YOKVHn2Um8qu6OWcruk36KauoU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e2r31iB6i2q-LUuWddYi-R2Hp1Fpl3wT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Balanced Diet: Introduction, Definition, Principles, Steps to choose a balanced diet, Food guide, Food groups, Recommended daily allowance, Food exchange system, Dietary fiber, Menu planning</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O4II3fER22sw-ZLsh27c_iz87YmXZqKz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tmzsKp4GJruI2usuQPeZcR9ZFnay3dG7/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Infant and child feeding, Nutrition for adolescents, Nutrition for aged people, Diet in pregnancy, Anemia in pregnancy, Nutrition in lactation, Weaning</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nlt9gbQC6VFH_30ELKuQC8vvL17F5D9D/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y5bgDyL3bjF2esExixm92ShjKvl-dflK/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - NUTRITIONAL DEFICIENCY DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Z49iUG9hgGOvVlfogE75ahe5ng_CNWo7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RhRzoqz0aXP_jAOlIMczZUX-3wYSwnXG/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nutritional deficiency disorders: Protein energy malnutrition (PEM), Childhood obesity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-WpVyQpr5r5bhpj0MR74eertJCyddpet/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-lX31ZdvwSGfCrATk8e1hAMz8JDuunDM/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vitamin Deficiency Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_XRBjhsHURWYSlVlvv7Hoc0ifGUgOSp9/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JT5-L1XNTuYsj1JL7EjhVynQBTq7qQsA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mineral Deficiency Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K5CDSrjFOs0hYf9s90JEX4quTQdBxRVl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sx_GbMKBTRuFIxExClrqb8CKzn9pmKy3/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - THERAPEUTIC DIETS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1N0wZZcd4pgJ7mOrO-Ljim7XP927fPXr6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_7RfYaHe-2KwE4bmLm8u-fw1bw3BXJbZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic diet, Diet in obesity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g7ZaLbgRwFa8E49MqcmkkQR5D9kmTSd0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diet in diabetes mellitus, Dietary recommendations for Cardiovascular Health, Under weight, Diet in renal disease, Hepatic disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13a6pE5NIGl8sisW-BBB28x4mRa58CMr2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diet in constipation and diarrhea, Pre operative diet, Post operative diet</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qXya5vVNg2_rcnb1kb__2q6h6uzeZrPq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dCeM9MMDK3m5Me1I0o6fhtaVmjdvU6Ax/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - COOKERY RULES AND PRESERVATION OF NUTRIENTS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Jr8C6vaA-PqBS64_ftoHBNLX_FivALnk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hgYCnVH69dNvbRJwEo6N3Qi6lW-86CY3/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cooking, Benefits of cooking, Principles of cooking, Methods of cooking</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KTGJqWaSrnq1uFKX7n5EiDe3iLkvOiDc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HC-8DjxyBqOFFT4RU_vqPkWxnxiWYsX2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Storage of food: Classification of food, Principles of storage of food, Methods of storage, Technologies Used in Storage, Measures to Prevent nutrient Loss During Preparation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ixxeZOmPVxJIgTURS42gIApRemHx3vTB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15IBIXHtywG3uekAKUGULc_lORWye5wR0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Food additives, Food adulteration, Food standards</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ODRFFEbNRLYY78IzosdriA8G1Usv-ezc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1glqtY9i2HncgZvfXsGfAEme0C9AFgPj8/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - NUTRITION ASSESSMENT AND NUTRITION EDUCATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Bu499GIM1raTRpFANrHm3XOCuij1pdJT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z5th1Cce2wOtfjFMWDp3FKlLngAGglTA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Malnutrition: Assessment and Various Methods of Assessment of Malnutrition</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UR4eome5AXOeLIfiG0xZ0bG5i6yWr7cB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zTTBB8fMaVeRYs6yaWQGg3POBDkIRfpN/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - NATIONAL NUTRITIONAL PROGRAMS AND ROLE OF NURSE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/17CCffyD5X_ELcCF7u1YQL3SqhEP0dKIP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aZSXse2HWvuZdjH5C4bJIviJu_dELkcb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nutritional programmes in India: Anemia Mukth Bharat Programme</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LwfWbS_8xqfrBIHN-pevmSRbuCKFOfze/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gaIRzWBclSl1UV8KGtEcm_phFrB1Yt62/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Integrated Child Developmental Service Scheme (ICDS)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iTTBH2ilC8EkkwA4_W8Sj75DkRhrsC6P/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1U2spneVeIeynIO1H6yvzzOk8bxma4i1R/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mid Day Meal Programme (MDM)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y_2cid1Be3iqmOWsNjAY5FzxkPqArkSa/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nNivOKVUvzrW85fm0d1CFMuTE_3hYpBF/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National Iodine Deficiency Disorder Programme (IDD)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O_EywfqYVnaFrFZZ8QOS3q2Ih6a87maq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iFyv4ZeMKSBT9R48TB0qh91rJV9OfWM0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National nutritional problems, National nutritional Policy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eakXlIk6CjgMRdcotGoOKhgs4PzyjS2T/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bGyb8zRILfh8a3p_RfKDw6fhV8cHlJek/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 12 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - FOOD SAFETY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1uXiFTYCgJgev4BEMpSqPZc8bbcASknRN/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1n0VTC54BJKmSqyx4gGNz0YZ3XQZUiSqj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Food safety: Food safety measures, Food safety acts, Keys for safer food, Food storing, Food handling</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SEywniWnbwBmUh3W4q9eFZB44O-oeyPT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cooking method, Principles of food storage, Role of food handler's, Essential steps in safe cooking handling</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FyDtUJBVbBm0c387_GcTAIPx3VMevuZE/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u-8XRF2RWYw-er10q8Z6Q9-cA33TRwZW/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 13 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
