@@ -1,1 +1,367 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nursing Management Syllabus</title>
+  <meta name="description" content="Comprehensive syllabus with detailed notes for Nursing Management." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --brand: #003B82;    /* Dark Blue */
+      --accent: #00B9F2;   /* Cyan */
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: white;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .syllabus-btn, .unit-header {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      margin: 24px 0;
+      background: var(--brand);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .syllabus-btn:hover, .unit-header:hover {
+      background: #002d63;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .unit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      margin: 16px 0;
+    }
+    .unit-header span:last-child {
+      transition: transform 0.3s ease;
+      color: #FFA500;
+    }
+    .unit-header[aria-expanded="true"] span:last-child {
+      transform: rotate(180deg);
+    }
+
+    .unit-content {
+      padding: 0 12px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .unit-content.active {
+      padding: 24px 12px;
+      max-height: none;
+    }
+
+    .subsection {
+      margin: 16px 0;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+    }
+    .subsection:hover { box-shadow: var(--shadow-md); }
+
+    .resource-btn {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s ease;
+      gap: 12px;
+      flex-wrap: wrap;
+      min-height: 50px;
+    }
+    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+    .resource-btn.notes:hover { background: #e0f2fe; }
+
+    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+
+    /* Cyan header style just for PYQ section */
+    .pyq-header {
+      background: var(--accent) !important;
+    }
+    .pyq-header:hover {
+      background: #0092bf !important;
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+      .resource-btn { font-size: 14px; }
+      .subsection { padding: 16px; }
+      .unit-content.active { padding: 16px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 📄 MAIN SYLLABUS BUTTON -->
+  <a href="https://drive.google.com/file/d/1-uXQ6TbBQ3yaCqFhtzTvMQfHZM7Jlf2r/view?usp=drive_link" class="syllabus-btn" target="_blank">
+    📄 NURSING MANAGEMENT SYLLABUS
+  </a>
+
+  <!-- === UNITS === -->
+  <div id="units">
+
+    <!-- === UNIT 1 === -->
+    <div class="unit-container" id="unit1">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+        UNIT 1 – Introduction
+        <span>🔽</span>
+      </div>
+      <div class="unit-content active">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1B4CMRKGzmwqG3erT3Y50bYfw511gZYnK/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- === UNIT 2 === -->
+    <div class="unit-container" id="unit2">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 2 – Nursing Management
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1v6uZeUn6ikLuVwQ-8OFwSUTlMAAPE4A-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 3 === -->
+    <div class="unit-container" id="unit3">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 3 – Planning
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1cuW5zl27QYhP4kwnksbMfap89CXEK98S/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 4 === -->
+    <div class="unit-container" id="unit4">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 4 – Organisation
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1JFiosHpOVVkkkCEpUcrKjfNzI3E_pm96/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 5 === -->
+    <div class="unit-container" id="unit5">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 5 – Human Resource for Health
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/11XGfsCTQWKnRSqiawehdPq15yPRJwxzl/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 6 === -->
+    <div class="unit-container" id="unit6">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 6 – Directing
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1q98eImdkoeKcC2RCc8Qn3J3ZvQoUZdUN/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 7 === -->
+    <div class="unit-container" id="unit7">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 7 – Material Management
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1jnCFGJ3eYFvs_hudRsDaRyoCYq5rN8GM/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 8 === -->
+    <div class="unit-container" id="unit8">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 8 – Controlling
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1chd4dkmpOGY578nrqeZNGb9uRVAaaiX7/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 9 === -->
+    <div class="unit-container" id="unit9">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 9 – Fiscal Planning
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1W6o1a5WLGT7JlWTIMcaVlfn1Qf9LIhle/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 10 === -->
+    <div class="unit-container" id="unit10">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 10 – Nursing Informatics
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1GvcBHI_XI7p9EkusnpXK78mkBtKNJNdC/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 11 === -->
+    <div class="unit-container" id="unit11">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 11 – Leadership
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1IOOlQqDuBsNFLGzw4-HMKXtCFac-cCR8/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === UNIT 12 === -->
+    <div class="unit-container" id="unit12">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 12 – Legal and Ethical Issues
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1enorYh8eZvfTH7zsV4pYojNaT0liJdkW/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- === PREVIOUS YEAR QUESTIONS === -->
+    <div class="unit-container" id="pyq">
+      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        Previous Year Question and Answer
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1mxMSznrWAg7-bAGu-rV_SLI8Aba76G7G/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
+          <a href="https://drive.google.com/file/d/1AvqlDK6JdR_7EYllnsutNNXCSdePn9ys/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
+          <a href="https://drive.google.com/file/d/1a8khgQNjnCKS2dIhnG3q_tJS5F7YibG8/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
+          <a href="https://drive.google.com/file/d/1hg3aIN9qrOE4q6RMLgwuadqRyD-poMns/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
+          <a href="https://drive.google.com/file/d/1TwxP3NDRqThfi9gj0jfqKA7TnHx59qsS/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
+          <a href="https://drive.google.com/file/d/1OKsxZT1tlVjTnH2FBAP75qfrRS5Zt0-l/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
+          <a href="https://drive.google.com/file/d/1Cm0IhMUeB68kBWnHj5Df9xOMYwM9xu0s/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
+          <a href="https://drive.google.com/file/d/1M_UROX8FUcOdA8Dab2sncOfixS5_JiNV/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
+          <a href="https://drive.google.com/file/d/1Sx3RfbK16ABVIEBLej7XYb0VW9aCuatc/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toggle script -->
+  <script>
+    function toggleUnit(header) {
+      const content = header.nextElementSibling;
+      const isExpanded = header.getAttribute('aria-expanded') === 'true';
+      header.setAttribute('aria-expanded', !isExpanded);
+      content.classList.toggle('active');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstUnit = document.querySelector('.unit-container');
+      if (firstUnit) {
+        const header = firstUnit.querySelector('.unit-header');
+        const content = firstUnit.querySelector('.unit-content');
+        header.setAttribute('aria-expanded', true);
+        content.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
