@@ -1,1 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forensic Nursing & Indian Laws - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Forensic Nursing and Indian Laws II." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            /* Original color scheme restored */
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63; /* Original darker blue on hover */
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: auto; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Syllabus PDF Link -->
+    <a href="https://drive.google.com/file/d/1iw04b61Jrl-RsUJsw_bdRBlgK8FItG1D/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        ⚖️ FORENSIC NURSING & INDIAN LAWS II - SYLLABUS
+    </a>
+    
+    <div id="units">
+        
+        <!-- UNIT 1 - FORENSIC SCIENCE -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - FORENSIC SCIENCE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <h3>1.1 Introduction to Forensic Science</h3>
+                    <a href="https://drive.google.com/file/d/1aZBntSYXTqDxXRXsIEDjWoY1ZnE1NuMN/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Forensic Science Overview</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ICSZ3TFBPH4jheckET_K-jt0BTZBuEWB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>History of Forensic Science, Medical Importance, and Laboratory Setup</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1akUio9cJppbRBIseLmW_eGiI_KlmaZ4A/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: History and Structure of Forensic Science</span>
+                    </a>
+                    <h3>1.2 Violence and Intervention</h3>
+                    <a href="https://drive.google.com/file/d/1y7piTbBHG7AlNaT87gN-OBCWq1S478LE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Violence (Factors, Sexual Violence), Prevention and Intervention Strategies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17rT5ZWROXIPg-qpJdPdbBe2ki-N0fo89/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Types of Violence and Nursing Intervention</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19Y8Q9QrS_xYV6pUbXdHUbZGX7fHq_g_R/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz: Forensic Science Fundamentals</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 - FORENSIC NURSING -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - FORENSIC NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <h3>2.1 Basics, Scope, and Practice</h3>
+                    <a href="https://drive.google.com/file/d/1KSu_IwcOgEVABYH57Na9nk5kevF7SVzr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Forensic Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bB-J3vuY5npOQGUz-F4_M1HKW9-FfXqR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, History, Scope, Sub-Specialties, and Areas of Practice</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nJXuz_ycl_qH8SKUJ35qXd-bn376myGX/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Scope and Specialties of Forensic Nursing</span>
+                    </a>
+                    <h3>2.2 Ethical Issues and Responsibilities</h3>
+                    <a href="https://drive.google.com/file/d/1E657JCTW5gIU3yaL2AhkWO3fiBk3T2nO/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ethical Issues, Roles/Responsibilities (General and Death Investigations), INC/SNC Act</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O-ElD1PlgDHy7I-cofKMRGpPcmQUfUjP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Roles, Ethics, and Legal Acts in Forensic Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ek--4d7PWSdN1F6KDYEZYtJTYHFImBrA/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz: Forensic Nursing Practice</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 - FORENSIC TEAM -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - FORENSIC TEAM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="#" class="resource-btn notes coming-soon">
+                        <span class="icon coming-soon-icon">⚠️</span><span>Detailed Notes: Forensic Team Collaboration (COMING SOON)</span>
+                    </a>
+                    <h3>3.1 Comprehensive Care and Teamwork</h3>
+                    <a href="https://drive.google.com/file/d/1wd8WJ34B9N98GN0jcc1TxIO5HbyVyKVX/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Forensic Team & Comprehensive Nursing Care of Victim and Family</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15Gs-fLU-ESqCqdkUAN3tN6QvzJYRwmh4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Team Dynamics and Victim Care</span>
+                    </a>
+                    <h3>3.2 Legal Documentation and End-of-Life Care</h3>
+                    <a href="https://drive.google.com/file/d/1FQBLaokvDT9PFppIRD1i0GUK4TFp81-r/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Assisting Forensic Team Beyond Scope of Practice, Admission and Death of a Victim of Violence</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Iag8GSkI4n1-WIqpdU9xqwlqqLrmE3-J/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Legal and Ethical Considerations in Victim Admission/Death</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bXzSHp-AqOnpA6x_0Xn3wfIymzsgERGp/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz: Team Collaboration and Legal Duties</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 4 - INTRODUCTION TO INDIAN CONSTITUTION -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - INTRODUCTION TO INDIAN CONSTITUTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <h3>4.1 Constitutional Foundations</h3>
+                    <a href="https://drive.google.com/file/d/1i0U07rvE5iUd2naMJXF1A_nCAkfHsjja/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Indian Constitution</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AH5YGHBoqxfFB_Lz-rCkuFsV1ec4eOP-/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Functions, History, and Structure of the Constitution</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Yn1PyO2o1cHbfMGLEQt5ju28Y9X_Nak7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: History and Structure</span>
+                    </a>
+                    <h3>4.2 Rights and Legal Cases</h3>
+                    <a href="https://drive.google.com/file/d/1CZLGZAtFN_bsLAgX6zwceq9xplZlNAzP/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Features of the Constitution, Fundamental Rights, Civil and Criminal Cases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xpbO8niFQf51NRjgSD5SegM-zqhfCdh6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Fundamental Rights and Case Types</span>
+                    </a>
+                    <h3>4.3 Procedures and Human Rights</h3>
+                    <a href="https://drive.google.com/file/d/1jHbSj0pNoGRiuo0Aaia9TQn2cdRWFPHU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Civil Case Procedure, Criminal Case Procedure, and the Human Rights Commission</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xJcdK6S1viYeZmU_sBHyAi6b1YoYfyRc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Legal Procedures and HRC</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PbBtpBgxp8MuAC86ljQQTDfsBfcd5bRg/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz: Indian Constitution and Rights</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 5 - SOURCES OF LAWS AND LAW MAKING POWERS -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - SOURCES OF LAWS AND LAW MAKING POWERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <h3>5.1 Indian Judicial System</h3>
+                    <a href="https://drive.google.com/file/d/1lLg0-imyUBYqUPYGvRAHEf_vgFn3tSIv/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Sources of Laws and Law Making Powers</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1W9DAAIrhOZXMuz7HIhWK-2VQFftl_Q8w/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Indian Judicial System (Roles, Apex, District, State), and Role of Nurse in Judicial System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g7Z2biDPj_7zPbfJ-RCokyWLPYslLw3k/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: The Judicial Structure and Nurse's Role</span>
+                    </a>
+                    <h3>5.2 Legal Codes and Punishments</h3>
+                    <a href="https://drive.google.com/file/d/15C4zM2cl74vQdLglU2hkxo2odRT4pb7W/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Indian Law, Civil/Criminal Case Procedures, Civil/Criminal Procedure Codes, Indian Evidence Act, Offense and Punishment</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cMj8O3YDVQWeXOphLd8_t1fw40fNrv8l/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Major Indian Legal Acts and Codes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oyEx_dLZET_8xWDl9XJJ1Rbo-CDsykpE/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz: Judicial System and Laws</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the unit content
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+
+            // Dynamic max-height for smooth collapse animation
+            if (unitContent.classList.contains('active')) {
+                // If expanding, set max-height to scrollHeight
+                // Use a short timeout to ensure correct height calculation after state change
+                setTimeout(() => {
+                    unitContent.style.maxHeight = unitContent.scrollHeight + "px";
+                }, 10);
+            } else {
+                // If collapsing, reset max-height to 0
+                unitContent.style.maxHeight = "0";
+            }
+        }
+        
+        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+        document.addEventListener('DOMContentLoaded', () => {
+             const allUnits = document.querySelectorAll('.unit-header');
+             allUnits.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 
+                 if (index === 0) {
+                     // Unit 1 is active by default
+                     header.setAttribute('aria-expanded', 'true');
+                     content.classList.add('active');
+                     // Set the max-height dynamically for the open unit
+                     setTimeout(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                     }, 50);
+                 } else {
+                     // All other units are initially collapsed
+                     header.setAttribute('aria-expanded', 'false');
+                     content.classList.remove('active');
+                     content.style.maxHeight = '0';
+                 }
+             });
+        });
+    </script>
+</body>
+</html>
 
