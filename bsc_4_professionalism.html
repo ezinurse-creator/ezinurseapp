@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professionalism, Professional Values - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Professionalism and Professional Values." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: auto; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Syllabus PDF Link -->
+    <a href="https://drive.google.com/file/d/19QgOfLBg_B0DwUiFrmfAu9ttaJyNE8D3/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 PROFESSIONALISM, PROFESSIONAL VALUES - SYLLABUS
+    </a>
+    
+    <div id="units">
+        
+        <!-- UNIT 1 - PROFESSIONALISM -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - PROFESSIONALISM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1FJwzqB3SpSkBqSxdMZJvNjLRC7S6fK77/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Professionalism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Mdd0A15cGHYLjiidDr3WygyxaHhs281W/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Profession</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xqiIwnVoFnczRJoSdmdjHR8maaJlO5Dk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Profession</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kobjpBc5nXhi3-pxwVHVlFLWI6bVRAi3/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professionalism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rGPi5cTz7cZpjuWTk_9cU1I4F9jF_Rl-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Professionalism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10ag4_HfpVlsycTie_eFBo9Hfu3I4UxS9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Personal identity vs professional identity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tVMTndIvhCGCluf9LNuWi07-wcXrjdD4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Relationship with team members, patients & society</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/177UMDFYOHXhvGgT3xMxbhrx_06bdyi-M/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Identity & Relationships</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GBT_ai4vZJ2xi80RZe_OXh0J3Y59Y0Ag/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professional Conduct</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jZfcl2DCeS8AzJJtcJ219vRIWuGe7Age/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Professional Conduct</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TL228SAtllwbWEeQDZwEJoULZqUR-qnd/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Regulatory bodies: INC & SNC</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SCPOoBnK84EEzPDivFNCxxNcfHjPHyV3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Regulatory Bodies (INC & SNC)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uX2-4vWHje6wPo-AbMm9R7r_wQ7OTyLV/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professional Organizations: TNAI & SNA</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LKWqhPeQJcocOl4LOXTztPjgD4uBaW6s/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Professional Organizations (TNAI & SNA)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/129bdvNCHMVUtmBAF9GMqBFEkprdH96QR/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professional Organizations: CMAI, ICN & ICM</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14G2CvJ8913MLsQkYzxpYeb3TGo5pFpcS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Professional Organizations (CMAI, ICN & ICM)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17x-G-T7J2L48gyugFWCBlywBVhdFQExC/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 - PROFESSIONAL VALUES -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - PROFESSIONAL VALUES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Xy6gL9Vcg2vWt6B4GRKmY2RuDP4-a7KS/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Professional Values</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WM3-Z1YON3509mbE1aB3n50Xje9xVNw0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction of values, Professional values - Characteristics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xDLvW5G-buED3TpdHQAnKfMyFIgCZnqV/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Values Introduction & Characteristics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iZo6tjgRBKt5TfITPr8eWM0E4H8VESAr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professional values in Nursing, Definition</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13EsUAq9oZ0_bvWosrAZjlCe0UTC7pzdI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Professional Values in Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Qbbz1UIg59SShbXqXZBgPD20k8gcRVY2/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Human Dignity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11Xt0z031hs6-ENJRuQJ3mGR1_MDfB2u3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Human Dignity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kpWMvN4QMu_vGejM9qNdquAE5aarvaI3/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 - ETHICS AND BIOETHICS -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ETHICS AND BIOETHICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1tXUZYUyKaE48gFrV4QmJbeA3QT3_EgTC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Ethics and Bioethics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-z6MdjW7zVKHixFqeQK7ZI3GK_2xRXzG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition of Ethics and Bioethics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vwVxVyU-IzWOnoVz7KUPJmb-RteT1jmK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Definitions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cgwSc4KYfXmLr6wojpfgOjOsCfGaAUmK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ethical Issues and Ethical Dilemma: Common Ethical Problems, Privacy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IyXTITpQuMBKPOUKx6VaU5P9w_8luWc4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Issues, Dilemma & Privacy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EcFk0O_CJhmeAaptN2NlKzREVbYnOSTv/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Professional Values: Beginning of Life Issues, Selective Deduction, Intrauterine Treatment of Conditions, Mandated Contraception</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Igjb3tBhMATRPLlbBFyvtfgXzgYIzDfE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Beginning of Life Issues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1b1c9Pf56LFhvqttEJHY7QEpTgNPJmdPk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>End of life issues and issues related to psychiatric care: End of life care, Euthanasia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oo_O9k2odSHIs9bqkdPpeFAlITQW7PLJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: End of Life Issues & Euthanasia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B7Z346JuoaZ78S3ZuHHrYfF5utXUTXJG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ethical decision making, ethics committee and code of ethics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fG_izzjHdmnhhN_pXZ0Z-q-4BB4EaiWL/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Decision Making & Code of Ethics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sHhapyr-YKzMwHpzksFxSf_HizfpyiMy/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>55 Inc code of ethics and patient's bill of rights</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z0e1RF4H3JqAxqgj63CEkM-VCnHy1ds3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: INC Code of Ethics & Patient's Rights</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X6FpzSNUuHmvX0FuWnGMHONJArBHSmI7/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the unit content
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+
+            // Dynamic max-height for smooth collapse animation
+            if (unitContent.classList.contains('active')) {
+                // If expanding, set max-height to scrollHeight
+                unitContent.style.maxHeight = unitContent.scrollHeight + "px";
+            } else {
+                // If collapsing, reset max-height to 0
+                unitContent.style.maxHeight = "0";
+            }
+        }
+        
+        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+        document.addEventListener('DOMContentLoaded', () => {
+             const allUnits = document.querySelectorAll('.unit-header');
+             allUnits.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 
+                 if (index === 0) {
+                     // Unit 1 is active by default
+                     header.setAttribute('aria-expanded', 'true');
+                     content.classList.add('active');
+                     // Set the max-height dynamically for the open unit
+                     // Needs a slight delay to ensure scrollHeight is calculated correctly after CSS application
+                     setTimeout(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                     }, 50);
+                 } else {
+                     // All other units are initially collapsed
+                     header.setAttribute('aria-expanded', 'false');
+                     content.classList.remove('active');
+                     content.style.maxHeight = '0';
+                 }
+             });
+        });
+    </script>
+</body>
+</html>
 
