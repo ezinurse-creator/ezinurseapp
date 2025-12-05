@@ -289,6 +289,18 @@
             </div>
         </div>
     </div>
+
+    <!-- EXIT CONFIRMATION MODAL -->
+    <div id="modal-exit" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3 class="headline">Exit App?</h3>
+            <p class="subtext">Do you want to close the application?</p>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <button class="btn btn-primary" style="background-color: var(--danger);" onclick="app.confirmExit()">Yes, Exit</button>
+                <button class="btn btn-outline" onclick="app.cancelExit()">No, Stay</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -439,8 +451,10 @@
             const savedUser = localStorage.getItem('eziUser');
             if (savedUser) {
                 this.currentUser = JSON.parse(savedUser);
-                // Replace current history state to avoid going back to blank
-                history.replaceState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
+                // GUARD PATTERN: Push a "Guard" state first, then Dashboard.
+                // If user presses back from Dashboard, they hit Guard state, triggering Modal.
+                history.replaceState({ viewId: 'view-exit-guard' }, 'Exit Guard', '#exit');
+                history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
                 this.renderView('view-dashboard');
             } else {
                 history.replaceState({ viewId: 'view-auth' }, 'Login', '#login');
@@ -450,6 +464,14 @@
             // LISTENER FOR ANDROID PHYSICAL BACK BUTTON
             window.addEventListener('popstate', (event) => {
                 if (event.state && event.state.viewId) {
+                    // EXIT GUARD LOGIC
+                    if (event.state.viewId === 'view-exit-guard') {
+                        this.showExitModal();
+                        // Hack: Keep showing dashboard visually while modal is up
+                        this.renderView('view-dashboard');
+                        return; 
+                    }
+
                     // Restore logic based on state
                     if (event.state.viewId === 'view-submenu') {
                         this.renderSubmenu(event.state.course);
@@ -462,10 +484,8 @@
                              this.renderView('view-dashboard');
                          }
                     } else if (event.state.viewId === 'view-iframe') {
-                        // If we are navigating "forward" to iframe via history (unlikely case, usually pop goes back)
-                        // We need the URL. If undefined, fallback.
                         if (event.state.sourceUrl) {
-                            this.openContent(event.state.sourceUrl, event.state.title, true); // true = don't push state again
+                            this.openContent(event.state.sourceUrl, event.state.title, true);
                         } else {
                             this.renderView('view-dashboard');
                         }
@@ -473,7 +493,7 @@
                         this.renderView(event.state.viewId);
                     }
                 } else {
-                    // Fallback if history state is empty
+                    // Fallback if history state is empty (should ideally hit guard first)
                     if (this.currentUser) this.renderView('view-dashboard');
                     else this.renderView('view-auth');
                 }
@@ -497,11 +517,10 @@
                 const data = await res.json();
                 if(data.result === 'success'){
                     this.currentUser = data.user;
-                    // SAVE SESSION
                     localStorage.setItem('eziUser', JSON.stringify(data.user));
                     
                     document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = "";
-                    this.navTo('view-dashboard', true); // true = clear history logic
+                    this.navTo('view-dashboard', true); // TRUE = Root navigation
                 } else {
                     errorDiv.textContent = data.message;
                 }
@@ -527,9 +546,7 @@
                 const data = await res.json();
                 if(data.result === 'success'){
                     this.currentUser = data.user;
-                    // SAVE SESSION
                     localStorage.setItem('eziUser', JSON.stringify(data.user));
-                    
                     alert("Account Created!");
                     this.navTo('view-dashboard', true);
                 } else {
@@ -555,18 +572,24 @@
 
         logout: function() { 
             this.currentUser = null; 
-            localStorage.removeItem('eziUser'); // Clear Session
-            this.navTo('view-auth', true); 
+            localStorage.removeItem('eziUser'); 
+            this.navTo('view-auth', true); // Back to Auth Root
         },
 
         // CORE NAVIGATION FUNCTION
         navTo: function(viewId, isRoot = false, stateData = {}) {
-            // Push State to Browser History
             const state = { viewId: viewId, ...stateData };
             
             if (isRoot) {
-                // If it's a root navigation (like login success), we reset history
-                 history.pushState(state, null, `#${viewId.replace('view-', '')}`);
+                 // GUARD LOGIC: If we are going to Dashboard as root (e.g. login),
+                 // Insert the Exit Guard first, preventing "Back" from going to Login page.
+                 if (viewId === 'view-dashboard') {
+                     history.replaceState({ viewId: 'view-exit-guard' }, null, '#exit');
+                     history.pushState(state, null, `#${viewId.replace('view-', '')}`);
+                 } else {
+                     // Normal replace (e.g. Logout goes to Login)
+                     history.replaceState(state, null, `#${viewId.replace('view-', '')}`);
+                 }
             } else {
                  history.pushState(state, null, `#${viewId.replace('view-', '')}`);
             }
@@ -574,26 +597,21 @@
             this.renderView(viewId);
         },
 
-        // VISUAL UPDATE ONLY (Does not touch history)
+        // VISUAL UPDATE ONLY
         renderView: function(viewId) {
-            // IFRAME CLEANUP: Only clear iframe if we are leaving the iframe view
-            // This prevents the white flash effect before navigation
+            // IFRAME CLEANUP
             const iframe = document.getElementById('content-frame');
             if (viewId !== 'view-iframe' && iframe && iframe.src && iframe.src !== "about:blank") {
                  iframe.src = "about:blank"; 
             }
 
-            // Hide all
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            
-            // Show Target
             const target = document.getElementById(viewId);
             if(target) target.classList.add('active');
             
             // Handle Header UI
             const isAuth = viewId === 'view-auth';
             const isDash = viewId === 'view-dashboard';
-            // Also show back button for iframe
             
             const backBtn = document.getElementById('btn-back');
             const logoutBtn = document.getElementById('btn-logout');
@@ -606,15 +624,25 @@
 
         // Called by On-Screen Back Button
         goBack: function() {
-            if(!document.getElementById('modal-referral').classList.contains('hidden')) { 
-                this.closeReferralModal(); 
-                return; 
-            }
-            
-            // FIXED: Do NOT clear iframe src here. 
-            // Clearing it here causes the white screen flash.
-            // It will be cleared in renderView() after the view changes.
+            if(!document.getElementById('modal-referral').classList.contains('hidden')) { this.closeReferralModal(); return; }
+            if(!document.getElementById('modal-exit').classList.contains('hidden')) { this.cancelExit(); return; }
             window.history.back();
+        },
+
+        // EXIT MODAL FUNCTIONS
+        showExitModal: function() {
+            document.getElementById('modal-exit').classList.remove('hidden');
+        },
+        cancelExit: function() {
+            document.getElementById('modal-exit').classList.add('hidden');
+            // User cancelled exit, so we must push Dashboard back onto history
+            // because popping 'Exit Guard' removed it.
+            history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
+        },
+        confirmExit: function() {
+            // We are currently at 'view-exit-guard' history state.
+            // Going back one more time drops out of the app history, closing WebView.
+            window.history.back(); 
         },
 
         navToCourse: function(key) {
@@ -649,8 +677,6 @@
             if(this.currentUser && this.currentUser.permissions && this.currentUser.permissions[pKey] === true) {
                 this.openSubjectList(course, section);
             } else {
-                // If locked, we navigate to paywall
-                // We add state so back button works from paywall
                 this.navTo('view-paywall', false, { from: 'checkAccess' });
             }
         },
@@ -672,8 +698,6 @@
                 const item = document.createElement('div');
                 item.className = 'menu-item';
                 item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
-                
-                // --- MODIFIED NAVIGATION FOR IFRAME ---
                 item.onclick = () => {
                     this.openContent(sub.link, sub.label);
                 };
@@ -681,22 +705,14 @@
             });
         },
         
-        // --- NEW: FUNCTION TO OPEN URL IN IFRAME ---
         openContent: function(url, title, fromHistory = false) {
             const frame = document.getElementById('content-frame');
-            
             if (!fromHistory) {
-                // To avoid double-history entries when using iframes, we just use navTo
-                // and let the renderView/setup handle logic if needed, but here 
-                // we set src AFTER pushing state to ensure clean history stack
                 this.navTo('view-iframe', false, { sourceUrl: url, title: title });
                 frame.src = url;
             } else {
                 this.renderView('view-iframe');
-                // Restore src if it was cleared
-                if (frame.src.indexOf(url) === -1) {
-                    frame.src = url;
-                }
+                if (frame.src.indexOf(url) === -1) { frame.src = url; }
             }
         },
 
