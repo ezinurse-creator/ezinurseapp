@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Applied Physiology Syllabus</title>
+    <title>Applied Anatomy Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         /* --- MODERN THEME --- */
         :root {
-            --primary: #01b9f1;
-            --primary-dark: #003b80;
+            --primary: #00B9F2;       /* Light Blue */
+            --primary-dark: #003B82;  /* Brand Navy */
+            --teal: #009688;          /* For 3D Models */
             --bg-card: #ffffff;
-            --bg-body: #f1f5f9;
-            --text-main: #003b80;
-            --text-muted: #64748b;
-            --accent: #f59e0b;
+            --bg-body: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #f59e0b;        /* Quiz Gold */
             --danger: #ef4444;
             --success: #10b981;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
             --radius-md: 12px;
         }
@@ -75,7 +76,7 @@
             margin-bottom: 16px;
             box-shadow: var(--shadow-sm);
             overflow: hidden;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
         }
 
         .unit-header {
@@ -91,12 +92,12 @@
             transition: background 0.2s;
         }
         
-        .unit-header:hover { background: #f8fafc; }
+        .unit-header:hover { background: #f9fafb; }
         
         .unit-header.active {
-            border-bottom-color: #e2e8f0;
+            border-bottom-color: #e5e7eb;
             background: #f0f9ff;
-            color: var(--primary);
+            color: var(--primary-dark);
         }
 
         .unit-content {
@@ -117,7 +118,7 @@
             align-items: center;
             padding: 16px;
             background: white;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
             text-decoration: none;
             color: var(--text-main);
@@ -133,9 +134,9 @@
         }
 
         /* Color coding by type */
-        .type-notes { border-left: 4px solid #0ea5e9; }
-        .type-video { border-left: 4px solid #8b5cf6; }
-        .type-model { border-left: 4px solid #10b981; }
+        .type-notes { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
+        .type-video { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+        .type-model { border-left: 4px solid var(--teal); background: #e0f7fa; }
         .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
 
         .icon {
@@ -145,14 +146,14 @@
             text-align: center;
         }
 
-        /* --- MODAL (The "Close Button" Wrapper) --- */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -185,25 +186,28 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto; /* Allow scrolling */
-            /* Default display is flexible to center videos */
+            overflow-y: auto;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* FIX: 16:9 Aspect Ratio for Videos */
         .modal-iframe {
             width: 100%;
-            height: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
             border: none;
-            background: #000; /* Black background for video loading state */
+            background: #000;
+            max-height: 80vh;
+            display: block;
         }
 
-        /* --- QUIZ STYLES (Inside Modal) --- */
+        /* --- QUIZ STYLES --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%; /* Ensures it fills screen if short */
+            min-height: 100%;
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -219,36 +223,10 @@
             position: relative;
         }
         .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
-        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
-        
-        /* Visual Indicators for Tick/Cross */
-        .quiz-option.correct { 
-            background: var(--success); 
-            color: white; 
-            border-color: var(--success); 
-        }
-        .quiz-option.correct::after {
-            content: '✓';
-            position: absolute;
-            right: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .quiz-option.wrong { 
-            background: var(--danger); 
-            color: white; 
-            border-color: var(--danger); 
-        }
-        .quiz-option.wrong::after {
-            content: '✗';
-            position: absolute;
-            right: 15px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
     </style>
 </head>
@@ -256,267 +234,234 @@
 
     <div class="container">
         <div class="page-header">
-            <div class="page-title">Applied Physiology</div>
-            <p style="color: var(--text-muted);">BSc Semester 1</p>
+            <div class="page-title">Applied Anatomy</div>
+            <p style="color: var(--text-muted);">BSc Nursing Semester 1</p>
         </div>
 
-        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1WCC53x59CYh_GQP-UgVNkgyIKNTI1oEr/preview')">
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1sPup33yo_7WjFxKCAd6_5WkESw46-CjI/preview')">
             📄 View Full Syllabus
         </div>
 
         <div id="units-container">
-            <!-- Content injected via JS -->
-        </div>
+            </div>
     </div>
 
-    <!-- MODAL OVERLAY -->
     <div id="app-modal" class="modal-overlay">
         <div class="modal-header">
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body">
-            <!-- Content injected here -->
-        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
     <script>
-        // --- 1. DUMMY 3D MODEL CODES ---
-        const MODEL_CODE_A = `<div><div><p><iframe allowfullscreen="true" frameborder="0" id="embedded-human" loading="lazy" src="https://human.biodigital.com/viewer/?id=5C83&amp;ui-anatomy-descriptions=true&amp;ui-anatomy-pronunciations=true&amp;ui-anatomy-labels=true&amp;ui-audio=true&amp;ui-chapter-list=false&amp;ui-fullscreen=true&amp;ui-help=true&amp;ui-info=true&amp;ui-label-list=true&amp;ui-layers=true&amp;ui-loader=circle&amp;ui-media-controls=full&amp;ui-menu=true&amp;ui-nav=true&amp;ui-search=true&amp;ui-tools=true&amp;ui-tutorial=false&amp;ui-undo=true&amp;ui-whiteboard=true&amp;initial.none=true&amp;disable-scroll=false&amp;uaid=LnZqE&amp;paid=o_10a88be0&amp;ui-bd.link=false" style="aspect-ratio: 3 / 5; width: 100%"></iframe></p></div><p>&nbsp;</p></div>`;
-        const MODEL_CODE_B = `<div><p><iframe allowfullscreen="true" frameborder="0" id="embedded-human" loading="lazy" src="https://human.biodigital.com/viewer/?id=5C87&amp;ui-anatomy-descriptions=true&amp;ui-anatomy-pronunciations=true&amp;ui-anatomy-labels=true&amp;ui-audio=true&amp;ui-chapter-list=false&amp;ui-fullscreen=true&amp;ui-help=true&amp;ui-info=true&amp;ui-label-list=true&amp;ui-layers=true&amp;ui-loader=circle&amp;ui-media-controls=full&amp;ui-menu=true&amp;ui-nav=true&amp;ui-search=true&amp;ui-tools=true&amp;ui-tutorial=false&amp;ui-undo=true&amp;ui-whiteboard=true&amp;initial.none=true&amp;disable-scroll=false&amp;uaid=LnZqz&amp;paid=o_10a88be0&amp;ui-bd.link=false" style="aspect-ratio: 3 / 5; width: 100%"></iframe></p></div>`;
-
-        // --- 2. PHYSIOLOGY QUIZ DATA (5 Questions each) ---
+        // --- 1. ANATOMY QUIZ DATA ---
         const QUIZ_DATA = {
-            1: [ // General Phys
-                { q: "Which organelle produces ATP?", o: ["Ribosome", "Mitochondria", "Nucleus", "Golgi Body"], a: 1 },
-                { q: "Homeostasis is maintained by:", o: ["Positive Feedback", "Negative Feedback", "Both", "None"], a: 1 },
-                { q: "Which tissue type contracts?", o: ["Epithelial", "Connective", "Muscle", "Nervous"], a: 2 },
-                { q: "Active transport requires:", o: ["No Energy", "ATP", "Osmosis", "Diffusion"], a: 1 },
-                { q: "Most body water is found in:", o: ["Intracellular Fluid", "Plasma", "Lymph", "Extracellular Fluid"], a: 0 }
+            1: [ 
+                { q: "The 'Powerhouse' of the cell is:", o: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Body"], a: 1 },
+                { q: "Which tissue covers body surfaces?", o: ["Connective", "Muscular", "Epithelial", "Nervous"], a: 2 },
+                { q: "The anatomical position implies the body is:", o: ["Lying down", "Sitting", "Standing erect facing forward", "Bending"], a: 2 },
+                { q: "Which plane divides the body into left and right?", o: ["Sagittal", "Coronal", "Transverse", "Oblique"], a: 0 },
+                { q: "The basic unit of life is:", o: ["Tissue", "Organ", "Cell", "System"], a: 2 }
             ],
-            2: [ // Respiratory
-                { q: "The primary muscle of inspiration is:", o: ["Internal Intercostal", "Diaphragm", "Abdominal", "Scalene"], a: 1 },
-                { q: "Gas exchange occurs in:", o: ["Bronchi", "Trachea", "Alveoli", "Larynx"], a: 2 },
-                { q: "Vital Capacity equals:", o: ["TV + IRV", "TV + IRV + ERV", "TLC - RV", "Both B & C"], a: 3 },
-                { q: "Surfactant prevents alveolar collapse by reducing:", o: ["Airflow", "Surface Tension", "Pressure", "Volume"], a: 1 },
-                { q: "Respiratory rhythm center is located in:", o: ["Cerebrum", "Medulla Oblongata", "Cerebellum", "Spinal Cord"], a: 1 }
+            2: [ 
+                { q: "The 'Windpipe' is anatomically known as:", o: ["Esophagus", "Trachea", "Larynx", "Pharynx"], a: 1 },
+                { q: "Gas exchange occurs in the:", o: ["Bronchi", "Alveoli", "Trachea", "Nose"], a: 1 },
+                { q: "The right lung has how many lobes?", o: ["Two", "Three", "One", "Four"], a: 1 },
+                { q: "The voice box is the:", o: ["Larynx", "Pharynx", "Trachea", "Mouth"], a: 0 },
+                { q: "Which muscle is primarily responsible for breathing?", o: ["Intercostals", "Diaphragm", "Abdominals", "Pectorals"], a: 1 }
             ],
-            3: [ // Digestive
-                { q: "Pepsin digests:", o: ["Proteins", "Fats", "Carbohydrates", "Vitamins"], a: 0 },
-                { q: "Bile is stored in:", o: ["Liver", "Pancreas", "Gallbladder", "Duodenum"], a: 2 },
-                { q: "Most absorption occurs in:", o: ["Stomach", "Small Intestine", "Large Intestine", "Esophagus"], a: 1 },
-                { q: "Hydrochloric acid (HCl) is secreted by:", o: ["Chief Cells", "Parietal Cells", "Mucous Cells", "G Cells"], a: 1 },
-                { q: "Emulsification of fats is the function of:", o: ["Amylase", "Lipase", "Bile Salts", "Trypsin"], a: 2 }
+            3: [
+                { q: "Digestion begins in the:", o: ["Stomach", "Small Intestine", "Mouth", "Esophagus"], a: 2 },
+                { q: "The largest gland in the body is:", o: ["Pancreas", "Liver", "Thyroid", "Pituitary"], a: 1 },
+                { q: "Most absorption of nutrients occurs in the:", o: ["Stomach", "Small Intestine", "Large Intestine", "Esophagus"], a: 1 },
+                { q: "Bile is stored in the:", o: ["Liver", "Gallbladder", "Pancreas", "Stomach"], a: 1 },
+                { q: "The wave-like motion moving food is called:", o: ["Digestion", "Peristalsis", "Absorption", "Mastication"], a: 1 }
             ],
-            4: [ // Circulatory
-                { q: "Stroke Volume x Heart Rate =", o: ["Blood Pressure", "Cardiac Output", "Venous Return", "Peripheral Resistance"], a: 1 },
-                { q: "The pacemaker of the heart:", o: ["AV Node", "SA Node", "Purkinje Fibers", "Bundle of His"], a: 1 },
-                { q: "Lymph drains into:", o: ["Arteries", "Veins", "Capillaries", "Heart"], a: 1 },
-                { q: "Normal blood pressure is approx:", o: ["100/60", "120/80", "140/90", "110/70"], a: 1 },
-                { q: "In ECG, the P wave represents:", o: ["Atrial Depolarization", "Ventricular Depolarization", "Repolarization", "Diastole"], a: 0 }
+            4: [
+                { q: "Which chamber pumps blood to the body?", o: ["Right Atrium", "Right Ventricle", "Left Atrium", "Left Ventricle"], a: 3 },
+                { q: "The pacemaker of the heart is:", o: ["AV Node", "SA Node", "Bundle of His", "Purkinje Fibers"], a: 1 },
+                { q: "Which blood vessel carries oxygenated blood?", o: ["Pulmonary Artery", "Aorta", "Superior Vena Cava", "Pulmonary Vein"], a: 1 },
+                { q: "The mitral valve is located between:", o: ["Right Atrium/Ventricle", "Left Atrium/Ventricle", "Aorta/Ventricle", "Pulmonary/Ventricle"], a: 1 },
+                { q: "Exchange of gases occurs in:", o: ["Arteries", "Veins", "Capillaries", "Heart"], a: 2 }
             ],
-            5: [ // Blood
-                { q: "Red blood cells are produced in:", o: ["Liver", "Spleen", "Red Bone Marrow", "Kidney"], a: 2 },
-                { q: "Which cell fights infection?", o: ["Erythrocyte", "Leukocyte", "Thrombocyte", "Adipocyte"], a: 1 },
-                { q: "Vitamin K is essential for:", o: ["Clotting", "Oxygen Transport", "Immunity", "Digestion"], a: 0 },
-                { q: "Average lifespan of RBC is:", o: ["30 days", "90 days", "120 days", "150 days"], a: 2 },
-                { q: "Universal Blood Donor is:", o: ["AB Positive", "O Negative", "A Positive", "B Negative"], a: 1 }
+            5: [
+                { q: "The 'Master Gland' is the:", o: ["Thyroid", "Adrenal", "Pituitary", "Pancreas"], a: 2 },
+                { q: "Insulin is secreted by the:", o: ["Liver", "Pancreas", "Spleen", "Gallbladder"], a: 1 },
+                { q: "Which gland regulates metabolism?", o: ["Thyroid", "Parathyroid", "Adrenal", "Thymus"], a: 0 },
+                { q: "Adrenaline is secreted by:", o: ["Kidney", "Adrenal Gland", "Brain", "Heart"], a: 1 },
+                { q: "Calcitonin regulates blood levels of:", o: ["Glucose", "Sodium", "Calcium", "Potassium"], a: 2 }
             ],
-            6: [ // Endocrine
-                { q: "Growth Hormone is secreted by:", o: ["Thyroid", "Adrenal", "Anterior Pituitary", "Posterior Pituitary"], a: 2 },
-                { q: "Insulin causes blood sugar to:", o: ["Increase", "Decrease", "Stay same", "Fluctuate"], a: 1 },
-                { q: "The 'Fight or Flight' hormone is:", o: ["Thyroxine", "Adrenaline", "Cortisol", "Melatonin"], a: 1 },
-                { q: "Parathyroid hormone increases blood:", o: ["Sodium", "Potassium", "Calcium", "Iron"], a: 2 },
-                { q: "Oxytocin stimulates:", o: ["Milk Production", "Uterine Contraction", "Growth", "Metabolism"], a: 1 }
+            6: [
+                { q: "The outer layer of the skin is:", o: ["Dermis", "Epidermis", "Subcutaneous", "Hypodermis"], a: 1 },
+                { q: "The white part of the eye is:", o: ["Cornea", "Sclera", "Iris", "Retina"], a: 1 },
+                { q: "Which bone is NOT in the middle ear?", o: ["Malleus", "Incus", "Stapes", "Femur"], a: 3 },
+                { q: "Olfaction refers to the sense of:", o: ["Taste", "Sight", "Smell", "Hearing"], a: 2 },
+                { q: "Gustatory receptors detect:", o: ["Light", "Sound", "Taste", "Touch"], a: 2 }
             ],
-            7: [ // Sensory
-                { q: "Photoreceptors are located in the:", o: ["Iris", "Cornea", "Retina", "Lens"], a: 2 },
-                { q: "The organ of hearing is:", o: ["Vestibule", "Cochlea", "Ossicles", "Pinna"], a: 1 },
-                { q: "Olfaction refers to sense of:", o: ["Taste", "Touch", "Smell", "Sight"], a: 2 },
-                { q: "Which is NOT a primary taste?", o: ["Sweet", "Sour", "Spicy", "Bitter"], a: 2 },
-                { q: "Cones are responsible for:", o: ["Night vision", "Color vision", "Peripheral vision", "Motion"], a: 1 }
+            7: [
+                { q: "The longest bone in the body is:", o: ["Humerus", "Tibia", "Femur", "Fibula"], a: 2 },
+                { q: "How many cervical vertebrae are there?", o: ["5", "7", "12", "4"], a: 1 },
+                { q: "Which muscle abducts the arm?", o: ["Biceps", "Triceps", "Deltoid", "Pectoralis"], a: 2 },
+                { q: "The knee cap is the:", o: ["Patella", "Tibia", "Fibula", "Femur"], a: 0 },
+                { q: "Sutures are found in the:", o: ["Knee", "Skull", "Elbow", "Hip"], a: 1 }
             ],
-            8: [ // Musculoskeletal
-                { q: "The functional unit of muscle contraction:", o: ["Sarcomere", "Myofibril", "Actin", "Myosin"], a: 0 },
-                { q: "Neurotransmitter at NMJ is:", o: ["Dopamine", "Acetylcholine", "Serotonin", "GABA"], a: 1 },
-                { q: "Calcium is stored in muscle in:", o: ["T-tubules", "Sarcoplasmic Reticulum", "Mitochondria", "Nucleus"], a: 1 },
-                { q: "Immediate source of energy for muscle is:", o: ["Glucose", "ATP", "Fat", "Protein"], a: 1 },
-                { q: "Bone forming cells are called:", o: ["Osteoclasts", "Osteoblasts", "Osteocytes", "Chondrocytes"], a: 1 }
+            8: [
+                { q: "The functional unit of the kidney is:", o: ["Neuron", "Nephron", "Alveoli", "Villi"], a: 1 },
+                { q: "Urine is stored in the:", o: ["Kidney", "Ureter", "Urinary Bladder", "Urethra"], a: 2 },
+                { q: "The tube carrying urine outside the body is:", o: ["Ureter", "Urethra", "Nephron", "Tubule"], a: 1 },
+                { q: "Filtration occurs in the:", o: ["Glomerulus", "Loop of Henle", "Collecting Duct", "Ureter"], a: 0 },
+                { q: "Normal urine output per day is approx:", o: ["100-200ml", "1-1.5 Liters", "5-6 Liters", "10 Liters"], a: 1 }
             ],
-            9: [ // Renal
-                { q: "Glomerular Filtration Rate (GFR) is approx:", o: ["125 ml/min", "180 L/day", "Both A & B", "1 L/min"], a: 2 },
-                { q: "Most reabsorption occurs in:", o: ["PCT", "Loop of Henle", "DCT", "Collecting Duct"], a: 0 },
-                { q: "Which hormone concentrates urine?", o: ["Aldosterone", "ADH", "Renin", "ANP"], a: 1 },
-                { q: "Kidneys regulate blood pH by secreting:", o: ["H+ ions", "Bicarbonate", "Sodium", "Water"], a: 0 },
-                { q: "Renin is secreted by:", o: ["Macula Densa", "Juxtaglomerular Cells", "Podocytes", "Mesangial Cells"], a: 1 }
+            9: [
+                { q: "The male gamete is:", o: ["Ovum", "Sperm", "Zygote", "Embryo"], a: 1 },
+                { q: "Fertilization usually occurs in:", o: ["Uterus", "Ovary", "Fallopian Tube", "Vagina"], a: 2 },
+                { q: "The hormone responsible for male characteristics:", o: ["Estrogen", "Progesterone", "Testosterone", "Insulin"], a: 2 },
+                { q: "The lining of the uterus is:", o: ["Myometrium", "Endometrium", "Perimetrium", "Epimetrium"], a: 1 },
+                { q: "Sperm maturation occurs in:", o: ["Testes", "Epididymis", "Vas Deferens", "Prostate"], a: 1 }
             ],
-            10: [ // Reproductive
-                { q: "Spermatogenesis occurs in:", o: ["Epididymis", "Seminiferous Tubules", "Vas Deferens", "Prostate"], a: 1 },
-                { q: "Ovulation is triggered by surge in:", o: ["FSH", "LH", "Estrogen", "Progesterone"], a: 1 },
-                { q: "The hormone of pregnancy is:", o: ["Estrogen", "Progesterone", "Oxytocin", "Prolactin"], a: 1 },
-                { q: "Menstruation occurs due to drop in:", o: ["FSH", "LH", "Progesterone", "Oxytocin"], a: 2 },
-                { q: "An ovum remains viable for approx:", o: ["12 hours", "24 hours", "48 hours", "72 hours"], a: 1 }
-            ],
-            11: [ // Nervous
-                { q: "Action potential conduction is faster in:", o: ["Unmyelinated axons", "Myelinated axons", "Dendrites", "Cell bodies"], a: 1 },
-                { q: "Balance is coordinated by:", o: ["Cerebrum", "Cerebellum", "Brain Stem", "Hypothalamus"], a: 1 },
-                { q: "Sympathetic nervous system causes:", o: ["Pupil constriction", "Heart rate decrease", "Bronchodilation", "Digestion"], a: 2 },
-                { q: "Myelin sheath in PNS is produced by:", o: ["Oligodendrocytes", "Schwann Cells", "Astrocytes", "Microglia"], a: 1 },
-                { q: "Cerebrospinal Fluid (CSF) is produced by:", o: ["Choroid Plexus", "Dura Mater", "Arachnoid Villi", "Sinuses"], a: 0 }
+            10: [
+                { q: "The CNS consists of:", o: ["Brain only", "Spinal Cord only", "Brain & Spinal Cord", "Nerves"], a: 2 },
+                { q: "The gap between two neurons is:", o: ["Axon", "Dendrite", "Synapse", "Myelin"], a: 2 },
+                { q: "Which part controls balance and coordination?", o: ["Cerebrum", "Cerebellum", "Brain Stem", "Hypothalamus"], a: 1 },
+                { q: "The largest part of the brain is:", o: ["Cerebellum", "Cerebrum", "Pons", "Medulla"], a: 1 },
+                { q: "There are how many pairs of spinal nerves?", o: ["12", "31", "24", "10"], a: 1 }
             ]
         };
 
-        // --- 3. COURSE DATA (Extracted from your inputs) ---
+        // --- 2. COURSE DATA ---
         const UNITS = [
             {
-                id: 1, title: "GENERAL PHYSIOLOGY",
+                id: 1, title: "INTRO & ORGANIZATION",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/10N3pxg1gls98_RVOKZO0nPQ9e2v02r1B/preview' },
-                    { type: 'video', title: 'Intro & Cell Structure', url: 'https://drive.google.com/file/d/101-DWlLTnTOEBrjzAxchPuVM2xP46fnV/preview' },
-                    { type: 'video', title: 'Tissues Physiology', url: 'https://drive.google.com/file/d/1bhKhpVsM0ElEwNMWdsJiB0MIAY_fChEG/preview' },
-                    { type: 'video', title: 'Types of Tissues', url: 'https://drive.google.com/file/d/15-iWAUqIpnaxLvprQJfmzxz-spLGMSac/preview' },
-                    { type: 'video', title: 'Membranes & Glands', url: 'https://drive.google.com/file/d/16w_-3R2Lz95YWo-BIRgMo3igxK--R5ZJ/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1kBEniLShpJ5aNYXwxOBv7tvC4-w-vD5V/preview' },
+                    { type: 'video', title: 'Intro & Cell Structure', url: 'https://drive.google.com/file/d/1DGH9dBpRYV7Qmj2kti_6Y83y26r7IETO/preview' },
+                    { type: 'model', title: '3D Model: Male Anatomy', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-male-complete-anatomy' },
+                    { type: 'model', title: '3D Model: Female Anatomy', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-female-complete-anatomy' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1rCaq5q_ZlXYmRD1r618OGnFypvW9F7XC/preview' },
+                    { type: 'video', title: 'Tissues Physiology', url: 'https://drive.google.com/file/d/1w7I0QZXvBAD9BUEOn19wxY8BA_K7M5sc/preview' },
+                    { type: 'model', title: '3D Model: Cell', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-cell' },
+                    { type: 'video', title: 'Mitosis & Meiosis', url: 'https://drive.google.com/file/d/1Igg8WpoIsghGvDyA0iTrPDbBd3UGd1uh/preview' },
+                    { type: 'model', title: '3D Model: Neuron', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-neuron_1' },
+                    { type: 'video', title: 'Surface Landmarks', url: 'https://drive.google.com/file/d/1sil8smYE73u7qf7RSM_GjXX292cfEksS/preview' },
+                    { type: 'model', title: '3D Model: Injection Sites', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-injection-site' }
                 ]
             },
             {
                 id: 2, title: "RESPIRATORY SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1QcOyOGL1-9ipMLcwzzLyLJkjxH2EmhcP/preview' },
-                    { type: 'video', title: 'Intro to Respiratory', url: 'https://drive.google.com/file/d/1AcSKAK1cy7huOA3B3RC3WruEdbEzb0TY/preview' },
-                    { type: 'model', title: '3D Model: Respiratory' },
-                    { type: 'video', title: 'Mechanism of Respiration', url: 'https://drive.google.com/file/d/1NJYsoWzQ4labwfi0Vh8m0AIMQfqFqOM1/preview' },
-                    { type: 'video', title: 'Physiology of Respiration', url: 'https://drive.google.com/file/d/1EKKrvJKwWoQbEWLudT1TePBiMvo183RB/preview' },
-                    { type: 'video', title: 'Gas Transport & Regulation', url: 'https://drive.google.com/file/d/1vphkb11o5f4kStf7T2kXCbJQ2d_IDsl8/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1zp3SJthkar0Zqglf8gIQuMjJYfWXM2EY/preview' },
+                    { type: 'video', title: 'Intro to Respiration', url: 'https://drive.google.com/file/d/1-v2nXIIJkoQZPT6sdKpqtZveuxL_uTUB/preview' },
+                    { type: 'model', title: '3D Model: Respiratory Sys', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-the-respiratory-system' },
+                    { type: 'video', title: 'Nose & Pharynx', url: 'https://drive.google.com/file/d/1F5xDrsluhcpwW4j0DnwC-_nKpACD4X-I/preview' },
+                    { type: 'model', title: '3D Model: Larynx', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-larynx' },
+                    { type: 'video', title: 'Trachea', url: 'https://drive.google.com/file/d/1ibk0bGro4EYt-EakAnC_AuSkjMv0GXbN/preview' },
+                    { type: 'model', title: '3D Model: Bronchial Tree', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-trachea-carina-bronchial-tree' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xwLwFOwcEQvkL0NKhSnIwUr2RRB_f5lL/preview' }
                 ]
             },
             {
                 id: 3, title: "DIGESTIVE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/156MjpYjAHJb2avDPWFyoZIoX-BqsUEzc/preview' },
-                    { type: 'video', title: 'Organs of Digestion', url: 'https://drive.google.com/file/d/1Q08ViVve81AtC_HHWvJztEiQR3SleQZm/preview' },
-                    { type: 'model', title: '3D Model: Stomach' },
-                    { type: 'video', title: 'Functions of Digestive Sys', url: 'https://drive.google.com/file/d/1T-wYVW0NrGVUXKK8QyASEK-_Eg_3z7q1/preview' },
-                    { type: 'video', title: 'Salivary Glands', url: 'https://drive.google.com/file/d/1IyCKX1TJiRdQotmKop09zac4R6PJ_rdk/preview' },
-                    { type: 'video', title: 'Gastric Secretions', url: 'https://drive.google.com/file/d/14Hk3HYzHdWXam_NbwTjJwlBYkJkmfaIX/preview' },
-                    { type: 'video', title: 'Pancreas & Secretions', url: 'https://drive.google.com/file/d/123FJomESMPRK1b9UR8pvccwfYG2OaaH9/preview' },
-                    { type: 'model', title: '3D Model: Pancreas' },
-                    { type: 'video', title: 'Liver & Gall Bladder', url: 'https://drive.google.com/file/d/1mRAjHD9K9riuRDdKEXjr0wKw_ihTNj55/preview' },
-                    { type: 'video', title: 'Large Intestine', url: 'https://drive.google.com/file/d/1PkMa8T70bfgwt6na9dJvp7ofZKDsH5rT/preview' },
-                    { type: 'video', title: 'Bile Secretion', url: 'https://drive.google.com/file/d/1PuJySZwjTRI6fJWOCsoYsly3kJmIvl7d/preview' },
-                    { type: 'video', title: 'GI Hormones', url: 'https://drive.google.com/file/d/14BG1zPfXCniaZn8YW72-yUcJ83QsmgNo/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1GsEUK__ngjD9CBpWue0CqXO56mmjxGZ0/preview' },
+                    { type: 'video', title: 'Digestive System Overview', url: 'https://drive.google.com/file/d/1J2veHwrJ83i1Qi63iMS818hWGEAkRkAA/preview' },
+                    { type: 'model', title: '3D Model: GI Tract', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-gastrointestinal-tract' },
+                    { type: 'video', title: 'Mouth to Stomach', url: 'https://drive.google.com/file/d/1UetDfsIJoGgdj_5BFmPsRCUrBbyJosfT/preview' },
+                    { type: 'model', title: '3D Model: Stomach', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-stomach' },
+                    { type: 'video', title: 'Intestines & Anus', url: 'https://drive.google.com/file/d/1GKJzoRPgOcGUhRQ7NaMes5nojhRm7aSD/preview' },
+                    { type: 'model', title: '3D Model: Liver', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-liver' },
+                    { type: 'video', title: 'Accessory: Liver/Pancreas', url: 'https://drive.google.com/file/d/1Ij8j9b45FQdVKea3NH75h59hrtsOGDMW/preview' }
                 ]
             },
             {
-                id: 4, title: "CIRCULATORY & LYMPHATIC",
+                id: 4, title: "CIRCULATORY SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1wI0my0taaQPS3gf3Peun7t2pBBs1GEP3/preview' },
-                    { type: 'video', title: 'Heart Structure', url: 'https://drive.google.com/file/d/1kHago-VxxxU15-w6RDZ8btHoEXRrKnMK/preview' },
-                    { type: 'model', title: '3D Model: Heart' },
-                    { type: 'video', title: 'Valves of Heart', url: 'https://drive.google.com/file/d/1tDnIULk-UmSgGmXPoHwjfv4f_86MbvH1/preview' },
-                    { type: 'video', title: 'Cardiac Cycle', url: 'https://drive.google.com/file/d/1gdiD9BHQKlKdC2jnQuuR6LfFtJZgo71C/preview' },
-                    { type: 'video', title: 'Stroke Volume', url: 'https://drive.google.com/file/d/1TOHanAbQHySY7iYYEPh14yorPGR7pBd0/preview' },
-                    { type: 'video', title: 'Cardiac Output & HR', url: 'https://drive.google.com/file/d/158oy_cUtC7JrrXpknynE8zjfJoHLg1Py/preview' },
-                    { type: 'video', title: 'Pulmonary & Systemic Circ', url: 'https://drive.google.com/file/d/1yV7oG-8HFDxmo0O0CUTuoyI1o8bqUxCD/preview' },
-                    { type: 'video', title: 'Lymphatic System', url: 'https://drive.google.com/file/d/1qY8ODUBWABSiMYqOCQRlzBkl4U0Dnfet/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1Z-5OBzBGiQ5khWySeLIW79SrvC2B2zqz/preview' },
+                    { type: 'video', title: 'Heart Structure', url: 'https://drive.google.com/file/d/1KffXXkOleyEf4qOw-SbUTXaU8dYALziW/preview' },
+                    { type: 'model', title: '3D Model: Heart Layers', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-layers-of-heart' },
+                    { type: 'video', title: 'Heart Valves', url: 'https://drive.google.com/file/d/1vbW-Gm93ntL1FeIn6zJOHfLhSfAIlitO/preview' },
+                    { type: 'video', title: 'Cardiac Cycle', url: 'https://drive.google.com/file/d/1YN1R3ORgCOZW7I0zwoCFSReqv--sP1V-/preview' },
+                    { type: 'model', title: '3D Model: Blood Flow', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-blood-flow-through-the-heart' },
+                    { type: 'video', title: 'Venous Circulation', url: 'https://drive.google.com/file/d/1EcBwprEnpuWXA53qbBA35OC9On3SPh84/preview' },
+                    { type: 'video', title: 'Lymphatic System', url: 'https://drive.google.com/file/d/1HnNCXLNOga-LLV0BT_aRLduO2TL3uBnM/preview' }
                 ]
             },
             {
-                id: 5, title: "BLOOD",
+                id: 5, title: "ENDOCRINE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1ls7J41VQZXJikLfG1CyS0AUJjqpBLSmX/preview' },
-                    { type: 'video', title: 'Intro to Blood Phys', url: 'https://drive.google.com/file/d/16UKyoVSWAA05EyGw2JAXI6MmTrdA2Pic/preview' },
-                    { type: 'video', title: 'Erythropoiesis', url: 'https://drive.google.com/file/d/1qi7QuEoqpwChOM8bNujmhv-W03eEBpLg/preview' },
-                    { type: 'video', title: 'Leukocytes', url: 'https://drive.google.com/file/d/15zbtNNFfuag_OfF8nkc7wK0hVllUI5hS/preview' },
-                    { type: 'video', title: 'Thrombocytes', url: 'https://drive.google.com/file/d/151WfxBZGrzro-3_HeGvoQz5zpSCdHQ0p/preview' },
-                    { type: 'video', title: 'Blood Coagulation', url: 'https://drive.google.com/file/d/1nlDmzqM2qxXNsV_EOXd24d1AYmRuczNR/preview' },
-                    { type: 'video', title: 'Hemostasis', url: 'https://drive.google.com/file/d/1paAe9sOz84HP7lDtWBPZRM07ZwD55NwA/preview' },
-                    { type: 'video', title: 'Blood Groups', url: 'https://drive.google.com/file/d/10DXrvF9gKNoXQ_P-nE2oI2_Q1XMf7_hp/preview' },
-                    { type: 'video', title: 'Immunity Types', url: 'https://drive.google.com/file/d/1cyI3Ck1gnWz0sGFkD6jGGfIyhuZTZZxp/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1DhUray7ZdgEfZmoSLxK_Ah9-P_y6uA35/preview' },
+                    { type: 'video', title: 'Intro & Hypothalamus', url: 'https://drive.google.com/file/d/1RkkA8rAcXeFv8nQVj5MeipFSGSVyavrU/preview' },
+                    { type: 'video', title: 'Pituitary Gland', url: 'https://drive.google.com/file/d/1oxMOZKsEqi9-v3Jkv914haQXIzQEXnMA/preview' },
+                    { type: 'model', title: '3D Model: Thyroid', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-thyroid-anatomy' },
+                    { type: 'model', title: '3D Model: Adrenal Gland', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-adrenal-gland-cross-section' },
+                    { type: 'video', title: 'Thyroid Gland', url: 'https://drive.google.com/file/d/1apCsaobC9JRzjvKU03zqmfTbE8i1rd_1/preview' }
                 ]
             },
             {
-                id: 6, title: "THE ENDOCRINE SYSTEM",
+                id: 6, title: "SENSORY ORGANS",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1MsscO3WYvPgjCT0uH1fF3qi7v6XxC5nN/preview' },
-                    { type: 'video', title: 'Hypothalamus', url: 'https://drive.google.com/file/d/1IgYsF1V4V1pYLIzQZW9fSCcHKyIa-JZa/preview' },
-                    { type: 'model', title: '3D Model: Hypothalamus' },
-                    { type: 'video', title: 'Pituitary Hormones (Ant)', url: 'https://drive.google.com/file/d/1-Xw0_-sZ1L5YQlDYOQEjAdo9B-RE7UMo/preview' },
-                    { type: 'video', title: 'Pituitary Hormones (Post)', url: 'https://drive.google.com/file/d/1ua4sjsiI7Af4dEyj2AK6SsovLsTiy7Mb/preview' },
-                    { type: 'video', title: 'Thyroid Gland', url: 'https://drive.google.com/file/d/1PF8wFE65kZs2pD-PQ0kimQl1gkjCi2_D/preview' },
-                    { type: 'model', title: '3D Model: Thyroid' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/10ReXGEjNagS3lQWO4GcQxe9ucmx8a5Fp/preview' },
+                    { type: 'video', title: 'Skin Anatomy', url: 'https://drive.google.com/file/d/1spCTVGLHIx5f8Jlg7dMkc3tIJG7i0-fw/preview' },
+                    { type: 'model', title: '3D Model: Skin', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-skin' },
+                    { type: 'video', title: 'Eye Anatomy', url: 'https://drive.google.com/file/d/1sA3BwCa5sIrlPpRJW1-8lRW_Zmr_XjeP/preview' },
+                    { type: 'model', title: '3D Model: Eye', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-human-eye' },
+                    { type: 'video', title: 'Ear Structure', url: 'https://drive.google.com/file/d/1tFHvLaUNpdfA70hWRL_FVmMMBAOYs2iK/preview' },
+                    { type: 'model', title: '3D Model: Ear', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-human-ear' },
+                    { type: 'video', title: 'Smell & Olfaction', url: 'https://drive.google.com/file/d/16q4bQnbziJ7g8oNtfPl8sTCsJF76y1ax/preview' }
                 ]
             },
             {
-                id: 7, title: "SENSORY ORGANS",
+                id: 7, title: "MUSCULOSKELETAL",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/18Jy44QJ9HDkxuaCe0CUST7S0TY0b_ISo/preview' },
-                    { type: 'video', title: 'Intro to Sensory Sys', url: 'https://drive.google.com/file/d/1qc7_JvBMl1OJE71iyATI1b-h-ovuEO_M/preview' },
-                    { type: 'video', title: 'Skin Physiology', url: 'https://drive.google.com/file/d/1HlRXY956MNUUGmbuFxN_ZNCM3HloWBHi/preview' },
-                    { type: 'model', title: '3D Model: Skin' },
-                    { type: 'video', title: 'Eye Anatomy', url: 'https://drive.google.com/file/d/1-4yUyDwc7ZumVeNm_L4R_av8Mujr7-mL/preview' },
-                    { type: 'model', title: '3D Model: Eye' },
-                    { type: 'video', title: 'Ear Physiology', url: 'https://drive.google.com/file/d/1jt3kAbTC9MOeMiHQI0XhZGfhTJPlOyOz/preview' },
-                    { type: 'video', title: 'Gustation (Tongue)', url: 'https://drive.google.com/file/d/1GY-2sUxhS-w0PckA8YjbmonxjaKlxvig/preview' },
-                    { type: 'video', title: 'Olfaction (Smell)', url: 'https://drive.google.com/file/d/1poaGG_onPauI2vR5stwoxsovNW0KnlYN/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1MDlJQ0vjPnr5hUxgnXE-IRg9PXxS8DMr/preview' },
+                    { type: 'video', title: 'Axial/Appendicular Skeleton', url: 'https://drive.google.com/file/d/1FlwIyxMB4TFQjZSPYoMH9I0tntlHUqV0/preview' },
+                    { type: 'model', title: '3D Model: Skeleton', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-male-skeletal-system' },
+                    { type: 'video', title: 'Skull & Cranium', url: 'https://drive.google.com/file/d/1GlO-oknavSyl9c7LQiFqWXiox7OPsJJY/preview' },
+                    { type: 'video', title: 'The Vertebrae', url: 'https://drive.google.com/file/d/1yHgv14D3l4KpCE1ohLsQm8DRZ_0pPjp0/preview' },
+                    { type: 'video', title: 'Muscles of Body', url: 'https://drive.google.com/file/d/1NNbFQwSh2pow3kzGaHmczqfTtRHHhyMQ/preview' },
+                    { type: 'model', title: '3D Model: Muscles', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-male-muscular-system' },
+                    { type: 'video', title: 'Lower Limb Muscles', url: 'https://drive.google.com/file/d/1i4yUlGXKszLXhKO9HzZR2ud0O3TH1Flg/preview' }
                 ]
             },
             {
-                id: 8, title: "MUSCULOSKELETAL SYSTEM",
+                id: 8, title: "RENAL SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/121sVgbcRetoxMiOcm5pvxeCGKbLxBvQv/preview' },
-                    { type: 'video', title: 'Skeletal System', url: 'https://drive.google.com/file/d/1ibWrcuBNriXjJmxwazDGYYuUlqrmKcBa/preview' },
-                    { type: 'model', title: '3D Model: Skeleton' },
-                    { type: 'video', title: 'Joints', url: 'https://drive.google.com/file/d/1k3tRJkoch4emH1eZQLzE7l3IUFtadM0c/preview' },
-                    { type: 'video', title: 'Muscle Physiology', url: 'https://drive.google.com/file/d/1x72mF3I_9ra-ocvXOCMnXtKUviUbAWoj/preview' },
-                    { type: 'video', title: 'Neuromuscular Junction', url: 'https://drive.google.com/file/d/1ffNOBgBaJghscIDElqWKvAw4V42JaKSi/preview' },
-                    { type: 'video', title: 'Muscle Contraction', url: 'https://drive.google.com/file/d/1C1LHBi0ylFfPbCKw7UPvs68-p0JExnO4/preview' },
-                    { type: 'video', title: 'Smooth Muscle Contraction', url: 'https://drive.google.com/file/d/1JfM2Q2gugwIEfVk20NCgpqm_20XbuFvI/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1kmmyy5WYzxj4H0NLbVMxkmjM1Clwy2Fh/preview' },
+                    { type: 'video', title: 'Kidney Intro', url: 'https://drive.google.com/file/d/1vhyUdOpH4nSLgBOGZ5iAIIpsTUUysCth/preview' },
+                    { type: 'model', title: '3D Model: Renal System', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-the-renal-system' },
+                    { type: 'model', title: '3D Model: Nephron', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-nephron' },
+                    { type: 'video', title: 'Nephron Function', url: 'https://drive.google.com/file/d/14Hf9dYtVB0vcgcK62TcHl-wgFkH0svMW/preview' },
+                    { type: 'video', title: 'Urine Formation', url: 'https://drive.google.com/file/d/1GyLCexgijItmFDnqaRSRjyDOWwvsKH9o/preview' },
+                    { type: 'video', title: 'Urinary Bladder', url: 'https://drive.google.com/file/d/1HVwzo7dyaHPjU5SEMewuSj42uDybT_YC/preview' }
                 ]
             },
             {
-                id: 9, title: "THE RENAL SYSTEM",
+                id: 9, title: "REPRODUCTIVE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1XLmC8pc0ws8gPsCpETEh5WP3Aa79rFjk/preview' },
-                    { type: 'video', title: 'Intro & Kidney', url: 'https://drive.google.com/file/d/1u8ntBZBayTpd2HViW8sImZgdQlqKC9bX/preview' },
-                    { type: 'model', title: '3D Model: Kidney' },
-                    { type: 'video', title: 'Nephron', url: 'https://drive.google.com/file/d/1HiG6rxo1lnGqOq1RSmIowBlAtHjTGEts/preview' },
-                    { type: 'video', title: 'Urine Formation', url: 'https://drive.google.com/file/d/1gxZ8Y0cOOKAgEk23RWZblZySEyL4HIzL/preview' },
-                    { type: 'video', title: 'Renal Regulation (Autoregulation)', url: 'https://drive.google.com/file/d/1ML2h5cwxdUpoly8NSRN8pTgWmPzgpQIu/preview' },
-                    { type: 'video', title: 'Renal Regulation (Osmolarity)', url: 'https://drive.google.com/file/d/1uhyxa6IjfVhtUgx6Xq1_Qk_rZCUv85Et/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1I08cHKZSrgoBuj2QBXFFSE46LctHrQVG/preview' },
+                    { type: 'video', title: 'Female Reproductive Intro', url: 'https://drive.google.com/file/d/1I8362MikaAHti6dN6VqYy_2Xc1GAOEj2/preview' },
+                    { type: 'model', title: '3D Model: Repro System', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-the-reproductive-system' },
+                    { type: 'model', title: '3D Model: Uterus', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-uterus' },
+                    { type: 'video', title: 'Menstrual Cycle', url: 'https://drive.google.com/file/d/1bjVDhPVR4nUuPvtsq6SEwLQ7eSKhHZmX/preview' },
+                    { type: 'model', title: '3D Model: Male System', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-male-reproductive-system' },
+                    { type: 'video', title: 'Spermatogenesis', url: 'https://drive.google.com/file/d/1zCIOwHcNDcGCstfHZzxqQmyp1PSY0wq4/preview' }
                 ]
             },
             {
-                id: 10, title: "REPRODUCTIVE SYSTEM",
+                id: 10, title: "NERVOUS SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1O6AuPR8YeiCxvLS4NdowJcAfTXe9epVJ/preview' },
-                    { type: 'video', title: 'Female Reproductive Intro', url: 'https://drive.google.com/file/d/1390ZTxHwRmn9IwkoqANY359aVAG5pF-H/preview' },
-                    { type: 'model', title: '3D Model: Female System' },
-                    { type: 'video', title: 'Ovaries', url: 'https://drive.google.com/file/d/1WqoST1I0w6WDek3OrA4DFklIhxVsyg1S/preview' },
-                    { type: 'video', title: 'Menstrual Cycle', url: 'https://drive.google.com/file/d/1gdStPRbXFktHL7oS-bIqc8-Fp14E0kNK/preview' },
-                    { type: 'video', title: 'Oogenesis', url: 'https://drive.google.com/file/d/1vyzcePMwrS4JRO_-wyKPH63O9u6b-lE_/preview' },
-                    { type: 'video', title: 'Male Reproductive Intro', url: 'https://drive.google.com/file/d/1G5LJFy0GLnHkjgpOSrp1UTN-7PHM5RtP/preview' },
-                    { type: 'model', title: '3D Model: Male System' },
-                    { type: 'video', title: 'Spermatogenesis', url: 'https://drive.google.com/file/d/1hx1cyhOJ9LB355io1VZZb3klLNBfu0Zj/preview' },
-                    { type: 'video', title: 'Sperm & Semen', url: 'https://drive.google.com/file/d/1ctWNqwGdxR07ZtSb5xns6gQjFOJHrVYe/preview' }
-                ]
-            },
-            {
-                id: 11, title: "NERVOUS SYSTEM",
-                resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1MbbTX0-LMWTjAoGC9XHGcawQ04AEWU-8/preview' },
-                    { type: 'model', title: '3D Model: Neuron' },
-                    { type: 'video', title: 'Neuron', url: 'https://drive.google.com/file/d/1tdNR6mo0siBxP0NWPlxpRsuxcpeMCRgs/preview' },
-                    { type: 'video', title: 'Nerve Impulse', url: 'https://drive.google.com/file/d/1z4TifczjCPRarUO7t5_Jm-MLAZ-H1-bg/preview' },
-                    { type: 'video', title: 'Synapse', url: 'https://drive.google.com/file/d/18-kMkugHm3fFoliUgMUF19XgVbftBLi-/preview' },
-                    { type: 'video', title: 'Intro to CNS', url: 'https://drive.google.com/file/d/1BZKTJZJB3gx2LuayBLw8a2waJ8B-BeNV/preview' },
-                    { type: 'model', title: '3D Model: Brain' },
-                    { type: 'video', title: 'Reflexes', url: 'https://drive.google.com/file/d/1JaFdUMLzX1WvGk8O9W3ticFxhHBC522p/preview' },
-                    { type: 'video', title: 'Autonomic Nervous System', url: 'https://drive.google.com/file/d/1LH7wWfSuY20ODNap7GRlwnPMyKkLmzFM/preview' }
+                    { type: 'model', title: '3D Model: Neuron', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-neuron' },
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1mhFnNF9ZWRXOIRmbFFlL0nY5dKijPyVB/preview' },
+                    { type: 'video', title: 'Intro to Nervous System', url: 'https://drive.google.com/file/d/1r0exklx5ryyVG_NaT1_LZ13aa2LRbjLq/preview' },
+                    { type: 'model', title: '3D Model: CNS', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-cns' },
+                    { type: 'model', title: '3D Model: Brain', url: 'https://sites.google.com/view/testredirectezinurse/3d-model-brain' },
+                    { type: 'video', title: 'Structure of Brain', url: 'https://drive.google.com/file/d/1jlxkdv4ClaVP4iTWBNlZKojwg9dZN8GH/preview' },
+                    { type: 'video', title: 'Spinal Cord', url: 'https://drive.google.com/file/d/1K_0JLoUw5TTmV78uEYZ7nM7U44XE0EV9/preview' }
                 ]
             }
         ];
 
-        // --- 4. RENDER LOGIC ---
+        // --- RENDER LOGIC ---
         function renderPage() {
             const container = document.getElementById('units-container');
             
@@ -562,11 +507,9 @@
             arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
         }
 
-        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
-        let modelToggle = false; 
-
+        // --- MODAL LOGIC ---
+        
         function openResource(type, url, title) {
-            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -576,21 +519,22 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            
-            // FIX: Restore flex centering for Video/Model (looks better centered)
             body.style.display = 'flex';
 
-            if (type === 'model') {
-                modelToggle = !modelToggle;
-                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
-            } 
-            else if (type === 'quiz') {
+            if (type === 'quiz') {
                 openQuiz(url); 
             }
             else {
-                let cleanUrl = url.replace('/view', '/preview');
-                // Use black background and permissions for better video experience
-                body.innerHTML = `<iframe class="modal-iframe" src="${cleanUrl}" allow="autoplay; encrypted-media; fullscreen"></iframe>`;
+                // Formatting URL for preview
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // SANDBOX ATTRIBUTE FIX: This prevents the 'Open in Drive' button from taking over the window
+                body.innerHTML = `<iframe 
+                    class="modal-iframe" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
 
@@ -604,9 +548,8 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
-            // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
-            body.scrollTop = 0; // Ensure we start at the top
+            body.scrollTop = 0; 
             
             const questions = QUIZ_DATA[unitId] || [];
             
@@ -647,21 +590,14 @@
             modal.style.display = 'none';
             body.innerHTML = ''; 
             
-            // If we are closing manually via button, go back in history to remove the state
-            // prevent unnecessary history buildup
             if (history.state && history.state.modalOpen) {
                 history.back();
             }
         }
 
-        // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
-            // If the state that was just popped (or current state) indicates no modal...
-            // Actually, popstate fires *after* the transition.
-            // If we went back, the modal should close.
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
-                // Just hide it, don't call history.back() again
                 modal.style.display = 'none';
                 document.getElementById('modal-body').innerHTML = '';
             }
