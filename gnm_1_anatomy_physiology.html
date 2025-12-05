@@ -1,1 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anatomy and Physiology Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and 3D models for Anatomy and Physiology." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1ZJtIhuwQWrRgdy9QjhVXoZPtS4uMAv6A/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 ANATOMY AND PHYSIOLOGY SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION TO ANATOMICAL TERMS ORGANIZATION OF HUMAN BODY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1mMpxRzu25H7aASt4XK2zGyKDlZgX6rwl/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-B6nX5vwFqDsc-K7rh5tfMGAsAlqIhEk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to anatomy and physiology</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-male-complete-anatomy" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Male Complete Anatomy</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-female-complete-anatomy" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Female Complete Anatomy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yWVaKRwzBKmYQ7qbYOAv23M5Q-I5bOix/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wMt4A6GeJ-m6JkJcTFNb99BxA9luBY6s/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Anotomical planes</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Shoulder Movements (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OrBBEWW0fTL30_h10Uay04VUhBCTzUMv/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ru8py7_LrkrTN59TF-YsDrmJdH6ZRy-8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Levels of organization of body</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1i2EBqqUbRb4uCLtKcjumBNQlr3fKg1Nf/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - INTRODUCTION TO THE DETAILED STRUCTURE OF THE BODY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1JCl4WpA9rcAhOpHcr8W0Ig-yHG6wRhbd/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rJPmPDNTJpc8AFCOrJsMRKvnJ-hVCZuu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cell</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B-CBDpA6xrZydvjQzigXPwSayG4BVgaQ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cell division</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cEgES39s8TP2gr1vIRyjRS-u8OioWjsP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k7GrXvfy7rY7GGxWQfOnCYPDcOOcBJJG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tissue : Classification, Epithelial Tissue, Soamous Epithelium, Cubodial Tissue</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yvmQ88dNNq2dd5FcNS8efyq3MpbX4S9s/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tissue : Columnar Epithelial Tissue, Pseudostratified Epithelial Tissue, Compund Tissue, Keratinized and Non Keratinized and Tissues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tb8kEoNhUETErwO9g0uEOiRVrluDaxSI/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tissue : Adipose Tissue, Areolar Tissue, Fiberous Tissue and different tissues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VQxiE65XTJJ0L5BblTjf4j2k6Sz4fXle/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - BLOOD
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/16ysR9UAwAVQNAui6qRWUTxelMaP_MF_v/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fA8Yiqgcm_0VKIzgYu_c45DIm13M00jL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Physiology of Blood</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fz5R-sGs5jo8fonymG4FEfzjhWucgLaE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1s4rjzzBBkzHb7Casc7joir6QSIiZRIb9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Erythropoiesis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DaRucHAZWyF8GHO22F2RO1aqvdwBVC3z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TvB37A-qWYrwjKNznt77n2wzlV7W-Vui/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Leukocytes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oto7ilCpVqy-5MvmUhApVS5nYC1zCW4x/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thrombocytes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aq8Xb8QJX5JtDHsxG7uxb6In9_-k1NmW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14mYsKzm06sVAY-vVOwMXuC6FRKm-xpYk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Coagulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hZv5weeflnQKBJXVruWcVe0YkkNi6-IU/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Coagulation Cascade</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IoxiwOi21GnnKgFCn7q7QOg8fo1zAvCA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hemostasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15T9Dd8xLRviIhEEBPo5qBsr664KJFv7e/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Coagulation of Blood & Anticoagulants</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g5YCMLSK1IH7NOHJvUgmT4Ph3XSghr2z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eAlnp1x6t4b4Xw-OT0LI-em1k6dweJvR/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Groups</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mBzS1UqvDo_1MC3dguV6t6U4WnpXqPzH/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/162Lm4O_UutWHhYt6Rbgq2jgaajmPEn8D/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Types of Immunity, Innate Immunity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gB8cJB_axP7hybmTRNTf-cerDH6-gclO/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Adaptive Immunity, Immunoglobins</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Hl1LjSW-6OSMfNEbaD9gemTHdC_5dzu4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Applied Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ojsQRkDYKQ5muDSsp5vM5HaUhWN0tFZ4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tAXyedl3j8WtdL3PFpVAUsNADhkbDVFZ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reticuloendothelial System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k_4JaBwRQh1Z85xHAWRdgID-m02rAzGV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - THE CIRCULATORY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-arterial-and-venous-circulation" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Arterial and Venous Circulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ylhoDROkmCrRGe30rEaXs-9xoTdTwpVY/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N9xIvpNQrLAiZLlzesSTqIidVjXEEr5m/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction of circulatory system</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-blood-flow-through-the-heart" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Blood Flow Through the Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10QSr4wV5YnpYVs3ypoNr3VcEE-B-leO4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WFw4sW29aYJsn8QqrRUSRpHbG5Y4AgZN/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Structure, layers & chambers of the heart</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-layers-of-heart" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Layers of Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gpW3GKq2cWM_OhUlkJAkx5_S5G5xOmXI/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AMN_kHr-nQa_FiRF0lcuSBQXAqGd12xw/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Valves of the heart</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-heart-valves" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Heart Valves</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zETPsIxyj0pY1xkpF4KB3EcNA2BEV_2M/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e4I3wHdXMuvnSJVbhVX9P8EtrXitIhW_/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Functions of Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1o6N4heNX00BqxHCE4vbScakbH8JrPsVL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ventricular Systole</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YTGMDstupeI6UsCi81y0Afjd60UR-q5p/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiological Variation in Cardiac Output</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1l6MNhoGbe6y0WZQkLIkcrg08QgVDOcFp/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bSK2LkoFFZDtM86IF4FV6WTwhLt5yt7x/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pulmonary and systemic circulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1duT3u3XAFnm4wG6_n2V1KJN_ywL_88qf/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IqSRz5NZfbRC8Ywur3hNXUqp0lI4xSut/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thoracic aorta branches</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DNngiicCavPKpfDhxDe6czWjWH0irNBX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K9b32FvRAY9Kb27Cxw8gdAYw_2Rvzb5o/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Venous circulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QXE-e7OHvpXrHdsUVIB_-dyR7uXMGjjq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Veins of Thorax</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-_hg6B-VFSFnvyMaislFfOQmX6iqlUks/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - THE LYMPHATIC SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1X9VRLMUg_BNqMjTbSWNTMWhHnmQ2ywcj/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nXumPpNBlfFILliE7sH_cbY4BjPVOwKI/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Lymphatic Capilleries, Thoracic Duct</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1peaPnT-JDj8iyrBlA9WGy8V2D2nxkgzU/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Lymphatic Organs and Tissues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KKKRR-mKzsNXwZ4Y8BwTMXOFIZ0UApua/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Functioning Parts, Medulla, Spleen, Parenchymal Tissue, Lymphatic Nodules</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12FhJmVgTi98cGUVzuv8G8WN_fLFAog1q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Lymphatic System Physiology (Coming Soon)</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - THE RESPIRATORY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1haSaENGTPhrUEdj75oxox9uCqeDh7XCP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VIj6eoQOVz5KBDQrQI664-eMo1BatASJ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-the-respiratory-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: The Respiratory System</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-heart-to-lungs-circulation?authuser=1" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Heart to Lungs Circulation</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Anatomy of Alveoli (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ENfS7VLzi-eFU8jRcEtJ4-7WvcNyVj7R/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ODL8kqVlC9l7RcB_dtJnIfm4a5TGc6dZ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nose</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-nose-and-nasal-cavity?authuser=1" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Nose</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uQFVI3dw3HDZzVbht_BFiwGtUizGT1W_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BHXvUiKrFeHw40RN87pj4uqpQZ2_tZgo/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pharynx</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-pharynx" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Pharynx</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z-ovtABjY8GYG447NWDVXwz0P89G1t3-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PZOn5E-cqTCBfcSofaOYz2pX3bdGPlWb/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Larynx</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e2euFOSOOW0CU8oL5A0c9GFMa6Tm049e/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Trachea</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MjBKT2LbFYbEdh29Kn9YtVvDg9j9_4Y1/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-trachea-carina-bronchial-tree" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Trachea (Carina - Bronchial Tree)</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 7 === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - THE DIGESTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1dCRhAN_z_dr7dRoEe7C9gHs22oxWro7x/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1U9I9Xy0XenzrewOFCfaLHtd7VDONvhaF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, organs of digestive system</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-gastrointestinal-tract" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Gastrointestinal Tract</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-teeth" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Teeth</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-tongue" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Tongue</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zWGPbxnkNm2u7VXKWG_uUURSrR8Cp68y/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DQmjae6Sd_E114HjElL9sBlQBmOzYCwd/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Functions of digestive system</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13fMSxImxqFmVm9Coyn_rHEVuvLLHk7aJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18GqncuT7HyfxOfUD_ji084kf5J_c3XeT/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Salivary glands</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-salivary-glands" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Salivary Glands</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TLuv104P9lHaloFrQ-Q9aD2xxBPufwKw/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SsRDLenG6w1VqesB4Y7V3wud1FQTTRkf/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gastric secretions</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-stomach" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Stomach</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OXXPwKF-Kwp6SzsTZl3PsZm7__rhMuqG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1q-ChGazx00ZSKOco8X2CttIIzqmBVnoP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pancreatic secretions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MoRQLsREmBxyYubv-8Rmgt05dNiIZtnp/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NmnUmGPS2aPmicbu5N-Lo-K1YLybS35K/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pancreas</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-pancreas" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Pancreas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fnvfAbGL3k07qviPFNftOGDZngM2KFJC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N5STKBInHoBl_8OnA8JIvpvbY_I7DjZI/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver & gall bladder</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-liver" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Liver</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-gallbladder" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Gallbladder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OK868_DkYaxJb8S5ZiAmJmbHSZZi7vWC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12FR22-gaoPEWmKB9AUbBy0dRhgX-uxXF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Large intestine</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-large-intestine" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Large Intestine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NQrRgYhB55zp02pmYXlVFJIQ70V5WBBn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rQtwvdgCkqTeBh0r-B5jl2XewOVO6FKD/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Intestine, Intestinal secretions</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Small Intestine (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13YOGV7rWTfgAzL_RuO2kDgkx5hku236A/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bkFivr7wyYYSTxj6bLtig8Rte4Gxl8RN/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bile secretion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16LiOw8ApclkqBaOspoVqhtcrrgdSPVrZ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jGrRvakcT9CSRHpXePoBPd-F5BbIPS4L/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gastro intestinal hormones</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kvgbbqiS33rXZ6-1CEziw77zYz3KPyET/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 8 === -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - THE EXCRETORY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1TCEW4jjKKk4n3R20kIQfyKCGy6c2gYvb/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ityzfLF29MO3VdI57gb82uPmFtzClHRQ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, kidney</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-the-renal-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Renal System</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-kidney-coronal-cross-section?authuser=1" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Kidney Coronal Cross Section</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fKYXAq203H5tybg3aRGhPXqshbDCY-4z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iWzx2u78CJHNq45p3zBrrBACuGwJcz6j/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nephron</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-nephron" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Nephron</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1deoxcy2LcyxRVFfrrudyeYiO_jYvCOeV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12SudjJGwbrewARDuv6hsrZuz39m8Igmz/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Formation of urine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qZ9fdt2khQOYPLti0-fdLUD70kgRkgxa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dVxzEFgybKK75SQH2NIvSfuJ1KGmZaBk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Urinary bladder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sykHCjcP1JTirbaLLWhUwbqZ3SoY2gpW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1s4E45G6jCPwgRvU1ObJ_fwNV-inb9f3U/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ureters & urethra</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12QJ3Yk6nMsj6zWToGXW9_QVDegvkVzoy/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10TQdG0JQgcP7riPvI16WRG63wm3EnlOG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Regulation of Renal Function : Autoregulation of the Kidney</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1s6E_KsAB5JRndW8WeTg3VKwTJlqVlJrU/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Regulation of Renal Function : Role of Kidney in Regulation of Osmolarity and Volume</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1r57m9U-n8enWDM0ptBLbW8X7NbrZjRUA/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 9 === -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - THE ENDOCRINE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1MD4xAEFD6olCX-2zWwUpCPYonqEJMCVt/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SlP8icuFyI_7eLji-fzJAVTqVbttS-cC/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>9Introduction, Hypothalamus</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-thyroid-anatomy" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Thyroid Anatomy</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-adrenal-gland-cross-section" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Adrenal Gland Cross Section</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-hypothalamus" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1m2emcUllfv-pexHLcbA4CAXtSSCr0oCj/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yFEHYVW7SLdaBkVFOB2vn0Kjp43tTmF7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pituitary Gland : Position and Relations, Blood Supply, Hormones, Secretions from anterior pitutary Gland</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eZaFYfzXVHGyVny7Zcw5nyd8yAJKMFPH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pituitary Gland : Hormones, Secretions from Posterior pitutary Gland, Applied Aspect of Anatomy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HgJgcx7c7b1wpPiuDi5jyhxRjlhmpV_2/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kERsZ_-XarGJ35dOYAdcjY7edR0FNqph/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thyroid Gland</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ezd-H4tUozYLGth37HsYZCcKY0iSnalA/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 10 === -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - THE REPRODUCTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1yBVapX9ewM9QMnAmptAT3SzYqY3PnE7a/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bo1gDJZwwGNa9sBAI6vRH08euZHKz6Jf/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to female reproductive system</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-the-reproductive-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Female Reproductive System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HJomSIq82g8tScWdmB9tMbMzRTYuMgAj/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood supply to reproductive organs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TQE8o0MY_oShVYxDq1Hl6xYrxXPVVoTt/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vagina</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kq6RllGnVd5BGDQ83J5VL1NEgWhDSeeV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cuTP_M5z74PK3oC4fTPLDMWHdS3pqgmF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ovaries</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-uterus" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: The Uterus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10HhZlzBQG7aslsmBqRFfkmljpVj38rrh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Supports of the uterus</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-female-breast" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Female Breast</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g7X8TWXLikmUveB68enuvsr_beyVuQBI/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RVTnJ8pNmoIlevmIA-wk2k5Fk2srqxPE/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Menstrual cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T-uyRlz902e7fFCmoH_i_ydmRyrgjWn6/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Oogenesis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xb_nufBhjjABdOKA3x6Zm3IYEDbYJAgU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VdwSzVETUC1yy6ZJVPGUZ9PM22sKR-LV/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Male reproductive system</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14mfmOar6Z6LTFjqEKglbalo78WN6o6I6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ls1cTgB77H60uzCEYCmexDedse5yH4yG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Epididymis</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-male-reproductive-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Male Reproductive System</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-prostate-sagittal-cross-section" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Prostate: Sagittal Cross Section</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1h7vTaIMJfK8OL1D-F7XQi5xD4nc5vpBE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vpoXh3BBjri9LLZVj_-dzmKLeBsv0ajJ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Male Reproductive System : Spermatogenesis - Steps and Flowchart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yLYwNLG86x_ZXk63qBAh4HrUsDVMD304/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Male Reproductive System : Sperm and Semen - Structure and Seminal Fluid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_KriJNDv1o0o9xvbyEjxzjwK4WqCj9eh/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 11 === -->
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - THE NERVOUS SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1nEG7EjNj7Jv11tJ0k1eOq-37kVs8pHGn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GR-YsaUE_SF69QS2PeI_A643ypZn9ks_/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neuron</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-neuron" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Neuron</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zI99jkkSIv4YPZlbESkz6vU0N2NVWX96/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oNjugi4zvmFEo6HEEnFlXWSbjTVdxcSd/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nerve impulse</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Nerve Impulse (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16R7IONNgAAB6Z0_DgEIyOfpmY86kBG5Q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ig8UFIGlpTgF807-tCAuMZQOrZFPOg_n/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Synapse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17FAjC6Dwx85VW7TzgLrhwcRiyXOpp-tP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Properties of synapse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17uGtspVstpUZDvKN3SLPguh86JWeRCRp/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PbWbxmeYCz44uUx15yy3FiqZ9D8KTkt-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Development of brain</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-brain" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: CNS</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Spinal Cord (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AoFHj1txJyAIw2hZlNAWJ-057Rn9yNtg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FDOpHC3kf9DJ1naWl5YhEBOUhEU4r7p7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neurotransmittters</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Neurotransmitter activity (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DLNvrjHL41S4tElLX72KurDo0g152I_o/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xvnZLGNOmyONBXKzBn6Z9Bs4XivTZnGm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reflexes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tFwdUGE74iSTBf9_XpnqlcHN-ah_Nycu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reflex action</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E36EvwmckajYCQPlHTTylDZt-kS1TxRM/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1shuv_QSW0dGPVYOSBfMHSuFnIbNe_2sH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Receptors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rsjpOkXywZLzBBbxMiN35U29BYujQXCe/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Properties of receptors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RU0iBFJFXkfOhz5KhsAswe_cQc5L96d1/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1okDbRZkWXh4Yt-_uIrRdBS8CDkKYg2dA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypothalamus</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-hypothalamus" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1a-1Cva6aP_gqHGHbQWhrIdJ5soNfJl2b/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Connection of hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15gTA9czqmRsL6Uy9eT0IJrkPXOXzT5FQ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vYnPbuQKml7mvrakocVS-BnG9jEgSZ_7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thalamus</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Thalamus (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AOrhFkoMavRARKE8i_iYDPCuiytQid21/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Functions of thalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wBs9yUdGIV-Aj9ASLSTBsBSMJ2SFIph7/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_quQbctZAcTkY8Q7PT01lJzygQ3G1Ha7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Basalganglia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1S7lRa5XvvCijrA7RnOODwjHAOnc5VY-u/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zV2WsvM7SlH0GaHg-1ud8iXDW5_v2MMP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cerebellum</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nwVqCx_4Fw2OQw3cqOmOvEFd9MBOxe4C/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Function of cerebellum</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZkBDqLClOACq0C9aGx4IGyD6zR1lSkX6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hgYKXQDjWJPv6OBNdlRg9p7H0I-Qdl-M/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cerebrum</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Cerebrum (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19Vo4cHkEPpFYHwjFl8EHoZqEPyRry58l/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1n36trLz7XWuBVYu-AU8oIxzXY8WmTjRW/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Formation and circulation of CSF</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YdND5MW1A3ApNJ1GZGlxIfswG__HXIPQ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pMXVfsTuIbSZcpHYy55vl3KGGY7ZnbPK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Motor system</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gFVPsFMUIUGcXHAv-Y3NKfWk-Xo1SVwJ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Upper motor neuron lesion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZaYGgei5VNlqYJukXkWU_80P4AsyuWeQ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Zb4SlFsW0yvlVS2VQy2oyJ5QjYcVK8WK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cranial nerves</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1th6sfEn1GJufBK6EUHVdrlLKr4dFIl5I/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Trigeminal nerve</span>
+                    </a>
+                    <a href="" class="resource-btn model coming-soon" target="_blank">
+                        <span class="icon model-icon">⏳</span><span>3D Model: Cranial Nerves (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15VfnAQcYXbYmdlrqnd-zCKFPzvoNbtLn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ynNM40RSmmeM_9eHrhm6rd5eKM98wlVb/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sympathetic division</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cULZq91RvkOXjFa19VDuYegzW8ucmNo_/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mediators of ANS</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CEJzsOe4a8ssYnce-3A_wGWzoGeeomY-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 11 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 12 === -->
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - THE SENSE ORGANS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/10PE1Zt1AFQ1YcqLe24Z8ByEnLsICdXX2/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HxqEdnN6PGqX85Od0qBZMD0-xEjLKDQ8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oM57NQ3kAnWSRq_ukRjqPhniYw_BzC3c/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pJVz8v57NnkJJKwUoGiJmUFUkrpkbGfW/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skin</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-skin" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: The Skin</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-fingernail-cross-section" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Fingernail Cross Section</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-8nL22c1o7Z4UH7udlbf7rYTs93cUbRr/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15diKxHgKf-VtvW7NggNTSgJmeFt6ySv5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Eye & Visual Pathway</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-human-eye" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Human Eye</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lO6fmOP1h1u5tAkh9PjURmMmpyicifVc/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Visual Pathway</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fBvWl92qRRznGv8iJLGo4RgLG7K0TgZq/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GygABMsdPaF8K6jjtEfalr7YnmFmA9nK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ear</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-human-ear" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Human Ear</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lcMmFARJ8RDuSfPqZskkQA0zTcNjtsAH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Inner Ear</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LoOTJScTOKGF87nzwZRgZsqZlywReL4i/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Supply To Inner Ear</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mKotFtrflkYAZ_ctwBP9qMw8suIDma1t/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VSWzCMIYC-jpcBnN3Qw0ejfhoVamAAVh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tongue</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tYiAhWgB84fAkQH_au_JXfFqePCef5xw/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gustatory pathway</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-tongue-taste-buds" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Tongue (Taste Buds)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DOUIeLY9J9QKClnB3hkffw9LQqDXRCAa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wC_qhR4IGpn3rSEmea28y7P3J5LZWiQ7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nose</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-nose-and-nasal-cavity?authuser=1" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Nose And Nasal Cavity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KE5ss1nCqV88WOaUqapst6KVLiWoQYHl/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1efyI6boVR50GRipNcd219xbaXwW4_PHO/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Smell</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BrdJQW5vQ-kaev6_ZyT4KyWWuyFDDXWB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 12 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 13 === -->
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                Unit 13 - The Skeleton System
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Nbio-gw7dQDHawddRgYrz4Qg1YLs5qey/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gnnOXabtZJVvwBCefwSfYvxAHFHTL3go/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-male-skeletal-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Male Skeletal System</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-female-skeletal-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Female Skeletal System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Umy5BUGIj8qFPfvdfkdc_BQg8cG1Xj6T/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eqSvwhnrBRZ5i4F7YNqsOUk1JrAPDcnC/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Axial Skeleton</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uF24Vgk0aGk5J56sGm0f7MdionNy0B1v/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skull & Cranium</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12Fo4DZ6V-TOZyiq867zplwKEOrCWTH89/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Q_atBCmbAHRAOdCttY6TTbLrpR6xtKlz/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Skull</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wvStcRPoyITdSYFCnHQRcRxDs6OKhyTq/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16u0UPCaNPE6lN4MwDlqXXA2CxeMR5GcP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Thorax & Vertebra</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FfWHrMrZeMCoGK6rTN2p7wfLViWp02Db/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Vertebra</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nm_VkskW8ZSslOwXXlHsU2UhdMiAxTjy/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B6dh6zj3hfDq9bBvqFhem2U3EHH4XJll/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>The Appendicular Skeleton</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1APgcM-KQQQssDgJsPeDhQ83FQwPdcD87/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Upper Arm</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/168JyJ36-PV3O1A9eAJeIsvgnjsMTC3_v/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oZ8OP6NQ_W-qAr9BVtH3NQx_EyKZ_Ztm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lower Limb</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1csYK3pCwPVBevLoHopaWgD_9Hgku_8QA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lower Limb</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16S58KRsoI3AwA6ed6hvmV9Rc4omZCbNu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lower limb</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-Vk4N2Agbh23Q6xT5HJMG5pr_3afl0JU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 13 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 14 === -->
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                Unit 14 - The Muscular System
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1zyIrMihMcAumHwTHtLh30IfP5qLXx_1D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NPhTKKxufYdaln30m5bkRgQ2K7OI_hWu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-male-muscular-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Male Muscular System</span>
+                    </a>
+                    <a href="https://sites.google.com/view/testredirectezinurse/3d-model-female-muscular-system" class="resource-btn model" target="_blank">
+                        <span class="icon model-icon">🧠</span><span>3D Model: Female Muscular System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xksTqsZZwVJlM9tAubNjS6anvMBZ2XsP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LPpYlP6aj9wX6PMQAdtwmib23MqsRg_n/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H81EOMteqW0Z-YfaKembGA377FLKtreL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Head</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kIBuoEnYeilkmNC5rz4e-4ZDvmoG4SLP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BVYzMuDinLCiPKdwdqfI2RZY_YHAFOoh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neck</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YfLUDB5wowHtM_8wRvYoE0ofymG4FgYH/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eNcWi6HUQuMZWFpLqQ6nPmJj6dU8NjiA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Abdomen</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eqqTdzHvRVHdbmrGfnV9Z8fi1UHaf8LE/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Abdomen</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1l60Ai1Mr7wFb0NZl6idKZSe2Rl8YLidI/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1drlsBxAtDxrqVeVQhhyW_hJ47PI7XpIq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Shoulder Girdle & Upper Limb</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aNGLG75NQniHId4ciT2Wx9Ml4WtPYRK5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️️</span><span>Pectoralis Minor</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jV-uJDvPaBXkML-VLzlMbM8zcytt8i6j/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19tE26B5tGzi9d9WkmhO4-QWCKrAOV_Bq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Muscles of Lower Limb</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eqgpSKJI240hXGVlJYSAB4c7tBGjkk7Z/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Muscles of Leg</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18wPov85rv6R_XKZMoLoq1gonu0r3e_lu/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 14 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
 
