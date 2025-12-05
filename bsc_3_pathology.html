@@ -1,1 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pathology - I Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Pathology - I." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brand);
+            margin: 0 0 12px 0;
+            padding-top: 10px;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        .pyq-header {
+            background: var(--accent) !important;
+        }
+        .pyq-header:hover {
+            background: #0092bf !important;
+        }
+
+        .subject-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            padding: 0 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            .subject-title { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://drive.google.com/file/d/13Yr-eJwgIbgl6T27fGwTEE2jVwi_pa5m/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 DOWNLOAD PATHOLOGY - I SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <h3 class="subheading">1. General Pathology</h3>
+                    <a href="https://drive.google.com/file/d/1gEeyPJBwEME_K5-Cg4BZXvxNKKWTifuB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_wH1_ojQ0PT_vjYn4pi1S7FmMTN06Xf-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Overview of Pathology, Cellular Adaptations - Hyperplasia, Hypertrophy, Atrophy, Metaplasia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15-pkiyYw770x5fLN-iTwMr4i4D2RsWU_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g4LV7D57JAUoCig7y4HGUhboKNjHCOUw/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cell Injury</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PAsXaTWOkTzawKz5EdFZjVoI3BD3IXQ7/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IMAFbv86KQL2uQNc1yE7vUGJYBphTOfz/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Necrosis & Gangrene</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kXsTWrbdBcbKf3b9NqaNMYpXb30zOzVj/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J2r3y6Im_695NDwVNPn10wZKIIl1_zkh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Apoptosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11fbqieUbHzZQpe4K6N6Lz2pwJ7Cf7aAW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <h3 class="subheading">2. Inflammation</h3>
+                    <a href="https://drive.google.com/file/d/1BnjqQbz0uHdKnkGvk7R4SSBUVsyejgqo/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <h3 class="subheading">3. Healing and Repair</h3>
+                    <a href="https://drive.google.com/file/d/1vNNP_gDsOmHxQUqhNuZYTXU0yiZEZCt_/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Wound Healing, Healing by Primary Intention, Healing by Secondary Intention, Factors Influencing Wound Healing, Bone Healing, Stages and Factors Influencing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1juYvIKg4ejVfR2yFp-nPt_4sOv4b3GhV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <h3 class="subheading">4. Fluid and Hemodynamic Disturbances and Shock</h3>
+                    <a href="https://drive.google.com/file/d/1wgRyxkB5fwqbqsjt8jl-YjTomqRat0mC/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fluid & Hemodynamic Disturbances</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10As2DXEkMM48I9NOvjk6gdefbyTq3aww/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1esnHhHLZBim1NNver1bEqHIERMFer21u/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Shock</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CCAOrqup_S2zmtcnYpOOt_IxGlIEulUk/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <h3 class="subheading">5. Neoplasia</h3>
+                    <a href="https://drive.google.com/file/d/1DA0jzd8T6jbW2rVTQ_jQa02sEUDZYiIj/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neoplasia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tbsRuJIVdaehXa8NgnoKIYpCeeVsnD1i/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Lkc-3sWhTi1X4UArwORj6CFfcOZyNt4R/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - SPECIAL PATHOLOGY (PATHOLOGICAL CHANGES IN DISEASE CONDITIONS OF SELECTED SYSTEMS)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <h3 class="subheading">1. Cardiovascular System</h3>
+                    <a href="https://drive.google.com/file/d/1F6HLzqMR2VCZbFJhi3cfg2vaXN90bI4Q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aRTzNpndoYLyIQxzq1Ss1td4yIwAmO5b/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Intro & CVS</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_4fpuoPKpfgmjLU8ZKTT9vmX99woQUYV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kZn1Ot2emRsm-sNQ39-lif70at5KuOPu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Atherosclerosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lmJdfdMbHlspWf1UXTqmpKAosWNk3EQa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11UXDTWWfTOAYKg1TsDSXAmG2UHl0ZInI/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>RHD</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H42QkAHMnBAKadixkVywh4kOuv0I5MgC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XVYYnQ0AJWXzHOrPQyjci7Pepc97cGnF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bacterial Endocarditish</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WoRv1FqvWyuvE9a-X3JFcR-YdtyRX1Ns/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zfEVYJ-h7m-TIos4ka70-KbiRGIu5a0-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Angina & MI</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pfoCEdsQ4UEFEd7u6cbZ6-Dd3BOZ8Gp8/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1939ket948JAcqKahB0-y38AniLBzz1qu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Aneurysm</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O-_qlD2RUJCBj9DpaUj4cV5TEETDX6k8/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ipkdomaIyw7uYjGdPv6cfUfIIgYGDZqP/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+                <div class="subsection">
+                    <h3 class="subheading">2. Respiratory System</h3>
+                    <a href="https://drive.google.com/file/d/1qosWXZoEv88IkSHCgF1dqRjclzY2JRri/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14QsjDpWRHbVcjJtSCl-6sseyh-27N6_E/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fNbvff6AMLmE7HIUdOc55htHGaYJegBF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c-ifG-MEMlq96iM7j5_U5j9b5pz110R7/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15hqpgmOy3EIAUe8jl0NsTGqWZ8GnUV1O/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pneumonia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hj3zw9RkLcRPEoZPKYDEdbejxlUjPf0D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fmWT95jVoXCEmWmoDGRCFDOd7Dg-mBuP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COPD, Etiology, Emphysema</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MFFSfQJtWmOJDxJXI0jvIyjv_2t03Hm5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Classification of Emphysema, Bronchiectasis, Bronchial Asthma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-U3azDiPdOOedOTgLrG-z4AaLXbaGOAY/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z2cQTm7SqlHKS4KBXAXe-dsRFk7XbWMh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pleural Effusion and Lung Abscess</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UORm1LTJkbUzsJ1eayHjGJVki_bctt99/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KC6IzGUeGQlhU8stPJsHQu8KHwqk2hkX/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+                <div class="subsection">
+                    <h3 class="subheading">3. Gastrointestinal Tract</h3>
+                    <a href="https://drive.google.com/file/d/1CC3ZRcu-ffk1HW3JB_N8lCCrAAqjqeK4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pathologies of Stomach</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fs-g_IhUUhU4i4DZwXCTWQ5JxNjNhWpR/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Typhoid Fever</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lgz0jp0c51qlx2N36PgdwpWsoX8kaMBU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lzLnvPsujvx50YoAG3R5-Ll0AziV1kxA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>H. Pylori Infections</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Rl-gGlyB871dZtXFjjJFMTJLKLt-uy0K/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Chronic H Pylori Infection</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/142NFpd01TU9Rpnn1zAedX_Z66AeRmutE/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1risjGFdAxmQjCeXDdJEtcNYB5QZtpPJq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Esophageal Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17uyWgG82SmaukpaaBLa_jJz4I4tqtEEv/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gastric Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1o0wHGtGWxLXvsQStE9J8pvlX3zEW1k8H/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Oral Leukoplakia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sSkFEeWFWwLTIFuCr2kahI37Go-aCIq2/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diagnostic Investigation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pl7RTkjAQJA2M7twla9wQDNMCBLkkqIO/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1d5UVD89clI7gewGZqjwWQ70K8o4E2gl4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Crohn's Disease, Colorectal Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_GMxzciP8tvJOtgL2DiptItACqtEuAi-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Colorectal Cancer, Ulcerative Colitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NRXQ5xRU9tqCvF7zHL3fJEiFul7J3ZV_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-uJGEF3oDtAtOGIBFZkkamOJ232dYqPT/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+                <div class="subsection">
+                    <h3 class="subheading">4. Liver, Gall Bladder and Pancreas</h3>
+                    <a href="https://drive.google.com/file/d/1ZJTsN7SrD8bCAfGkyth1ZrDuj8jOzTmg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AO1T4r3egvzws1bwhEzu6aQEDFsTU_mk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver Cirrhosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y4dukqiT_xRRqN6X33-C_DqtC7gJloM3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hPBUP4fRAx4_8zEnCVzcs3LZ-E_EknU/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pathologies Of Liver</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kxjJSP0rsugLDnwPubLRNnDFKVIG0UR0/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Jaundice</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nXr70JFTOqoNdNigy_gDW0Dly26LEiwa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HiYWfY27BEodvttTY6xRGVmcDwb5kzES/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Types, Etiology, Pathology, Pathophysiology, Clinical Features, Complication of Pancreatitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kW3z1oN_hoZpiWM_MoBTVB9cY-v1cHe6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VhiXPQK5gj_XQSkZyMNyQcSdZWo8pH9Z/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pancreatic Carcinoma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1t7JVR8iU7b-DdmhbYgoVZ1q2sRZ0PeyD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver Abscess</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oOK1efSem81gpSqOlpm-atshKuNqcc2V/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L5ST_yMCO4XHE5sgvF8vtUXqzByyj_Tv/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tumors of Liver</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_r-aTyERNgSANHXuiG8DYf6RxP35bhtb/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MybBxXuWrUWH7E6UqON8tA6yi5yPZlY_/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cholecystitis And Gallbladder Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1M1fkWYBLtjBZy9WFXoknNA_0MZh9gmz-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A3sl0LeAUrSxHIEm_3jFB1bJZgkm3Slp/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+                <div class="subsection">
+                    <h3 class="subheading">5. Skeletal System</h3>
+                    <a href="https://drive.google.com/file/d/19XlaASwwnMIs8zKpL2IdO1qwUEhtRoYe/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xMPJExeR5cspJTSXrAp2drilO9I36-Od/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bone Healing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kTH-9EA5EynkKBvDKLWVQ9TPJq4AFpxd/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yLo_0KK9TuqM-tVDV52spqBlPj_p6SOz/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Osteomyelitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zmTIuRViBNDb5PhfklUEI7JIUbIyvEoW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/178X1VLAZN_PUOw5AJHkRvmJb0uQneeCu/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Osteoporosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N4-Vl1ZpF5rbL-JPDLD9PALlZjzT76t7/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1r3ptHkZvq3V0kt8w2sCz1EXmt8kbHRzf/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bone Tumors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nt7HCc2tQ2qKRRo7h1P0LjnGnYBZs1ih/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SCkDx-GzQPvGbtC_M4-LHcPuFmYiAKWj/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Arthritis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10bZSeocylkA0uzGBTE7EjWwSxcX-V6BV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14HzuAysHl5oGBX61RmCgM8KtIVmjWB46/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+                <div class="subsection">
+                    <h3 class="subheading">6. Endocrine System</h3>
+                    <a href="https://drive.google.com/file/d/1vTKbkPYBDWC5NEyPi2VxcSYzfUNqO9x0/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1C627u7nXBd6koAy5tMNz_SNNTAYZ1PPD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Goiter</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1D1DYUm2hxdh71c4usLxbgErZYm3UremA/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10IZtokHHtPFemncmnIfPCwIMlRTaHY8E/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Carcinoma of Thyroid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1p5ww2e4Dv5BLkxRr4yYMg7xjQYMwhgv_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KlCBhxH3bC0DoZ-pjn5BvNSHyykTTk8T/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diabetes Mellitus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kYPjatzVdvy0R5nvxa5FPmuziMEGZBmJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y82OGIkRbo9CInJ2GPv4QEmY4kxcECtk/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - HEMATOLOGICAL TESTS FOR THE DIAGNOSIS OF BLOOD DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <h3 class="subheading">Hematological Tests</h3>
+                    <a href="https://drive.google.com/file/d/1X688qPoJBYZKI2DodaRZW8_3RCYEC-7O/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eo-lVAN_WtMElRZg2qpB1ivNb_KY4o5F/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bleeding Time, Prothrombin Time, Activated partial prothrombin time.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sDuQuEemvGut-B3TiCNbTiuYv3Z7lx2V/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EvDrL2TWP00ffqAsoGPqUrZ-C-EwHbZ5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Grouping and Cross matching</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1j8O0lkMQneINqVJ2zGpvNcCMcy_gd0i6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10hLjwNYsUIXjOKWxyXXDhE5A9oGA9yRv/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Packed Cell Volume & Erythrocyte Sedimentation Rate</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qxvZzXfxpCu9lVIRez3xrsKXFEnIBkWc/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YX02gelCHnDCmSDvKK9TxCMX0jPls6hT/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Components</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1idXZaKEoPgDWIunB4YMwXdPzKoWrRQSJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E5vM6SOyvXyusqmrubXejD30-202uSxW/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Cell Count</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1V8MnB8hVSlfNR54XfOM0FbheW0Hh5hZK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1orDLo30dkzQerMpTTCRtVZOrI6m2QnvF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>HemoGlobin Estimation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hON2mJD9BHQHfIPZR_JohDd0TkO3WGCU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-Ijc9nGSleNHkrygKmSXBMkgCRvyUvQe/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the unit content visibility
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        // JavaScript to automatically expand the first unit on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
