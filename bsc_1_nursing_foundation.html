@@ -1,1 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nursing Foundation I Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Nursing Foundation I." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1tmY_7Jka0j3ELLNJDShkmyNgRlkkn-1U/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 DOWNLOAD NURSING FOUNDATION I SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION TO HEALTH AND ILLNESS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1QKZi5lxQ1TTv8pR-mPZ8tCfVn1iUQGzw/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vfBNelGFFm64Vc1XsL5PZ2YhXZa967NX/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Concept of Health – Definitions (WHO), Dimensions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-uO6LyLyWTeHbyd479lmjIZV93oO1hu5/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HtVADKbLA0KWSQYmpI_WpSSy3qi26eaL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health – Illness continuum, Illness,Maslow‘s hierarchy of needs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10SHLD2ODqoqx1MRYIF5DPsgPt5mg1MJs/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H_8nNWctDmiQ24DFrri2LjHjdhTIc9id/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - HEALTHCARE DELIVERY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1zG3rnQ8U--qh0WaZcvJUYbD0xe-2FJvL/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jTHYoWESEBsFmvLW7-N3FCD4ZdPQmxJQ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Level of illness Prevention, Modes of intervention, Health Care Agencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ggOdeL4tGxiXtu1INfq3IJABP65kDDBa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k9AI8B05SFDzkYs5ysAsn4v4IiWGhsoF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hospitals, Health care teams in hospitals</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ddWUlxh8O5hwgWWqO7tw8ziLEakaWUDe/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uqXLh3gjZ5YnKVInd9MRKmaLBMeozed-/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - HISTORY OF NURSING AND NURSING AS A PROFESSION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1mYRZsAD7X-7OCcfrazPymUTUR-BWuqav/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A-6VNRbbm5Q6DZMbupdAlv03gD6tp4JN/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>History of Nursing, Concepts of Nursing, Philosophy of Nursing, Objectives of Nursing, Characteristic of Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wR9QR5eW5SDRM5BwL8Yxg5UBH0BvtV7A/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IcYMG1MN8tZRdJ0y54q1BcPqc8nVAVXd/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Qualities of a nurse,Nursing as a profession – definition,Code of ethics and professional conduct for nurses</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1F3AultBl5-uMtp4MJ0PVRDODXsX-ht2K/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eQia6tE9r2DAXXR6DnenJaftJc2HNw7S/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - NURSE PATIENT RELATIONSHIP
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1m4RSpCro0fl5Kaw7N6xlOWUroLYMMojC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19iAt5E_mHuE1qznHzI3yO_381KRR_h2G/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Communication – Levels, Elements and Process.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18LQOSxwhb6odgFYllnyMGjpeW-3b9LOy/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1MUFw1a7bW2NLMtAvYfp6b7cOP-iQExDM/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Communication – Types, Modes, Factors influencing communication</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iPMUgbfF1cGN87OpksFCnNqD3f-QU85C/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1leLC2VgpzbiyE9dxGrMj99YKyPKYGbjn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic communication,Barriers , & Nurse Patient Relationship</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10mIV5JoDFhMi8EPV2U-v4Z2Dd6QVrmQd/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12Y21CHkNsRlsz3sEBUBcNyx0p_JFmaLT/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Effective Communication ,Communication With Vulnerable group</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18gnSecm3YZ5KLidPIOIwLPIkS6aqLeEP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/102VkcI3BV2LtbnOREnDMAPXtkHgAf7cB/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - DOCUMENTATION AND REPORTING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1cQpbgTNTWupCvXpvCkxhjvtE_RZUO7pT/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E9EqeaPLyns95naqv5-QglzO6Gcsmjdv/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Documentation – Purposes of Reports and Records, Confidentiality</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A0HufNmeeNHgQWrckJCcw6D4_NNzvD2c/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Methods/Systems of documentation/Recording &Guidelines for documentation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RNvPnilKDUgX_UQRnjzBd-JCQ40ph13b/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10jw7GBsuFmAa5yig-65fclV9-sUa-TNk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reporting - types</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PtsflV3JzoNVBhJ7pPHweu5LbPAisH1i/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fcfKeqsFIO_9QR8Z9XuYUqbSYEhJRTRD/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - VITAL SIGNS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1NRL50PRr2ZMd7WsGvVFVKBDEyYJj386M/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12K1NeZe-yYMbcHAgp3MynfqYltFTHw0Q/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Guidelines for taking vital signs,Body temperature</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JKeuku8_XYMNrnhEmB3RJ5P-SK2Dg5Mf/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rohWm6_KG5KN2pU_kb99XulEU6zooaBc/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fever/Pyrexia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FwT9LMXe4526pYqkGArX6ekNMa6DQtxk/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E8qcOXqGEyhBJHNUiXDRGcksKTl67hfz/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pulse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1K4-WECY_ca-Ot9-GcvLMZBzn_KQSBUUz/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dOPtPj85T04NnGQgGPOtRHTd7JFJ--uE/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Respiration</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Hc6d4y7Rs3UcrcQxIulYU-9YDdsoA3nW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1icKMFWSvkMUYiHvCPkXku8bmEfrAQlmA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Pressure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17Ks5xxzX0n_2LNx3zw7shgLBxqOOZooT/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EcTEflpDn89qEzeQynh0FsIcp9eY42sY/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 7 === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - EQUIPMENT AND LINEN
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1EI36xKS7NMzPWTLbuzl0EQQgQdBAXDCp/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mQyy8AaWNe5DEhzr-jI_S9RaNHysgUGr/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction – Indent, maintenance.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sJGL8g_nkWx9lJdhOwke2OZrxPvpRwoE/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Principles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DqgYzfrI8Z4507jswgFwxInjVDmaF8Ak/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QPUlmFzMJ8HtRYCJ2d4SryDm_1G0IQN2/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types – Disposables and reusable o Linen</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qi-lzWzgnYi5sr1shBos7EtZIaEkuiS8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Rubber goods, glassware, metal, plastics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12iXWPtk83OoZ6Xz9noUvm1Lq08QF1y2p/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Care Of Furniture</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Csym-JjmmO650mv_KqNIXQayUHGfTTKG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17SNEeu-8bY0obr2HML3EAEPLaDLAoPNm/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 8 === -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - INTRODUCTION TO INFECTION CONTROL IN A CLINICAL SETTING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1DfVCCMfQejWUI9aijcUhUK6_nnCJ-BRb/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g9NAYD6AQwjO6hcyqU8EZANXSjIDika-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nature of infection, Chain of infection, Types of infection, Stages of infection, Factors increasing susceptibility to infection, Body defenses against infection</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EDRtxBvsx0iP1CGun_VZkswwtPsJ3hQC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NKm8VoVSpeKa2rboCYdnuVy_Q1TvSX9A/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 9 === -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - COMFORT, REST, SLEEP AND PAIN PROMOTING SAFETY IN HEALTHCARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1G6QyKZtF-OADlNp4Bl0QkaflirnHQQu4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Pzw48R5bVe1UlajCyBiDcQG2Ocyo-7D-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Comfort, Factors Influencing Comfort, Types of beds including latest beds, purposes & bed making</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gp0YRwVIROL6nxsO9A4l48N1D_4TtHhZ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Comfort - Types of beds including latest beds, purposes & bed making</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bBoXmXljCaYZofhwjDVKWQP_8tWqSRwJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A5htuL_fIJ4EAaw-RYe5WQfDFzhYjDPB/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Comfort :: Therapeutic positions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Gz_tTewoNHgweQaec4evamu3i44gmBke/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dJu2Q-4Lh1EZjck0mjrlVhzOobWTa-1i/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Comfort : Comfort devices</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11xIkxgaVL9ElP5wWa_Fv6mSMonRjtJy8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sleep and Rest - Physiology of sleep, Factors affecting sleep.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/179xDBj1fulf9xMoHSdBFOsuT7bAlES9I/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qv0DW8K43GG8_iK1OCI5RruzKzdzK9IX/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Promoting Rest and sleep, Sleep Disorders -1</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fjE-9KDYMAv-YOyEq_-KQF3aBeU9l3hl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sleep Disorders PART -II</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T4krF3FfdWokLkOk80W-tEZ863Et0th8/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mg9loTQw9Zh_QDy0WKb1L0P5EVBfT6Sk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pain (Discomfort), Physiology, Common cause of pain, Types, Assessment</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X5RQx43ZxAC3RPRF8BeFCuv0TV2hKsRH/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HR4ps2bTsLwVJJ3CteXgVfBEc9A9NSKV/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pain - CAM (Complementary & Alternative healing Modalities)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1txiIQyM9aNfCPZaUl9rBH0EMgv10bIlR/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UNWX2qzBP_jS7dkd6v5fJjth-nR1--YR/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 10 === -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - PROMOTING SAFETY IN HEALTH CARE ENVIRONMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1bxoG9XwSw5J6TtF3LpaSSawJtNqeMMW6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B-vQIavMcoq7je8dlXD5jLzBzojwwbhJ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physical environment – Temperature, Humidity, Noise, Ventilation, Light, Odor, Pest control, Reduction of Physical hazards – fire</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1s64zZUjY538YhNI6kCBPviJIHdxo9FGU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reduction of Physical hazards – Accidents ,Fall Risk Assessment &Nurses role</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UlBuO-D2D4Nexi2EKzY1cFL4dUSIEst3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16p7ESn69e19hZ75sa0avfvhzmW9XKB3J/view?usp=drive_link" class="resource-btn notes coming-soon" target="_blank">
+                        <span class="icon coming-soon-icon">📚</span><span>Restraints : Types, Purposes (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16p7ESn69e19hZ75sa0avfvhzmW9XKB3J/view?usp=drive_link" class="resource-btn notes coming-soon" target="_blank">
+                        <span class="icon coming-soon-icon">📚</span><span>Restraints : Other Safety Devices (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16p7ESn69e19hZ75sa0avfvhzmW9XKB3J/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FYnYa9nQcuFqe2711bBjBPPrsoCNc1S3/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 11 === -->
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - HOSPITAL ADMISSION AND DISCHARGE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1iOSe9FluFpxHrpxAhwg-AByXvThUT_2p/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1r0Wkdrx9tmsCjbrIxODgr8aLoz66Op-n/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hospital, Hospital admission and Types of admission</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kfBT6-fb_2e0YcWkvtUkyLh5ki1lopNo/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16w9UfCRp0cRpkGPZuJoM24PgdeMbgH5C/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Unit & Preparation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qMuXCNd-6cGHKAAjVWz9pHDEWOrdJsvZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Efec1-X-8F4VdeLElKQxTZru9sg70nju/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Admission bed</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bOkQBIv5z6RccPW_ypKDFeLGdQNxJMyI/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ztLmrU4XZD7F6bHwdHnfG99rE7_e1ozr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Admission procedure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18ojWRpsv0g42rm78C41aoLNBJVlWlaKY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16cyNDtHgQ5ue_YjCK_pDxZIedLWUHn6P/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Steps of Admission procedure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HtBIDNxsSlsLar_xwlAUkqwC8O48Nx4J/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NBBG5K9BegeV6tmUgIfSW-MsEDsBecsy/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Admission Procedur -ICU & Emergency Department</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z_bR_B6fdEtcGF8v7x1Esr9V6BQc115c/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hvPgG4mzNr2z3aCPpRmYSyOt63tmaHON/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medico-legal issues in Admission</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eS_hZf0MAVXuilHlSxtzHa8uc4JKNUYJ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1smVYBlpxuI_N8cUMKscD8JzC64X_uhu9/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Discharge</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X81vwI2ADv20rARkuOaxyEs27OM3aADp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13vJ_oQ3GHGaMJP9F8JGP1107bibT5I0S/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Discharge Planning</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17bJGtMn3quV1bcn2VbtNfd-3eZzgPiao/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FUm-XIzbrq9G5KI0Z8b0h7k35LpUdvGX/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medico-legal issues & role of nurse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PHLgAJGCtkHzigBtPsbKZeZ_hAzu5bet/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19hfheL2dlGETCg1oqJU1VJADG-amwN9_/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 12 === -->
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - MOBILITY AND IMMOBILITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1qdosW4GXhXkYTc1Zm8GvmXN-4-lg2ULH/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hIRGuK32MzvfY0YLGmPlymbQiVh6Uf5R/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Body Mechanism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14rgga3rny8UdDYCgNRq8kjOc5bq9pbM8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12vlhjP_-gDe2F9XPdtnpJQYfQ24VlhWT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Position, Range of motion & Exercise</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nGYv9uuXEb6V-el67GI0wM9qrPT77gPx/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12VN8E_gWWOsXTEQHloJoipU4Bc67duVM/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immobility .</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-LaxcCyz3TheVKTk-WFToqrhbiqf8Gu6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/195ZcClk_WJ-8aiHEkAAw81QRrkdx9Pya/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 13 === -->
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - PATIENT EDUCATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1PkvSPFbR3_K1pH9rJ5-zoRa0cAZZl7NT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1v5u4t_pFTH4v8DGhzZCGBmnuiceSZQQO/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Patient Teaching : Importance, Purposes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wDHcSqLhTQGJ2HRthK2p0OHbYbLMISnj/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WP3lmBtRTQX4GFmL-mMqRLwcFyuKOFBw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Patient Teaching : Process & Integrating nursing process in patient teaching</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bFh_38GK8SIxc90q8pnMVEoVeeBfxBHC/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gCGntqYnPcNTAaO7H26r8yX-VjtyNMLQ/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- === UNIT 14 === -->
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - FIRST AID
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1wd_u9PUGwi46jfSf7i2Wkh5SVs3P3RVo/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TgBceWQscHjF3t14qn3zsZhpNuDW9fnf/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>First Aid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O8DAVCgdv_uJnjNi6VbdH79YzX3mV70o/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15wRFvvPZ0F2cCeu6okCgccgLjTagGq6T/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>First Aid Management : Wounds & Hemorrhage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1w1IQmiML2b1BU2VJc-VgtcSD_Pvael1n/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>First Aid Management : Shock & Musculoskeletal Injuries – Fractures</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hIOBqS3Px_unQndCWjXX6VsWGLXLtbvl/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yVLu-D0ACTArypVU57jTlQsbEfIIgNts/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Musculoskeletal Injuries : Dislocation, Muscle injuries</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19wx7pPVpNb75Rys0jqBBxRN9CaldYmeb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Transportation of Injured persons with Respiratory Emergencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1l5gK4ViDvIEyaE_Hi__veOiZUCrEm_dV/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1q9i_3lBsDTl2Uyi3OkrVHeU8kkZkjyJ7/view?usp=drive_link" class="resource-btn notes coming-soon" target="_blank">
+                        <span class="icon coming-soon-icon">📚</span><span>Respiratory Emergencies (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1q9i_3lBsDTl2Uyi3OkrVHeU8kkZkjyJ7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IQSWa64n46klV-1PyAj69yOLemOyzs78/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Foreign Bodies : Skin, Eye, Ear, Nose, Throat & Stomach</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LUT3bZXj-ihyv8MSkHbDZLCN3JNpKcSD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Burns & Scalds : Poisoning, Bites</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mTD12JgBQ00tjmHrKtHHYnNAgmMDYX0Z/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18GwuSkNLWyXORgwFMR4AyjPIfNWHJ7dv/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Frostbite & Effects of Heat : Community Emergencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RsVEN8ZDwq2GBgP9N0AcYkCtPLhhF0g3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OGu28bk4cqdEq8IFvBNpk6gUKay0Dynj/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
 
