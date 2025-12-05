@@ -4,515 +4,613 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Applied Psychology Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Psychology." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82;
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #01b9f1;
+            --primary-dark: #003b80;
+            --bg-card: #ffffff;
+            --bg-body: #f1f5f9;
+            --text-main: #003b80;
+            --text-muted: #64748b;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 80px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f8fafc; }
+        
+        .unit-header.active {
+            border-bottom-color: #e2e8f0;
+            background: #f0f9ff;
+            color: var(--primary);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none;
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
-        }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { 
-            background: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
-
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
         }
-        
-        h3 {
+
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; }
+        .type-video { border-left: 4px solid #8b5cf6; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+            width: 30px;
+            text-align: center;
         }
 
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
+        /* --- MODAL (The "Close Button" Wrapper) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto; /* Allow scrolling for quizzes */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000; /* Black background for video loading state */
+        }
+
+        /* --- QUIZ STYLES (Inside Modal) --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
+        }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
     </style>
 </head>
 <body>
-    <a href="https://drive.google.com/file/d/1SzjzyUmcGHldumeCdFHfSvrjK30oeNt3/view?usp=drive_link" class="syllabus-btn" target="_blank">
-        📄 APPLIED PSYCHOLOGY SYLLABUS
-    </a>
-    
-    <div id="units">
-        <!-- === UNIT 1 === -->
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1YHc0CPkqtteSAeyVGVYm2NNUuko1qLV4/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1O85Cfr6PBBCNN9-LDVFJA7le-Y-OjKe_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Meaning of Psychology, Development of psychology, Relationship with other subjects</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZHGs2J3mLkMKdR_qm93SymhsfSs3VR-h/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xA-Pel630M4h3bwD3gE7A-AeiJFbtLIB/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Significance of psychology in nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1r56_5GOW1u4hW8X3gKCV8Yl6f0gbwHoi/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13i7gYmqTMpzitnnx_IMJc36ghjRp870X/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </a>
-                </div>
-            </div>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Applied Psychology</div>
+            <p style="color: var(--text-muted);">BSc Semester 1</p>
         </div>
 
-        <!-- === UNIT 2 === -->
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - BIOLOGICAL BASIS OF BEHAVIOUR
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1UbGYA6_AdZ3pJQwE4vilv2s7sVFxA6-g/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GpyAWlGdvV2n0iP-crXSsfn4pK45s0r4/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Body mind relationship, Genetics and behaviour, Inheritance of behaviour, Brain and behaviour, Psychology and sensation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wQjNkZQggmPS30npswsv-I-tUg7ZKg5R/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16ybCF_bSNo8U3Uikxf2NOUYdlRSYfIyX/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </a>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1SzjzyUmcGHldumeCdFHfSvrjK30oeNt3/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <!-- === UNIT 3 === -->
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - MENTAL HEALTH AND MENTAL HYGIENE
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1iPSsHzcNoWiH37dMQv-wS1fQCwUYCC42/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19GwBowjDMTWHv5tIw3MWE-FmD-IcD8RG/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Mental Health & Mental Hygine : Definition , charactrestics,prevention , Mental Health Services</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14ONeSy-uvwjJTz2lcZith5TOMUEHNaV8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OWlT-UIx3zT20Xf5JWNVobTzmsWrFCis/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Defence Mechanism, Conflit, Frustration</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xZEPztKUXF0epYs4d8NCQ5b_l1E2sejK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Ct8NmrvYBxO6oywZ1_y0FFJ7WiQvazGb/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- === UNIT 4 === -->
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - DEVELOPMENTAL PSYCHOLOGY
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1izG_Xgs0efdUKr5_5rQS6GCGS8VK4Ren/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/11wAQq67lwxV1xXq9jxADqirBGveE2KKU/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Developmental Psychology, stages of development, growth and development, developmental tasks.</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1oFUhPPenMA3hWzKvJ9eseybu7--dALr7/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/138NM8jghAtkGjmfwGhhHBWUb-eN1cAYE/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Adolescence, Early adulthood.</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zvfdRhFvO8rrj6p9sGvxRmGm2cvTVWYC/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AdbEGmvAP0Lhg024QhwNTaiV5er39EI9/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Middle adulthood, late adulthood, psychology of vulnerable, challenged, and sick individuals, and women.</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1921hjaG34ECYB2HSlBd4UN6QE2a6nwZq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gSHCsOHy3LJXRD8_YWpSDEswNmt-_5TV/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- === UNIT 5 === -->
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - PERSONALITY
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1b6w03oUhFopcLyYWcYomcRNFu3xDAuD2/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jhNokKNX-tzNohIFFRFJ9wGIT5vpDvon/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Definition of personality, Classification</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bBJg3xY33leRb9l_CovfhlW0Y1kMu4oA/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dpbofQQJfPbh3LGz4J0K4o--JcMF0Jyp/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Assessment and evalution of personality, Method of assessment and evalution</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1K0Z47oqFNaycoXd7ay98PIyoPOPA_EjK/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eHpvaf8JS5JOl5eJ4XHRTA-0UuAN4yFq/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Projective techniques, alterations in personality due to illness</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gqS4srVpLeSAKq1xfVhspRt-zMkP7Os3/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uHUYWF1qzjCts9h9sWmmwYImTisMnMIF/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Characteristics of various age group</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18Bdrg6ocvgsaOlDkWMB6mT3VeJavaHIE/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PR-2eK_CcKp3oUpA9iPYcxDarPvbguVb/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- === UNIT 6 === -->
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - COGNITIVE PROCESS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1HMGwweJcUyu-wEtG7HmyoyCNuzsF3PT_/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bdsNSrRsXrPXGyiLwIHGw6S-PeZ_0f6m/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Attention- types,determinants , Types of distractions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pYHlQAO3juwPPlRO7pNF852ewMwwp-k9/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sN0IAtRR72IGXI1UH4KnSt8Q-OeAIF4y/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Perception-principle, factors affecting perception</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Ua9opGoI0hsom26UMkO5balRsPrwrnM_/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Di95wk0JlH3Ra0qPM4JF5zvlvvdgUj-I/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Aptitude- concepts-types, Uses of intelligence test</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Y2Uzao50zkTiayV5GclijZkvhZdfFNHj/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1J0dqov97bf4KKgmqdL3G6Dtkg0ELXWgH/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- === UNIT 7 === -->
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - MOTIVATION AND EMOTIONAL PROCESSES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1fUujKXFIhCHQu8it8dOa1c5njJuM47PZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rYJy_hsG3_DSiImzsnhjibycDnE1c_Pg/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Motivation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1TkRUvA4MQVSJLi-ZkPoh_Mbvxth6HktN/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RsbdA5nsY92Gov95ey9SqNUKiiiPeE0n/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ezi _ Stress and Adaptation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Shui6aYkFTjS_MLUNJEnUT_K80WOePvJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13ZPzQxdRFQvz1T8hsWcTXgInNBwnDuLV/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Emotions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yAp4RwbS1qMnOeOuUJqsW203wltkYubS/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gVFg-RNoS3o7cCfkAOOECeiJmD9FSRJF/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- === UNIT 8 === -->
-        <div class="unit-container" id="unit8">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - PSYCHOLOGICAL ASSESSMENT AND TESTS INTRODUCTION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1b71-DUeB_ZhlE5XT8Nk53Ci2S2NBF320/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17GksfWtwKI8vynmdlOlx6Pnq9P5agjEw/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Psychologyical assessment & tests</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_Zrv1t3w8YUWhnq0_ZCi2hJyreXT39gk/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16vSSnTyEJS0rEi5WydsUKzMLjGW80G9V/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Development of psychological test</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SSnfiuDact1UlcAlZgt7mDXb0Og-S6os/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SUy9l3Snh7xYcp-mOszsPkW4HruXc_YZ/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- === UNIT 9 === -->
-        <div class="unit-container" id="unit9">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - APPLICATION OF SOFT SKILL
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1oZO3sZxy6dwt9Y2A31aQkcxXsfCDzHTn/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CSvqXnMg5-fYzqYsBNc7BkSsQviTjvJn/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Soft skills, Visual communication skills</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13V3r_BWBvNTznR3iZIUOEaGLVPNHgXHJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DBC0xy1It5QQKG6ayF-enS2tl9VDjplu/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Building relationship with client & society</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j9pktSPHC2sFw4RKrJahAGjQxqnry1wX/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pPyVHycnGY3lu9YeMeoz9GGC9hUyNS9d/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Barriers to interpersonal relationship</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1laIvLctgo-yXKaE1vMkGRF-a0216tE1g/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UsZQjwpcS7gnDQ4_22ga3ndHvOUNx9KJ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Survival strategies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EQp96bQZ3iw9u7X2sbYrotpz9hFjOucI/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KowH_28KPP3lQ0Oan2Awd0rEThpZPneu/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- === UNIT 10 === -->
-        <div class="unit-container" id="unit10">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 10 - SELF EMPOWERMENT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1n-GMCRfTP_czWLyJVFk8oZg6vUf1gIoF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kYfROhSPMjxr98zpjADW66A6Qh0NdcK_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Self empowerment, Dimention of self empowerment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1HcBujyyzvDGIGsPs1-QSHxhXjX3ySmKv/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fh4VPWpTEQJXIdLuEP_wVkdGhoCOTgNV/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Women empowerment, professional etiquette, Role of nurse</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BQBxtneQqF6mN5I3p_XrDDWoOvejptvE/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DaBANi27-BHkv70bOl_C1WQGepmxqbM0/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
-                    </a>
-                </div>
-            </div>
+        <div id="units-container">
+            <!-- Content injected via JS -->
         </div>
     </div>
+
+    <!-- MODAL OVERLAY -->
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body">
+            <!-- Content injected here -->
+        </div>
+    </div>
+
     <script>
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnit = document.querySelector('.unit-container');
-            if (firstUnit) {
-                const header = firstUnit.querySelector('.unit-header');
-                const content = firstUnit.querySelector('.unit-content');
-                header.setAttribute('aria-expanded', true);
-                content.classList.add('active');
+        // --- 1. PSYCHOLOGY QUIZ DATA (5 Questions each) ---
+        const QUIZ_DATA = {
+            1: [ // Intro
+                { q: "Who is considered the father of Psychology?", o: ["Freud", "Wundt", "Watson", "Skinner"], a: 1 },
+                { q: "Psychology is the scientific study of:", o: ["Soul", "Mind", "Behavior & Mental Processes", "Heart"], a: 2 },
+                { q: "Which branch deals with mental disorders?", o: ["Clinical", "Industrial", "Educational", "Social"], a: 0 },
+                { q: "Introspection method was introduced by:", o: ["Functionalism", "Structuralism", "Behaviorism", "Gestalt"], a: 1 },
+                { q: "Which is NOT a method of psychology?", o: ["Observation", "Experimental", "Astrology", "Survey"], a: 2 }
+            ],
+            2: [ // Biological Basis
+                { q: "The basic unit of the nervous system is:", o: ["Nephron", "Neuron", "Gene", "Cell"], a: 1 },
+                { q: "Which hemisphere controls the right side of body?", o: ["Left", "Right", "Both", "Cerebellum"], a: 0 },
+                { q: "The gap between two neurons is:", o: ["Axon", "Dendrite", "Synapse", "Myelin"], a: 2 },
+                { q: "Which gene carrier determines heredity?", o: ["Chromosomes", "Ribosomes", "Mitochondria", "Plasma"], a: 0 },
+                { q: "The 'Master Gland' is:", o: ["Thyroid", "Adrenal", "Pituitary", "Pineal"], a: 2 }
+            ],
+            3: [ // Mental Health
+                { q: "Mental Hygiene is concerned with:", o: ["Curing disease", "Preserving mental health", "Physical fitness", "Social status"], a: 1 },
+                { q: "A defense mechanism where one reverts to childish behavior:", o: ["Projection", "Regression", "Repression", "Denial"], a: 1 },
+                { q: "Attributing own faults to others is:", o: ["Projection", "Rationalization", "Sublimation", "Displacement"], a: 0 },
+                { q: "Which is a sign of poor mental health?", o: ["Adaptability", "Emotional stability", "Constant anxiety", "Self-confidence"], a: 2 },
+                { q: "Blocking painful memories is called:", o: ["Repression", "Suppression", "Regression", "Projection"], a: 0 }
+            ],
+            4: [ // Developmental
+                { q: "Developmental psychology studies changes from:", o: ["Birth to Death", "Childhood to Adult", "Conception to Death", "Birth to Adolescence"], a: 2 },
+                { q: "Adolescence is a period of:", o: ["Stability", "Storm and Stress", "Decline", "Stagnation"], a: 1 },
+                { q: "Which is a developmental task of infancy?", o: ["Learning to walk", "Career choice", "Marriage", "Retirement"], a: 0 },
+                { q: "Cognitive development theory was proposed by:", o: ["Freud", "Piaget", "Erikson", "Maslow"], a: 1 },
+                { q: "Empty Nest Syndrome occurs in:", o: ["Early Adulthood", "Middle Adulthood", "Childhood", "Old Age"], a: 1 }
+            ],
+            5: [ // Personality
+                { q: "Which part of personality operates on Pleasure Principle?", o: ["Id", "Ego", "Superego", "Self"], a: 0 },
+                { q: "The Rorschach Inkblot test is a:", o: ["Questionnaire", "Projective Test", "Interview", "Rating Scale"], a: 1 },
+                { q: "Who proposed Introvert and Extrovert types?", o: ["Jung", "Freud", "Allport", "Eysenck"], a: 0 },
+                { q: "The moral branch of personality is:", o: ["Id", "Ego", "Superego", "Libido"], a: 2 },
+                { q: "TAT stands for:", o: ["Thematic Apperception Test", "Trait Analysis Test", "Time Analysis Tool", "Total Aptitude Test"], a: 0 }
+            ],
+            6: [ // Cognitive
+                { q: "Short term memory lasts for:", o: ["1-2 secs", "20-30 secs", "1 hour", "Lifetime"], a: 1 },
+                { q: "False perception without external stimulus is:", o: ["Illusion", "Hallucination", "Delusion", "Dream"], a: 1 },
+                { q: "The formula for IQ is:", o: ["MA/CA x 100", "CA/MA x 100", "MA/CA", "CA/MA"], a: 0 },
+                { q: "Misinterpretation of actual stimulus is:", o: ["Hallucination", "Illusion", "Attention", "Sensation"], a: 1 },
+                { q: "Thinking 'outside the box' is:", o: ["Convergent thinking", "Divergent thinking", "Logical thinking", "Critical thinking"], a: 1 }
+            ],
+            7: [ // Motivation & Emotion
+                { q: "Which is a primary motive?", o: ["Achievement", "Hunger", "Affiliation", "Power"], a: 1 },
+                { q: "Maslow's highest level of need is:", o: ["Safety", "Esteem", "Self-actualization", "Belongingness"], a: 2 },
+                { q: "James-Lange theory relates to:", o: ["Learning", "Emotion", "Memory", "Intelligence"], a: 1 },
+                { q: "Eustress is:", o: ["Bad stress", "Good/Positive stress", "No stress", "Chronic stress"], a: 1 },
+                { q: "Which is a social motive?", o: ["Thirst", "Sleep", "Affiliation", "Pain avoidance"], a: 2 }
+            ],
+            8: [ // Assessment
+                { q: "IQ stands for:", o: ["Intellectual Query", "Intelligence Quotient", "Inner Quality", "Intelligent Question"], a: 1 },
+                { q: "Who developed the first intelligence test?", o: ["Binet", "Wechsler", "Galton", "Terman"], a: 0 },
+                { q: "Consistency of a test score is called:", o: ["Validity", "Reliability", "Norms", "Standardization"], a: 1 },
+                { q: "A test measuring what it claims to measure is:", o: ["Valid", "Reliable", "Easy", "Objective"], a: 0 },
+                { q: "Bhatia's Battery is a test of:", o: ["Personality", "Intelligence", "Attitude", "Aptitude"], a: 1 }
+            ],
+            9: [ // Soft Skills
+                { q: "Which is a soft skill?", o: ["Coding", "Communication", "Machine operation", "Data entry"], a: 1 },
+                { q: "Non-verbal communication includes:", o: ["Spoken words", "Written letters", "Body language", "Emails"], a: 2 },
+                { q: "Active listening involves:", o: ["Interrupting", "Ignoring", "Paying full attention", "Judging"], a: 2 },
+                { q: "A barrier to communication is:", o: ["Feedback", "Noise", "Clarity", "Empathy"], a: 1 },
+                { q: "Empathy means:", o: ["Feeling pity", "Understanding others' feelings", "Ignoring feelings", "Judging feelings"], a: 1 }
+            ],
+            10: [ // Empowerment
+                { q: "Empowerment means:", o: ["Giving orders", "Gaining power/control", "Surrendering", "Following"], a: 1 },
+                { q: "Self-esteem refers to:", o: ["Self-worth", "Selfishness", "Arrogance", "Knowledge"], a: 0 },
+                { q: "Professional etiquette includes:", o: ["Being late", "Respect and Punctuality", "Gossiping", "Ignoring patients"], a: 1 },
+                { q: "Burnout is a state of:", o: ["High energy", "Physical/Emotional exhaustion", "Happiness", "Motivation"], a: 1 },
+                { q: "Assertiveness is:", o: ["Being aggressive", "Being passive", "Expressing needs respectfully", "Being silent"], a: 2 }
+            ]
+        };
+
+        // --- 2. COURSE DATA (Extracted & Parsed) ---
+        const UNITS = [
+            {
+                id: 1, title: "INTRODUCTION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1YHc0CPkqtteSAeyVGVYm2NNUuko1qLV4/preview' },
+                    { type: 'video', title: 'Meaning & Development', url: 'https://drive.google.com/file/d/1O85Cfr6PBBCNN9-LDVFJA7le-Y-OjKe_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ZHGs2J3mLkMKdR_qm93SymhsfSs3VR-h/preview' },
+                    { type: 'video', title: 'Psychology in Nursing', url: 'https://drive.google.com/file/d/1xA-Pel630M4h3bwD3gE7A-AeiJFbtLIB/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1r56_5GOW1u4hW8X3gKCV8Yl6f0gbwHoi/preview' }
+                ]
+            },
+            {
+                id: 2, title: "BIOLOGICAL BASIS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1UbGYA6_AdZ3pJQwE4vilv2s7sVFxA6-g/preview' },
+                    { type: 'video', title: 'Genetics & Brain', url: 'https://drive.google.com/file/d/1GpyAWlGdvV2n0iP-crXSsfn4pK45s0r4/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wQjNkZQggmPS30npswsv-I-tUg7ZKg5R/preview' }
+                ]
+            },
+            {
+                id: 3, title: "MENTAL HEALTH",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1iPSsHzcNoWiH37dMQv-wS1fQCwUYCC42/preview' },
+                    { type: 'video', title: 'MH Concepts & Services', url: 'https://drive.google.com/file/d/19GwBowjDMTWHv5tIw3MWE-FmD-IcD8RG/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/14ONeSy-uvwjJTz2lcZith5TOMUEHNaV8/preview' },
+                    { type: 'video', title: 'Defense Mechanisms', url: 'https://drive.google.com/file/d/1OWlT-UIx3zT20Xf5JWNVobTzmsWrFCis/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xZEPztKUXF0epYs4d8NCQ5b_l1E2sejK/preview' }
+                ]
+            },
+            {
+                id: 4, title: "DEVELOPMENTAL PSYCH",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1izG_Xgs0efdUKr5_5rQS6GCGS8VK4Ren/preview' },
+                    { type: 'video', title: 'Growth & Development', url: 'https://drive.google.com/file/d/11wAQq67lwxV1xXq9jxADqirBGveE2KKU/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1oFUhPPenMA3hWzKvJ9eseybu7--dALr7/preview' },
+                    { type: 'video', title: 'Adolescence & Early Adult', url: 'https://drive.google.com/file/d/138NM8jghAtkGjmfwGhhHBWUb-eN1cAYE/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1zvfdRhFvO8rrj6p9sGvxRmGm2cvTVWYC/preview' },
+                    { type: 'video', title: 'Middle/Late Adult & Vulnerable', url: 'https://drive.google.com/file/d/1AdbEGmvAP0Lhg024QhwNTaiV5er39EI9/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1921hjaG34ECYB2HSlBd4UN6QE2a6nwZq/preview' }
+                ]
+            },
+            {
+                id: 5, title: "PERSONALITY",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1b6w03oUhFopcLyYWcYomcRNFu3xDAuD2/preview' },
+                    { type: 'video', title: 'Personality Definition', url: 'https://drive.google.com/file/d/1jhNokKNX-tzNohIFFRFJ9wGIT5vpDvon/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1bBJg3xY33leRb9l_CovfhlW0Y1kMu4oA/preview' },
+                    { type: 'video', title: 'Assessment Methods', url: 'https://drive.google.com/file/d/1dpbofQQJfPbh3LGz4J0K4o--JcMF0Jyp/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1K0Z47oqFNaycoXd7ay98PIyoPOPA_EjK/preview' },
+                    { type: 'video', title: 'Projective Techniques', url: 'https://drive.google.com/file/d/1eHpvaf8JS5JOl5eJ4XHRTA-0UuAN4yFq/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1gqS4srVpLeSAKq1xfVhspRt-zMkP7Os3/preview' },
+                    { type: 'video', title: 'Age Group Characteristics', url: 'https://drive.google.com/file/d/1uHUYWF1qzjCts9h9sWmmwYImTisMnMIF/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/18Bdrg6ocvgsaOlDkWMB6mT3VeJavaHIE/preview' }
+                ]
+            },
+            {
+                id: 6, title: "COGNITIVE PROCESS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1HMGwweJcUyu-wEtG7HmyoyCNuzsF3PT_/preview' },
+                    { type: 'video', title: 'Attention', url: 'https://drive.google.com/file/d/1bdsNSrRsXrPXGyiLwIHGw6S-PeZ_0f6m/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pYHlQAO3juwPPlRO7pNF852ewMwwp-k9/preview' },
+                    { type: 'video', title: 'Perception', url: 'https://drive.google.com/file/d/1sN0IAtRR72IGXI1UH4KnSt8Q-OeAIF4y/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Ua9opGoI0hsom26UMkO5balRsPrwrnM_/preview' },
+                    { type: 'video', title: 'Aptitude & Intelligence', url: 'https://drive.google.com/file/d/1Di95wk0JlH3Ra0qPM4JF5zvlvvdgUj-I/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Y2Uzao50zkTiayV5GclijZkvhZdfFNHj/preview' }
+                ]
+            },
+            {
+                id: 7, title: "MOTIVATION & EMOTION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1fUujKXFIhCHQu8it8dOa1c5njJuM47PZ/preview' },
+                    { type: 'video', title: 'Motivation', url: 'https://drive.google.com/file/d/1rYJy_hsG3_DSiImzsnhjibycDnE1c_Pg/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1TkRUvA4MQVSJLi-ZkPoh_Mbvxth6HktN/preview' },
+                    { type: 'video', title: 'Stress & Adaptation', url: 'https://drive.google.com/file/d/1RsbdA5nsY92Gov95ey9SqNUKiiiPeE0n/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Shui6aYkFTjS_MLUNJEnUT_K80WOePvJ/preview' },
+                    { type: 'video', title: 'Emotions', url: 'https://drive.google.com/file/d/13ZPzQxdRFQvz1T8hsWcTXgInNBwnDuLV/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1yAp4RwbS1qMnOeOuUJqsW203wltkYubS/preview' }
+                ]
+            },
+            {
+                id: 8, title: "ASSESSMENT & TESTS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1b71-DUeB_ZhlE5XT8Nk53Ci2S2NBF320/preview' },
+                    { type: 'video', title: 'Psych Assessment', url: 'https://drive.google.com/file/d/17GksfWtwKI8vynmdlOlx6Pnq9P5agjEw/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_Zrv1t3w8YUWhnq0_ZCi2hJyreXT39gk/preview' },
+                    { type: 'video', title: 'Test Development', url: 'https://drive.google.com/file/d/16vSSnTyEJS0rEi5WydsUKzMLjGW80G9V/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1SSnfiuDact1UlcAlZgt7mDXb0Og-S6os/preview' }
+                ]
+            },
+            {
+                id: 9, title: "SOFT SKILLS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1oZO3sZxy6dwt9Y2A31aQkcxXsfCDzHTn/preview' },
+                    { type: 'video', title: 'Soft Skills & Comm', url: 'https://drive.google.com/file/d/1CSvqXnMg5-fYzqYsBNc7BkSsQviTjvJn/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/13V3r_BWBvNTznR3iZIUOEaGLVPNHgXHJ/preview' },
+                    { type: 'video', title: 'Building Relationships', url: 'https://drive.google.com/file/d/1DBC0xy1It5QQKG6ayF-enS2tl9VDjplu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1jpktSPHC2sFw4RKrJahAGjQxqnry1wX/preview' },
+                    { type: 'video', title: 'Barriers to Relationships', url: 'https://drive.google.com/file/d/1pPyVHycnGY3lu9YeMeoz9GGC9hUyNS9d/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1laIvLctgo-yXKaE1vMkGRF-a0216tE1g/preview' },
+                    { type: 'video', title: 'Survival Strategies', url: 'https://drive.google.com/file/d/1UsZQjwpcS7gnDQ4_22ga3ndHvOUNx9KJ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1EQp96bQZ3iw9u7X2sbYrotpz9hFjOucI/preview' }
+                ]
+            },
+            {
+                id: 10, title: "SELF EMPOWERMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1n-GMCRfTP_czWLyJVFk8oZg6vUf1gIoF/preview' },
+                    { type: 'video', title: 'Self Empowerment', url: 'https://drive.google.com/file/d/1kYfROhSPMjxr98zpjADW66A6Qh0NdcK_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1HcBujyyzvDGIGsPs1-QSHxhXjX3ySmKv/preview' },
+                    { type: 'video', title: 'Women Empowerment', url: 'https://drive.google.com/file/d/1fh4VPWpTEQJXIdLuEP_wVkdGhoCOTgNV/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1BQBxtneQqF6mN5I3p_XrDDWoOvejptvE/preview' }
+                ]
             }
-        });
+        ];
+
+        // --- 4. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
+        }
+
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            return '📄';
+        }
+
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        
+        function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            
+            // FIX: Restore flex centering for Video/Notes (looks better centered)
+            body.style.display = 'flex';
+
+            if (type === 'quiz') {
+                openQuiz(url); 
+            }
+            else {
+                // Ensure proper preview URL
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                // Use black background and permissions for better video experience
+                body.innerHTML = `<iframe class="modal-iframe" src="${cleanUrl}" allow="autoplay; encrypted-media; fullscreen"></iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            // FIX: Remove flex centering for Quiz so it starts at the top
+            body.style.display = 'block';
+            body.scrollTop = 0; // Ensure we start at the top
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            // If we are closing manually via button, go back in history to remove the state
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        // --- 6. HANDLE BACK BUTTON ---
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        // Initialize
+        renderPage();
+
     </script>
 </body>
 </html>
-
