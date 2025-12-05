@@ -85,7 +85,8 @@
             flex-direction: column;
         }
         
-        #content-frame {
+        /* Note: #content-frame is now dynamically created, styles are inline in JS or here */
+        iframe {
             width: 100%;
             height: 100%;
             border: none;
@@ -102,7 +103,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-bottom: 20vh; 
+            /* Changed from 20vh to 5vh to center it better */
+            padding-bottom: 5vh; 
         }
 
         /* --- COMPONENTS --- */
@@ -252,7 +254,7 @@
 
     <!-- NEW IFRAME VIEW: Displays subject content within the app wrapper -->
     <div id="view-iframe" class="view">
-        <iframe id="content-frame" src=""></iframe>
+        <!-- Content Frame is now injected dynamically to prevent history/white screen issues -->
     </div>
 
     <div id="view-paywall" class="view">
@@ -456,6 +458,15 @@
                 history.replaceState({ viewId: 'view-exit-guard' }, 'Exit Guard', '#exit');
                 history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
                 this.renderView('view-dashboard');
+                
+                // BACKGROUND SYNC: Check for permission updates
+                const savedAuth = localStorage.getItem('eziAuth');
+                if(savedAuth) {
+                    try {
+                        const creds = JSON.parse(savedAuth);
+                        this.syncPermissions(creds);
+                    } catch(e) { console.log("Auth parse error"); }
+                }
             } else {
                 history.replaceState({ viewId: 'view-auth' }, 'Login', '#login');
                 this.renderView('view-auth');
@@ -499,6 +510,27 @@
                 }
             });
         },
+        
+        // NEW: Background Sync Function
+        syncPermissions: async function(creds) {
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST', body: JSON.stringify({
+                        action:'login', 
+                        email: creds.email, 
+                        password: creds.password, 
+                        deviceId: getDeviceId()
+                    })
+                });
+                const data = await res.json();
+                if(data.result === 'success'){
+                    // Update local storage and current user instance silently
+                    this.currentUser = data.user;
+                    localStorage.setItem('eziUser', JSON.stringify(data.user));
+                    console.log("Permissions synced in background");
+                }
+            } catch(e) { console.log("Background sync failed"); }
+        },
 
         login: async function() {
             const email = document.getElementById('login-email').value.trim();
@@ -518,6 +550,8 @@
                 if(data.result === 'success'){
                     this.currentUser = data.user;
                     localStorage.setItem('eziUser', JSON.stringify(data.user));
+                    // SAVE AUTH FOR BACKGROUND SYNC
+                    localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
                     
                     document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = "";
                     this.navTo('view-dashboard', true); // TRUE = Root navigation
@@ -547,6 +581,9 @@
                 if(data.result === 'success'){
                     this.currentUser = data.user;
                     localStorage.setItem('eziUser', JSON.stringify(data.user));
+                    // SAVE AUTH FOR BACKGROUND SYNC
+                    localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
+                    
                     alert("Account Created!");
                     this.navTo('view-dashboard', true);
                 } else {
@@ -573,6 +610,7 @@
         logout: function() { 
             this.currentUser = null; 
             localStorage.removeItem('eziUser'); 
+            localStorage.removeItem('eziAuth'); // CLEAR AUTH
             this.navTo('view-auth', true); // Back to Auth Root
         },
 
@@ -599,20 +637,17 @@
 
         // VISUAL UPDATE ONLY
         renderView: function(viewId) {
-            // 1. FIRST HIDE EVERYTHING (Update UI)
+            // IFRAME CLEANUP: Destroy iframe DOM element completely if not needed
+            // This prevents "ghost" history and white flashes from about:blank
+            const iframeContainer = document.getElementById('view-iframe');
+            if (viewId !== 'view-iframe' && iframeContainer) {
+                 iframeContainer.innerHTML = ''; 
+            }
+
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             const target = document.getElementById(viewId);
             if(target) target.classList.add('active');
             
-            // 2. AFTER UI UPDATE, CLEAN IFRAME (Prevents White Flash)
-            const iframe = document.getElementById('content-frame');
-            if (viewId !== 'view-iframe' && iframe) {
-                 // We clear it after a short delay to ensure it's hidden first
-                 setTimeout(() => {
-                    iframe.src = "about:blank"; 
-                 }, 50);
-            }
-
             // Handle Header UI
             const isAuth = viewId === 'view-auth';
             const isDash = viewId === 'view-dashboard';
@@ -630,6 +665,7 @@
         goBack: function() {
             if(!document.getElementById('modal-referral').classList.contains('hidden')) { this.closeReferralModal(); return; }
             if(!document.getElementById('modal-exit').classList.contains('hidden')) { this.cancelExit(); return; }
+            
             window.history.back();
         },
 
@@ -710,14 +746,17 @@
         },
         
         openContent: function(url, title, fromHistory = false) {
-            const frame = document.getElementById('content-frame');
+            const container = document.getElementById('view-iframe');
+            
             if (!fromHistory) {
                 this.navTo('view-iframe', false, { sourceUrl: url, title: title });
-                frame.src = url;
             } else {
                 this.renderView('view-iframe');
-                if (frame.src.indexOf(url) === -1) { frame.src = url; }
             }
+            
+            // DYNAMICALLY CREATE IFRAME
+            // This ensures a clean history state and no white flash on exit
+            container.innerHTML = `<iframe id="content-frame" src="${url}" style="width:100%; height:100%; border:none; display:block; background:#fff;"></iframe>`;
         },
 
         showReferralModal: function() { document.getElementById('modal-referral').classList.remove('hidden'); this.resetReferralModal(); },
@@ -742,7 +781,16 @@
             this.closeReferralModal();
             window.open(url, '_blank');
         },
-        navTo3D: function() { this.navToCourse('3D'); } 
+        navTo3D: function() { 
+            this.lockedCourseKey = '3D';
+            const pKey = '3d_models'; 
+            
+            if(this.currentUser && this.currentUser.permissions && this.currentUser.permissions[pKey] === true) {
+                this.openContent('3dmodels.html', '3D Models');
+            } else {
+                this.navTo('view-paywall', false, { from: 'checkAccess' });
+            }
+        } 
     };
 
     // START APP
