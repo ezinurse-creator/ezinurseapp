@@ -1,1 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Microbiology - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Microbiology." />
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <!-- Tailwind Configuration to match the original custom CSS colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand': '#003B82', // Original --brand
+              'brand-hover': '#002d63',
+              'accent': '#00B9F2', // Original --accent
+              'qa-btn': '#00CED1', // Original #qa-btn
+              'qa-btn-hover': '#00A9AA',
+              'gray-50': '#f9fafb',
+              'gray-200': '#e5e7eb',
+              'gray-900': '#111827',
+              'note-bg': '#f0f9ff',
+              'note-border': '#bae6fd',
+              'note-text': '#085d8c',
+              'video-bg': '#f5f3ff',
+              'video-border': '#d8b4fe',
+              'video-text': '#5a32a6',
+              'model-bg': '#f0fff4',
+              'model-border': '#a7f3d0',
+              'model-text': '#106637',
+              'quiz-bg': '#fff5e8',
+              'quiz-border': '#ffd8a8',
+              'quiz-text': '#8c5e08',
+              'soon-bg': '#e5e7eb',
+              'soon-border': '#d1d5db',
+              'soon-text': '#6b7280',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+        /* Base styles for font and color consistency */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Utility class to smoothly control the max-height for accordion effect */
+        .unit-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            max-height: 2000px; /* Large value to accommodate content */
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        @media (max-width: 768px) {
+             .unit-content.active {
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+        }
+
+        /* Arrow rotation for the accordion state */
+        .unit-header[aria-expanded="true"] .arrow-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Specific styling for coming soon links */
+        .resource-btn.coming-soon:hover {
+            background-color: #e5e7eb !important;
+            transform: none !important;
+            cursor: default !important;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+
+    <!-- Syllabus Button -->
+    <a href="https://drive.google.com/file/d/1jAMnkkFwWWw_sDPrDwzHLB2oH6qoGopJ/view?usp=drive_link" target="_blank"
+        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
+        📄 MICROBIOLOGY - SYLLABUS
+    </a>
+
+    <!-- Previous Year Questions Button (Different Color) -->
+    <a href="https://drive.google.com/file/d/1Pzq-ucUgNEYNHPOmA4YBwZOtGsXUlbkG/view?usp=drive_link" target="_blank"
+        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
+        ❓ PREVIOUS YEAR QUESTIONS AND ANSWERS
+    </a>
+
+    <div id="units">
+        <!-- Unit 1 -->
+        <div class="unit-container" id="unit1">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - STRUCTURE AND CLASSIFICATION OF MICROBES.
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content active px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 1 Resources -->
+                    <a href="https://drive.google.com/file/d/1gS9O50v2BdnyCmy9DLXUDi1yUl7RQ2IQ/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BhtGLc78MbXtH4ZSTYFL36QIBHPwzXEz/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction of structure and classification of microbes (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hQDStwTctGwSyIfflSu1qG6i8WDLk9LF/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E5kdTxZcWep9TP-9FOf3TU-FMC2AdPBd/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="unit-container" id="unit2">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - IDENTIFICATION OF MICROORGANISMS.
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 2 Resources -->
+                    <a href="https://drive.google.com/file/d/1dwgEV50POV5PKD_Rfq7xe3TC01pN-ME2/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TgXeV4ziUyWMCTE4DJrnJ4FJ6oaJosWl/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Identification of microorganisms and diagnosis of bacterial diseases (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hZF5SIpOoy2pCPxqaiaHWl0bYsDVdIcN/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P_n5Ff22DHhmBs6MS4fSex9SjXAlOSzz/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 3 -->
+        <div class="unit-container" id="unit3">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - GROWTH AND NUTRITION OF MICROBES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 3 Resources -->
+                    <a href="https://drive.google.com/file/d/1TDEM-Rms2a9USLMF0-iXQJzMyIiOP_Up/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17grWxgEaHjP-X2OcoA3v-eDS1tN7ix3c/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12QizxSgME6JSJlyFMacGeVeepQPuOtUf/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Growth and Nutrition of microbes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Tor6KkwPITrthRndar2DE8ar2R9OVt7p/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1h4lsrvGVpUar8b1v5S1mBpXjWpYHrI3t/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 4 -->
+        <div class="unit-container" id="unit4">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - DESTRUCTION OF MICROORGANISMS.
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 4 Resources -->
+                    <a href="https://drive.google.com/file/d/1EGlf74shgVqcy1gYT6ncHrZAa6kFc3d9/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J9L2nM-BH5yg-RuBu0pVz_yex4I2-7Nd/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O8ELVn-75TTNrVV41gyBmb4B2eR31PTP/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Destruction of Microorganisms</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aUnsZs_TUQk7jbmgX2ZXPLvbYriN0onj/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Qrt0CCubs4IUhJobjeGXRxCKIQVhXiDj/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Unit 5 -->
+        <div class="unit-container" id="unit5">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - DISEASE PRODUCING MICROORGANISMS. GRAM POSITIVE BACILLI
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 5 Resources -->
+                    <a href="https://drive.google.com/file/d/1W9x1GY9omVvvywHxRI27k8nw_pk1QuGx/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10lb80uiRWoWQ5lCzRQMwmeFVDTKD9BBp/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18cIgHzjlLmXakPxfDXpY11iksNqhyxE-/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Disease Producing Microorganisms</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GCTWh1zH6UYkUC572gVuD3Z4Gf97N_iB/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-jGBRhRyTFtUDf8mw5iM5SZ6dooqnPXi/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 6 -->
+        <div class="unit-container" id="unit6">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - PATHOGENIC FUNGI DERMATOPHYTES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 6 Resources -->
+                    <a href="https://drive.google.com/file/d/19pkTvvHqipOlEz7YUot_OSusJMxihAkZ/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GeIJYUgYxZOZJ3XQtmw_J89gX0-gCAh4/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fVVDbrKP_qha1P5aMpTDmkJ3MbAhxXIC/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Pathogenic Fungi Dermatophytes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kEwOdQxrndHzS4c-XNZ0gedqqCnFAP-M/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y2PSjnHsjkI2O8EtxZyPWGsRHsnSn-1X/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 7 -->
+        <div class="unit-container" id="unit7">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - IMMUNITY
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 7 Resources -->
+                    <a href="https://drive.google.com/file/d/1g-JJKsd23CP-t5TEy3V4gDXaqhXH4tii/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zPlVMz2boG-OCzDsNu8tZmT4zs5lZir9/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xGYowvjy_wMr3ltnyH_Tny5KZXCr8iO_/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Immunity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15OQB5Q8cBjSpWXgQW_YgwCnnXWf6E5-G/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LfF4TIkRT3b8WcQ7VReh9y8d5bpJnD2_/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 8 -->
+        <div class="unit-container" id="unit8">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - PARASITES AND VECTORS
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 8 Resources -->
+                    <a href="https://drive.google.com/file/d/1Cc14AJBWokxz-YbibCR-frC6qqsqJv0l/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BxZbpbJlABKjaoV2bZgTgJCY3eh7XfqA/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1axhgk872-vXUj41pK3JXhRuep1vaN6wb/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Parasites And Vectors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LgFA2Rs-IsZmqQneH8IvzAd46vJw_qXI/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qLjys6pGNfLy88ChFd2kES2APSPcU3t2/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 9 -->
+        <div class="unit-container" id="unit9">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - VIRUSES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 9 Resources -->
+                    <a href="https://drive.google.com/file/d/1k3Ja8_dtp-X512Utr68jsw26SlD8njIZ/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jltTDMNGCCJPGx9OcXSrZUzODG3PeWNv/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10X5ogh2qKp5guE6RhnvM74zuM95TOB_N/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Viruses</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RMsnlu4fX9GwkWs9VXuGwlk0h_Vhg4q-/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aLhe2hYtkGGVssprekFlwrWPnEeIvHJ9/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 10 -->
+        <div class="unit-container" id="unit10">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - MICROORGANISMS TRANSMITTED THROUGH FOOD
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 10 Resources -->
+                    <a href="https://drive.google.com/file/d/1c5Hxwgzd8Y2mIKXyI6XnGXXPGYC2CC11/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RgM6ROSnsPjraC5OrN7a5uZa3bTNt_C-/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12wVs8Tid3zo00NoKgq30sJOAdvouD0IA/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Microorganisms Transmitted Through Food, Food Poisoning, Food-Borne Infections</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1m4VQAL_mFM-aAHMcXbHlaFhyWjvWT6su/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dXjMsPwupsrXfJxJgDTPy0iT6tvgPuyu/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 11 -->
+        <div class="unit-container" id="unit11">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - BIOMEDICAL WASTE MANAGEMENT
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <!-- Unit 11 Resources -->
+                    <a href="https://drive.google.com/file/d/1Lk3yV7m3sEr82U8aNYFThlENPfKVpEgm/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zkwV27bRbDpJNdAHrZr_XbNti2YI8uSH/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PgX4Fu0LOhrctEnZbm7R5fATGBDu3Zm6/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Biomedical waste Management</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E6VOOYTzvp2hN2SvJI9C49pSOr_xJ_ju/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ztQ0tr0ub6KiUVYkRMX1jLCcbiVci7vv/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Units 12-16 from the previous subject are removed to match the new syllabus -->
+
+    </div>
+
+    <!-- JavaScript for Accordion Functionality -->
+    <script>
+        /**
+         * Toggles the visibility of the next sibling element (unit content)
+         * when the unit header is clicked.
+         * @param {HTMLElement} header The unit header button element.
+         */
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+            // Toggle ARIA attribute
+            header.setAttribute('aria-expanded', !isExpanded);
+
+            // Toggle the 'active' class for the CSS transitions
+            unitContent.classList.toggle('active');
+
+            // If expanding, calculate the required height to allow smooth transition
+            if (!isExpanded) {
+                 // Set max-height large enough to hold all content for smooth expansion
+                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            } else {
+                // To smoothly collapse, first set height to current scrollHeight,
+                // then remove 'active' class, and reset max-height to 0 after a small delay.
+                // Note: The main transition is handled by the max-height class property,
+                // but setting a specific height often makes the collapse animation smoother.
+                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
+                setTimeout(() => {
+                    unitContent.style.maxHeight = '0';
+                }, 10);
+            }
+        }
+
+        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
+        window.onload = function() {
+            const firstActiveContent = document.querySelector('.unit-content.active');
+            if (firstActiveContent) {
+                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
