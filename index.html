@@ -77,6 +77,22 @@
             padding-bottom: 80px; 
         }
 
+        /* IFRAME VIEW SPECIFIC STYLES */
+        #view-iframe.view {
+            padding: 0 !important; /* Remove padding so iframe is full width */
+            padding-bottom: 0 !important;
+            overflow: hidden; /* Let iframe handle scrolling */
+            flex-direction: column;
+        }
+        
+        #content-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: #fff;
+        }
+
         .view.active { display: flex; flex-direction: column; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
@@ -232,6 +248,11 @@
         <h2 class="headline" id="subject-title">Subjects</h2>
         <p class="subtext">Select subject to open.</p>
         <div class="card-menu" id="subject-list"></div>
+    </div>
+
+    <!-- NEW IFRAME VIEW: Displays subject content within the app wrapper -->
+    <div id="view-iframe" class="view">
+        <iframe id="content-frame" src=""></iframe>
     </div>
 
     <div id="view-paywall" class="view">
@@ -434,14 +455,20 @@
                         this.renderSubmenu(event.state.course);
                         this.renderView('view-submenu');
                     } else if (event.state.viewId === 'view-subjects') {
-                        // Re-open subject list is tricky without params, so we might fallback
-                        // Ideally store params in state. For now, fallback to course or dashboard
                          if(event.state.course && event.state.section) {
                              this.renderSubjectList(event.state.course, event.state.section);
                              this.renderView('view-subjects');
                          } else {
                              this.renderView('view-dashboard');
                          }
+                    } else if (event.state.viewId === 'view-iframe') {
+                        // If we are navigating "forward" to iframe via history (unlikely case, usually pop goes back)
+                        // We need the URL. If undefined, fallback.
+                        if (event.state.sourceUrl) {
+                            this.openContent(event.state.sourceUrl, event.state.title, true); // true = don't push state again
+                        } else {
+                            this.renderView('view-dashboard');
+                        }
                     } else {
                         this.renderView(event.state.viewId);
                     }
@@ -559,6 +586,7 @@
             // Handle Header UI
             const isAuth = viewId === 'view-auth';
             const isDash = viewId === 'view-dashboard';
+            // Also show back button for iframe
             
             const backBtn = document.getElementById('btn-back');
             const logoutBtn = document.getElementById('btn-logout');
@@ -575,6 +603,11 @@
                 this.closeReferralModal(); 
                 return; 
             }
+            
+            // Handle iframe specific clearing if needed
+            const iframe = document.getElementById('content-frame');
+            if (iframe) iframe.src = "";
+
             // Trigger browser back (which triggers popstate listener)
             window.history.back();
         },
@@ -634,11 +667,25 @@
                 const item = document.createElement('div');
                 item.className = 'menu-item';
                 item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
+                
+                // --- MODIFIED NAVIGATION FOR IFRAME ---
                 item.onclick = () => {
-                    window.location.href = sub.link;
+                    this.openContent(sub.link, sub.label);
                 };
                 list.appendChild(item);
             });
+        },
+        
+        // --- NEW: FUNCTION TO OPEN URL IN IFRAME ---
+        openContent: function(url, title, fromHistory = false) {
+            const frame = document.getElementById('content-frame');
+            frame.src = url;
+            
+            if (!fromHistory) {
+                this.navTo('view-iframe', false, { sourceUrl: url, title: title });
+            } else {
+                this.renderView('view-iframe');
+            }
         },
 
         showReferralModal: function() { document.getElementById('modal-referral').classList.remove('hidden'); this.resetReferralModal(); },
