@@ -1,1 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental Health Nursing - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Mental Health Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            /* Original color scheme restored */
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63; /* Original darker blue on hover */
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: auto; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Syllabus PDF Link -->
+    <a href="https://drive.google.com/file/d/1GdnHjjL7-Uzg9KDSKZ1yLuDQmc8FMWHG/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        🧠 MENTAL HEALTH NURSING - SYLLABUS
+    </a>
+    
+    <div id="units">
+        
+        <!-- UNIT 1 - INTRODUCTION -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1SCbo-VomXLCZct_k1Kx8YLy-ezZzMmWu/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Mental Health Nursing</span>
+                    </a>
+                    <h3>1.1 Concepts and Characteristics</h3>
+                    <a href="https://drive.google.com/file/d/1OtA65-nOBa_BiUSpG9TUSIl72XQesiFn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mental Health and Mental Illness, Criteria of Mental Health</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/111DWORyR1vPBWuNM-5SozXAXYuU4ehCS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Characteristics of Mentally Healthy Person</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yuSvtQWPgSjkRMxOll_JIEr1Entoghh5/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Criteria and Characteristics of Mental Health</span>
+                    </a>
+                    <h3>1.2 Evolution and Practice Settings</h3>
+                    <a href="https://drive.google.com/file/d/1Px4QbjXKa0BxKhfwp_RXTODjKDLcdrUP/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Evolution of Mental Health Services and Treatment, Important Milestones</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OzwTHJPEHfZPy9p0l55iwv4KzJ_nNQ-C/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Evolution of Mental Health Treatment</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pVkf-YF-SFWPB23gpskdeKOfTSMfqrbz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mental Health Team and Nature of Mental Health Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NEbafCPs45g9t4ZE-HB-rQPbuw5cjdv-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Mental Health Team and Nature of Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-fgYtof8wLlAE0MjH6aUjdETL0g8_tqB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Roles and Functions of Mental Health Nurse in Various Settings</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14lWumHDgNpMraN3SYIrrDyqTQg2Nhnqg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Factors Affecting the level of Nursing Practice</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dDkg3pHCaOkqKEuff81tqWZT84hNPKJ2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Roles, Functions, and Practice Factors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Vzhi5EVdWsjgJOGNK0C7Ydyu6kdPGUcp/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz: Introduction and Roles</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 - PRINCIPLES AND CONCEPTS OF MENTAL HEALTH NURSING -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - PRINCIPLES AND CONCEPTS OF MENTAL HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1HftfuKtULfPgaOuUL-3-WaKHzbQqzI3o/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Principles and Concepts of Mental Health Nursing</span>
+                    </a>
+                    <h3>2.1 Terminology, Classification, and Personality</h3>
+                    <a href="https://drive.google.com/file/d/10S3fhGeHoRNl83nGQvZWXb-TYUeYVErF/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mental Health Nursing Terminologies and Classification of Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-48e3Co-N9Dm9c8n3f-JdHOzBiOinqoQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Mental Health Terminologies and Classifications</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nfw--8hXeVkYMcSZ-sVrLh81eE-0-nq6/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>DSM - 5 classification, Geropsychiatric Classification, Personality Development and Influencing Factors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18DbWE-9iX_MIoscsU_sCNeTpD7SgAaCg/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: DSM-5 and Personality Factors</span>
+                    </a>
+                    <h3>2.2 Etiology and Pathophysiology</h3>
+                    <a href="https://drive.google.com/file/d/1FU87CDfn5HoDaVmY6ZWa1EAxgswNe-4s/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Defence Mechanism, Etiology of Mental Illness, Psychopathology - Signs and Symptoms</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RRi8b0ScONUw2j8yiaFvyOddjLK0SpE_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Defence Mechanisms and Etiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FhAsLmUapbqGPIkUtXaEijge7i69fqst/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Structure of Brain, Nervous System, and Parts of Brain</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ow0NN-cyIYXVzS68TETQawRg1hp_adQP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Neuroanatomy Review</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GdMsgGdJYQcNu3H9Tjghc2-8F0Y9U8BI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Abnormal/Normal Neurotransmission, Principles, Ethics, and Responsibilities of Mental Health Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17KpAhrq1j4zsOTLmU0gcNTyG8Ry-xKEQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Neurotransmission, Ethics, and Responsibilities</span>
+                    </a>
+                    <h3>2.3 Standards of Practice and Rehabilitation</h3>
+                    <a href="https://drive.google.com/file/d/17XzqbCQZf2MKVZZJQsk_Wjndg9lqyQw3/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Practice Standards, Aims, Conceptual Models, and Role of Nurse (Video/Notes)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1E7Bmh6oFtZs5kGg9ezxCaNBDk-QCKrYe/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Role of Nurse, Preventive Psychiatry, Psychiatric Rehabilitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1S2vDF7uFMiy-V9mtzvqGMDYtDRHZzm6D/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Prevention and Rehabilitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bI9rHjKmkpijwNaP1_zLYZTZ3aEH1sLe/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz: Principles and Concepts</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 - MENTAL HEALTH ASSESSMENT -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - MENTAL HEALTH ASSESSMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1SoGKaKwokH_xFRr5sK7pwkiR2b_PpSbZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Mental Health Assessment</span>
+                    </a>
+                    <h3>3.1 Foundational Assessment Tools</h3>
+                    <a href="https://drive.google.com/file/d/1L-TRqUYnonr9vAxBdjh4zqoA8oV5VLbV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>History Taking, Family Genogram, Mental Status Examination (MSE)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kldqutNzbcdZDh0zR2Ya77RLDgOyswd0/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: History, Genogram, and MSE</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HlmhSh_N_RA9wewWp5WOtLanwG5I97QE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mental Health Examination (Cont.), Physical Examination, Mini Mental Status Examination (MMSE)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Z2jSsvazlSUdx1QlhnXBV2tQ-s8OIRAw/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: MSE (Cont.) and MMSE</span>
+                    </a>
+                    <h3>3.2 Neurological and Diagnostic Testing</h3>
+                    <a href="https://drive.google.com/file/d/1uNf8bhFBy3JKV-0pmVJjqnO35RtnTO43/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neurological Examination, Cranial Nerve Examination</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Bwjjm3F4cKABOvwBdcKXoKkXgRwBE6MP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Neurological and Cranial Nerve Exam</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FkfWIN00oXIKWWWvtaB1fhLsBlldTwvh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cranial Nerve Examination (Cont.), Investigations in Psychiatry, Psychological Tests</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UV_21X2g0XhG3bzu9GzqevqzE962LSDg/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Psychiatric Investigations and Tests</span>
+                    </a>
+                    <h3>3.3 Specialized Assessment Instruments</h3>
+                    <a href="https://drive.google.com/file/d/185rv-uWDYUXpMFcl4GHb37IMuiSVemsL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Instruments for Assessment of Personality Traits, Cognitive Functioning, Environmental Stressors, Psychodynamics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OUaiH4jezQZJDj4p0bkoUlVJ6WeosN2G/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Advanced Assessment Instruments</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WeRYYuApTvnCAyRbDVI8_SF7j1rquJi9/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz: Mental Health Assessment</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 4 - THERAPEUTIC COMMUNICATION AND NURSE PATIENT RELATIONSHIP -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - THERAPEUTIC COMMUNICATION AND NURSE PATIENT RELATIONSHIP
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Nq0gpGlOQ-Gv6Urs4Z2vWtrRdBK_Kogs/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Communication and Relationship</span>
+                    </a>
+                    <h3>4.1 Therapeutic Communication</h3>
+                    <a href="https://drive.google.com/file/d/1sYwHoq8RuAkbL1QwHmTi2DO7pm5fnW8X/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic Communication: Definition, Types, and Techniques</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1juV8SdDAsTGKZdmCv-rXWgYD7g8HKeo_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Therapeutic Communication Techniques</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11esWBeEOsHobilqkOQxlXPJJ5tzwo2k0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Characteristics and Barriers of Therapeutic Communication</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PCfhgJy2ghoA8i7oHTYWsl6aF2rrxGel/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Communication Characteristics and Barriers</span>
+                    </a>
+                    <h3>4.2 Nurse-Patient Relationship and Dynamics</h3>
+                    <a href="https://drive.google.com/file/d/1B-uJd8PUsBQQfH4IotDBixzpWzIUrUcj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic Nurse-Patient Relationship (Components, Phases, and Tasks)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-EpMVH1kVBIC9O_f8ALeGESzy8aRZOip/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Nurse-Patient Relationship Phases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1m5za8Ij8NNRJ2vqRXqlO6hFg6E3LdcVZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Interpersonal Relationship and Johari Window</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1J_2RlxdAS5yDWHC4Cmo8g20bylUaFGf-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Johari Window</span>
+                    </a>
+                    <h3>4.3 Relationship Challenges</h3>
+                    <a href="https://drive.google.com/file/d/1ZWn-EVX-1FweaBwynFleiEtXCLMw9Orc/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic Impasses and Its Management</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NWqZYxTUwm1Dp0_t87shPi1wIyRBDfV4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Therapeutic Impasses</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1glAduN9uFbrio5kUUHr8yQm97X80_Svx/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Counter Transference and Boundary Violations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nDoQA526WM6i9XwT3Vm7ahYyxoSCgL4P/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Counter Transference and Boundaries</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iu2p1H86nuA5rE4qDIvbb8N1wJxmjI0X/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz: Communication and Relationships</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 5 - TREATMENT MODALITIES AND THERAPIES USED IN MENTAL DISORDERS -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - TREATMENT MODALITIES AND THERAPIES USED IN MENTAL DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/11Nw0kFc3pfVjv97PUdPWtWE4UWLlQvU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Treatment Modalities and Therapies</span>
+                    </a>
+                    <h3>5.1 Overview and Psychopharmacology</h3>
+                    <a href="https://drive.google.com/file/d/1T1vLcw8ixX_NAsxKTPXEa5To9rfX1t9z/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Treatment Modalities and Therapies Used in Mental Disorders (Overview)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/178EGm0qEbnvXVIQwtgnIkw4khz_c6ka2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Treatment Modalities Overview</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon coming-soon-icon">⚠️</span><span>Patient Education Related to Psychopharmacology (Video - COMING SOON)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FUUl8FE4mhYnLC5tyjjQcHxgUxZW2CZ1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Patient Education in Psychopharmacology</span>
+                    </a>
+                    <h3>5.2 Classes of Medications</h3>
+                    <a href="https://drive.google.com/file/d/1N1pFLdKLgdaTLt2Z-rY5Bd2y-IttgLDq/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Antidepressants</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FQf9gkHwHicNX0wWVMmE0yKaT6DR9PoK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Antidepressants</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_CQtirNzDHUwpwvywTuJSQAvhKL46mSK/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mood Stabilizers (Lithium, Carbamazepine)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fCG1BRacxieldZ2P6Q4MT9PjTx6aa-XN/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Lithium and Carbamazepine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10BX06bQySt0Wy-w72p_fwq-AnxHatajU/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sodium Valproate, Anxiolytics & Hypnosedatives</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gQsb5GLQXzTY_KebHqeJa4G-hr1D6_x7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Valproate, Anxiolytics, and Hypnosedatives</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1okF3iJ1Eg5vvbFv0fYIhIZStG0rT4d3v/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Antiparkinsonian Drugs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10IEE32nD1qgbGZHoxjD8Stu82DtU8vva/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Antiparkinsonian Drugs</span>
+                    </a>
+                    <h3>5.3 Somatic and Psychological Therapies</h3>
+                    <a href="https://drive.google.com/file/d/104cL6XN4ymnhObnpO0R2x_XNxOnwScI6/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Electro-Convulsive Therapy (ECT)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JUSQ7MnYWcrQGciHf6v1vgiPnWX83IGY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: ECT</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SFGRhlw75yKtlqm4WEPGi5O8ta-N-Zhi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Application of Electrodes (for ECT)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zAtGbvDnfmQa9cDUMzehEdCEk2klwiZB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Electrode Application</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/185dntRGIoE6Vbnbdj0HboNFzGnjAeLII/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Psychological Therapy, Psychotherapy, Behavioral Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19OqY6gylDVutZ2cF3eSSm3qY4heYusAd/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Psychotherapy and Behavioral Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wcIVgjJRYXqhc_cbrrZVtGICE_PXH8tT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cognitive Behavioural Therapy (CBT)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nfKzW8EL4K30wQ7eIJ0Mxh-UNM_VWVGL/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: CBT</span>
+                    </a>
+                    <h3>5.4 Group and Alternative Therapies</h3>
+                    <a href="https://drive.google.com/file/d/1-qpj1g_-chkV-egY_9NF0sEKP8RBLTI5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Group Therapy, Family Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14v9YezCkVKKUpq3BOTi1munMgyH1Ufzx/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Group and Family Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g6B8gRU7JLLWgzofKx6k0PgHAJjRMRxr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Steps of Family Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-DnpQr07GTpBbtlLiUx1jbU7RQB-i46M/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Steps of Family Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WbAyBXQpZsSfVyX8tK9n0mbX3iLU4eLB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Music Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1o4qjjSxThF6fzR9pM8IzygiIAvFxmukD/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Music Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VGk8UDKSZiRL0aNT8uQ9UB0TBx9RPJQk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Complimentary and Alternative Therapies (CAT)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PI_9GzWnnZyqeSj7fxoIYhSi38BBUYvg/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: CAT</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1a_H9g5Xeqb0HhWLgrhd2OUiE6gjq5nbH/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz: Treatment Modalities</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 6 - NURSING MANAGEMENT OF PATIENT WITH SCHIZOPHRENIA AND OTHER PSYCHOTIC DISORDERS -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - NURSING MANAGEMENT OF PATIENT WITH SCHIZOPHRENIA AND OTHER PSYCHOTIC DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1_MhliXw9C8ZIuInd36ilajt5hAo5dRNC/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Schizophrenia and Psychotic Disorders</span>
+                    </a>
+                    <h3>6.1 Schizophrenia Concepts and Manifestations</h3>
+                    <a href="https://drive.google.com/file/d/1ngxPwC3eGaWlY-Q2VjgJL-KonLi2wtU0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Schizophrenia (Prevalence, Incidence, Classification, Types)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gL00l_KKktyQ6u9AwW4euALId9LacFup/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Schizophrenia Classification and Types</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_cwaZzn-QNL9Bu7R6m7iiJxnRp0tToWe/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Delusion, Hallucination, Illusion, Etiology, Pathophysiology, Clinical manifestation, Diagnostic Evaluation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gL00l_KKktyQ6u9AwW4euALId9LacFup/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Positive and Negative Symptoms (Delusion, Hallucination, Illusion)</span>
+                    </a>
+                    <h3>6.2 Nursing Management and Rehabilitation</h3>
+                    <a href="https://drive.google.com/file/d/1Plwtbk2KUuxgQSSP6E_Qpok8JCp_wPaq/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Prognosis of Schizophrenia, Nursing Management, Geriatric Considerations, Home Care, Rehabilitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1957o3YyOkkmXK3TF_4bVjTnDoir-Hf6c/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Management, Home Care, and Rehabilitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZZkodTY06-5-OItIcmXF8uMk2aBCGBxC/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz: Schizophrenia and Psychotic Disorders</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 7 - NURSING MANAGEMENT OF PATIENT WITH MOOD DISORDERS -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - NURSING MANAGEMENT OF PATIENT WITH MOOD DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1TcFCpdYUovSeffcGK9Hk5OOT2jSJQ-r3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Mood Disorders</span>
+                    </a>
+                    <h3>7.1 Major Mood Disorders</h3>
+                    <a href="https://drive.google.com/file/d/1bs6u9Zl6wuGOeDF5zj63Gk_eFgx1kEcS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mood Disorder Introduction and Mania</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VCFsuobS41rw3-y_4D5GtsaO2ccgmWPW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Mania</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HKnG-Z3JjsvjwCjVJczvk34-bqO4hNLC/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Depression</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A5NFOCDXliDS-tAjOLLrlxSwmg8ua1IO/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Depression</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CxlgpqD30Bl0jHR7SysAQx2Cd8BkvBd5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bipolar Affective Disorder, Dysthymia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GEzdYiVfHE9S16s6M_pxMyX4HzovdiQT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Bipolar Affective Disorder and Dysthymia</span>
+                    </a>
+                    <h3>7.2 Persistent Depressive Disorders</h3>
+                    <a href="https://drive.google.com/file/d/1K2jKyZfXYN8pjaCmMht_9_5hVMKBhRPu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Dysthymia (Persistent Depressive Disorder)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u90n9MfCN4zaXsihdMp9jGY7tAzGOT55/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Dysthymia (Cont.)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/119NBs5KyjaJ-5cxVy7_5oMesGYsffsXv/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz: Mood Disorders</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 8 - NURSING MANAGEMENT OF PATIENT WITH NEUROTIC, STRESS RELATED AND SOMATISATION DISORDERS -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - NURSING MANAGEMENT OF PATIENT WITH NEUROTIC, STRESS RELATED AND SOMATISATION DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1jCAg4Yv0HnHyXEdl6Vj6IvVatiEvh9y_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Neurotic, Stress, and Somatisation Disorders</span>
+                    </a>
+                    <h3>8.1 Anxiety and Phobic Disorders</h3>
+                    <a href="https://drive.google.com/file/d/1MdUACFrwD0qKag_nqpPQBYXDRyOfQpQH/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Anxiety Disorder (General)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13L-vo27C9NqqVcLRCXV7dPFYH8mtxD4F/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Anxiety Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UEhMfKM44cXnEUdg8sGejW2jCDKr9V04/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Panic Disorder, Phobic Anxiety Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kqb1uQW34vibmfDjV5R5o1skhnwqXkNA/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Panic and Phobic Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1t2n5d75GzkbTvC_jC-4SWbFJE3hCF45S/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Symptoms of Phobia, Separation Anxiety, Selective Mutism, Diagnosis and Treatment of Panic Anxiety Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1naB27iQjG52wi2Jy9FBdSN0iA2M19eaY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Phobia Symptoms and Treatment</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DKQ4IMr38mZcEdFVKKOFMDUqMCGLGtZg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Obsessive Compulsive Disorder (OCD)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1i2R6zcCSm2BYxJwcbOaAu74x9-GCkOq9/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: OCD</span>
+                    </a>
+                    <h3>8.2 Stress and Somatisation Disorders</h3>
+                    <a href="https://drive.google.com/file/d/1ZorDBXrWs4zUieUm4ZzeAVuf6S9OBWvi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Post Traumatic Stress Disorder (PTSD), Dissociative Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H4m1O3GKDO2rLrVuyoZ4GXjyLMpFW-gR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: PTSD and Dissociative Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hf5YaQHzbYCxyFJpGp-btx2EcmYwPKjv/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Dissociative Neurological Symptom Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u6y63lXS9ysLpnCEbiGMjh0DvCHIU1Ic/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Dissociative Neurological Symptoms</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_xulItkc15w80sCkR1xXqyF4--cI6MrV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Somatoform Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WuGpGFyjSRF6ZsQeRjtQRlr6jt_gnhSW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Note: Somatoform Disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UEeLvltCI3RXaMfXwWSNK8fSgH3gpgp7/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz: Neurotic, Stress, and Somatisation Disorders</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the unit content
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+
+            // Dynamic max-height for smooth collapse animation
+            if (unitContent.classList.contains('active')) {
+                // If expanding, set max-height to scrollHeight
+                // Use a short timeout to ensure correct height calculation after state change
+                setTimeout(() => {
+                    unitContent.style.maxHeight = unitContent.scrollHeight + "px";
+                }, 10);
+            } else {
+                // If collapsing, reset max-height to 0
+                unitContent.style.maxHeight = "0";
+            }
+        }
+        
+        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+        document.addEventListener('DOMContentLoaded', () => {
+             const allUnits = document.querySelectorAll('.unit-header');
+             allUnits.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 
+                 if (index === 0) {
+                     // Unit 1 is active by default
+                     header.setAttribute('aria-expanded', 'true');
+                     content.classList.add('active');
+                     // Set the max-height dynamically for the open unit
+                     setTimeout(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                     }, 50);
+                 } else {
+                     // All other units are initially collapsed
+                     header.setAttribute('aria-expanded', 'false');
+                     content.classList.remove('active');
+                     content.style.maxHeight = '0';
+                 }
+             });
+        });
+    </script>
+</body>
+</html>
