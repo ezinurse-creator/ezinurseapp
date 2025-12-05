@@ -74,7 +74,6 @@
             overflow-y: auto;
             display: none; 
             animation: fadeIn 0.3s ease-in-out;
-            /* FIX 2: Added padding-bottom to allow full scrolling */
             padding-bottom: 80px; 
         }
 
@@ -82,13 +81,12 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* FIX 1: New container to center auth form higher up on mobile */
         .auth-container {
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-bottom: 20vh; /* Lifts the form visually */
+            padding-bottom: 20vh; 
         }
 
         /* --- COMPONENTS --- */
@@ -143,12 +141,6 @@
         .modal-card { background: white; width: 90%; max-width: 350px; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
         .hidden { display: none !important; }
 
-        /* --- PDF OVERLAY --- */
-        #pdf-viewer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 200; background: #000; display: flex; flex-direction: column; }
-        .pdf-header { height: 56px; background: #1e293b; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: white; }
-        .pdf-title { font-weight: 600; font-size: 0.95rem; max-width: 70%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .pdf-close { background: none; border: none; color: white; cursor: pointer; font-size: 1rem; }
-        iframe#pdf-frame { width: 100%; height: 100%; border: none; background: #fff; }
     </style>
 </head>
 <body>
@@ -238,20 +230,8 @@
 
     <div id="view-subjects" class="view">
         <h2 class="headline" id="subject-title">Subjects</h2>
-        <p class="subtext">Select subject.</p>
+        <p class="subtext">Select subject to open.</p>
         <div class="card-menu" id="subject-list"></div>
-    </div>
-
-    <div id="view-content" class="view">
-        <div style="margin-bottom: 20px;">
-            <h2 class="headline" id="content-subject-name">Subject</h2>
-            <p class="subtext">Course Materials</p>
-        </div>
-        <div id="content-list-container" class="card-menu"></div>
-        <div id="content-placeholder" class="placeholder-container hidden">
-            <svg class="icon-large" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-            <h2 class="headline">No Content Yet</h2>
-        </div>
     </div>
 
     <div id="view-paywall" class="view">
@@ -288,19 +268,11 @@
             </div>
         </div>
     </div>
-
-    <div id="pdf-viewer-overlay" class="hidden">
-        <div class="pdf-header">
-            <span class="pdf-title" id="pdf-viewer-title">Doc</span>
-            <button class="pdf-close" onclick="app.closePdf()">Close ✕</button>
-        </div>
-        <iframe id="pdf-frame" src=""></iframe>
-    </div>
 </div>
 
 <script>
     /* UPDATE THIS URL AFTER NEW DEPLOYMENT */
-    const API_URL = "https://script.google.com/macros/s/AKfycbz-7EZq6_1Qi1pojbItle78THjZjBSKTbX9QgYdadxCXNjixWmE_ORnr7e6q37nJKWuUg/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbxYHO1V-xIzc_XYs4FWWPnPcx4nIFAKf3s-KRNVq8m6d0lBCjzwBF-kmSO198WsghXj7g/exec";
 
     function getDeviceId() {
         let id = localStorage.getItem('ezi_device_id');
@@ -322,256 +294,120 @@
         return `${c}_${section.toLowerCase().replace(' ', '_')}`;
     }
 
-    /* --- DATA STRUCTURES (Includes MSc First Year for Testing) --- */
+    /* --- DATA STRUCTURES (Mapped to File Names) --- */
     const COURSES = {
         'MSc': {
-            // REAL DATA: Uses IDs to prevent conflicts
             'First Year': [
-                { id: 'MSc_Yr1_Edu', label: 'Nursing Education' },
-                { id: 'MSc_Yr1_AdvNurs', label: 'Advanced Nursing Practice' },
-                { id: 'MSc_Yr1_Research', label: 'Nursing Research & Statistics' },
-                { id: 'MSc_Yr1_MedSurg', label: 'Medical Surgical Nursing' },
-                { id: 'MSc_Yr1_CommHealth', label: 'Community Health Nursing' },
-                { id: 'MSc_Yr1_OBG', label: 'Obstetric & Gynecological Nursing' },
-                { id: 'MSc_Yr1_ChildHealth', label: 'Child Health Nursing' },
-                { id: 'MSc_Yr1_MentalHealth', label: 'Mental Health Nursing I' }
+                { label: 'Advanced Nursing Practice', link: 'msc_1_advanced_nursing_practice.html' },
+                { label: 'Nursing Education', link: 'msc_1_nursing_education.html' },
+                { label: 'Child Health Nursing', link: 'msc_1_child_health_nursing.html' },
+                { label: 'Community Health Nursing', link: 'msc_1_community_health_nursig.html' },
+                { label: 'Medical Surgical Nursing', link: 'msc_1_medical_surgical_nursing.html' },
+                { label: 'Mental Health Nursing', link: 'msc_1_mental_health_nursing.html' },
+                { label: 'Nursing Research & Stats', link: 'msc_1_nursing_research_and_statistics.html' },
+                { label: 'OBG Nursing', link: 'msc_1_obgyn_nursing.html' }
             ],
-            'Second Year': ['Nursing Management', 'Medical Surgical Nursing II', 'Community Health Nursing II', 'Obstetric & Gynecological Nursing II', 'Child Health Nursing II', 'Mental Health Nursing II']
+            'Second Year': [
+                { label: 'Child Health Nursing', link: 'msc_2_child_health_nursing.html' },
+                { label: 'Community Health Nursing', link: 'msc_2_community_health_nursing' },
+                { label: 'OBG Nursing', link: 'msc_2_obgyn_nursing.html' },
+                { label: 'Nursing Management', link: 'msc_2_nursing_management' },
+                { label: 'Mental Health Nursing', link: 'msc_2_mental_health_nursing' },
+                { label: 'Medical Surgical Nursing', link: 'msc_2_medical_surgical_nursing' }
+            ]
         },
-        // DUMMY DATA: Kept as strings for now
         'BSc': {
-            'Semester 1': ['Communicative English', 'Applied Anatomy', 'Applied Physiology', 'Applied Sociology', 'Nursing Foundations I'],
-            'Semester 2': ['Applied Biochemistry', 'Applied Nutrition & Dietetics', 'Nursing Foundations II', 'Health/Nursing Informatics'],
-            'Semester 3': ['Applied Microbiology', 'Infection Control & Safety', 'Adult Health Nursing I'],
-            'Semester 4': ['Pharmacology', 'Pathology', 'Genetics', 'Adult Health Nursing II', 'Professionalism'],
-            'Semester 5': ['Child Health Nursing I', 'Mental Health Nursing I', 'Community Health Nursing I', 'Educational Tech'],
-            'Semester 6': ['Child Health Nursing II', 'Mental Health Nursing II', 'Midwifery/Obstetrics I'],
-            'Semester 7': ['Community Health Nursing II', 'Midwifery/Obstetrics II', 'Nursing Research & Stats', 'Management of Nursing Services']
+            'Semester 1': [
+                { label: 'Applied Sociology', link: 'bsc_1_applied_sociology.html' },
+                { label: 'Applied Psychology', link: 'bsc_1_applied_psychology.html' },
+                { label: 'Applied Physiology', link: 'bsc_1_applied_physiology.html' },
+                { label: 'Applied Anatomy', link: 'bsc_1_applied_anatomy.html' },
+                { label: 'Nursing Foundation', link: 'bsc_1_nursing_foundation.html' }
+            ],
+            'Semester 2': [
+                { label: 'Applied Nutrition', link: 'bsc_2_applied_nutrition.html' },
+                { label: 'Applied Biochemistry', link: 'bsc_2_applied_biochemistry.html' },
+                { label: 'Nursing Foundation', link: 'bsc_2_nursing_foundation.html' }
+            ],
+            'Semester 3': [
+                { label: 'Pharmacology', link: 'bsc_3_pharmacology.html' },
+                { label: 'Pathology', link: 'bsc_3_pathology.html' },
+                { label: 'Applied Microbiology', link: 'bsc_3_applied_microbiology.html' },
+                { label: 'Adult Health Nursing', link: 'bsc_3_adult_health_nursing.html' }
+            ],
+            'Semester 4': [
+                { label: 'Pharmacology II', link: 'bsc_4_pharmacology.html' },
+                { label: 'Pathology II', link: 'bsc_4_pathology.html' },
+                { label: 'Adult Health Nursing II', link: 'bsc_4_adult_health_nursing.html' },
+                { label: 'Professionalism', link: 'bsc_4_professionalism.html' },
+                { label: 'Genetics', link: 'bsc_4_genetics.html' }
+            ],
+            'Semester 5': [
+                { label: 'Forensic Nursing & Law', link: 'bsc_5_forensic_nursing_indian_law.html' },
+                { label: 'Nursing Education', link: 'bsc_5_nursing_education.html' },
+                { label: 'Community Health Nursing', link: 'bsc_5_community_health_nursing.html' },
+                { label: 'Mental Health Nursing', link: 'bsc_5_mental_health_nursing.html' },
+                { label: 'Child Health Nursing', link: 'bsc_5_child_health_nursing.html' }
+            ],
+            'Semester 6': [
+                { label: 'Child Health Nursing II', link: 'bsc_6_child_health_nursing.html' },
+                { label: 'Mental Health Nursing II', link: 'bsc_6_mental_health_nursing.html' },
+                { label: 'Midwifery & OBG', link: 'bsc_6_midwifery_obgyn.html' },
+                { label: 'Nursing Management', link: 'bsc_6_nursing_management_leadership.html' }
+            ],
+            'Semester 7': [
+                { label: 'Community Health Nursing II', link: 'bsc_7_community_health_nursing.html' },
+                { label: 'Research & Statistics', link: 'bsc_7_nursing_research_statistics.html' },
+                { label: 'Midwifery & OBG II', link: 'bsc_7_midwifery_obgyn.html' }
+            ]
         },
         'PBBSc': {
-            'First Year': ['Nursing Foundation', 'Nutrition & Dietetics', 'Biochemistry & Biophysics', 'Psychology', 'Maternal Nursing', 'Child Health Nursing', 'Microbiology', 'Medical & Surgical Nursing'],
-            'Second Year': ['Sociology', 'Community Health Nursing', 'Mental Health Nursing', 'Introduction to Nursing Education', 'Introduction to Nursing Administration']
+            'First Year': [
+                { label: 'Medical Surgical Nursing', link: 'pbbsc_1_medical_surgical_nursing.html' },
+                { label: 'Child Health Nursing', link: 'pbbsc_1_child_health_nursing.html' },
+                { label: 'Microbiology', link: 'pbbsc_1_microbiology.html' },
+                { label: 'Biochemistry & Biophysics', link: 'pbbsc_1_biochemistry_biophysics.html' },
+                { label: 'Nutrition & Dietetics', link: 'pbbsc_1_nutrition_dietetics.html' },
+                { label: 'Nursing Foundation', link: 'pbbsc_1_nursing_foundation.html' },
+                { label: 'Maternal Nursing', link: 'pbbsc_1_maternal_nursing.html' },
+                { label: 'Psychology', link: 'pbbsc_1_psychology.html' }
+            ],
+            'Second Year': [
+                { label: 'Nursing Administration', link: 'pbbsc_2_nursing_service_administration.html' },
+                { label: 'Mental Health Nursing', link: 'pbbsc_2_mental_health_nursing.html' },
+                { label: 'Nursing Education', link: 'pbbsc_2_nursing_education.html' },
+                { label: 'Community Health Nursing', link: 'pbbsc_2_community_health_nursing.html' },
+                { label: 'Sociology', link: 'pbbsc_2_sociology.html' }
+            ]
         },
         'GNM': {
-            'First Year': ['Bio-Science', 'Behavioral Science', 'Nursing Foundations', 'Community Health Nursing I'],
-            'Second Year': ['Medical Surgical Nursing I', 'Medical Surgical Nursing II', 'Mental Health Nursing', 'Child Health Nursing'],
-            'Third Year': ['Midwifery & Gynaecological Nursing', 'Community Health Nursing II']
+            'First Year': [
+                { label: 'Nutrition', link: 'gnm_1_nutrition.html' },
+                { label: 'Health Education', link: 'gnm_1_health_education.html' },
+                { label: 'Environmental Hygiene', link: 'gnm_1_environmental_hygiene.html' },
+                { label: 'Community Health Nursing', link: 'gnm_1_community_health_nursing.html' },
+                { label: 'First Aid', link: 'gnm_1_first_aid.html' },
+                { label: 'Fundamentals of Nursing', link: 'gnm_1_fundamentals_of_nursing.html' },
+                { label: 'Sociology', link: 'gnm_1_sociology.html' },
+                { label: 'Psychology', link: 'gnm_1_psychology.html' },
+                { label: 'Microbiology', link: 'gnm_1_microbiology.html' },
+                { label: 'Anatomy & Physiology', link: 'gnm_1_anatomy_physiology.html' }
+            ],
+            'Second Year': [
+                { label: 'Medical Surgical Nursing I', link: 'gnm_2_medical_surgical_nursing.html' },
+                { label: 'Mental Health Nursing', link: 'gnm_2_mental_health_nursing.html' },
+                { label: 'Medical Surgical Nursing II', link: 'gnm_2_medical_surgical_nursing_two.html' },
+                { label: 'Child Health Nursing', link: 'gnm_2_child_health_nursing.html' }
+            ],
+            'Third Year': [
+                { label: 'Community Health Nursing II', link: 'gnm_3_community_health_nursing.html' },
+                { label: 'Midwifery', link: 'gnm_3_midwifery.html' },
+                { label: 'Gynecology', link: 'gnm_3_gynecology.html' }
+            ]
         },
-        '3D': { 'Systems': ['Skeletal', 'Muscular', 'Cardio', 'Digestive', 'Nervous'] }
+        '3D': { 'Systems': [{ label: '3D Models', link: '3dmodels.html' }] }
     };
 
-    const CONTENT_DATA = {
-
-  // --- 1. Advanced Nursing Practice ---
-  'MSc_Yr1_AdvNurs': [
-    { title: "Syllabus", type: "header" },
-    { title: "Advance Nursing Practice Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/153NVm7d-u3mfyVVy7t8hPo5oiWDr1p8b/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - NURSING AS A PROFESSION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1U-nq7q_yZaqFe888Of6oc07dWuGpcSE9/view?usp=sharing" },
-    { title: "UNIT 2 - HEALTHCARE DELIVERY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1BAva7uX63TW_8xHV6W90l_hd6Xf6Lilt/view?usp=sharing" },
-    { title: "UNIT 3 - GENETICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/152qt5G1PfFV7tg-RhoazBfZkqpKQmoGH/view?usp=sharing" },
-    { title: "UNIT 4 - EPIDEMIOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1AvBqfqJsaSKqFQTl5FEmYnqTgHFawC0a/view?usp=sharing" },
-    { title: "UNIT 5 - BIOPSYCHO SOCIAL PATHOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1NJEDSscp5utagDlRv1Al6fO4Tfh_7oFa/view?usp=sharing" },
-    { title: "UNIT 6 - PHILOSOPHY & THEORIES", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1g3ST8agz0Ihnb1LzsDxpXilAjiKWBoh4/view?usp=sharing" },
-    { title: "UNIT 7 - NURSING PROCESS APPROACH (1)", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ftELNhUIjdxwacwHlOSLHByIn_t-4_cU/view?usp=sharing" },
-    { title: "UNIT 8 - NURSING PROCESS APPROACH (2)", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1jTCWem1HnoWBhheQRD_2gp85G_NbVLrS/view?usp=sharing" },
-    { title: "UNIT 9 - NURSING PRACTICE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1CjmeSesoUWXIaZQtaWX5hlIJ79E_3yaM/view?usp=sharing" },
-    { title: "UNIT 10 - COMPUTER APPLICATIONS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1lTd8rpmVkqLkkBGWYlozXXRFaxVgqIL0/view?usp=sharing" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - January 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1O-e4QB72WtGSEBD7uAmnmKoVaCYUe0KS/view?usp=drive_link" },
-    { title: "PYQ - June 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/15d7Ia6KSpulCT_Bi3dBMC8-EmnUhy7lU/view?usp=drive_link" },
-    { title: "PYQ - February 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1StOx-24Ded-1gf4CYsACLwv0qUJn3-wr/view?usp=drive_link" },
-    { title: "PYQ - May 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1PY3MjW4C2gfSKEXwH2-LnOcMSysy-o_h/view?usp=drive_link" },
-    { title: "PYQ - February 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1X4vQDEf9L8tyOv-CHfakN9pS8O5KU7pb/view?usp=drive_link" },
-    { title: "PYQ - July 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/16tR7wIoARm3ms-znhhrUqV-yzviLndc8/view?usp=drive_link" },
-    { title: "PYQ - November 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1fN5CrTClxPAWlDikDUdifpdhFFavSU6t/view?usp=drive_link" }
-  ],
-
-  // --- 2. Child Health Nursing ---
-  'MSc_Yr1_ChildHealth': [
-    { title: "Syllabus", type: "header" },
-    { title: "Child Health Nursing Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1rgyh9yvG8KYd3pGj76KYTA6eXrBDtDgv/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1X7htNfDOlqnwA6ak9yOy-2mQZDGSADs8/view?usp=sharing" },
-    { title: "UNIT 2 - ASSESSMENT OF PEDIATRIC", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1GwiQQjr26JHX2W2mVY5y1JXeJo1Oa3Y1/view?usp=drive_link" },
-    { title: "UNIT 3 - HOSPITALIZED CHILD", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1BAM5EXg3LxEgBSNTuHDjGXuS7tusSJfR/view?usp=sharing" },
-    { title: "UNIT 4 - PRE-NATAL PEDIATRICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ny2P9ZHhgzavWRgOnpwrpuwhcsVa_S5B/view?usp=sharing" },
-    { title: "UNIT 5 - GROWTH AND DEVELOPMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1zVOLhHXoDawnP7K9DaeJuSUQzQhPbhaY/view?usp=sharing" },
-    { title: "UNIT 6 - BEHAVIORAL PEDIATRICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1QpP1JApAnXedWwy7I57MOHxvhr9eTSET/view?usp=sharing" },
-    { title: "UNIT 7 - PREVENTIVE PEDIATRICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1uOztwz2zuJRktVofSfu4asmQo1pGmrgI/view?usp=sharing" },
-    { title: "UNIT 8 - NEONATAL NURSING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1RMz0AkFU7OEXBXzvprgM3aJ6rKOK6fbt/view?usp=sharing" },
-    { title: "UNIT 9 - IMNCI", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1O3opAT_2iR154yBD4KH_Q4eRu7G0xcXF/view?usp=sharing" },
-    { title: "UNIT 10 - PEDIATRIC EMERGENCY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1-0xNrJCuCll-Bt-0u24S7zPgL87Q8ciY/view?usp=sharing" },
-    { title: "UNIT 11 - QUALITY ASSURANCE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1sSuwxb9pQEa_zVgKkeBlfXySbHj55iki/view?usp=sharing" },
-    { title: "UNIT 12 - MODIFICATION OF MGMT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1C4pxv-YpkL04zwwlv5FmoCImns4CBfWz/view?usp=sharing" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - January 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1IDO6xUMEcfkBo0FsZm9e67pLXXpkun_i/view?usp=drive_link" },
-    { title: "PYQ - June 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/13pRNSS5dd1ftdrg9yCCGHCS8zJ2Nb_0l/view?usp=drive_link" },
-    { title: "PYQ - March 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1DRViJXCulJElinNODJzK36tegIl_i9rB/view?usp=drive_link" },
-    { title: "PYQ - May 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/17t8ah3BiNjAL86IzBJIQS1nvXbDObB1x/view?usp=drive_link" },
-    { title: "PYQ - February 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1pp9j2oOVHLmvrlDCKSsCdbhS1v5kZfug/view?usp=drive_link" },
-    { title: "PYQ - August 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/137po9CmHx946_Xx3xxfPXpDMlfm4-Ubu/view?usp=drive_link" },
-    { title: "PYQ - September 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/13KqPvoPUKQUYyUiQPRvmkwcXfE-qpYht/view?usp=drive_link" }
-  ],
-
-  // --- 3. Medical Surgical Nursing ---
-  'MSc_Yr1_MedSurg': [
-    { title: "Syllabus", type: "header" },
-    { title: "Medical Surgical Nursing Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1bpNeKRvQ-UXd2wCn8o3ZwkqwMjpmtY_0/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1DLqpdqmGerRD0co1bORV3ZrB4s3h_ZVz/view?usp=sharing" },
-    { title: "UNIT 2 - HEALTH ASSESSMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1heagOZVuxgHYhNvbdPpqZmdrzBZE4cum/view?usp=sharing" },
-    { title: "UNIT 3 - HOSPITAL SETTING CARE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1RyfIVtF6_t9i-BrJTjsSvUcubBIaDg3X/view?usp=sharing" },
-    { title: "UNIT 4 - GASTROINTESTINAL", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1fm_-s5X4WWO_g57LvaKF5jO54CshthYE/view?usp=sharing" },
-    { title: "UNIT 5 - NERVOUS SYSTEM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1vpjj7isrSF-F-7ajH1NX83yM_dsrS9sx/view?usp=sharing" },
-    { title: "UNIT 6 - RESPIRATORY SYSTEM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1gb7oAhJ4HM8Wpi2I9Sygz7BTlE4PfIqL/view?usp=sharing" },
-    { title: "UNIT 7 - CARDIOVASCULAR", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1S9AwClN6rmJm40irImZ_RnZOEP7qCxZ1/view?usp=sharing" },
-    { title: "UNIT 8 - BLOOD DISORDERS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/14zjJslHr9VMlGEXfbRr2gm-vEaZfgCmJ/view?usp=sharing" },
-    { title: "UNIT 9 - GENITOURINARY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1o97vfJDK5-53m5lDJQh_7_GUr63SZdbM/view?usp=sharing" },
-    { title: "UNIT 10 - ENDOCRINE DISORDERS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1dVjvaBaIuJiGxctHRK0qGR07-0u4D20d/view?usp=sharing" },
-    { title: "UNIT 11 - MUSCULOSKELETAL", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/109_CSF0eFSeK9wOlrtBXo1z8O3dAReGM/view?usp=sharing" },
-    { title: "UNIT 12 - INTEGUMENTARY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/11aCXJJFiElTC50F-XLYVYkQeiQfVHncH/view?usp=sharing" },
-    { title: "UNIT 13 - EYE AND ENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1y52r1Bhwm-RMiXLrxML3sId-PAlM2L7r/view?usp=sharing" },
-    { title: "UNIT 14 - REPRODUCTIVE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/12N1uTXzj34VU6WdhB1bzNTOVultM4Myp/view?usp=sharing" },
-    { title: "UNIT 15 - GERIATRIC NURSING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1YEuDbBy1eDnTQ372VmhEcfov9gXxfSvD/view?usp=sharing" },
-    { title: "UNIT 16 - COMMUNICABLE DISEASES", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1qy4i1-46wRKHGNjyXQidS01nI3XHaIrw/view?usp=sharing" },
-    { title: "UNIT 17 - EMERGENCY & TRAUMA", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ZZDL3HElh4vA-tXTJA80FXcHjEYpMqZE/view?usp=sharing" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - January 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1m38YnvM3OxsDIKVZRar4iqxR-7Cle-kL/view?usp=drive_link" },
-    { title: "PYQ - June 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1UUEF0q0cXFtkt4RW8T-f_wW36zcW_KuX/view?usp=drive_link" },
-    { title: "PYQ - March 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1yJw2ZE_jL_WXqjW_S493TWzQfRdB93S0/view?usp=drive_link" },
-    { title: "PYQ - May 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1uURG7C7LpQgRKlCWjN4OPQ2zBoDnC0Rn/view?usp=drive_link" },
-    { title: "PYQ - February 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1FA8RzqWMfVcJq3ZNa3o9hJQrbzZI_rCA/view?usp=drive_link" },
-    { title: "PYQ - August 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1qKrpBvyKDayPC9x2bdPT9h-shL6WsjN6/view?usp=drive_link" },
-    { title: "PYQ - November 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1Ty27sFuWYSHOtjD001FqvL6ZjjUocuHa/view?usp=drive_link" }
-  ],
-
-  // --- 4. Community Health Nursing ---
-  'MSc_Yr1_CommHealth': [
-    { title: "Syllabus", type: "header" },
-    { title: "Community Health Nursing Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1gX-MW24Sh2bWa3yIlpFp_tlGG7e-evOo/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1LSWn--OuJSPltZVzrgUD1smG--j8Zb-z/view?usp=sharing" },
-    { title: "UNIT 2 - HEALTH", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1S-FA0lvUJRrlHU8YuW1hxzTXTopqAvbi/view?usp=sharing" },
-    { title: "UNIT 3 - COMMUNITY HEALTH NURSING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ituS2JHjyf3EzbgaUXV_Ef8_94OnXqtM/view?usp=sharing" },
-    { title: "UNIT 4 - HEALTH CARE DELIVERY SYSTEM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1-QfePrdO54LUBRdyHhpDHs6syCLKhTVu/view?usp=sharing" },
-    { title: "UNIT 5 - POPULATION DYNAMICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1uJOvNouue2EDSIMfiDdfzxGzT5KLrm99/view?usp=sharing" },
-    { title: "UNIT 6 - MATERNAL & NEONATAL CARE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1wxROmUyzWYa0LHmT8QUkAPpisb_iIV12/view?usp=sharing" },
-    { title: "UNIT 7 - EPIDEMIOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1k9Y5AHwXGDZMDqD32wgOpWlZBdtCLOSI/view?usp=sharing" },
-    { title: "UNIT 8 - DISASTER NURSING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1-1Kdpj_doqBH52rcnv0_gQ53JqFk7xDB/view?usp=sharing" },
-    { title: "UNIT 9 - IEC", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1eLRelwXzsysDWi1vA7hRxTxKATwh8Lfg/view?usp=sharing" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - Question Paper 1", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/19Ejtn-cudeJNdqslJHVBAZ6PN4LoWamR/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 2", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/12H8bcXbwHZUUWyJkoqkRhpwwY09VUEBd/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 3", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1MTm7LcREt1ji98yJXzK0mFAfbQ9sZXdT/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 4", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1tlsyJjMPl5nSbOlh-cdiQ6EIW_XLZyjg/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 5", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1-lFYBL-v-QJIPZR3yVyTHdCYQhwNTULP/view?usp=drive_link" }
-  ],
-
-  // --- 5. Mental Health Nursing ---
-  'MSc_Yr1_MentalHealth': [
-    { title: "Syllabus", type: "header" },
-    { title: "Mental Health Nursing Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1pauLaTMC3OngROIx3Mm0n3Umt5bWZOMj/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1hV1Iwxpy-BxtNzQTCz3wRWe3nVzXFYB-/view?usp=sharing" },
-    { title: "UNIT 2 - PSYCHOBIOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1FaiMjJXYn-5mCrHlMVJrHp8T0520BIET/view?usp=sharing" },
-    { title: "UNIT 3 - PERSONALITY DEVELOPMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1AVBDSWnsFhWXv5gd8HmYmht1Xr1x5g5r/view?usp=sharing" },
-    { title: "UNIT 4 - STRESS MANAGEMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1MCxS_tQzX2vtW1CC5uv2LC1REdzQwWzw/view?usp=sharing" },
-    { title: "UNIT 5 - THERAPEUTIC COMMUNICATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1C56JyCYteC18R91VzYPwk99KVTW0Dtii/view?usp=sharing" },
-    { title: "UNIT 6 - ASSERTIVE TRAINING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1WXfee-SntTzb5l3D_vxdLjPZ0u63SVaT/view?usp=sharing" },
-    { title: "UNIT 7 - PROMOTING SELF-ESTEEM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ZpL7pxbNAHutxwp-5zbQgUUVd7ZVyz8t/view?usp=sharing" },
-    { title: "UNIT 8 - NURSING PROCESS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1_wSgYc71QbnGC0pXoVKRhqvIzzzv_n2Y/view?usp=sharing" },
-    { title: "UNIT 9 - THERAPIES", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1CzJ3uK3OMGL_rbjImB8k7QK7lR7pM1Vl/view?usp=drive_link" },
-    { title: "UNIT 10 - ECT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1WSHL-4SW04BxsvwCRlXPfHz9Lq91r1P5/view?usp=drive_link" },
-    { title: "UNIT 11 - PSYCHOPHARMACOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1bdvwz1rAzr51u4Q98tnU4NZ1DpCgZvUi/view?usp=drive_link" },
-    { title: "UNIT 12 - ALTERNATIVE SYSTEMS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1l2JYc0Iw_dhMHIYLp_ThxNL8Kt_kTgPS/view?usp=drive_link" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - November 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1lzu3TUlB3rK6wfCQ188RJBXMECALJoNi/view?usp=drive_link" },
-    { title: "PYQ - September 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1Gco-GomE5w0pusjv1kIvz5InNrJe0vSq/view?usp=drive_link" },
-    { title: "PYQ - August 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1rfsa20zzBrWQH68bdaAL9KGxrYfern2X/view?usp=drive_link" },
-    { title: "PYQ - May 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1wkvr5UnFcBLnQptHDoVqAQeFpf5RKrE7/view?usp=drive_link" },
-    { title: "PYQ - February 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1C0i2-7HKT092pv3XtnHV11dZsaYpohKr/view?usp=drive_link" },
-    { title: "PYQ - June 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1PrbKZh7cd0kioVJ_bemrqLxBTZ1XZrDA/view?usp=drive_link" },
-    { title: "PYQ - March 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/view?usp=drive_link" },
-    { title: "PYQ - January 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/view?usp=drive_link" }
-  ],
-
-  // --- 6. Research & Statistics ---
-  'MSc_Yr1_Research': [
-    { title: "Syllabus", type: "header" },
-    { title: "Research & Statistics Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1_4zEQ0nEn3j4S9YX2lirlIv4NuupaVjT/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1CyRIgRpQS3V-zUcAYO7wZsqy8WybbZq1/view?usp=sharing" },
-    { title: "UNIT 2 - REVIEW OF LITERATURE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1_1Fe6XJ_MCJb57I8mzogv-_-o-nMTi4x/view?usp=sharing" },
-    { title: "UNIT 3 - RESEARCH APPROACHES", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1gB1Jk7si-YXDbNqkMXJd4llSiASKkL5O/view?usp=sharing" },
-    // UNIT 4 Link was missing in the provided source text
-    { title: "Previous Year Questions", type: "header" },
-    { title: "Research - February 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1PSXTR3STr87Ukr14v-41uSwNHI4GTh0I/view?usp=drive_link" },
-    { title: "Research - February 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/11vjNBQhF5e5jvFKZfirMET24_2tpIeV2/view?usp=drive_link" },
-    { title: "Research - July 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1cohiN_lX57Yqun923JkxugSagoClruUK/view?usp=drive_link" },
-    { title: "Statistics - July 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1t-hfLwdpyh7VOgQDjyZwvE2F5meVS6pQ/view?usp=drive_link" },
-    { title: "Statistics - November 2020 (1)", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1cP89Oq9TWxRm0RhkAg6dnY5Z9zcpiUUf/view?usp=drive_link" },
-    { title: "Statistics - November 2020 (2)", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/165ymKNSU-yPsUqZrCx8dPC6DG9-VkkID/view?usp=drive_link" },
-    { title: "Statistics - September 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1EwC_JlX-ViDT2Z47SO9dU-4_pMNdWuFD/view?usp=drive_link" }
-  ],
-
-  // --- 7. Nursing Education ---
-  'MSc_Yr1_Edu': [
-    { title: "Syllabus", type: "header" },
-    { title: "Nursing Education Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/10zqzBfgzvczBWDwSr2r3tJiR5amA7xek/view?usp=sharing" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1hSyBW7h9g7BfWWvx_KKvnpDykuBOmxra/view?usp=sharing" },
-    { title: "UNIT 2 - TEACHING LEARNING PROCESS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1QSQTqFkwHWKE57H8TaY3rcgSxUtrj5nf/view?usp=sharing" },
-    { title: "UNIT 3 - EDUCATIONAL TECHNOLOGY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1uB93pTQIRgogNLHxaN0CHH7o1U_Mw1OD/view?usp=sharing" },
-    { title: "UNIT 4 - MEASUREMENT & EVALUATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1LUu3EJ3GkYx0L2R6JzU79kFVlInFuR6P/view?usp=sharing" },
-    { title: "UNIT 5 - STD & NON-STD TESTS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1luXvr1c8JSm9ay9OO3aqThtv5avBxY5Z/view?usp=sharing" },
-    { title: "UNIT 6 - ADMINISTRATION & SCORING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/13kK8Z75OIQF9WgjmUPrncuT6RXZryBBw/view?usp=sharing" },
-    { title: "UNIT 7 - STANDARDIZED TOOLS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1Xc4-9F5AbVfR16tZwodTGKeF1fC3nkS4/view?usp=sharing" },
-    { title: "UNIT 8 - EDUCATIONAL PROGRAMS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1L5J9uuzscWr3092RZDRFIy8xb8x_JYZe/view?usp=sharing" },
-    { title: "UNIT 9 - CONTINUING EDUCATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1X9vR02KnO9SOrlbPEzwS30FEDH760GfC/view?usp=sharing" },
-    { title: "UNIT 10 - CURRICULUM DEVELOPMENT", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1FZzOuC6nyrDOvpBOGm7RwFFuXDn4voNy/view?usp=sharing" },
-    { title: "UNIT 11 - TEACHER PREPARATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/17yhkHsttzvbFB2k2SObCCLMpGof6BH8O/view?usp=drive_link" },
-    { title: "UNIT 12 - GUIDANCE & COUNSELING", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/18iosJA095VbxaoVf_EuwQS-WxN2KYNhn/view?usp=drive_link" },
-    { title: "UNIT 13 - ADMIN OF CURRICULUM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1-qVTHpVi-WGKzpJRoZUOSTzmzaDDHjPa/view?usp=drive_link" },
-    { title: "UNIT 14 - MGMT OF INSTITUTIONS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/14JNi3o2DI0mu_QmEnu-xINnWpuGpWbht/view?usp=drive_link" },
-    { title: "UNIT 15 - STANDARDS & ACCREDITATION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1UbbwBTJHGtWksS5Fgo_DyD957Tz8alG5/view?usp=drive_link" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - July 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1E14_cVTlgxbJDb5O4r39Osa6ch8Mu5fY/view?usp=drive_link" },
-    { title: "PYQ - September 2020", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1B0YTIZG1n0CxuTdByyT2p4GZ_pHLXu_S/view?usp=drive_link" },
-    { title: "PYQ - July 2021", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/14NlepSQXlIGC1ilN1s7Cf7LC-OlMdk4Z/view?usp=drive_link" },
-    { title: "PYQ - November 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1nMCJKAeJUfOClDO_BojGacABnMUWaGwy/view?usp=drive_link" },
-    { title: "PYQ - July 2022", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/16AmFz9qgRMlgrRzY-_3u0EQtFeM0AcF6/view?usp=drive_link" },
-    { title: "PYQ - January 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1l74MSEIU-IWE74TQWGjlWrgIf1RM5xQ2/view?usp=drive_link" },
-    { title: "PYQ - November 2023", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1TTWNgx9K8sbcAxBbsM51BT-AidcoVrB0/view?usp=drive_link" },
-    { title: "PYQ - July 2024", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1ZjjGKZB750Frrh7bBhIsD4W5C2PqvxCi/view?usp=drive_link" }
-  ],
-
-  // --- 8. OBG Nursing ---
-  'MSc_Yr1_OBG': [
-    { title: "Syllabus", type: "header" },
-    { title: "OBG Nursing Syllabus", type: "pdf", subtitle: "Official Syllabus", url: "https://drive.google.com/file/d/1JynTZJJjhKskeQvRjnhrcmfGWyEgAK_4/view?usp=drive_link" },
-    { title: "Units & Notes", type: "header" },
-    { title: "UNIT 1 - INTRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1ARzw8Ybh198Jt4ICaJ_I48N3dVG2wLKV/view?usp=sharing" },
-    { title: "UNIT 2 - HUMAN REPRODUCTION", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1yxiCn0LKRWdspD0ryrkIrp4H7SDJaXif/view?usp=sharing" },
-    { title: "UNIT 3 - HIGH RISK PREGNANCY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1DPNdoIr3qj58Jtl73b06spONJmBchmX5/view?usp=sharing" },
-    { title: "UNIT 4 - NORMAL LABOUR", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1qGTAsjI5wH5LxgvRa8TI9qpXu7PwKrjJ/view?usp=sharing" },
-    { title: "UNIT 5 - NORMAL PUERPERIUM", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1k6TvP605mfgAAAdOp2r4qtJV1CJzA6YI/view?usp=sharing" },
-    { title: "UNIT 6 - NORMAL NEWBORN", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1PXWEkHj798mmohNk5I4LiUl9KOhiX0M_/view?usp=sharing" },
-    { title: "UNIT 7 - PHARMACODYNAMICS", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1xN3hpuSUZZLSMRDTs3ACuIl5fD4Dd4dn/view?usp=sharing" },
-    { title: "UNIT 8 - FAMILY WELFARE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1BVgNvkOnYd529QQTBy458qSuH0CeTTwg/view?usp=sharing" },
-    { title: "UNIT 9 - INFERTILITY", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1IJffu9j6zWD-u0C3vh2QmSW8oKlUgVNW/view?usp=sharing" },
-    { title: "UNIT 10 - MENOPAUSE", type: "pdf", subtitle: "Detailed Notes", url: "https://drive.google.com/file/d/1SLTBVA1N1iVw8zlECvT83JopEEUZaZ5L/view?usp=sharing" },
-    { title: "Previous Year Questions", type: "header" },
-    { title: "PYQ - Question Paper 1", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1WnBKAgD2eAkIiRpd4S7MwZ1V1SGIt0qB/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 2", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1A5c7g6JCR7Btgnt4uzWNv4s8QnJXUhpI/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 3", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1BKusf0osse5JrvCXHaTPxCC7F0ZBzrES/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 4", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1ho8SSJVcLYjJfkm912_fvv0aYe0S0JxV/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 5", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/10bJiWQjZtePBWbickHtEtlyxNg_8Rw0F/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 6", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1Y9NEEL_bULsP5HQgrQ4evnzXvz2Va81f/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 7", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/1IWZqxp_7vLdqwp6LSN_l_a73fG2BGJF1/view?usp=drive_link" },
-    { title: "PYQ - Question Paper 8", type: "pdf", subtitle: "Question Paper", url: "https://drive.google.com/file/d/12uU-Gv6BILdieyOKR1oHoM_qIKPVJ5iI/view?usp=drive_link" }
-  ]
-};
     /* --- APP LOGIC --- */
     const app = {
         currentUser: null,
@@ -659,7 +495,6 @@
         },
 
         goBack: function() {
-            if(!document.getElementById('pdf-viewer-overlay').classList.contains('hidden')) { this.closePdf(); return; }
             if(!document.getElementById('modal-referral').classList.contains('hidden')) { this.closeReferralModal(); return; }
             if(this.history.length === 0) { this.navTo('view-dashboard'); return; }
             
@@ -676,14 +511,14 @@
             document.getElementById('submenu-title').textContent = key + (key==='3D'?'':' Program');
             document.getElementById('submenu-subtitle').textContent = "Select Option";
 
-            const sections = key === '3D' ? COURSES['3D']['Systems'] : Object.keys(COURSES[key]);
+            const sections = key === '3D' ? Object.keys(COURSES['3D']) : Object.keys(COURSES[key]);
             sections.forEach(sec => {
                 const item = document.createElement('div');
                 item.className = 'menu-item';
                 item.innerHTML = `<div><h3>${sec}</h3></div><span class="menu-arrow">&#10095;</span>`;
                 item.onclick = () => {
-                   if(key === '3D') { this.history.push({type:'submenu', course:'3D'}); this.navTo('view-coming-soon'); }
-                   else this.checkAccessAndOpen(key, sec);
+                    if(key === '3D') this.checkAccessAndOpen(key, 'Systems');
+                    else this.checkAccessAndOpen(key, sec);
                 };
                 list.appendChild(item);
             });
@@ -693,7 +528,8 @@
         checkAccessAndOpen: function(course, section) {
             this.lockedCourseKey = course;
             const pKey = getPermissionKey(course, section);
-            if(this.currentUser.permissions && this.currentUser.permissions[pKey] === true) {
+            // Permission check logic
+            if(this.currentUser && this.currentUser.permissions && this.currentUser.permissions[pKey] === true) {
                 this.openSubjectList(course, section);
             } else {
                 this.history.push({type:'submenu', course: course});
@@ -705,43 +541,21 @@
             this.history.push({type:'submenu', course: course});
             const list = document.getElementById('subject-list');
             list.innerHTML = '';
-            document.getElementById('subject-title').textContent = section + " Subjects";
+            document.getElementById('subject-title').textContent = section + (course==='3D'?'':' Subjects');
             
-            COURSES[course][section].forEach(sub => {
+            const subjects = (course === '3D') ? COURSES[course][section] : COURSES[course][section];
+
+            subjects.forEach(sub => {
                 const item = document.createElement('div');
                 item.className = 'menu-item';
-                item.innerHTML = `<div><h3>${sub}</h3></div><span class="menu-arrow">&#10095;</span>`;
-                item.onclick = () => this.openContent(sub);
+                item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
+                // NAVIGATION LOGIC: Redirect to specific HTML file
+                item.onclick = () => {
+                    window.location.href = sub.link;
+                };
                 list.appendChild(item);
             });
             this.navTo('view-subjects');
-        },
-
-        openContent: function(name) {
-            this.history.push('view-subjects');
-            document.getElementById('content-subject-name').textContent = name;
-            const cont = document.getElementById('content-list-container');
-            const ph = document.getElementById('content-placeholder');
-            
-            if(CONTENT_DATA[name]) {
-                ph.classList.add('hidden');
-                cont.innerHTML = '';
-                CONTENT_DATA[name].forEach(i => {
-                    const el = document.createElement('div');
-                    if(i.type === 'header') {
-                        el.className = 'menu-item section-header';
-                        el.innerHTML = `<div><h3>${i.title}</h3></div>`;
-                    } else if(i.type === 'pdf') {
-                        el.className = 'menu-item is-pdf';
-                        el.innerHTML = `<div><h3>${i.title}</h3><p>${i.subtitle}</p></div><span class="menu-arrow">&#10095;</span>`;
-                        el.onclick = () => this.openPdf(i.url, i.title);
-                    }
-                    cont.appendChild(el);
-                });
-            } else {
-                cont.innerHTML = ''; ph.classList.remove('hidden');
-            }
-            this.navTo('view-content');
         },
 
         showReferralModal: function() { document.getElementById('modal-referral').classList.remove('hidden'); this.resetReferralModal(); },
@@ -765,17 +579,6 @@
             const url = `https://www.razorpay.com/${c}_${ref ? 'withreferral' : 'withoutreferral'}`;
             this.closeReferralModal();
             window.open(url, '_blank');
-        },
-        openPdf: function(url, title) {
-            let u = url;
-            if(u.includes('drive.google.com')) u = u.replace(/\/view.*/, '/preview').replace('open?', 'file/d/');
-            document.getElementById('pdf-viewer-title').textContent = title;
-            document.getElementById('pdf-frame').src = u;
-            document.getElementById('pdf-viewer-overlay').classList.remove('hidden');
-        },
-        closePdf: function() {
-            document.getElementById('pdf-viewer-overlay').classList.add('hidden');
-            document.getElementById('pdf-frame').src = "";
         },
         navTo3D: function() { this.navToCourse('3D'); } 
     };
