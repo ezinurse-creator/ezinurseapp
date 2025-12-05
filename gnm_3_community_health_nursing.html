@@ -1,1 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Health Nursing - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Community Health Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: auto; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Syllabus PDF Link -->
+    <a href="https://drive.google.com/file/d/1-dK83IEUOhM1CqTFk3ouZfu8q9NAkicB/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 COMMUNITY HEALTH NURSING - SYLLABUS
+    </a>
+    
+    <div id="units">
+        
+        <!-- UNIT 1 - HEALTH SYSTEM IN INDIA -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - HEALTH SYSTEM IN INDIA
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1yXBzLLpEL9R8WN71HToXjySb4noTx5qs/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health System in India</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rGr2DctgB34En6EwOYwgMMjbdvK-McrG/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Organization and Administration of Health System in India</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16AkpRBIOmrJbHH0Rdq3l6Rhxmh8LREuv/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Organization at Central Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Xo55uRXDVkDPDGBCLiL_ZZfQuvo_9bvB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Central Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1d1wMma35UbND0mEnXCnyVCdZFB5wDquu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Organization at State Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g3tZKr3hy4PEfXyJJ9mlpFyO_6r03Vbm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: State Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-DWaw6nZfjyLMXvja1Fa18F0aIve4zrs/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Organization at District Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VFcgAVjoLHjd4clWjCOYchwNpeL_IDOJ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: District Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CsLoUTQ4OnhsYleZSwH3M8L7Ygb34-82/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Organization at Block Level & CHC</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wsM4Q6xU498BqlhwPQMTh0QZdjpi5IEY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Block Level & CHC</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VVjx3-mtkpWz-7HHtJuR3c7YRhjWh2MN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>PHC & Sub-Centre</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jHCFxvkYjrBSUeI9c_LZqyKFZ42b6dBT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: PHC & Sub-Centre</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ey893RdqG-UE3-1KIoGFhYA2E7dtJ336/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Organization at Urban Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mqHYp-wXLRiNdmelFQJpVAy-hgFaNoGd/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Urban Level</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11B86umodNLF4OVBcOUIlF979ASz-dLqi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Panchayati-Raj & Zilla Parishad</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mti-qE0RC2k2Adn-1cPXwvF1gg8UEHRb/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Panchayati-Raj & Zilla Parishad</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/152L0JTlArg-IV9tDFQCxfQQZ9UwBIN8S/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Administration at Different Levels & IRDP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZJGgdC8ZqBHh0QKapWl487NsSuKYn2It/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Nursing Admin & IRDP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16ejU7bp-Zyt_zArOCYu0-YPCmHtrahSX/view?usp=sharing" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 - HEALTH CARE DELIVERY SYSTEM -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - HEALTH CARE DELIVERY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1dNKIR6gf3Ga2HA1a_W7j3tREcM5a5sjR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Care Delivery System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dbELGJlp78y5sYrbx96tzoIkS5Dhdxci/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Heath Care Concept and Trends, Voluntary Health Services & AYUSH</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yToePiuU7MO5OJ8JeXnA51334IIII5T-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Health Care Concepts & Trends</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nWiiMrrk_-frNH1TCJyqhUEWwkcJSHrV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Public Private Partnership (PPP) & Health Care Services</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ri4dAsSTGRpcY0F03N_KB-7BrGHanAgy/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Care Services - Public Sector, Rural, Urban</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gyv_ZLeqUqG1I0bz3FVt6naXTqP1TCNt/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Public Sector Services</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18oDf5v7bXAlsjgwfayGO8ImRfp5VQmxC/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Care Agencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wa7g9l487_h8RZk85ILLJHSojWQ-vfD-/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Care Services - Private Sector</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1j8TQCTGtWQtXf8j66ChkfluwTOEbP-A6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Private Sector Services</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1diVxbjgEX2TdWI_rlZNdgoQX9bofIZyn/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 - HEALTH PLANNING INDIA -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - HEALTH PLANNING INDIA
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1DNE-gaiOZS0jOZToHCQu6YZtnJ_RWUA8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Planning India</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13rcRxRDGBUz6GihOvihgHi3EvdLTcRtD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition & Objectives of National Health Planning</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KhpW2QOiEcvoqDpVve-gDetmii_-M-_-/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Elements, Steps & Limitations of National Health Planning</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c1iqpKek8RuYQtwuLyD_JAxkvqOJU25H/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Planning Concepts</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tTISMH0YCpa55x9WYKWK-5KALE50ZGKn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>First to Fourth Five Year Plan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kmFjdMVpi5TJQ9jVJ5jNmwQt-7mR8hh3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: First to Fourth FYP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GCD8uF9OD8wVphTtnf5HTJ8ibROmtz17/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fifth to Seventh Five Year Plan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IgUYVjKEzL7lcNmfDwNK8TU7OvHEszi5/view?usp=drive_linkk" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Fifth to Seventh FYP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FKAsZCL4j-BLIi0GcQxWwgr9ILgK0cEw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Eighth to Twelveth Five Year Plan</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18FwHF1K26RLCP2qagT3SK4y05hElq-qB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Eighth to Twelfth FYP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fi3kvaw01UV1OYwCb4eLOKoyZMBybgpZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Health Committees and Reports</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14kilRD9nI9ieTNXW1gCEuKffOI6SVgr3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Health Committees</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Mukerji Committee (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1niI8e5Fz0wNUDdwP0a_yLzn0VP2WORqT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Mukerji Committee</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KYXHS5X83jLEji68spTLO80cgR2hDGCj/view?usp=sharing" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 4 - SPECIALIZED COMMUNITY HEALTH SERVICES AND NURSE’S ROLE -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - SPECIALIZED COMMUNITY HEALTH SERVICES AND NURSE’S ROLE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1TcodROhIa2BWH9lrTYVFt_7Jbj3WnNAX/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Specialized Community Health Services</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y9V85TrMM7nNhx-h6ngjaXgtZx852sM0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National Health Mission (Rural/Urban), JSSK, Emergency Ambulance Services, Government Health Insurance Schemes.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1D8dNFlh1SYhzVFwkuOB4IHdZbzgIX_Dk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: NHM & Health Schemes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bWtNBp_oLYffg9r8y-jVhDB_5Tnt3Gjp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>School Health Services, Occupational Health Nursing, Geriatric Nursing, Care of Differently Abled & Rehabilitation Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ibRRO5Nwv0-INxvv3xzLlDaGHNSIno2u/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Specialized Services</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1j2g5JQHEVL18kNzDDFAKySAD-UFQG4Kg/view?usp=sharing" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 5 - NATIONAL HEALTH PROBLEMS -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - NATIONAL HEALTH PROBLEMS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1YFmuEYuPwJjpdxi0vAAKXJMu0r9LIA14/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: National Health Problems</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dMQYQLY3Qfyku-RSdO1GSDwUtD8koMQc/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tuberculosis, Malaria, Dengue, Filariasis, Japanese Encephalitis, Leprosy, Chikungunya</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X6Nt79fOgjJQ8uiu675oF1jEC9enp8A6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Communicable Diseases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N1CM41hOK2J1GyfAHKtSfcouV4CQRTMc/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nutritional Problems</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_37PehK2FMkvfWIu-MeAXrwbSQ5ORMYm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Nutritional Problems</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Non Communicable Disease (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RO1VRu-ItktU66H7D-EJvBdPJTV3rSY3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Non Communicable Disease</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Population Problem (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14EsKEVjGfp7eMZDFaiTrvkODkHF5k1pR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Population Problem</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1I5upWiJjMo3-fZ_SnOAxOEoQbLNoUXLZ/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 6 - NATIONAL HEALTH PROGRAMME -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - NATIONAL HEALTH PROGRAMME
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1icglBgoO6myqAwGEnn0XQ2Twn9ndMhQV/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: National Health Programme</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rtZ82UUsOeJgVJ0fJbOhLsLM-RNJS1Wd/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National ARI Program, RNTCP, National Filaria Control Program</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1phM7Ek5hLmb6UvSoGDltudKVEATLiNZB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: ARI, RNTCP, NFCP</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_3874BaJF9yW7BPktZrKEQ3MTqNhyPgC/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National Malaria Control Program, National Guiness Worm Control Program, NLEP, STD Control Program, National AIDS Control Program</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xQ5jwMGUWItA5JxUsC721eBFKrktZgHu/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Vector-Borne & STD Programs</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>National Program for Control of Blindness (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qJo010wQ0D4ic5GiHznfOYFRWUvsxfO_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Control of Blindness</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>National Water Supply and Sanitation Program (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/181iTtYQ6ljYJNxbmRIeG79QY804orYsz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Water & Sanitation Program</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>National Nutritional Anemia Prophylaxis Program, ICDS Program & Mid-Day Meal Program (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iLnA1IRCpDo9tOpMac3u1dUhAOVlmFSY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Nutrition & Meal Programs</span>
+                    </a>
+                    <a href="#" class="resource-btn video coming-soon">
+                        <span class="icon video-icon coming-soon-icon">▶️</span><span>National Cancer Control Program (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15pkuK0w_T5-peNqAV9M-1XAT-uV_vQaC/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Cancer Control Program</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_LX1YCPx9qXCNN82Qy6gOO5-bT73RmSj/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 7 - DEMOGRAPHY AND FAMILY WELFARE -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - DEMOGRAPHY AND FAMILY WELFARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1VfYLJtgz3DRcOMM2c_6yzBVgBmJ3Nemk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Demography and Family Welfare</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oHFmdz2FMJpWkyZqWrWgR5LtqhYSLbF1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Demography and Demographic Trends</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YOa1JWH_G-j4kEgdqFScsHppgYCZEXFl/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Concept of Fertility and Infertility & Small family norm</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fz5pAEHqoqnHXPKYE1DuabDBOYA-yBQk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Fertility & Norms</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16PS6-pMkvwPxJOZJJRwqeXRaj9lKxeTi/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>National Family Welfare Policy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L7TiVyH_YojY5maYklHyv_kAcePp77U7/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Family Welfare Policy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nGKJiDrv_S_JjK65dOW_1ImfoYeOFHd7/view?usp=sharing" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 8 - HEALTH TEAM -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - HEALTH TEAM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1TFECUfFdkpTz3kOd_MD1hIP9mMIvrJNY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Team</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dDvSVe9F9i5U8uMVPYPu2gzeJjU3NAAr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Composition & Functions of Health Team</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14_ND052E4SqWkMUgyaLbwXKYUyiGoZlk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Role of Nursing personnel at various levels</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NIdzNwrwB8c9aa2YNu9cv34n-Hz8HGGd/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Team Composition & Role</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cB0k9Udrn1YZTlXt1x_QKAVe44UEpC-A/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 9 - HEALTH INFORMATION SYSTEM -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - HEALTH INFORMATION SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1xpiWzlAu_lGfxl679vr8z9CS8H1N3VxP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Information System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eJZYZUYtOW8DqxvIa7yQ4juJb3Xx8BNj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Components, Uses of Health Information System & Vital Statistics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mZ1ovVIYXBUzzaUpCdT03JabgfzDBLVi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vital Health Records, Basic Statistical Methods & Descriptive Statistics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fMdXTDV_7HcfiyjiZ64Shxn-QGxe80QJ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: Statistics & Methods</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1grB9iwF0LtHbp0_LEat2UtlP3ycin0lt/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 10 - HEALTH AGENCIES -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - HEALTH AGENCIES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/16ENeaH-DnT-NRXXbDqaDuNc_deXZdzH1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Agencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gfzWvolbnLPKG8d0ty75Wh488ayAiS82/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>WHO, UNFPA, UNDP & World Bank</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e9R9-576FeOs72k36iRgdwcwQx5HRDfN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>FAO, UNESCO, USAID, DANIDA, ILO, European commission, CARE</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XxofzxBNldf6K7sz_z1iu2Tm_8kCZxNO/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: International Agencies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FYjAesRNQnXWL2iz6ktafCwn639C3r65/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Indian Red Cross Society</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rpre4zATQ77IxVQOT5MBgfrF_cE8PhQv/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Indian Council for Child Welfare & NGO</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RRYfBMybQ-n2Wb0UC7GodkuuAqaxsB-I/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes: National Agencies & NGOs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10SKXCnVdEe6Lg9RXmqQ1XrUlJteaOS7G/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the unit content
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            header.setAttribute('aria-expanded', !isExpanded);
+            unitContent.classList.toggle('active');
+
+            // Dynamic max-height for smooth collapse animation
+            if (unitContent.classList.contains('active')) {
+                // If expanding, set max-height to scrollHeight
+                unitContent.style.maxHeight = unitContent.scrollHeight + "px";
+            } else {
+                // If collapsing, reset max-height to 0
+                unitContent.style.maxHeight = "0";
+            }
+        }
+        
+        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+        document.addEventListener('DOMContentLoaded', () => {
+             const allUnits = document.querySelectorAll('.unit-header');
+             allUnits.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 
+                 if (index === 0) {
+                     // Unit 1 is active by default
+                     header.setAttribute('aria-expanded', 'true');
+                     content.classList.add('active');
+                     // Set the max-height dynamically for the open unit
+                     // Needs a slight delay to ensure scrollHeight is calculated correctly after CSS application
+                     setTimeout(() => {
+                         content.style.maxHeight = content.scrollHeight + "px";
+                     }, 50);
+                 } else {
+                     // All other units are initially collapsed
+                     header.setAttribute('aria-expanded', 'false');
+                     content.classList.remove('active');
+                     content.style.maxHeight = '0';
+                 }
+             });
+        });
+    </script>
+</body>
+</html>
 
