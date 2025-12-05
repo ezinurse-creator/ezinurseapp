@@ -1,1 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midwifery Syllabus</title>
+  <meta name="description" content="Comprehensive syllabus with video lectures, notes, and quizzes for Midwifery." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+  <style>
+    :root {
+      --brand: #003B82;     /* Dark Blue */
+      --accent: #00B9F2;    /* Cyan Blue */
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: white;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      word-wrap: break-word;
+    }
+
+    /* SYLLABUS BUTTON + UNIT HEADER STYLE */
+    .syllabus-btn,
+    .unit-header {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      margin: 24px 0;
+      background: var(--brand);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .syllabus-btn:hover,
+    .unit-header:hover {
+      background: #002d63;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .unit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      margin: 16px 0;
+      padding: 18px 24px;
+    }
+
+    .unit-header span:last-child {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      color: #FFA500; /* 🟠 ORANGE TOGGLE ARROW */
+    }
+
+    .unit-header[aria-expanded="true"] span:last-child {
+      transform: rotate(180deg);
+    }
+
+    .unit-container {
+      margin: 32px 0;
+    }
+
+    .unit-content {
+      padding: 0 12px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    }
+
+    .unit-content.active {
+      padding: 24px 12px;
+      max-height: none;
+      overflow-y: auto;
+    }
+
+    .subsection {
+      margin: 24px 0;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease;
+      overflow: visible;
+    }
+
+    .subsection:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .resource-btn {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      border: 1px solid var(--gray-200);
+      transition: all 0.2s ease;
+      gap: 12px;
+      flex-wrap: wrap;
+      word-break: break-word;
+      min-height: 50px;
+    }
+
+    .resource-btn.notes {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      color: #085d8c;
+    }
+
+    .resource-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+      background: #f9fafb;
+    }
+
+    .resource-btn.notes:hover {
+      background: #e0f2fe;
+    }
+
+    .icon {
+      font-size: 1.3rem;
+      min-width: 24px;
+      text-align: center;
+      color: var(--accent);
+      flex-shrink: 0;
+      align-self: flex-start;
+      margin-top: 2px;
+    }
+
+    .important-section {
+      margin-top: 32px;
+      padding: 24px;
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .important-section h3 {
+      margin: 0 0 16px 0;
+      color: var(--brand);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .important-section h3::before {
+      content: "🎯";
+      font-size: 1.2em;
+    }
+
+    /* QUIZ BUTTON STYLES */
+    .action-button {
+      display: block;
+      width: 100%;
+      padding: 20px 24px;
+      margin: 32px auto 16px;
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      border: none;
+    }
+
+    .quiz-button {
+      background: #003B82;
+      color: white;
+    }
+
+    .quiz-button:hover {
+      background: #002d63;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+      .syllabus-btn,
+      .unit-header,
+      .resource-btn {
+        font-size: 15px;
+        padding: 14px 16px;
+      }
+      .resource-btn {
+        padding: 12px 14px;
+        font-size: 14px;
+      }
+      .icon {
+        font-size: 1.2rem;
+      }
+      .subsection {
+        padding: 16px;
+        margin: 16px 0;
+      }
+      .unit-content {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .unit-content.active {
+        padding: 16px 8px;
+      }
+    }
+
+    .unit-header:focus,
+    .resource-btn:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 📄 MAIN SYLLABUS BUTTON -->
+  <a href="https://drive.google.com/file/d/1-lhf00RbkGaKDOnhk944I0F8JAikwqQ7/view?usp=sharing" class="syllabus-btn" target="_blank">
+    📄 MIDWIFERY SYLLABUS
+  </a>
+
+  <!-- UNIT 1 -->
+  <div class="unit-container" id="unit1">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 1. Introduction, Scope & Trends of Midwifery, Vital Statistics, Maternal Death Audit
+      <span>🔽</span>
+    </div>
+    <div class="unit-content active">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1vNzvwmMfe9fwm7dGSVLSlIidSH3WNpSd/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 1.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1MXHHF3IHZVd9Ay3LgIbdZKU4bXX2y_TF/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Introduction to Midwifery</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1Bii1xqO2z4aBu6fYZq5_TeC1enYvAtHH/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 1.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1v_WfhzV-uiwCUKfEJShP4J1aGH8erD8-/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>National Health Programs (RMNCHA)</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1CKZ8otx_mrHC0XpvJEmLCjIH3aNGVEbE/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 1.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1EitxyHd6wn9FDHjVl-h_TPrs2Pqx9_x3/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Competencies for Midwifery</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1BfYiY2LspDX1qEEQQxBzQC_Rp3eKdc5C/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 1.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1yYTfURm1tkZRRW9W-WXq4b0f_PdGFI64/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Ethical Issues in Maternal & Neonatal Care</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1o8mlTe7yEtzjnrNueBcXASsqXRqn3VP9/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/19qs3wVd9GrrouYPU4LsDqzR6UQQabjTd/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📄</span>
+          <span>Important Question Discussion</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1i-fiBgqz3p0NbXJ_BY1Y0vtt4kaH7TmZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 1 -->
+      <a href="https://drive.google.com/file/d/1mPTzylSKOwJdAg5h50NE8zZcwbztgf8R/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 1 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 2 -->
+  <div class="unit-container" id="unit2">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 2. Anatomy and Physiology of Human Reproductive System and Conception
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1OVtOYenZxZL_NUKKuolZ5M1WZ28G3QqB/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/16sONkFr_y6R4uYMoufrd7GQPlmzkqf3l/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Fetal Skull</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1pFz-Ulf4WzIWmLfa-PdOtm5OWJjg8jO8/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1FWLMNgHrQ1a7XCo4bhPj8AEaZUKWjKdN/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Anatomy & Physiology of Female Reproductive System</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1CQ9v1nuAQJEu7Xhg-BP84o77aBKwaEXN/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1BshlM_CqmVy0Z1Hr0fgIVseTmwjOryqF/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Female Pelvis</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1w2GwQmls17VOQ3MlAJpdcr5mOrdTqYPp/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1yLWV1EMW0DBKZscrVUfboKTkpYR18NQc/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Menstrual Cycle</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1o4Q99nrz92jbpdXdmgmN-HPGxWnvEETR/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.5 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1SghZylw6nDRkMCIFIfH1ksyHAe_-szYW/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Menstrual Hygiene, Fertilization, Conception, Implantation</span>
+        </a>
+        <a href="https://drive.google.com/file/d/14-0uZweZp5-r5FMLfV4-fvdTJ1N-P1LS/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.6 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1BEHaI2Lu1Lq0f1SDQlMgQARJBhoXe2lr/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Embryological Development</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1tcaRz6MFJ9_L6PiNrcz73eBGtjIcfI1E/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 2.7 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1JzHrL7r8jrnxb86r7vW5GKpF4-FqIPj8/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Placental Development, Placental Barrier</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1asv6iFt-IEDwQ0LpFMrzmSyCG5SYj4LR/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/1rxuJMOHu28wJJNCEPzuCGLeuWs6Qb_8M/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📄</span>
+          <span>Important Question Discussion</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1FzHvI5oWO_X16yEU1mB7MahTguYAEWbq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 2 -->
+      <a href="https://drive.google.com/file/d/1MFy6qGl3XH_IUehykv5qj2DHq3e0C5TB/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 2 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 3 -->
+  <div class="unit-container" id="unit3">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 3. Assessment and Management of Normal Pregnancy (Ante-Natal)
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1PG_c3os76z_imTaQWLfAbXY0Kam9LQwA/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 3.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/14EWhu5Ac0MhR6G4SklT_-Kq54aXPoQFS/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Preconception Care, Planned Parenthood</span>
+        </a>
+        <a href="https://drive.google.com/file/d/14BG92-y6FAfEm_X4RJZ5UvAk7aLB2Pbu/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 3.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1CG9WO48wFblvc4iROj4oMOSLaMOa0ui_/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Maternal Nutrition and Malnutrition</span>
+        </a>
+        <a href="https://drive.google.com/file/d/10GFsKj5TuCB-r3mfuG_DPXvA7fVQHklN/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 3.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1d1c7G8eysFAfqLR3pPJCoyKMmxpBeVN2/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Recording & Reporting in First Trimester (GOI)</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1qXDoVW6Wa90Rn8HxUDKUfdUhS5geQa-x/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 3.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/12rOeyI-0ZB9sMRAhE68m3iUfOcb6WZTd/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Rh Negative & Prophylactic Anti-D</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1xsxbUf52aPhY3t6CEhj01-veolEc3-xj/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 3.5 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1BaAevVPNjtaIGqG1EZecvqbM5TMUBVoK/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Birth Preparedness & Complication Readiness (BPCR)</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1jc5eH665L8aD2uEZThVXzZbJSO1u8WYs/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/1o_bGFgdypESy5moYgkJg-n8RRCptkaym/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📄</span>
+          <span>Important Question Discussion</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1JMrZvKv7do8eUIZbiFmuHCbEMPZTc2Un/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 3 -->
+      <a href="https://drive.google.com/file/d/1Rj9uVZWNLImSi5TFVJnD2fIr01_AMX2N/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 3 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 4 -->
+  <div class="unit-container" id="unit4">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 4. Physiology, Management and Care During Labour
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1XhFQ_Fy9mMzGfmwtdS_afO9EuGNZkUoc/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1NZPGRngx17oILBwfFa1hhZ-hDR4Z1gTu/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Normal Labor, Onset of Labor</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1NLkgcIEHjZOq-4FXlWkb0gOYo6m0w3z9/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1WUG4W0AogHWgWpp-5CP8xgwCyaLO7Vt4/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Physiological Changes: First Stage of Labor</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1nrt8APmstR9AzNgQwg72oCe1qkZxnluv/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1uY6ltk4jx2RAdOS26JKCHSAb6KMXfZSp/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Second Stage of Labor</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1dtSGiOYUMG0IdkH3iLRlTDfs28zZMAzV/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1Eith1ypnvxINMSTQ45_QwL3wfbG_3FTp/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Newborn Assessment</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1zCc0VM7KlaQUlqFze-A2xOwKne9IYRAR/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.5 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1ZwQ49M6uj20_lvHenAksOK4ueudIrHTX/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Third Stage of Labor</span>
+        </a>
+        <a href="https://drive.google.com/file/d/16omaBs_ZdUwVY1C3eJTWC5dGwrvATSVF/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.6 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/13YG7HOhL4SS3Bj7C404Jzapl4t4QN_bg/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Third Stage: Active Nursing Management</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1RrEL6f9X057jP6peK9IvME4HZL-3YvJU/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.7 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1KQ4rL6SrShv1PTQ_9T9p9yfpQpZc_eSs/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Neonatal Resuscitation, TABC of Resuscitation</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1Xyb5j8NQRzx1fmQ_x7D9v68exkk1bDSH/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 4.8 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1Yv1Xvsq5t2lBrHwFR1uCzP8M1ZZ_L3DR/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Fourth Stage of Labor</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1jtvREK7qLYjtydz1ikKeFabUgQW76mfR/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/1-504iq-vVr7NTL7lM9WH7iOhs9_v3UUL/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 4 -->
+      <a href="https://drive.google.com/file/d/1ahZWpO_3SOg05L2J9TUelsr8qvOST1Gv/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 4 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 5 -->
+  <div class="unit-container" id="unit5">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 5. Postpartum Care / Ongoing Care of Women
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1Owsi4mY_-PhrtDcJqCOqk7dG4XrXlc3T/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1ZqWc_vzlt8ccq7_G3z3-40q18zyoryMJ/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Puerperium</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1MH9IbMEQnvOGqzTS18aysXIrFL7g_pUR/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1fzrHfwmYtBmmxKCbfRr6VE6hmb1vGK_o/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Perineal Hygiene and Care, Post Discharge Care</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1eUb6crjz1m9VmefK8rn59H1d74o1NUng/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/14O0gP8TJy3ln9JfD_TKk47-a_7_05r7g/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Monitoring & Reporting Postpartum Complications</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1R0BYGJctDC8xKEzTTwSMroFpzAtDbcsa/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1EaBs3jKijYe8btf5h-inRy7TJX9rQZzU/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Lactation, Lactation Management</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1vw-Fpa4ZZUpUKykm7ILTGgSxkbPZhlqD/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.5 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1YAZbOPaBVAF1P4tmY81Zicgd9NyFl_Ub/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Elements of Post-Natal Counselling</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1T4wwSFzRKCnfdl0FqguTwv8hvz4gPEHF/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.6 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1I3T9i1PGfBfIxuukZrrC9jwMTNkgcGDV/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Postnatal Changes and Diet</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1EJtj2Lf10CsvQVhPDt8Zpvz2jUnbEyd_/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 5.7 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1DzV1QvKqz0EqooPjd_PPj93GM_v0ianc/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Obstetric Nursing</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1AtWKxbHXex7GypXtEGjFFKCF1hrqYnbu/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/1GAzbnXgqTzwE9uNUWnOhRmfSgXRhCANR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 5 -->
+      <a href="https://drive.google.com/file/d/1zXyGYCSt5KtHOJf-ZtIuai_0DrOR99SJ/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 5 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 6 -->
+  <div class="unit-container" id="unit6">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 6. Assessment and Ongoing Care of Normal Neonates
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1gsOY46NKTDyXfSh3QYadR2JqVgP8z3O3/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 6.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1GcmgpQgL_2qijmK52LF5uRDtDuwcsZAv/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Family-Centered Care, Respectful Newborn Care</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1tk-izSQfgi8spEOGh6k3jTGuG6o3S5dm/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 6.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1LtJ-YG_y2rrIOgOAklTf9Nx-sW_4HdY_/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Newborn Assessment - Screening for Congenital Anomalies</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1DjQpztvO8eSQPSl8N83xR6HVeFvAqx6w/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 6.3 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1jtUN1h6pYD6dCHtnzSv6bjH8GQnXSK1g/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Daily Routine Care, Skin-to-Skin Contact, Thermoregulation</span>
+        </a>
+        <a href="https://drive.google.com/file/d/15AcjtBiwvnRQ09Sx42n-2qOv5yMp7Kpk/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 6.4 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1OdSq9BJt5EyDHrcrnM6aeW9uSFl3me2A/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Immunization</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1j37vVCFxDeG-cEHsikxgUjHUSnRSiVTU/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/1lV1hnTV3SwQvMqqm-ygL04tHcDsoTZxh/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📄</span>
+          <span>Important Question Discussion</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1mEv66o5VObejlzaWV6iPZz8HMdNJ0aO_/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 6 -->
+      <a href="https://drive.google.com/file/d/1hxMqVnQBQdCoZTQI-ePAl0VWnvi5Ha6A/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 6 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- UNIT 7 -->
+  <div class="unit-container" id="unit7">
+    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
+      UNIT 7. Family Welfare Services
+      <span>🔽</span>
+    </div>
+    <div class="unit-content">
+
+      <!-- Detailed Notes -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/15vasjvvdIVIQRKlF1yXE4Lsd0bWzco49/view?usp=sharing" class="resource-btn" target="_blank">
+          <span class="icon">📚</span>
+          <span>Detailed Notes</span>
+        </a>
+      </div>
+
+      <!-- 7.1 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/1GdubNDFtrf-xf3okyJdlSTcJoESb3c3t/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Family Planning, Methods of Family Planning</span>
+        </a>
+        <a href="https://drive.google.com/file/d/17w6Lhi_rSsP9G9LzRqRNF3NDgb5Xguwu/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- 7.2 -->
+      <div class="subsection">
+        <a href="https://drive.google.com/file/d/17la7L6P_Z4wyjCi1W607DI2bvD_QTFYR/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">🎥</span>
+          <span>Gender Based Violence</span>
+        </a>
+        <a href="https://drive.google.com/file/d/19RM9i4We3SYQsjo8aXUg9tVKapoK_0ny/view?usp=sharing" class="resource-btn notes" target="_blank">
+          <span class="icon">📝</span>
+          <span>Lecture Notes</span>
+        </a>
+      </div>
+
+      <!-- IMPORTANT QUESTIONS -->
+      <div class="important-section">
+        <h3>Important Questions</h3>
+        <a href="https://drive.google.com/file/d/19mZZ4BO9evRSMAyCkYf1QJqGCSHXtSCD/view?usp=drive_link" class="resource-btn" target="_blank">
+          <span class="icon">📄</span>
+          <span>Important Question Discussion</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1KuCyxL5saefSOYdBnkPr8QwRrjPZ_Qhq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+          <span class="icon">📘</span>
+          <span>Important Questions</span>
+        </a>
+      </div>
+
+      <!-- 🧠 QUIZ BUTTON FOR UNIT 7 -->
+      <a href="https://drive.google.com/file/d/17BHs0PS0JaJdHQ191GTP_SpORR6pnMZY/view?usp=drive_link" 
+         class="action-button quiz-button" 
+         target="_blank">
+        🧠 Take Unit 7 Quiz
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ✅ JAVASCRIPT — DO NOT MODIFY -->
+  <script>
+    function toggleUnit(header) {
+      const content = header.nextElementSibling;
+      const isExpanded = header.getAttribute('aria-expanded') === 'true';
+      header.setAttribute('aria-expanded', !isExpanded);
+      content.classList.toggle('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstUnitHeader = document.querySelector('.unit-header');
+      if (firstUnitHeader) {
+        firstUnitHeader.setAttribute('aria-expanded', 'true');
+        firstUnitHeader.nextElementSibling.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
