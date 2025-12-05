@@ -1,1 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adult Health Nursing - I Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Adult Health Nursing - I." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brand);
+            margin: 0 0 12px 0;
+            padding-top: 10px;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        .pyq-header {
+            background: var(--accent) !important;
+        }
+        .pyq-header:hover {
+            background: #0092bf !important;
+        }
+
+        .subject-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 32px 0 16px;
+            padding: 0 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            .subject-title { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://drive.google.com/file/d/13iVmPIq-HGaLPfR_68v0rnl6yOcAuKrR/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 ADULT HEALTH NURSING - I SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1AuVt9rLFlNT4evrVovlqJTYvVWjAGfNR/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wO4jo3XnNgX8YQrQGZMvqUw2j-zY21rZ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition MSN & Nursing, History of Ancient & Modern Period of MSN, Early Civilization, History of Indian & Modern Medicine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aGrMOIHRhVrvm_ggLK4KBFfoLPlqCvM-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wDWomFRvwQqrovaL59cAu_0XHfbG2ZGo/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Florence Nightingale, History of Surgical Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jO_wH0cFfLrU7ikqFyf2kKvJlyeRuEQV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N0VIxsRtd15QNbXw4YsYbcZkE1wgIoYc/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Trends & Issues in Medical - Surgical Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gvdcRIgsJ76TmiAsn8ZwKy1ZrcvwIqar/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aJxuru5Ne9199g4yTkZUjWMmJBp5huf7/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - INTRAOPERATIVE CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1-2TodQDBInvpeR1Yfng4TSlFh4-ZjVJF/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/164VBgV1gLeXoHS9Zn5zTMu9JkZtrAQhP/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Operation Theater, Design of OT, Staff in OT, Duties and Responsibilities of Nurse in OT</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e_56tRVKRakbdE_JuSAekLTyPNYaA1J7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Surgical Draping, Positioning of the Patient</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11BsjzuMQTMmUWCWnIflOrd8C_nfy5mCb/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VQdtV-504w1nfZSBKTMIbpTvAyhAHbQL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sutures and Suture Materials</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13GRd3JSHuiWaTX93TScnf6TN2YFMs2JK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cutting Sutures, Surgical Scrub, Surgical Gowning, Surgical Gloving</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nsy2hgJ8sW5ZxZxM4ySfyd3qYuAf3mjN/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/189VOR6eG_fMi3pdyUYmGe-IrC70IrTq2/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Therapeutic Environment, Characteristics, Factors Affecting Optimal Environment, Procedure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fbne1M9wW0OtIZM0c1MKLphbm9jKMrwG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Preparation of Set, Instruments Used in OT, Monitoring the Patient During Surgery</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JnVJucr0qyNhdo_LXed8q_YuWxKx-a4D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ClKPR4cG3ZqAz-23r6c_zkiibeSJg3v4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Classification, Phases, Stages, Sedation Scale of Anesthesia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nVEkhoL1g65454_tNO0U7raOu9BKFlGA/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Accidents & Hazards in OT, Prevention, Disinfection & Sterilization</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PqTu3QT2aeby1YomuzBlhghFI_iICB5D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Q3jrXiUvbWEu7TLFwTAkIZVuiWBeIqc9/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - NURSING CARE OF PATIENTS WITH COMMON SIGNS AND SYMPTOMS AND MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1KPEBe0EnSuOPE0MaaWYcku-ElKZ0bsXX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17TMxi4yAcUTLjISJCAUGq5s3zWLqgskx/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Etiology, Types, Stages, Pathophysiology, Management of Shocks</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_PcOrFJrYiVQE__3_jO0uVJY7BAPN4SB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wbagw9e9vHHN6dAB2EOKRyYPlA4caP8a/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Types, Pathway, Physiology, Assessment & Measurement Tools & Management of Pain</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y3zVuBvvIozBLfO4CPVW4a3xtoEHGSVg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1I4MAq8jbXWRUvf8BomRevLB7QN_PMo7i/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Body Fluid, Fluid Compartments, Electrolytes, Movements of Body Fluid, Passive Transport, Water Balance, Definition, Etiology, Types, Pathophysiology, Diagnostic Procedures, Management of Dehydration</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hBi_CP2YxEJW4OBMnfpchiSD3L3_J9OC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pSI_eJQ9VKr7-6xg-ljufWDXsaiVXfHR/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - NURSING MANAGEMENT OF PATIENTS WITH RESPIRATORY PROBLEMS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/143wAF2jxgEXTHRuSLI4OIBnmAjZVDWk3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11yO6wxl62U-1LQvbO0rFGZwzAdI_xO5y/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Anatomical Physiology of Respiratory system, Nursing Assessment of Respiratory System, Definition, Causes, Symptoms & Diagnosis of Upper Respiratory System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cleD3PejOMuxVj5k4LoZMmesHMZ9pg2C/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medical & Nursing Management of Upper Respiratory Tract Infection, Definition, Causes, Symptoms, Diagnosis, Medical & Nursing Management of COPD</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QNztuz3eG66p9giCacntxMNCjEArkNNM/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Pk9_MDpM6D34cEfHvyuEOT4LuCrLP3Kd/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pleural Effusion, Empyema, Bronchiectasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1907IB7mR0TJqR3pyDylV0nKTfkYRJKLW/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GcaTGDYmVgk-4VxxteJL7MgeLOGY5rH1/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Causes, Symptoms, Diagnosis, Medical & Nursing Management of Pneumonia & Definition, Causes, Symptoms & Diagnosis of Lung Abscess</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eWcsMJfVN7LDBYKDFhUCsKUo6-vzHljk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medical & Nursing Management of Lung Abscess, Cysts & Definition, Causes, Symptoms, Diagnosis, Medical & Surgical Management of Tumors of Respiratory System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HLxj2TZrzrsrXGGrUYdpkwgR0d996G0r/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CYWiTMph7NFlJdF8qTv5ZuswjBZUcr/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Causes, Symptoms, Diagnosis, Medical Management of Respiratory Injuries</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZBIpHiM-bRWfx8v64TI-WCXHyZ4tvEMG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Surgical & Nursing Management of Chest Injury, & Pulmonary Embolism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UdRnDwlh8Eawz46pB26v6aVaxeWF0llQ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N163IACDWaDYbaVV9B-0NouUgQtXU0cK/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - NURSING MANAGEMENT OF PATIENTS WITH DISORDERS OF DIGESTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1R3zIsNn_cfMaMk5OhL-FlHTWQrBWlOHO/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Assessment of Gastro Intestinal System and Investigation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14_dnr3adfFF3ZXNz-rh7i9cQEwH3UQRp/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OfP0BeFCFJUQGXvqds1zK3IbhUy99kjT/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Etiology, Pathophysiology of Peptic and Duodenal Ulcer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vPr942oSC7jTXPUKboL_rujiDqqsFI-5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Symptoms, Diagnosis, Medical, Surgical and Nursing Management of Peptic and Duodenal Ulcer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1o09w7xtt8rKoufo8WaTT9zNyoTDLusuN/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ia0aPzgHtoY6qbayXDK4JKVorG4Smqv8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Malabsorption Syndrome</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pbx358k9jN9aKIJTKUIVRljjuukRLqO9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Appendicitis & Hernias</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EqrgzC7JacvDOgp1Fs3MgDxfPNZWr0Vk/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DRSndHHAY5SlBOCYJ7XQnef8I_5NjQr9/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Etiology, Pathophysiology, types, Symptoms, Stages and Diagnostic Evaluation of Hemorrhoids</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zEgVmMngJAX58YgTgndQYNHmcGWudyDN/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medical and Surgical Management, Complications of Hemorrhoids, Definition, Etiology, Clinical Manifestation, Diagnosis, Medical and Surgical Management of Anal Fissure and Anal Fistula</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PXY7EmMMC-58RuCO4EEEjQ3kvQgaToXK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nBZ0788U4DRSbMm4K-vKn1dJ1CwNmEzS/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Types, Etiology, Pathophysiology and Symptoms of Pancreatitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rjMd0xz0VNpfD4tg98oR9WmOtZNasd9e/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diagnostic Evaluation, Medical and Surgical Management of Pancreatitis and Cancer of Pancreas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kMrDZo7kaqPQpfN7XmNFBSkp-Sp4hZTn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ce22koHrNHKi3HO0Eiw7DUXZoik2I_5I/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hepatitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oFvBxUia0L9ftPwttj--8frS7aPHWDOV/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cirrhosis of Liver and Hepatic Failure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HqkPJsk1TbD9yTjChz_59FnMBqeHLa4R/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14BOBlI3IdHVdSRC5UkoK2cb1m0qZMvvq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver Abcess, and Portal Hypertension</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZMU9RhgGNIcCgTtNx5NDEGr_YVpGcMoe/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver Cancer</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oKnrUIwOPYa34QeaxWjANzaKJkYFSyBv/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FrYf2qziX5BSPx4A75YGyN3pqlFzi-Nx/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cholecystitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CGf85-1ttuBEgGQf4dfkEJ4AdP4NDTQf/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Medical & Surgical Management of Cholecystitis and Cholelithiasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eOK-RoxuivcIAbMgD2S25Xy1-8q-bfS0/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KoMOt5VqPmLQpoBUORvuFJ-jjJWnlpSS/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - NURSING MANAGEMENT OF PATIENTS WITH CARDIOVASCULAR PROBLEMS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1Qq6ISHlnF-59tLp7Lm-YgHAQWU8CSsRR/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T0B5A24wXdwXFPfJZcA5JMFfRfWKh4TM/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Anatomy and Physiology of Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ybV2i3G9HEde4_ApI5_ECv6jfS28yPI5/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17yZ-a3n7EXd5MivYfRmVk1cGLExCJvfm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Assessment : History and Physical Examination</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1R4FE_iI6VUZ2PRSNF8kYG7pXzpBLk9dr/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mYoWA2nA4BJrEZGgkXBUqn47AMhSv_-a/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Invasive and Non - Invasive Cardiac Procedures</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OnGngeRRx8zaaOiB6vQdTDRH1ugKTpcn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1i6cCWp0fG3mapuXV8tNt_A6v1u_FITPI/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Incidence, Classification, Types, Risk Factors and Pathophysiology of Hypertension</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18ck1K1FngkBpMG5i2cyB9KxZw7sPputW/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Clinical Manifestation, Diagnostic Evaluation, Medical and Nursing Management, Nutrition and Supplements, Lifestyle and Home Remedies, Complications and Hypertensive Crisis of Hypertension</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XeQLF4vC_cAL8aDaxq_WLE-AxLSt0f-R/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BdLwYP7WeFTTUaRaBlm_xy3TaXeynfVH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Arteriosclerosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nXLPWMwGdRY2PJn7wMrjk_HzWpLIdx_3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16rO_ghxmvDfi_EYK6GPcT6aVVonXO8oq/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Raynaud's Disease</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jM-lBXfLSUwrusr3RDAG1zKLkAph5sCh/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15hJ7KwA87ijhZUZFXo0SJ94YAoqBZMHs/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Aneurysm</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ODupmNMHuBZyPleRRPG4q2K2YcPlUsDP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fj3aYP2b7EPn3pTtXNP7nMZl9Dnn5Rvl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Peripheral Vascular Diseases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kdf1ObP83qaRgvYAMXm4ERVtpbgEpSAU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13xhG0V3XAkmZxmsUajMJ5tOf2tA4m_Pk/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Atherosclerosis, Angina Pectoris</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z0hgprCICrFaT3mffBcoolNxjDzYG1Pm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pathophysiology of Angina Pectoris and Myocardial Infraction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qU73RBeoF_AwyvePaPnfaRBYmJaxVsdo/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yiT2_-2tArDdeD3AUCUq3-i_ijw32zpt/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management of Coronary Artery Diseases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19680rogCPpABBLIc9RzPsDXIoy8OSwzg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RGKnvp3LzXiseffQb-698KzF86IOsatR/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mitral Stenosis and Mitral Regurgitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WSkriBr26rHpXBssW627Q_wpsoCcfsrK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mitral Valve Prolapse, Aortic Stenosis & Aortic Regurgitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11AHN8H5c8FV7BtmiLq4UlN_ptf71vI35/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1586Ny-3kQ6sjkOd81TwoQcPUoPjYZos_/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fever & Rheumatic Heart Disease</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZFfSemjAEkoosdCfGm6vCC7JkW90PGAG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WlSnd9pVRaRgI3ewtDusRfpC9dDfYS4x/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pericarditis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/165MBlkJseBdujKyusOSxUK0MtAUJqsfG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1akNpbfaYqYSXWvP3sBHp5ThBM45C58gg/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Myocarditis & Infective Endocarditis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1D3mKSTL_Bj_a3YfWaL-16UWedtawQ4FY/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1N29Ro5KbXsxdTN13HKKxHp8lk8OsZd26/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cardiomyopathy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LwSERts9bFEEhjEABiuwYBZmfETkczAK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QDnWUqhm5pYD6xsQ7-iO6ytjdMiX_pEp/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sinus Tachycardia & Bradycardia, Atrial Fibrillation & Flutter</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nzkYEu1bwJFA1f00KldNFeAAFKWSKE2U/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ventricular Tachycardia & Fibrillation and Heart Block</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gx8x46LuRKftBGmwmzgtrA_nmhzLCEif/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jwJr5bVdFsw7t7DmImhfiJn2nzATCFaY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Congestive Heart Failure & Cardiac Arrest</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_bJOQGTkXij3NViZfCVbQ7MyVFKa-3NE/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ztoOk8pPoLnBnbZTYepxGA2BbaOM2JzY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pulmonary Edema and Cardiogenic Shock</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kCXAikopZvjQBz2jqQYM5iRKmIhOUtIM/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uy8hhequ0_6k7ICYoUSu-OeMS382ittg/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pericardial Effusion and Tamponade</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TNcbaCbpiGdOSV_1ZkdwgT7TvaH2hEa_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1afS5fbX6JF_ZF9L5M81HPgO2qAxWSxWe/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 7 === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - NURSING MANAGEMENT OF PATIENTS WITH DISORDERS OF BLOOD
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1tsdtBUyf1FGhHbm1Ba3DtQ_XC3YMsdnq/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13vEApOc3oHat7vkqilLHRsF0tAnZ-x6O/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Anatomy & Physiology, Functions, Nursing & Physical Assessment of Blood</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IyN7YsNNE2KIeEtDvYk0lrT6KD5OX_ne/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NiIhr1HRr76EsbpCRag2cxJcfrhkU3UG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Anemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZWE1lBcbyBRtYdgoNrS_1RBPb_h4Kklg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A2ikUK51YCkguygH1t8kD4mXH6R76bnH/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Aplastic Anemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YEkMFPYCZp8RT31nfJau1-4B8mo4a3QJ/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Iron Deficiency Anemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H_bYwPTjkHydCmyt-e6ejCNzabjhJ-Pu/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13xUs2W4iIJbNzyGFYtXxmulqhqN5FzU1/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Sickle Cell Anemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-84LgMxa1Nwt5ozFZGx7x3ZywnX_Fwz9/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1F-lSDYx_hnnn3w2TMSL8zz2uTjj1ET_p/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Polycythemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TcJbFfVcJSj5aRkUN7yT0l0Y0q0XnSa8/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bleeding Disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1268AlwzbNHRvtQK9gszdu1cXpbNDDh3q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1d5366kr2AA25dbXPTBrUoRsrdk_mauXr/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hemophilia & Thalassemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/152RMdeuFU-r-Ir9VMmUcJtC4I4J2mAT5/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rTfVdCMdQQEj7OU8gVh_J0VKi_1Bpfjy/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Leukaemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jibMsgNn931YmikDB-UDw7l5AiGpLriG/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Leukopenia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FYXVphoLJKBwIMXEQMTF6Jeosnm6sP67/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ep47lb_AWAxShZmKouJLYI0XpFRGbwsy/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphoma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tB39LMMHCSob05qNZ29okTka_zo5MyTN/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Myelomas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CZZRntbpGbg2O_4R2EfFEuPIUKPmH6DO/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nJVf11NyLCGwqADAwF700tLopazEofy7/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 8 === -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - NURSING MANAGEMENT OF PATIENTS WITH DISORDERS OF ENDOCRINE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1aZ1lwO81R1lDb7GJDw2j5P2oYpwNH-X_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1A4UYOOo3VoBRTZNIM_19kcwQvWt98aDs/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Endocrine System, Hypothalamus, Pituitary Gland, Thyroid Gland</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18E9bRJ3KOPg8As46Wcs7wkA7da6CeNL7/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Parathyroid Gland, Adrenal Gland, Pancreas, Pineal Gland, Gonad</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1y5Zz_FEPpPubRou2VTJRvEK15KVfrz_W/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eGYdYiQc2JPZXlvrZc4czetVLtildeGM/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hyperthyroidism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bb8ULOul0KUerzoS1ongW0c5qx_IeQqU/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypothyroidism, Goiter</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QB5l9qg4wD7CIum1gyJgsaTwIXYKnh3g/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17yrZGRmRxx6qWrpA7vf92TzMoNSBy3pC/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Parathyroid Gland, Hyperparathyroidism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JEo-t63zJofrbQpoiQBbob6sco9BrUrK/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypoparathyroidism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1F5rAs6zYdk8Bk_dwtEnKrEjZA1z9jHrS/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-O4IC_VSGLj2bKDo45KjL0DI-k9QnaAh/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Addison's Disease, Cushing's Syndrome</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VoCgwHt8inZZI8sQ03-2sVuwqynEEG2X/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Conn's Syndrome & Pheochromocytoma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zjYo-aeQ2pPdNGmCclKKKTFj-ikIl8tI/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1681HnVhOoWxluJFt5BuWM3DkfhvbM4Ep/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Disorders of Anterior Pituitary Gland & It's Management</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19sIXO5NKTladFgF-QfdKzMSScaxwPvYz/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KzGPqkRNAv03Y-AW7qmWBuCUM9KO89lO/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypopituitarism</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wwwpjX9IONZfJbwUv4YrF6PU9E2Xz0fl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diabetes Insipidus (DI), Hypothalamic Disorders, Posterior Pituitary Tumors, Syndrome of inappropriate Antidiuretic Hormone (SIADH)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZoWWGTq3ojD0Wl7cDvVCxamXmXws48WJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14s3rVaMC37g_mnxVGhNXYLfOxU4asrCi/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Type 1 & 2 Diabetes Mellitus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yuR1KmK4x-oqlZ7bEisBYAeoR1w-Pyyn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gestational Diabetes Mellitus & Self Monitoring Blood Glucose, Antidiabetic Drugs, Insulins, Administration Sites & Routes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HzIbEXt3_ZNdLVPixgFUE8p5eNf8_hdP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wI6QrDJoi47NnJgZ1oUv-KDc-js0z5y6/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 9 === -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - NURSING MANAGEMENT OF PATIENTS WITH DISORDERS OF INTEGUMENTARY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1RlZe4ibyKYP_WR29IIpE3PJ5MzNJUUsP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hRF3RR4CLoXDor3KW98EkynKf-_TbArn/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Review of Anatomy, Physiology, and Functions of Skin, Structure and Functions of Hair and Structure of Nail</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sPmqI0LVD-kJnHsC885_WtnKHlVv7HYf/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lDfM8phPfyTucJJk6KIdOPAjsCrBhhek/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nursing Assessment, Physical Assessment, Definition, Etiology, Types, Pathophysiology, Symptoms, Management of Dermatitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12boggmJ8PcxN1u8P0PH6qltWpRgL0ajM/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lCSar6ikvhT-lMC-HzFfL9d4yyPphvAF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Causes, Pathophysiology, Symptoms, Clinical Variants, Complications, Diagnosis of Acne</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uh19tod8UJIjxGedzSuDycT5UaHm24jO/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management of Acne, Dermatoses, Symptoms and Management of Herpes Zoster</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eR53JoExRGfl-RaJHpTdpkLtgFFd_qKV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12ltieIKud6rddi-dPB-rebVNg3mYcSXe/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Symptoms, Management of Herpes Simplex Virus Infection, Skin Allergies, Definition, Causes, Symptoms, Mode of Transmission and Management of Scabies</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FSLxOJZ7ZFY4kA7ukrAfdnRO83DkOpRb/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P2rhsa7p5xvq1Nmn5TX4WB-IkH3mgUuL/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Causes, Symptoms, Management of Pemphigus Vulgaris, Definition, Causes, Morphological Variants of Psoriasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TtDDAEdRHtfxz7_yTooUvosU5voPnmx7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pathophysiology, Symptoms, Diagnosis, Management of Psoriasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zFrVTHf9oDsulXCeqXcNOTZPR_lSvVsV/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fr0VVQxUnheRZqkPGIkVKISugc5zJUo5/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Definition, Causes, Types, Symptoms, Diagnosis of Malignat Melenoma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qYB5czXbThp6sk-WxDIV3P8go5s3zGwt/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management of Malignat Melenoma, Definition, Causes, Symptoms, Diagnosis and Management of Alopecia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P8C2KzFIrr-IoL5ZfB-cT8oeuFagvqS8/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18xO4IPIpw__R1dfeRD3bV4XCQ50vmAfo/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Special Therapies, Alternative Therapies, Drugs used in Disorders of Integumentary System, Nursing Management of Integumentary System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KZAaTTy_jnlwgxTgDFCpZFmwtqvKymcG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/104EgfR8t-c-cnbJn1eE3XkwdeRLnN4v9/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 10 === -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - NURSING MANAGEMENT OF PATIENTS WITH MUSCULOSKELETAL PROBLEMS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/14W8asv086mndxqTCl9eFlcMoc1w_xpZ-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1chdmz5TSLVWowr5z7pWudaqisUyBbg6y/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Musculoskeletal System Assessment & Diagnosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VLNIQk3IqKc37TKVyLrzrkVKtPJEBjwB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1iXjXxJvN0tAwOvxgbw6uQLQMiObDdF9u/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Joint Dislocations</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sgEtP37e1nyx2eqt5VxiXbfOFBivI6QF/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TU5GBUfqiLlQ34F-k0y92QOUkytDaCI-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Fracture</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1e9AAWeaFQNUYxD6zcLIdkgVEil5H5pgq/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fz9hI6agS-CNQwKLtQTcLW1-tOvzWQt4/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Amputation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c2KmtX1RdgbRoxRIAKGL9f1qQZm2Ut8z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15wj3jyE6Q7XeTxGr7ZM8Z8wn9wJS_aqW/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Osteomyelitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yOinDzf_SwTpdOtDKY-O01EP4cJUh87J/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bone Tumor</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oER8K9Bk0cwkZxp-Bs_CN5KkKhPZv_uY/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kBsThrbBxVVGRH_HRSpqqSjCBNVxzg6G/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bursitis & Synovitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yENWqe5bYICUyaRXdK3PQCLZzw9ldsxB/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Zh0lpVWku7NxtsFo0S9zXr5g0u9hT8mm/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Arthritis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OfN3SFdGj-3lmrtZtlrdHZzohWc01k-6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qaCiKRxMggl-Jm3-EpedKFfpWX-fXR9Q/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Osteoporosis, Osteomalacia & Paget’s Disease</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nR3mBnnrcLFEE6Qz7at-PuUPX8n1J0iS/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jbCZ4FetAid8f3Uke9vT6XyHKnmZqzcC/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Prolapsed Intervertebral Disk & Pott’s Spine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gdM4izd90QNGYR8865QR36027b98hvTX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ixMQB0clOmLySonHE2IlyTZFR55-FphT/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Orthopedic Modalities & Alternative Therapy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pOvuGeFRhqJxqtXSRQpRuKbmIkn7NGSC/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Q07dI3-drtrneW6tHQ6DQ6D4kdJj2dS_/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 11 === -->
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - NURSING MANAGEMENT OF PATIENTS WITH COMMUNICABLE DISEASES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1dELyduIqbAKioF43L0MbnVQ-hFgF76_p/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZFbD8jQJpAPn4mKeQyI2T9robGvgNa3p/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aIVVrvwTxvMCpQEa2TQoNoO8DYzYSaM2/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn video coming-soon" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Chicken Pox, Small Pox, Measles, Mumps, Rubella</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1INzk8bXcpwSxXtUBw1kwtxYSAvZNGT6Q/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18phJa-mwKuqlL-bIiyveAdk3_MtgRMzp/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Poliomyelitis, Hepatitis, Typhoid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19rTJg0Iu6PhxOeCc846q55UqYsi-abje/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1a03s5ldNxXv0RKEOQexSYN2rzOZcOy4J/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Diphtheria, Pertussis, Tetanus, Meningococcal Meningitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10LiMu90-9nGTlkxjsBv00aXNnzyVeSMK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L4Xv5-wjeEUMhj0Zdhya8Xn1ifUUX-4p/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vector Born Diseases</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X0f52pL8-ZTgkuWf9fgP5JzK_LkAVdjN/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qSh9jxMgRlHFldoh3gk22qWb_g_fmwj-/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Communicable Diseases- Chikungunya, Influenza, and Plague</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CswD6_PdY28M6me0J8UEtc1kOiNFKJZc/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1FK0wbq9y1fo_I3896IjTlLB_JfAl5zyl/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Covid-19</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fDWwkQPm4MijD3m6Eeh4B7hQIx_hSoBj/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1o0ayMfEpNTwouQCmy8WAvlOf-gY4WUen/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Leprosy and Gas Gangrene</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kUNTjkKy10LyA69HVnt6J8diQXA0PM1z/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1804mCrncOv8XJwDCfNJ666041XILOI0z/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>AIDS</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DU9eXNk-thx-fr_7Nydwti_wUPDQtEX_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ISv8YpCVyJcp_fnD8rdRrfkc-uUe9JFU/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle the unit content visibility
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        // JavaScript to automatically expand the first unit on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
