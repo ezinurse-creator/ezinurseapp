@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sociology Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Sociology." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.model:hover { background: #d1fae5; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.model-icon { color: #16a34a; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1L08KiIYfQAOk_Zo4gRYxgZv8lNPBMw0q/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 SOCIOLOGY SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/16tJUgb3Xm_PvkNR7L8U2clNJn2piPHjo/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_HYsjTjQgoy1TL2LFMgI-Ha2u2Gme04O/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to sociology,Definition,Scope&Nature</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZUpkQ7kx0fJ3Ai6WfL3TR-beLUhGDMOd/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14Spwg75UV0VI1sPGCWZBdq-JC50aKn2S/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Significant in Sociology in Nursing</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/114K3pfpBT94Kuvep_TyfCpVwcux8cDpr/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1003WCKZOLSkEBZm3zY1tu6Ce5scL8zx7/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Branches of Sociology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19gMqKeG2BWwDOCzteRuVOW5MA1Ld_D-t/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - INDIVIDUAL
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/15Iac1q8OWB13qZW-e-m-AjaUniPpOluU/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nd-_j_Oy7FoJGSNCY31hXzFG_oOa1Auv/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Indivitual</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1V_4zW6vu4OSeSCCAHX5CYE-CZhs-NdNO/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - THE FAMILY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1VAHapX6KAjE6uMOYLOG1nkJFp0dtxlq5/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZV0ciTe9jiEpulLmGvmWxuqr_xpswVqc/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Family and Its Characteristics</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18Ag3OdGuJX7taFcO_nPf-wvc414XtboE/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JgGvENrA_i7Vcyxwv5ApCwYz-tVx6dEy/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Marriage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XzUicAyq16cbppwnwxJiN5lig0jMqYD6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PE-8RqBdJ0ViXI2a27EGcsvAZeZqkKIp/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Laws Related to Marriage</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YvgjQLLzzdlORnHWSBiJh9I-RYHbQJ1u/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TYQ9ZahfYsmpsTS0ECvSVX9Bu22xnoIF/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Family Cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WMahmM6LAJksHQm3t8J27YFiSLr42Aa6/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - SOCIETY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1kgUFP41VmAM2EFjxy-wXJHDWHc2Kdmpg/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rNZs2M_60Ow3vS5lVSaJ4WTXrca3xuHg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Society</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11OGLAjjwcMDdVncyAqn0b91pw5eNsR3h/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types fo Social Groups</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wzT8wJvZuEKvV-mr6XKDDdXOae2HzPDS/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yy2LW0RZydj-cATmEsrVdkjY3Bc5cBHF/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Changes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fU9XDQcLFbVYWleyrBGqx35vjVcFOX4O/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1thIAyNA6890fmz5QPzrmTBkkrxMInhDM/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Problems</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qRprm9fs5nopa4JEPLgo1QMOQ2XJoCmr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Juvenile Deliquency</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vNXxpBbOV-1hwtqbft6HMD6IaOmkzgsn/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ni7hnT7xxvHChDI4hz6f7bWevNx4CNQG/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Agencies (1)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X1Ebg1WQCsG27u4yhZT-hXK7yFVnG84C/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Social Agencies (2)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KKO6CDVclnEMD26BDZHFU970WaRfdtA4/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - THE COMMUNITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1ze2q_K5gTFppEsCnGKr3RsE9Pvdzk-hX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rbQsLQvbcZ1fejhT9w_UhsCJXsIQX44H/view?usp=sharing" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Community</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/111zCRjwrCoMEhd_q4cERxouRk7N13mAG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
+                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
 
