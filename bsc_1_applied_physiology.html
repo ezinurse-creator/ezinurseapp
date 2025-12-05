@@ -1,1 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Applied Physiology Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Physiology." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1WCC53x59CYh_GQP-UgVNkgyIKNTI1oEr/view?usp=drive_link" class="syllabus-btn" target="_blank">
+        📄 APPLIED PHYSIOLOGY SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- === UNIT 1 === -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - GENERAL PHYSIOLOGY - BASIC CONCEPT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/10N3pxg1gls98_RVOKZO0nPQ9e2v02r1B/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/101-DWlLTnTOEBrjzAxchPuVM2xP46fnV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Physiology & Cell Structure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ep6T8g1WnkNujUDVY-sWpgVgD2dXDVh5/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bhKhpVsM0ElEwNMWdsJiB0MIAY_fChEG/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tissues & Its Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1S2hZY_PFTZFTbGSdnkWEAhTAx5gevzmw/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15-iWAUqIpnaxLvprQJfmzxz-spLGMSac/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Types of Tissues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mR75v61rIfdaUF96Mq0clHCSMS5snOka/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16w_-3R2Lz95YWo-BIRgMo3igxK--R5ZJ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Membranes & Glands</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KquOH3UyTUbDCH8x3koRhhUCSA0o9Dav/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wNsQ1D2_AZKSuRtlJW6uMAyssJfTPzzy/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 2 === -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - RESPIRATORY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1QcOyOGL1-9ipMLcwzzLyLJkjxH2EmhcP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AcSKAK1cy7huOA3B3RC3WruEdbEzb0TY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction of the Respiratory System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15lx_pq6tEsNu9v05FkBaZ4bT5FOF8VgR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NJYsoWzQ4labwfi0Vh8m0AIMQfqFqOM1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mechanism of Respiration</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TVoIQs1atAaqpHp7RvmydPk5_oPkHQLs/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EKKrvJKwWoQbEWLudT1TePBiMvo183RB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Respiration</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YfjSZH_-AoMEuP6fIi1J5WDvK3rz5Aif/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vphkb11o5f4kStf7T2kXCbJQ2d_IDsl8/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Transport of Gas and Regulation of Respiration</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1shs7jdrsUxiNb29QWs8K2WmHrOEUMqal/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Pu4NtAhVm2N6gmabDcDhoVtasPJfrtM7/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 3 === -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - DIGESTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/156MjpYjAHJb2avDPWFyoZIoX-BqsUEzc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Q08ViVve81AtC_HHWvJztEiQR3SleQZm/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Organs of Digestive System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O5lZsbUWMfVMGcV7ukDBaTR25sgM6dyd/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1T-wYVW0NrGVUXKK8QyASEK-_Eg_3z7q1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Functions of Digestive System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nUFrHG3m8EaupqE6hREt4i3WNv-lYmVU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IyCKX1TJiRdQotmKop09zac4R6PJ_rdk/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Salivary glands</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UHYs-aPzvShMR6Bd5ukv5job1d6EraNm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14Hk3HYzHdWXam_NbwTjJwlBYkJkmfaIX/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gastric Secretions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Vxc3fA0uwBTiLmeqKKuG7un12hZv-DmS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/123FJomESMPRK1b9UR8pvccwfYG2OaaH9/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pancreatic Secretions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/137iPCy9v9sCtsym2UTkZ_J6OazdA0AQ0/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1682B0jY1fek3EgcS1URPYme9zGBQ77_t/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pancreas</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1adZ9Xf395B0wObqRMHEBwSP77eNLdj-H/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mRAjHD9K9riuRDdKEXjr0wKw_ihTNj55/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Liver & Gall bladder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15VpoVz_FE9yzEoQfdWGL16pPtvXsdwJK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PkMa8T70bfgwt6na9dJvp7ofZKDsH5rT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Large Intestine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1mqOvwkz9vX4MVxoenKX_I2tkgqN82Sfk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P7ILSGQr8FaN25sr61SCqT8BDVXx_WiI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Intestine, Intestinal Secretions</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lMo0Gh0RnQHu53CpdyhikYfU8YH3AnRF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PuJySZwjTRI6fJWOCsoYsly3kJmIvl7d/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Bile Secretion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_IJk0bFLThknKDzpl1TrBwADZfE-InCc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14BG1zPfXCniaZn8YW72-yUcJ83QsmgNo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Gastro Intestinal Hormones</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nJDvsYONRtr49UqWHEIZF0KVIq5FJNNy/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IWGFXdAZMcOv8gC5Hnwn6apseRvjYiIg/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 4 === -->
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - CIRCULATORY AND LYMPHATIC SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1wI0my0taaQPS3gf3Peun7t2pBBs1GEP3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kHago-VxxxU15-w6RDZ8btHoEXRrKnMK/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Structure, Layers & Chambers of the Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QQO1z82Y7XxYzqru062TWQsDekyZySKY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tDnIULk-UmSgGmXPoHwjfv4f_86MbvH1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Valves of the Heart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GVvGAzDnXw0maPoY1n3wWp1mXaCFAOfr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gdiD9BHQKlKdC2jnQuuR6LfFtJZgo71C/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Cardiovascular : Functions, Conduction System, Cardiac Cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TOHanAbQHySY7iYYEPh14yorPGR7pBd0/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Cardiovascular : Stroke Volume</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/158oy_cUtC7JrrXpknynE8zjfJoHLg1Py/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Cardiovascular : Cardiac Output, Heart Rate, Normal Value and Variations </span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tRecXngvtLIERSuUcis67eUrc8cBa4C5/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yV7oG-8HFDxmo0O0CUTuoyI1o8bqUxCD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pulmonary and Systemic Circulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1afdNd5RwEPoQqkOw3PUe2GpHZbJaOVFk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DTYRtsJW3Cwm_QmzcaP6FQQRtZopvQEN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thoracic Aorta Branches</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KVbumBAz-9mTYpIUhOD_2gJtFrfqd8_w/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Cj5tjWXcFIZw9FpzOprg52nRuL1YdPYZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Venous Circulation : Heart, Neck and Veins, Upper Limbs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zcLhrIsyK37o6NmuL6wdVg-Qm6167EXt/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Venous Circulation : Thorax, Abdomen and Pelvis, Lower Limbs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17ZWU1hN_cuWkeUZOXjF7lAzw9a_knqAf/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qY8ODUBWABSiMYqOCQRlzBkl4U0Dnfet/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Lymphatic Capilleries, Thoracic Duct</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fJz8Qd4RR1Zz0XBaxismkz3xjQvLhy-8/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Lymphatic Organs and Tissues</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1O0QPzUe3mZgZfGXyfX7LG78w0hrwcWng/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Lymphatic System : Functioning Parts, Medulla, Spleen, Parenchymal Tissue, Lymphatic Nodules</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sgJCuPG1Y8uPIaJdR9KDN_p_a4mb9je6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16V9yMWUEpK4Urlti9pjCus8W_JOTla4t/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 5 === -->
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - BLOOD
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1ls7J41VQZXJikLfG1CyS0AUJjqpBLSmX/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/16UKyoVSWAA05EyGw2JAXI6MmTrdA2Pic/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Physiology of Blood</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WpfT9qo3jhqJyIAwPav0IiCrkQzxZrCM/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qi7QuEoqpwChOM8bNujmhv-W03eEBpLg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Erythropoiesis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Eu94LsnMahD2f4RnIo784m3RAvCJMYQ4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15zbtNNFfuag_OfF8nkc7wK0hVllUI5hS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Leukocytes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/151WfxBZGrzro-3_HeGvoQz5zpSCdHQ0p/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thrombocytes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BJyc9SxhE4VoKSGmxJbq8f9KX-GovEef/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nlDmzqM2qxXNsV_EOXd24d1AYmRuczNR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Coagulation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15ce99Clydepl2BHhvwJvBh0-G256P9hD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Coagulation Cascade</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1paAe9sOz84HP7lDtWBPZRM07ZwD55NwA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hemostasis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1U1t4fDItOuh9Qfw2gQz42Iy1Qu9EmwfT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Coagulation of Blood & Anticoagulants</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RpTNdxzu6_VY8TCK9N6mkA52mFKjqcrV/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10DXrvF9gKNoXQ_P-nE2oI2_Q1XMf7_hp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Groups</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZhKXKrQtvrnCnKlBZqMJVk2pnHQ3DsOV/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cyI3Ck1gnWz0sGFkD6jGGfIyhuZTZZxp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Types of Immunity, Innate Immunity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AqSDpKlDwHw0-cYROus9rgcLDcNunT7p/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Adaptive Immunity, Immunoglobins</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1frSj5s5mAXq2rIiKMompsw2kpYXG4m3d/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Immune System : Applied Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HC08laHkA5NMnaDqa5WQmaE-IwQuCzHW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oAA_AvB6JnQaNuK9qYD-Kpl1moYlnbCi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reticuloendothelial System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ky5mpvNdphOJ5ovuKxFEnYXiyluUU9yS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jLo1yCOYMKkh-RA6dmrBnyFB8U1bQlWX/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 6 === -->
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - THE ENDOCRINE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1MsscO3WYvPgjCT0uH1fF3qi7v6XxC5nN/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IgYsF1V4V1pYLIzQZW9fSCcHKyIa-JZa/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ShajIyHZJBI56-C07QZChyTVaRuA32IQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-Xw0_-sZ1L5YQlDYOQEjAdo9B-RE7UMo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pituitary Gland : Position and Relations, Blood Supply, Hormones, Secretions from anterior pitutary Gland</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ua4sjsiI7Af4dEyj2AK6SsovLsTiy7Mb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pituitary Gland : Hormones, Secretions from Posterior pitutary Gland, Applied Aspect of Anatomy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rHpKqWr7dB49Z6MRp_y5TspIBWDZYWnZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PF8wFE65kZs2pD-PQ0kimQl1gkjCi2_D/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Thyroid Gland</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aMfEOGfiAql-KvCzqAuZrWB0XkKVu5x6/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HKoOIhfsG9v8QlLu0Zqtx2n6jUEswhqE/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 7 === -->
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - THE SENSORY ORGANS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/18Jy44QJ9HDkxuaCe0CUST7S0TY0b_ISo/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qc7_JvBMl1OJE71iyATI1b-h-ovuEO_M/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Sensory System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SvWn0Y4kIQQ7Uqf0nhdVBIhFeNC2XP05/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Jq9wQi0MnoZiZlBggY4zz7zSo1NQ73J2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skin : Epidermis, Dermis, Glands of Skin, Appendages</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HlRXY956MNUUGmbuFxN_ZNCM3HloWBHi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skin : Applied Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GtK50v7RcU1YlKvilWPNufWDNwCE_CQE/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-4yUyDwc7ZumVeNm_L4R_av8Mujr7-mL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Eye : Anatomy and Layers</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17AnIbYrsTuENcwBowDeY97MaICr0fjN2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Eye : Blood Supply, Nerve Supply</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Xd_7MoqDKjJwptZu3qV3-svlvThsYBT1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gulhuj8h8TTEQuY0WOpp0rBeooZNDUQ5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ear : External & Middle Ear, Blood & Nerve Supply</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nJkfPj55nK7vh5wIyossSLHOiUz1_xX3/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ear : Inner Ear</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jt3kAbTC9MOeMiHQI0XhZGfhTJPlOyOz/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ear : Vestibular Apparatus, Cohlea, Blood Supply, Applied Phsyiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1X-F0BRkeHilQnarDjOXx9Zm-fRn8XuJq/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14mDH_IfdjSwYO6hgoOAgQeSU5GgqphWZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tongue : Gustation, Papillae, Muscles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GY-2sUxhS-w0PckA8YjbmonxjaKlxvig/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Tongue : Gustatory Pathway, Functions, Nerve Supply, Lymphatic Drainage, Applied Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jdo1aXWl6fM7FsRlYkWg36HFrgujCbJH/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nk_Xyqjk5fjYzd5AMcAjoVC3N2DcTQgo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nose</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17gZhVXS3gNJ89tRwsUQ3LnUqCt5igIf2/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1poaGG_onPauI2vR5stwoxsovNW0KnlYN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Smell and Olfaction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Qq94dq9ooba_KdepQNyW-2YQCLjrVHCt/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ttLyPXRYzFWYt_BSChg3Lmdzkno0bmrB/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 8 === -->
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - MUSCULOSKELETAL SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/121sVgbcRetoxMiOcm5pvxeCGKbLxBvQv/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ibWrcuBNriXjJmxwazDGYYuUlqrmKcBa/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skeletal System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1EqTYm8k-k5rYNOsWzRTa_sFaNunTWSeL/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18J8M9iPKh7NuT2dHuyXx5ha1KtpSSbxn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skeletal System & Bone</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12hSX0brWplO51WIrmQH9PqEmzVafzMmB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k3tRJkoch4emH1eZQLzE7l3IUFtadM0c/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Joints</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1I6IBSns5IDLnx_CZ1UsOJGdbcPwjDipQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1x72mF3I_9ra-ocvXOCMnXtKUviUbAWoj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Muscle Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WLrONOzn2xTg0laYGzcVKs6k6ta2-Mi4/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ffNOBgBaJghscIDElqWKvAw4V42JaKSi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neuromuscular Junction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oHt2QN8hdA7tpfSUTXSVOWKkLzu7Dshr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1C1LHBi0ylFfPbCKw7UPvs68-p0JExnO4/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Muscle Contraction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wRuNnpuwJnhhi8bcwnxYMiUcZg0OXz-3/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gxqC_lvqIgwJBfe4ye0COfFqVZJT_p1T/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Skeletal Muscles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aOTwlPZCQnHBZ5yv6tYLgYUAhs7LYN6H/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1edG6qOg1xOiS07I2cgKfHbIdCwK23Rwi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Smooth Muscles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JfM2Q2gugwIEfVk20NCgpqm_20XbuFvI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Mechanism of Contraction of Smooth Muscles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1f8HVLzJkHWCDdyFRSddTKAbbVAkXWoVZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hWw9fEr8p5gEXj1c8FXnOkBOt3yj6BBS/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cardiac Muscles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1YjQJGVNvvZFiO4F3S-1JnUSPePg55DVn/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/115qM7oX_qWp-yeLbqVy9YLzzIG79pxmo/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 9 === -->
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - THE RENAL SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1XLmC8pc0ws8gPsCpETEh5WP3Aa79rFjk/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1u8ntBZBayTpd2HViW8sImZgdQlqKC9bX/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction, Kidney</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1en4z2xbvhTLM8CTG1RXecDa3U-qnediU/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HiG6rxo1lnGqOq1RSmIowBlAtHjTGEts/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nephron</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Xt8ZookIcAhOegtzDMCgwCG1yiILwLXy/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gxZ8Y0cOOKAgEk23RWZblZySEyL4HIzL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Formation of Urine</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y9vkX8HYSNdAo_qGFyBTkWBTzXMLim_p/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1aUznOTMPgtFR75y7hytGSQUduNbtqmry/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Urinary Bladder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Gn7tarfVOfuydTiZLNcTqKnwfwI9NL1S/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17HQLwB2daA9taJfcdAY7Cv_kiL9eHoXh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ureters & Urethra</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Gb4oXFNLrO1yjca7nYWddhgOXh0CJQcS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ML2h5cwxdUpoly8NSRN8pTgWmPzgpQIu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Regulation of Renal Function : Autoregulation of the Kidney</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1uhyxa6IjfVhtUgx6Xq1_Qk_rZCUv85Et/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Regulation of Renal Function : Role of Kidney in Regulation of Osmolarity and Volume</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17IwGKKTGrDPJG5jbTfot5e0F0ttUy9Uz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TQzim5H5f2uiXlLbp8L3OpNXad3jC4gG/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 10 === -->
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - THE REPRODUCTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1O6AuPR8YeiCxvLS4NdowJcAfTXe9epVJ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1390ZTxHwRmn9IwkoqANY359aVAG5pF-H/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Female Reproductive System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11vOWwaqQhHsrshHGW_p_lM5nl48FyOO8/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Blood Supply to Reproductive Organs</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1axBaeb5pmMRpxnwPJXZH2eKOn0qlKm_Y/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Vagina</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1g1yj3yTiCPXcTQ2MWsOd_zu2lMPpi523/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WqoST1I0w6WDek3OrA4DFklIhxVsyg1S/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Ovaries</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Kk0NvrKMBCjPywixrpmrYLQTR02loCoq/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Supports of the Uterus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yARI-HXvXJqdptWykQrGKuLWrK5lUmDB/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gdStPRbXFktHL7oS-bIqc8-Fp14E0kNK/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Menstrual Cycle</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vyzcePMwrS4JRO_-wyKPH63O9u6b-lE_/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Oogenesis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ujNxILzuO4yEVDbLKfZ_r4vUANnJGxMc/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G5LJFy0GLnHkjgpOSrp1UTN-7PHM5RtP/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Male Reproductive System Introduction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fiCa3FX9zg7XommZwdhxZWR-fyb15kWR/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_UTigfbSWlVIlFxPYAN1XgkRvRbN0hqJ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Epididymis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1PVfP4s174R_v3URtFjUbWJ1lHTluOHwH/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hx1cyhOJ9LB355io1VZZb3klLNBfu0Zj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Male Reproductive System : Spermatogenesis - Steps and Flowchart</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ctWNqwGdxR07ZtSb5xns6gQjFOJHrVYe/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Male Reproductive System : Sperm and Semen - Structure and Seminal Fluid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19Tk3ZV8Y4dle63MHE_g5LvXVIYdptyDP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14TXBv9u5TFxD1wo9NmEcbzbUXpg2v_9z/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- === UNIT 11 === -->
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - NERVOUS SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1MbbTX0-LMWTjAoGC9XHGcawQ04AEWU-8/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1tdNR6mo0siBxP0NWPlxpRsuxcpeMCRgs/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neuron</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/19nigTD6pOIM64OHZbUzzdgH6sr4MlUEm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z4TifczjCPRarUO7t5_Jm-MLAZ-H1-bg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nerve Impulse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1s8J_0bPobgLEXgf9g309cZCS9EldXomN/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18-kMkugHm3fFoliUgMUF19XgVbftBLi-/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Synapse</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1t1fX1nf_A0KuhLaZ3uztN2KFsvCQJ1oT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Synapse Delay</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ysNPqXvCs0IUqxKD7Ga_hU2Pcr-LdOMj/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BZKTJZJB3gx2LuayBLw8a2waJ8B-BeNV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Central Nervous System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VvwT3kMHUXH05olYZZIuFqaBmvVasIkK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c6cbB53y7gO2xmRQfsFSrhTlzeRMAIFY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Neurotransmitters</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nw0JPdagkfydtWN7FaBGfbdf-rVuO4H7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1JaFdUMLzX1WvGk8O9W3ticFxhHBC522p/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reflexes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15kV0jUFIEsWuUyiOore-OC-viK-6J5f5/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Reflex Action</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1a2mXPF5rtksjlCxCO0CLWGVUue2bbq6f/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1v3vo19ZtYq0lGEOviit6Er7Kf-RB6j6D/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Receptors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1B1J2ifs76CNa38G03cFF8IXZxeQVBOyu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Properties of Receptors</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lfU8wnnOdMsCvrYmYJTMbaWwnv-BjF1u/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zbOJ8HiIt6HX5o7kd7hjqHBJTFa7SK8R/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1D7RkzhkyaL_xDzqx60NLAofkWkjXSmcc/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Connection of Hypothalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14h6a_cZBCDNEx5OBIYuECxvh8TKbYYmT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1GXlApGJFar5BnWdBYROwpYJYyrLEHfoW/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Functions of Thalamus</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1IC2Rf9kWvcjPsWpPmL3c1A-IATbSDUOK/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kAp94HyRhNl2u4Z_6pM22pAdRMAhPJgH/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Basal Ganglia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZxFnPGwu3MLSm69FYVLUW7keOJlTs46j/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13ahOrmYJv4sZBeuUfdQignlGmX6o5Ej9/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cerebellum</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1SwUDyuXo6_0rDh7c3umA-mg8wY9ZU8eB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nuclei of Cerebellum</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1H1x-KyQC4PkH0Ekyq8CttyZ4rV3FbSvS/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wxcsWC-VUUV00wlcIiu4nAd1vnvexCWB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cerebrum</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pqbBYpCV2mT4NlRiE4Hq7RtNpK2KQw5I/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zg6b9R5MVAOrjpDYSeNm8GAz4TsGohfp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cerebrospinal Fluid</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lM_8uxXICD5r5t8_RH7ZY3s69TtXB8IF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13a0OuwiUYXTJ9Nsu6TLh1BFJAaoPr6vp/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Motor System : Pyramidal System, Extrapyramidal System</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1gjnOk6AHhf6oJSrygA8bjqZXPnmQBUSm/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Motor System : Neuron Lesion, Applied Physiology</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Deg7w3USrWfqQ2bsZcRynsL1t6seQ-Wv/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11ASgn2gd8UYJr8vVZqLFIWmeu5T1q135/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cranial Nerves : Offactory, Oculomotor</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/11ASgn2gd8UYJr8vVZqLFIWmeu5T1q135/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Cranial Nerves : Trigeminal, Facial, Glossopharyngeal, Accessory</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OM-hn-OUs4cTpfniCm9wDN_IOAvhr4cr/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LH7wWfSuY20ODNap7GRlwnPMyKkLmzFM/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Autonomic Nervous System : Sympathetic Division, Parasympathetic Division</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ii1qD71RQi2WCPuXyMme2sQU2L4Lw0oT/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Autonomic Nervous System : Mediators of ANS, Adrenergic Division</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oj6wy4xaK6owqobwAcFfYw60oOOMWHHa/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1c40YLPE139W7-SfUQgMjrkGcRgnj6Qtk/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
 
