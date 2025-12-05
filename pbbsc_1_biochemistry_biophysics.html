@@ -1,1 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biochemistry & Biophysics Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Biochemistry and Biophysics." />
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind Configuration to match the original custom CSS colors -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand': '#003B82', // Original --brand
+              'brand-hover': '#002d63',
+              'accent': '#00B9F2', // Original --accent
+              'qa-btn': '#00CED1', // Original #qa-btn
+              'qa-btn-hover': '#00A9AA',
+              'gray-50': '#f9fafb',
+              'gray-200': '#e5e7eb',
+              'gray-900': '#111827',
+              'note-bg': '#f0f9ff',
+              'note-border': '#bae6fd',
+              'note-text': '#085d8c',
+              'video-bg': '#f5f3ff',
+              'video-border': '#d8b4fe',
+              'video-text': '#5a32a6',
+              'model-bg': '#f0fff4',
+              'model-border': '#a7f3d0',
+              'model-text': '#106637',
+              'quiz-bg': '#fff5e8',
+              'quiz-border': '#ffd8a8',
+              'quiz-text': '#8c5e08',
+              'soon-bg': '#e5e7eb',
+              'soon-border': '#d1d5db',
+              'soon-text': '#6b7280',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+        /* Base styles for font and color consistency */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Utility class to smoothly control the max-height for accordion effect */
+        .unit-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            max-height: 2000px; /* Large value to accommodate content */
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        @media (max-width: 768px) {
+             .unit-content.active {
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+        }
+
+        /* Arrow rotation for the accordion state */
+        .unit-header[aria-expanded="true"] .arrow-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Specific styling for coming soon links */
+        .resource-btn.coming-soon:hover {
+            background-color: #e5e7eb !important;
+            transform: none !important;
+            cursor: default !important;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+
+    <!-- Syllabus Button -->
+    <a href="https://drive.google.com/file/d/1K3u3vanpMh8JE_NpvP3SUEkkMsqL-Rce/view?usp=drive_link" target="_blank"
+        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
+        📄 BIOCHEMISTRY & BIOPHYSICS - SYLLABUS
+    </a>
+
+    <!-- Previous Year Questions Button (Different Color) -->
+    <a href="https://drive.google.com/file/d/1HtgCASerzg8cdqEMmibfgCZPewV8ijhI/view?usp=drive_link" target="_blank"
+        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
+        ❓ PREVIOUS YEAR QUESTIONS AND ANSWERS
+    </a>
+
+    <div id="units">
+        
+        <!-- SECTION HEADING: BIOCHEMISTRY -->
+        <div class="text-2xl font-bold mt-8 mb-5 text-brand border-b-2 border-brand pb-2">BIOCHEMISTRY</div>
+
+        <!-- Unit 1 -->
+        <div class="unit-container" id="unit1_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION: IMPORTANCE OF BIOCHEMISTRY IN NURSING.
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content active px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1GDIH-NP5-bfSeTvniyk4quqiIKyvXYe3/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ymDO69kUIFjxHVlhcl_-dtqlcxddc60-/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bItwp-RTb_zHOTt589XeVqAcWv1h-0d7/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1QcYbUQM4Sg1fKNN8tncw-UkWqFwlELzu/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="unit-container" id="unit2_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - WATER AND ELECTROLYTES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1caw2vtO3M2HZlYy9mW-A_O4cHqR1fb8c/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XAPezYJLo5dSvg6-nRixyFzNj71LzGAo/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oOxf-Sap2g-H1_d6zt-KyzThuqa_hfdk/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qsv5lS4P9DC6lJqKM0N_q20pnbYEkIjb/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 3 -->
+        <div class="unit-container" id="unit3_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ENZYMES MECHANISM OF ACTION
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1NP2VXXG5oGu_k6Na8OIAG9-ak67Ys-Bg/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wteYXWjMahUw9Y7ZEDAt9dJIQ7wYk_Vg/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CC8Lqi6z5EwdfHM4Cq1LXvwnkjcsVmRa/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RjtqRrx4vvtDYcRS91CTjpKyuZK40DmX/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 4 -->
+        <div class="unit-container" id="unit4_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - CARBOHYDRATES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1KXK55A3rrKCAyzE5iBWe_x-d38zGpovZ/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VUvWaB7JdxM1f_q2KFQrHTVUELlwDuK-/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AOmDL7-ECszXj2Vl16y2rKKeszVbrhGM/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1KxXcQCSWaJimTiDe4FQTDAToCXKuQAld/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 5 -->
+        <div class="unit-container" id="unit5_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - PROTEIN
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1HX1amrt8kzzGXLG5ruon3p8kJkU9O1_l/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1lq50_Fl7NINXuXvu7Axt8TCQ44Vwqs93/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TR9im_-ZUv8tFImSe_T4o1feIbR435VQ/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OQY5ZMu4sdHogzquf5NwwGRxxNNB1y7G/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 6 -->
+        <div class="unit-container" id="unit6_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - FAT AND ITS METABOLISM
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1zbie-WzdQOcjCKf1_h8sfcWdE7QGgu_v/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/146pOEiKBU00bcLjAmGiYXxC5_UJrkeMP/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Pd-BrYF5fYPMPwap95ohsJMyvoRZfo53/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1F13ApV2iXRPuqfYjMphf14bicirdhCan/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 6 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 7 -->
+        <div class="unit-container" id="unit7_biochem">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - BIOMEDICAL WASTE MANAGEMNT
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="https://drive.google.com/file/d/1Ffav-RfOT29bEla-hqVLATaG62rwf0jy/view?usp=drive_link" target="_blank"
+                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1phvcM092pB4wP69u0C031VBCsP_NrozG/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1csWmKWhqMdjQYEfSFPXsaKYucK433ut6/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hELm6YBURad1PttUO92r1xmRPPsV2_dg/view?usp=sharing" target="_blank"
+                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 7 Quiz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION HEADING: BIOPHYSICS -->
+        <div class="text-2xl font-bold mt-8 mb-5 text-brand border-b-2 border-brand pb-2">BIOPHYSICS</div>
+
+        <!-- Unit 1 -->
+        <div class="unit-container" id="unit1_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION: UNIT AND MEASUREMENTS
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17H3BXpX7rrWwfkDXKXlo-SlvIBFQzoYh/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 1 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 2 -->
+        <div class="unit-container" id="unit2_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - VECTOR AND SOLAR MOTION
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kdv2_Ln7ZD11HOKxDTseuR4xXX4RkKFq/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 2 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 3 -->
+        <div class="unit-container" id="unit3_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - GRAVITY
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-BbSwufTU7ERzCSc4k2Mp6mmiopYnOpw/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 3 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 4 -->
+        <div class="unit-container" id="unit4_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - FORCE
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-JZOJ2ByKksk5IRiLW9zbaDdg-XkaXTC/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 4 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 5 -->
+        <div class="unit-container" id="unit5_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - HEAT
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1eGcy22aTor7usNErE0xIkhC2SI4zsgVV/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 5 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 6 -->
+        <div class="unit-container" id="unit6_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - LIGHT
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qLtl8SP7qfRLc5xEUjmwC1zo3Q2XE0Bs/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 6 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 7 -->
+        <div class="unit-container" id="unit7_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - PRESSURES
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sQqhrvM5buFcsppTAMXpATbZrY83_Iwf/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 7 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 8 -->
+        <div class="unit-container" id="unit8_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - SOUND
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Fqx7GHHghSXzEFIvPC3z-1MJo8P2TxlH/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 8 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 9 -->
+        <div class="unit-container" id="unit9_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - ELECTRICITY
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1glBCwBntm_KOoyesYEGjrT5O0gEY2x0e/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 9 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 10 -->
+        <div class="unit-container" id="unit10_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - ATOMIC ENERGY
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1k34CKAJ5fkGro1-bYYFmtEg1kjof_cx8/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 10 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unit 11 -->
+        <div class="unit-container" id="unit11_biophy">
+            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
+                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - ELECTRONICS
+                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
+            </button>
+            <div class="unit-content px-3 md:px-5">
+                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1vmO_iH5pSDTkmqr9R2Kz8Mq3531GMq01/view?usp=drive_link" target="_blank"
+                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
+                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
+                    </a>
+                    <a href="#" target="_blank"
+                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
+                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 11 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Accordion Functionality -->
+    <script>
+        /**
+         * Toggles the visibility of the next sibling element (unit content)
+         * when the unit header is clicked.
+         * @param {HTMLElement} header The unit header button element.
+         */
+        function toggleUnit(header) {
+            const unitContent = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+            // Toggle ARIA attribute
+            header.setAttribute('aria-expanded', !isExpanded);
+
+            // Toggle the 'active' class for the CSS transitions
+            unitContent.classList.toggle('active');
+
+            // If expanding, calculate the required height to allow smooth transition
+            if (!isExpanded) {
+                 // Set max-height large enough to hold all content for smooth expansion
+                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            } else {
+                // To smoothly collapse, first set height to current scrollHeight,
+                // then remove 'active' class, and reset max-height to 0 after a small delay.
+                // Note: The main transition is handled by the max-height class property,
+                // but setting a specific height often makes the collapse animation smoother.
+                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
+                setTimeout(() => {
+                    unitContent.style.maxHeight = '0';
+                }, 10);
+            }
+        }
+
+        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
+        window.onload = function() {
+            const firstActiveContent = document.querySelector('.unit-content.active');
+            if (firstActiveContent) {
+                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+            }
+        }
+    </script>
+</body>
+</html>
 
