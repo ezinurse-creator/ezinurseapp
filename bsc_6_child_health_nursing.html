@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Child Health Nursing Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Child Health Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82;
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1-px rgba(0,0,0,0.06);
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none;
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { 
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        
+        .resource-btn.coming-soon:hover {
+            cursor: default;
+            background: #e5e7eb;
+        }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            color: var(--brand);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--brand);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+            h2 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://drive.google.com/file/d/1x7-Cwb5oOScj8eNwQwQ2BGjlByFl-JyN/view?usp=sharing" class="syllabus-btn" target="_blank">
+        📄 DOWNLOAD CHILD HEALTH NURSING SYLLABUS
+    </a>
+    
+    <div id="units">
+        <!-- UNIT 1 -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1. Cardiovascular System
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1j8RY4X7SQkDvtbqQcvLEwLJ04ZCxFsfc/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/18TRV6zblE9R05-0zP3c8uWYgLyfHBNRh/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>CARDIOVASCULAR DISORDERS : congenital heart disease, atrial septal defect, ventricular septal defect.</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ae6QMTMlT8DzI2igAeLPguF8jPVQ4CeT/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1z-ygIvRJ5wHFBWLcqPnbMkX9CURa4_iy/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>CARDIOVASCULAR DISORDERS: patent ductus arteriosus, tetralogy of fallot(TOF), rheumatic fever</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oh7yDRw-IMgqWpB7C6aLEVNUBgwbzzY-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ZtLoFksoVU4kaWxe2G0I4X5KYglimr-_/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️️</span><span>CARDIOVASCULAR DISORDERS: rheumatic heart disease(RHD), mitral regurgitation, mitral stenosis, aortic regurgitation, tricuspid regurgitation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pRJWUx9DjYIAMytomFTzYCSnHkEnThIQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1dv5NYXiV3zq6bNM-TcdPDzjJG9-sQjLL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>CARDIOVASCULAR DISORDERS: congestive cardiac failure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xlU3PLSkGdEScboaiz3ynDD2YOzWZ-Qm/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1auq79t3_qMMcd8Hz4AOshzzYciTFhcNW/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>HEMATOLOGICAL CONDITIONS: Hemophilia, thalassemia, anemia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qk-fc1-j70uxgGctpt7KC-eBWaUdRJId/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ONhyA3pfow8Qywthci5l3F82HCFdtgcO/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>HEMATOLOGICAL CONDITIONS: Leukemia, idiopathic thrombocytopenic purpura, hodgkin's lymphoma, non-hodgkin's lymphoma</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1C10wEec6Plu0BOmE7hmt2GKgA-1AR1IX/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-u6_tVW1QPLjobahxt9Eulc_xBCoH8fw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GASTRO-INTESTINAL DISORDERS: Cleft lip and cleft palate, congenital hypertrophic pyloric stenosis, Hirschsprung's disease</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1qe5t29kaf8FBY9dtI-a5mXkWmN2y_WfY/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1CMeq9Ih6gB8ivUMa-bTMB9qxPa0-M6J6/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GASTRO-INTESTINAL DISORDERS: Anorectal malformation, Malabsorption syndrome, Abdominal wall defects, Hernia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Y8XTU9GS7EoS8DoTnVEPCLasT9gMBXsx/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hjE_LGPILdAHnELa9S1_Zze3jCKGU84N/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GASTRO-INTESTINAL DISORDERS: Gastroenteritis, Diarrhea, Vomiting, Protein Energy Malnutrition (PEM)</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kz02-AkcSIb1VWXjaprQRJmJ9hREZ47o/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1BmGlpuOiYgiNeNOjEhMvZ93TEcALdTtI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GASTRO-INTESTINAL DISORDERS: Intestinal Obstruction, Hepatic diseases, Intestinal parasites</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1jMwpXz1wlL7OtWHRKN9sREjFKHqZBva1/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1d_7mHiA6edKcReZB7QOFCbfL9xEjwxC_/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GENITOURINARY SYSTEM: Wilms tumor, Extrophy of the bladder, Hypospadias, Epispadias</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1yDr6UQbqMt9pACocrI8wkXDoZRUyEWqW/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14axnVTxP6JUQsogZHTPItmGXGFRq5XfI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>GENITOURINARY SYSTEM: Obstructive uropathy, Nephrotic syndrome, Acute Glomerulonephritis, Renal failure</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1RD8p1s0RZaLyHuWyyLxcpRk0T_dh1aXP/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AlaxpWobITGj3CAv71rqKL0uGYaYCkw2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>NERVOUS SYSTEM: Hydrocephalus, Spina bifida, Meningitis, Encephalitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/12s7X4QNQxpQPwlC4OLVDWe3XoXYslbiz/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ri6zj0GZzvlH2Z1PzgNiwIPUOBWsLutL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>NERVOUS SYSTEM: Convulsive disorders, Epilepsy, Cranio-cerebral trauma or head injury, Cerebral palsy</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/15vo-wmHgSoSSAnYguVUTEnJKB3sauTG-/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1zwFf9CBWP5JKSSZMQu-py6bVn3doNnoB/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Important Question Discussion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1pKxtVa1IFXi-U3h7cJKVpnJqrf_qeMeK/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Important Questions</span>
+                    </a>
+                    <a href="#" class="resource-btn quiz coming-soon" onclick="event.preventDefault()">
+                        <span class="icon quiz-icon coming-soon-icon">✍️</span><span>Take Unit 1 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 2 -->
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2. Orthopedic Disorders
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1_SFVFAaFk6UXyVJpmwoenHPPzoS0gFET/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xw1OBSYR-e8sk-YsDHs7JKnxhNVKLDIi/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>ORTHOPEDIC DISORDERS: Introduction to orthopedic disorders</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1b9tUPgoJq4mVGO2bmmAzKD_clrseaU7A/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WaKTUcIJ8g8Pe6WqmkmBfbOcbG2H6tOd/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>ORTHOPEDIC DISORDERS: Club foot</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1nmosxQOWxg4GUWdwrbmPry-KS07OkFzx/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XeGQvAfBXIUWI5Lxp0Dfl8ymypwd9CrL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>ORTHOPEDIC DISORDERS: Hip dislocation</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1G9ZsoBqrtX-APmDEiBK8hUS6eUgMnO_t/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1L3hRyuABXXWQhfO62YEBYW56GnAC_qea/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>ORTHOPEDIC DISORDERS: Fracture</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ha86eaE0oquxiJMpU76hEzQ6H5SEA87o/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/126I2YnNb2MThJbGOnXVzm5GygGm2oTVK/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/141Y9Wn9gGrCK5eqvnaHchU1GFpMgF5Kb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>EAR DISORDERS: Introduction, common ear disorders and its management</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1VsqdjEz44Dgq8BgoTqOV94bb2vt_5HVi/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1LTOkRbxn01G3lFspdXq9dD6LfHnjR5gg/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>SKIN DISORDERS: introduction, Atopic dermatitis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1i3KVQAPjTKhwT8f7--IJWBxrGNB3mRiI/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10jgUTb3lA0CvuuZ3OKSuRLlPaSfw5wRn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COMMUNICABLE DISEASES: Tuberculosis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1UGAZYcu6o4Y6kp9mFve8wvtGNYizx2qw/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/13ofvi77lopleLjYJFoaIZCdu-cLJpuXE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COMMUNICABLE DISEASES: Diphtheria</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1sBLFe0Eba0D7Ue1W8bdxXB2vfs6jv76N/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/198x7gIhRocIccksRHatWxHeqPVo2ocwE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COMMUNICABLE DISEASES: Tetanus, Measles</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1usLXlVd2kuqjuErHjD99s8jXggaIyFqO/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1fOIThqinY__8Nm2duynaGv732TI3FhlZ/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COMMUNICABLE DISEASES: Pertusis, HIV/AIDS</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1bj2s67GiVqx4Qi2dPE7EPYxMV18ZXwG-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/14F5p0YuKiski7CoUIEJw0o-ygdF1kcK2/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>COMMUNICABLE DISEASES: Poliomyelitis, Chickenpox</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1kO8o_6ZlDJngwJLubJKcsL4p36VrxQ4f/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1ph7gUXmlVMVi9DOhsGewZrIoCoSmusGa/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Important Question Discussion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1AUBXRljvaDRiyhFu4DBYoEfktSErRRJT/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Important Questions</span>
+                    </a>
+                    <a href="#" class="resource-btn quiz coming-soon" onclick="event.preventDefault()">
+                        <span class="icon quiz-icon coming-soon-icon">✍️</span><span>Take Unit 2 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT 3 -->
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3. Management of Bheavior and Social Problems in Children
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <a href="https://drive.google.com/file/d/1RbZKbxUAwa2LO5V5Q-2-pH9GPWHXgOd-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1P6KDs0Mb21w5FOYsJ8cJ59NcCsNlWwGE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Child guidance clinic</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1_pJrOcoL6MpNhRi_dtQRku_0zuxzXAW-/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hGYTiyekJ7yOXUnP1kOm67J6PWk4MiPD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Enuresis, Encopresis</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1cB3UFm2gkkSl-JPG59k-KkyurI9PS7IF/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Ts_fvo6zsFy1_J0xD2EbXdWV2-x66ocr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Nervousness, Nail Biting, Thumb Sucking</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1XKtJoQvyHgaLz14kGHU3Sj5pt5eFTt1M/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DkALR9CfrCitB4MUwilZwLMbwZPF-19O/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Temper tantrum, Stealing in children, Aggression, Breath holding spells</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1wKbehsKgV-cP-Uqbd8NUyiGa9tugZqgy/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1-OhojvpvSZujOY9KAnRr7liiu6BoX2mn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Juvenile delinquency, School phobia, Learning disabilities</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1rFTLCtrRkXGvcfIaA0fyxBYhHkt_xzr1/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/10YQ4Pp_nDQEIQ1bdiSYgYiYc2pafH1nC/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Pica, Tics, and Childhood schizophrenia</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1HU57m2Q13T3hyQ2aWrX0NHg0ZoMiSRkT/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1abQ81hXQxpDm40agsb16IPj9quytruaf/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Childhood depression, Conversion reaction</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1hkoIsQOV-JRZ1CBD7E9B9szfkYXBnwsx/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1utIiWYJZWj1RxGZWiP_1_5OOqqt9qzHu/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Posttraumatic stress disorder, Autism spectrum disorder</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1F3SFl1_t648l1qFBs8n7oay8VXLszNly/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1xV62ODA2jwBjm5hZgFYDKTIVEc8vcLhI/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Childhood obesity</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1OVZiuGtBqKexrLVHhIjNCo0Wtmw4zQ1_/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/17IilnJLKBvV-XbnU4A5KqyZNdk3mnsAN/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Anorexia nervosa, Bulimia nervosa</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1TtH2FTkMTBCylZU9QUXW4zqQ1P-FqSVA/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1l2P0EbpZC-cf7wd-zuGn6u3s1837s56s/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Management of challenged children</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Wjqw67oeBNitRYM5oLE5XdquySFiQ6Xa/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1w8OW57sLSXYIbO-kB3RxNhcq-Kfny6xf/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Child abuse, Substance abuse, Welfare services for challenged children in India</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1NxgfxUhX2VEDp0IACLrTRZClCOT2ed9D/view?usp=sharing" class="resource-btn notes" target="_blank">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1Nxlxa1yKeeLl41F6ZM8DIomyzftKTxQD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                        <span class="icon video-icon">▶️</span><span>Important Question Discussion</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1DSGvhTo0Tm0hRE9y6lF15fLAyYTi2JD3/view?usp=drive_link" class="resource-btn quiz" target="_blank">
+                        <span class="icon quiz-icon">✍️</span><span>Important Questions</span>
+                    </a>
+                    <a href="#" class="resource-btn quiz coming-soon" onclick="event.preventDefault()">
+                        <span class="icon quiz-icon coming-soon-icon">✍️</span><span>Take Unit 3 Quiz (Coming Soon)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnit = document.querySelector('.unit-container');
+            if (firstUnit) {
+                const header = firstUnit.querySelector('.unit-header');
+                const content = firstUnit.querySelector('.unit-content');
+                header.setAttribute('aria-expanded', true);
+                content.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
