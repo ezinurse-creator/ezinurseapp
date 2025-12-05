@@ -3,560 +3,634 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Applied Nutrition and Dietetics - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Applied Nutrition and Dietetics." />
+    <title>Applied Nutrition & Dietetics Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82;
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
+            --primary: #00B9F2;       /* Light Blue */
+            --primary-dark: #003B82;  /* Navy */
+            --bg-card: #ffffff;
+            --bg-body: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #f59e0b;        /* Quiz Gold */
+            --danger: #ef4444;
+            --success: #10b981;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 80px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f9fafb; }
+        
+        .unit-header.active {
+            border-bottom-color: #e5e7eb;
+            background: #f0f9ff;
+            color: var(--primary-dark);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none;
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
-        }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.model:hover { background: #d1fae5; }
-        .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon {
-            background: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.model-icon { color: #16a34a; }
-        .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
-
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
         }
-        
-        h3 {
+
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
+        .type-video { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
             font-size: 1.2rem;
-            font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+            width: 30px;
+            text-align: center;
         }
 
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FIX: 16:9 Aspect Ratio for Videos */
+        .modal-iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            max-height: 80vh;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
     </style>
 </head>
 <body>
-    <a href="https://drive.google.com/file/d/1b1JcWDoEW4B0s_FuXfVj9Vakpw1ggsHd/view?usp=drive_link" class="syllabus-btn" target="_blank">
-        📄 APPLIED NUTRITION AND DIETETICS - SYLLABUS
-    </a>
-    
-    <div id="units">
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION TO NUTRITION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1LtEg0KI6MyNhxjmayarrITsibO5KfGd-/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19FP4IYHT-M7D3pMwY01YPMbUi7a52e_g/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Introduction to Nutrition, Health, Role of Nutrition in Maintaining Health, Classification of Nutrients</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uqHuLiHkcOT2sBx34GCIqvImEVRTc9II/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10Thj5tD2xVPYUON5n5zgNrwDk06txk7y/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Food, Classification of Food, Macronutrients and Micronutrient</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-bzNrM-RhXUHflCSGjeFweHxwLdbtuGT/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NKQwOoJ5x4u5RHWn-0JpFYinknTsc5is/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
-                </div>
-            </div>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Applied Nutrition & Dietetics</div>
+            <p style="color: var(--text-muted);">BSc Nursing Semester 1</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - CARBOHYDRATES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1mA2_KPUro3aX76J1ND9rCyAkmM2HVkS3/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1IprrlxGn1v4YikY5EgPlchD-yS-rwxXh/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Carbohydrate: Introduction, Classification, Daily Requirement of Carbohydrates, Functions, Sources and Energy, Basal Metabolic Rate</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xFaPcpt2dICLqsuWEgE7isOoYef1UEvt/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1XGejUo-lgC972CvIkzzhq0C29su6zXKi/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1b1JcWDoEW4B0s_FuXfVj9Vakpw1ggsHd/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - PROTEINS
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1_dz0RqM8iwdNc5UqlAcqbh1Sxj9o7TrS/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1c3xCXL4MY69rh3WiW1gnskb3S3o6pyLA/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Proteins: Introduction, Aminoacids, Types of aminoacids, Classification of proteins, Functions, Sources, Daily requirement of protein</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ctQgl3u3-JgMOSLjCsGGVKYPPuw0Qti9/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ooFH7Jkoi0_iPsUE-SCq76TpIpHqVyML/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - FATS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1inVMmGS1LT_9CS6U6C5A5R8hw8S5URQb/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-EUsyLGT9wvxooEjd3VnZ10o2Gadrjw5/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Fats: Introduction, Classification of fats, Fatty acids, Types of fatty acids, Caloric value of fat, Functions of fat, Dietary sources of fat, Daily requirement of fat</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KwvurKoSU8kBHXim9ietJLDtFnqTMASr/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1IlEk--Z4Yu_sWFA0S34ftCZfjgxvm6J4/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
-                </div>
-            </div>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - VITAMINS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1rV_HW3DUEwJA3ZouCOKgAzlE7v2h2FWD/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16iXdjCt_I2rqY9lRA-UwHWYeLtZe_1ZE/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Vitamins: Introduction, Classification, Functions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1luWABRxGhveqwtYr0LdFAAOdh7H9wKfG/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1m6Mokl33zd7hj-YISj8d2BUVQ34sihsQ/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Vitamin B6, Vitamin B12, Pantothenic acid, Folic acid</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1G_jI_TXDwIK-q4YENpRWTMG_Zil_pmH1/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PwHCVLPFk04FwJFKssShC7qm0Pq__PZV/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Fat soluble vitamins: Vitamin A, Vitamin D, Vitamin E, Vitamin K</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LwoiORrlrvKPuFp3DFUCwaMELJOPt6KK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uVHIVbetef855GKXUfcJCswlRecjD8U1/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - MINERALS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/14Orrlv5jpHC6E9OD8z_DzgLqivWbmKhH/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xS4k2A8qNOd5B14vIxnDjSViSl-QKvAk/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Minerals: Introduction, Classification of minerals, Calcium, Phosphorus, Sodium, Potassium, Magnesium</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hi5Bed78TOKkMNbyZJKfiw12w20U4Jeo/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EQbelP_1eAKnynrWlnGjKdlN2Mimr0L0/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Microminerals: Iron, Copper, Iodine, Zinc, Manganese</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1z3o7kmn15J2L4Jt4F8oXOj8ssZvBjpZq/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qLrs_QdikGRv06j1_HksUbRSQrAiuAcL/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - BALANCED DIET
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1tFLtE2YOKVHn2Um8qu6OWcruk36KauoU/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1e2r31iB6i2q-LUuWddYi-R2Hp1Fpl3wT/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Balanced Diet: Introduction, Definition, Principles, Steps to choose a balanced diet, Food guide, Food groups, Recommended daily allowance, Food exchange system, Dietary fiber, Menu planning</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1O4II3fER22sw-ZLsh27c_iz87YmXZqKz/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1tmzsKp4GJruI2usuQPeZcR9ZFnay3dG7/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Infant and child feeding, Nutrition for adolescents, Nutrition for aged people, Diet in pregnancy, Anemia in pregnancy, Nutrition in lactation, Weaning</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1nlt9gbQC6VFH_30ELKuQC8vvL17F5D9D/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Y5bgDyL3bjF2esExixm92ShjKvl-dflK/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit8">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - NUTRITIONAL DEFICIENCY DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1Z49iUG9hgGOvVlfogE75ahe5ng_CNWo7/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RhRzoqz0aXP_jAOlIMczZUX-3wYSwnXG/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Nutritional deficiency disorders: Protein energy malnutrition (PEM), Childhood obesity</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-WpVyQpr5r5bhpj0MR74eertJCyddpet/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-lX31ZdvwSGfCrATk8e1hAMz8JDuunDM/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Vitamin Deficiency Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_XRBjhsHURWYSlVlvv7Hoc0ifGUgOSp9/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JT5-L1XNTuYsj1JL7EjhVynQBTq7qQsA/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Mineral Deficiency Disorder</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1K5CDSrjFOs0hYf9s90JEX4quTQdBxRVl/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sx_GbMKBTRuFIxExClrqb8CKzn9pmKy3/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit9">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - THERAPEUTIC DIETS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1N0wZZcd4pgJ7mOrO-Ljim7XP927fPXr6/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_7RfYaHe-2KwE4bmLm8u-fw1bw3BXJbZ/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Therapeutic diet, Diet in obesity</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1g7ZaLbgRwFa8E49MqcmkkQR5D9kmTSd0/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diet in diabetes mellitus, Dietary recommendations for Cardiovascular Health, Under weight, Diet in renal disease, Hepatic disorder</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13a6pE5NIGl8sisW-BBB28x4mRa58CMr2/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diet in constipation and diarrhea, Pre operative diet, Post operative diet</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qXya5vVNg2_rcnb1kb__2q6h6uzeZrPq/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dCeM9MMDK3m5Me1I0o6fhtaVmjdvU6Ax/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit10">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 10 - COOKERY RULES AND PRESERVATION OF NUTRIENTS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1Jr8C6vaA-PqBS64_ftoHBNLX_FivALnk/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hgYCnVH69dNvbRJwEo6N3Qi6lW-86CY3/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cooking, Benefits of cooking, Principles of cooking, Methods of cooking</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KTGJqWaSrnq1uFKX7n5EiDe3iLkvOiDc/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1HC-8DjxyBqOFFT4RU_vqPkWxnxiWYsX2/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Storage of food: Classification of food, Principles of storage of food, Methods of storage, Technologies Used in Storage, Measures to Prevent nutrient Loss During Preparation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ixxeZOmPVxJIgTURS42gIApRemHx3vTB/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15IBIXHtywG3uekAKUGULc_lORWye5wR0/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Food additives, Food adulteration, Food standards</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ODRFFEbNRLYY78IzosdriA8G1Usv-ezc/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1glqtY9i2HncgZvfXsGfAEme0C9AFgPj8/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit11">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 11 - NUTRITION ASSESSMENT AND NUTRITION EDUCATION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1Bu499GIM1raTRpFANrHm3XOCuij1pdJT/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Z5th1Cce2wOtfjFMWDp3FKlLngAGglTA/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Malnutrition: Assessment and Various Methods of Assessment of Malnutrition</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UR4eome5AXOeLIfiG0xZ0bG5i6yWr7cB/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zTTBB8fMaVeRYs6yaWQGg3POBDkIRfpN/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 11 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit12">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 12 - NATIONAL NUTRITIONAL PROGRAMS AND ROLE OF NURSE
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/17CCffyD5X_ELcCF7u1YQL3SqhEP0dKIP/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1aZSXse2HWvuZdjH5C4bJIviJu_dELkcb/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Nutritional programmes in India: Anemia Mukth Bharat Programme</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LwfWbS_8xqfrBIHN-pevmSRbuCKFOfze/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gaIRzWBclSl1UV8KGtEcm_phFrB1Yt62/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Integrated Child Developmental Service Scheme (ICDS)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iTTBH2ilC8EkkwA4_W8Sj75DkRhrsC6P/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U2spneVeIeynIO1H6yvzzOk8bxma4i1R/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Mid Day Meal Programme (MDM)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Y_2cid1Be3iqmOWsNjAY5FzxkPqArkSa/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1nNivOKVUvzrW85fm0d1CFMuTE_3hYpBF/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>National Iodine Deficiency Disorder Programme (IDD)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1O_EywfqYVnaFrFZZ8QOS3q2Ih6a87maq/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iFyv4ZeMKSBT9R48TB0qh91rJV9OfWM0/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>National nutritional problems, National nutritional Policy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eakXlIk6CjgMRdcotGoOKhgs4PzyjS2T/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bGyb8zRILfh8a3p_RfKDw6fhV8cHlJek/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 12 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit13">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 13 - FOOD SAFETY
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1uXiFTYCgJgev4BEMpSqPZc8bbcASknRN/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1n0VTC54BJKmSqyx4gGNz0YZ3XQZUiSqj/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Food safety: Food safety measures, Food safety acts, Keys for safer food, Food storing, Food handling</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SEywniWnbwBmUh3W4q9eFZB44O-oeyPT/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cooking method, Principles of food storage, Role of food handler's, Essential steps in safe cooking handling</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FyDtUJBVbBm0c387_GcTAIPx3VMevuZE/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1u-8XRF2RWYw-er10q8Z6Q9-cA33TRwZW/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 13 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
     <script>
-        function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            unitContent.classList.toggle('active');
+        // --- 1. NUTRITION QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Intro
+                { q: "Which of the following is a Macronutrient?", o: ["Vitamin A", "Calcium", "Protein", "Zinc"], a: 2 },
+                { q: "Health is defined by WHO as:", o: ["Absence of disease", "Physical fitness", "Physical, mental, social well-being", "Financial stability"], a: 2 },
+                { q: "Food provides energy which is measured in:", o: ["Kilograms", "Kilocalories (kcal)", "Liters", "Milligrams"], a: 1 },
+                { q: "Micronutrients include:", o: ["Carbs and Fats", "Vitamins and Minerals", "Water and Fiber", "Protein and Starch"], a: 1 },
+                { q: "Good nutrition helps in:", o: ["Promoting growth", "Preventing disease", "Repairing tissue", "All of the above"], a: 3 }
+            ],
+            2: [ // Carbs
+                { q: "1 gram of Carbohydrate provides:", o: ["4 kcal", "9 kcal", "7 kcal", "2 kcal"], a: 0 },
+                { q: "Which is a monosaccharide?", o: ["Sucrose", "Lactose", "Glucose", "Starch"], a: 2 },
+                { q: "The storage form of glucose in humans is:", o: ["Starch", "Fiber", "Glycogen", "Insulin"], a: 2 },
+                { q: "Dietary fiber helps prevent:", o: ["Fever", "Constipation", "Headache", "Hair loss"], a: 1 },
+                { q: "Which organ primarily relies on glucose for energy?", o: ["Heart", "Liver", "Brain", "Muscles"], a: 2 }
+            ],
+            3: [ // Proteins
+                { q: "Building blocks of proteins are:", o: ["Fatty acids", "Glucose", "Amino acids", "Enzymes"], a: 2 },
+                { q: "1 gram of Protein provides:", o: ["9 kcal", "4 kcal", "7 kcal", "0 kcal"], a: 1 },
+                { q: "Essential amino acids must be:", o: ["Synthesized by body", "Obtained from diet", "Avoided", "Stored in fat"], a: 1 },
+                { q: "A complete protein source is:", o: ["Rice", "Egg", "Wheat", "Corn"], a: 1 },
+                { q: "Protein deficiency causes:", o: ["Scurvy", "Kwashiorkor", "Rickets", "Goiter"], a: 1 }
+            ],
+            4: [ // Fats
+                { q: "1 gram of Fat provides:", o: ["4 kcal", "9 kcal", "7 kcal", "12 kcal"], a: 1 },
+                { q: "Which is a 'Good' Cholesterol?", o: ["LDL", "VLDL", "HDL", "Triglycerides"], a: 2 },
+                { q: "Saturated fats are usually _____ at room temperature.", o: ["Liquid", "Solid", "Gas", "Vapor"], a: 1 },
+                { q: "Essential fatty acids include:", o: ["Cholesterol", "Linoleic & Linolenic acid", "Stearic acid", "Butyric acid"], a: 1 },
+                { q: "Excess fat is stored in:", o: ["Muscle tissue", "Adipose tissue", "Bone marrow", "Liver"], a: 1 }
+            ],
+            5: [ // Vitamins
+                { q: "Vitamin C deficiency causes:", o: ["Rickets", "Beriberi", "Scurvy", "Night Blindness"], a: 2 },
+                { q: "Which is a fat-soluble vitamin?", o: ["Vitamin C", "Vitamin B12", "Vitamin A", "Folic Acid"], a: 2 },
+                { q: "Vitamin D is essential for absorption of:", o: ["Iron", "Calcium", "Zinc", "Potassium"], a: 1 },
+                { q: "Night blindness is caused by lack of:", o: ["Vitamin A", "Vitamin E", "Vitamin K", "Vitamin B1"], a: 0 },
+                { q: "Vitamin K is necessary for:", o: ["Vision", "Blood Clotting", "Digestion", "Reproduction"], a: 1 }
+            ],
+            6: [ // Minerals
+                { q: "Iron is required for formation of:", o: ["Bones", "Hemoglobin", "Teeth", "Skin"], a: 1 },
+                { q: "Deficiency of Iodine leads to:", o: ["Anemia", "Goiter", "Scurvy", "Dermatitis"], a: 1 },
+                { q: "Major mineral in bones and teeth is:", o: ["Iron", "Sodium", "Calcium", "Iodine"], a: 2 },
+                { q: "Sodium intake should be restricted in:", o: ["Hypertension", "Hypotension", "Fever", "Anemia"], a: 0 },
+                { q: "Zinc is important for:", o: ["Wound healing", "Vision", "Blood clotting", "Muscle contraction"], a: 0 }
+            ],
+            7: [ // Balanced Diet
+                { q: "A balanced diet contains:", o: ["Only proteins", "Only carbs", "Nutrients in correct proportions", "Fast food"], a: 2 },
+                { q: "RDA stands for:", o: ["Recommended Dietary Allowance", "Real Diet Action", "Required Daily Amount", "Regular Diet Assessment"], a: 0 },
+                { q: "The Food Pyramid guides us on:", o: ["Food quantity & types", "Cooking recipes", "Food prices", "Restaurant locations"], a: 0 },
+                { q: "Pregnant women need extra:", o: ["Iron & Folic Acid", "Vitamin A only", "Fiber only", "Sugar"], a: 0 },
+                { q: "Weaning is:", o: ["Stopping breastfeeding", "Starting solid foods gradually", "Sleeping pattern", "Walking"], a: 1 }
+            ],
+            8: [ // Deficiency Disorders
+                { q: "Marasmus is caused by deficiency of:", o: ["Protein only", "Energy & Protein", "Vitamin C", "Iron"], a: 1 },
+                { q: "Anemia is commonly caused by lack of:", o: ["Calcium", "Iron", "Sodium", "Fluoride"], a: 1 },
+                { q: "Bitot's spots are a sign of:", o: ["Vitamin A deficiency", "Iron deficiency", "Calcium deficiency", "Protein deficiency"], a: 0 },
+                { q: "Rickets affects:", o: ["Eyes", "Skin", "Bones", "Blood"], a: 2 },
+                { q: "Goiter is enlargement of:", o: ["Liver", "Thyroid Gland", "Spleen", "Heart"], a: 1 }
+            ],
+            9: [ // Therapeutic Diets
+                { q: "A clear liquid diet includes:", o: ["Milk", "Coconut water", "Mashed potato", "Scrambled egg"], a: 1 },
+                { q: "Diet for Hypertension (High BP) is:", o: ["High Salt", "Low Sodium (DASH)", "High Fat", "Low Protein"], a: 1 },
+                { q: "In Diarrhea, the patient needs:", o: ["High Fiber", "Spicy food", "Fluids & Electrolytes", "High Fat"], a: 2 },
+                { q: "Diabetic diet focuses on:", o: ["High sugar", "Complex carbs & Fiber", "Fasting only", "Fruit juice"], a: 1 },
+                { q: "Pre-operative diet usually involves:", o: ["Heavy meal", "NPO (Nothing by Mouth)", "High protein", "Raw vegetables"], a: 1 }
+            ],
+            10: [ // Cookery
+                { q: "Boiling is a method of cooking using:", o: ["Dry heat", "Fat/Oil", "Water", "Steam"], a: 2 },
+                { q: "Vitamin C is easily destroyed by:", o: ["Freezing", "Heat/Overcooking", "Cutting", "Washing"], a: 1 },
+                { q: "Parboiling is associated with:", o: ["Wheat", "Rice", "Corn", "Potatoes"], a: 1 },
+                { q: "A method to preserve nutrients is:", o: ["Overcooking", "Washing after cutting", "Pressure cooking", "Discarding cooking water"], a: 2 },
+                { q: "Food adulteration means:", o: ["Adding nutrients", "Adding inferior/harmful substances", "Cooking well", "Freezing food"], a: 1 }
+            ],
+            11: [ // Assessment
+                { q: "BMI stands for:", o: ["Body Mass Index", "Basal Metabolic Indicator", "Body Muscle Index", "Basic Mass Indicator"], a: 0 },
+                { q: "Anthropometry involves measurement of:", o: ["Blood levels", "Height, Weight, Circumference", "Dietary intake", "Clinical signs"], a: 1 },
+                { q: "Clinical assessment looks for:", o: ["Weight", "Signs of deficiency (skin, eyes)", "Lab values", "Food diary"], a: 1 },
+                { q: "Dietary recall usually covers:", o: ["Last 24 hours", "Last month", "Last year", "Lifetime"], a: 0 },
+                { q: "Mid-Upper Arm Circumference (MUAC) assesses:", o: ["Obesity", "Malnutrition in children", "Height", "Head size"], a: 1 }
+            ],
+            12: [ // Programs
+                { q: "ICDS stands for:", o: ["Indian Child Development Scheme", "Integrated Child Development Services", "International Child Diet System", "None"], a: 1 },
+                { q: "Mid-Day Meal program targets:", o: ["School children", "Pregnant women", "Elderly", "Infants"], a: 0 },
+                { q: "Vitamin A Prophylaxis program gives doses every:", o: ["1 month", "6 months", "1 year", "5 years"], a: 1 },
+                { q: "Anemia Mukt Bharat focuses on supplementation of:", o: ["Calcium", "Iron & Folic Acid", "Vitamin C", "Zinc"], a: 1 },
+                { q: "The role of a nurse in nutrition programs is:", o: ["Assessment", "Education", "Distribution", "All of the above"], a: 3 }
+            ],
+            13: [ // Food Safety
+                { q: "Pasteurization is used for:", o: ["Meat", "Milk", "Vegetables", "Fruits"], a: 1 },
+                { q: "Food hygiene involves:", o: ["Proper handling", "Cooking", "Storage", "All of the above"], a: 3 },
+                { q: "The danger zone for bacterial growth is:", o: ["0-5°C", "5-60°C", "Above 100°C", "Below 0°C"], a: 1 },
+                { q: "Cross-contamination means:", o: ["Cleaning food", "Transfer of bacteria from raw to cooked food", "Cooking thoroughly", "Freezing"], a: 1 },
+                { q: "FSSAI regulates:", o: ["Drug safety", "Food safety in India", "Traffic rules", "School education"], a: 1 }
+            ]
+        };
+
+        // --- 2. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "INTRO TO NUTRITION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1LtEg0KI6MyNhxjmayarrITsibO5KfGd-/preview' },
+                    { type: 'video', title: 'Intro & Classification', url: 'https://drive.google.com/file/d/19FP4IYHT-M7D3pMwY01YPMbUi7a52e_g/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1uqHuLiHkcOT2sBx34GCIqvImEVRTc9II/preview' },
+                    { type: 'video', title: 'Food & Macronutrients', url: 'https://drive.google.com/file/d/10Thj5tD2xVPYUON5n5zgNrwDk06txk7y/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1-bzNrM-RhXUHflCSGjeFweHxwLdbtuGT/preview' }
+                ]
+            },
+            {
+                id: 2, title: "CARBOHYDRATES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1mA2_KPUro3aX76J1ND9rCyAkmM2HVkS3/preview' },
+                    { type: 'video', title: 'Carbs: Functions & Sources', url: 'https://drive.google.com/file/d/1IprrlxGn1v4YikY5EgPlchD-yS-rwxXh/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xFaPcpt2dICLqsuWEgE7isOoYef1UEvt/preview' }
+                ]
+            },
+            {
+                id: 3, title: "PROTEINS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1_dz0RqM8iwdNc5UqlAcqbh1Sxj9o7TrS/preview' },
+                    { type: 'video', title: 'Proteins: Amino Acids & Sources', url: 'https://drive.google.com/file/d/1c3xCXL4MY69rh3WiW1gnskb3S3o6pyLA/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ctQgl3u3-JgMOSLjCsGGVKYPPuw0Qti9/preview' }
+                ]
+            },
+            {
+                id: 4, title: "FATS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1inVMmGS1LT_9CS6U6C5A5R8hw8S5URQb/preview' },
+                    { type: 'video', title: 'Fats: Classification & Functions', url: 'https://drive.google.com/file/d/1-EUsyLGT9wvxooEjd3VnZ10o2Gadrjw5/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1KwvurKoSU8kBHXim9ietJLDtFnqTMASr/preview' }
+                ]
+            },
+            {
+                id: 5, title: "VITAMINS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1rV_HW3DUEwJA3ZouCOKgAzlE7v2h2FWD/preview' },
+                    { type: 'video', title: 'Vitamins Classification', url: 'https://drive.google.com/file/d/16iXdjCt_I2rqY9lRA-UwHWYeLtZe_1ZE/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1luWABRxGhveqwtYr0LdFAAOdh7H9wKfG/preview' },
+                    { type: 'video', title: 'Water Soluble (B-Complex)', url: 'https://drive.google.com/file/d/1m6Mokl33zd7hj-YISj8d2BUVQ34sihsQ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1G_jI_TXDwIK-q4YENpRWTMG_Zil_pmH1/preview' },
+                    { type: 'video', title: 'Fat Soluble (A, D, E, K)', url: 'https://drive.google.com/file/d/1PwHCVLPFk04FwJFKssShC7qm0Pq__PZV/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1LwoiORrlrvKPuFp3DFUCwaMELJOPt6KK/preview' }
+                ]
+            },
+            {
+                id: 6, title: "MINERALS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/14Orrlv5jpHC6E9OD8z_DzgLqivWbmKhH/preview' },
+                    { type: 'video', title: 'Macro Minerals (Ca, P, Na, K)', url: 'https://drive.google.com/file/d/1xS4k2A8qNOd5B14vIxnDjSViSl-QKvAk/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1hi5Bed78TOKkMNbyZJKfiw12w20U4Jeo/preview' },
+                    { type: 'video', title: 'Micro Minerals (Fe, Cu, I, Zn)', url: 'https://drive.google.com/file/d/1EQbelP_1eAKnynrWlnGjKdlN2Mimr0L0/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1z3o7kmn15J2L4Jt4F8oXOj8ssZvBjpZq/preview' }
+                ]
+            },
+            {
+                id: 7, title: "BALANCED DIET",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1tFLtE2YOKVHn2Um8qu6OWcruk36KauoU/preview' },
+                    { type: 'video', title: 'Principles & Food Groups', url: 'https://drive.google.com/file/d/1e2r31iB6i2q-LUuWddYi-R2Hp1Fpl3wT/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1O4II3fER22sw-ZLsh27c_iz87YmXZqKz/preview' },
+                    { type: 'video', title: 'Nutrition Across Life Cycle', url: 'https://drive.google.com/file/d/1tmzsKp4GJruI2usuQPeZcR9ZFnay3dG7/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1nlt9gbQC6VFH_30ELKuQC8vvL17F5D9D/preview' }
+                ]
+            },
+            {
+                id: 8, title: "DEFICIENCY DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1Z49iUG9hgGOvVlfogE75ahe5ng_CNWo7/preview' },
+                    { type: 'video', title: 'PEM & Obesity', url: 'https://drive.google.com/file/d/1RhRzoqz0aXP_jAOlIMczZUX-3wYSwnXG/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1-WpVyQpr5r5bhpj0MR74eertJCyddpet/preview' },
+                    { type: 'video', title: 'Vitamin Deficiencies', url: 'https://drive.google.com/file/d/1-lX31ZdvwSGfCrATk8e1hAMz8JDuunDM/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_XRBjhsHURWYSlVlvv7Hoc0ifGUgOSp9/preview' },
+                    { type: 'video', title: 'Mineral Deficiencies', url: 'https://drive.google.com/file/d/1JT5-L1XNTuYsj1JL7EjhVynQBTq7qQsA/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1K5CDSrjFOs0hYf9s90JEX4quTQdBxRVl/preview' }
+                ]
+            },
+            {
+                id: 9, title: "THERAPEUTIC DIETS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1N0wZZcd4pgJ7mOrO-Ljim7XP927fPXr6/preview' },
+                    { type: 'video', title: 'Diet in Obesity', url: 'https://drive.google.com/file/d/1_7RfYaHe-2KwE4bmLm8u-fw1bw3BXJbZ/preview' },
+                    { type: 'video', title: 'Diet for Diabetes, Cardiac & Renal', url: 'https://drive.google.com/file/d/1g7ZaLbgRwFa8E49MqcmkkQR5D9kmTSd0/preview' },
+                    { type: 'video', title: 'Pre/Post Operative Diet', url: 'https://drive.google.com/file/d/13a6pE5NIGl8sisW-BBB28x4mRa58CMr2/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qXya5vVNg2_rcnb1kb__2q6h6uzeZrPq/preview' }
+                ]
+            },
+            {
+                id: 10, title: "COOKERY & PRESERVATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1Jr8C6vaA-PqBS64_ftoHBNLX_FivALnk/preview' },
+                    { type: 'video', title: 'Principles of Cooking', url: 'https://drive.google.com/file/d/1hgYCnVH69dNvbRJwEo6N3Qi6lW-86CY3/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1KTGJqWaSrnq1uFKX7n5EiDe3iLkvOiDc/preview' },
+                    { type: 'video', title: 'Food Storage & Nutrient Loss', url: 'https://drive.google.com/file/d/1HC-8DjxyBqOFFT4RU_vqPkWxnxiWYsX2/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ixxeZOmPVxJIgTURS42gIApRemHx3vTB/preview' },
+                    { type: 'video', title: 'Additives & Adulteration', url: 'https://drive.google.com/file/d/15IBIXHtywG3uekAKUGULc_lORWye5wR0/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ODRFFEbNRLYY78IzosdriA8G1Usv-ezc/preview' }
+                ]
+            },
+            {
+                id: 11, title: "NUTRITION ASSESSMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1Bu499GIM1raTRpFANrHm3XOCuij1pdJT/preview' },
+                    { type: 'video', title: 'Assessment Methods', url: 'https://drive.google.com/file/d/1Z5th1Cce2wOtfjFMWDp3FKlLngAGglTA/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1UR4eome5AXOeLIfiG0xZ0bG5i6yWr7cB/preview' }
+                ]
+            },
+            {
+                id: 12, title: "PROGRAMS & NURSE ROLE",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/17CCffyD5X_ELcCF7u1YQL3SqhEP0dKIP/preview' },
+                    { type: 'video', title: 'Anemia Mukt Bharat', url: 'https://drive.google.com/file/d/1aZSXse2HWvuZdjH5C4bJIviJu_dELkcb/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1LwfWbS_8xqfrBIHN-pevmSRbuCKFOfze/preview' },
+                    { type: 'video', title: 'ICDS', url: 'https://drive.google.com/file/d/1gaIRzWBclSl1UV8KGtEcm_phFrB1Yt62/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1iTTBH2ilC8EkkwA4_W8Sj75DkRhrsC6P/preview' },
+                    { type: 'video', title: 'Mid Day Meal', url: 'https://drive.google.com/file/d/1U2spneVeIeynIO1H6yvzzOk8bxma4i1R/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Y_2cid1Be3iqmOWsNjAY5FzxkPqArkSa/preview' },
+                    { type: 'video', title: 'Iodine Deficiency Program', url: 'https://drive.google.com/file/d/1nNivOKVUvzrW85fm0d1CFMuTE_3hYpBF/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1O_EywfqYVnaFrFZZ8QOS3q2Ih6a87maq/preview' },
+                    { type: 'video', title: 'Problems & Policy', url: 'https://drive.google.com/file/d/1iFyv4ZeMKSBT9R48TB0qh91rJV9OfWM0/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1eakXlIk6CjgMRdcotGoOKhgs4PzyjS2T/preview' }
+                ]
+            },
+            {
+                id: 13, title: "FOOD SAFETY",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1uXiFTYCgJgev4BEMpSqPZc8bbcASknRN/preview' },
+                    { type: 'video', title: 'Measures, Acts & Storing', url: 'https://drive.google.com/file/d/1n0VTC54BJKmSqyx4gGNz0YZ3XQZUiSqj/preview' },
+                    { type: 'video', title: 'Cooking & Handling', url: 'https://drive.google.com/file/d/1SEywniWnbwBmUh3W4q9eFZB44O-oeyPT/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1FyDtUJBVbBm0c387_GcTAIPx3VMevuZE/preview' }
+                ]
+            }
+        ];
+
+        // --- 3. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
+
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            return '📄';
+        }
+
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 4. MODAL LOGIC & NAVIGATION CONTROL ---
+        
+        function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex';
+
+            if (type === 'quiz') {
+                openQuiz(url); 
+            }
+            else {
+                // Formatting URL for preview
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // SANDBOX ATTRIBUTE FIX: This prevents the 'Open in Drive' button from taking over the window
+                body.innerHTML = `<iframe 
+                    class="modal-iframe" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        // --- 6. HANDLE BACK BUTTON ---
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        // Initialize
+        renderPage();
+
     </script>
 </body>
 </html>
