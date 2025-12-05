@@ -1,1 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nursing Education Syllabus</title>
+  <meta name="description" content="Comprehensive syllabus with detailed notes for Nursing Education." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+  <style>
+    :root {
+      --brand: #003B82;
+      --accent: #00B9F2;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: white;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .syllabus-btn, .unit-header {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      margin: 24px 0;
+      background: var(--brand);
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .syllabus-btn:hover, .unit-header:hover { background: #002d63; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+    .unit-header { display: flex; justify-content: space-between; align-items: center; text-align: left; margin: 16px 0; }
+    .unit-header span:last-child { transition: transform 0.3s ease; color: #FFA500; }
+    .unit-header[aria-expanded="true"] span:last-child { transform: rotate(180deg); }
+
+    .unit-content { padding: 0 12px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .unit-content.active { padding: 24px 12px; max-height: none; }
+
+    .subsection { margin: 16px 0; padding: 20px; background: white; border-radius: 12px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); transition: box-shadow 0.2s ease; }
+    .subsection:hover { box-shadow: var(--shadow-md); }
+
+    .resource-btn { display: flex; align-items: flex-start; width: 100%; padding: 14px 18px; margin: 8px 0; background: var(--gray-50); color: var(--gray-900); text-decoration: none; border-radius: 8px; font-weight: 500; border: 1px solid var(--gray-200); transition: all 0.2s ease; gap: 12px; flex-wrap: wrap; min-height: 50px; }
+    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+    .resource-btn.notes:hover { background: #e0f2fe; }
+
+    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+    .pyq-header { background: var(--accent) !important; }
+    .pyq-header:hover { background: #0092bf !important; }
+
+    @media (max-width: 768px) {
+      body { padding: 16px; }
+      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+      .resource-btn { font-size: 14px; }
+      .subsection { padding: 16px; }
+      .unit-content.active { padding: 16px 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="https://drive.google.com/file/d/10zqzBfgzvczBWDwSr2r3tJiR5amA7xek/view?usp=sharing" class="syllabus-btn" target="_blank">
+    📄 NURSING EDUCATION SYLLABUS
+  </a>
+
+  <div id="units">
+
+    <!-- UNITS 1–15 -->
+    <div class="unit-container" id="unit1">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+        UNIT 1 – Introduction
+        <span>🔽</span>
+      </div>
+      <div class="unit-content active">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1hSyBW7h9g7BfWWvx_KKvnpDykuBOmxra/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit2">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 2 – Teaching Learning Process
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1QSQTqFkwHWKE57H8TaY3rcgSxUtrj5nf/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit3">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 3 – Educational Technology and Instructional Technology
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1uB93pTQIRgogNLHxaN0CHH7o1U_Mw1OD/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit4">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 4 – Measurement and Evaluation
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1LUu3EJ3GkYx0L2R6JzU79kFVlInFuR6P/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit5">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 5 – Standardized and Non-Standardized Tests
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1luXvr1c8JSm9ay9OO3aqThtv5avBxY5Z/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit6">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 6 – Administration, Scoring and Reporting
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/13kK8Z75OIQF9WgjmUPrncuT6RXZryBBw/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit7">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 7 – Standardized Tools
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1Xc4-9F5AbVfR16tZwodTGKeF1fC3nkS4/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit8">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 8 – Nursing Educational Programs
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1L5J9uuzscWr3092RZDRFIy8xb8x_JYZe/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit9">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 9 – Continuing Education in Nursing
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1X9vR02KnO9SOrlbPEzwS30FEDH760GfC/view?usp=sharing" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit10">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 10 – Curriculum Development
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit11">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 11 – Teacher Preparation
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/17yhkHsttzvbFB2k2SObCCLMpGof6BH8O/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit12">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 12 – Guidance and Counseling
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/18iosJA095VbxaoVf_EuwQS-WxN2KYNhn/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit13">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 13 – Administration of Nursing Curriculum
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1-qVTHpVi-WGKzpJRoZUOSTzmzaDDHjPa/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit14">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 14 – Management of Nursing Educational Institutions
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/14JNi3o2DI0mu_QmEnu-xINnWpuGpWbht/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="unit-container" id="unit15">
+      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        UNIT 15 – Standards and Accreditation
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1UbbwBTJHGtWksS5Fgo_DyD957Tz8alG5/view?usp=drive_link" class="resource-btn notes" target="_blank">
+            <span class="icon">📚</span><span>Detailed Notes</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Previous Year Questions -->
+    <div class="unit-container" id="pyq">
+      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        📄 Previous Year Question Papers
+        <span>🔽</span>
+      </div>
+      <div class="unit-content">
+        <div class="subsection">
+          <a href="https://drive.google.com/file/d/1E14_cVTlgxbJDb5O4r39Osa6ch8Mu5fY/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - JULY 2020</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1B0YTIZG1n0CxuTdByyT2p4GZ_pHLXu_S/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - SEPTEMBER 2020</span>
+          </a>
+          <a href="https://drive.google.com/file/d/14NlepSQXlIGC1ilN1s7Cf7LC-OlMdk4Z/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - JULY 2021</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1nMCJKAeJUfOClDO_BojGacABnMUWaGwy/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - NOVEMBER 2022</span>
+          </a>
+          <a href="https://drive.google.com/file/d/16AmFz9qgRMlgrRzY-_3u0EQtFeM0AcF6/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - JULY 2022</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1l74MSEIU-IWE74TQWGjlWrgIf1RM5xQ2/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - JANUARY 2023</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1TTWNgx9K8sbcAxBbsM51BT-AidcoVrB0/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - NOVEMBER 2023</span>
+          </a>
+          <a href="https://drive.google.com/file/d/1ZjjGKZB750Frrh7bBhIsD4W5C2PqvxCi/view?usp=drive_link" class="resource-btn" target="_blank">
+            <span class="icon">📝</span><span>PYQ - JULY 2024</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleUnit(header) {
+      const expanded = header.getAttribute("aria-expanded") === "true";
+      header.setAttribute("aria-expanded", !expanded);
+      const content = header.nextElementSibling;
+      content.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
