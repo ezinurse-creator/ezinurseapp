@@ -1,972 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mental Health Nursing II Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with video lectures, notes, and quizzes for Mental Health Nursing II." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental Health Nursing II Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Mental Health Nursing II." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;     /* Dark Blue */
-      --accent: #00B9F2;    /* Cyan Blue */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-      word-wrap: break-word;
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    /* SYLLABUS BUTTON + UNIT HEADER STYLE */
-    .syllabus-btn,
-    .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .syllabus-btn:hover,
-    .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-      padding: 18px 24px;
-    }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .unit-header span:last-child {
-      display: inline-block;
-      transition: transform 0.3s ease;
-      color: #FFA500; /* 🟠 ORANGE TOGGLE ARROW */
-    }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    .unit-container {
-      margin: 32px 0;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
-    }
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-      overflow-y: auto;
-    }
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .subsection {
-      margin: 24px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-      overflow: visible;
-    }
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
 
-    .subsection:hover {
-      box-shadow: var(--shadow-md);
-    }
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      word-break: break-word;
-      min-height: 50px;
-    }
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
-    .resource-btn.notes {
-      background: #f0f9ff;
-      border-color: #bae6fd;
-      color: #085d8c;
-    }
-
-    .resource-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-      background: #f9fafb;
-    }
-
-    .resource-btn.notes:hover {
-      background: #e0f2fe;
-    }
-
-    .icon {
-      font-size: 1.3rem;
-      min-width: 24px;
-      text-align: center;
-      color: var(--accent);
-      flex-shrink: 0;
-      align-self: flex-start;
-      margin-top: 2px;
-    }
-
-    .important-section {
-      margin-top: 32px;
-      padding: 24px;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
-      border-radius: 12px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .important-section h3 {
-      margin: 0 0 16px 0;
-      color: var(--brand);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .important-section h3::before {
-      content: "🎯";
-      font-size: 1.2em;
-    }
-
-    /* QUIZ & MODEL BUTTON STYLES */
-    .action-button {
-      display: block;
-      width: 100%;
-      padding: 20px 24px;
-      margin: 32px auto 16px;
-      font-weight: 600;
-      font-size: 18px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-      border: none;
-    }
-
-    .quiz-button {
-      background: #003B82;
-      color: white;
-    }
-
-    .quiz-button:hover {
-      background: #002d63;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    .model-button {
-      background: #003B82; /* Dark Blue */
-      color: white;        /* White text */
-      margin-top: 60px;
-    }
-
-    .model-button:hover {
-      background: #002d63;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 16px;
-      }
-      .syllabus-btn,
-      .unit-header,
-      .resource-btn {
-        font-size: 15px;
-        padding: 14px 16px;
-      }
-      .resource-btn {
-        padding: 12px 14px;
-        font-size: 14px;
-      }
-      .icon {
-        font-size: 1.2rem;
-      }
-      .subsection {
-        padding: 16px;
-        margin: 16px 0;
-      }
-      .unit-content {
-        padding-left: 8px;
-        padding-right: 8px;
-      }
-      .unit-content.active {
-        padding: 16px 8px;
-      }
-    }
-
-    .unit-header:focus,
-    .resource-btn:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-  </style>
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1cVXX0MdfmXTU5Exki00nmnJzI5WNg7u9/view?usp=sharing" class="syllabus-btn" target="_blank">
-    📄 MENTAL HEALTH NURSING II SYLLABUS
-  </a>
-
-  <!-- UNIT 1 -->
-  <div class="unit-container" id="unit1">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 1. Nursing Management of Patients with Substance Use Disorders
-      <span>🔽</span>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1cVXX0MdfmXTU5Exki00nmnJzI5WNg7u9/preview', 'Syllabus')">
+        📄 DOWNLOAD MENTAL HEALTH NURSING II SYLLABUS
     </div>
-    <div class="unit-content active">
+    
+    <div id="units">
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - SUBSTANCE USE DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13ivjNuXCsFW23FKI4ZSbmjhejVTzm7VU/preview', 'Detailed Notes: Substance Use')">
+                        <span class="icon">📚</span><span>Detailed Notes: Substance Use</span>
+                    </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/13ivjNuXCsFW23FKI4ZSbmjhejVTzm7VU/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+                
 
-      <!-- 1.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1BlPeKxBK_6LRwdE5ctldrinGFvtfj7dP/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Substance Use Disorders: Terminologies, Definition, Prevalence, ICD-11</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1ZrPm9ZpZkaabropX4MUOb0M08QxK6lSB/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
 
-      <!-- 1.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1dbWne-vj71RkJp5L_PRbGLts5TDAvJnm/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Commonly Abused Substances, Etiology</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1pvAW4WjVVGT2qLYSP22RVoGOrcl-ST01/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BlPeKxBK_6LRwdE5ctldrinGFvtfj7dP/preview', 'Terminologies & ICD-11')">
+                        <span class="icon video-icon">▶️</span><span>Terminologies, Prevalence & ICD-11</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dbWne-vj71RkJp5L_PRbGLts5TDAvJnm/preview', 'Etiology')">
+                        <span class="icon video-icon">▶️</span><span>Commonly Abused Substances & Etiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Z8B5JUG5fXfvjZWaQPPgIvvyuY4VX_8a/preview', 'Alcohol Abuse Signs')">
+                        <span class="icon video-icon">▶️</span><span>Signs, Symptoms & Alcohol Abuse</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1t58TVNfOXnbNAsqqPvej7dH00Gbbx5ua/preview', 'Treatment: Alcohol/Opioids')">
+                        <span class="icon video-icon">▶️</span><span>Diagnosis & Treatment: Alcohol, Cannabis, Opioids</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1416vNF9ApKc6CwrfQKBorUJJi_QDDNoR/preview', 'Management: Sedatives')">
+                        <span class="icon video-icon">▶️</span><span>Management: Opioids & Sedatives</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Drj_zygJkWoOEbBa2OqYbuQKpR1YeEjp/preview', 'Cocaine & Stimulants')">
+                        <span class="icon video-icon">▶️</span><span>Cocaine & Stimulants</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GCKgYEh-7utP51UVlt4E4bupqct5p-KW/preview', 'Caffeine & Nicotine')">
+                        <span class="icon video-icon">▶️</span><span>Caffeine, Hallucinogens & Nicotine</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FBIODDGGlt9n3PUiFA8ONjFPZIuBlWur/preview', 'Inhalants')">
+                        <span class="icon video-icon">▶️</span><span>Volatile Inhalants</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ai_wyPQAH9rB7ACHIs_JwZQrmwjY7PBv/preview', 'Rehabilitation & Laws')">
+                        <span class="icon video-icon">▶️</span><span>Prevention, Rehabilitation & Laws</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HsGAuzDSsSoIeFw7D5dlk0jdW-07jobx/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 1</span>
+                    </div>
 
-      <!-- 1.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Z8B5JUG5fXfvjZWaQPPgIvvyuY4VX_8a/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Signs, Symptoms, Diagnostic Criteria, Alcohol Abuse</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1wMRySD55iTZNchTFVqGTV8W1YGunMyJL/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 1.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1t58TVNfOXnbNAsqqPvej7dH00Gbbx5ua/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Diagnosis & Treatment: Alcohol, Cannabis, Opioids</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1IOMLOFEJyuD3uElekHKVVo88_-Couh7X/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - PERSONALITY & SEXUAL DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1e5YfasAa8hOwJpLQt0wdMMF_uLX_l-8F/preview', 'Detailed Notes: Personality')">
+                        <span class="icon">📚</span><span>Detailed Notes: Personality & Sexual Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1v7Qoe4f1VglL09aqDlt0mIZJQEfCdhkG/preview', 'Personality Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Personality Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11R0Tvyy9do5ejAOWCYIes-Br9F8Q2R7E/preview', 'Sexual Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Sexual Disorders</span>
+                    </div>
 
-      <!-- 1.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1416vNF9ApKc6CwrfQKBorUJJi_QDDNoR/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Management: Opioid Use, Sedatives, Hypnotics, Anxiolytics</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1qBSse53rS0yw2WyUHNMN7S2BDXSYtu-L/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1y1JEu7Mo22G5PqBW3jsC5cQuDAqPZ4EO/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 2</span>
+                    </div>
 
-      <!-- 1.6 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Drj_zygJkWoOEbBa2OqYbuQKpR1YeEjp/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Cocaine, Stimulants</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1TrEILqUIbsdGqKbo9li9UqL8zNyfmB4Z/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 1.7 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1GCKgYEh-7utP51UVlt4E4bupqct5p-KW/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Caffeine, Hallucinogens, Nicotine</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1dekC_9BMlN_wLfuU1RRzRG2PFq0WPvda/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - CHILDHOOD & ADOLESCENCE DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VFVf1Mi7g2OtXkiaiMRMpi11VHsiSjnh/preview', 'Detailed Notes: Child Psych')">
+                        <span class="icon">📚</span><span>Detailed Notes: Child & Adolescent</span>
+                    </div>
 
-      <!-- 1.8 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1FBIODDGGlt9n3PUiFA8ONjFPZIuBlWur/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Volatile Inhalants</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Xtpf659jVog7JIahzyYvZIygPdrReCC4/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    
 
-      <!-- 1.9 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1ai_wyPQAH9rB7ACHIs_JwZQrmwjY7PBv/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Prevention, Rehabilitation, Follow-up, Homecare, Laws</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1F8V0oZtO3wd8ZSIWN7fmFs_ud0NhFmM2/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+[Image of ADHD brain vs normal brain]
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/19MZJ8_bXFHtvolcBKyo89XMQ0sVzdg_W/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1HsGAuzDSsSoIeFw7D5dlk0jdW-07jobx/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 1 -->
-      <a href="https://drive.google.com/file/d/1Xuty2w96Kl87z-vMZsyIpQcB9umIOnRo/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 1 Quiz
-      </a>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WpNSMf4L__vFVWLxRQ2TZbYQcHHJS9rw/preview', 'Intellectual Disability')">
+                        <span class="icon video-icon">▶️</span><span>Intellectual Disability & Epidemiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Eq35TIGYowr0gD8LT885pP-bxu7oYkfg/preview', 'Autism & Speech')">
+                        <span class="icon video-icon">▶️</span><span>Autism Spectrum & Speech Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HVGAK4rJbZvXW-Tq7eHsUamUEij23gvr/preview', 'ADHD & Learning')">
+                        <span class="icon video-icon">▶️</span><span>ADHD, Learning & Motor Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S0SiUhjmVknUqH9B7vYvnhidtncXLH7R/preview', 'Conduct Disorder')">
+                        <span class="icon video-icon">▶️</span><span>Types of ADHD & Conduct Disorder</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18mzMU-8k4cc-IWP2bDyMb4dPg1Rvd1ck/preview', 'Eating/Elimination')">
+                        <span class="icon video-icon">▶️</span><span>Eating & Elimination Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1iBI0mf9E5VcTs_jWadWVdNezSiCBCs2r/preview', 'Bulimia & Rehab')">
+                        <span class="icon video-icon">▶️</span><span>Bulimia Nervosa & Rehabilitation</span>
+                    </div>
 
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1w9ILYMsRyo_KnRIEYVdL-8stkRTCKljy/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 3</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - ORGANIC BRAIN DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13PevrbRMageUobaSyUAIky-Fg6OzJMWQ/preview', 'Detailed Notes: Organic')">
+                        <span class="icon">📚</span><span>Detailed Notes: Organic Brain Disorders</span>
+                    </div>
+
+                    
+
+[Image of brain atrophy in Alzheimer's disease]
+
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ksZT-vWk5JiCmWzhHQ33m6gRwv_RcQhC/preview', 'Alzheimer\'s Disease')">
+                        <span class="icon video-icon">▶️</span><span>Alzheimer's Disease</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OCRu_rfVI8NZ2jH5-RgVaejexinE9718/preview', 'Delirium')">
+                        <span class="icon video-icon">▶️</span><span>Delirium (Acute Organic Brain Syndrome)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1cplkqSMHKtPa5t57DTZwzJE8cJvR7rIe/preview', 'Amnestic Syndrome')">
+                        <span class="icon video-icon">▶️</span><span>Organic Amnestic Syndrome</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-gOkTvGsdE-9ylJY0bSRt6LhkxMygY5L/preview', 'Dementia')">
+                        <span class="icon video-icon">▶️</span><span>Dementia</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Gbs5QkHRVlJWNURUNOLM6SaZigCYCHUk/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 4</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - PSYCHIATRIC EMERGENCIES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/199tS7hisRIp7CyM1od_8TSHrTl7MgmF7/preview', 'Detailed Notes: Emergencies')">
+                        <span class="icon">📚</span><span>Detailed Notes: Psychiatric Emergencies</span>
+                    </div>
+
+                    
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1q2TD5YhRlxpkPm76Q5gBgkzxOWJzaqcY/preview', 'Minor Emergencies')">
+                        <span class="icon video-icon">▶️</span><span>Introduction & Minor Emergencies</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CXV_hBZVH0ffN29UWNwOeKuz6kM5Nifi/preview', 'Medical Emergencies')">
+                        <span class="icon video-icon">▶️</span><span>Medical Emergencies & Maladaptive Behavior</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11hVTY8UieBhMSmay91jZXfJHIMPKe5RL/preview', 'Prevention Strategies')">
+                        <span class="icon video-icon">▶️</span><span>Strategies to Change & Prevent</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dEs8udsbTIzXLdRisf3xggzDlKOi-wzr/preview', 'Crisis Intervention')">
+                        <span class="icon video-icon">▶️</span><span>Crisis Management & Stress Adaptation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1NwAGa3wkR2KW3QEIcwGIXJxiXFzgcWwB/preview', 'Coping & Counselling')">
+                        <span class="icon video-icon">▶️</span><span>Coping Mechanisms & Counselling</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OleDctFPR0q5faOsuW0cE6Cu4Vjv68NN/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 5</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - LEGAL ISSUES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16caG4oSIrI63sU59Xu9wCOn5txTFiYP_/preview', 'Detailed Notes: Legal Issues')">
+                        <span class="icon">📚</span><span>Detailed Notes: Legal Issues</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1InTr1WSnyOaao2cCQKQjDu8KH_8zyEUU/preview', 'ILA & MHA')">
+                        <span class="icon video-icon">▶️</span><span>Acts: ILA 1912, MHA 1987, POSCO</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1irN38I8rjUzxTaps5Z6pkKiuIdteucfu/preview', 'Forensic Psych')">
+                        <span class="icon video-icon">▶️</span><span>Forensic Psychiatry & Civil Responsibilities</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1SR2Rtw8HwKuQPYciSecLFbACNOFX4V9w/preview', 'MHCA 2017')">
+                        <span class="icon video-icon">▶️</span><span>Mental Health Care Act 2017</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WNgi41yYkZO3IEn3m1tnfxbpxTF5QnvR/preview', 'NDPS Act')">
+                        <span class="icon video-icon">▶️</span><span>Narcotics & Psychotropic Substances Acts</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qfIPKtyMo-r0DzjtJSGRKxMhXI1vqiaT/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 6</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - COMMUNITY MENTAL HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ydXJA8s21GBMD_M4DICXYDyVi4HrURXk/preview', 'Detailed Notes: Community')">
+                        <span class="icon">📚</span><span>Detailed Notes: Community Mental Health</span>
+                    </div>
+
+                    
+
+[Image of levels of prevention in mental health]
+
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1o4e7tVUcLCxtCt46T5oYhUV-pVD70ncY/preview', 'NMHP & NHP')">
+                        <span class="icon video-icon">▶️</span><span>Introduction, NMHP & NHP</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GHJeoXbRbVDgxHql6VmTZPc9_q2uqBo_/preview', 'Institutionalization')">
+                        <span class="icon video-icon">▶️</span><span>Institutionalization & Deinstitutionalization</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HVXZD8CIJpiVYy4_UqS0hGa4BB0hBIdO/preview', 'Agencies')">
+                        <span class="icon video-icon">▶️</span><span>National & International Agencies</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a-aMfVqZnurNvFUcfgk29cnrSezzR_KP/preview', 'Special Populations')">
+                        <span class="icon video-icon">▶️</span><span>Mental Health for Special Populations</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fXThNAGmtfbF0whor6Fk9r-bedYOpQWV/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 7</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- UNIT 2 -->
-  <div class="unit-container" id="unit2">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 2. Nursing Management of Patients with Personality and Sexual Disorders
-      <span>🔽</span>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
-    <div class="unit-content">
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1e5YfasAa8hOwJpLQt0wdMMF_uLX_l-8F/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Substance Use
+                { q: "Disulfiram is used in the treatment of:", o: ["Opioid dependence", "Alcohol dependence", "Cannabis abuse", "Nicotine addiction"], a: 1 },
+                { q: "Wernicke's encephalopathy is caused by deficiency of:", o: ["Vitamin B1 (Thiamine)", "Vitamin B12", "Vitamin C", "Vitamin D"], a: 0 },
+                { q: "Delirium tremens is a severe withdrawal symptom of:", o: ["Cocaine", "Heroin", "Alcohol", "Cannabis"], a: 2 },
+                { q: "Methadone is primarily used for:", o: ["Alcohol detoxification", "Opioid substitution therapy", "Smoking cessation", "Benzodiazepine overdose"], a: 1 },
+                { q: "The CAGE questionnaire is used to screen for:", o: ["Depression", "Anxiety", "Alcoholism", "Schizophrenia"], a: 2 }
+            ],
+            2: [ // Unit 2: Personality & Sexual
+                { q: "Antisocial personality disorder is characterized by:", o: ["Social withdrawal", "Disregard for rights of others", "Perfectionism", "Attention seeking"], a: 1 },
+                { q: "Vaginismus is a:", o: ["Sexual pain disorder", "Desire disorder", "Orgasmic disorder", "Arousal disorder"], a: 0 },
+                { q: "A person deriving sexual pleasure from observing unsuspecting people is:", o: ["Exhibitionism", "Voyeurism", "Fetishism", "Frotteurism"], a: 1 },
+                { q: "Borderline Personality Disorder is characterized by:", o: ["Emotional stability", "Unstable interpersonal relationships", "Lack of remorse", "Excessive orderliness"], a: 1 },
+                { q: "Dyspareunia refers to:", o: ["Painful intercourse", "Lack of desire", "Premature ejaculation", "Inability to orgasm"], a: 0 }
+            ],
+            3: [ // Unit 3: Child/Adolescent
+                { q: "The core symptoms of ADHD are:", o: ["Depression and anxiety", "Inattention, hyperactivity, impulsivity", "Hallucinations and delusions", "Social withdrawal"], a: 1 },
+                { q: "Enuresis refers to:", o: ["Bed wetting", "Soiling clothes with stool", "Thumb sucking", "Nail biting"], a: 0 },
+                { q: "Autism Spectrum Disorder involves deficits in:", o: ["Motor skills", "Social communication & interaction", "Vision", "Hearing"], a: 1 },
+                { q: "Bulimia Nervosa is characterized by:", o: ["Self-starvation", "Binge eating followed by purging", "Pica", "Refusal to swallow"], a: 1 },
+                { q: "Conduct disorder in children may develop into which adult disorder?", o: ["Schizophrenia", "Antisocial Personality Disorder", "Bipolar Disorder", "Obsessive Compulsive Disorder"], a: 1 }
+            ],
+            4: [ // Unit 4: Organic Brain
+                { q: "The most common cause of Dementia is:", o: ["Vascular disease", "Alzheimer's disease", "Trauma", "Alcohol"], a: 1 },
+                { q: "Delirium is primarily characterized by:", o: ["Chronic memory loss", "Clouding of consciousness", "Intact attention", "Stable course"], a: 1 },
+                { q: "Confabulation is a feature of:", o: ["Korsakoff's psychosis", "Schizophrenia", "Mania", "Depression"], a: 0 },
+                { q: "Sundowning syndrome is commonly seen in:", o: ["Depression", "Dementia", "Anxiety", "Schizophrenia"], a: 1 },
+                { q: "Which of the following is an acute organic brain syndrome?", o: ["Dementia", "Delirium", "Amnestic syndrome", "Mental retardation"], a: 1 }
+            ],
+            5: [ // Unit 5: Emergencies
+                { q: "Which is a psychiatric emergency?", o: ["Mild anxiety", "Suicidal attempt", "Insomnia", "Fatigue"], a: 1 },
+                { q: "The priority nursing intervention for a suicidal patient is:", o: ["Administer sedation", "Ensure safety", "Provide counseling", "Involve family"], a: 1 },
+                { q: "Catatonic stupor is characterized by:", o: ["Hyperactivity", "Immobility and mutism", "Excessive talking", "Aggression"], a: 1 },
+                { q: "Lithium toxicity can lead to:", o: ["Hypertension", "Tremors and confusion", "Weight loss", "Insomnia"], a: 1 },
+                { q: "Crisis intervention focuses on:", o: ["Deep personality change", "Resolving the immediate problem", "Past childhood trauma", "Long term therapy"], a: 1 }
+            ],
+            6: [ // Unit 6: Legal
+                { q: "The Mental Healthcare Act was passed in India in:", o: ["1987", "2017", "1912", "2000"], a: 1 },
+                { q: "Which admission type allows a patient to leave the hospital at will?", o: ["Voluntary admission", "Involuntary admission", "Reception order", "Emergency admission"], a: 0 },
+                { q: "The NDPS Act relates to:", o: ["Mental health rights", "Narcotic Drugs and Psychotropic Substances", "Juvenile justice", "Disability rights"], a: 1 },
+                { q: "Informed consent is NOT required for:", o: ["ECT", "Surgery", "Emergency life-saving treatment", "Routine medication"], a: 2 },
+                { q: "A nurse's legal responsibility includes:", o: ["Prescribing medication", "Protecting patient rights", "Diagnosing disorders", "Detaining patients indefinitely"], a: 1 }
+            ],
+            7: [ // Unit 7: Community
+                { q: "Deinstitutionalization refers to:", o: ["Building more hospitals", "Shifting care from hospital to community", "Locking patients in rooms", "Increasing hospital stay"], a: 1 },
+                { q: "Primary prevention in mental health includes:", o: ["Early diagnosis", "Health promotion & education", "Rehabilitation", "Treatment"], a: 1 },
+                { q: "NMHP stands for:", o: ["National Mental Health Programme", "Nursing Mental Health Plan", "National Medical Health Policy", "New Mental Health Programme"], a: 0 },
+                { q: "Halfway homes are examples of:", o: ["Primary prevention", "Tertiary prevention/Rehabilitation", "Acute care", "Emergency care"], a: 1 },
+                { q: "The goal of community mental health nursing is:", o: ["Isolation of patients", "Promoting mental health in the population", "Long term hospitalization", "Sedation of patients"], a: 1 }
+            ]
+        };
 
-      <!-- 2.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1v7Qoe4f1VglL09aqDlt0mIZJQEfCdhkG/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Personality Disorder</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1ybwDEUHin0GJimD_zogkTZPjMPA5-T_U/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-      <!-- 2.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/11R0Tvyy9do5ejAOWCYIes-Br9F8Q2R7E/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Sexual Disorder</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1i0JpODlLTd9BcIKAqQw9Y8Xi2pM-vTUb/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        function openResource(type, url, title) {
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1ChjFTcYUvOKMC8hti2ZM9YfXdkMQgOIW/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1y1JEu7Mo22G5PqBW3jsC5cQuDAqPZ4EO/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 2 -->
-      <a href="https://drive.google.com/file/d/1Lzz1Dgtm04_JTfSTPFiCwulTspHOSBnc/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 2 Quiz
-      </a>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    </div>
-  </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-  <!-- UNIT 3 -->
-  <div class="unit-container" id="unit3">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 3. Nursing Management of Behavioural & Emotional Disorders in Childhood & Adolescence
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1VFVf1Mi7g2OtXkiaiMRMpi11VHsiSjnh/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-      <!-- 3.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1WpNSMf4L__vFVWLxRQ2TZbYQcHHJS9rw/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Behavioural & Emotional Disorder, Intellectual Disability, Epidemiology</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1RNIoHUQ2wUm-qUapwJo5Lu5UxMTkSCDG/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
-      <!-- 3.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Eq35TIGYowr0gD8LT885pP-bxu7oYkfg/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Developmental Speech/Language Disorder, Autism Spectrum Disorder</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Oi4uJeINREK3NinJNv75UhaZ2rVOLOZo/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
 
-      <!-- 3.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1HVGAK4rJbZvXW-Tq7eHsUamUEij23gvr/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Developmental Learning Disorder, Motor Coordination Disorder, ADHD</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1tzg_1i7nq9ypotesCaMv28lCkuPge7D1/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
 
-      <!-- 3.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1S0SiUhjmVknUqH9B7vYvnhidtncXLH7R/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Types of ADHD, Conduct Disorder</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1M6eR39gIa3zSl5XHKutx9u54DQoombnI/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
 
-      <!-- 3.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/18mzMU-8k4cc-IWP2bDyMb4dPg1Rvd1ck/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Elimination Disorders, Feeding/Eating Disorders</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1EQ8nQYIaz5xy-6yzLgNUR6xOB2b9s5OL/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 3.6 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1iBI0mf9E5VcTs_jWadWVdNezSiCBCs2r/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Bulimia Nervosa, Follow-up, Home Care, Rehabilitation</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1WqIKMjEHI_Ge-qehujguNl7dKg3WMDTC/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1QRTdt_zqP1yt0EWb-TzyqAZzfbmwodWM/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1w9ILYMsRyo_KnRIEYVdL-8stkRTCKljy/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 3 -->
-      <a href="https://drive.google.com/file/d/12msTbHvIoqKh9kDJ1inGlef0B5iX6IGw/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 3 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 4 -->
-  <div class="unit-container" id="unit4">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 4. Nursing Management of Organic Brain Disorders
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/13PevrbRMageUobaSyUAIky-Fg6OzJMWQ/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 4.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1ksZT-vWk5JiCmWzhHQ33m6gRwv_RcQhC/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Alzheimer's Disease</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1MJUY6e_69nSYZKQYwW3Pc18-efR1SWmw/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 4.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1OCRu_rfVI8NZ2jH5-RgVaejexinE9718/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Delirium (Acute Organic Brain Syndrome)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1X1hnNTOGrIh_fx-7I0d4JWX59zLTdtcS/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 4.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1cplkqSMHKtPa5t57DTZwzJE8cJvR7rIe/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Organic Amnestic Syndrome</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1gsbroj9Cj_rQOEQPBFfQ257hEhVK0K0_/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 4.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1-gOkTvGsdE-9ylJY0bSRt6LhkxMygY5L/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Dementia</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1zM8oKPFTtjgSxUdRq5dO9gFlR7P_pynv/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1Poe4ZDENXwSW8wE9XFHa53x53LZ9ujvk/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Gbs5QkHRVlJWNURUNOLM6SaZigCYCHUk/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 4 -->
-      <a href="https://drive.google.com/file/d/1_DX9fKuC-cm1e5584EYMMwVxuuLRISXf/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 4 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 5 -->
-  <div class="unit-container" id="unit5">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 5. Psychiatric Emergencies and Crisis Intervention
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/199tS7hisRIp7CyM1od_8TSHrTl7MgmF7/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1q2TD5YhRlxpkPm76Q5gBgkzxOWJzaqcY/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Introduction, Minor Psychiatric Emergencies</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1yz0BzXvFTbylvZaOlyxLOThnkCmkEe7J/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1CXV_hBZVH0ffN29UWNwOeKuz6kM5Nifi/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Medical Psychiatric Emergencies, Maladaptive Behavior</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1qTKUA2SNlsj_G5OqlSjraPI3UzVIm252/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/11hVTY8UieBhMSmay91jZXfJHIMPKe5RL/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Strategies to Change & Prevent Maladaptive Behavior</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1kNfRpwwELJZaBXGVDHV6PAI9ooFxKxBL/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1dEs8udsbTIzXLdRisf3xggzDlKOi-wzr/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Crisis Management, Crisis Intervention, Stress Adaptation Model</span>
-        </a>
-        <a href="https://drive.google.com/file/d/134ASy0jnGhUXoY2Ct56D6UX8tKPba4em/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1NwAGa3wkR2KW3QEIcwGIXJxiXFzgcWwB/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Coping Mechanism, Techniques of Counselling</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1t6oFgRscjOCdEbB1Nt2n3wtm2RpwPHwQ/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1lrZUXgn1hklzW_v3Hl_u3Tz-qBB62vGI/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1OleDctFPR0q5faOsuW0cE6Cu4Vjv68NN/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 5 -->
-      <a href="#" 
-         class="action-button quiz-button" 
-         style="opacity: 0.7; cursor: not-allowed;" 
-         title="Quiz link not provided">
-        🧠 Take Unit 5 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 6 -->
-  <div class="unit-container" id="unit6">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 6. Legal Issues in Mental Health Nursing
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/16caG4oSIrI63sU59Xu9wCOn5txTFiYP_/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1InTr1WSnyOaao2cCQKQjDu8KH_8zyEUU/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Indian Lunacy Act 1912, Mental Health Act 1987, POSCO, Rights, Nurse's Role</span>
-        </a>
-        <a href="https://drive.google.com/file/d/10jzqMQUqCFAeJAvAeL_cKMFBMKufpffj/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1irN38I8rjUzxTaps5Z6pkKiuIdteucfu/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Forensic Psychiatry, Civil Responsibilities</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1xpEr2OasY4-e8QKZYbHgqOqcDISMBiwI/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1SR2Rtw8HwKuQPYciSecLFbACNOFX4V9w/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Mental Health Care Act 2017, Admission & Discharge</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1SPBKQJiOgJra9TjUR8sPoEbbTlD6SWAu/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1WNgi41yYkZO3IEn3m1tnfxbpxTF5QnvR/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Acts Related to Narcotics & Psychotropic Substances</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1eo9c5WZWc3oltXlKq2O6w8ekneT6-BBL/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1tymyqqgpBgNcB-wyoZjMxBA9GcMilVfh/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1qfIPKtyMo-r0DzjtJSGRKxMhXI1vqiaT/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 6 -->
-      <a href="https://drive.google.com/file/d/1mQsJVrfEAwFUKQn6TcUWq9Widr55WCdO/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 6 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 7 -->
-  <div class="unit-container" id="unit7">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 7. Community Mental Health Nursing
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1ydXJA8s21GBMD_M4DICXYDyVi4HrURXk/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1o4e7tVUcLCxtCt46T5oYhUV-pVD70ncY/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Introduction, NMHP, NHP</span>
-        </a>
-        <a href="https://drive.google.com/file/d/18ncVV38clJk0kuaPlL3Lkji8rpnmPLB9/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1GHJeoXbRbVDgxHql6VmTZPc9_q2uqBo_/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Institutionalization, Deinstitutionalization, Public Agencies</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1xXGSj8ReCHtILOQFMDHrBj-MXp9huIuw/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1HVXZD8CIJpiVYy4_UqS0hGa4BB0hBIdO/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Private Services, National & International Agencies</span>
-        </a>
-        <a href="https://drive.google.com/file/d/13iAX_ZYSNZr2Rm_ede5B5Xgf5_zqRIIl/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1a-aMfVqZnurNvFUcfgk29cnrSezzR_KP/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Mental Health Nursing Issues For Special Populations</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1YMIDG1DSv6cD0-XJJAYMzehbEI7LnkbA/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1rdnTM0TODBg6yUuyryCWem9lX5RKRhVo/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1fXThNAGmtfbF0whor6Fk9r-bedYOpQWV/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 7 -->
-      <a href="#" 
-         class="action-button quiz-button" 
-         style="opacity: 0.7; cursor: not-allowed;" 
-         title="Quiz link not provided">
-        🧠 Take Unit 7 Quiz
-      </a>
-
-    </div>
-  </div>
-    </a>
-
-  <!-- ✅ JAVASCRIPT — DO NOT MODIFY -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const firstUnitHeader = document.querySelector('.unit-header');
-      if (firstUnitHeader) {
-        firstUnitHeader.setAttribute('aria-expanded', 'true');
-        firstUnitHeader.nextElementSibling.classList.add('active');
-      }
-    });
-  </script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 
 </body>
 </html>
