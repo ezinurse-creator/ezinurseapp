@@ -1,1746 +1,1069 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nursing Management and Leadership Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with video lectures, notes, and quizzes for Nursing Management and Leadership." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nursing Management & Leadership Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Nursing Management." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;     /* Dark Blue */
-      --accent: #00B9F2;    /* Cyan Blue */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-      word-wrap: break-word;
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    /* SYLLABUS BUTTON + UNIT HEADER STYLE */
-    .syllabus-btn,
-    .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .syllabus-btn:hover,
-    .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-      padding: 18px 24px;
-    }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
-    .unit-header span:last-child {
-      display: inline-block;
-      transition: transform 0.3s ease;
-      color: #FFA500; /* 🟠 ORANGE TOGGLE ARROW */
-    }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+        .icon.coming-soon-icon { color: #9ca3af; }
 
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    .unit-container {
-      margin: 32px 0;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
-    }
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-      overflow-y: auto;
-    }
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .subsection {
-      margin: 24px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-      overflow: visible;
-    }
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
 
-    .subsection:hover {
-      box-shadow: var(--shadow-md);
-    }
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      word-break: break-word;
-      min-height: 50px;
-    }
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
-    .resource-btn.notes {
-      background: #f0f9ff;
-      border-color: #bae6fd;
-      color: #085d8c;
-    }
-
-    .resource-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-sm);
-      background: #f9fafb;
-    }
-
-    .resource-btn.notes:hover {
-      background: #e0f2fe;
-    }
-
-    .icon {
-      font-size: 1.3rem;
-      min-width: 24px;
-      text-align: center;
-      color: var(--accent);
-      flex-shrink: 0;
-      align-self: flex-start;
-      margin-top: 2px;
-    }
-
-    .important-section {
-      margin-top: 32px;
-      padding: 24px;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
-      border-radius: 12px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .important-section h3 {
-      margin: 0 0 16px 0;
-      color: var(--brand);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .important-section h3::before {
-      content: "🎯";
-      font-size: 1.2em;
-    }
-
-    /* QUIZ BUTTON STYLES */
-    .action-button {
-      display: block;
-      width: 100%;
-      padding: 20px 24px;
-      margin: 32px auto 16px;
-      font-weight: 600;
-      font-size: 18px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-      border: none;
-    }
-
-    .quiz-button {
-      background: #003B82;
-      color: white;
-    }
-
-    .quiz-button:hover {
-      background: #002d63;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding: 16px;
-      }
-      .syllabus-btn,
-      .unit-header,
-      .resource-btn {
-        font-size: 15px;
-        padding: 14px 16px;
-      }
-      .resource-btn {
-        padding: 12px 14px;
-        font-size: 14px;
-      }
-      .icon {
-        font-size: 1.2rem;
-      }
-      .subsection {
-        padding: 16px;
-        margin: 16px 0;
-      }
-      .unit-content {
-        padding-left: 8px;
-        padding-right: 8px;
-      }
-      .unit-content.active {
-        padding: 16px 8px;
-      }
-    }
-
-    .unit-header:focus,
-    .resource-btn:focus {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-  </style>
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1jzWumJ4g4yZrXuz0c8l9nOBrCE_4C6ds/view?usp=sharing" class="syllabus-btn" target="_blank">
-    📄 NURSING MANAGEMENT AND LEADERSHIP SYLLABUS
-  </a>
-
-  <!-- UNIT 1 -->
-  <div class="unit-container" id="unit1">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 1. Health Care Development of Nursing Services in India
-      <span>🔽</span>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1jzWumJ4g4yZrXuz0c8l9nOBrCE_4C6ds/preview', 'Syllabus')">
+        📄 DOWNLOAD NURSING MANAGEMENT SYLLABUS
     </div>
-    <div class="unit-content active">
+    
+    <div id="units">
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - HEALTH CARE DEVELOPMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JLmgfF7MAj3xJzmJ5-g_TjZe7RjcVe4M/preview', 'Detailed Notes: Development')">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Care Development</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wUhDrbeQs2elwGBPXRxvrlixYIGd4c5S/preview', 'Health Care & Development')">
+                        <span class="icon video-icon">▶️</span><span>Health Care and Development</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p6CLOPoFCyhiIFevuL8k0kboVjjjKM6p/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 1</span>
+                    </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1JLmgfF7MAj3xJzmJ5-g_TjZe7RjcVe4M/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 1.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1wUhDrbeQs2elwGBPXRxvrlixYIGd4c5S/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Health Care and Development</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Q51peFzsZsFWLnWqWcduorj0F0u8Pouy/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - MANAGEMENT BASICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nkYIIfa1pCH1TpSDmeYMBXeFg64tsO5H/preview', 'Detailed Notes: Basics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Management Basics</span>
+                    </div>
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/17OIHznSBXOvG9wyo9lpGu3dscLjKzmlJ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1p6CLOPoFCyhiIFevuL8k0kboVjjjKM6p/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14wMZ0ZEubl7WUP7nGt4C5ndP6qZ49CvF/preview', 'Management Basics')">
+                        <span class="icon video-icon">▶️</span><span>Management Basics Applied to Nursing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UxSMJl7Z6gT9HCuSxaYP9YE-ePuUeutu/preview', 'Management Process')">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Management Process</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19-0avq66ieKtqcUpfG4qoe8mov_OJ7kO/preview', 'Functions of Management')">
+                        <span class="icon video-icon">▶️</span><span>Staffing, Directing/Leading, Controlling</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RBncWVvOkvT3KfCY1c1ok3H422YxVImd/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 2</span>
+                    </div>
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 1 -->
-      <a href="https://drive.google.com/file/d/1vSJ-d2ge8vYQmzuO9QwjxswbNJQKR7Mt/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 1 Quiz
-      </a>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - PLANNING NURSING SERVICES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BCvq6AlNc4cvmocga5HqlfSbiCcUsabw/preview', 'Detailed Notes: Planning')">
+                        <span class="icon">📚</span><span>Detailed Notes: Planning Services</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AfXWPtCREs2gpZHV1wPGM3e9N6I2rjaf/preview', 'Planning Services')">
+                        <span class="icon video-icon">▶️</span><span>Planning Nursing Services</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ByuSl6x6wsKGOsT6-ELDaDcbk1qHr_Vm/preview', 'Program Planning')">
+                        <span class="icon video-icon">▶️</span><span>Gantt Chart, Milestone Chart, Budgeting</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1D_VPrR5Yslc5fVuTCq2XoA8OCUk2a8FH/preview', 'Cost-Benefit Analysis')">
+                        <span class="icon video-icon">▶️</span><span>Cost-Benefit Analysis & Disaster Planning</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1aMXUiZ3xsp3QlkSUgYV5RZYJtro3Ca5Z/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 3</span>
+                    </div>
 
-  <!-- UNIT 2 -->
-  <div class="unit-container" id="unit2">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 2. Management Basics Applied to Nursing
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1nkYIIfa1pCH1TpSDmeYMBXeFg64tsO5H/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - ORGANIZING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Hn87weGD3_0JxUIb0TVCQa8QMx7S8VZ_/preview', 'Detailed Notes: Organizing')">
+                        <span class="icon">📚</span><span>Detailed Notes: Organizing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sV8TTcUmc4I9J6Ik300Mgmki4KITDO7d/preview', 'Organization Types')">
+                        <span class="icon video-icon">▶️</span><span>Organization, Types & Development</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QbDQLH9RHDuP5qvviZZxWD3T56BHUqrL/preview', 'Structure')">
+                        <span class="icon video-icon">▶️</span><span>Organizational Structure & Authority</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1G-akfkPNlK6DYnsngZ9stzvx-1L9mThp/preview', 'Delivery Systems')">
+                        <span class="icon video-icon">▶️</span><span>Nursing Care Delivery & Org Climate</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/153V1Y21DjKhLsxg9s25c2JkGmWD_Kr7b/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 4</span>
+                    </div>
 
-      <!-- 2.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/14wMZ0ZEubl7WUP7nGt4C5ndP6qZ49CvF/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Management Basics Applied to Nursing</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1I8w9ys-CSjZpOxuCh8EoxcOnuaZCBVMq/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 2.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1UxSMJl7Z6gT9HCuSxaYP9YE-ePuUeutu/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Introduction to Management Process</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1wEm_h2Oo8AMObKkxwPw9jl4etkzlRRhS/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - STAFFING (HRM)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JQIywZbuzOS7XIQPVFBWs7ThmIdDdE_M/preview', 'Detailed Notes: Staffing')">
+                        <span class="icon">📚</span><span>Detailed Notes: Staffing & HRM</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tChcmP8UsnfIqr8PdJqdYOVz7db0zjME/preview', 'Recruitment')">
+                        <span class="icon video-icon">▶️</span><span>Staffing, Recruitment & Selection</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JSPfZf0ybVHK0NR3_r463zaHE7Myx-8Y/preview', 'Staff Development')">
+                        <span class="icon video-icon">▶️</span><span>Training, Development & Retaining</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17Y1UkOd7nHNAE3NqH0zX0mzGwEIFmHtX/preview', 'Staffing Norms')">
+                        <span class="icon video-icon">▶️</span><span>Patient Classification & Staffing Norms</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1R8bQ0WWKyoTmqSoZPFj63mg4gNdzqj9G/preview', 'Nursing Director Role')">
+                        <span class="icon video-icon">▶️</span><span>Roles of Nursing Director</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1O1bYOTrKRB_yXorsMnFrlj8LOQylobsF/preview', 'Assignment Methods')">
+                        <span class="icon video-icon">▶️</span><span>Patient Assignment Methods (Functional, Team, Primary)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FG973oPzRlV0kGJnPfUjdH6BZP4U6dyw/preview', 'Turnover')">
+                        <span class="icon video-icon">▶️</span><span>Employee Turnover & Absenteeism</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jngxmQX_b-0HaXdZRXhsQml7IPGsCEOQ/preview', 'Adult Education')">
+                        <span class="icon video-icon">▶️</span><span>Adult Education / Learning</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18dcEYgo4GJomv0eVAVZ3Fjmkee2wdLZU/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 5</span>
+                    </div>
 
-      <!-- 2.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/19-0avq66ieKtqcUpfG4qoe8mov_OJ7kO/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Staffing, Directing/Leading, Controlling</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1EALTj-j0gwXgWoVZwumkvVugIMfwos72/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1e_PcGxXPvo-UBKh1u0IZIdSVZcqTQkUo/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1RBncWVvOkvT3KfCY1c1ok3H422YxVImd/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - DIRECTING & LEADING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zxUw66Qx8cwWQuc18rlLi709zikfJnWB/preview', 'Detailed Notes: Directing')">
+                        <span class="icon">📚</span><span>Detailed Notes: Directing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-deKThuZFDmYDF0ro61ICM2ff3h46rYN/preview', 'Directing Principles')">
+                        <span class="icon video-icon">▶️</span><span>Directing Principles & Participatory Mgmt</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mmmYMTTRmSXR7V2G6_Qf-nWhh6jVkmo_/preview', 'MBO')">
+                        <span class="icon video-icon">▶️</span><span>Management by Objectives (MBO)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lPWUrIxqifKkANVC_-SwksRsj1j6yoRN/preview', 'Team Management')">
+                        <span class="icon video-icon">▶️</span><span>Team Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Oz0AnXlN8kn76LYXiI3mNAB8Df-lK2j8/preview', 'Rotation & Discipline')">
+                        <span class="icon video-icon">▶️</span><span>Rotation Plan & Discipline</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KG2_px53CHijkuRor50zOsysmBrpj1cI/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 6</span>
+                    </div>
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 2 -->
-      <a href="https://drive.google.com/file/d/1CbvUZygm0P5hzK1PGvBYVT_LqJkqeXWe/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 2 Quiz
-      </a>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - LEADERSHIP
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LsQ6k4hwKcI-Rlt5ESFYglw5xDw2EpKL/preview', 'Detailed Notes: Leadership')">
+                        <span class="icon">📚</span><span>Detailed Notes: Leadership</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kiIPamAX1uLn41A7DSdJVLMBofgQsR9_/preview', 'Leadership Concept')">
+                        <span class="icon video-icon">▶️</span><span>Leadership Concept</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1pp1cokheHh8eFkH7pY0uIxecwvUqbbN9/preview', 'Leadership Styles')">
+                        <span class="icon video-icon">▶️</span><span>Leadership Styles</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LZraQ-K5oRwxSbVunSkjUe5lsJb7w-CD/preview', 'Leadership Development')">
+                        <span class="icon video-icon">▶️</span><span>Leadership Development</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PmUONsIXVf9ymMQCdW4AF1PvDrM-h_ig/preview', 'Delegation & Power')">
+                        <span class="icon video-icon">▶️</span><span>Delegation, Power & Politics</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gi4gPiIGchWNSGMZJMAZe45tjSOJodKD/preview', 'Empowerment')">
+                        <span class="icon video-icon">▶️</span><span>Empowerment, Mentoring & Coaching</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1MRRurLTfbQ1eb_gKFRbwNRteXQ82sV3g/preview', 'Decision Making')">
+                        <span class="icon video-icon">▶️</span><span>Decision Making & Conflict Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RO7j2GMIbvXt3Zu-GBIYODfTXH9v5ark/preview', 'Negotiation')">
+                        <span class="icon video-icon">▶️</span><span>Negotiation & Planned Change</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1djH7DSQeEXlEX_MT4Q98olZOhq-5zFXs/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 7</span>
+                    </div>
 
-  <!-- UNIT 3 -->
-  <div class="unit-container" id="unit3">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 3. Planning Nursing Services
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1BCvq6AlNc4cvmocga5HqlfSbiCcUsabw/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - CONTROLLING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p14fkjbzAGkUjIGC1LGQTSx6Akr7C_QH/preview', 'Detailed Notes: Controlling')">
+                        <span class="icon">📚</span><span>Detailed Notes: Controlling</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zySg7-fqI9AFKJcSA17-fYnjdE6OZeOl/preview', 'Nursing Audit')">
+                        <span class="icon video-icon">▶️</span><span>Nursing Audit & Performance Appraisal</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ym3JTCMMFWoGRRSMK7WLm2kvymVd5_-g/preview', 'Quality Assurance')">
+                        <span class="icon video-icon">▶️</span><span>Quality Assurance & Standards</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1aKli9eaAvLgRUt3BQwt0dPfed5YuZ6YQ/preview', 'PERT')">
+                        <span class="icon video-icon">▶️</span><span>Programme Evaluation Review Techniques (PERT)</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BcRjoX2HVl6g3wrUqyrEuH8NC9NUr-Fp/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 8</span>
+                    </div>
 
-      <!-- 3.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1AfXWPtCREs2gpZHV1wPGM3e9N6I2rjaf/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Planning Nursing Services</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1JllYTIfD8Bx02NS16aBhvd0Oq1Die7d3/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 3.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1ByuSl6x6wsKGOsT6-ELDaDcbk1qHr_Vm/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Program Planning: Gantt Chart, Milestone Chart, Budgeting</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1uTj03pGAwnip2POA6DNESJjxrkKwZOPV/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - ORGANIZATIONAL BEHAVIOR
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dG9_TKwuWIaMip8SJlGPi-BKAOlG8Iw3/preview', 'Detailed Notes: Org Behavior')">
+                        <span class="icon">📚</span><span>Detailed Notes: Organizational Behavior</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1h2BzAK-gxrwF9EAHibKZ4MYvCTW0jYGP/preview', 'Group Dynamics')">
+                        <span class="icon video-icon">▶️</span><span>Organizational Behavior & Group Dynamics</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_-2LQrucx_BtQjY3KMOky85kEa7ahwbQ/preview', 'Human Relations')">
+                        <span class="icon video-icon">▶️</span><span>Interpersonal & Human Relations</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GBUUC12vpZbTFbn8ShU3D6osuv3Q5Akg/preview', 'Collective Bargaining')">
+                        <span class="icon video-icon">▶️</span><span>Collective Bargaining</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IfSCP4c20YOLGsN7opF3v0l6FDofXwgC/preview', 'Motivation')">
+                        <span class="icon video-icon">▶️</span><span>Motivation and Morale Building</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DzPtJTeYmKpC_Pf2vDI11Ry48HNsLi86/preview', 'Communication')">
+                        <span class="icon video-icon">▶️</span><span>Assertive Communication & Committees</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16230RSflGYbaokBlf2ZrKLdnQRgycnk6/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 9</span>
+                    </div>
 
-      <!-- 3.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1D_VPrR5Yslc5fVuTCq2XoA8OCUk2a8FH/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Cost-Benefit Analysis, Planning Hospital & Patient Care Unit, Disaster Planning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1AZroh7475Kj5_aIrE8X7eoh3UzLGIhcp/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1jtGy4ZNA7KGn2HCb9mhZfubyXQsemcEo/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1aMXUiZ3xsp3QlkSUgYV5RZYJtro3Ca5Z/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - FINANCIAL MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18KvRloE3wgVIjKoYyExezo2T9yixJZlF/preview', 'Detailed Notes: Finance')">
+                        <span class="icon">📚</span><span>Detailed Notes: Financial Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CG7GEYL5X8BDWnWp4xNZBjNeaJGmbu7A/preview', 'Financial Management')">
+                        <span class="icon video-icon">▶️</span><span>Financial Management Basics</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qyV_0Fs6K18H49UgLcj0-d8r8ivygcsu/preview', 'Financial Planning')">
+                        <span class="icon video-icon">▶️</span><span>Financial Planning</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jlqFaZP4-9b4jSG2GBipdcgXzogxSXsM/preview', 'Budgeting')">
+                        <span class="icon video-icon">▶️</span><span>Budgeting & Financial Audit</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bnZkXcbuSPYFral4eLRHnUwzUgGdZ80K/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 10</span>
+                    </div>
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 3 -->
-      <a href="https://drive.google.com/file/d/1aQ_8ekt1D6OtzHvhQiKFVaW8SGeAtInf/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 3 Quiz
-      </a>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - NURSING INFORMATICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GHky3pufYa0lDRB2br0wIsFCFbc14r8Y/preview', 'Detailed Notes: Informatics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Nursing Informatics</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1roztfJVfvR7vurPVuhA56trU2zp954Et/preview', 'Informatics & Records')">
+                        <span class="icon video-icon">▶️</span><span>Nursing Informatics & Reporting</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gta8vxTfi9pUXfkHFa1MEMIREPeRbePH/preview', 'Telemedicine')">
+                        <span class="icon video-icon">▶️</span><span>Telemedicine</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sr89KejiznqSayJIfL3UgRhtYLXl_nZK/preview', 'EMR & EHR')">
+                        <span class="icon video-icon">▶️</span><span>Telenursing & Electronic Health Records</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p1IEdi8ZXH-bua7LMcNRVDTOsZE1ED3T/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 11</span>
+                    </div>
 
-  <!-- UNIT 4 -->
-  <div class="unit-container" id="unit4">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 4. Organizing
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Hn87weGD3_0JxUIb0TVCQa8QMx7S8VZ_/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - PERSONAL MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sW_TthudKiWztKoeERFrjGjwmtKshGAV/preview', 'Detailed Notes: Personal Mgmt')">
+                        <span class="icon">📚</span><span>Detailed Notes: Personal Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OFc7bgfJ4_KPuBv3ZNeqwxDr7uIo1h39/preview', 'Emotional Intelligence')">
+                        <span class="icon video-icon">▶️</span><span>Personnel Management & Emotional Intelligence</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nwdS6IMN4mr5doe7nhSqN1jTWtSn9CMo/preview', 'Stress Management')">
+                        <span class="icon video-icon">▶️</span><span>Stress and Time Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1pvR-RGiKNxmSLblpwRsSsXkne4GUcVpv/preview', 'Career Planning')">
+                        <span class="icon video-icon">▶️</span><span>Career Planning</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zqqBdSAoAjBpbzyaivTvhZuXeMCcubIX/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 12</span>
+                    </div>
 
-      <!-- 4.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1sV8TTcUmc4I9J6Ik300Mgmki4KITDO7d/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Organization, Types, Organizational Development</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1pR2sbXzdT1hp-IS5nW2AuALLt3kUjmW2/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 4.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1QbDQLH9RHDuP5qvviZZxWD3T56BHUqrL/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Organizational Structure, Effectiveness, Hospital Admin, Line of Authority</span>
-        </a>
-        <a href="https://drive.google.com/file/d/10eT9NYVx0tN4qwc98uNgpg6tmPbobeM7/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - ESTABLISHING INSTITUTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1k91bIZTfyn2e5GDJK1ZMNP7acSezC0OB/preview', 'Detailed Notes: Institutions')">
+                        <span class="icon">📚</span><span>Detailed Notes: Nursing Institutions</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12ZgawgbdICqqNRPUppN3yTZNkPo29e_J/preview', 'INC Norms')">
+                        <span class="icon video-icon">▶️</span><span>INC Norms & Guidelines</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hEo-vqNjfXEA_UJ-1Eau8abjOjEH3xYY/preview', 'Accreditation')">
+                        <span class="icon video-icon">▶️</span><span>INC/SNC & Accreditation</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CoGTYlBLcu1I95ohYtEG1KxABCBu2bdh/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 13</span>
+                    </div>
 
-      <!-- 4.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1G-akfkPNlK6DYnsngZ9stzvx-1L9mThp/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Hospital Statistics, Nursing Care Delivery, Nurse’s Role in Org Climate</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1OjR6J4DAp82-7m2zy8g2nVTXkXQkmxVe/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1e8oPjlw7-xTjl-Sy6Od7paK7eHT6eI6N/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/153V1Y21DjKhLsxg9s25c2JkGmWD_Kr7b/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - PLANNING & ORGANIZING (EDUCATION)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13hDkZHyhlZqgrkqMcmYf_fO_fd4Hapbq/preview', 'Detailed Notes: Educational Planning')">
+                        <span class="icon">📚</span><span>Detailed Notes: Educational Planning</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jYMCqgEhDMR9-iOT2eNWe3LALptMtjnL/preview', 'Philosophy')">
+                        <span class="icon video-icon">▶️</span><span>Philosophy of Nursing College</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BasN_n67gIw7kKSzX1zjUvsu1NLbQZzU/preview', 'Curriculum')">
+                        <span class="icon video-icon">▶️</span><span>Clinical Facilities & Curriculum Planning</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1G9hpm5KDoyekHowJZDLsmMCfCF1T1HtP/preview', 'Rotation Plans')">
+                        <span class="icon video-icon">▶️</span><span>Master & Clinical Rotation Plans</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a17oGytU9fjCd2H7Z-NpJBgtoLzvArj8/preview', 'Budget')">
+                        <span class="icon video-icon">▶️</span><span>Revenue Expenditure & Budget</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nRitGbCwb3pA2mrExGAjrf280z_V4qzI/preview', 'Committees')">
+                        <span class="icon video-icon">▶️</span><span>Committees and Functioning</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DsMBwQLe7Ky5uakIgLXorjQZKrlRDRsj/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 14</span>
+                    </div>
 
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 4 -->
-      <a href="https://drive.google.com/file/d/1WLhG0FGbiKwcyG51W1zOunMj8dtl1db3/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 4 Quiz
-      </a>
+                    <div class="resource-btn quiz" onclick="openQuiz(14)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-  </div>
+        <div class="unit-container" id="unit15">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 15 - STUDENT SELECTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1D0ffCOwh7onBTnMYWgJqJbG1VTiG09Gy/preview', 'Detailed Notes: Student Selection')">
+                        <span class="icon">📚</span><span>Detailed Notes: Student Selection</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mh9gKiHO56_QbYhPZ6PIgHGnhjXvm-DP/preview', 'Performance Appraisal')">
+                        <span class="icon video-icon">▶️</span><span>Performance Appraisal</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DR_0FrI2XsdsPfgvczh9h9vD55vJGQZs/preview', 'Staff Welfare')">
+                        <span class="icon video-icon">▶️</span><span>Staff Development & Welfare</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ih4OK6kxDE-awUlMLAzyaSRoeZpodLgo/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 15</span>
+                    </div>
 
-  <!-- UNIT 5 -->
-  <div class="unit-container" id="unit5">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 5. Staffing (Human Resource Management)
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
+                    <div class="resource-btn quiz" onclick="openQuiz(15)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 15 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1JQIywZbuzOS7XIQPVFBWs7ThmIdDdE_M/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit16">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 16 - DIRECTING & CONTROLLING (EDU)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_oNHfz9gRhyuykLNBVMGvJIG06q-LlFN/preview', 'Detailed Notes: Edu Directing')">
+                        <span class="icon">📚</span><span>Detailed Notes: Directing & Controlling</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10UQkN1_MnbqbBs90bvgYLebpoZZOZsTK/preview', 'Curriculum')">
+                        <span class="icon video-icon">▶️</span><span>Curriculum Implementation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YIAt24gjQlO1TuEcxQPkb_SsX9e-8den/preview', 'Counselling')">
+                        <span class="icon video-icon">▶️</span><span>Counselling</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Trev3g8oFiYUSZ0_cfrqHgxKt8_inJbU/preview', 'Quality Management')">
+                        <span class="icon video-icon">▶️</span><span>Quality Management & Educational Audit</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VfQrTCKcc7bSw13ELuNKXG-PUTFgfFRN/preview', 'Discipline')">
+                        <span class="icon video-icon">▶️</span><span>Maintaining Discipline</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iEmgaTSDWm66DP6s3ejC84Hxv8x0eaOR/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 16</span>
+                    </div>
 
-      <!-- 5.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1tChcmP8UsnfIqr8PdJqdYOVz7db0zjME/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Staffing, Recruitment, Selection</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1XlWb2l3bQmZHYNBiPPOUwqOw95Gv2bMn/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(16)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 16 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 5.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1JSPfZf0ybVHK0NR3_r463zaHE7Myx-8Y/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Training, Development, Credentialing, Retaining</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1iZl7MJVznF0H-s_kfPe7_klv3EkoSyiU/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit17">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 17 - PROFESSIONAL CONSIDERATIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KC_ZCw1MLl2dj8JIOsCKImTxzyJNIVAT/preview', 'Detailed Notes: Professional')">
+                        <span class="icon">📚</span><span>Detailed Notes: Professional Considerations</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YBDlUId8Xfkl4j4XqXAcKRqCwvTX3cyy/preview', 'Nursing Practice')">
+                        <span class="icon video-icon">▶️</span><span>Professional Consideration & Practice</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kjobiyVUV2fa41UZxURuE_PuJbabJgw6/preview', 'Legal Aspects')">
+                        <span class="icon video-icon">▶️</span><span>Legal Aspect in Nursing & Patient Rights</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sK-sJYgMkevHZhLvSddc_lrBaoovf0oD/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 17</span>
+                    </div>
 
-      <!-- 5.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/17Y1UkOd7nHNAE3NqH0zX0mzGwEIFmHtX/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Promotion, Transfer, Termination, Superannuation, Staffing Norms, Patient Classification</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1lw9I-qcdjEsXG-9t_6VCYTaSO0hMjiN1/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(17)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 17 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- 5.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1R8bQ0WWKyoTmqSoZPFj63mg4gNdzqj9G/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Roles & Responsibilities of a Nursing Director</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1de0r3B7OUJRo7g8fFGjXMxes2kBjMmdq/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
+        <div class="unit-container" id="unit18">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 18 - PROFESSIONAL ADVANCEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cVmTPHha2TG5YKhkqTyReFlymPRuwhPc/preview', 'Detailed Notes: Advancement')">
+                        <span class="icon">📚</span><span>Detailed Notes: Professional Advancement</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1A8XBs1bvzziKqbba5wDO8KdJnEeXobtr/preview', 'CNE')">
+                        <span class="icon video-icon">▶️</span><span>Continuing Nursing Education (CNE)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1f_NjY4CqtxJfN-Q4FOii0v5IzWYCnNKu/preview', 'Research')">
+                        <span class="icon video-icon">▶️</span><span>Research Activities in Nursing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Hl4ZracC5iVul4NXLHoDQQ_7D_7rARgY/preview', 'Publications')">
+                        <span class="icon video-icon">▶️</span><span>Steps in Writing for Publications</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eXN6mifqVCTnxtKpfsqbGiJiZ3OXpmd_/preview', 'Important Questions')">
+                        <span class="icon">❓</span><span>Important Questions: Unit 18</span>
+                    </div>
 
-      <!-- 5.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1O1bYOTrKRB_yXorsMnFrlj8LOQylobsF/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Case Method, Functional, Team, Modular, Progressive, Primary Care Nursing</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1SCksVS1SnnQyTwlwndTAOycRZX_Mwf6H/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.6 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1FG973oPzRlV0kGJnPfUjdH6BZP4U6dyw/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Employee Turnover, Absenteeism</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1kuRcXL4Kqyd8AZvdaGOMvQ2BaErXOS_1/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 5.7 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1jngxmQX_b-0HaXdZRXhsQml7IPGsCEOQ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Adult Education / Learning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1x69xbMUfEu9WUAitZPJ3qgofTDpRvErB/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1Mktsi-VtNW5cocU2vfzCOmNDAdF5XeBZ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/18dcEYgo4GJomv0eVAVZ3Fjmkee2wdLZU/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 5 -->
-      <a href="https://drive.google.com/file/d/1RNtO6Zg3Y-fyuA5fwT9R0S8gJP7q_04t/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 5 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 6 -->
-  <div class="unit-container" id="unit6">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 6. Directing and Leading
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1zxUw66Qx8cwWQuc18rlLi709zikfJnWB/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1-deKThuZFDmYDF0ro61ICM2ff3h46rYN/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Directing, Principles of Directing, Participatory Management</span>
-        </a>
-        <a href="https://drive.google.com/file/d/12nlVh1Md6QxAfV9kNCEBkumd2IxsMYJ7/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.2 -->
-      <div class="subsection">
-        <a href="#" class="resource-btn" style="opacity: 0.7; pointer-events: none;" title="Link not provided">
-          <span class="icon">🎥</span>
-          <span>[Video Not Provided]</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1fadfheeyhpqjQS6sxJqtHa60L_Y36YOV/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1mmmYMTTRmSXR7V2G6_Qf-nWhh6jVkmo_/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Interpersonal Collaboration, Management by Objectives (MBO)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1xqGUmTbcueHVcHKeaiwZjoNXnwZiUoAR/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1lPWUrIxqifKkANVC_-SwksRsj1j6yoRN/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Team Management, Team Managers, Patient Assignment</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1wjEtAbY9F3a6GgIDZ9cBvP4v0x1zX50x/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 6.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Oz0AnXlN8kn76LYXiI3mNAB8Df-lK2j8/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Rotation Plan, Clinical Rotation, Discipline, Leadership</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Y0MwIMccs084fqJY6U2Pks3JxDT8ZRe4/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/11kdFIk0xSXyu7S6JEoduItE0ANs1BvHQ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1KG2_px53CHijkuRor50zOsysmBrpj1cI/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 6 -->
-      <a href="https://drive.google.com/file/d/1gIoF_awySfymouJZXiwQKCF-c3soOYlB/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 6 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 7 -->
-  <div class="unit-container" id="unit7">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 7. Leadership
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1LsQ6k4hwKcI-Rlt5ESFYglw5xDw2EpKL/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1kiIPamAX1uLn41A7DSdJVLMBofgQsR9_/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Leadership, Concept of Leadership</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1UsUnNckI9vAEUyw7G2Kc4Jqr0MR2fB77/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1pp1cokheHh8eFkH7pY0uIxecwvUqbbN9/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Leadership Styles</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1ESK13guImalQXFIMsw1Ncq-x8nXazq-A/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1LZraQ-K5oRwxSbVunSkjUe5lsJb7w-CD/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Leadership Development</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1L6Jax4riy7aoR620EwDf46RJa5lxTuRw/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1PmUONsIXVf9ymMQCdW4AF1PvDrM-h_ig/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Delegation, Power, Politics</span>
-        </a>
-        <a href="https://drive.google.com/file/d/19OCzwsKJOrrsUkmqv-jJwEjkHmAp_xk1/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1gi4gPiIGchWNSGMZJMAZe45tjSOJodKD/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Empowerment, Mentoring, Coaching</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1bwa_AQHEv3bPd3mWDNPkcYPWMfoDeygo/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.6 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1MRRurLTfbQ1eb_gKFRbwNRteXQ82sV3g/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Decision Making, Problem-Solving, Conflict Management</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1C-LXh-1qczCEalPBbDOam8V85qPs6KGh/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 7.7 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1RO7j2GMIbvXt3Zu-GBIYODfTXH9v5ark/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Negotiation, Implementing Planned Change</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1ozYp_QRrU8lfSJV9mkK5yG4QqsmKXVWg/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn" target="_blank" style="opacity: 0.7;">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion (Coming Soon)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1djH7DSQeEXlEX_MT4Q98olZOhq-5zFXs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 7 -->
-      <a href="https://drive.google.com/file/d/1FMfZpmS6hflHwIwTo9cijfr5o1LmKzXm/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 7 Quiz
-      </a>
+                    <div class="resource-btn quiz" onclick="openQuiz(18)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 18 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
-  </div>
 
-  <!-- UNIT 8 -->
-  <div class="unit-container" id="unit8">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 8. Controlling
-      <span>🔽</span>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
-    <div class="unit-content">
 
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1p14fkjbzAGkUjIGC1LGQTSx6Akr7C_QH/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 8.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1zySg7-fqI9AFKJcSA17-fYnjdE6OZeOl/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Introduction, Nursing Audit, Performance Appraisal</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Mjz9E7UKv14DPBdTEAsf4Odu8fAh0Wod/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 8.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Ym3JTCMMFWoGRRSMK7WLm2kvymVd5_-g/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Nursing Rounds, Quality Assurance, Standards</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1eicaBOgoRuarPZLCyRgYMXZMGJwbPvEX/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 8.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1aKli9eaAvLgRUt3BQwt0dPfed5YuZ6YQ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Programme Evaluation Review Techniques (PERT)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1sLs0KCCyXswUaoi2Vi27GNaRQZsr4bQm/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn" target="_blank" style="opacity: 0.7;">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion (Coming Soon)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1BcRjoX2HVl6g3wrUqyrEuH8NC9NUr-Fp/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 8 -->
-      <a href="https://drive.google.com/file/d/1GszmARF0sfum-g8tn1AocpM8xt9NCi4f/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 8 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 9 -->
-  <div class="unit-container" id="unit9">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 9. Organizational Behaviour and Human Relations
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1dG9_TKwuWIaMip8SJlGPi-BKAOlG8Iw3/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 9.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1h2BzAK-gxrwF9EAHibKZ4MYvCTW0jYGP/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Organizational Behavior, Group Dynamics</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1cUuHRpnjOwqCVV-O12yE1D7bDxEefSwd/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 9.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1_-2LQrucx_BtQjY3KMOky85kEa7ahwbQ/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Interpersonal Relationships, Human Relations, Public Relations</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1pktCANdIXt7a9lCHgej7pDAr6Nhr3Xd3/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 9.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1GBUUC12vpZbTFbn8ShU3D6osuv3Q5Akg/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Collective Bargaining</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1z3wfzV7mdV8uaoQx7foGGaKFm57VwVRL/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 9.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1IfSCP4c20YOLGsN7opF3v0l6FDofXwgC/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Motivation and Morale Building</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1_bIz0FsmAiTSE1biH-AMdGRRbtkyVYuc/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 9.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1DzPtJTeYmKpC_Pf2vDI11Ry48HNsLi86/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Assertive Communication and Committees</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1_hRpO-GltPG62kgVrzlwziFB7hfug9B4/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn" target="_blank" style="opacity: 0.7;">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion (Coming Soon)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/16230RSflGYbaokBlf2ZrKLdnQRgycnk6/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 9 -->
-      <a href="https://drive.google.com/file/d/1wzXIVpa_iMNULXkjJzKCd-dLQn6-a5K-/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 9 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 10 -->
-  <div class="unit-container" id="unit10">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 10. Financial Management
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/18KvRloE3wgVIjKoYyExezo2T9yixJZlF/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 10.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1CG7GEYL5X8BDWnWp4xNZBjNeaJGmbu7A/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Financial Management</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1U07sxGlEdcDjHk28HvCFz_Ln0vX-woLw/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 10.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1qyV_0Fs6K18H49UgLcj0-d8r8ivygcsu/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Financial Planning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Vsszr5YCvYeanMAbzZDD0ugj9p-boF1D/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 10.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1jlqFaZP4-9b4jSG2GBipdcgXzogxSXsM/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Budget, Budget Planning, Financial Audit</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1-tXcCuegcOFv3qkqSaBxsWVbtiHb16UO/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1WhfOKtaY9OtSr6rnTPH0e44A8xdr_N4D/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1bnZkXcbuSPYFral4eLRHnUwzUgGdZ80K/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 10 -->
-      <a href="https://drive.google.com/file/d/19UdjKvBoogvGm1Rul8qJLv6eHTenwezX/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 10 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 11 -->
-  <div class="unit-container" id="unit11">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 11. Nursing Informatics / Information Management – Review
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1GHky3pufYa0lDRB2br0wIsFCFbc14r8Y/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 11.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1roztfJVfvR7vurPVuhA56trU2zp954Et/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Nursing Informatics, Patient Records, Nursing Records, Reporting</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1I8VH34tE5u4Vnme0fmqlGuQMh_KStssV/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 11.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1gta8vxTfi9pUXfkHFa1MEMIREPeRbePH/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Telemedicine</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1fXtJ6vuQdEs3CQs_C0YwbXSXtV1GFZTj/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 11.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1sr89KejiznqSayJIfL3UgRhtYLXl_nZK/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Telenursing, Electronic Medical Records, Electronic Health Records</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1xjcL9Og1KgGeiQ6aN1j2aazFKQhIj5vx/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1zwbb1EJZSpW5ruxRX08WtroTQEwhw43n/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1p1IEdi8ZXH-bua7LMcNRVDTOsZE1ED3T/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 11 -->
-      <a href="https://drive.google.com/file/d/1yLnVTOioTsnJfait-akF23fioy5F557U/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 11 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 12 -->
-  <div class="unit-container" id="unit12">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 12. Personal Management Review
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1sW_TthudKiWztKoeERFrjGjwmtKshGAV/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 12.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1OFc7bgfJ4_KPuBv3ZNeqwxDr7uIo1h39/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Personnel Management, Emotional Intelligence, Resilience Building</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1kai9lAoOeu9jkKFVaRRYR1Cx85XKn5Qb/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 12.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1nwdS6IMN4mr5doe7nhSqN1jTWtSn9CMo/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Stress and Time Management</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Jp3gfaSonva4Ucruuev75wc5AEcR1RDk/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 12.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1pvR-RGiKNxmSLblpwRsSsXkne4GUcVpv/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Career Planning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1QgKEb2UVMc-_Z0TSwKHGbN3VFX-7ITzG/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1DVAiOHnI6yZRl47Se6Lqzp0ttLH2po_1/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1zqqBdSAoAjBpbzyaivTvhZuXeMCcubIX/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 12 -->
-      <a href="https://drive.google.com/file/d/1spZ7Yh3fPYoH0CpySFtz2ABXhCgdxtSb/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 12 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 13 -->
-  <div class="unit-container" id="unit13">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 13. Establishment of Nursing Institutions
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1k91bIZTfyn2e5GDJK1ZMNP7acSezC0OB/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 13.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/12ZgawgbdICqqNRPUppN3yTZNkPo29e_J/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Indian Nursing Council Norms & Guidelines</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1tuZHX1zu0N6ow0Iay7aDFbQa9QTzwGaD/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 13.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1hEo-vqNjfXEA_UJ-1Eau8abjOjEH3xYY/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>INC and State Nursing Council, Accreditation</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1KlS0xUgKkP_EBRFKMK1ce_c0pZ02w23T/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/15xcHH5h2yPyszt6r7ppB7oxGOu-142AS/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1CoGTYlBLcu1I95ohYtEG1KxABCBu2bdh/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 13 -->
-      <a href="https://drive.google.com/file/d/1KFkvDV9MUxBHijfvpvQ3843A_yykhsrX/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 13 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 14 -->
-  <div class="unit-container" id="unit14">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 14. Planning and Organizing
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/13hDkZHyhlZqgrkqMcmYf_fO_fd4Hapbq/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 14.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1jYMCqgEhDMR9-iOT2eNWe3LALptMtjnL/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Philosophy of Nursing College</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1LD0wiVKZw8Xb-pNFeNS5Hte0qjes1ct0/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 14.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1BasN_n67gIw7kKSzX1zjUvsu1NLbQZzU/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Organizing Clinical Facilities (INC), Curriculum Planning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1nNkco-ITkysPi2uFdcfnLkSCAT3vbqZv/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 14.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1G9hpm5KDoyekHowJZDLsmMCfCF1T1HtP/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Master Rotation Plan, Clinical Rotation Plan, Budget Planning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1BZT8hhawJu4CSCqhHuMjGE_IULacD46W/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 14.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1a17oGytU9fjCd2H7Z-NpJBgtoLzvArj8/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Revenue Expenditure, Classification of Budget</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1T6I1AZVtyo8BbharXxFTQ85NJ7mLG0N9/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 14.5 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1nRitGbCwb3pA2mrExGAjrf280z_V4qzI/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Committees and Functioning</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1qcQM9WiAaHLUFl41T5xmURFNuOh_la9h/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1-THNxQ20T12HICjgHbKxkYQn_cqCgNVU/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1DsMBwQLe7Ky5uakIgLXorjQZKrlRDRsj/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 14 -->
-      <a href="https://drive.google.com/file/d/1ISPu0ySg2woRv9012uA2iylHzkHKhUw8/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 14 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 15 -->
-  <div class="unit-container" id="unit15">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 15. Staffing and Student Selection
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1D0ffCOwh7onBTnMYWgJqJbG1VTiG09Gy/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 15.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1mh9gKiHO56_QbYhPZ6PIgHGnhjXvm-DP/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Performance Appraisal</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1aJ4oN92pdInIF1m1xMH_R6SIXJ_O6Krx/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 15.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1DR_0FrI2XsdsPfgvczh9h9vD55vJGQZs/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Staff Development Program, Staff Welfare</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1TtBq4e6uJShTqT7YsI9XbbD6FsTN0U8C/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1s7jEJ9cuxMwh5C23DIMavv4uMLZxsei2/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1ih4OK6kxDE-awUlMLAzyaSRoeZpodLgo/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 15 -->
-      <a href="https://drive.google.com/file/d/1diGflGUESFPfG9hb_vBiAjHLnLRmWrrN/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 15 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 16 -->
-  <div class="unit-container" id="unit16">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 16. Directing and Controlling
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1_oNHfz9gRhyuykLNBVMGvJIG06q-LlFN/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 16.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/10UQkN1_MnbqbBs90bvgYLebpoZZOZsTK/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Curriculum Implementation</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1PZABLSxUoki4enZYGuGlizwTdSEpFeDS/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 16.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1YIAt24gjQlO1TuEcxQPkb_SsX9e-8den/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Counselling</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1hnIeWIbt-Gt3YId2Pwr7ed--i5IWbIU7/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 16.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Trev3g8oFiYUSZ0_cfrqHgxKt8_inJbU/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Quality Management and Educational Audit</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1dE6y3kTXBkwqCMsibvOSZ8-PhobWy81f/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 16.4 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1VfQrTCKcc7bSw13ELuNKXG-PUTFgfFRN/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Maintaining Discipline</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1VralBKCaIoZh2tVM8I0YzYLqChH-J2ZT/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://sites.google.com/view/test-mysiteateinurse/coming-soon" class="resource-btn" target="_blank" style="opacity: 0.7;">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion (Coming Soon)</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1iEmgaTSDWm66DP6s3ejC84Hxv8x0eaOR/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 16 -->
-      <a href="https://drive.google.com/file/d/1zzoHGB5oiChnpN8ToC2tzBkwPxKCatUU/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 16 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 17 -->
-  <div class="unit-container" id="unit17">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 17. Professional Considerations
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1KC_ZCw1MLl2dj8JIOsCKImTxzyJNIVAT/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 17.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1YBDlUId8Xfkl4j4XqXAcKRqCwvTX3cyy/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Professional Consideration, Nursing Practice</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1xnDb-NGOQD8zvAoOGVuoDz9r5JhaZfJP/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 17.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1kjobiyVUV2fa41UZxURuE_PuJbabJgw6/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Legal Aspect in Nursing, Patient Rights</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1Zs8eNXChzMuHuMOoZnENQubg8E0EGEdE/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/12usDFr9dbdSXMJlxuxNkfIseEtbEe99K/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1sK-sJYgMkevHZhLvSddc_lrBaoovf0oD/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 17 -->
-      <a href="https://drive.google.com/file/d/1ImAt9tJIEJ5oDqXshgkhosHqMPqriEk1/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 17 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- UNIT 18 -->
-  <div class="unit-container" id="unit18">
-    <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleUnit(this)">
-      UNIT 18. Professional Advancement
-      <span>🔽</span>
-    </div>
-    <div class="unit-content">
-
-      <!-- Detailed Notes -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1cVmTPHha2TG5YKhkqTyReFlymPRuwhPc/view?usp=sharing" class="resource-btn" target="_blank">
-          <span class="icon">📚</span>
-          <span>Detailed Notes</span>
-        </a>
-      </div>
-
-      <!-- 18.1 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1A8XBs1bvzziKqbba5wDO8KdJnEeXobtr/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Continuing Nursing Education</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1nEPkV69xUCPvKhyIlzq3GYGufE-UGvVD/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 18.2 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1f_NjY4CqtxJfN-Q4FOii0v5IzWYCnNKu/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Research Activities in Nursing</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1fe656iZnnwjZDKMG4zMzSD4toH6TbO-J/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- 18.3 -->
-      <div class="subsection">
-        <a href="https://drive.google.com/file/d/1Hl4ZracC5iVul4NXLHoDQQ_7D_7rARgY/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">🎥</span>
-          <span>Steps in Writing for Publications</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1hiRUOwNKi5rGJ7vQnwz59ZLRVkPs_d7C/view?usp=sharing" class="resource-btn notes" target="_blank">
-          <span class="icon">📝</span>
-          <span>Lecture Notes</span>
-        </a>
-      </div>
-
-      <!-- IMPORTANT QUESTIONS -->
-      <div class="important-section">
-        <h3>Important Questions</h3>
-        <a href="https://drive.google.com/file/d/1xUXk-hLYq2MOHV68PXd8ITadTxkHWJ_l/view?usp=drive_link" class="resource-btn" target="_blank">
-          <span class="icon">📄</span>
-          <span>Important Question Discussion</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1eXN6mifqVCTnxtKpfsqbGiJiZ3OXpmd_/view?usp=drive_link" class="resource-btn notes" target="_blank">
-          <span class="icon">📘</span>
-          <span>Important Questions</span>
-        </a>
-      </div>
-
-      <!-- 🧠 QUIZ BUTTON FOR UNIT 18 -->
-      <a href="https://drive.google.com/file/d/126M2OdfFU4qq8bknOeQeILaZplaRMULt/view?usp=drive_link" 
-         class="action-button quiz-button" 
-         target="_blank">
-        🧠 Take Unit 18 Quiz
-      </a>
-
-    </div>
-  </div>
-
-  <!-- ✅ JAVASCRIPT — DO NOT MODIFY -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const firstUnitHeader = document.querySelector('.unit-header');
-      if (firstUnitHeader) {
-        firstUnitHeader.setAttribute('aria-expanded', 'true');
-        firstUnitHeader.nextElementSibling.classList.add('active');
-      }
-    });
-  </script>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Health Care Dev
+                { q: "The 'Health for All' goal was declared at:", o: ["Alma Ata", "Geneva", "New Delhi", "Washington"], a: 0 },
+                { q: "The Bhore Committee is also known as:", o: ["Health Survey and Planning Committee", "Health Survey and Development Committee", "Mudaliar Committee", "Kartar Singh Committee"], a: 1 },
+                { q: "Primary Health Care is based on the principle of:", o: ["Urban centralization", "Equity", "Specialized care", "Private funding"], a: 1 },
+                { q: "The regulatory body for nursing education in India is:", o: ["MCI", "INC", "UGC", "AICTE"], a: 1 },
+                { q: "TNAI stands for:", o: ["Trained Nurses Association of India", "Technical Nursing Authority of India", "Total Nursing Assessment of India", "None"], a: 0 }
+            ],
+            2: [ // Unit 2: Basics
+                { q: "Who is known as the father of scientific management?", o: ["Henry Fayol", "Frederick Taylor", "Max Weber", "Elton Mayo"], a: 1 },
+                { q: "POSDCORB was coined by:", o: ["Luther Gulick", "Urwick", "Fayol", "Taylor"], a: 0 },
+                { q: "The 'C' in POSDCORB stands for:", o: ["Communication", "Coordinating", "Controlling", "Commanding"], a: 1 },
+                { q: "Scalar chain refers to:", o: ["Chain of command", "Supply chain", "Communication barrier", "None"], a: 0 },
+                { q: "Unity of Command means:", o: ["One subordinate, one boss", "One plan, one team", "Teamwork", "Centralization"], a: 0 }
+            ],
+            3: [ // Unit 3: Planning
+                { q: "A Gantt chart is primarily used for:", o: ["Budgeting", "Scheduling activities", "Employee appraisal", "Inventory"], a: 1 },
+                { q: "PERT stands for:", o: ["Program Evaluation and Review Technique", "Planned Emergency Response Team", "Patient Evaluation Record Tool", "None"], a: 0 },
+                { q: "Strategic planning is usually:", o: ["Short term", "Long term", "Day to day", "Immediate"], a: 1 },
+                { q: "Cost-Benefit Analysis helps in:", o: ["Comparing costs with outcomes", "Hiring staff", "Teaching students", "Writing reports"], a: 0 },
+                { q: "The first step in planning is:", o: ["Setting objectives", "Budgeting", "Execution", "Evaluation"], a: 0 }
+            ],
+            4: [ // Unit 4: Organizing
+                { q: "Line authority is characterized by:", o: ["Advisory role", "Direct command", "Horizontal communication", "Informal relations"], a: 1 },
+                { q: "Span of control refers to:", o: ["Number of subordinates a supervisor manages", "Geographic area", "Duration of shift", "Budget limit"], a: 0 },
+                { q: "An organizational chart shows:", o: ["Formal structure", "Informal groups", "Patient list", "Budget"], a: 0 },
+                { q: "Decentralization involves:", o: ["Concentrating power at top", "Delegating power to lower levels", "No hierarchy", "Strict rules"], a: 1 },
+                { q: "The nursing care delivery system where one nurse assumes total responsibility for a patient is:", o: ["Functional nursing", "Team nursing", "Primary nursing", "Modular nursing"], a: 2 }
+            ],
+            5: [ // Unit 5: Staffing
+                { q: "Patient Classification System (PCS) helps in:", o: ["Determining staffing needs", "Diagnosing patients", "Billing", "Discharge planning"], a: 0 },
+                { q: "Recruitment is the process of:", o: ["Selecting candidates", "Searching for prospective employees", "Training", "Firing"], a: 1 },
+                { q: "Induction training is given to:", o: ["New employees", "Retiring employees", "Top management", "Students"], a: 0 },
+                { q: "The nurse-patient ratio recommended for ICU is:", o: ["1:1", "1:3", "1:6", "1:10"], a: 0 },
+                { q: "Performance appraisal is used for:", o: ["Salary increments", "Feedback", "Promotion", "All of the above"], a: 3 }
+            ],
+            6: [ // Unit 6: Directing
+                { q: "Directing includes:", o: ["Supervision, Motivation, Leadership", "Planning, Budgeting", "Staffing, Recruitment", "Reporting"], a: 0 },
+                { q: "MBO stands for:", o: ["Management by Objectives", "Management by Order", "Member Board Organization", "None"], a: 0 },
+                { q: "Which is a non-financial incentive?", o: ["Bonus", "Recognition", "Salary hike", "Pension"], a: 1 },
+                { q: "Supervision should be:", o: ["Autocratic", "Democratic and guiding", "Punitive", "Absent"], a: 1 },
+                { q: "Delegation is defined as:", o: ["Doing all work alone", "Assigning responsibility and authority", "Ordering people", "Avoiding work"], a: 1 }
+            ],
+            7: [ // Unit 7: Leadership
+                { q: "Which leadership style allows maximum freedom to subordinates?", o: ["Autocratic", "Democratic", "Laissez-faire", "Bureaucratic"], a: 2 },
+                { q: "Transformational leadership focuses on:", o: ["Routine tasks", "Inspiring change and vision", "Punishment", "Strict rules"], a: 1 },
+                { q: "Power derived from position is called:", o: ["Legitimate power", "Expert power", "Referent power", "Coercive power"], a: 0 },
+                { q: "Conflict management strategy 'Win-Win' is associated with:", o: ["Collaboration", "Avoidance", "Competition", "Accommodation"], a: 0 },
+                { q: "A key trait of a leader is:", o: ["Vision", "Technical skill only", "Rigidity", "Isolation"], a: 0 }
+            ],
+            8: [ // Unit 8: Controlling
+                { q: "Nursing Audit focuses on:", o: ["Financial records", "Quality of nursing care", "Staff attendance", "Inventory"], a: 1 },
+                { q: "Standard of care is:", o: ["Minimum acceptable level of care", "Maximum possible care", "Ideal care", "None"], a: 0 },
+                { q: "Quality Assurance involves:", o: ["Structure, Process, Outcome", "Planning only", "Budgeting only", "Hiring"], a: 0 },
+                { q: "Which is a tool for performance appraisal?", o: ["Checklist", "Thermometer", "Stethoscope", "Syringe"], a: 0 },
+                { q: "Retrospective audit is done:", o: ["After patient discharge", "During care", "Before admission", "During surgery"], a: 0 }
+            ],
+            9: [ // Unit 9: Org Behavior
+                { q: "Maslow's hierarchy of needs starts with:", o: ["Physiological needs", "Safety needs", "Esteem needs", "Self-actualization"], a: 0 },
+                { q: "Collective bargaining is a process between:", o: ["Employer and Employee union", "Nurse and Patient", "Doctor and Nurse", "Student and Teacher"], a: 0 },
+                { q: "Group dynamics refers to:", o: ["Interactions within a group", "Group size", "Group location", "None"], a: 0 },
+                { q: "Johari Window is related to:", o: ["Self-awareness", "Ventilation", "Building design", "Budgeting"], a: 0 },
+                { q: "Burnout is a state of:", o: ["Physical and emotional exhaustion", "High energy", "Motivation", "Happiness"], a: 0 }
+            ],
+            10: [ // Unit 10: Financial
+                { q: "Zero-based budgeting starts from:", o: ["Previous year's budget", "Zero", "Top management", "Estimated profit"], a: 1 },
+                { q: "An audit of financial records is called:", o: ["Clinical audit", "Financial audit", "Nursing audit", "Safety audit"], a: 1 },
+                { q: "Inventory control prevents:", o: ["Overstocking and understocking", "Staffing shortage", "Patient falls", "Infection"], a: 0 },
+                { q: "Fiscal year in India usually starts on:", o: ["1st January", "1st April", "1st July", "1st October"], a: 1 },
+                { q: "ABC analysis is used in:", o: ["Inventory management", "Patient care", "Staffing", "Training"], a: 0 }
+            ],
+            11: [ // Unit 11: Informatics
+                { q: "EHR stands for:", o: ["Electronic Health Record", "Emergency Health Response", "Electric Heart Rate", "None"], a: 0 },
+                { q: "Telenursing involves:", o: ["Nursing via telecommunication", "Nursing in OT", "Home care", "Bedside nursing"], a: 0 },
+                { q: "A key advantage of HIS is:", o: ["Reduced paperwork", "Increased cost", "More errors", "Slower service"], a: 0 },
+                { q: "Data security in informatics ensures:", o: ["Confidentiality", "Public access", "Deleting records", "Hacking"], a: 0 },
+                { q: "Telemedicine helps in:", o: ["Remote consultation", "Surgery", "Bed making", "Cleaning"], a: 0 }
+            ],
+            12: [ // Unit 12: Personal Mgmt
+                { q: "Emotional Intelligence involves:", o: ["Understanding self and others' emotions", "High IQ", "Suppressing emotions", "Ignoring others"], a: 0 },
+                { q: "A key component of time management is:", o: ["Prioritization", "Procrastination", "Multitasking incorrectly", "Sleeping"], a: 0 },
+                { q: "Resilience means:", o: ["Bouncing back from adversity", "Giving up", "Being rigid", "Avoiding stress"], a: 0 },
+                { q: "Career planning includes:", o: ["Self-assessment and goal setting", "Waiting for luck", "Following others blindly", "None"], a: 0 },
+                { q: "Stress management technique includes:", o: ["Meditation", "Overeating", "Smoking", "Worrying"], a: 0 }
+            ],
+            13: [ // Unit 13: Institutions
+                { q: "INC inspections are done for:", o: ["Accreditation/Recognition", "Punishment", "Funding", "Building design"], a: 0 },
+                { q: "The physical facility norms for a nursing college are prescribed by:", o: ["INC", "Local municipality", "Police", "Builders"], a: 0 },
+                { q: "SNC stands for:", o: ["State Nursing Council", "Student Nurse Council", "Staff Nurse Club", "None"], a: 0 },
+                { q: "Clinical facilities ratio for ANM/GNM/BSc is generally:", o: ["1:1", "1:3", "1:5", "1:10"], a: 1 },
+                { q: "Accreditation ensures:", o: ["Quality standards", "High fees", "Low staff", "Old buildings"], a: 0 }
+            ],
+            14: [ // Unit 14: Planning Edu
+                { q: "Master Rotation Plan shows:", o: ["Placement of students in clinical/theory throughout the year", "Daily diet", "Staff shifts", "Exam paper"], a: 0 },
+                { q: "Curriculum planning is based on:", o: ["Educational objectives", "Teacher's mood", "Student demand", "Weather"], a: 0 },
+                { q: "A curriculum committee includes:", o: ["Principal and faculty", "Students only", "Parents only", "Cleaners"], a: 0 },
+                { q: "Clinical rotation ensures:", o: ["Students get exposure to all specialties", "Students stay in one ward", "Students take leave", "None"], a: 0 },
+                { q: "Philosophy of a college reflects its:", o: ["Beliefs and values", "Building color", "Fees", "Location"], a: 0 }
+            ],
+            15: [ // Unit 15: Student Selection
+                { q: "Student selection is based on:", o: ["Merit/Entrance exams", "Height", "Weight", "Wealth"], a: 0 },
+                { q: "Guidance and counseling helps students in:", o: ["Personal and professional growth", "Cheating", "Skipping classes", "Fighting"], a: 0 },
+                { q: "Anecdotal record is a:", o: ["Narrative of a specific incident", "Attendance register", "Mark sheet", "Budget"], a: 0 },
+                { q: "Cumulative record contains:", o: ["Complete history of student", "Only current marks", "Medical bill", "None"], a: 0 },
+                { q: "OSCE stands for:", o: ["Objective Structured Clinical Examination", "Oral Structured Clinical Exam", "One Student Clinical Exam", "None"], a: 0 }
+            ],
+            16: [ // Unit 16: Edu Directing
+                { q: "Clinical supervision focuses on:", o: ["Improving clinical skills", "Attendance", "Uniform check only", "Punishment"], a: 0 },
+                { q: "Educational audit assesses:", o: ["Quality of education", "Financial fraud", "Building strength", "Water supply"], a: 0 },
+                { q: "Discipline in a college should ideally be:", o: ["Self-discipline", "Forced", "Corporal punishment", "Absent"], a: 0 },
+                { q: "A lesson plan is a guide for:", o: ["Teacher", "Patient", "Doctor", "Driver"], a: 0 },
+                { q: "Audio-Visual aids are used to:", o: ["Enhance learning", "Distract students", "Waste time", "Decorate room"], a: 0 }
+            ],
+            17: [ // Unit 17: Professional
+                { q: "Code of Ethics for nurses was developed by:", o: ["ICN", "WHO", "UNICEF", "Red Cross"], a: 0 },
+                { q: "Malpractice refers to:", o: ["Professional negligence", "Standard care", "Good documentation", "Helping patients"], a: 0 },
+                { q: "Informed consent must be taken:", o: ["Before procedure", "After procedure", "During procedure", "Never"], a: 0 },
+                { q: "Defamation involving written words is called:", o: ["Libel", "Slander", "Assault", "Battery"], a: 0 },
+                { q: "The Consumer Protection Act applies to healthcare to protect against:", o: ["Deficiency in service", "High fees", "Long queues", "Bad food"], a: 0 }
+            ],
+            18: [ // Unit 18: Advancement
+                { q: "CNE stands for:", o: ["Continuing Nursing Education", "Central Nursing Exam", "Clinical Nurse Educator", "None"], a: 0 },
+                { q: "Evidence-Based Practice (EBP) integrates:", o: ["Research evidence, clinical expertise, patient values", "Old traditions", "Doctor's orders only", "Textbooks only"], a: 0 },
+                { q: "Plagiarism means:", o: ["Copying others' work without credit", "Doing original research", "Writing a poem", "Signing a document"], a: 0 },
+                { q: "A peer-reviewed journal implies:", o: ["Articles reviewed by experts before publication", "Articles written by friends", "Newspaper", "Magazine"], a: 0 },
+                { q: "PhD is a degree in:", o: ["Doctor of Philosophy (Research)", "Doctor of Pharmacy", "Public Health", "Physiology"], a: 0 }
+            ]
+        };
+
+        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 
 </body>
 </html>
