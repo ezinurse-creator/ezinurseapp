@@ -4,303 +4,530 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Child Health Nursing - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Child Health Nursing." />
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Child Health Nursing." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Tailwind Configuration to match the original custom CSS colors -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'brand': '#003B82', // Original --brand
-              'brand-hover': '#002d63',
-              'accent': '#00B9F2', // Original --accent
-              'qa-btn': '#00CED1', // Original #qa-btn
-              'qa-btn-hover': '#00A9AA',
-              'gray-50': '#f9fafb',
-              'gray-200': '#e5e7eb',
-              'gray-900': '#111827',
-              'note-bg': '#f0f9ff',
-              'note-border': '#bae6fd',
-              'note-text': '#085d8c',
-              'video-bg': '#f5f3ff',
-              'video-border': '#d8b4fe',
-              'video-text': '#5a32a6',
-              'model-bg': '#f0fff4',
-              'model-border': '#a7f3d0',
-              'model-text': '#106637',
-              'quiz-bg': '#fff5e8',
-              'quiz-border': '#ffd8a8',
-              'quiz-text': '#8c5e08',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
-        }
-      }
-    </script>
     <style>
-        /* Base styles for font and color consistency */
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; }
         body {
             font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* Utility class to smoothly control the max-height for accordion effect */
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
         .unit-content {
+            padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.3s ease;
         }
         .unit-content.active {
-            max-height: 2000px; /* Large value to accommodate content */
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        @media (max-width: 768px) {
-             .unit-content.active {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
+            padding: 24px 12px;
+            max-height: none; 
         }
 
-        /* Arrow rotation for the accordion state */
-        .unit-header[aria-expanded="true"] .arrow-icon {
-            transform: rotate(180deg);
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+<body>
 
-    <!-- Syllabus Button -->
-    <a href="https://drive.google.com/file/d/1gQ7_cHlFwIipmOIhw_QpGPQkwgWJaa_8/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
-        📄 CHILD HEALTH NURSING - SYLLABUS
-    </a>
-
-    <!-- Previous Year Questions Button (Different Color) -->
-    <a href="https://drive.google.com/file/d/1gGJ5uYktodD7GF73rUNSaK9FkUBytxz4/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
-        ❓ PREVIOUS YEAR QUESTIONS & ANSWERS
-    </a>
-
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1gQ7_cHlFwIipmOIhw_QpGPQkwgWJaa_8/preview', 'Child Health Nursing Syllabus')">
+        📄 DOWNLOAD CHILD HEALTH NURSING SYLLABUS
+    </div>
+    
     <div id="units">
-        <!-- Unit 1 -->
+        
         <div class="unit-container" id="unit1">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - NTRODUCTION CHILD HEALTH NURSING
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content active px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 1 Resources -->
-                    <a href="https://drive.google.com/file/d/1v79MG-s9JBKyCNADlFY6-jwP0-pQCrJq/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QEy_Wjs1D0Poa7PGOBp9UQLZTFKAEN2Z/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19UbZKpPwMQgCy0nT3YV1COTly6PeSKCZ/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Child health Nursing and Child Health & Welfare</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16C5XJn_4ny02O2N13Pk-qlhSaXTQC7yC/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13rYmTxMvkzI7UqRfKzUlL0GSwDdwvVHo/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION TO CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gGJ5uYktodD7GF73rUNSaK9FkUBytxz4/preview', 'Previous Year Q&A')">
+                        <span class="icon">📄</span><span>Previous Year Questions & Answers</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1v79MG-s9JBKyCNADlFY6-jwP0-pQCrJq/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QEy_Wjs1D0Poa7PGOBp9UQLZTFKAEN2Z/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19UbZKpPwMQgCy0nT3YV1COTly6PeSKCZ/preview', 'Child Health Welfare')">
+                        <span class="icon video-icon">▶️</span><span>Child Health Nursing & Welfare</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16C5XJn_4ny02O2N13Pk-qlhSaXTQC7yC/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 2 -->
         <div class="unit-container" id="unit2">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 2 - THE HEALTHY CHILD
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 2 Resources -->
-                    <a href="https://drive.google.com/file/d/1IKCXV5tg-Zb3I-TtQEXGZZSB_W7k1OzA/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Short Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GTbxrcMuPZk6Mks9Ez628XD_x6zeog4v/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dHvR6EGg0y8GGZNc46rY-wZl9rBd7zro/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Growth and development, Nutritional Needs of Infants, Play, Preventive Immunization, Accident</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uKRu5IwlgkGOTJfWiNUFvazbSRljcJ1X/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FnkvUBXjJ9kJMZPVLg1JaooDN5_MwRRb/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IKCXV5tg-Zb3I-TtQEXGZZSB_W7k1OzA/preview', 'Short Video: Healthy Child')">
+                        <span class="icon video-icon">▶️</span><span>The Healthy Child - Short Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GTbxrcMuPZk6Mks9Ez628XD_x6zeog4v/preview', 'Detailed Notes: Healthy Child')">
+                        <span class="icon">📚</span><span>Detailed Notes: The Healthy Child</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dHvR6EGg0y8GGZNc46rY-wZl9rBd7zro/preview', 'Growth and Development')">
+                        <span class="icon video-icon">▶️</span><span>Growth, Development, Nutrition & Immunization</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1uKRu5IwlgkGOTJfWiNUFvazbSRljcJ1X/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 3 -->
         <div class="unit-container" id="unit3">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 3 - NURSING CARE OF NEONATE
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 3 Resources -->
-                    <a href="https://drive.google.com/file/d/1OhkgfAaQ1ig_fwLCGjDhDeqyWSEJxerM/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Short Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ga41fapJxy3ud39nGDkfDAi_uSLJvWr_/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lfQ9tPa7htYF0JQV9kOoHm96Fyp1iedi/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Newborn Assessment, Neonatal Resuscitation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/188amKezdVy1RU4MUBQHqza7MzreKDtXC/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Kk3H4_tEzBEnn3QhyrxlPNlzltoMtvnb/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OhkgfAaQ1ig_fwLCGjDhDeqyWSEJxerM/preview', 'Short Video: Neonate')">
+                        <span class="icon video-icon">▶️</span><span>Nursing Care of Neonate - Short Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ga41fapJxy3ud39nGDkfDAi_uSLJvWr_/preview', 'Detailed Notes: Neonate')">
+                        <span class="icon">📚</span><span>Detailed Notes: Care of Neonate</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lfQ9tPa7htYF0JQV9kOoHm96Fyp1iedi/preview', 'Assessment Resuscitation')">
+                        <span class="icon video-icon">▶️</span><span>Newborn Assessment & Neonatal Resuscitation</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/188amKezdVy1RU4MUBQHqza7MzreKDtXC/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 4 -->
         <div class="unit-container" id="unit4">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 4 - NURSING MANAGEMENT IN COMMON CHILDHOOD DISEASES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 4 Resources -->
-                    <a href="https://drive.google.com/file/d/1OuhcDVvZZwJMB_SbS_RLb7USDH4ZuNR5/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Short Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qetdYUfIQczkLYi3BpJ6RvY6lTAd5JhT/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iV9k0t5vYa6CjKWxIVXe0otw8MFyspVU/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Nutritional Deficiencies, Pneumonia, Asthma, Cleft Lip and Palate, Hirschsprung's Disease, Gastroenteritis, Wilms Tumor and Disease conditions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dXwwyjSdWA5gw2VpwvxFAPOoksEDFtIj/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CuXgBaNSHFvA-gGgiKawYjK1dtpuyHJa/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OuhcDVvZZwJMB_SbS_RLb7USDH4ZuNR5/preview', 'Short Video: Diseases')">
+                        <span class="icon video-icon">▶️</span><span>Common Childhood Diseases - Short Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qetdYUfIQczkLYi3BpJ6RvY6lTAd5JhT/preview', 'Detailed Notes: Diseases')">
+                        <span class="icon">📚</span><span>Detailed Notes: Childhood Diseases</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15iZ12KtcmHgxTMowlsBS6yrQBMOdKagR/preview', 'Common Diseases Overview')">
+                        <span class="icon video-icon">▶️</span><span>Nutritional Deficiencies, Pneumonia, Asthma & Others</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dXwwyjSdWA5gw2VpwvxFAPOoksEDFtIj/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 5 -->
         <div class="unit-container" id="unit5">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - MANAGEMENT OF BEHAVIOUR DISORDERS IN CHILDREN
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 5 Resources -->
-                    <a href="https://drive.google.com/file/d/16adLI0OpNfA_DfiR-ZPJJUYv_-NwMNlb/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Short Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iaCXSCYlJ-QapgKU2fi_P1BVynn_VNiP/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QZfaS477p4kl6QJJzFlB-p_dfLg6vrpp/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Management of Challenges Children, Physically and Socially Handicapped Children, Mentally Challeged</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KVZNywUonikEZiH5cyDw8lQicmm7sQQd/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZfXIj5jb3CJpIg1YOhLxccfxBfuqzF1-/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - MANAGEMENT OF BEHAVIOUR DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16adLI0OpNfA_DfiR-ZPJJUYv_-NwMNlb/preview', 'Short Video: Behaviour')">
+                        <span class="icon video-icon">▶️</span><span>Behaviour Disorders - Short Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iaCXSCYlJ-QapgKU2fi_P1BVynn_VNiP/preview', 'Detailed Notes: Behaviour')">
+                        <span class="icon">📚</span><span>Detailed Notes: Behaviour Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QZfaS477p4kl6QJJzFlB-p_dfLg6vrpp/preview', 'Challenged Children')">
+                        <span class="icon video-icon">▶️</span><span>Management of Challenged & Handicapped Children</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KVZNywUonikEZiH5cyDw8lQicmm7sQQd/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- JavaScript for Accordion Functionality -->
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
     <script>
-        /**
-         * Toggles the visibility of the next sibling element (unit content)
-         * when the unit header is clicked.
-         * @param {HTMLElement} header The unit header button element.
-         */
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Introduction
+                { q: "The term 'Paediatrics' is derived from which language?", o: ["Latin", "Greek", "French", "Sanskrit"], a: 1 },
+                { q: "Which of the following is a key trend in pediatric nursing?", o: ["Institutionalization", "Family Centered Care", "Isolation of child", "Doctor centered care"], a: 1 },
+                { q: "The rights of the child were adopted by the UN General Assembly in:", o: ["1959", "1989", "1948", "1979"], a: 1 },
+                { q: "Preventive pediatrics focuses on:", o: ["Curing disease", "Preventing disease and promoting health", "Rehabilitation", "Surgery"], a: 1 },
+                { q: "The IMR (Infant Mortality Rate) is expressed per:", o: ["100 live births", "1000 live births", "10,000 live births", "100,000 live births"], a: 1 }
+            ],
+            2: [ // Unit 2: Healthy Child
+                { q: "The 'posterior fontanelle' usually closes by:", o: ["6-8 weeks", "12-18 months", "3-4 months", "Birth"], a: 0 },
+                { q: "Which milestone is typically achieved at 6 months?", o: ["Walking", "Sitting with support", "Standing", "Running"], a: 1 },
+                { q: "Exclusive breastfeeding is recommended for:", o: ["3 months", "6 months", "9 months", "1 year"], a: 1 },
+                { q: "BCG vaccine protects against:", o: ["Polio", "Tuberculosis", "Measles", "Hepatitis B"], a: 1 },
+                { q: "Solitary play is characteristic of:", o: ["Infants", "Toddlers", "Preschoolers", "School age"], a: 0 }
+            ],
+            3: [ // Unit 3: Neonate
+                { q: "A normal APGAR score at 5 minutes is:", o: ["0-3", "4-6", "7-10", "15"], a: 2 },
+                { q: "Kangaroo Mother Care (KMC) is primarily for:", o: ["Post-term babies", "Hypothermia & Low Birth Weight", "Jaundice", "Infection"], a: 1 },
+                { q: "The reflex where a baby turns its head when the cheek is touched is:", o: ["Moro", "Rooting", "Grasp", "Babinski"], a: 1 },
+                { q: "Physiological jaundice usually appears on:", o: ["Day 1", "Day 2-3", "Day 7", "Day 14"], a: 1 },
+                { q: "The normal heart rate of a newborn is:", o: ["60-80 bpm", "80-100 bpm", "120-160 bpm", "160-200 bpm"], a: 2 }
+            ],
+            4: [ // Unit 4: Childhood Diseases
+                { q: "The first line of management for diarrhea in children is:", o: ["Antibiotics", "ORS & Zinc", "Anti-motility drugs", "IV Fluids"], a: 1 },
+                { q: "Rickets is caused by a deficiency of:", o: ["Vitamin A", "Vitamin C", "Vitamin D", "Iron"], a: 2 },
+                { q: "Hirschsprung's disease affects the:", o: ["Lungs", "Heart", "Large Intestine", "Kidneys"], a: 2 },
+                { q: "Which sign indicates severe pneumonia in a child?", o: ["Cough", "Chest indrawing", "Fever", "Runny nose"], a: 1 },
+                { q: "Wilms' tumor is a malignancy of the:", o: ["Brain", "Kidney", "Bone", "Liver"], a: 1 }
+            ],
+            5: [ // Unit 5: Behaviour Disorders
+                { q: "Enuresis refers to:", o: ["Bed wetting", "Sleep walking", "Thumb sucking", "Eating non-food items"], a: 0 },
+                { q: "Pica is the habit of:", o: ["Nail biting", "Eating non-nutritive substances", "Stuttering", "Stealing"], a: 1 },
+                { q: "ADHD stands for:", o: ["Attention Deficit Hyperactivity Disorder", "Acute Depression Hyperactivity Disease", "Autism Deficit Health Disorder", "None"], a: 0 },
+                { q: "Which is a common behavioral problem in toddlers?", o: ["Temper tantrums", "Anorexia nervosa", "Drug abuse", "Truancy"], a: 0 },
+                { q: "IQ range for moderate mental retardation is:", o: ["50-70", "35-49", "20-34", "Below 20"], a: 1 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
+            const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-            // Toggle ARIA attribute
             header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-            // Toggle the 'active' class for the CSS transitions
-            unitContent.classList.toggle('active');
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-            // If expanding, calculate the required height to allow smooth transition
-            if (!isExpanded) {
-                 // Set max-height large enough to hold all content for smooth expansion
-                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
             } else {
-                // To smoothly collapse, first set height to current scrollHeight,
-                // then remove 'active' class, and reset max-height to 0 after a small delay.
-                // Note: The main transition is handled by the max-height class property,
-                // but setting a specific height often makes the collapse animation smoother.
-                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
-                setTimeout(() => {
-                    unitContent.style.maxHeight = '0';
-                }, 10);
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
             }
         }
 
-        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
-        window.onload = function() {
-            const firstActiveContent = document.querySelector('.unit-content.active');
-            if (firstActiveContent) {
-                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
             }
         }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
     </script>
 </body>
 </html>
-
