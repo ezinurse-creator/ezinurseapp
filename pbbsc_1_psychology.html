@@ -3,551 +3,768 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Psychology Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Psychology." />
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Psychology - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Psychology." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Tailwind Configuration to match the original custom CSS colors -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'brand': '#003B82', // Original --brand
-              'brand-hover': '#002d63',
-              'accent': '#00B9F2', // Original --accent
-              'qa-btn': '#00CED1', // Original #qa-btn
-              'qa-btn-hover': '#00A9AA',
-              'gray-50': '#f9fafb',
-              'gray-200': '#e5e7eb',
-              'gray-900': '#111827',
-              'note-bg': '#f0f9ff',
-              'note-border': '#bae6fd',
-              'note-text': '#085d8c',
-              'video-bg': '#f5f3ff',
-              'video-border': '#d8b4fe',
-              'video-text': '#5a32a6',
-              'model-bg': '#f0fff4',
-              'model-border': '#a7f3d0',
-              'model-text': '#106637',
-              'quiz-bg': '#fff5e8',
-              'quiz-border': '#ffd8a8',
-              'quiz-text': '#8c5e08',
-              'soon-bg': '#e5e7eb',
-              'soon-border': '#d1d5db',
-              'soon-text': '#6b7280',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
-        }
-      }
-    </script>
     <style>
-        /* Base styles for font and color consistency */
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; }
         body {
             font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* Utility class to smoothly control the max-height for accordion effect */
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
         .unit-content {
+            padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.3s ease;
         }
         .unit-content.active {
-            max-height: 2000px; /* Large value to accommodate content */
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        @media (max-width: 768px) {
-             .unit-content.active {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
+            padding: 24px 12px;
+            max-height: none; 
         }
 
-        /* Arrow rotation for the accordion state */
-        .unit-header[aria-expanded="true"] .arrow-icon {
-            transform: rotate(180deg);
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
         }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
-        /* Specific styling for coming soon links */
-        .resource-btn.coming-soon:hover {
-            background-color: #e5e7eb !important;
-            transform: none !important;
-            cursor: default !important;
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+<body>
 
-    <!-- Syllabus Button -->
-    <a href="https://drive.google.com/file/d/1ELv0Q7OdYJns0py09CkRlU2Y1PEPOYT2/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
-        📄 PSYCHOLOGY - SYLLABUS
-    </a>
-
-    <!-- Previous Year Questions Button (Different Color) -->
-    <a href="https://drive.google.com/file/d/1Hkdq_IEGE-iJzGn_XZg20DnqRqZIzsyS/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
-        ❓ PREVIOUS YEAR QUESTIONS AND ANSWERS
-    </a>
-
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1ELv0Q7OdYJns0py09CkRlU2Y1PEPOYT2/preview', 'Psychology Syllabus')">
+        📄 DOWNLOAD PSYCHOLOGY SYLLABUS
+    </div>
+    
     <div id="units">
-        <!-- Unit 1 -->
+        
         <div class="unit-container" id="unit1">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
                 UNIT 1 - INTRODUCTION TO PSYCHOLOGY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content active px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 1 Resources -->
-                    <a href="https://drive.google.com/file/d/1JmDEA_S3iHA1dsJNNch1fc-jHuAs6_ny/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uJcSnWVWUsfnUD3OK62v8zlMlopo_c7h/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1q1lyjHzXGHG7BKSnVaxfPkSVsFHs6sM3/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction to Psychology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mOwa3hUStoObLf7SXoTqrCmqlTu_xFp2/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hGaRu7CakgFlRoNmtr9cOA5mkvxvF5TL/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Hkdq_IEGE-iJzGn_XZg20DnqRqZIzsyS/preview', 'Previous Year Q&A')">
+                        <span class="icon">📄</span><span>Previous Year Questions & Answers</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JmDEA_S3iHA1dsJNNch1fc-jHuAs6_ny/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1uJcSnWVWUsfnUD3OK62v8zlMlopo_c7h/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1q1lyjHzXGHG7BKSnVaxfPkSVsFHs6sM3/preview', 'Intro to Psychology')">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Psychology</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mOwa3hUStoObLf7SXoTqrCmqlTu_xFp2/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 2 -->
         <div class="unit-container" id="unit2">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 2 - SENSATION, ATTENTION AND PERCEPTION
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 2 Resources -->
-                    <a href="https://drive.google.com/file/d/1PIRCy5Yl_gmLIgFaPzC0VRxh0ev48nwt/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JsyR_GzeDUnM3-5cjQ-LnMOEzIUIfEq9/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lxK7gdc048z_2wWjgcRnu1JS8_n42AaV/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Sensation, Attention and Perception: Definitions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DZ1-4ifeBu1eR9o0KWP9R8mk6xcnl2dd/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xbcWMh0TmEqvTvme0EI610noAbmrUYmF/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PIRCy5Yl_gmLIgFaPzC0VRxh0ev48nwt/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JsyR_GzeDUnM3-5cjQ-LnMOEzIUIfEq9/preview', 'Detailed Notes: Sensation')">
+                        <span class="icon">📚</span><span>Detailed Notes: Sensation, Attention, Perception</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lxK7gdc048z_2wWjgcRnu1JS8_n42AaV/preview', 'Definitions')">
+                        <span class="icon video-icon">▶️</span><span>Definitions: Sensation, Attention, Perception</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DZ1-4ifeBu1eR9o0KWP9R8mk6xcnl2dd/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 3 -->
         <div class="unit-container" id="unit3">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 3 - MOTIVATION
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 3 Resources -->
-                    <a href="https://drive.google.com/file/d/1rlC8CgEOTU8LOH1q6wTwyOKDCwEAaeap/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GpENbyDMC-rWt6LrdsBR2lVeSW86e2MV/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17HPgwCgbQKiy8ewiGF702cmYHxjbeZ7j/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Motivation : Definition and Nature of Motivation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iHI8Sv7qQVQCr4psKyWL4OLZTwn7hX6f/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1W9IQyG4qpK8pzok5AV8s24Hvnfqzc27Y/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rlC8CgEOTU8LOH1q6wTwyOKDCwEAaeap/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GpENbyDMC-rWt6LrdsBR2lVeSW86e2MV/preview', 'Detailed Notes: Motivation')">
+                        <span class="icon">📚</span><span>Detailed Notes: Motivation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17HPgwCgbQKiy8ewiGF702cmYHxjbeZ7j/preview', 'Motivation Definition')">
+                        <span class="icon video-icon">▶️</span><span>Motivation: Definition & Nature</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iHI8Sv7qQVQCr4psKyWL4OLZTwn7hX6f/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 4 -->
         <div class="unit-container" id="unit4">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 4 - EMOTIONS
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 4 Resources -->
-                    <a href="https://drive.google.com/file/d/1YRaRx-EhBUEknPlmfbW4O9t5qXwnG5Th/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pUOdRkPf6Yams4EbeRVfff4RwbhYPF8T/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Emotions (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1XhrJheqZJrSUa_XA7cdSxJQyZJHNJ3fe/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sbPVRKzI0ARkzMY02U2Voh-XfElMfE3l/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YRaRx-EhBUEknPlmfbW4O9t5qXwnG5Th/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pUOdRkPf6Yams4EbeRVfff4RwbhYPF8T/preview', 'Detailed Notes: Emotions')">
+                        <span class="icon">📚</span><span>Detailed Notes: Emotions</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('coming-soon', '', 'Emotions')">
+                        <span class="icon video-icon">▶️</span><span>Emotions (Coming Soon)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XhrJheqZJrSUa_XA7cdSxJQyZJHNJ3fe/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Unit 5 -->
+
         <div class="unit-container" id="unit5">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 5 - PERSONALITY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 5 Resources -->
-                    <a href="https://drive.google.com/file/d/1vl3c0ebJ8yfWuh1kUirZ8VnCnA_dgL7r/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VipZIlrdOAaK5DGwQWW_wthiERDTBL9X/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12rbIhQSvKEEpkuZAvelZmIdjlNDJlwBE/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Personality: Definition, Constituents of Personality Personality in Sickness and Nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lJ0ZXcYRr_M2kln1G0cut710PV90653L/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Kg8uFtcMGnW7QXlKNXbri_msnO_jFtHe/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1vl3c0ebJ8yfWuh1kUirZ8VnCnA_dgL7r/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VipZIlrdOAaK5DGwQWW_wthiERDTBL9X/preview', 'Detailed Notes: Personality')">
+                        <span class="icon">📚</span><span>Detailed Notes: Personality</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12rbIhQSvKEEpkuZAvelZmIdjlNDJlwBE/preview', 'Personality Definition')">
+                        <span class="icon video-icon">▶️</span><span>Personality: Definition & Constituents</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lJ0ZXcYRr_M2kln1G0cut710PV90653L/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 6 -->
         <div class="unit-container" id="unit6">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 6 - PSYCHOLOGICAL ASPECTS OF NURSING
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 6 Resources -->
-                    <a href="https://drive.google.com/file/d/1Ka_vD1978aRpoDzJyQCZSWjpy_hOh3wx/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1oec2YiS48QC0pxUkKzwqZqx6kkhhGYJQ/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1I-6gdx1SnCPzFb5UvnA_3t6SwYJ7y4uV/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Psychological Aspects of Nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kWy2RDW819Kmj22LgkuJqvYCLkAeRGkj/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10vkZPWivoeCX7L-nrSGnmJzQ0dTqX3lx/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ka_vD1978aRpoDzJyQCZSWjpy_hOh3wx/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oec2YiS48QC0pxUkKzwqZqx6kkhhGYJQ/preview', 'Detailed Notes: Psych Aspects')">
+                        <span class="icon">📚</span><span>Detailed Notes: Psychological Aspects</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1I-6gdx1SnCPzFb5UvnA_3t6SwYJ7y4uV/preview', 'Psych Aspects')">
+                        <span class="icon video-icon">▶️</span><span>Psychological Aspects of Nursing</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1kWy2RDW819Kmj22LgkuJqvYCLkAeRGkj/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Unit 7 -->
+
         <div class="unit-container" id="unit7">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 7 - INDIVIDUAL DIFFERENCES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 7 Resources -->
-                    <a href="https://drive.google.com/file/d/1GI0iBRrKvKCz-8s4WxELEcFXiavNstSp/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19XAoQc0yXITQKhJP8sxqVYFV4pC9dcJN/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JGeBbpO-VkJTJwRqGyD6wgw4Qzv9wNZq/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Indivitual Differences</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lM--_7wSrPGOD9-4Ldio0GrhEUETxp5d/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QhPMCK2nbjVp9DCopY0Qrmd8tapInqCg/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GI0iBRrKvKCz-8s4WxELEcFXiavNstSp/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19XAoQc0yXITQKhJP8sxqVYFV4pC9dcJN/preview', 'Detailed Notes: Differences')">
+                        <span class="icon">📚</span><span>Detailed Notes: Individual Differences</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JGeBbpO-VkJTJwRqGyD6wgw4Qzv9wNZq/preview', 'Individual Differences')">
+                        <span class="icon video-icon">▶️</span><span>Individual Differences</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lM--_7wSrPGOD9-4Ldio0GrhEUETxp5d/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Unit 8 -->
+
         <div class="unit-container" id="unit8">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 8 - INTELLIGENCE AND ABILITIES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 8 Resources -->
-                    <a href="https://drive.google.com/file/d/1epf8Mwxp-WBkqRAolLEKlQ3Mea7GyVxf/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KwjGjXmCl8grw0Gvxv1e75KgppCjJtzK/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1n_o1J1SJOPEpzer5i8cbnTAJ4Uc1QJHg/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Intelligence and Abilities: Definition Intelligence and Abilities During Sickness</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PawPhMHxycTe7dN-NdzxWqHvyxe_hJtV/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1S8eOXq1qOWwIRvgM-nQ2QPTwDBt1oFoZ/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 8 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1epf8Mwxp-WBkqRAolLEKlQ3Mea7GyVxf/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KwjGjXmCl8grw0Gvxv1e75KgppCjJtzK/preview', 'Detailed Notes: Intelligence')">
+                        <span class="icon">📚</span><span>Detailed Notes: Intelligence & Abilities</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1n_o1J1SJOPEpzer5i8cbnTAJ4Uc1QJHg/preview', 'Intelligence Definition')">
+                        <span class="icon video-icon">▶️</span><span>Intelligence and Abilities: Definition</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PawPhMHxycTe7dN-NdzxWqHvyxe_hJtV/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Unit 9 -->
+
         <div class="unit-container" id="unit9">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 9 - LEARNING
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 9 Resources -->
-                    <a href="https://drive.google.com/file/d/1dNf_OzV7rdlt22T2Swb6VZEpBseNO-vD/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/169XH-Gz-_7mYL7Gjn9OGmwPrucElLR_2/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wArzxmatiHrE5JsAUM9Wr7mYoDGxkxMW/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Learning: Definition, Conditions of Learning</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lZt4ofG9_JzkvMfacsOKsGlRKn1qQLGF/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1in90KIP4RYYvOocUqFqPeRhe68N4ziJl/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 9 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dNf_OzV7rdlt22T2Swb6VZEpBseNO-vD/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/169XH-Gz-_7mYL7Gjn9OGmwPrucElLR_2/preview', 'Detailed Notes: Learning')">
+                        <span class="icon">📚</span><span>Detailed Notes: Learning</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wArzxmatiHrE5JsAUM9Wr7mYoDGxkxMW/preview', 'Learning Definition')">
+                        <span class="icon video-icon">▶️</span><span>Learning: Definition & Conditions</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lZt4ofG9_JzkvMfacsOKsGlRKn1qQLGF/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 10 -->
         <div class="unit-container" id="unit10">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 10 - MEMORY AND FORGETTING
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 10 Resources -->
-                    <a href="https://drive.google.com/file/d/1JrwjGbM5lUxUK4e_Wa1t8ehre6iNMAgJ/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j0qrlQMm-dE6N6XVoyaUU5DBd7cJEjbS/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dpwX1rP9u5NPByyMMoEApfNSQBiez7SN/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Memory and Forgetting: Definition and Nature of Memory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wCwoq7qT234Bo5Igwc50RW0yMo7f9LI2/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19rygaAfxLGlVS5NC-x9erXncYZ7qvf16/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 10 Quiz</span>
-                    </a>
-                </div>
+                <span>🔽</span>
             </div>
-        </div>
-        
-        <!-- Unit 11 -->
-        <div class="unit-container" id="unit11">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 11 - ATTITUDES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 11 Resources -->
-                    <a href="https://drive.google.com/file/d/1SGm--lNbM-4x2MqpHvpq01Ubo_S1ePe9/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rOC6hMfkoaTjCIwS0eUcIRXXNYqoqiEo/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1aIjC8lMTUrU9lln2BBiz9Vm1rh0NP7Jm/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Attitudes, Definition, Development and Modification</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Z_auY6xc0p_PWeRSF0kXdVgJ7KOwaFfZ/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12kHvrj5Zc7rrpHr88J_FiEW830M9h-gz/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 11 Quiz</span>
-                    </a>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JrwjGbM5lUxUK4e_Wa1t8ehre6iNMAgJ/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1j0qrlQMm-dE6N6XVoyaUU5DBd7cJEjbS/preview', 'Detailed Notes: Memory')">
+                        <span class="icon">📚</span><span>Detailed Notes: Memory & Forgetting</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dpwX1rP9u5NPByyMMoEApfNSQBiez7SN/preview', 'Memory Definition')">
+                        <span class="icon video-icon">▶️</span><span>Memory and Forgetting: Definition</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wCwoq7qT234Bo5Igwc50RW0yMo7f9LI2/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 12 -->
-        <div class="unit-container" id="unit12">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 12 - CONCEPT OF MENTAL HYGIENE & MENTAL HEALTH
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 12 Resources -->
-                    <a href="https://drive.google.com/file/d/1fEyFNUu4icwSaQvpb20rGHZfi-OCbmR5/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1C5qL2TuIjguZa0jjf2EfBmKHzdVCv0ng/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j6I9yxtUf3Ogf6poQpmORpm0F_vfge2k/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Concept of Mental Hygiene and Mental Health</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sKQN1oA8O3K9mknBi3nw6bGhMfmQOal6/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LQxOSaKQWrv72Yun_Jcz2s4q7T1bUmCF/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 12 Quiz</span>
-                    </a>
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - ATTITUDES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1SGm--lNbM-4x2MqpHvpq01Ubo_S1ePe9/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1rOC6hMfkoaTjCIwS0eUcIRXXNYqoqiEo/preview', 'Detailed Notes: Attitudes')">
+                        <span class="icon">📚</span><span>Detailed Notes: Attitudes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1aIjC8lMTUrU9lln2BBiz9Vm1rh0NP7Jm/preview', 'Attitudes Definition')">
+                        <span class="icon video-icon">▶️</span><span>Attitudes: Definition & Development</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Z_auY6xc0p_PWeRSF0kXdVgJ7KOwaFfZ/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - MENTAL HYGIENE & MENTAL HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fEyFNUu4icwSaQvpb20rGHZfi-OCbmR5/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1C5qL2TuIjguZa0jjf2EfBmKHzdVCv0ng/preview', 'Detailed Notes: Mental Health')">
+                        <span class="icon">📚</span><span>Detailed Notes: Mental Hygiene & Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1j6I9yxtUf3Ogf6poQpmORpm0F_vfge2k/preview', 'Mental Hygiene Concept')">
+                        <span class="icon video-icon">▶️</span><span>Concept of Mental Hygiene and Mental Health</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sKQN1oA8O3K9mknBi3nw6bGhMfmQOal6/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- JavaScript for Accordion Functionality -->
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
     <script>
-        /**
-         * Toggles the visibility of the next sibling element (unit content)
-         * when the unit header is clicked.
-         * @param {HTMLElement} header The unit header button element.
-         */
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1
+                { q: "Psychology is defined as the study of:", o: ["Soul", "Mind", "Behavior and mental processes", "Brain physiology"], a: 2 },
+                { q: "Who is considered the father of Psychology?", o: ["Sigmund Freud", "Wilhelm Wundt", "William James", "Ivan Pavlov"], a: 1 },
+                { q: "Which method involves observing behavior in natural settings?", o: ["Experimental", "Survey", "Naturalistic Observation", "Case study"], a: 2 },
+                { q: "The branch of psychology dealing with mental disorders is:", o: ["Developmental", "Clinical", "Educational", "Social"], a: 1 },
+                { q: "Introspection was a method used by:", o: ["Behaviorists", "Structuralists", "Functionalists", "Gestalt psychologists"], a: 1 }
+            ],
+            2: [ // Unit 2
+                { q: "Perception is:", o: ["Receiving stimuli", "Interpreting sensory information", "Ignoring stimuli", "Forgetting information"], a: 1 },
+                { q: "The minimum stimulation needed to detect a stimulus 50% of the time is:", o: ["Absolute threshold", "Difference threshold", "Sensory adaptation", "Perceptual set"], a: 0 },
+                { q: "Attention span refers to:", o: ["Focusing on multiple things", "Duration of focus on one object", "Ignoring distractions", "Memory capacity"], a: 1 },
+                { q: "An illusion is:", o: ["A false belief", "A misinterpretation of sensory stimuli", "A hallucination", "A dream"], a: 1 },
+                { q: "Which is an external factor affecting attention?", o: ["Interest", "Motives", "Intensity of stimulus", "Mindset"], a: 2 }
+            ],
+            3: [ // Unit 3
+                { q: "Motivation typically starts with a:", o: ["Drive", "Need", "Goal", "Incentive"], a: 1 },
+                { q: "Maslow's hierarchy places which need at the bottom?", o: ["Safety", "Physiological", "Esteem", "Self-actualization"], a: 1 },
+                { q: "Intrinsic motivation comes from:", o: ["External rewards", "Internal satisfaction", "Punishment avoidance", "Social pressure"], a: 1 },
+                { q: "The drive reduction theory suggests we act to:", o: ["Increase arousal", "Reduce tension caused by unmet needs", "Achieve goals", "Gain approval"], a: 1 },
+                { q: "Which is a social motive?", o: ["Hunger", "Thirst", "Affiliation", "Sleep"], a: 2 }
+            ],
+            4: [ // Unit 4
+                { q: "The three components of emotion are:", o: ["Physical, Cognitive, Behavioral", "Thought, Feeling, Action", "Stimulus, Response, Outcome", "None"], a: 0 },
+                { q: "Which theory states 'we feel afraid because we tremble'?", o: ["Cannon-Bard", "James-Lange", "Schachter-Singer", "Lazarus"], a: 1 },
+                { q: "Stress is:", o: ["Always bad", "A response to a threat/challenge", "An emotion", "A personality trait"], a: 1 },
+                { q: "Emotional intelligence involves:", o: ["Ignoring emotions", "Suppressing emotions", "Understanding and managing emotions", "Having no emotions"], a: 2 },
+                { q: "Which part of the brain is key for fear?", o: ["Hippocampus", "Amygdala", "Cerebellum", "Thalamus"], a: 1 }
+            ],
+            5: [ // Unit 5
+                { q: "Freud's Id operates on the:", o: ["Reality principle", "Pleasure principle", "Moral principle", "Social principle"], a: 1 },
+                { q: "Which is a Projective Test of personality?", o: ["MMPI", "Rorschach Inkblot Test", "16PF", "Big Five Inventory"], a: 1 },
+                { q: "Introversion and Extroversion were proposed by:", o: ["Freud", "Jung", "Adler", "Rogers"], a: 1 },
+                { q: "The Super-ego represents:", o: ["Biological drives", "Rational thought", "Conscience and morals", "Self-concept"], a: 2 },
+                { q: "A Type A personality is characterized by:", o: ["Relaxation", "Patience", "Competitiveness and urgency", "Introversion"], a: 2 }
+            ],
+            6: [ // Unit 6
+                { q: "Psychology in nursing helps to:", o: ["Diagnose physical diseases", "Understand patient behavior", "Prescribe medication", "Perform surgery"], a: 1 },
+                { q: "The nurse-patient relationship should be:", o: ["Personal", "Therapeutic", "Social", "Casual"], a: 1 },
+                { q: "Empathy means:", o: ["Feeling sorry for someone", "Understanding another's feelings", "Ignoring feelings", "Judging feelings"], a: 1 },
+                { q: "Communication barriers include:", o: ["Active listening", "Clarification", "Prejudice and noise", "Feedback"], a: 2 },
+                { q: "Holistic care considers:", o: ["Body only", "Mind only", "Body, mind, and spirit", "Social status"], a: 2 }
+            ],
+            7: [ // Unit 7
+                { q: "Individual differences are caused by:", o: ["Heredity only", "Environment only", "Interaction of Heredity and Environment", "Chance"], a: 2 },
+                { q: "Which is an area of individual difference?", o: ["Intelligence", "Personality", "Interests", "All of the above"], a: 3 },
+                { q: "Heredity is transmitted through:", o: ["Blood", "Genes", "Environment", "Culture"], a: 1 },
+                { q: "Which factor is environmental?", o: ["Eye color", "Height potential", "Schooling", "Blood group"], a: 2 },
+                { q: "Understanding individual differences helps a nurse to:", o: ["Treat everyone exactly the same", "Provide individualized care", "Ignore patient needs", "Generalize patients"], a: 1 }
+            ],
+            8: [ // Unit 8
+                { q: "IQ formula is:", o: ["MA/CA x 100", "CA/MA x 100", "MA/100 x CA", "CA/100 x MA"], a: 0 },
+                { q: "Who proposed the Theory of Multiple Intelligences?", o: ["Spearman", "Gardner", "Thurstone", "Binet"], a: 1 },
+                { q: "Aptitude refers to:", o: ["Current knowledge", "Potential ability to learn a skill", "General intelligence", "Personality"], a: 1 },
+                { q: "Fluid intelligence involves:", o: ["Learned facts", "Reasoning and problem solving", "Vocabulary", "History knowledge"], a: 1 },
+                { q: "Mental Retardation is now clinically termed:", o: ["Intellectual Disability", "Learning Disability", "Slow Learner", "Genius"], a: 0 }
+            ],
+            9: [ // Unit 9
+                { q: "Learning is a relatively permanent change in behavior due to:", o: ["Maturation", "Experience", "Drugs", "Fatigue"], a: 1 },
+                { q: "Pavlov is famous for:", o: ["Operant Conditioning", "Classical Conditioning", "Observational Learning", "Insight Learning"], a: 1 },
+                { q: "Reinforcement is a key concept in:", o: ["Classical Conditioning", "Operant Conditioning", "Social Learning", "Cognitive Learning"], a: 1 },
+                { q: "Learning by watching others is:", o: ["Insight", "Observational/Social Learning", "Trial and Error", "Conditioning"], a: 1 },
+                { q: "Transfer of learning means:", o: ["Moving schools", "Past learning influencing new learning", "Forgetting old info", "Learning fast"], a: 1 }
+            ],
+            10: [ // Unit 10
+                { q: "Short-term memory lasts for about:", o: ["1 second", "20-30 seconds", "1 hour", "A lifetime"], a: 1 },
+                { q: "The process of getting information into memory is:", o: ["Storage", "Retrieval", "Encoding", "Forgetting"], a: 2 },
+                { q: "Amnesia refers to:", o: ["Enhanced memory", "Loss of memory", "False memory", "Déjà vu"], a: 1 },
+                { q: "Which theory explains forgetting as fading over time?", o: ["Interference", "Decay", "Repression", "Retrieval failure"], a: 1 },
+                { q: "Chunking helps improve:", o: ["Sensory memory", "Short-term memory capacity", "Long-term memory", "Procedural memory"], a: 1 }
+            ],
+            11: [ // Unit 11
+                { q: "An attitude is a:", o: ["Fact", "Predisposition to evaluate something positively or negatively", "Skill", "Personality type"], a: 1 },
+                { q: "The cognitive component of attitude involves:", o: ["Feelings", "Beliefs and thoughts", "Actions", "Emotions"], a: 1 },
+                { q: "Attitudes are primarily:", o: ["Inborn", "Learned", "Permanent", "Unchangeable"], a: 1 },
+                { q: "Cognitive Dissonance creates:", o: ["Harmony", "Psychological discomfort", "Happiness", "Indifference"], a: 1 },
+                { q: "Prejudice is a negative:", o: ["Action", "Attitude", "Skill", "Fact"], a: 1 }
+            ],
+            12: [ // Unit 12
+                { q: "Mental hygiene aims to:", o: ["Cure mental illness", "Prevent mental illness and promote health", "Sedate patients", "Isolate patients"], a: 1 },
+                { q: "A characteristic of a mentally healthy person is:", o: ["Rigidity", "Emotional instability", "Adaptability", "Social isolation"], a: 2 },
+                { q: "Defense mechanisms are used to reduce:", o: ["Happiness", "Anxiety", "Sleep", "Hunger"], a: 1 },
+                { q: "Rationalization involves:", o: ["Making excuses", "Forgetting painful thoughts", "Acting childish", "Blaming others"], a: 0 },
+                { q: "Projection is:", o: ["Attributing one's own faults to others", "Channeling energy", "Returning to earlier stage", "Refusing to accept reality"], a: 0 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
+            const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-            // Toggle ARIA attribute
             header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-            // Toggle the 'active' class for the CSS transitions
-            unitContent.classList.toggle('active');
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-            // If expanding, calculate the required height to allow smooth transition
-            if (!isExpanded) {
-                 // Set max-height large enough to hold all content for smooth expansion
-                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
             } else {
-                // To smoothly collapse, first set height to current scrollHeight,
-                // then remove 'active' class, and reset max-height to 0 after a small delay.
-                // Note: The main transition is handled by the max-height class property,
-                // but setting a specific height often makes the collapse animation smoother.
-                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
-                setTimeout(() => {
-                    unitContent.style.maxHeight = '0';
-                }, 10);
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
             }
         }
 
-        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
-        window.onload = function() {
-            const firstActiveContent = document.querySelector('.unit-content.active');
-            if (firstActiveContent) {
-                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
             }
         }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optional: Auto-open first unit
+            // const firstUnitHeader = document.querySelector('.unit-header');
+            // if(firstUnitHeader) toggleUnit(firstUnitHeader);
+        });
     </script>
 </body>
 </html>
-
