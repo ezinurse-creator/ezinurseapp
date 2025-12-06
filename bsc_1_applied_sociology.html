@@ -185,16 +185,31 @@
             background: #000;
             position: relative;
             overflow-y: auto;
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-iframe {
+        /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        /* 2. For Notes (Fills the screen vertically) */
+        .iframe-doc {
             width: 100%;
             height: 100%;
             border: none;
-            background: #000;
+            background: #fff;
+            display: block;
         }
 
         /* --- QUIZ STYLES (Inside Modal) --- */
@@ -280,7 +295,7 @@
     </div>
 
     <script>
-        // --- 1. SOCIOLOGY QUIZ DATA (Generated for each Unit) ---
+        // --- 1. SOCIOLOGY QUIZ DATA ---
         const QUIZ_DATA = {
             1: [ // Intro to Sociology
                 { q: "Who is known as the Father of Sociology?", o: ["Karl Marx", "Auguste Comte", "Emile Durkheim", "Max Weber"], a: 1 },
@@ -333,7 +348,7 @@
             ]
         };
 
-        // --- 2. COURSE DATA (Parsed from your Sociology HTML) ---
+        // --- 2. COURSE DATA ---
         const UNITS = [
             {
                 id: 1, title: "SOCIOLOGY & NURSING",
@@ -439,7 +454,7 @@
             }
         ];
 
-        // --- 4. RENDER LOGIC ---
+        // --- 3. RENDER LOGIC ---
         function renderPage() {
             const container = document.getElementById('units-container');
             
@@ -484,7 +499,7 @@
             arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
         }
 
-        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        // --- 4. MODAL LOGIC & NAVIGATION CONTROL ---
         
         function openResource(type, url, title) {
             // PUSH STATE: Create a history entry so Back button closes modal
@@ -498,6 +513,7 @@
             modal.style.display = 'flex';
             body.innerHTML = ''; 
             
+            // FIX: Restore flex centering for Video (looks better centered)
             body.style.display = 'flex';
 
             if (type === 'quiz') {
@@ -505,7 +521,17 @@
             }
             else {
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
-                body.innerHTML = `<iframe class="modal-iframe" src="${cleanUrl}" allow="autoplay; encrypted-media; fullscreen"></iframe>`;
+                
+                // FIX: Apply correct class based on type
+                // Videos get 16:9, Notes get full height
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
 
@@ -519,6 +545,7 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
+            // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
             body.scrollTop = 0; 
             
@@ -566,7 +593,7 @@
             }
         }
 
-        // --- 6. HANDLE BACK BUTTON ---
+        // --- 5. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
