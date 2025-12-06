@@ -4,370 +4,618 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maternal Nursing - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Maternal Nursing." />
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Maternal Nursing." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Tailwind Configuration to match the original custom CSS colors -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'brand': '#003B82', // Original --brand
-              'brand-hover': '#002d63',
-              'accent': '#00B9F2', // Original --accent
-              'qa-btn': '#00CED1', // Original #qa-btn
-              'qa-btn-hover': '#00A9AA',
-              'gray-50': '#f9fafb',
-              'gray-200': '#e5e7eb',
-              'gray-900': '#111827',
-              'note-bg': '#f0f9ff',
-              'note-border': '#bae6fd',
-              'note-text': '#085d8c',
-              'video-bg': '#f5f3ff',
-              'video-border': '#d8b4fe',
-              'video-text': '#5a32a6',
-              'model-bg': '#f0fff4',
-              'model-border': '#a7f3d0',
-              'model-text': '#106637',
-              'quiz-bg': '#fff5e8',
-              'quiz-border': '#ffd8a8',
-              'quiz-text': '#8c5e08',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
-        }
-      }
-    </script>
     <style>
-        /* Base styles for font and color consistency */
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; }
         body {
             font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* Utility class to smoothly control the max-height for accordion effect */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+            display: block;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
         .unit-content {
+            padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.3s ease;
         }
         .unit-content.active {
-            max-height: 2000px; /* Large value to accommodate content */
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        @media (max-width: 768px) {
-             .unit-content.active {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
+            padding: 24px 12px;
+            max-height: none; 
         }
 
-        /* Arrow rotation for the accordion state */
-        .unit-header[aria-expanded="true"] .arrow-icon {
-            transform: rotate(180deg);
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+<body>
 
-    <!-- Syllabus Button -->
-    <a href="https://drive.google.com/file/d/1CcNDEy8I44crsOQpGUtEMonfy4yj0DBN/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
-        📄 MATERNAL NURSING - SYLLABUS
-    </a>
-
-    <!-- Previous Year Questions Button (Different Color) -->
-    <a href="https://drive.google.com/file/d/14sg2bD_sHf37i2sqaikjJ8PE8-x4QVyp/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
-        ❓ PREVIOUS YEAR QUESTIONS AND ANSWERS
-    </a>
-
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1CcNDEy8I44crsOQpGUtEMonfy4yj0DBN/preview', 'Maternal Nursing Syllabus')">
+        📄 DOWNLOAD MATERNAL NURSING SYLLABUS
+    </div>
+    
     <div id="units">
-        <!-- Unit 1 -->
-        <div class="unit-container" id="unit1">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION AND HISTORICAL REVIEW
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content active px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 1 Resources -->
-                    <a href="https://drive.google.com/file/d/1tpul4Ym88kHKnKL6FvkKcbi_t77eQo7y/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZK5yrHBKO1w27B8RIsTYAn4BxIdy_nho/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15Y8-7bsUkZW7XHzjSv0spTwc3epyfFH5/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction and historic review</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wGn_DWeT1VhpEyH0tgcgrQUnvVjFMVnB/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10L_mQh2ekvynpqoD9T-csZfrIxY9n5PG/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Unit 2 -->
-        <div class="unit-container" id="unit2">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - REVIEW OF THE ANATOMY AND PHYSIOLOGY OF FEMALE REPRODUCTIVE SYSTEM
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 2 Resources -->
-                    <a href="https://drive.google.com/file/d/1rzjdea9zg64-VwVnMQbHsC1RK92p_rdU/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jaxDSa3UeKWqV64pEwT-X1Exghm2R10s/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1YVPb1iF8HY6GPq7ZfGD_X5_d9TdbakJ3/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Review of the anatomy and physiology of female reproductive system</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1nWFVkm8Z9K9o9iGZa1_MlQsmm3DwMnc3/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U-hxEcUvz_1cGddOHAbjAx0FBPXYmlHc/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Unit 3 -->
-        <div class="unit-container" id="unit3">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - PHYSIOLOGY OF PREGNANCY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 3 Resources -->
-                    <a href="https://drive.google.com/file/d/1WLsHfEUmEG8yOLiihyLm5xFksikn0gIb/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/135vvLdYtKUofmfJsxeMKkb-o8m4Dl7e0/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DbFgTaiNpaKAB6BttPAJ9YdRLadFsWfb/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Physiology of pregnancy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JpnN5Y6NQLtsjT_xOgCvwkov4oKJLdiF/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14Ci6k8ecZEu40NAmrmpceY8k3NPbvJo4/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Unit 4 -->
-        <div class="unit-container" id="unit4">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - THE NEW BORN BABY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 4 Resources -->
-                    <a href="https://drive.google.com/file/d/1iu93Qj3W-oeHb_66oQwk1UL-Ba8qMEkm/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1K6TZ9xOkAGjrzVXNBtAOmHfK39XA38q6/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/101_mR5gP4YZzAbaYcbmmQCqTekvIlKxJ/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Small for Dates, Sepsis, Hemorrhage and Newborn Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OJ36GCKR9ptc5-2SeabYxoju7Ky-zQyS/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SnwBp6aGEX3mbJ8cLdzTu4SLoDhBGdI8/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
-                </div>
-            </div>
-        </div>
         
-        <!-- Unit 5 -->
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION AND HISTORICAL REVIEW
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14sg2bD_sHf37i2sqaikjJ8PE8-x4QVyp/preview', 'Previous Year Q&A')">
+                        <span class="icon">📄</span><span>Previous Year Questions & Answers</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tpul4Ym88kHKnKL6FvkKcbi_t77eQo7y/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wGn_DWeT1VhpEyH0tgcgrQUnvVjFMVnB/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15Y8-7bsUkZW7XHzjSv0spTwc3epyfFH5/preview', 'Historical Review')">
+                        <span class="icon video-icon">▶️</span><span>Introduction and Historical Review</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ZK5yrHBKO1w27B8RIsTYAn4BxIdy_nho/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - ANATOMY & PHYSIOLOGY OF REPRODUCTIVE SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of female reproductive system anatomy]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rzjdea9zg64-VwVnMQbHsC1RK92p_rdU/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jaxDSa3UeKWqV64pEwT-X1Exghm2R10s/preview', 'Detailed Notes: Anatomy')">
+                        <span class="icon">📚</span><span>Detailed Notes: Anatomy & Physiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YVPb1iF8HY6GPq7ZfGD_X5_d9TdbakJ3/preview', 'Anatomy Review')">
+                        <span class="icon video-icon">▶️</span><span>Review of Female Reproductive System</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nWFVkm8Z9K9o9iGZa1_MlQsmm3DwMnc3/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - PHYSIOLOGY OF PREGNANCY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of physiological changes in pregnancy]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WLsHfEUmEG8yOLiihyLm5xFksikn0gIb/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/135vvLdYtKUofmfJsxeMKkb-o8m4Dl7e0/preview', 'Detailed Notes: Physiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Physiology of Pregnancy</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DbFgTaiNpaKAB6BttPAJ9YdRLadFsWfb/preview', 'Physiology Overview')">
+                        <span class="icon video-icon">▶️</span><span>Physiology of Pregnancy</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JpnN5Y6NQLtsjT_xOgCvwkov4oKJLdiF/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - THE NEW BORN BABY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1iu93Qj3W-oeHb_66oQwk1UL-Ba8qMEkm/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1K6TZ9xOkAGjrzVXNBtAOmHfK39XA38q6/preview', 'Detailed Notes: Newborn')">
+                        <span class="icon">📚</span><span>Detailed Notes: The New Born Baby</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/101_mR5gP4YZzAbaYcbmmQCqTekvIlKxJ/preview', 'Assessment Sepsis')">
+                        <span class="icon video-icon">▶️</span><span>Assessment, Sepsis, Hemorrhage & Small for Dates</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OJ36GCKR9ptc5-2SeabYxoju7Ky-zQyS/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="unit-container" id="unit5">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - MANAGEMENT OF ABNORMAL PREGNANCY, LABOUR, AND PUERPERIUM
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 5 Resources -->
-                    <a href="https://drive.google.com/file/d/15R42mYPUqalv0PYOjBF2td0YNRp1hf_M/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dHfDFW60yzBfylKsLhvzvG4BoiUoI3g7/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/103wLj9VzWs7i7A7afS0b0t68NW71BHBY/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Management of Abnormal Pregnancy, Labour and Puerperium</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iPUL9Whx6d47sT6HBWkBNu2f99FdnKrW/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Gf_jako-Tb4582inW_uWpckcc3DVaMqD/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - MANAGEMENT OF ABNORMAL PREGNANCY, LABOUR & PUERPERIUM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of placenta previa vs abruption]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15R42mYPUqalv0PYOjBF2td0YNRp1hf_M/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dHfDFW60yzBfylKsLhvzvG4BoiUoI3g7/preview', 'Detailed Notes: Abnormal Mgmt')">
+                        <span class="icon">📚</span><span>Detailed Notes: Management of Abnormal Cases</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/103wLj9VzWs7i7A7afS0b0t68NW71BHBY/preview', 'Management Overview')">
+                        <span class="icon video-icon">▶️</span><span>Management of Abnormal Pregnancy, Labour & Puerperium</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iPUL9Whx6d47sT6HBWkBNu2f99FdnKrW/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 6 -->
         <div class="unit-container" id="unit6">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 6 - DRUGS IN OBSTETRICS
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 6 Resources -->
-                    <a href="https://drive.google.com/file/d/1DCxGjUPNEfkU24G59pIcWLhV4ttPrzhf/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xEpOTmBb0fhZP_IgVrJAtKxzZhLL-yBT/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/137nsucfPkgrdT2fKS3zpliDfBBDZBGDe/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Drug in obstetrics</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pjE1PFCKybJXXmCMsU5tvvPg_Xof9u_5/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U7OSiy2Kd4t3w2apZhRk6xPe5FAySDBD/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DCxGjUPNEfkU24G59pIcWLhV4ttPrzhf/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xEpOTmBb0fhZP_IgVrJAtKxzZhLL-yBT/preview', 'Detailed Notes: Drugs')">
+                        <span class="icon">📚</span><span>Detailed Notes: Drugs in Obstetrics</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/137nsucfPkgrdT2fKS3zpliDfBBDZBGDe/preview', 'Drug Overview')">
+                        <span class="icon video-icon">▶️</span><span>Drugs in Obstetrics</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pjE1PFCKybJXXmCMsU5tvvPg_Xof9u_5/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 7 -->
         <div class="unit-container" id="unit7">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 7 - NATIONAL WELFARE PROGRAMMES FOR WOMEN
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <!-- Unit 7 Resources -->
-                    <a href="https://drive.google.com/file/d/1Q8Frxx4oywu2TcFEDWM611i4Fqjj1FHS/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CSTQq5kW6aTJaXx0_Evw340dGFTcm2nL/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UlXbsTdRQbCjrQajf52MMeGX-ckkqTsX/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>National welfare programmes for women</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MYB2Hh1DJTYbKr3-t0QfWwqUEh0qh6pe/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xyZGhg3-LRKEp-pBGqbP5SuA6gVj4l65/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Q8Frxx4oywu2TcFEDWM611i4Fqjj1FHS/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CSTQq5kW6aTJaXx0_Evw340dGFTcm2nL/preview', 'Detailed Notes: Programmes')">
+                        <span class="icon">📚</span><span>Detailed Notes: Welfare Programmes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UlXbsTdRQbCjrQajf52MMeGX-ckkqTsX/preview', 'Programmes Overview')">
+                        <span class="icon video-icon">▶️</span><span>National Welfare Programmes for Women</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MYB2Hh1DJTYbKr3-t0QfWwqUEh0qh6pe/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <!-- JavaScript for Accordion Functionality -->
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
     <script>
-        /**
-         * Toggles the visibility of the next sibling element (unit content)
-         * when the unit header is clicked.
-         * @param {HTMLElement} header The unit header button element.
-         */
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1
+                { q: "Who is traditionally considered the 'Father of Medicine'?", o: ["Hippocrates", "Sushruta", "Galen", "Aristotle"], a: 0 },
+                { q: "The term 'Midwife' comes from Old English meaning:", o: ["Wise woman", "With woman", "Mother's helper", "Birth attendant"], a: 1 },
+                { q: "Which organization primarily sets standards for midwifery globally?", o: ["ICM", "WHO", "UNICEF", "Red Cross"], a: 0 },
+                { q: "Maternal mortality rate is defined as deaths per:", o: ["1,000 live births", "10,000 live births", "100,000 live births", "1,000,000 live births"], a: 2 },
+                { q: "Current trends in midwifery emphasize:", o: ["Home births only", "Family-centered care", "Physician-led care", "High-tech interventions"], a: 1 }
+            ],
+            2: [ // Unit 2
+                { q: "The womb is medically known as the:", o: ["Cervix", "Vagina", "Uterus", "Ovary"], a: 2 },
+                { q: "Fertilization normally takes place in the:", o: ["Uterus", "Fallopian tube (Ampulla)", "Ovary", "Cervix"], a: 1 },
+                { q: "The hormone primarily responsible for ovulation is:", o: ["FSH", "LH", "Estrogen", "Progesterone"], a: 1 },
+                { q: "Which layer of the uterus is shed during menstruation?", o: ["Perimetrium", "Myometrium", "Endometrium", "Parametrium"], a: 2 },
+                { q: "The average length of the menstrual cycle is:", o: ["21 days", "28 days", "35 days", "14 days"], a: 1 }
+            ],
+            3: [ // Unit 3
+                { q: "Amenorrhea is a _____ sign of pregnancy.", o: ["Presumptive", "Probable", "Positive", "Diagnostic"], a: 0 },
+                { q: "The hormone detected in home pregnancy tests is:", o: ["hCG", "Estrogen", "Progesterone", "Oxytocin"], a: 0 },
+                { q: "Quickening refers to:", o: ["Fetal heart beat", "First fetal movement felt by mother", "Uterine contraction", "Lightening"], a: 1 },
+                { q: "Physiological anemia in pregnancy is caused by:", o: ["Blood loss", "Hemodilution", "Iron deficiency", "Bone marrow suppression"], a: 1 },
+                { q: "Chloasma is also known as:", o: ["Linea nigra", "Striae gravidarum", "Mask of pregnancy", "Palmar erythema"], a: 2 }
+            ],
+            4: [ // Unit 4
+                { q: "A normal APGAR score at 1 minute is:", o: ["0-3", "4-6", "7-10", "12"], a: 2 },
+                { q: "The Moro reflex is also known as the:", o: ["Rooting reflex", "Startle reflex", "Grasp reflex", "Sucking reflex"], a: 1 },
+                { q: "Vitamin K is administered to newborns to prevent:", o: ["Jaundice", "Hemorrhagic disease", "Infection", "Hypoglycemia"], a: 1 },
+                { q: "Meconium is the:", o: ["First urine", "First stool", "Vernix caseosa", "Lanugo"], a: 1 },
+                { q: "Normal newborn heart rate is:", o: ["60-100 bpm", "120-160 bpm", "80-120 bpm", "100-140 bpm"], a: 1 }
+            ],
+            5: [ // Unit 5
+                { q: "Postpartum Hemorrhage (PPH) is blood loss greater than:", o: ["300ml", "500ml", "1000ml", "200ml"], a: 1 },
+                { q: "Pre-eclampsia is characterized by hypertension and:", o: ["Proteinuria", "Diabetes", "Fever", "Bleeding"], a: 0 },
+                { q: "Dystocia means:", o: ["Normal labor", "Difficult labor", "Rapid labor", "Painless labor"], a: 1 },
+                { q: "Puerperal sepsis is infection of the:", o: ["Breast", "Genital tract", "Urinary tract", "Lungs"], a: 1 },
+                { q: "A common cause of PPH is:", o: ["Uterine Atony", "Infection", "Hypertension", "Diabetes"], a: 0 }
+            ],
+            6: [ // Unit 6
+                { q: "Oxytocin is used to:", o: ["Stop labor", "Induce/Augment labor & control bleeding", "Treat hypertension", "Treat infection"], a: 1 },
+                { q: "Magnesium Sulfate is the drug of choice for:", o: ["PPH", "Eclampsia/Severe Pre-eclampsia", "Pain relief", "Induction"], a: 1 },
+                { q: "Methergine is contraindicated in patients with:", o: ["Hypotension", "Hypertension", "Diabetes", "Asthma"], a: 1 },
+                { q: "Prostaglandins are used for:", o: ["Cervical ripening", "Stopping labor", "Treating infection", "Reducing BP"], a: 0 },
+                { q: "Tocolytics are drugs used to:", o: ["Induce labor", "Stop premature labor", "Increase contractions", "Prevent bleeding"], a: 1 }
+            ],
+            7: [ // Unit 7
+                { q: "RCH stands for:", o: ["Reproductive and Child Health", "Rural Child Health", "Regional Center for Health", "Rapid Child Help"], a: 0 },
+                { q: "JSY (Janani Suraksha Yojana) aims to promote:", o: ["Home delivery", "Institutional delivery", "Private care", "Cesarean sections"], a: 1 },
+                { q: "Which program provides free transport, drugs, and diet to pregnant women?", o: ["JSSK", "ICDS", "RNTCP", "NLEP"], a: 0 },
+                { q: "The MTP Act was passed in:", o: ["1971", "1981", "1991", "2001"], a: 0 },
+                { q: "ASHA stands for:", o: ["Accredited Social Health Activist", "Association for Social Health Action", "Auxiliary Social Health Assistant", "None"], a: 0 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
+            const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-            // Toggle ARIA attribute
             header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-            // Toggle the 'active' class for the CSS transitions
-            unitContent.classList.toggle('active');
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-            // If expanding, calculate the required height to allow smooth transition
-            if (!isExpanded) {
-                 // Set max-height large enough to hold all content for smooth expansion
-                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
             } else {
-                // To smoothly collapse, first set height to current scrollHeight,
-                // then remove 'active' class, and reset max-height to 0 after a small delay.
-                // Note: The main transition is handled by the max-height class property,
-                // but setting a specific height often makes the collapse animation smoother.
-                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
-                setTimeout(() => {
-                    unitContent.style.maxHeight = '0';
-                }, 10);
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
             }
         }
 
-        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
-        window.onload = function() {
-            const firstActiveContent = document.querySelector('.unit-content.active');
-            if (firstActiveContent) {
-                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
             }
         }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
     </script>
 </body>
 </html>
-
