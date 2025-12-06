@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Applied Psychology Syllabus</title>
+    <title>Applied Physiology Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         /* --- MODERN THEME --- */
@@ -31,7 +31,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-        }
+        } 
 
         .container {
             max-width: 800px;
@@ -135,6 +135,7 @@
         /* Color coding by type */
         .type-notes { border-left: 4px solid #0ea5e9; }
         .type-video { border-left: 4px solid #8b5cf6; }
+        .type-model { border-left: 4px solid #10b981; }
         .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
 
         .icon {
@@ -184,24 +185,39 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto; /* Allow scrolling for quizzes */
+            overflow-y: auto; /* Allow scrolling */
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-iframe {
+        /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        /* 2. For Notes & Models (Fills the screen vertically) */
+        .iframe-doc {
             width: 100%;
             height: 100%;
             border: none;
-            background: #000; /* Black background for video loading state */
+            background: #fff;
+            display: block;
         }
 
         /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%;
+            min-height: 100%; /* Ensures it fills screen if short */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -219,7 +235,7 @@
         .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
         .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
         
-        /* Visual Indicators */
+        /* Visual Indicators for Tick/Cross */
         .quiz-option.correct { 
             background: var(--success); 
             color: white; 
@@ -245,6 +261,8 @@
             font-weight: bold;
             font-size: 1.2rem;
         }
+        
+        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
 
     </style>
 </head>
@@ -252,217 +270,259 @@
 
     <div class="container">
         <div class="page-header">
-            <div class="page-title">Applied Psychology</div>
+            <div class="page-title">Applied Physiology</div>
             <p style="color: var(--text-muted);">BSc Semester 1</p>
         </div>
 
-        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1SzjzyUmcGHldumeCdFHfSvrjK30oeNt3/preview')">
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1WCC53x59CYh_GQP-UgVNkgyIKNTI1oEr/preview')">
             📄 View Full Syllabus
         </div>
 
         <div id="units-container">
-            <!-- Content injected via JS -->
-        </div>
+            </div>
     </div>
 
-    <!-- MODAL OVERLAY -->
     <div id="app-modal" class="modal-overlay">
         <div class="modal-header">
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
         <div id="modal-body" class="modal-body">
-            <!-- Content injected here -->
-        </div>
+            </div>
     </div>
 
     <script>
-        // --- 1. PSYCHOLOGY QUIZ DATA (5 Questions each) ---
+        // --- 1. DUMMY 3D MODEL CODES ---
+        const MODEL_CODE_A = `<div><div><p><iframe allowfullscreen="true" frameborder="0" id="embedded-human" loading="lazy" src="https://human.biodigital.com/viewer/?id=5C83&amp;ui-anatomy-descriptions=true&amp;ui-anatomy-pronunciations=true&amp;ui-anatomy-labels=true&amp;ui-audio=true&amp;ui-chapter-list=false&amp;ui-fullscreen=true&amp;ui-help=true&amp;ui-info=true&amp;ui-label-list=true&amp;ui-layers=true&amp;ui-loader=circle&amp;ui-media-controls=full&amp;ui-menu=true&amp;ui-nav=true&amp;ui-search=true&amp;ui-tools=true&amp;ui-tutorial=false&amp;ui-undo=true&amp;ui-whiteboard=true&amp;initial.none=true&amp;disable-scroll=false&amp;uaid=LnZqE&amp;paid=o_10a88be0&amp;ui-bd.link=false" style="aspect-ratio: 3 / 5; width: 100%"></iframe></p></div><p>&nbsp;</p></div>`;
+        const MODEL_CODE_B = `<div><p><iframe allowfullscreen="true" frameborder="0" id="embedded-human" loading="lazy" src="https://human.biodigital.com/viewer/?id=5C87&amp;ui-anatomy-descriptions=true&amp;ui-anatomy-pronunciations=true&amp;ui-anatomy-labels=true&amp;ui-audio=true&amp;ui-chapter-list=false&amp;ui-fullscreen=true&amp;ui-help=true&amp;ui-info=true&amp;ui-label-list=true&amp;ui-layers=true&amp;ui-loader=circle&amp;ui-media-controls=full&amp;ui-menu=true&amp;ui-nav=true&amp;ui-search=true&amp;ui-tools=true&amp;ui-tutorial=false&amp;ui-undo=true&amp;ui-whiteboard=true&amp;initial.none=true&amp;disable-scroll=false&amp;uaid=LnZqz&amp;paid=o_10a88be0&amp;ui-bd.link=false" style="aspect-ratio: 3 / 5; width: 100%"></iframe></p></div>`;
+
+        // --- 2. PHYSIOLOGY QUIZ DATA (5 Questions each) ---
         const QUIZ_DATA = {
-            1: [ // Intro
-                { q: "Who is considered the father of Psychology?", o: ["Freud", "Wundt", "Watson", "Skinner"], a: 1 },
-                { q: "Psychology is the scientific study of:", o: ["Soul", "Mind", "Behavior & Mental Processes", "Heart"], a: 2 },
-                { q: "Which branch deals with mental disorders?", o: ["Clinical", "Industrial", "Educational", "Social"], a: 0 },
-                { q: "Introspection method was introduced by:", o: ["Functionalism", "Structuralism", "Behaviorism", "Gestalt"], a: 1 },
-                { q: "Which is NOT a method of psychology?", o: ["Observation", "Experimental", "Astrology", "Survey"], a: 2 }
+            1: [ // General Phys
+                { q: "Which organelle produces ATP?", o: ["Ribosome", "Mitochondria", "Nucleus", "Golgi Body"], a: 1 },
+                { q: "Homeostasis is maintained by:", o: ["Positive Feedback", "Negative Feedback", "Both", "None"], a: 1 },
+                { q: "Which tissue type contracts?", o: ["Epithelial", "Connective", "Muscle", "Nervous"], a: 2 },
+                { q: "Active transport requires:", o: ["No Energy", "ATP", "Osmosis", "Diffusion"], a: 1 },
+                { q: "Most body water is found in:", o: ["Intracellular Fluid", "Plasma", "Lymph", "Extracellular Fluid"], a: 0 }
             ],
-            2: [ // Biological Basis
-                { q: "The basic unit of the nervous system is:", o: ["Nephron", "Neuron", "Gene", "Cell"], a: 1 },
-                { q: "Which hemisphere controls the right side of body?", o: ["Left", "Right", "Both", "Cerebellum"], a: 0 },
-                { q: "The gap between two neurons is:", o: ["Axon", "Dendrite", "Synapse", "Myelin"], a: 2 },
-                { q: "Which gene carrier determines heredity?", o: ["Chromosomes", "Ribosomes", "Mitochondria", "Plasma"], a: 0 },
-                { q: "The 'Master Gland' is:", o: ["Thyroid", "Adrenal", "Pituitary", "Pineal"], a: 2 }
+            2: [ // Respiratory
+                { q: "The primary muscle of inspiration is:", o: ["Internal Intercostal", "Diaphragm", "Abdominal", "Scalene"], a: 1 },
+                { q: "Gas exchange occurs in:", o: ["Bronchi", "Trachea", "Alveoli", "Larynx"], a: 2 },
+                { q: "Vital Capacity equals:", o: ["TV + IRV", "TV + IRV + ERV", "TLC - RV", "Both B & C"], a: 3 },
+                { q: "Surfactant prevents alveolar collapse by reducing:", o: ["Airflow", "Surface Tension", "Pressure", "Volume"], a: 1 },
+                { q: "Respiratory rhythm center is located in:", o: ["Cerebrum", "Medulla Oblongata", "Cerebellum", "Spinal Cord"], a: 1 }
             ],
-            3: [ // Mental Health
-                { q: "Mental Hygiene is concerned with:", o: ["Curing disease", "Preserving mental health", "Physical fitness", "Social status"], a: 1 },
-                { q: "A defense mechanism where one reverts to childish behavior:", o: ["Projection", "Regression", "Repression", "Denial"], a: 1 },
-                { q: "Attributing own faults to others is:", o: ["Projection", "Rationalization", "Sublimation", "Displacement"], a: 0 },
-                { q: "Which is a sign of poor mental health?", o: ["Adaptability", "Emotional stability", "Constant anxiety", "Self-confidence"], a: 2 },
-                { q: "Blocking painful memories is called:", o: ["Repression", "Suppression", "Regression", "Projection"], a: 0 }
+            3: [ // Digestive
+                { q: "Pepsin digests:", o: ["Proteins", "Fats", "Carbohydrates", "Vitamins"], a: 0 },
+                { q: "Bile is stored in:", o: ["Liver", "Pancreas", "Gallbladder", "Duodenum"], a: 2 },
+                { q: "Most absorption occurs in:", o: ["Stomach", "Small Intestine", "Large Intestine", "Esophagus"], a: 1 },
+                { q: "Hydrochloric acid (HCl) is secreted by:", o: ["Chief Cells", "Parietal Cells", "Mucous Cells", "G Cells"], a: 1 },
+                { q: "Emulsification of fats is the function of:", o: ["Amylase", "Lipase", "Bile Salts", "Trypsin"], a: 2 }
             ],
-            4: [ // Developmental
-                { q: "Developmental psychology studies changes from:", o: ["Birth to Death", "Childhood to Adult", "Conception to Death", "Birth to Adolescence"], a: 2 },
-                { q: "Adolescence is a period of:", o: ["Stability", "Storm and Stress", "Decline", "Stagnation"], a: 1 },
-                { q: "Which is a developmental task of infancy?", o: ["Learning to walk", "Career choice", "Marriage", "Retirement"], a: 0 },
-                { q: "Cognitive development theory was proposed by:", o: ["Freud", "Piaget", "Erikson", "Maslow"], a: 1 },
-                { q: "Empty Nest Syndrome occurs in:", o: ["Early Adulthood", "Middle Adulthood", "Childhood", "Old Age"], a: 1 }
+            4: [ // Circulatory
+                { q: "Stroke Volume x Heart Rate =", o: ["Blood Pressure", "Cardiac Output", "Venous Return", "Peripheral Resistance"], a: 1 },
+                { q: "The pacemaker of the heart:", o: ["AV Node", "SA Node", "Purkinje Fibers", "Bundle of His"], a: 1 },
+                { q: "Lymph drains into:", o: ["Arteries", "Veins", "Capillaries", "Heart"], a: 1 },
+                { q: "Normal blood pressure is approx:", o: ["100/60", "120/80", "140/90", "110/70"], a: 1 },
+                { q: "In ECG, the P wave represents:", o: ["Atrial Depolarization", "Ventricular Depolarization", "Repolarization", "Diastole"], a: 0 }
             ],
-            5: [ // Personality
-                { q: "Which part of personality operates on Pleasure Principle?", o: ["Id", "Ego", "Superego", "Self"], a: 0 },
-                { q: "The Rorschach Inkblot test is a:", o: ["Questionnaire", "Projective Test", "Interview", "Rating Scale"], a: 1 },
-                { q: "Who proposed Introvert and Extrovert types?", o: ["Jung", "Freud", "Allport", "Eysenck"], a: 0 },
-                { q: "The moral branch of personality is:", o: ["Id", "Ego", "Superego", "Libido"], a: 2 },
-                { q: "TAT stands for:", o: ["Thematic Apperception Test", "Trait Analysis Test", "Time Analysis Tool", "Total Aptitude Test"], a: 0 }
+            5: [ // Blood
+                { q: "Red blood cells are produced in:", o: ["Liver", "Spleen", "Red Bone Marrow", "Kidney"], a: 2 },
+                { q: "Which cell fights infection?", o: ["Erythrocyte", "Leukocyte", "Thrombocyte", "Adipocyte"], a: 1 },
+                { q: "Vitamin K is essential for:", o: ["Clotting", "Oxygen Transport", "Immunity", "Digestion"], a: 0 },
+                { q: "Average lifespan of RBC is:", o: ["30 days", "90 days", "120 days", "150 days"], a: 2 },
+                { q: "Universal Blood Donor is:", o: ["AB Positive", "O Negative", "A Positive", "B Negative"], a: 1 }
             ],
-            6: [ // Cognitive
-                { q: "Short term memory lasts for:", o: ["1-2 secs", "20-30 secs", "1 hour", "Lifetime"], a: 1 },
-                { q: "False perception without external stimulus is:", o: ["Illusion", "Hallucination", "Delusion", "Dream"], a: 1 },
-                { q: "The formula for IQ is:", o: ["MA/CA x 100", "CA/MA x 100", "MA/CA", "CA/MA"], a: 0 },
-                { q: "Misinterpretation of actual stimulus is:", o: ["Hallucination", "Illusion", "Attention", "Sensation"], a: 1 },
-                { q: "Thinking 'outside the box' is:", o: ["Convergent thinking", "Divergent thinking", "Logical thinking", "Critical thinking"], a: 1 }
+            6: [ // Endocrine
+                { q: "Growth Hormone is secreted by:", o: ["Thyroid", "Adrenal", "Anterior Pituitary", "Posterior Pituitary"], a: 2 },
+                { q: "Insulin causes blood sugar to:", o: ["Increase", "Decrease", "Stay same", "Fluctuate"], a: 1 },
+                { q: "The 'Fight or Flight' hormone is:", o: ["Thyroxine", "Adrenaline", "Cortisol", "Melatonin"], a: 1 },
+                { q: "Parathyroid hormone increases blood:", o: ["Sodium", "Potassium", "Calcium", "Iron"], a: 2 },
+                { q: "Oxytocin stimulates:", o: ["Milk Production", "Uterine Contraction", "Growth", "Metabolism"], a: 1 }
             ],
-            7: [ // Motivation & Emotion
-                { q: "Which is a primary motive?", o: ["Achievement", "Hunger", "Affiliation", "Power"], a: 1 },
-                { q: "Maslow's highest level of need is:", o: ["Safety", "Esteem", "Self-actualization", "Belongingness"], a: 2 },
-                { q: "James-Lange theory relates to:", o: ["Learning", "Emotion", "Memory", "Intelligence"], a: 1 },
-                { q: "Eustress is:", o: ["Bad stress", "Good/Positive stress", "No stress", "Chronic stress"], a: 1 },
-                { q: "Which is a social motive?", o: ["Thirst", "Sleep", "Affiliation", "Pain avoidance"], a: 2 }
+            7: [ // Sensory
+                { q: "Photoreceptors are located in the:", o: ["Iris", "Cornea", "Retina", "Lens"], a: 2 },
+                { q: "The organ of hearing is:", o: ["Vestibule", "Cochlea", "Ossicles", "Pinna"], a: 1 },
+                { q: "Olfaction refers to sense of:", o: ["Taste", "Touch", "Smell", "Sight"], a: 2 },
+                { q: "Which is NOT a primary taste?", o: ["Sweet", "Sour", "Spicy", "Bitter"], a: 2 },
+                { q: "Cones are responsible for:", o: ["Night vision", "Color vision", "Peripheral vision", "Motion"], a: 1 }
             ],
-            8: [ // Assessment
-                { q: "IQ stands for:", o: ["Intellectual Query", "Intelligence Quotient", "Inner Quality", "Intelligent Question"], a: 1 },
-                { q: "Who developed the first intelligence test?", o: ["Binet", "Wechsler", "Galton", "Terman"], a: 0 },
-                { q: "Consistency of a test score is called:", o: ["Validity", "Reliability", "Norms", "Standardization"], a: 1 },
-                { q: "A test measuring what it claims to measure is:", o: ["Valid", "Reliable", "Easy", "Objective"], a: 0 },
-                { q: "Bhatia's Battery is a test of:", o: ["Personality", "Intelligence", "Attitude", "Aptitude"], a: 1 }
+            8: [ // Musculoskeletal
+                { q: "The functional unit of muscle contraction:", o: ["Sarcomere", "Myofibril", "Actin", "Myosin"], a: 0 },
+                { q: "Neurotransmitter at NMJ is:", o: ["Dopamine", "Acetylcholine", "Serotonin", "GABA"], a: 1 },
+                { q: "Calcium is stored in muscle in:", o: ["T-tubules", "Sarcoplasmic Reticulum", "Mitochondria", "Nucleus"], a: 1 },
+                { q: "Immediate source of energy for muscle is:", o: ["Glucose", "ATP", "Fat", "Protein"], a: 1 },
+                { q: "Bone forming cells are called:", o: ["Osteoclasts", "Osteoblasts", "Osteocytes", "Chondrocytes"], a: 1 }
             ],
-            9: [ // Soft Skills
-                { q: "Which is a soft skill?", o: ["Coding", "Communication", "Machine operation", "Data entry"], a: 1 },
-                { q: "Non-verbal communication includes:", o: ["Spoken words", "Written letters", "Body language", "Emails"], a: 2 },
-                { q: "Active listening involves:", o: ["Interrupting", "Ignoring", "Paying full attention", "Judging"], a: 2 },
-                { q: "A barrier to communication is:", o: ["Feedback", "Noise", "Clarity", "Empathy"], a: 1 },
-                { q: "Empathy means:", o: ["Feeling pity", "Understanding others' feelings", "Ignoring feelings", "Judging feelings"], a: 1 }
+            9: [ // Renal
+                { q: "Glomerular Filtration Rate (GFR) is approx:", o: ["125 ml/min", "180 L/day", "Both A & B", "1 L/min"], a: 2 },
+                { q: "Most reabsorption occurs in:", o: ["PCT", "Loop of Henle", "DCT", "Collecting Duct"], a: 0 },
+                { q: "Which hormone concentrates urine?", o: ["Aldosterone", "ADH", "Renin", "ANP"], a: 1 },
+                { q: "Kidneys regulate blood pH by secreting:", o: ["H+ ions", "Bicarbonate", "Sodium", "Water"], a: 0 },
+                { q: "Renin is secreted by:", o: ["Macula Densa", "Juxtaglomerular Cells", "Podocytes", "Mesangial Cells"], a: 1 }
             ],
-            10: [ // Empowerment
-                { q: "Empowerment means:", o: ["Giving orders", "Gaining power/control", "Surrendering", "Following"], a: 1 },
-                { q: "Self-esteem refers to:", o: ["Self-worth", "Selfishness", "Arrogance", "Knowledge"], a: 0 },
-                { q: "Professional etiquette includes:", o: ["Being late", "Respect and Punctuality", "Gossiping", "Ignoring patients"], a: 1 },
-                { q: "Burnout is a state of:", o: ["High energy", "Physical/Emotional exhaustion", "Happiness", "Motivation"], a: 1 },
-                { q: "Assertiveness is:", o: ["Being aggressive", "Being passive", "Expressing needs respectfully", "Being silent"], a: 2 }
+            10: [ // Reproductive
+                { q: "Spermatogenesis occurs in:", o: ["Epididymis", "Seminiferous Tubules", "Vas Deferens", "Prostate"], a: 1 },
+                { q: "Ovulation is triggered by surge in:", o: ["FSH", "LH", "Estrogen", "Progesterone"], a: 1 },
+                { q: "The hormone of pregnancy is:", o: ["Estrogen", "Progesterone", "Oxytocin", "Prolactin"], a: 1 },
+                { q: "Menstruation occurs due to drop in:", o: ["FSH", "LH", "Progesterone", "Oxytocin"], a: 2 },
+                { q: "An ovum remains viable for approx:", o: ["12 hours", "24 hours", "48 hours", "72 hours"], a: 1 }
+            ],
+            11: [ // Nervous
+                { q: "Action potential conduction is faster in:", o: ["Unmyelinated axons", "Myelinated axons", "Dendrites", "Cell bodies"], a: 1 },
+                { q: "Balance is coordinated by:", o: ["Cerebrum", "Cerebellum", "Brain Stem", "Hypothalamus"], a: 1 },
+                { q: "Sympathetic nervous system causes:", o: ["Pupil constriction", "Heart rate decrease", "Bronchodilation", "Digestion"], a: 2 },
+                { q: "Myelin sheath in PNS is produced by:", o: ["Oligodendrocytes", "Schwann Cells", "Astrocytes", "Microglia"], a: 1 },
+                { q: "Cerebrospinal Fluid (CSF) is produced by:", o: ["Choroid Plexus", "Dura Mater", "Arachnoid Villi", "Sinuses"], a: 0 }
             ]
         };
 
-        // --- 2. COURSE DATA (Extracted & Parsed) ---
+        // --- 3. COURSE DATA (Extracted from your inputs) ---
         const UNITS = [
             {
-                id: 1, title: "INTRODUCTION",
+                id: 1, title: "GENERAL PHYSIOLOGY",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1YHc0CPkqtteSAeyVGVYm2NNUuko1qLV4/preview' },
-                    { type: 'video', title: 'Meaning & Development', url: 'https://drive.google.com/file/d/1O85Cfr6PBBCNN9-LDVFJA7le-Y-OjKe_/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ZHGs2J3mLkMKdR_qm93SymhsfSs3VR-h/preview' },
-                    { type: 'video', title: 'Psychology in Nursing', url: 'https://drive.google.com/file/d/1xA-Pel630M4h3bwD3gE7A-AeiJFbtLIB/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1r56_5GOW1u4hW8X3gKCV8Yl6f0gbwHoi/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/10N3pxg1gls98_RVOKZO0nPQ9e2v02r1B/preview' },
+                    { type: 'video', title: 'Intro & Cell Structure', url: 'https://drive.google.com/file/d/101-DWlLTnTOEBrjzAxchPuVM2xP46fnV/preview' },
+                    { type: 'video', title: 'Tissues Physiology', url: 'https://drive.google.com/file/d/1bhKhpVsM0ElEwNMWdsJiB0MIAY_fChEG/preview' },
+                    { type: 'video', title: 'Types of Tissues', url: 'https://drive.google.com/file/d/15-iWAUqIpnaxLvprQJfmzxz-spLGMSac/preview' },
+                    { type: 'video', title: 'Membranes & Glands', url: 'https://drive.google.com/file/d/16w_-3R2Lz95YWo-BIRgMo3igxK--R5ZJ/preview' }
                 ]
             },
             {
-                id: 2, title: "BIOLOGICAL BASIS",
+                id: 2, title: "RESPIRATORY SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1UbGYA6_AdZ3pJQwE4vilv2s7sVFxA6-g/preview' },
-                    { type: 'video', title: 'Genetics & Brain', url: 'https://drive.google.com/file/d/1GpyAWlGdvV2n0iP-crXSsfn4pK45s0r4/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wQjNkZQggmPS30npswsv-I-tUg7ZKg5R/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1QcOyOGL1-9ipMLcwzzLyLJkjxH2EmhcP/preview' },
+                    { type: 'video', title: 'Intro to Respiratory', url: 'https://drive.google.com/file/d/1AcSKAK1cy7huOA3B3RC3WruEdbEzb0TY/preview' },
+                    { type: 'model', title: '3D Model: Respiratory' },
+                    { type: 'video', title: 'Mechanism of Respiration', url: 'https://drive.google.com/file/d/1NJYsoWzQ4labwfi0Vh8m0AIMQfqFqOM1/preview' },
+                    { type: 'video', title: 'Physiology of Respiration', url: 'https://drive.google.com/file/d/1EKKrvJKwWoQbEWLudT1TePBiMvo183RB/preview' },
+                    { type: 'video', title: 'Gas Transport & Regulation', url: 'https://drive.google.com/file/d/1vphkb11o5f4kStf7T2kXCbJQ2d_IDsl8/preview' }
                 ]
             },
             {
-                id: 3, title: "MENTAL HEALTH",
+                id: 3, title: "DIGESTIVE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1iPSsHzcNoWiH37dMQv-wS1fQCwUYCC42/preview' },
-                    { type: 'video', title: 'MH Concepts & Services', url: 'https://drive.google.com/file/d/19GwBowjDMTWHv5tIw3MWE-FmD-IcD8RG/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/14ONeSy-uvwjJTz2lcZith5TOMUEHNaV8/preview' },
-                    { type: 'video', title: 'Defense Mechanisms', url: 'https://drive.google.com/file/d/1OWlT-UIx3zT20Xf5JWNVobTzmsWrFCis/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xZEPztKUXF0epYs4d8NCQ5b_l1E2sejK/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/156MjpYjAHJb2avDPWFyoZIoX-BqsUEzc/preview' },
+                    { type: 'video', title: 'Organs of Digestion', url: 'https://drive.google.com/file/d/1Q08ViVve81AtC_HHWvJztEiQR3SleQZm/preview' },
+                    { type: 'model', title: '3D Model: Stomach' },
+                    { type: 'video', title: 'Functions of Digestive Sys', url: 'https://drive.google.com/file/d/1T-wYVW0NrGVUXKK8QyASEK-_Eg_3z7q1/preview' },
+                    { type: 'video', title: 'Salivary Glands', url: 'https://drive.google.com/file/d/1IyCKX1TJiRdQotmKop09zac4R6PJ_rdk/preview' },
+                    { type: 'video', title: 'Gastric Secretions', url: 'https://drive.google.com/file/d/14Hk3HYzHdWXam_NbwTjJwlBYkJkmfaIX/preview' },
+                    { type: 'video', title: 'Pancreas & Secretions', url: 'https://drive.google.com/file/d/123FJomESMPRK1b9UR8pvccwfYG2OaaH9/preview' },
+                    { type: 'model', title: '3D Model: Pancreas' },
+                    { type: 'video', title: 'Liver & Gall Bladder', url: 'https://drive.google.com/file/d/1mRAjHD9K9riuRDdKEXjr0wKw_ihTNj55/preview' },
+                    { type: 'video', title: 'Large Intestine', url: 'https://drive.google.com/file/d/1PkMa8T70bfgwt6na9dJvp7ofZKDsH5rT/preview' },
+                    { type: 'video', title: 'Bile Secretion', url: 'https://drive.google.com/file/d/1PuJySZwjTRI6fJWOCsoYsly3kJmIvl7d/preview' },
+                    { type: 'video', title: 'GI Hormones', url: 'https://drive.google.com/file/d/14BG1zPfXCniaZn8YW72-yUcJ83QsmgNo/preview' }
                 ]
             },
             {
-                id: 4, title: "DEVELOPMENTAL PSYCH",
+                id: 4, title: "CIRCULATORY & LYMPHATIC",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1izG_Xgs0efdUKr5_5rQS6GCGS8VK4Ren/preview' },
-                    { type: 'video', title: 'Growth & Development', url: 'https://drive.google.com/file/d/11wAQq67lwxV1xXq9jxADqirBGveE2KKU/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1oFUhPPenMA3hWzKvJ9eseybu7--dALr7/preview' },
-                    { type: 'video', title: 'Adolescence & Early Adult', url: 'https://drive.google.com/file/d/138NM8jghAtkGjmfwGhhHBWUb-eN1cAYE/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1zvfdRhFvO8rrj6p9sGvxRmGm2cvTVWYC/preview' },
-                    { type: 'video', title: 'Middle/Late Adult & Vulnerable', url: 'https://drive.google.com/file/d/1AdbEGmvAP0Lhg024QhwNTaiV5er39EI9/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1921hjaG34ECYB2HSlBd4UN6QE2a6nwZq/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1wI0my0taaQPS3gf3Peun7t2pBBs1GEP3/preview' },
+                    { type: 'video', title: 'Heart Structure', url: 'https://drive.google.com/file/d/1kHago-VxxxU15-w6RDZ8btHoEXRrKnMK/preview' },
+                    { type: 'model', title: '3D Model: Heart' },
+                    { type: 'video', title: 'Valves of Heart', url: 'https://drive.google.com/file/d/1tDnIULk-UmSgGmXPoHwjfv4f_86MbvH1/preview' },
+                    { type: 'video', title: 'Cardiac Cycle', url: 'https://drive.google.com/file/d/1gdiD9BHQKlKdC2jnQuuR6LfFtJZgo71C/preview' },
+                    { type: 'video', title: 'Stroke Volume', url: 'https://drive.google.com/file/d/1TOHanAbQHySY7iYYEPh14yorPGR7pBd0/preview' },
+                    { type: 'video', title: 'Cardiac Output & HR', url: 'https://drive.google.com/file/d/158oy_cUtC7JrrXpknynE8zjfJoHLg1Py/preview' },
+                    { type: 'video', title: 'Pulmonary & Systemic Circ', url: 'https://drive.google.com/file/d/1yV7oG-8HFDxmo0O0CUTuoyI1o8bqUxCD/preview' },
+                    { type: 'video', title: 'Lymphatic System', url: 'https://drive.google.com/file/d/1qY8ODUBWABSiMYqOCQRlzBkl4U0Dnfet/preview' }
                 ]
             },
             {
-                id: 5, title: "PERSONALITY",
+                id: 5, title: "BLOOD",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1b6w03oUhFopcLyYWcYomcRNFu3xDAuD2/preview' },
-                    { type: 'video', title: 'Personality Definition', url: 'https://drive.google.com/file/d/1jhNokKNX-tzNohIFFRFJ9wGIT5vpDvon/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1bBJg3xY33leRb9l_CovfhlW0Y1kMu4oA/preview' },
-                    { type: 'video', title: 'Assessment Methods', url: 'https://drive.google.com/file/d/1dpbofQQJfPbh3LGz4J0K4o--JcMF0Jyp/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1K0Z47oqFNaycoXd7ay98PIyoPOPA_EjK/preview' },
-                    { type: 'video', title: 'Projective Techniques', url: 'https://drive.google.com/file/d/1eHpvaf8JS5JOl5eJ4XHRTA-0UuAN4yFq/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1gqS4srVpLeSAKq1xfVhspRt-zMkP7Os3/preview' },
-                    { type: 'video', title: 'Age Group Characteristics', url: 'https://drive.google.com/file/d/1uHUYWF1qzjCts9h9sWmmwYImTisMnMIF/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/18Bdrg6ocvgsaOlDkWMB6mT3VeJavaHIE/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1ls7J41VQZXJikLfG1CyS0AUJjqpBLSmX/preview' },
+                    { type: 'video', title: 'Intro to Blood Phys', url: 'https://drive.google.com/file/d/16UKyoVSWAA05EyGw2JAXI6MmTrdA2Pic/preview' },
+                    { type: 'video', title: 'Erythropoiesis', url: 'https://drive.google.com/file/d/1qi7QuEoqpwChOM8bNujmhv-W03eEBpLg/preview' },
+                    { type: 'video', title: 'Leukocytes', url: 'https://drive.google.com/file/d/15zbtNNFfuag_OfF8nkc7wK0hVllUI5hS/preview' },
+                    { type: 'video', title: 'Thrombocytes', url: 'https://drive.google.com/file/d/151WfxBZGrzro-3_HeGvoQz5zpSCdHQ0p/preview' },
+                    { type: 'video', title: 'Blood Coagulation', url: 'https://drive.google.com/file/d/1nlDmzqM2qxXNsV_EOXd24d1AYmRuczNR/preview' },
+                    { type: 'video', title: 'Hemostasis', url: 'https://drive.google.com/file/d/1paAe9sOz84HP7lDtWBPZRM07ZwD55NwA/preview' },
+                    { type: 'video', title: 'Blood Groups', url: 'https://drive.google.com/file/d/10DXrvF9gKNoXQ_P-nE2oI2_Q1XMf7_hp/preview' },
+                    { type: 'video', title: 'Immunity Types', url: 'https://drive.google.com/file/d/1cyI3Ck1gnWz0sGFkD6jGGfIyhuZTZZxp/preview' }
                 ]
             },
             {
-                id: 6, title: "COGNITIVE PROCESS",
+                id: 6, title: "THE ENDOCRINE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1HMGwweJcUyu-wEtG7HmyoyCNuzsF3PT_/preview' },
-                    { type: 'video', title: 'Attention', url: 'https://drive.google.com/file/d/1bdsNSrRsXrPXGyiLwIHGw6S-PeZ_0f6m/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pYHlQAO3juwPPlRO7pNF852ewMwwp-k9/preview' },
-                    { type: 'video', title: 'Perception', url: 'https://drive.google.com/file/d/1sN0IAtRR72IGXI1UH4KnSt8Q-OeAIF4y/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Ua9opGoI0hsom26UMkO5balRsPrwrnM_/preview' },
-                    { type: 'video', title: 'Aptitude & Intelligence', url: 'https://drive.google.com/file/d/1Di95wk0JlH3Ra0qPM4JF5zvlvvdgUj-I/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Y2Uzao50zkTiayV5GclijZkvhZdfFNHj/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1MsscO3WYvPgjCT0uH1fF3qi7v6XxC5nN/preview' },
+                    { type: 'video', title: 'Hypothalamus', url: 'https://drive.google.com/file/d/1IgYsF1V4V1pYLIzQZW9fSCcHKyIa-JZa/preview' },
+                    { type: 'model', title: '3D Model: Hypothalamus' },
+                    { type: 'video', title: 'Pituitary Hormones (Ant)', url: 'https://drive.google.com/file/d/1-Xw0_-sZ1L5YQlDYOQEjAdo9B-RE7UMo/preview' },
+                    { type: 'video', title: 'Pituitary Hormones (Post)', url: 'https://drive.google.com/file/d/1ua4sjsiI7Af4dEyj2AK6SsovLsTiy7Mb/preview' },
+                    { type: 'video', title: 'Thyroid Gland', url: 'https://drive.google.com/file/d/1PF8wFE65kZs2pD-PQ0kimQl1gkjCi2_D/preview' },
+                    { type: 'model', title: '3D Model: Thyroid' }
                 ]
             },
             {
-                id: 7, title: "MOTIVATION & EMOTION",
+                id: 7, title: "SENSORY ORGANS",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1fUujKXFIhCHQu8it8dOa1c5njJuM47PZ/preview' },
-                    { type: 'video', title: 'Motivation', url: 'https://drive.google.com/file/d/1rYJy_hsG3_DSiImzsnhjibycDnE1c_Pg/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1TkRUvA4MQVSJLi-ZkPoh_Mbvxth6HktN/preview' },
-                    { type: 'video', title: 'Stress & Adaptation', url: 'https://drive.google.com/file/d/1RsbdA5nsY92Gov95ey9SqNUKiiiPeE0n/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Shui6aYkFTjS_MLUNJEnUT_K80WOePvJ/preview' },
-                    { type: 'video', title: 'Emotions', url: 'https://drive.google.com/file/d/13ZPzQxdRFQvz1T8hsWcTXgInNBwnDuLV/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1yAp4RwbS1qMnOeOuUJqsW203wltkYubS/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/18Jy44QJ9HDkxuaCe0CUST7S0TY0b_ISo/preview' },
+                    { type: 'video', title: 'Intro to Sensory Sys', url: 'https://drive.google.com/file/d/1qc7_JvBMl1OJE71iyATI1b-h-ovuEO_M/preview' },
+                    { type: 'video', title: 'Skin Physiology', url: 'https://drive.google.com/file/d/1HlRXY956MNUUGmbuFxN_ZNCM3HloWBHi/preview' },
+                    { type: 'model', title: '3D Model: Skin' },
+                    { type: 'video', title: 'Eye Anatomy', url: 'https://drive.google.com/file/d/1-4yUyDwc7ZumVeNm_L4R_av8Mujr7-mL/preview' },
+                    { type: 'model', title: '3D Model: Eye' },
+                    { type: 'video', title: 'Ear Physiology', url: 'https://drive.google.com/file/d/1jt3kAbTC9MOeMiHQI0XhZGfhTJPlOyOz/preview' },
+                    { type: 'video', title: 'Gustation (Tongue)', url: 'https://drive.google.com/file/d/1GY-2sUxhS-w0PckA8YjbmonxjaKlxvig/preview' },
+                    { type: 'video', title: 'Olfaction (Smell)', url: 'https://drive.google.com/file/d/1poaGG_onPauI2vR5stwoxsovNW0KnlYN/preview' }
                 ]
             },
             {
-                id: 8, title: "ASSESSMENT & TESTS",
+                id: 8, title: "MUSCULOSKELETAL SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1b71-DUeB_ZhlE5XT8Nk53Ci2S2NBF320/preview' },
-                    { type: 'video', title: 'Psych Assessment', url: 'https://drive.google.com/file/d/17GksfWtwKI8vynmdlOlx6Pnq9P5agjEw/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_Zrv1t3w8YUWhnq0_ZCi2hJyreXT39gk/preview' },
-                    { type: 'video', title: 'Test Development', url: 'https://drive.google.com/file/d/16vSSnTyEJS0rEi5WydsUKzMLjGW80G9V/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1SSnfiuDact1UlcAlZgt7mDXb0Og-S6os/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/121sVgbcRetoxMiOcm5pvxeCGKbLxBvQv/preview' },
+                    { type: 'video', title: 'Skeletal System', url: 'https://drive.google.com/file/d/1ibWrcuBNriXjJmxwazDGYYuUlqrmKcBa/preview' },
+                    { type: 'model', title: '3D Model: Skeleton' },
+                    { type: 'video', title: 'Joints', url: 'https://drive.google.com/file/d/1k3tRJkoch4emH1eZQLzE7l3IUFtadM0c/preview' },
+                    { type: 'video', title: 'Muscle Physiology', url: 'https://drive.google.com/file/d/1x72mF3I_9ra-ocvXOCMnXtKUviUbAWoj/preview' },
+                    { type: 'video', title: 'Neuromuscular Junction', url: 'https://drive.google.com/file/d/1ffNOBgBaJghscIDElqWKvAw4V42JaKSi/preview' },
+                    { type: 'video', title: 'Muscle Contraction', url: 'https://drive.google.com/file/d/1C1LHBi0ylFfPbCKw7UPvs68-p0JExnO4/preview' },
+                    { type: 'video', title: 'Smooth Muscle Contraction', url: 'https://drive.google.com/file/d/1JfM2Q2gugwIEfVk20NCgpqm_20XbuFvI/preview' }
                 ]
             },
             {
-                id: 9, title: "SOFT SKILLS",
+                id: 9, title: "THE RENAL SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1oZO3sZxy6dwt9Y2A31aQkcxXsfCDzHTn/preview' },
-                    { type: 'video', title: 'Soft Skills & Comm', url: 'https://drive.google.com/file/d/1CSvqXnMg5-fYzqYsBNc7BkSsQviTjvJn/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/13V3r_BWBvNTznR3iZIUOEaGLVPNHgXHJ/preview' },
-                    { type: 'video', title: 'Building Relationships', url: 'https://drive.google.com/file/d/1DBC0xy1It5QQKG6ayF-enS2tl9VDjplu/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1jpktSPHC2sFw4RKrJahAGjQxqnry1wX/preview' },
-                    { type: 'video', title: 'Barriers to Relationships', url: 'https://drive.google.com/file/d/1pPyVHycnGY3lu9YeMeoz9GGC9hUyNS9d/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1laIvLctgo-yXKaE1vMkGRF-a0216tE1g/preview' },
-                    { type: 'video', title: 'Survival Strategies', url: 'https://drive.google.com/file/d/1UsZQjwpcS7gnDQ4_22ga3ndHvOUNx9KJ/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1EQp96bQZ3iw9u7X2sbYrotpz9hFjOucI/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1XLmC8pc0ws8gPsCpETEh5WP3Aa79rFjk/preview' },
+                    { type: 'video', title: 'Intro & Kidney', url: 'https://drive.google.com/file/d/1u8ntBZBayTpd2HViW8sImZgdQlqKC9bX/preview' },
+                    { type: 'model', title: '3D Model: Kidney' },
+                    { type: 'video', title: 'Nephron', url: 'https://drive.google.com/file/d/1HiG6rxo1lnGqOq1RSmIowBlAtHjTGEts/preview' },
+                    { type: 'video', title: 'Urine Formation', url: 'https://drive.google.com/file/d/1gxZ8Y0cOOKAgEk23RWZblZySEyL4HIzL/preview' },
+                    { type: 'video', title: 'Renal Regulation (Autoregulation)', url: 'https://drive.google.com/file/d/1ML2h5cwxdUpoly8NSRN8pTgWmPzgpQIu/preview' },
+                    { type: 'video', title: 'Renal Regulation (Osmolarity)', url: 'https://drive.google.com/file/d/1uhyxa6IjfVhtUgx6Xq1_Qk_rZCUv85Et/preview' }
                 ]
             },
             {
-                id: 10, title: "SELF EMPOWERMENT",
+                id: 10, title: "REPRODUCTIVE SYSTEM",
                 resources: [
-                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1n-GMCRfTP_czWLyJVFk8oZg6vUf1gIoF/preview' },
-                    { type: 'video', title: 'Self Empowerment', url: 'https://drive.google.com/file/d/1kYfROhSPMjxr98zpjADW66A6Qh0NdcK_/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1HcBujyyzvDGIGsPs1-QSHxhXjX3ySmKv/preview' },
-                    { type: 'video', title: 'Women Empowerment', url: 'https://drive.google.com/file/d/1fh4VPWpTEQJXIdLuEP_wVkdGhoCOTgNV/preview' },
-                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1BQBxtneQqF6mN5I3p_XrDDWoOvejptvE/preview' }
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1O6AuPR8YeiCxvLS4NdowJcAfTXe9epVJ/preview' },
+                    { type: 'video', title: 'Female Reproductive Intro', url: 'https://drive.google.com/file/d/1390ZTxHwRmn9IwkoqANY359aVAG5pF-H/preview' },
+                    { type: 'model', title: '3D Model: Female System' },
+                    { type: 'video', title: 'Ovaries', url: 'https://drive.google.com/file/d/1WqoST1I0w6WDek3OrA4DFklIhxVsyg1S/preview' },
+                    { type: 'video', title: 'Menstrual Cycle', url: 'https://drive.google.com/file/d/1gdStPRbXFktHL7oS-bIqc8-Fp14E0kNK/preview' },
+                    { type: 'video', title: 'Oogenesis', url: 'https://drive.google.com/file/d/1vyzcePMwrS4JRO_-wyKPH63O9u6b-lE_/preview' },
+                    { type: 'video', title: 'Male Reproductive Intro', url: 'https://drive.google.com/file/d/1G5LJFy0GLnHkjgpOSrp1UTN-7PHM5RtP/preview' },
+                    { type: 'model', title: '3D Model: Male System' },
+                    { type: 'video', title: 'Spermatogenesis', url: 'https://drive.google.com/file/d/1hx1cyhOJ9LB355io1VZZb3klLNBfu0Zj/preview' },
+                    { type: 'video', title: 'Sperm & Semen', url: 'https://drive.google.com/file/d/1ctWNqwGdxR07ZtSb5xns6gQjFOJHrVYe/preview' }
+                ]
+            },
+            {
+                id: 11, title: "NERVOUS SYSTEM",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1MbbTX0-LMWTjAoGC9XHGcawQ04AEWU-8/preview' },
+                    { type: 'model', title: '3D Model: Neuron' },
+                    { type: 'video', title: 'Neuron', url: 'https://drive.google.com/file/d/1tdNR6mo0siBxP0NWPlxpRsuxcpeMCRgs/preview' },
+                    { type: 'video', title: 'Nerve Impulse', url: 'https://drive.google.com/file/d/1z4TifczjCPRarUO7t5_Jm-MLAZ-H1-bg/preview' },
+                    { type: 'video', title: 'Synapse', url: 'https://drive.google.com/file/d/18-kMkugHm3fFoliUgMUF19XgVbftBLi-/preview' },
+                    { type: 'video', title: 'Intro to CNS', url: 'https://drive.google.com/file/d/1BZKTJZJB3gx2LuayBLw8a2waJ8B-BeNV/preview' },
+                    { type: 'model', title: '3D Model: Brain' },
+                    { type: 'video', title: 'Reflexes', url: 'https://drive.google.com/file/d/1JaFdUMLzX1WvGk8O9W3ticFxhHBC522p/preview' },
+                    { type: 'video', title: 'Autonomic Nervous System', url: 'https://drive.google.com/file/d/1LH7wWfSuY20ODNap7GRlwnPMyKkLmzFM/preview' }
                 ]
             }
         ];
@@ -501,6 +561,7 @@
         function getIcon(type) {
             if(type === 'notes') return '📚';
             if(type === 'video') return '▶️';
+            if(type === 'model') return '🧊';
             return '📄';
         }
 
@@ -513,7 +574,8 @@
         }
 
         // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
-        
+        let modelToggle = false; 
+
         function openResource(type, url, title) {
             // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
@@ -526,17 +588,28 @@
             modal.style.display = 'flex';
             body.innerHTML = ''; 
             
-            // FIX: Restore flex centering for Video/Notes (looks better centered)
+            // FIX: Restore flex centering for Video/Model (looks better centered)
             body.style.display = 'flex';
 
-            if (type === 'quiz') {
+            if (type === 'model') {
+                modelToggle = !modelToggle;
+                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
+            } 
+            else if (type === 'quiz') {
                 openQuiz(url); 
             }
             else {
-                // Ensure proper preview URL
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
-                // Use black background and permissions for better video experience
-                body.innerHTML = `<iframe class="modal-iframe" src="${cleanUrl}" allow="autoplay; encrypted-media; fullscreen"></iframe>`;
+                
+                // FIX: Apply correct class based on type
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
 
@@ -594,6 +667,7 @@
             body.innerHTML = ''; 
             
             // If we are closing manually via button, go back in history to remove the state
+            // prevent unnecessary history buildup
             if (history.state && history.state.modalOpen) {
                 history.back();
             }
@@ -601,8 +675,12 @@
 
         // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
+            // If the state that was just popped (or current state) indicates no modal...
+            // Actually, popstate fires *after* the transition.
+            // If we went back, the modal should close.
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
+                // Just hide it, don't call history.back() again
                 modal.style.display = 'none';
                 document.getElementById('modal-body').innerHTML = '';
             }
