@@ -1,1 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Health Nursing II - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Community Health Nursing II." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/13LuuYbm2sIR109PL3TI1xP9D3SQ1F12I/preview', 'CHN II Syllabus')">
+        📄 DOWNLOAD COMMUNITY HEALTH NURSING SYLLABUS
+    </div>
+    
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - SOCIOLOGY AND SIGNIFICANCE IN NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-nqj9bBrso9rI1karsDqskjKhV6YpCal/preview', 'Detailed Notes: Sociology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Sociology & Significance</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IfccaO8ACRtolF-4H0Yiq40wdSlRS7mJ/preview', 'Abdominal Pain')">
+                        <span class="icon video-icon">▶️</span><span>Abdominal Pain</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pD5nu5CpV1XbhDbUIfSWz48a6K4_6qTm/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gZpo0yEeHfEbARthYoAWImTQ64f4U6kH/preview', 'Ulcers & URI')">
+                        <span class="icon video-icon">▶️</span><span>Aphthous Ulcers, Acute URI, Haemoptysis</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Y1d3Rc8xUcWArcYRKGqAKuHkN3X1xjF4/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1l2altm6nU_MZlNxDVjGGJorvJ9JPrzM7/preview', 'Heart Diseases')">
+                        <span class="icon video-icon">▶️</span><span>Heart Diseases, Arrhythmia, Anemia, Blood Cancer</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PURzUsZqG_KUeGwuqaOkPx2LWDfpXSwS/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1oCADnAXZqolqGhgXq9Ebwtnn0ESsBGvh/preview', 'Eye & ENT')">
+                        <span class="icon video-icon">▶️</span><span>Eye Conditions, Epistaxis, ASOM, Sore Throat</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QJ9LfzBNjV00_yFUSjFb6d5kdqC2DMmO/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1P7WTuSyuNufJRhiewbGSlHdNF72y-tsx/preview', 'Urinary Tract')">
+                        <span class="icon video-icon">▶️</span><span>Cystitis, Pyelonephritis, UTI</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19FFQYmxZQSACqPM6EgeTqJbcaNh57zgt/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1V5krfhwWpfjZWU9ytKzERqN8kmwmPYzc/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+                    
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - RMNCH & ADOLESCENT HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1EmLjhxF8PrLge1Qzl51rsuiZeJ0mnW_z/preview', 'Detailed Notes: RMNCH')">
+                        <span class="icon">📚</span><span>Detailed Notes: RMNCH & Adolescent Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yyxCjfCSgXQlA_ldxci4RANUyxOiD5qL/preview', 'Antenatal Care')">
+                        <span class="icon video-icon">▶️</span><span>Antenatal Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1TSy4XN5ZEbXKknUOhJ0cCwIko-2uE-Uo/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1v_YipqM9-xN3DJpkOCXYmCpMQRIDvG5I/preview', 'Labour 1st Stage')">
+                        <span class="icon video-icon">▶️</span><span>Labour: Definition & First Stage</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FDng1FFJiAO1h0gSuYkCT0-Oq8Hu-e80/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1XGIfautqiQ506yf1fyNj4XYIVbp2oIOB/preview', 'Labour Stages & Newborn')">
+                        <span class="icon video-icon">▶️</span><span>2nd/3rd/4th Stage of Labour & Newborn Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jrnJtJWiMF2mf6v3bi-YXSz1JwjdZCak/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15c_unlLyV1KpGjvB7W26lh1rOz9eTCJg/preview', 'Postpartum Care')">
+                        <span class="icon video-icon">▶️</span><span>SBA Module & Postpartum Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JSRB2By0jACk0Hp_VXGjZPRt6jCrEC4A/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VtGIygjec0samEPnJ9lWFCq0tQZVxDvI/preview', 'Child Care')">
+                        <span class="icon video-icon">▶️</span><span>Newborn and Child Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IT8mXjwwvOtXp2bATEEB_LyMTOpALqiS/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1F0xIPMdJ63wQG1cOI38ls8c-9v4KyX0A/preview', 'Under Five Clinics')">
+                        <span class="icon video-icon">▶️</span><span>Under Five Clinics</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dxFMlviG1-M16VuPZ7o6AUwFFBZJjfHs/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18RQs2GD92rsalOwQwhP8WJQZbfdtIfhj/preview', 'Adolescent Health')">
+                        <span class="icon video-icon">▶️</span><span>Adolescent Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/167PX6vBtIjvammmtmdtIxNbRo8JCuz2e/preview', 'Youth Services')">
+                        <span class="icon video-icon">▶️</span><span>Youth Friendly Services</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZyIHdr-ofKD6HKQ9gN5-Yu3aPqojXtqE/preview', 'RMNCH+A')">
+                        <span class="icon video-icon">▶️</span><span>RMNCH + A Approach</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DKLJKh3KsQoWS-1oTfGbVvbRHV2hhWxe/preview', 'RBSK RKSK')">
+                        <span class="icon video-icon">▶️</span><span>RBSK & RKSK</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UAepYR6RwE-aHmMKOLtwJBx1GplxgJ_I/preview', 'Questions Part 1')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Part 1</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1c9fiWsF2EarfZ-sQkd_ysm2Vi1rjeGhp/preview', 'Questions Part 2')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Part 2</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - DEMOGRAPHY AND SURVEILLANCE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1K47VPSqmzA8XblKJ1XpK8GUc7vX68jD4/preview', 'Detailed Notes: Demography')">
+                        <span class="icon">📚</span><span>Detailed Notes: Demography & Surveillance</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ASWcWetqHiHiOYcnwg48ZfCbU4tNFvV0/preview', 'Demography')">
+                        <span class="icon video-icon">▶️</span><span>Demography & Sex Ratio</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JizEhn98QSGn-SIZdY6yPvqKD9RqX7Yf/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HD_Z5UWPYfzpPExyko7oR3Ca111zdivo/preview', 'Vital Statistics')">
+                        <span class="icon video-icon">▶️</span><span>Vital Statistics & Disease Surveillance</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LPq3jC-4lCNaj9QBi3m4eGA_FN29ZFTJ/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1unccj1wYQJu4jduKwj-1K27prV1nbbeg/preview', 'IDSP MCTS')">
+                        <span class="icon video-icon">▶️</span><span>SRS, IDSP and MCTS</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/107KdHrHYBhN0H4qyAPBt9SjK6nHi4hO5/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Lh16yhgjWX1LjocYhwLrciYovKiobdAh/preview', 'Data Collection')">
+                        <span class="icon video-icon">▶️</span><span>Collection, Analysis & Use of Data</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1SvUtGnOQYeL0dp4qG-6cpLkxb21gw5uu/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - POPULATION AND ITS CONTROL
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OgLujfgyUe2PFI_tDqvzF6dSYj-KXezT/preview', 'Detailed Notes: Population')">
+                        <span class="icon">📚</span><span>Detailed Notes: Population Control</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yvGP1SIBztSjUdfXrf0c4Ac7zuByN5LD/preview', 'Population Explosion')">
+                        <span class="icon video-icon">▶️</span><span>Population Explosion & Women Empowerment</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ZkGPenHVnSfHpQ8xpgHy-IU0Iavy7vWo/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('coming-soon', '', 'Limiting Family Size')">
+                        <span class="icon video-icon">▶️</span><span>Limiting Family Size - Coming Soon</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18ApAAp0r13BDzds3ulXCANJWT-Gp6wlS/preview', 'Family Norm')">
+                        <span class="icon video-icon">▶️</span><span>Small Family Norm & Emergency Contraception</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14SpCLey7zq3lJzRvNdV9Wp3ugZ-SBAmd/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DqW693iN3WRDromGvaZUQrPgjW_12msV/preview', 'MTP')">
+                        <span class="icon video-icon">▶️</span><span>Medical Termination of Pregnancy (MTP)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pdVvInp_W6zqISEFwG_58Nv-SM2cYXDb/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qKcOj2T8TolNfMdffNmGdzLSYYWiWfDq/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - OCCUPATIONAL HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sIG1690yQJrczbnlh4lxYdARU-sE8X6Q/preview', 'Detailed Notes: Occupational')">
+                        <span class="icon">📚</span><span>Detailed Notes: Occupational Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19H487Sm-nLTRo5Rq1ohpklY60YAfsY6U/preview', 'Occupational Hazards')">
+                        <span class="icon video-icon">▶️</span><span>Occupational Health Hazards & Diseases</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1uja8hKE3JzaiLatEHXsbVI0y48ZiVmEc/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FP-S9xaa1tigTiveWtB28fLRAXjsIzR1/preview', 'ESI Act')">
+                        <span class="icon video-icon">▶️</span><span>The Employee State Insurance (ESI) Act</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Aq0EpzQj_gdzBj088UL_uEj-yfGg2-lR/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1iRwTRR1qLZgLsnXwDq2pBnrXvg-CIAqw/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - GERIATRIC HEALTH CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sMxsWzddmgxn2xQm5HNbrlac195r868b/preview', 'Detailed Notes: Geriatric')">
+                        <span class="icon">📚</span><span>Detailed Notes: Geriatric Health Care</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yH9MEwHIxvhtFnH6yy3R6Vml0jnSOtES/preview', 'Geriatric Care')">
+                        <span class="icon video-icon">▶️</span><span>Geriatric Health Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1yH9MEwHIxvhtFnH6yy3R6Vml0jnSOtES/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1G6_i7VsxFTVAHRtDD88c5Cp2JAw5nWvH/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - MENTAL HEALTH DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WHzFgYZQAhcYIM8hxALQmlQ0iiKO17Kl/preview', 'Detailed Notes: Mental Health')">
+                        <span class="icon">📚</span><span>Detailed Notes: Mental Health Disorders</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zSVsad99_mlpbLP_Zn7vjz5vaq-NV87O/preview', 'Mental Health Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Mental Health Disorders Overview</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1h7z1cCV5lD3xG_-e96vNtiqbGHnbqioE/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZlV8MVWrlDLcZFhkpG9v4HvM4iThm16u/preview', 'Psychosis')">
+                        <span class="icon video-icon">▶️</span><span>Acute Psychosis, Schizophrenia, Dementia</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18tzKRtc7xinu4bdfBq2lMN-8rpWDlU7m/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/150bfYr-faRm8NYw-ykzMADlrlKHd5ZoL/preview', 'Suicide Alcohol')">
+                        <span class="icon video-icon">▶️</span><span>Suicide, Alcohol & Substance Abuse</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MVIZgwRZQlA6j7W5iGLlG6TjWo5J0ss0/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eszgH1VFbRugJ3NEI57U0HJarnazOEBp/preview', 'Mental Health Policy')">
+                        <span class="icon video-icon">▶️</span><span>National Mental Health Policy</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FS6CeofCVENwkn3CS4knlKqbzOMg-Z9R/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BHCNUMP-X_Q4AbxNu0KJZUpHGQzn9iCG/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - HMIS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DEDAAtGbp-V9WTqbM0k1TBuG6pvoWNGk/preview', 'Detailed Notes: HMIS')">
+                        <span class="icon">📚</span><span>Detailed Notes: HMIS</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1z1Hcf-e0tI0_82pOzmzU9lrSMhlQAvZV/preview', 'HMIS Cycle')">
+                        <span class="icon video-icon">▶️</span><span>HMIS & Demographic Cycle</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fcZAgh355gI0cT9KtgdsV8oBnczSwugI/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sRCkIz6ibhZ5WpZ1OmR8KIPQcYHvFOH6/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - DELIVERY OF COMMUNITY HEALTH SERVICES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LPW_3C9eHhZmYTlbn7c6ESIZm8OXYVD_/preview', 'Detailed Notes: Delivery')">
+                        <span class="icon">📚</span><span>Detailed Notes: Delivery of Services</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yi_hKUKH-zV5wCRG494-ceHzMfM7hnrD/preview', 'Planning PHC')">
+                        <span class="icon video-icon">▶️</span><span>Planning & Material Management of PHC, CHC, SC</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1hLjMW-Y72tP_OERHKqRFgHUKfHX2G7EB/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tQU3W1cB6hPBWZceyxMsoXg5RKZw-eiW/preview', 'Manpower IPHS')">
+                        <span class="icon video-icon">▶️</span><span>Manpower Planning & IPHS Standards</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pG1yZgELb3nl_WqRNAOqJ4LQ0AU-cNn9/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dkpFsbHjX0nuL7sfQ6M49zQ2jdOITtRT/preview', 'Urban Health')">
+                        <span class="icon video-icon">▶️</span><span>Urban Health Services & Defense Services</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Isw5vftdJDkqh1CEwTKt0pgr1B8hSzVc/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CR73vnS0nDXfUKIFh8y6NYk34D0c4Yug/preview', 'Other Systems')">
+                        <span class="icon video-icon">▶️</span><span>ISM, AYUSH & Indigenous Services</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1aI86bHx8o31Y9RMXyryKNog40Gf6TP0s/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1daY0B6nfRGSmxnazakt0osuOQ5CVSKKs/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - LEADERSHIP AND MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fUzSXK1H_vXPZIgdcm3cvcmLXxZhI8-i/preview', 'Detailed Notes: Management')">
+                        <span class="icon">📚</span><span>Detailed Notes: Leadership & Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AbA7sX7mp5EWRs94LOBZrvwYeqV8RW7y/preview', 'Financial Management')">
+                        <span class="icon video-icon">▶️</span><span>Financial Management & Accounting</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/10_UkuEdVRpn8R2k-pzgXamgkj-Vg9aIO/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1r3M2rpzCMWVmkpp5JdLzmrU_XHDFJdLP/preview', 'Budgeting')">
+                        <span class="icon video-icon">▶️</span><span>Accounting Process & Preparing a Budget</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BEglYHSQboV90ZHTdx9TTBmVQ0w5IJXx/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jrFJX-9cAiAqLOeT2G3XqH3Rf_pTPTrB/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - DISASTER MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Lovj7b50vtn2zSDp3tJXyuSZw_nDZOte/preview', 'Detailed Notes: Disaster')">
+                        <span class="icon">📚</span><span>Detailed Notes: Disaster Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Rp00dA_clloZWPcw72NIQ1QkNNZGMUSM/preview', 'Disaster Management')">
+                        <span class="icon video-icon">▶️</span><span>Disaster Management Overview</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ktyaEMXw-rrwaRzsfDPYznuuhLUydjFv/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10Zi4QTOwMnqquErRYyLEwukYQiwLS1_m/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - BIOMEDICAL WASTE MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1laJI-dMdJJVYiP7fCH5pMyYVe5qotdql/preview', 'Detailed Notes: BMW')">
+                        <span class="icon">📚</span><span>Detailed Notes: Biomedical Waste Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1umWnVpo32f5bgnOSdhu97U6uywDRatb1/preview', 'BMW Management')">
+                        <span class="icon video-icon">▶️</span><span>Biomedical Waste Management Overview</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mxJG9TTEW91xnFr6is74E21Bh6H3qdDl/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dOMw3n2TUkap8oDJfqBVy6qDvlvFTAOs/preview', 'BMW Guidelines')">
+                        <span class="icon video-icon">▶️</span><span>Waste Management Guidelines 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pqGayXON8EFVkeapBIGrwNMRgE1hEZh5/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1C11lhT1y2M8NeQjM5XBGXnxv_4sLddKr/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - HEALTH AGENCIES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12r9Wg61NbQFjgNq2vbnjh9MelKkEmDkO/preview', 'Detailed Notes: Agencies')">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Agencies</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1NTeabRQrz69ZgGxuqgLDp1CbAdpuP4Sa/preview', 'International Agencies 1')">
+                        <span class="icon video-icon">▶️</span><span>WHO, FAO, Red Cross, ILO, CARE</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NTeabRQrz69ZgGxuqgLDp1CbAdpuP4Sa/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1XCs4bLMyYQuFFFOZMy9HcvDlZolEnjQQ/preview', 'International Agencies 2')">
+                        <span class="icon video-icon">▶️</span><span>UNICEF, UNDP, UNESCO, World Bank</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1l_0363jpWjigVvUMRy8T_wGF-n1J0dKN/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hp45_U5qIENJIL8te9sz_KGdK9bE9fvl/preview', 'International Agencies 3')">
+                        <span class="icon video-icon">▶️</span><span>UNFPA, USAID, Jhpiego, Colombo Plan</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BSXK-I9DDfILs5Xq1FU8t9U2tyvsR_MU/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1U9SksML3fEeuUtfEv-uh6rzGeT9b2Kzz/preview', 'National Agencies')">
+                        <span class="icon video-icon">▶️</span><span>National Health Agencies</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1uVIiVrBCS7jWakRn72F0AbZeoI3Hxd_S/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a2GKGz-AA6ONc5rWa3xZSOhJ32nce6rh/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Sociology
+                { q: "Which of the following is a social determinant of health?", o: ["Genetics", "Socioeconomic status", "Age", "Blood type"], a: 1 },
+                { q: "Rheumatic Heart Disease is primarily caused by:", o: ["Streptococcal infection", "Viral infection", "Fungal infection", "Genetic mutation"], a: 0 },
+                { q: "A common symptom of a cataract is:", o: ["Redness", "Cloudy vision", "Pain", "Itching"], a: 1 },
+                { q: "The most common cause of anemia in India is:", o: ["Vitamin B12 deficiency", "Iron deficiency", "Blood loss", "Hemolysis"], a: 1 },
+                { q: "Epistaxis refers to bleeding from the:", o: ["Ear", "Nose", "Throat", "Gums"], a: 1 }
+            ],
+            2: [ // Unit 2: RMNCH
+                { q: "The 'A' in APGAR score stands for:", o: ["Action", "Appearance", "Attitude", "Alertness"], a: 1 },
+                { q: "Exclusive breastfeeding is recommended for:", o: ["3 months", "6 months", "9 months", "1 year"], a: 1 },
+                { q: "The 3rd stage of labour involves:", o: ["Dilation of cervix", "Delivery of baby", "Delivery of placenta", "Observation"], a: 2 },
+                { q: "Iron and Folic Acid (IFA) supplementation in adolescents is to prevent:", o: ["Goiter", "Anemia", "Night blindness", "Rickets"], a: 1 },
+                { q: "Which program covers the health of children from 0-18 years?", o: ["RBSK", "JSY", "JSSK", "PMSMA"], a: 0 }
+            ],
+            3: [ // Unit 3: Demography
+                { q: "The Sex Ratio is defined as the number of females per:", o: ["100 males", "1000 males", "10,000 males", "100,000 males"], a: 1 },
+                { q: "In India, the Census is conducted every:", o: ["5 years", "10 years", "15 years", "20 years"], a: 1 },
+                { q: "IDSP stands for:", o: ["Integrated Disease Surveillance Project", "Indian Disease Surveillance Program", "International Disease Safety Protocol", "Integrated Data Safety Project"], a: 0 },
+                { q: "Which of the following is a vital statistic?", o: ["Blood pressure", "Birth rate", "Height", "Weight"], a: 1 },
+                { q: "Maternal Mortality Ratio is expressed per:", o: ["1,000 live births", "10,000 live births", "100,000 live births", "1,000,000 live births"], a: 2 }
+            ],
+            4: [ // Unit 4: Population
+                { q: "A 'Small Family' is typically defined as a couple with:", o: ["1 child", "2 children", "3 children", "4 children"], a: 1 },
+                { q: "Which is a permanent method of family planning?", o: ["Condom", "Oral Pills", "Tubectomy", "IUD"], a: 2 },
+                { q: "Emergency contraception pills should be taken within:", o: ["24 hours", "48 hours", "72 hours", "1 week"], a: 2 },
+                { q: "The MTP Act allows termination of pregnancy up to:", o: ["12 weeks", "20 weeks", "24 weeks (amended)", "28 weeks"], a: 2 },
+                { q: "An 'Eligible Couple' usually refers to a married couple where the wife's age is:", o: ["15-45 years", "18-45 years", "21-50 years", "15-49 years"], a: 0 }
+            ],
+            5: [ // Unit 5: Occupational
+                { q: "Silicosis is an occupational disease affecting the:", o: ["Liver", "Lungs", "Kidneys", "Skin"], a: 1 },
+                { q: "The ESI Act was passed in the year:", o: ["1947", "1948", "1950", "1952"], a: 1 },
+                { q: "Which is a physical occupational hazard?", o: ["Lead", "Noise", "Bacteria", "Stress"], a: 1 },
+                { q: "PPE stands for:", o: ["Personal Protective Equipment", "Public Protection Equipment", "Private Patient Exam", "Primary Prevention Equipment"], a: 0 },
+                { q: "Lead poisoning is also known as:", o: ["Siderosis", "Plumbism", "Anthracosis", "Byssinosis"], a: 1 }
+            ],
+            6: [ // Unit 6: Geriatric
+                { q: "Gerontology is the study of:", o: ["Children", "Women", "Aging and older adults", "Diseases"], a: 2 },
+                { q: "A common bone condition in the elderly is:", o: ["Rickets", "Osteoporosis", "Scoliosis", "Polio"], a: 1 },
+                { q: "Which of the following is a common psychological issue in the elderly?", o: ["Hyperactivity", "Depression/Isolation", "Aggression", "Risk-taking"], a: 1 },
+                { q: "The leading cause of blindness in the elderly is:", o: ["Glaucoma", "Cataract", "Trauma", "Infection"], a: 1 },
+                { q: "Geriatric care focuses on:", o: ["Curing all diseases", "Improving quality of life", "Isolating patients", "Experimental treatments"], a: 1 }
+            ],
+            7: [ // Unit 7: Mental Health
+                { q: "Schizophrenia is characterized by:", o: ["Split personality", "Hallucinations and delusions", "Severe depression only", "Memory loss only"], a: 1 },
+                { q: "The National Mental Health Programme (NMHP) was launched in:", o: ["1982", "1987", "1990", "2000"], a: 0 },
+                { q: "Delirium Tremens is associated with withdrawal from:", o: ["Opioids", "Alcohol", "Cannabis", "Tobacco"], a: 1 },
+                { q: "Which act was recently replaced by the Mental Healthcare Act, 2017?", o: ["MHA 1987", "MHA 1950", "MHA 1990", "MHA 2000"], a: 0 },
+                { q: "A primary prevention strategy for suicide is:", o: ["Crisis intervention", "Helplines", "Reducing access to lethal means", "Hospitalization"], a: 2 }
+            ],
+            8: [ // Unit 8: HMIS
+                { q: "HMIS stands for:", o: ["Health Management Information System", "Hospital Medical Insurance System", "Health Monitoring Internal System", "Home Medical Information Service"], a: 0 },
+                { q: "The primary source of health data at the village level is:", o: ["Doctor", "ASHA/ANM", "Teacher", "Sarpanch"], a: 1 },
+                { q: "Analysis of data helps in:", o: ["Collection only", "Decision making and planning", "Storage only", "Increasing workload"], a: 1 },
+                { q: "Which is NOT a tool for data collection?", o: ["Survey", "Observation", "Checklist", "Guessing"], a: 3 },
+                { q: "Demographic cycle describes the transition of:", o: ["Disease patterns", "Population birth and death rates", "Economic growth", "Educational levels"], a: 1 }
+            ],
+            9: [ // Unit 9: Delivery of Services
+                { q: "A Primary Health Centre (PHC) in plain areas covers a population of:", o: ["20,000", "30,000", "50,000", "5,000"], a: 1 },
+                { q: "AYUSH includes Ayurveda, Yoga, Unani, Siddha, and:", o: ["Allopathy", "Homeopathy", "Naturopathy", "Osteopathy"], a: 1 },
+                { q: "The 'first referral unit' (FRU) is typically the:", o: ["Sub-centre", "PHC", "CHC", "District Hospital"], a: 2 },
+                { q: "ASHA is selected from the:", o: ["Urban city", "Village community itself", "Medical college", "Government office"], a: 1 },
+                { q: "One Sub-centre is staffed by:", o: ["One Doctor", "One ANM and One Male Health Worker", "Two Doctors", "One Nurse only"], a: 1 }
+            ],
+            10: [ // Unit 10: Management
+                { q: "Budgeting is primarily related to:", o: ["Manpower", "Financial planning", "Material storage", "Time management"], a: 1 },
+                { q: "Democratic leadership style involves:", o: ["Strict orders", "Group participation", "Laissez-faire", "Dictatorship"], a: 1 },
+                { q: "Supervision is best described as:", o: ["Finding faults", "Guiding and mentoring", "Punishing", "Ignoring"], a: 1 },
+                { q: "Inventory management deals with:", o: ["Staff attendance", "Patient records", "Stock of drugs and equipment", "Vehicle maintenance"], a: 2 },
+                { q: "An audit is an inspection of:", o: ["Financial accounts", "Buildings", "Staff uniforms", "Gardens"], a: 0 }
+            ],
+            11: [ // Unit 11: Disaster
+                { q: "In Triage, the color 'Red' indicates:", o: ["Dead", "Minor injury", "Immediate care needed", "Delayed care"], a: 2 },
+                { q: "The first phase of the disaster management cycle is:", o: ["Response", "Mitigation/Prevention", "Recovery", "Rehabilitation"], a: 1 },
+                { q: "Which is a man-made disaster?", o: ["Earthquake", "Flood", "Bhopal Gas Tragedy", "Cyclone"], a: 2 },
+                { q: "The 'Black' tag in triage signifies:", o: ["Immediate", "Urgent", "Deceased/Unsalvageable", "Walking wounded"], a: 2 },
+                { q: "The nodal ministry for disaster management in India is:", o: ["Ministry of Health", "Ministry of Home Affairs", "Ministry of Defense", "Ministry of Finance"], a: 1 }
+            ],
+            12: [ // Unit 12: BMW
+                { q: "Anatomical waste (human tissues) should be disposed of in which colored bag?", o: ["Red", "Yellow", "Blue", "White"], a: 1 },
+                { q: "Sharps (needles, blades) are disposed of in:", o: ["Yellow bag", "Red bag", "White translucent container", "Blue marking box"], a: 2 },
+                { q: "Plastic waste like catheters and IV sets goes into:", o: ["Red bag", "Yellow bag", "Black bag", "Blue bag"], a: 0 },
+                { q: "The symbol for biohazard is:", o: ["Skull and bones", "Three interlocking circles", "Green triangle", "Red cross"], a: 1 },
+                { q: "Cytotoxic drugs should be disposed of in:", o: ["Red bag", "Yellow bag with cytotoxic label", "Black bag", "Blue bag"], a: 1 }
+            ],
+            13: [ // Unit 13: Agencies
+                { q: "The headquarters of WHO is located in:", o: ["New York", "London", "Geneva", "Paris"], a: 2 },
+                { q: "UNICEF primarily focuses on:", o: ["Adult health", "Children and mothers", "Geriatric care", "Occupational health"], a: 1 },
+                { q: "FAO stands for:", o: ["Food and Agricultural Organization", "Foreign Aid Organization", "Free Area Operation", "Food Assistance Office"], a: 0 },
+                { q: "The Indian Red Cross Society was established in:", o: ["1920", "1947", "1950", "1900"], a: 0 },
+                { q: "USAID is an agency from which country?", o: ["UK", "USA", "USSR", "UAE"], a: 1 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
+</body>
+</html>
