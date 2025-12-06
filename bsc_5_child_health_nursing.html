@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
-            /* Original color scheme restored */
             --brand: #003B82; 
             --accent: #00B9F2;
             --gray-50: #f9fafb;
@@ -18,6 +17,8 @@
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; }
@@ -49,7 +50,7 @@
             transition: all 0.2s ease;
         }
         .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63; /* Original darker blue on hover */
+            background: #002d63;
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
@@ -77,7 +78,7 @@
         }
         .unit-content.active {
             padding: 24px 12px;
-            max-height: auto; 
+            max-height: none; 
         }
 
         .subsection {
@@ -107,39 +108,22 @@
             gap: 12px;
             flex-wrap: wrap;
             min-height: 50px;
+            cursor: pointer;
         }
         .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
         .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
         .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
         .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
         .resource-btn.notes:hover { background: #e0f2fe; }
         .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.model:hover { background: #d1fae5; }
         .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon {
-            background: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
-        }
+        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
         .icon.video-icon { color: #8b5cf6; }
-        .icon.model-icon { color: #16a34a; }
         .icon.quiz-icon { color: #FFA500; }
         .icon.coming-soon-icon { color: #9ca3af; }
 
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
-        }
-        
         h3 {
             font-size: 1.2rem;
             font-weight: 600;
@@ -148,197 +132,213 @@
             color: var(--brand);
         }
 
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
         @media (max-width: 768px) {
             body { padding: 16px; }
             .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
             .resource-btn { font-size: 14px; }
             .subsection { padding: 16px; }
             .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Main Syllabus PDF Link -->
-    <a href="https://drive.google.com/file/d/1aFe6JOMcBSxUDCXfSslRaSr3fsNuwcf0/view?usp=drive_link" class="syllabus-btn" target="_blank">
+
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1aFe6JOMcBSxUDCXfSslRaSr3fsNuwcf0/preview', 'Syllabus')">
         👶 CHILD HEALTH NURSING - SYLLABUS
-    </a>
+    </div>
     
     <div id="units">
-        
-        <!-- UNIT 1 - INTRODUCTION: MODERN CONCEPTS OF CHILD CARE -->
         <div class="unit-container" id="unit1">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION: MODERN CONCEPTS OF CHILD CARE
+                UNIT 1 - INTRODUCTION: MODERN CONCEPTS
                 <span>🔽</span>
             </div>
             <div class="unit-content active">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1QXYN-rbAqj3uX-jJiUR7ND4ecYC2l831/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QXYN-rbAqj3uX-jJiUR7ND4ecYC2l831/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes: Modern Concepts of Child Care</span>
-                    </a>
+                    </div>
                     <h3>1.1 Philosophy and Legal Framework</h3>
-                    <a href="https://drive.google.com/file/d/1UV-8iAgynfOC7pwJWwGtGWIDkL2Y8ITC/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Modern concept of child Health care: Introduction, History, Philosophy, and Atraumatic Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Yf-gk3nOE74k5tthqe5J2pWb6gv3MkX7/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UV-8iAgynfOC7pwJWwGtGWIDkL2Y8ITC/preview', 'Modern Concepts & Atraumatic Care')">
+                        <span class="icon video-icon">▶️</span><span>Modern concept, Philosophy, and Atraumatic Care</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Yf-gk3nOE74k5tthqe5J2pWb6gv3MkX7/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Note: Atraumatic Care and Philosophy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19pu67tnELDiEKLmix8sZCKD2C6BzaD82/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Modern concept of child care, Cultural and Religious consideration in child care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NXsbqVcpMkyXEyL1B57Ex88oI84OiXp-/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Cultural and Religious Consideration</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dXjVgfBw_BaBZiHX4xksDV8SvzHbP1vu/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>National Policy and Legislation (Children's Act, Juvenile Justice Act, Child Labour, Child Marriage Restraint)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1f7JG72X4wOPz3G0qkVclwbZOLzSGbjJO/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Child Welfare Legislation</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19pu67tnELDiEKLmix8sZCKD2C6BzaD82/preview', 'Cultural Considerations')">
+                        <span class="icon video-icon">▶️</span><span>Cultural and Religious consideration in child care</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dXjVgfBw_BaBZiHX4xksDV8SvzHbP1vu/preview', 'Legislation')">
+                        <span class="icon video-icon">▶️</span><span>National Policy and Legislation (Juvenile Justice, Child Labour)</span>
+                    </div>
+
                     <h3>1.2 National Programs and Agencies</h3>
-                    <a href="https://drive.google.com/file/d/1OnWWbWcXL_dGIZFYlZd96z2SuzeQyfDs/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>The Rights of Children, National Programs and Agencies Related to Welfare Services to the Children</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xnrJmS65oSH0zrXveH9ihbNB6SGloW9f/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Rights of Children and Welfare Services</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sovMp7ovMKZpXoYWkWs9JUQonwl09fTY/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>School Health Service, IMNCI, and Maternal and Child Health (MCH)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Tu3NP4D2mmOijkeRPvK_j8xXXk39BOP3/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: School Health and IMNCI/MCH</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VI4JWYGVdBaHjb8xIM4bcqW8Zegg1nbb/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>RCH, Mid Day Meal, Vitamin A Prophylaxis, Nutritional Anemia Prophylaxis, Balwadi Nutrition Programme</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KVGHpw0QQiz6L0abNlWnusgwGJDSFDNs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Child Nutrition Programs</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VW5SD7uXZv_pfINmI1qNHnJkBQ4Qqs6L/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>National Agencies (Red Cross, CSWB, ICCW, CRY, AIWC)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qw4Zrh2654FArR77Yw00BI4NbbqXJOMx/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: National Child Welfare Agencies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19lol9rfeP2_Bl6FORTK-fanrpFnydMb1/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>International Agencies: World Health Organization (WHO), UNICEF</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VdbpbXxKhf4x-kSfyCjSNhPdjQfiP57f/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: International Child Health Agencies</span>
-                    </a>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OnWWbWcXL_dGIZFYlZd96z2SuzeQyfDs/preview', 'Rights & Programs')">
+                        <span class="icon video-icon">▶️</span><span>Rights of Children, National Welfare Programs</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sovMp7ovMKZpXoYWkWs9JUQonwl09fTY/preview', 'School Health & IMNCI')">
+                        <span class="icon video-icon">▶️</span><span>School Health Service, IMNCI, MCH</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VI4JWYGVdBaHjb8xIM4bcqW8Zegg1nbb/preview', 'Nutrition Programs')">
+                        <span class="icon video-icon">▶️</span><span>RCH, Mid Day Meal, Vitamin A Prophylaxis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VW5SD7uXZv_pfINmI1qNHnJkBQ4Qqs6L/preview', 'National Agencies')">
+                        <span class="icon video-icon">▶️</span><span>National Agencies (Red Cross, ICCW, CRY)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19lol9rfeP2_Bl6FORTK-fanrpFnydMb1/preview', 'International Agencies')">
+                        <span class="icon video-icon">▶️</span><span>International Agencies: WHO, UNICEF</span>
+                    </div>
+
                     <h3>1.3 Core Pediatric Care Concepts</h3>
-                    <a href="https://drive.google.com/file/d/10_mu0gugwopUmS93xjfzKNoVRuZLmY2C/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10_mu0gugwopUmS93xjfzKNoVRuZLmY2C/preview', 'Hospital Trends')">
                         <span class="icon video-icon">▶️</span><span>Trends in Hospital Care and Preventive Pediatrics</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Xo4rhzi8EFHW_LJzaGuK_GTImvAjyfh8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hospital Care Trends & Preventive Pediatrics</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1y5D2HiWKXyB5NqO9qw8XKGWMvpV9fXcY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1y5D2HiWKXyB5NqO9qw8XKGWMvpV9fXcY/preview', 'Under Five Clinic')">
                         <span class="icon video-icon">▶️</span><span>Under Five Clinic</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13OLmY1RL-OdrgtGc1IKvQJMGb3Ecye4n/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Under Five Clinic</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KE7MBlxinleHrUfQGRd378HeuifuafWD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KE7MBlxinleHrUfQGRd378HeuifuafWD/preview', 'Immunisation')">
                         <span class="icon video-icon">▶️</span><span>Immunisation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1h2hxA7dpf-TgVc3j2nqAqNfJgDUtH1ID/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Immunisation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1T-YOmr8ItvEHxAyaEqXYErQliXgSp_TR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1T-YOmr8ItvEHxAyaEqXYErQliXgSp_TR/preview', 'Grief')">
                         <span class="icon video-icon">▶️</span><span>Grief and Bereavement in Children</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ehHllBuVejr20FAJCjszXXKEmuf7kkff/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Grief and Bereavement</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GidQODFjEMzi7wg_F6rTyGbd1d2ojAyk/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles of Pre and Postoperative Care of Infants and Children</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1g9J9VC6MpwMvFYfgtwXRPYXD2ufKPLu_/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Pre/Postoperative Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Tmz7xUQjr9VMhYWMWMjK_ctXiwCi4pLw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GidQODFjEMzi7wg_F6rTyGbd1d2ojAyk/preview', 'Pre/Post Op Care')">
+                        <span class="icon video-icon">▶️</span><span>Principles of Pre and Postoperative Care</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Tmz7xUQjr9VMhYWMWMjK_ctXiwCi4pLw/preview', 'Nurse Role')">
                         <span class="icon video-icon">▶️</span><span>Role of Pediatric Nurse</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AVjGROMcoAA3pZ79dWBlOJ6z7_u2wHHV/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Role of Pediatric Nurse</span>
-                    </a>
+                    </div>
+
                     <h3>1.4 Safety and Essential Nursing Procedures</h3>
-                    <a href="https://drive.google.com/file/d/1c3MdBh8_pH1RRKqF_ryzt9Tvmnor4m8k/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1c3MdBh8_pH1RRKqF_ryzt9Tvmnor4m8k/preview', 'Hospital Environment')">
                         <span class="icon video-icon">▶️</span><span>Hospital Environment for Sick Child</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qq_fCux57XM8EgzaFWTykHxSoDdxpEtE/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hospital Environment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DVlaTIvmaehdjyP3Dj9rGPSW5Pn2TyMs/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DVlaTIvmaehdjyP3Dj9rGPSW5Pn2TyMs/preview', 'Accidents')">
                         <span class="icon video-icon">▶️</span><span>Preventive Measures Towards Accidents</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UDGKa0zHl8CiX7LfDTQwKWHti_SuYLLY/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Accident Prevention</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gnTuS3UVdBTX46vu7zopGpGZscxDL0eE/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gnTuS3UVdBTX46vu7zopGpGZscxDL0eE/preview', 'Mortality')">
                         <span class="icon video-icon">▶️</span><span>Child Morality and Morbidity Rate</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/112UwBnZwkS2awNEyRVbwChkBkH-HpuAG/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Child Morbidity/Mortality</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gCgNYyf_u_FtSBJTz2LtyVVA6BCjx6LL/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gCgNYyf_u_FtSBJTz2LtyVVA6BCjx6LL/preview', 'Child vs Adult')">
                         <span class="icon video-icon">▶️</span><span>Difference Between Adult and Child</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/100B_tsRB1u_tG2O9kUFe_ePa4G-9EKue/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Adult vs. Child Differences</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1y0vcccdxQuXlNfMH9nXNTIZC1LrFFrlb/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1y0vcccdxQuXlNfMH9nXNTIZC1LrFFrlb/preview', 'Drug Calculation')">
                         <span class="icon video-icon">▶️</span><span>Administration of Medication and Drug Calculation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PkoHZvRVgG7jXVe4mCCatpJUSbxwynTD/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Drug Calculation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GA4xjT55-CEOl7rrCWlFPdb8NcRrlnG1/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GA4xjT55-CEOl7rrCWlFPdb8NcRrlnG1/preview', 'Oral Meds')">
                         <span class="icon video-icon">▶️</span><span>Oral Medication</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15VeaUPas8iB_Hkh261ge0V-JOcJSxVvX/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Oral Medication</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/119Jmsii_SoLEE5OoNSwvuaHg3cF91HDD/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/119Jmsii_SoLEE5OoNSwvuaHg3cF91HDD/preview', 'IM Injection')">
                         <span class="icon video-icon">▶️</span><span>Intramuscular Injection</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UGsbRGGft0iK-m2W-ym6XGc1UI1WaicP/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: IM Injection</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eiBlWwawoHNpS2KGofRNtoV8lDafhFLn/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eiBlWwawoHNpS2KGofRNtoV8lDafhFLn/preview', 'IV Therapy')">
                         <span class="icon video-icon">▶️</span><span>Intravenous Therapy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1czXMueceGtAFZ9MkVr34G8Ag7pvrWuP1/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: IV Therapy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12Yc_EmfQhfiFuTJPYe6iYybtYcigHxLm/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12Yc_EmfQhfiFuTJPYe6iYybtYcigHxLm/preview', 'Fluid Calc')">
                         <span class="icon video-icon">▶️</span><span>Calculation of Fluid Requirement</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sPrQJ_q3_tJmyVZHiegxuOLzeiLGn5CO/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Fluid Calculation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xMVqs2jVepXNA4uOge9AcCZZLzXBGrxo/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xMVqs2jVepXNA4uOge9AcCZZLzXBGrxo/preview', 'Restraints')">
                         <span class="icon video-icon">▶️</span><span>Restraints</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ACLq1wzDBN-7zGQb6wGbrUw666o-E6dq/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Restraints</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1w0P0yIGibk1LnVk3ROmIhdWV3zva5Uxj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1w0P0yIGibk1LnVk3ROmIhdWV3zva5Uxj/preview', 'Pain Assessment')">
                         <span class="icon video-icon">▶️</span><span>Assessment of Pain in Children</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1X_n6oL_f9pI4z0uY_USRDKpu20fLLa4v/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Pain Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cxiZ70KtZwAGElRSJwcAMMDxKKspwF0c/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz: Introduction and Concepts</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 2 - THE HEALTHY CHILD -->
         <div class="unit-container" id="unit2">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 2 - THE HEALTHY CHILD
@@ -346,129 +346,77 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1SpzSTblooEq4kGm3MyJp252s95luBC3s/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: The Healthy Child (Growth & Development)</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1SpzSTblooEq4kGm3MyJp252s95luBC3s/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes: The Healthy Child</span>
+                    </div>
                     <h3>2.1 Growth & Development Fundamentals</h3>
-                    <a href="https://drive.google.com/file/d/1_q3b9n6x-tfCefqdFAmvrOtjKDVW5eUR/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Growth and Development (Maturation, Pattern, Differential Trends)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16ixEpT8M4meaPvtmxZiwxL-vyj4aa1pV/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Patterns of Growth and Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jrzqfpGfGcy7vw2_lB56GCkKG0rRhg4-/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles and Factors Affecting Growth and Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jDLi4VY3ZxqB6HOGVu1eP3RSiu1GnnaR/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Principles & Factors of G&D</span>
-                    </a>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_q3b9n6x-tfCefqdFAmvrOtjKDVW5eUR/preview', 'G&D Patterns')">
+                        <span class="icon video-icon">▶️</span><span>Growth and Development (Maturation, Pattern)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jrzqfpGfGcy7vw2_lB56GCkKG0rRhg4-/preview', 'Principles of G&D')">
+                        <span class="icon video-icon">▶️</span><span>Principles and Factors Affecting Growth</span>
+                    </div>
+
                     <h3>2.2 Developmental Stages</h3>
-                    <a href="https://drive.google.com/file/d/1Eb5nbxo7zsptc7WT_kJJB31ZBlmp3_5k/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Infant (From Birth to One Year)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iQrkrK7Sf5VyagGuPGkbS4ztV--cHG2R/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Infant Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1J-jrLOYMvx9fVK5hMbSoczD6clpi4-Qj/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Eb5nbxo7zsptc7WT_kJJB31ZBlmp3_5k/preview', 'Infant Dev')">
+                        <span class="icon video-icon">▶️</span><span>Infant (Birth to One Year)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1J-jrLOYMvx9fVK5hMbSoczD6clpi4-Qj/preview', 'Toddler Dev')">
                         <span class="icon video-icon">▶️</span><span>Toddler Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1E8Uzn0WauwU3h_kWApUjA3gMyckmiPRC/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Toddler Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JFLlx6Ih8jLSzVrZkHEeDn1eB_6oUWuR/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JFLlx6Ih8jLSzVrZkHEeDn1eB_6oUWuR/preview', 'Preschooler Dev')">
                         <span class="icon video-icon">▶️</span><span>Preschooler Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EPhUIsGJP_Jf9cribjDALlE_1iXhkpPZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Preschool Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19kmMIq1BKKevYNbQzeJtKkRGi-3bxHoY/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19kmMIq1BKKevYNbQzeJtKkRGi-3bxHoY/preview', 'Schooler Dev')">
                         <span class="icon video-icon">▶️</span><span>Schooler Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SoA2QwnaPXmZv7xK7DyHQ20Zv-5zHwkh/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: School-Age Development</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15ax8fvPOS_XvmG9RjUV9VoOGh00_9fnS/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Growth and Development of Adolescence, Signs of Puberty in Girls</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1w4fWIZi0gyyzGtHlvkVlDpfsrBQum6nl/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Adolescence and Puberty</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15ax8fvPOS_XvmG9RjUV9VoOGh00_9fnS/preview', 'Adolescence')">
+                        <span class="icon video-icon">▶️</span><span>Adolescence & Puberty</span>
+                    </div>
+
                     <h3>2.3 Developmental Theories</h3>
-                    <a href="https://drive.google.com/file/d/1Ycw6m4Jug3pOqx9MO_sQ0j6e2-K5wwJ5/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Sigmund Freud's Psychosexual Development Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dXyPU6WkYqDeu5fmXvrWnd2ONNxzQzbY/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Freud's Psychosexual Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1N6ozfV0v-ZDY5ZeDdjt3PdpIBpJSDrb3/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Erik Erikson's Psychosocial Development Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1A5n_6-72qAozGdHlyMFmozckV8KHPt41/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Erikson's Psychosocial Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10P-8uDIlE-SwGxV-SZ00dvdQfRQq-OYx/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Jean Piagets Cognitive Development Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1tkwcK6RKZa7dqGotEa2pwGrLwsRwHkDQ/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Piaget's Cognitive Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lcTYtOUtjZRiMXPnoB-rO1Q7wg_zCF1a/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Lawrence Kohlberg's Moral Development Theory</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KH-mBQ1pZ-QaGbX7QGtyNX1JtemblEnT/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Kohlberg's Moral Theory</span>
-                    </a>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ycw6m4Jug3pOqx9MO_sQ0j6e2-K5wwJ5/preview', 'Freud')">
+                        <span class="icon video-icon">▶️</span><span>Sigmund Freud's Psychosexual Theory</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1N6ozfV0v-ZDY5ZeDdjt3PdpIBpJSDrb3/preview', 'Erikson')">
+                        <span class="icon video-icon">▶️</span><span>Erik Erikson's Psychosocial Theory</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10P-8uDIlE-SwGxV-SZ00dvdQfRQq-OYx/preview', 'Piaget')">
+                        <span class="icon video-icon">▶️</span><span>Jean Piaget's Cognitive Theory</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lcTYtOUtjZRiMXPnoB-rO1Q7wg_zCF1a/preview', 'Kohlberg')">
+                        <span class="icon video-icon">▶️</span><span>Lawrence Kohlberg's Moral Theory</span>
+                    </div>
+
                     <h3>2.4 Nutrition, Needs, and Play</h3>
-                    <a href="https://drive.google.com/file/d/1bmHk93Z7eOEQC4GtJOj7lrcFrSwAAj19/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1bmHk93Z7eOEQC4GtJOj7lrcFrSwAAj19/preview', 'Infant Nutrition')">
                         <span class="icon video-icon">▶️</span><span>Nutritional Needs of Infants, Breast Milk</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bvyJYn9h_dvnJuqyUx5YWnWry_HJ6KLL/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Infant Nutrition and Breast Milk</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1i4m3ypiTMdrpaoXdmH2y8XiCo5-yyHOw/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1i4m3ypiTMdrpaoXdmH2y8XiCo5-yyHOw/preview', 'Artificial Feeding')">
                         <span class="icon video-icon">▶️</span><span>Artificial Feeding</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ayuPxMDr6fljEoh0-iz4XC0wTLap2tPW/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Artificial Feeding</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mxUN25SmGdDAa5BNtmYVjgdWBYejMs6H/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mxUN25SmGdDAa5BNtmYVjgdWBYejMs6H/preview', 'Weaning')">
                         <span class="icon video-icon">▶️</span><span>Weaning Foods</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OiryY8F1Wq41sZrBi7rpQQSJ0E09N75Y/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Weaning Foods</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/11BpOJzARgWG5iPlh_ESW-8cs6_BDbYdr/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11BpOJzARgWG5iPlh_ESW-8cs6_BDbYdr/preview', 'BFHI')">
                         <span class="icon video-icon">▶️</span><span>Baby Friendly Hospital Initiative (BFHI)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OzlwLclvY_fWc4s0SGlm1vvtle7Ll1NK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: BFHI</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QWfTOEWKHRZ5mnUr1hq6qgWJLFbVfofn/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Needs of Normal Children (Infants, Toddler, Preschooler, Schooler)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j6gkcioO3VQDmXKL5ytLVJ3BqUDd131_/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Needs of Normal Children</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19qa-SxYiGp-hETSBxzDTKq3U-PbfTvln/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QWfTOEWKHRZ5mnUr1hq6qgWJLFbVfofn/preview', 'Needs of Children')">
+                        <span class="icon video-icon">▶️</span><span>Needs of Normal Children</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19qa-SxYiGp-hETSBxzDTKq3U-PbfTvln/preview', 'Play Types')">
                         <span class="icon video-icon">▶️</span><span>Play and Types of Play</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1H1HL4OOR3zcJWkoGBwEKLsJ8daKPrB3t/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Play Types</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Mbsd-rXlSLbXyoJQjfSeXR6R_lZVfgnA/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Mbsd-rXlSLbXyoJQjfSeXR6R_lZVfgnA/preview', 'Play Therapy')">
                         <span class="icon video-icon">▶️</span><span>Play Therapy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jm22Eb44wcEzKQcuBADyKDs8C_PJ7jpp/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Play Therapy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gTV919ozmhywjEkNijXMTIZl8TB9lq0f/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz: The Healthy Child</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 3 - NURSING CARE OF NEONATE -->
         <div class="unit-container" id="unit3">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 3 - NURSING CARE OF NEONATE
@@ -476,208 +424,137 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/15WzqxqmKcKj5CJHAaikXr05FXHGK9Ekp/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15WzqxqmKcKj5CJHAaikXr05FXHGK9Ekp/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes: Nursing Care of Neonate</span>
-                    </a>
+                    </div>
                     <h3>3.1 Newborn Appraisal and Routine Care</h3>
-                    <a href="https://drive.google.com/file/d/1Jrnd52Q52eRxVtPf5DdiX_fq_htCK8tW/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Appraisal of Newborn (Size, Gestational Age, Physical Characteristics, Stooling)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sTq2wHt3TWwJuGnVH9OCX2_CUf_Yk4fC/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Newborn Appraisal</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1q_ywiCIaBSBVaFOd3HZWGfBp27ZIh8YB/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Immediate and Later Routine Care of Normal Newborn</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DN3FTKkNELmg1aX8pjtQzJy8VmVLT9_6/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Immediate and Routine Newborn Care</span>
-                    </a>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Jrnd52Q52eRxVtPf5DdiX_fq_htCK8tW/preview', 'Appraisal')">
+                        <span class="icon video-icon">▶️</span><span>Appraisal of Newborn</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1q_ywiCIaBSBVaFOd3HZWGfBp27ZIh8YB/preview', 'Routine Care')">
+                        <span class="icon video-icon">▶️</span><span>Immediate and Later Routine Care</span>
+                    </div>
+
                     <h3>3.2 Neonatal Assessment</h3>
-                    <a href="https://drive.google.com/file/d/1JMd3UoVjKO08-mE4P_rt-53NQwi_NGAs/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Newborn Assessment (Immediate, Apgar Score, Transitional, Head to Toe)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/121k28fti7lVgwNY9J9n-tqR3NvpkMXu-/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Newborn Assessment and Apgar</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-SWQHhjzLh_En_cpWhEGm5B6MrO4WZge/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Neurological Assessment and Assessment of Reflexes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19e98YRY0vmF2poGsaKWO7t1lauEm8FVH/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Neurological Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rv2Ry67-YM9l6I9LIiOAZmE1bSOLhyuV/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JMd3UoVjKO08-mE4P_rt-53NQwi_NGAs/preview', 'Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Newborn Assessment (Apgar, Head to Toe)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-SWQHhjzLh_En_cpWhEGm5B6MrO4WZge/preview', 'Neuro Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Neurological Assessment & Reflexes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rv2Ry67-YM9l6I9LIiOAZmE1bSOLhyuV/preview', 'Gestational Age')">
                         <span class="icon video-icon">▶️</span><span>Assessment of Gestational Age</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/126mhxB8Zt4eTYMvxjvnYriOBYVobH1R6/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Gestational Age Assessment</span>
-                    </a>
-                    <h3>3.3 Resuscitation and Low Birth Weight Management</h3>
-                    <a href="https://drive.google.com/file/d/1n1-BpY4IHimpskz7DBHK9cQPeh5Vl2u3/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Neonatal Resuscitation (TABC, Intubation, Procedure)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1h4Co7pNP5c7eJVnWJZ6aYiww1hqUQ6tc/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Neonatal Resuscitation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ooabHe4_T7h4HnCEHxll1iWGWBcyoCBg/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Low Birth Weight (Etiology of Preterm, Characteristics of Preterm Physiology)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17zPsdUxe74bHskdTdHUereHznBXBj0Qo/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Low Birth Weight & Preterm Physiology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1M-nEX2Fy6tV1csg01NSGn7hBrT4s25dV/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles of Management of Low Birth Weight, Discharge and Follow up</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13RCYS4CgsfJLLnwtuvr-JJ5BJHDE0IR9/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Low Birth Weight Management & Follow-up</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hhfwGgm84egvAmJyZC0MBoCYw6jquVGE/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Kangaroo Mother Care (Advantage, Benefit to Baby, Mother and Family)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FKZMqN2dN6KF1F8KQgv-3i2Cdqe4ISpg/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Kangaroo Mother Care</span>
-                    </a>
-                    <h3>3.4 Neonatal Illnesses and Care Organization</h3>
-                    <a href="https://drive.google.com/file/d/1uwhNEDieOU6_Nqa87snw5H5Ymuit53B8/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hyperbilirubinemia (Classification, Causes, Jaundice in Breastfeeding Infants, Clinical Features)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SVZ7d9k34Eyz2nQuG2So7qizR3LZic9M/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hyperbilirubinemia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GGzq3VDvVpywjbWs1DxnHhxThU02T6_U/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hypocalcemia, Hypoglycemia (Clinical Manifestations, Management)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1r9zCrDT8XUXJ1lbX2hKvd1kFghYZLydk/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hypocalcemia and Hypoglycemia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1vAQmGu4bpDS95Fw2A-lSsOPJsfKP1luM/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Sepsis (Causes, Symptoms, Diagnosis, Treatment) and Neonatal Convulsion</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18Ch7wRe8Ri9QX-UqdYzxeuGhgCnj1501/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Neonatal Sepsis and Convulsion</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fVmVwyogcKLz-CeEz769RQUChHfrB-tg/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Respiratory Syndrome Diseases (RDS)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j7YhLYftz4eyN5NUlBxOLDnoqsEPQ_Je/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Respiratory Syndrome Diseases</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wtPnbOPmpikMfB3ZRNwRjKBvWg-N3Inl/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    </div>
+
+                    <h3>3.3 Resuscitation and Low Birth Weight</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1n1-BpY4IHimpskz7DBHK9cQPeh5Vl2u3/preview', 'Resuscitation')">
+                        <span class="icon video-icon">▶️</span><span>Neonatal Resuscitation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ooabHe4_T7h4HnCEHxll1iWGWBcyoCBg/preview', 'LBW')">
+                        <span class="icon video-icon">▶️</span><span>Low Birth Weight (Preterm)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1M-nEX2Fy6tV1csg01NSGn7hBrT4s25dV/preview', 'LBW Mgmt')">
+                        <span class="icon video-icon">▶️</span><span>Management of Low Birth Weight</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hhfwGgm84egvAmJyZC0MBoCYw6jquVGE/preview', 'KMC')">
+                        <span class="icon video-icon">▶️</span><span>Kangaroo Mother Care (KMC)</span>
+                    </div>
+
+                    <h3>3.4 Neonatal Illnesses</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1uwhNEDieOU6_Nqa87snw5H5Ymuit53B8/preview', 'Hyperbilirubinemia')">
+                        <span class="icon video-icon">▶️</span><span>Hyperbilirubinemia (Jaundice)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GGzq3VDvVpywjbWs1DxnHhxThU02T6_U/preview', 'Metabolic Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Hypocalcemia & Hypoglycemia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1vAQmGu4bpDS95Fw2A-lSsOPJsfKP1luM/preview', 'Sepsis')">
+                        <span class="icon video-icon">▶️</span><span>Neonatal Sepsis & Convulsions</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fVmVwyogcKLz-CeEz769RQUChHfrB-tg/preview', 'RDS')">
+                        <span class="icon video-icon">▶️</span><span>Respiratory Distress Syndrome (RDS)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wtPnbOPmpikMfB3ZRNwRjKBvWg-N3Inl/preview', 'ROP')">
                         <span class="icon video-icon">▶️</span><span>Retinopathy of Prematurity (ROP)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xRUcbsoQNWHRXmU1dtgfL8kkahb0NTqs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: ROP</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mWG01-9dxD_lt6u00vRMQGkhbgL-nTfL/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Organisation of Neonatal Care (Video/Notes)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1uVy63U09eKX5f3UV1hdPGg2nNwBgl4Kb/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz: Neonatal Care</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mWG01-9dxD_lt6u00vRMQGkhbgL-nTfL/preview', 'Org of Care')">
+                        <span class="icon video-icon">▶️</span><span>Organisation of Neonatal Care</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 4 - INTEGRATED MANAGEMENT OF NEONATAL AND CHILDHOOD ILLNESSES -->
         <div class="unit-container" id="unit4">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - INTEGRATED MANAGEMENT OF NEONATAL AND CHILDHOOD ILLNESSES (IMNCI)
+                UNIT 4 - IMNCI
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1U9xtxlWSdD75QdkEcmZkmatB3HhJzqty/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1U9xtxlWSdD75QdkEcmZkmatB3HhJzqty/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes: IMNCI</span>
-                    </a>
-                    <h3>4.1 IMNCI Overview and Components</h3>
-                    <a href="https://drive.google.com/file/d/1dSUXrp8ivbdIBoC8W7G3P0kvR4LAw04z/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>IMNCI (Structure, Objective, Components, Improving Health Worker Skills, Strengthening Health, Home Based System)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BOQ6TPE-wHQ6L-gel6DK3Jy7fvHZlslb/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: IMNCI Structure and Components</span>
-                    </a>
-                    <h3>4.2 IMNCI Guidelines and Process</h3>
-                    <a href="https://drive.google.com/file/d/1VnT2P0VSiC344VLexg8sGDxzpI_f3H8A/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles of IMNCI Guidelines, IMNCI Case Management Process</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CRoswOSw31TapDNhs-H2QRMGnD4lEMMv/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: IMNCI Guidelines and Process</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NObDRkrCnwKbH8pjIOz42DYkpr1PlQke/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz: Integrated Management of Illnesses</span>
-                    </a>
+                    </div>
+                    <h3>4.1 IMNCI Overview</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dSUXrp8ivbdIBoC8W7G3P0kvR4LAw04z/preview', 'IMNCI Structure')">
+                        <span class="icon video-icon">▶️</span><span>IMNCI Structure & Components</span>
+                    </div>
+                    <h3>4.2 Guidelines & Process</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VnT2P0VSiC344VLexg8sGDxzpI_f3H8A/preview', 'IMNCI Process')">
+                        <span class="icon video-icon">▶️</span><span>IMNCI Principles & Case Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 5 - NURSING MANAGEMNT IN COMMON CHILDHOOD DISEASES -->
         <div class="unit-container" id="unit5">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - NURSING MANAGEMENT IN COMMON CHILDHOOD DISEASES
+                UNIT 5 - COMMON CHILDHOOD DISEASES
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1UZ1TxiF5DYQTmoUhfcnGx_huP0J4gbFr/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Management in Common Childhood Diseases</span>
-                    </a>
-                    <h3>5.1 Respiratory and Gastrointestinal Conditions</h3>
-                    <a href="https://drive.google.com/file/d/1xLyDRysmT6_uWj_Vhh0eDmiRFpYbV8B1/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Nasopharyngitis and Tonsillitis (Causes, Types, Symptoms, Treatments)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eJn-7ZUm8z6g8QUkXjWBeVU66CBk46PW/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Nasopharyngitis & Tonsillitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cRFBSzOqk32xNZ6kK1m6Lve4kFpUT7Kj/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Croup and Bronchitis (Causes, Diagnosis, Treatment)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Vgx1dgw-ghoSJZfnztvMyCWetH2hjZZn/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Croup and Bronchitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mRPXSIxJEGbsQhYw6-pQ8ZyoNafx0E8t/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>TEF (Incidence, Causes, Types, Clinical Manifestation)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15D0d2_3L4chVL5f-GinmJ1_o9CM98z_G/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Tracheoesophageal Fistula (TEF)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1I3Veqcp3VssbDjf5lFWe-Tdf121x1NN8/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diaphragmatic Hernia (Causes, Symptoms, Treatments)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FTJXiD9Va7rZaaXvONS1hgb-5mu3XnoX/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Diaphragmatic Hernia</span>
-                    </a>
-                    <h3>5.2 Chronic and Endocrine Conditions</h3>
-                    <a href="https://drive.google.com/file/d/1IVnOvfNe5djak6S9UiEuxnEJWv9AbZcl/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Pneumonia (Risk Factors, Pathophysiology, Diagnosis, Management)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JTW-G-UWVzeEd8vt0RPpNqX51Q9UCO18/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Pneumonia Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-Uy3Mk1k39eGStzvS4W9Ms74e1C24p-E/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Asthma (Causes, Pathophysiology, Clinical Features, Diagnosis, Treatment)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1IunpiNIkK-8JySD9g1cTXQcdezzZssA8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Asthma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1swCfC9FXdtwXanp7kArZe9M4HxkGLDaB/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Juvenile Diabetes Mellitus (Causes, Clinical Features, Treatment, Complication)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gJGTYoFNDV0jBPxRcYmJnSp9dRbMReVs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Juvenile Diabetes Mellitus</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jIOyG1w8qh8455XfI4HoIBQJJ9CQtpDF/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hypothyroidism (Causes, Clinical Features, Diagnosis, Treatment)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1i8muh4XjshmDLBkeENH1t3svLncw9qHC/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hypothyroidism</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UZ1TxiF5DYQTmoUhfcnGx_huP0J4gbFr/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz: Childhood Disease Management</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1UZ1TxiF5DYQTmoUhfcnGx_huP0J4gbFr/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes: Childhood Diseases</span>
+                    </div>
+                    <h3>5.1 Respiratory & GI</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xLyDRysmT6_uWj_Vhh0eDmiRFpYbV8B1/preview', 'URTI')">
+                        <span class="icon video-icon">▶️</span><span>Nasopharyngitis & Tonsillitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1cRFBSzOqk32xNZ6kK1m6Lve4kFpUT7Kj/preview', 'Croup')">
+                        <span class="icon video-icon">▶️</span><span>Croup & Bronchitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mRPXSIxJEGbsQhYw6-pQ8ZyoNafx0E8t/preview', 'TEF')">
+                        <span class="icon video-icon">▶️</span><span>Tracheoesophageal Fistula (TEF)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1I3Veqcp3VssbDjf5lFWe-Tdf121x1NN8/preview', 'Hernia')">
+                        <span class="icon video-icon">▶️</span><span>Diaphragmatic Hernia</span>
+                    </div>
+
+                    <h3>5.2 Chronic & Endocrine</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IVnOvfNe5djak6S9UiEuxnEJWv9AbZcl/preview', 'Pneumonia')">
+                        <span class="icon video-icon">▶️</span><span>Pneumonia Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-Uy3Mk1k39eGStzvS4W9Ms74e1C24p-E/preview', 'Asthma')">
+                        <span class="icon video-icon">▶️</span><span>Asthma Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1swCfC9FXdtwXanp7kArZe9M4HxkGLDaB/preview', 'Diabetes')">
+                        <span class="icon video-icon">▶️</span><span>Juvenile Diabetes Mellitus</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jIOyG1w8qh8455XfI4HoIBQJJ9CQtpDF/preview', 'Hypothyroidism')">
+                        <span class="icon video-icon">▶️</span><span>Hypothyroidism</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 6 - CHILDHOOD EMERGENCIES -->
         <div class="unit-container" id="unit6">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 6 - CHILDHOOD EMERGENCIES
@@ -685,82 +562,200 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1dy-asyIs6HphiqzUVenS317pv3sNzb6b/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Childhood Emergencies</span>
-                    </a>
-                    <h3>6.1 Accidents, Poisoning, and Foreign Body</h3>
-                    <a href="https://drive.google.com/file/d/1ywdJGh5DxHMBubLH98LmP3J4hIZ_BQAD/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Accidents (Types, Prevention), Poisoning (Treatment), and Foreign Body (Symptoms, Treatments)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1H7hY7jg7aj79gqP2pwg4HJUMvfsC_xxR/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Accidents, Poisoning, and Foreign Body Management</span>
-                    </a>
-                    <h3>6.2 Trauma, Hemorrhage, and Burns</h3>
-                    <a href="https://drive.google.com/file/d/1YrEu66hFXL4IrBE492xYSt7NgF--YxCc/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hemorrhage (Types, Causes, Symptoms, Treatment)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZRX5zxco5NT1Hbr_GuZ8RNCAYm6gZgbs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Hemorrhage Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17wiimU2Ym5HgPogBV574BH880ITuFGD0/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Burns (Types, Degrees, Symptoms, Treatment) and Drowning (Causes, Symptoms, Treatments)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17GnFYBH2edqHH7YJx8sg3FQojSdaplTV/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Note: Burns and Drowning Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dy-asyIs6HphiqzUVenS317pv3sNzb6b/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz: Childhood Emergencies</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dy-asyIs6HphiqzUVenS317pv3sNzb6b/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes: Emergencies</span>
+                    </div>
+                    <h3>6.1 Accidents & Poisoning</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ywdJGh5DxHMBubLH98LmP3J4hIZ_BQAD/preview', 'Accidents')">
+                        <span class="icon video-icon">▶️</span><span>Accidents, Poisoning & Foreign Body</span>
+                    </div>
+
+                    <h3>6.2 Trauma & Burns</h3>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YrEu66hFXL4IrBE492xYSt7NgF--YxCc/preview', 'Hemorrhage')">
+                        <span class="icon video-icon">▶️</span><span>Hemorrhage Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17wiimU2Ym5HgPogBV574BH880ITuFGD0/preview', 'Burns')">
+                        <span class="icon video-icon">▶️</span><span>Burns & Drowning</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
     <script>
-        // Function to toggle the visibility of the unit content
-        function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            
-            header.setAttribute('aria-expanded', !isExpanded);
-            unitContent.classList.toggle('active');
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Intro
+                { q: "Atraumatic care focuses on:", o: ["Curing disease", "Minimizing physical & psychological distress", "Reducing cost", "Speeding discharge"], a: 1 },
+                { q: "IMNCI stands for:", o: ["Integrated Management of Neonatal and Childhood Illnesses", "Indian Medical Nursing Council Institute", "International Maternal Newborn Care Initiative", "None"], a: 0 },
+                { q: "The Juvenile Justice Act protects children:", o: ["In conflict with law", "In schools", "In hospitals", "With disabilities"], a: 0 },
+                { q: "Under-five clinics provide:", o: ["Surgery only", "Preventive, Promotive & Curative care", "Dental care only", "School books"], a: 1 },
+                { q: "Which vitamin is given as prophylaxis to children?", o: ["Vitamin C", "Vitamin A", "Vitamin B12", "Vitamin E"], a: 1 }
+            ],
+            2: [ // Unit 2: Healthy Child
+                { q: "The anterior fontanelle typically closes by:", o: ["2-3 months", "6-8 months", "12-18 months", "24 months"], a: 2 },
+                { q: "According to Freud, the infant is in which stage?", o: ["Oral", "Anal", "Phallic", "Latency"], a: 0 },
+                { q: "Erikson's stage for Toddlers is:", o: ["Trust vs Mistrust", "Autonomy vs Shame/Doubt", "Initiative vs Guilt", "Industry vs Inferiority"], a: 1 },
+                { q: "Breast milk is the best food for infants because:", o: ["It contains antibodies", "It is expensive", "It is hard to digest", "It causes allergies"], a: 0 },
+                { q: "Solitary play is characteristic of:", o: ["Infants", "Toddlers", "Preschoolers", "School-age"], a: 0 }
+            ],
+            3: [ // Unit 3: Neonate
+                { q: "A normal Apgar score is:", o: ["0-3", "4-6", "7-10", "12-15"], a: 2 },
+                { q: "Physiological jaundice usually appears:", o: ["At birth (<24 hrs)", "After 24 hours", "After 1 week", "After 1 month"], a: 1 },
+                { q: "Kangaroo Mother Care (KMC) provides:", o: ["Warmth, Nutrition & Bonding", "Only warmth", "Only nutrition", "Ventilation"], a: 0 },
+                { q: "Moro reflex disappears by:", o: ["1 month", "3-4 months", "6 months", "1 year"], a: 1 },
+                { q: "Hypoglycemia in a newborn is defined as blood glucose:", o: ["<60 mg/dL", "<40 mg/dL", "<100 mg/dL", "<80 mg/dL"], a: 1 }
+            ],
+            4: [ // Unit 4: IMNCI
+                { q: "The color code 'Pink' in IMNCI indicates:", o: ["Home care", "OPD treatment", "Urgent referral/Hospital admission", "Healthy child"], a: 2 },
+                { q: "The color code 'Yellow' in IMNCI indicates:", o: ["Urgent referral", "Treatment at OPD", "No treatment", "Vaccination only"], a: 1 },
+                { q: "In IMNCI, a child with chest indrawing is classified as:", o: ["No pneumonia", "Pneumonia", "Severe Pneumonia", "Asthma"], a: 2 },
+                { q: "General Danger Signs in IMNCI include:", o: ["Convulsions", "Vomiting everything", "Unable to drink/breastfeed", "All of the above"], a: 3 },
+                { q: "Low weight for age is checked in:", o: ["Every visit", "Only when sick", "Malnutrition assessment", "Immunization only"], a: 2 }
+            ],
+            5: [ // Unit 5: Common Diseases
+                { q: "Croup is characterized by:", o: ["Barking cough & Stridor", "Wheezing", "Crackles", "High fever only"], a: 0 },
+                { q: "Tracheoesophageal Fistula (TEF) presents with:", o: ["3 C's: Coughing, Choking, Cyanosis", "Fever", "Diarrhea", "Vomiting blood"], a: 0 },
+                { q: "In Asthma, the airways become:", o: ["Dilated", "Narrowed/Inflamed", "Dry", "Infected"], a: 1 },
+                { q: "The drug of choice for juvenile diabetes is:", o: ["Metformin", "Insulin", "Glipizide", "Diet only"], a: 1 },
+                { q: "Hypothyroidism in children can lead to:", o: ["Cretinism/Mental retardation", "Gigantism", "Hyperactivity", "Weight loss"], a: 0 }
+            ],
+            6: [ // Unit 6: Emergencies
+                { q: "The first priority in emergency care is:", o: ["Circulation", "Airway", "Breathing", "Disability"], a: 1 },
+                { q: "Heimlich maneuver is used for:", o: ["Drowning", "Choking/Foreign body", "Poisoning", "Burns"], a: 1 },
+                { q: "For a corrosive poison ingestion, you should:", o: ["Induce vomiting", "Neutralize/Dilute (Do NOT vomit)", "Give charcoal", "Wait"], a: 1 },
+                { q: "In burns, fluid resuscitation is calculated using:", o: ["Rule of Nines", "Parkland Formula", "Apgar Score", "BMI"], a: 1 },
+                { q: "Epistaxis management involves:", o: ["Tilting head back", "Pinching nose & leaning forward", "Lying down", "Blowing nose"], a: 1 }
+            ]
+        };
 
-            // Dynamic max-height for smooth collapse animation
-            if (unitContent.classList.contains('active')) {
-                // If expanding, set max-height to scrollHeight
-                // Use a short timeout to ensure correct height calculation after state change
-                setTimeout(() => {
-                    unitContent.style.maxHeight = unitContent.scrollHeight + "px";
-                }, 10);
-            } else {
-                // If collapsing, reset max-height to 0
-                unitContent.style.maxHeight = "0";
+        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') return;
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; // Default flex for centering
+
+            // FIX: Restore flex centering for Video/Doc
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // Videos get 16:9, Notes get full height
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
-        
-        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            // FIX: Remove flex centering for Quiz so it starts at the top
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        // Auto-expand first unit
         document.addEventListener('DOMContentLoaded', () => {
-             const allUnits = document.querySelectorAll('.unit-header');
-             allUnits.forEach((header, index) => {
-                 const content = header.nextElementSibling;
-                 
-                 if (index === 0) {
-                     // Unit 1 is active by default
-                     header.setAttribute('aria-expanded', 'true');
-                     content.classList.add('active');
-                     // Set the max-height dynamically for the open unit
-                     setTimeout(() => {
-                         content.style.maxHeight = content.scrollHeight + "px";
-                     }, 50);
-                 } else {
-                     // All other units are initially collapsed
-                     header.setAttribute('aria-expanded', 'false');
-                     content.classList.remove('active');
-                     content.style.maxHeight = '0';
-                 }
-             });
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
         });
     </script>
+
 </body>
 </html>
-
