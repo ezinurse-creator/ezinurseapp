@@ -1,1 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nursing Research & Statistics - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Nursing Research and Statistics." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1j-6fD6-41lyAJ0UXQdyKD1S0MIuyL6G7/preview', 'Nursing Research Syllabus')">
+        📄 DOWNLOAD NURSING RESEARCH SYLLABUS
+    </div>
+    
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - RESEARCH AND RESEARCH PROCESS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fpfn7fhCh-LpgalQ8UZynKbVoTsNyRzy/preview', 'Detailed Notes: Research Process')">
+                        <span class="icon">📚</span><span>Detailed Notes: Research Process</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19NDvJxMf9X0Og4fJx8WT3a9dtrLBQzRb/preview', 'Research Process')">
+                        <span class="icon video-icon">▶️</span><span>Research and Research Process</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/10GAUVfihL8wPMokTtgKLo5yUM0HWQMJl/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1p78-BsUs8ObR85ZkynoukfXuXvyyAenX/preview', 'Qualitative Quantitative')">
+                        <span class="icon video-icon">▶️</span><span>Quantitative/Qualitative Overview & EBP</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nyd0uRvSuWw09SGm90pSN7PVtk4_Pzvh/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19sNa3N-3hblr-13fOztAMCyNPbl2GE6U/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+                    
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - RESEARCH PROBLEM / QUESTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1UYau_QelusSpzVFUzx3QKPhGVB2jKR4Q/preview', 'Detailed Notes: Research Problem')">
+                        <span class="icon">📚</span><span>Detailed Notes: Research Problem & Question</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qQ7ZJBDDMftu1iV300V0M1lx3QubmmFq/preview', 'Problem Statement')">
+                        <span class="icon video-icon">▶️</span><span>Problem Statement & Variables</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gse0PXOkjAxMLOOsszkUJntX7KLSTUtf/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mNX1c6foleVwv426YsFh6UhduormkgEd/preview', 'Objectives Hypothesis')">
+                        <span class="icon video-icon">▶️</span><span>Writing Objectives & Hypothesis</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HedSK5SQ4a0HJoTSzJiCoLc2470K18xU/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15Li_QKMbY8Ojg8TDxc-eA_Emm0vrqUz-/preview', 'Assumption')">
+                        <span class="icon video-icon">▶️</span><span>Assumption</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oEf534IodlT3aQei2FulF5Ya4lgy4bgh/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qMVGbOwsRH_6LVQaYCt224Jz8dr5xdX3/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - REVIEW OF LITERATURE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JovxN9YeZKu57HSfcZZeUQyZJkcfdv-h/preview', 'Detailed Notes: Literature Review')">
+                        <span class="icon">📚</span><span>Detailed Notes: Review of Literature</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BPsG1vIsJs_18QEaW6yn9Jt4URMivLRD/preview', 'Sources of Literature')">
+                        <span class="icon video-icon">▶️</span><span>Sources of Literature Review</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dtpnkrunUy0AxECb6Fz91ACTS6oK_UE6/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1L2uSsGBSYqhgthzkXZsA9W_WgKLUIQ1G/preview', 'Online Sources')">
+                        <span class="icon video-icon">▶️</span><span>Online Sources & Annotated Bibliography</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17onlXrICxMgm2BiK725nBDU6ffAncC0g/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1A2dXzmYbcTbuezu5QrR9osn-unz9RT3R/preview', 'Questions Discussion')">
+                        <span class="icon video-icon">▶️</span><span>Important Questions Discussion</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - RESEARCH APPROACHES AND DESIGNS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vyA-ECiXKZcM4ZOwK5_3G4ZGy2FnH6do/preview', 'Detailed Notes: Research Design')">
+                        <span class="icon">📚</span><span>Detailed Notes: Research Approaches & Designs</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - SAMPLING AND DATA COLLECTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cA_zyU9SHTpUSIUSXRXWIjarnufd8-rj/preview', 'Detailed Notes: Sampling')">
+                        <span class="icon">📚</span><span>Detailed Notes: Sampling & Data Collection</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rmqmCKrFHO3sknCleHTC1cJGoYO7gNEg/preview', 'Population Sampling')">
+                        <span class="icon video-icon">▶️</span><span>Population, Sampling & Process</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1s_lST-wiHBmHi2nW0CUtd5b_QYaY-UQR/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VCcV72G-ncEzexi9QAXtKMjTooCTlW94/preview', 'Random Sampling')">
+                        <span class="icon video-icon">▶️</span><span>Random & Sequential Sampling</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16-V_6sMIxWUvv9Yw9oOJtf07fb2KubAo/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1O2yebhY-vg5ZJG5YGXChX7C_cvMypez2/preview', 'Non-Probability Sampling')">
+                        <span class="icon video-icon">▶️</span><span>Non-Probability Sampling & Problems</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zVFQCpjcvnFoNRB1TDBmKf5qvbLVPunA/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gRG0vG6_ZFMV99T-p-LfqAWW7XuDbydV/preview', 'Data Collection')">
+                        <span class="icon video-icon">▶️</span><span>Data Collection Methods & Tools</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13WY7HGWG7abMLJUdsoGzTcowDP0VHsbL/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1C0GkhCywrCmv2FyVIXYID66TRSom76fu/preview', 'Interview')">
+                        <span class="icon video-icon">▶️</span><span>Interviewing Process & Benefits</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11-xElleVKdXxrwlUeKRnZTtedgJpsHK2/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OJpoMNnPogC_hRkRjm9PvB08OzI0-RfQ/preview', 'Questionnaire')">
+                        <span class="icon video-icon">▶️</span><span>Questionnaire & Administration</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13Wz9aEViaVoyO0FUZRdJMhrzkXlyzXIo/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GC6UTdkTDS7rYyg37YdzG9JSuOxtRhNC/preview', 'Scales')">
+                        <span class="icon video-icon">▶️</span><span>Likert, Semantic & Visual Analog Scales</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zxg0hNMuhsE2zvUnYYSklWSbU-70j0dm/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1H8HpLLyUmtp0vobUYFqe0F29dCZtFh17/preview', 'Validity Reliability')">
+                        <span class="icon video-icon">▶️</span><span>Validity, Reliability & Observations</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bu0Nqj_QaIA-6gMsstX7VQi7nA7Aapdl/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/129GSyZrUgnydhAFPp5pA7KnApn3wVaqo/preview', 'Ethics Pilot')">
+                        <span class="icon video-icon">▶️</span><span>Research Ethics & Pilot Study</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1D_lJXX7-B_RM8kjaNJxW7lsei07Cwhuh/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - ANALYSIS OF DATA
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ieOq7B5Y7tj3yFPw0VReNZi4mPTZdRhq/preview', 'Detailed Notes: Data Analysis')">
+                        <span class="icon">📚</span><span>Detailed Notes: Analysis of Data</span>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Introduction
+                { q: "Evidence-Based Practice (EBP) integrates:", o: ["Clinical expertise, patient values, and best research evidence", "Tradition, authority, and intuition", "Textbooks, lectures, and notes", "Doctors' orders only"], a: 0 },
+                { q: "Which of the following is a characteristic of qualitative research?", o: ["Large sample size", "Numerical data", "Subjective interpretation", "Statistical analysis"], a: 2 },
+                { q: "The primary purpose of nursing research is to:", o: ["Improve patient care", "Get a promotion", "Publish papers", "Collect data"], a: 0 },
+                { q: "Which is NOT a step in the research process?", o: ["Problem identification", "Data collection", "Data fabrication", "Report writing"], a: 2 },
+                { q: "Basic research is also known as:", o: ["Applied research", "Pure research", "Action research", "Clinical research"], a: 1 }
+            ],
+            2: [ // Unit 2: Problem
+                { q: "A hypothesis is:", o: ["A proven theory", "A tentative prediction", "A conclusion", "A summary"], a: 1 },
+                { q: "The 'Independent Variable' is the variable that is:", o: ["Measured", "Manipulated", "Constant", "Extraneous"], a: 1 },
+                { q: "Which of the following is a good source for a research problem?", o: ["Personal experience", "Literature review", "Social issues", "All of the above"], a: 3 },
+                { q: "A 'Null Hypothesis' states that:", o: ["There is a relationship", "There is no relationship", "The result is positive", "The result is negative"], a: 1 },
+                { q: "Delimitations in research refer to:", o: ["Weaknesses", "Boundaries set by the researcher", "Future recommendations", "Data analysis errors"], a: 1 }
+            ],
+            3: [ // Unit 3: Literature
+                { q: "A primary source of literature is:", o: ["Textbook", "Original research article", "Review article", "Encyclopedia"], a: 1 },
+                { q: "Which database is most commonly used for nursing literature?", o: ["CINAHL", "IEEE", "EconLit", "Agricola"], a: 0 },
+                { q: "The purpose of a literature review is to:", o: ["Copy text", "Identify gaps in knowledge", "Fill pages", "Prove a point"], a: 1 },
+                { q: "APA style refers to:", o: ["American Psychological Association", "American Psychiatric Association", "Asian Psychological Association", "Advanced Paper Analysis"], a: 0 },
+                { q: "An annotated bibliography includes:", o: ["Only the reference list", "Reference and a summary", "Full text of articles", "Author biography"], a: 1 }
+            ],
+            4: [ // Unit 4: Design
+                { q: "A 'True Experimental Design' must have:", o: ["Manipulation, Control, Randomization", "Observation only", "Survey data", "Interview transcript"], a: 0 },
+                { q: "A study that collects data at one point in time is called:", o: ["Longitudinal", "Cross-sectional", "Retrospective", "Prospective"], a: 1 },
+                { q: "Which design is non-experimental?", o: ["RCT", "Quasi-experimental", "Descriptive", "Pre-test Post-test"], a: 2 },
+                { q: "Phenomenology is a type of:", o: ["Quantitative research", "Qualitative research", "Mixed methods", "Experimental research"], a: 1 },
+                { q: "A 'Retrospective Study' looks:", o: ["Forward in time", "Backward in time", "At the present moment", "At random times"], a: 1 }
+            ],
+            5: [ // Unit 5: Sampling
+                { q: "Simple Random Sampling gives every member of the population:", o: ["No chance", "An unequal chance", "An equal chance", "A deliberate chance"], a: 2 },
+                { q: "Which is a Non-Probability sampling method?", o: ["Stratified", "Cluster", "Purposive", "Systematic"], a: 2 },
+                { q: "A Likert scale is commonly used to measure:", o: ["Temperature", "Attitudes/Opinions", "Height", "Blood pressure"], a: 1 },
+                { q: "Reliability refers to:", o: ["Accuracy", "Consistency", "Feasibility", "Usefulness"], a: 1 },
+                { q: "A Pilot Study is conducted to:", o: ["Publish results", "Test feasibility of the main study", "Save money", "Avoid ethical review"], a: 1 }
+            ],
+            6: [ // Unit 6: Analysis
+                { q: "Mean, Median, and Mode are measures of:", o: ["Dispersion", "Central Tendency", "Correlation", "Significance"], a: 1 },
+                { q: "Standard Deviation measures:", o: ["Average", "Spread/Variability", "Frequency", "Rank"], a: 1 },
+                { q: "A 'p-value' less than 0.05 usually indicates:", o: ["Statistical significance", "No significance", "Error", "High probability"], a: 0 },
+                { q: "Which test is used to compare means of two groups?", o: ["Chi-square", "t-test", "ANOVA", "Correlation"], a: 1 },
+                { q: "Data analysis in qualitative research involves:", o: ["Calculating averages", "Thematic analysis", "Regression", "T-tests"], a: 1 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
+</body>
+</html>
