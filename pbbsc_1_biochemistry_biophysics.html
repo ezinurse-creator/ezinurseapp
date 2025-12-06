@@ -3,673 +3,854 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Biochemistry & Biophysics Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Biochemistry and Biophysics." />
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Biochemistry & Biophysics - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Biochemistry and Biophysics." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Tailwind Configuration to match the original custom CSS colors -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'brand': '#003B82', // Original --brand
-              'brand-hover': '#002d63',
-              'accent': '#00B9F2', // Original --accent
-              'qa-btn': '#00CED1', // Original #qa-btn
-              'qa-btn-hover': '#00A9AA',
-              'gray-50': '#f9fafb',
-              'gray-200': '#e5e7eb',
-              'gray-900': '#111827',
-              'note-bg': '#f0f9ff',
-              'note-border': '#bae6fd',
-              'note-text': '#085d8c',
-              'video-bg': '#f5f3ff',
-              'video-border': '#d8b4fe',
-              'video-text': '#5a32a6',
-              'model-bg': '#f0fff4',
-              'model-border': '#a7f3d0',
-              'model-text': '#106637',
-              'quiz-bg': '#fff5e8',
-              'quiz-border': '#ffd8a8',
-              'quiz-text': '#8c5e08',
-              'soon-bg': '#e5e7eb',
-              'soon-border': '#d1d5db',
-              'soon-text': '#6b7280',
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-            },
-          }
-        }
-      }
-    </script>
     <style>
-        /* Base styles for font and color consistency */
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * { box-sizing: border-box; }
         body {
             font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        /* Utility class to smoothly control the max-height for accordion effect */
+        .syllabus-btn, .unit-header, .section-divider {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-divider {
+            background: var(--accent);
+            cursor: default;
+            margin-top: 40px;
+        }
+        .section-divider:hover {
+            background: var(--accent);
+            transform: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
         .unit-content {
+            padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.3s ease;
         }
         .unit-content.active {
-            max-height: 2000px; /* Large value to accommodate content */
-            padding-top: 24px;
-            padding-bottom: 24px;
-        }
-        @media (max-width: 768px) {
-             .unit-content.active {
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
+            padding: 24px 12px;
+            max-height: none; 
         }
 
-        /* Arrow rotation for the accordion state */
-        .unit-header[aria-expanded="true"] .arrow-icon {
-            transform: rotate(180deg);
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
         }
+        .subsection:hover { box-shadow: var(--shadow-md); }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
+
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
-        /* Specific styling for coming soon links */
-        .resource-btn.coming-soon:hover {
-            background-color: #e5e7eb !important;
-            transform: none !important;
-            cursor: default !important;
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
         }
     </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed p-6 max-w-5xl mx-auto md:p-10">
+<body>
 
-    <!-- Syllabus Button -->
-    <a href="https://drive.google.com/file/d/1K3u3vanpMh8JE_NpvP3SUEkkMsqL-Rce/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 my-6 bg-brand text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg">
-        📄 BIOCHEMISTRY & BIOPHYSICS - SYLLABUS
-    </a>
-
-    <!-- Previous Year Questions Button (Different Color) -->
-    <a href="https://drive.google.com/file/d/1HtgCASerzg8cdqEMmibfgCZPewV8ijhI/view?usp=drive_link" target="_blank"
-        class="block w-full px-6 py-4 mb-8 bg-qa-btn text-white font-semibold text-base text-center rounded-xl shadow-md transition-all duration-200 hover:bg-qa-btn-hover hover:-translate-y-px hover:shadow-lg">
-        ❓ PREVIOUS YEAR QUESTIONS AND ANSWERS
-    </a>
-
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1K3u3vanpMh8JE_NpvP3SUEkkMsqL-Rce/preview', 'Biochem & Biophysics Syllabus')">
+        📄 DOWNLOAD BIOCHEMISTRY & BIOPHYSICS SYLLABUS
+    </div>
+    
     <div id="units">
         
-        <!-- SECTION HEADING: BIOCHEMISTRY -->
-        <div class="text-2xl font-bold mt-8 mb-5 text-brand border-b-2 border-brand pb-2">BIOCHEMISTRY</div>
+        <div class="section-divider">
+            PART A: BIOCHEMISTRY
+        </div>
 
-        <!-- Unit 1 -->
-        <div class="unit-container" id="unit1_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION: IMPORTANCE OF BIOCHEMISTRY IN NURSING.
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content active px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1GDIH-NP5-bfSeTvniyk4quqiIKyvXYe3/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ymDO69kUIFjxHVlhcl_-dtqlcxddc60-/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bItwp-RTb_zHOTt589XeVqAcWv1h-0d7/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QcYbUQM4Sg1fKNN8tncw-UkWqFwlELzu/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
+        <div class="unit-container" id="biochem1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION: BIOCHEMISTRY IN NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HtgCASerzg8cdqEMmibfgCZPewV8ijhI/preview', 'Previous Year Q&A')">
+                        <span class="icon">📄</span><span>Previous Year Questions & Answers</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GDIH-NP5-bfSeTvniyk4quqiIKyvXYe3/preview', 'Introduction Video')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ymDO69kUIFjxHVlhcl_-dtqlcxddc60-/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bItwp-RTb_zHOTt589XeVqAcWv1h-0d7/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 2 -->
-        <div class="unit-container" id="unit2_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biochem2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 2 - WATER AND ELECTROLYTES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1caw2vtO3M2HZlYy9mW-A_O4cHqR1fb8c/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1XAPezYJLo5dSvg6-nRixyFzNj71LzGAo/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1oOxf-Sap2g-H1_d6zt-KyzThuqa_hfdk/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qsv5lS4P9DC6lJqKM0N_q20pnbYEkIjb/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1caw2vtO3M2HZlYy9mW-A_O4cHqR1fb8c/preview', 'Water and Electrolytes')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XAPezYJLo5dSvg6-nRixyFzNj71LzGAo/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oOxf-Sap2g-H1_d6zt-KyzThuqa_hfdk/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 3 -->
-        <div class="unit-container" id="unit3_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - ENZYMES MECHANISM OF ACTION
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1NP2VXXG5oGu_k6Na8OIAG9-ak67Ys-Bg/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wteYXWjMahUw9Y7ZEDAt9dJIQ7wYk_Vg/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CC8Lqi6z5EwdfHM4Cq1LXvwnkjcsVmRa/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RjtqRrx4vvtDYcRS91CTjpKyuZK40DmX/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
+        <div class="unit-container" id="biochem3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ENZYMES: MECHANISM OF ACTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1NP2VXXG5oGu_k6Na8OIAG9-ak67Ys-Bg/preview', 'Enzymes')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wteYXWjMahUw9Y7ZEDAt9dJIQ7wYk_Vg/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CC8Lqi6z5EwdfHM4Cq1LXvwnkjcsVmRa/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 4 -->
-        <div class="unit-container" id="unit4_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biochem4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 4 - CARBOHYDRATES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1KXK55A3rrKCAyzE5iBWe_x-d38zGpovZ/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VUvWaB7JdxM1f_q2KFQrHTVUELlwDuK-/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AOmDL7-ECszXj2Vl16y2rKKeszVbrhGM/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KxXcQCSWaJimTiDe4FQTDAToCXKuQAld/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KXK55A3rrKCAyzE5iBWe_x-d38zGpovZ/preview', 'Carbohydrates')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VUvWaB7JdxM1f_q2KFQrHTVUELlwDuK-/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1AOmDL7-ECszXj2Vl16y2rKKeszVbrhGM/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 5 -->
-        <div class="unit-container" id="unit5_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biochem5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 5 - PROTEIN
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1HX1amrt8kzzGXLG5ruon3p8kJkU9O1_l/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lq50_Fl7NINXuXvu7Axt8TCQ44Vwqs93/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1TR9im_-ZUv8tFImSe_T4o1feIbR435VQ/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OQY5ZMu4sdHogzquf5NwwGRxxNNB1y7G/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HX1amrt8kzzGXLG5ruon3p8kJkU9O1_l/preview', 'Protein')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lq50_Fl7NINXuXvu7Axt8TCQ44Vwqs93/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1TR9im_-ZUv8tFImSe_T4o1feIbR435VQ/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 6 -->
-        <div class="unit-container" id="unit6_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biochem6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 6 - FAT AND ITS METABOLISM
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1zbie-WzdQOcjCKf1_h8sfcWdE7QGgu_v/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/146pOEiKBU00bcLjAmGiYXxC5_UJrkeMP/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Pd-BrYF5fYPMPwap95ohsJMyvoRZfo53/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1F13ApV2iXRPuqfYjMphf14bicirdhCan/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zbie-WzdQOcjCKf1_h8sfcWdE7QGgu_v/preview', 'Fats')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/146pOEiKBU00bcLjAmGiYXxC5_UJrkeMP/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Pd-BrYF5fYPMPwap95ohsJMyvoRZfo53/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 7 -->
-        <div class="unit-container" id="unit7_biochem">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - BIOMEDICAL WASTE MANAGEMNT
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="https://drive.google.com/file/d/1Ffav-RfOT29bEla-hqVLATaG62rwf0jy/view?usp=drive_link" target="_blank"
-                        class="resource-btn video flex items-start w-full p-4 my-2 rounded-lg font-medium border text-video-text bg-video-bg border-video-border transition-all duration-200 gap-3 hover:bg-purple-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">▶️</span><span>Introduction Video</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1phvcM092pB4wP69u0C031VBCsP_NrozG/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1csWmKWhqMdjQYEfSFPXsaKYucK433ut6/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hELm6YBURad1PttUO92r1xmRPPsV2_dg/view?usp=sharing" target="_blank"
-                        class="resource-btn quiz flex items-start w-full p-4 my-2 rounded-lg font-medium border text-quiz-text bg-quiz-bg border-quiz-border transition-all duration-200 gap-3 hover:bg-orange-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
-                </div>
+        <div class="unit-container" id="biochem7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - BIOMEDICAL WASTE MANAGEMENT
+                <span>🔽</span>
             </div>
-        </div>
-        
-        <!-- SECTION HEADING: BIOPHYSICS -->
-        <div class="text-2xl font-bold mt-8 mb-5 text-brand border-b-2 border-brand pb-2">BIOPHYSICS</div>
-
-        <!-- Unit 1 -->
-        <div class="unit-container" id="unit1_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer mb-4 mt-6 hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION: UNIT AND MEASUREMENTS
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17H3BXpX7rrWwfkDXKXlo-SlvIBFQzoYh/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 1 Quiz (Coming Soon)</span>
-                    </a>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ffav-RfOT29bEla-hqVLATaG62rwf0jy/preview', 'BMW')">
+                        <span class="icon video-icon">▶️</span><span>Introduction Video</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1phvcM092pB4wP69u0C031VBCsP_NrozG/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1csWmKWhqMdjQYEfSFPXsaKYucK433ut6/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 2 -->
-        <div class="unit-container" id="unit2_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - VECTOR AND SOLAR MOTION
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kdv2_Ln7ZD11HOKxDTseuR4xXX4RkKFq/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 2 Quiz (Coming Soon)</span>
-                    </a>
+        <div class="section-divider">
+            PART B: BIOPHYSICS
+        </div>
+
+        <div class="unit-container" id="biophys1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 1 - UNITS AND MEASUREMENTS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17H3BXpX7rrWwfkDXKXlo-SlvIBFQzoYh/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 3 -->
-        <div class="unit-container" id="unit3_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - VECTOR AND SCALAR MOTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1kdv2_Ln7ZD11HOKxDTseuR4xXX4RkKFq/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="biophys3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 3 - GRAVITY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-BbSwufTU7ERzCSc4k2Mp6mmiopYnOpw/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 3 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-BbSwufTU7ERzCSc4k2Mp6mmiopYnOpw/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 4 -->
-        <div class="unit-container" id="unit4_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 4 - FORCE
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-JZOJ2ByKksk5IRiLW9zbaDdg-XkaXTC/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 4 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-JZOJ2ByKksk5IRiLW9zbaDdg-XkaXTC/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 5 -->
-        <div class="unit-container" id="unit5_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 5 - HEAT
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eGcy22aTor7usNErE0xIkhC2SI4zsgVV/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 5 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eGcy22aTor7usNErE0xIkhC2SI4zsgVV/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 6 -->
-        <div class="unit-container" id="unit6_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 6 - LIGHT
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qLtl8SP7qfRLc5xEUjmwC1zo3Q2XE0Bs/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 6 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qLtl8SP7qfRLc5xEUjmwC1zo3Q2XE0Bs/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 7 -->
-        <div class="unit-container" id="unit7_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - PRESSURES
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sQqhrvM5buFcsppTAMXpATbZrY83_Iwf/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 7 Quiz (Coming Soon)</span>
-                    </a>
+        <div class="unit-container" id="biophys7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - PRESSURE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sQqhrvM5buFcsppTAMXpATbZrY83_Iwf/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(14)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 8 -->
-        <div class="unit-container" id="unit8_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 8 - SOUND
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Fqx7GHHghSXzEFIvPC3z-1MJo8P2TxlH/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 8 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Fqx7GHHghSXzEFIvPC3z-1MJo8P2TxlH/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(15)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 9 -->
-        <div class="unit-container" id="unit9_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 9 - ELECTRICITY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1glBCwBntm_KOoyesYEGjrT5O0gEY2x0e/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 9 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1glBCwBntm_KOoyesYEGjrT5O0gEY2x0e/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(16)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 10 -->
-        <div class="unit-container" id="unit10_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 10 - ATOMIC ENERGY
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1k34CKAJ5fkGro1-bYYFmtEg1kjof_cx8/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 10 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1k34CKAJ5fkGro1-bYYFmtEg1kjof_cx8/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(17)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Unit 11 -->
-        <div class="unit-container" id="unit11_biophy">
-            <button class="unit-header flex justify-between items-center w-full px-6 py-4 my-4 bg-brand text-white font-semibold text-base text-left rounded-xl shadow-md transition-all duration-200 cursor-pointer hover:bg-brand-hover hover:-translate-y-px hover:shadow-lg"
-                role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+        <div class="unit-container" id="biophys11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 11 - ELECTRONICS
-                <span class="arrow-icon transition-transform duration-300 text-yellow-300">🔽</span>
-            </button>
-            <div class="unit-content px-3 md:px-5">
-                <div class="subsection bg-white rounded-xl border border-gray-200 shadow-sm p-5 mb-4 transition-shadow duration-200 hover:shadow-md">
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">▶️</span><span>Introduction Video (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1vmO_iH5pSDTkmqr9R2Kz8Mq3531GMq01/view?usp=drive_link" target="_blank"
-                        class="resource-btn notes flex items-start w-full p-4 my-2 rounded-lg font-medium border text-note-text bg-note-bg border-note-border transition-all duration-200 gap-3 hover:bg-blue-100 hover:-translate-y-px">
-                        <span class="icon text-xl min-w-[24px]">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">📚</span><span>Lecture Notes (Coming Soon)</span>
-                    </a>
-                    <a href="#" target="_blank"
-                        class="resource-btn coming-soon flex items-start w-full p-4 my-2 rounded-lg font-medium border text-soon-text bg-soon-bg border-soon-border transition-all duration-200 gap-3">
-                        <span class="icon text-xl min-w-[24px] text-gray-500">⏳</span><span>Take Unit 11 Quiz (Coming Soon)</span>
-                    </a>
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vmO_iH5pSDTkmqr9R2Kz8Mq3531GMq01/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(18)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- JavaScript for Accordion Functionality -->
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
     <script>
-        /**
-         * Toggles the visibility of the next sibling element (unit content)
-         * when the unit header is clicked.
-         * @param {HTMLElement} header The unit header button element.
-         */
+        // --- 1. QUIZ DATA ---
+        // IDs 1-7: Biochemistry, IDs 8-18: Biophysics
+        const QUIZ_DATA = {
+            1: [ // BioChem Unit 1: Intro
+                { q: "Biochemistry is the study of:", o: ["Physical forces in the body", "Chemical processes in living organisms", "Anatomy of organs", "Drug interactions only"], a: 1 },
+                { q: "The basic unit of life is:", o: ["Tissue", "Organ", "Cell", "Atom"], a: 2 },
+                { q: "Eukaryotic cells differ from prokaryotic cells by having:", o: ["A cell wall", "Ribosomes", "A nucleus", "Cytoplasm"], a: 2 },
+                { q: "Which organelle is the 'powerhouse' of the cell?", o: ["Nucleus", "Mitochondria", "Ribosome", "Golgi Body"], a: 1 },
+                { q: "A solution with a pH of 2 is:", o: ["Neutral", "Basic", "Strongly Acidic", "Weakly Basic"], a: 2 }
+            ],
+            2: [ // BioChem Unit 2: Water & Electrolytes
+                { q: "Which is the major intracellular cation?", o: ["Sodium", "Potassium", "Chloride", "Calcium"], a: 1 },
+                { q: "Which is the major extracellular cation?", o: ["Sodium", "Potassium", "Magnesium", "Phosphate"], a: 0 },
+                { q: "Osmosis involves the movement of:", o: ["Solutes", "Water (solvent)", "Proteins", "Electrolytes only"], a: 1 },
+                { q: "Dehydration is characterized by:", o: ["Excess water", "Loss of water and electrolytes", "Low blood sodium only", "High blood pressure"], a: 1 },
+                { q: "Normal blood pH range is:", o: ["7.0 - 7.2", "7.35 - 7.45", "7.5 - 7.8", "6.8 - 7.0"], a: 1 }
+            ],
+            3: [ // BioChem Unit 3: Enzymes
+                { q: "Enzymes function as:", o: ["Biological catalysts", "Energy storage", "Structural support", "Hormones"], a: 0 },
+                { q: "The 'Lock and Key' model explains:", o: ["Enzyme denaturation", "Enzyme specificity", "Enzyme inhibition", "Enzyme synthesis"], a: 1 },
+                { q: "Factors affecting enzyme activity include:", o: ["Temperature", "pH", "Substrate concentration", "All of the above"], a: 3 },
+                { q: "Zymogens are:", o: ["Active enzymes", "Inactive enzyme precursors", "Cofactors", "Inhibitors"], a: 1 },
+                { q: "Which of these is a coenzyme?", o: ["Iron", "Vitamin B complex", "Zinc", "Copper"], a: 1 }
+            ],
+            4: [ // BioChem Unit 4: Carbohydrates
+                { q: "The simplest form of carbohydrate is:", o: ["Disaccharide", "Polysaccharide", "Monosaccharide", "Oligosaccharide"], a: 2 },
+                { q: "Glucose is stored in the human body as:", o: ["Starch", "Glycogen", "Cellulose", "Sucrose"], a: 1 },
+                { q: "Hypoglycemia refers to:", o: ["High blood sugar", "Low blood sugar", "Normal blood sugar", "No sugar in urine"], a: 1 },
+                { q: "Which process breaks down glucose to pyruvate?", o: ["Glycolysis", "Gluconeogenesis", "Glycogenesis", "Lipolysis"], a: 0 },
+                { q: "Sucrose is composed of:", o: ["Glucose + Glucose", "Glucose + Fructose", "Glucose + Galactose", "Fructose + Galactose"], a: 1 }
+            ],
+            5: [ // BioChem Unit 5: Proteins
+                { q: "The building blocks of proteins are:", o: ["Fatty acids", "Monosaccharides", "Amino acids", "Nucleotides"], a: 2 },
+                { q: "Essential amino acids are those that:", o: ["The body makes", "Must be obtained from diet", "Are not required", "Are toxic"], a: 1 },
+                { q: "The bond between amino acids is called a:", o: ["Glycosidic bond", "Peptide bond", "Ester bond", "Hydrogen bond"], a: 1 },
+                { q: "Albumin is important for maintaining:", o: ["Blood clotting", "Oncotic pressure", "Immunity", "Digestion"], a: 1 },
+                { q: "Denaturation of a protein results in:", o: ["Loss of structure and function", "Improved function", "Change in amino acid sequence", "Increase in weight"], a: 0 }
+            ],
+            6: [ // BioChem Unit 6: Fats
+                { q: "Triglycerides are composed of:", o: ["Glycerol + 3 Fatty Acids", "Cholesterol + Fatty Acid", "Glucose + Fatty Acids", "Amino Acids"], a: 0 },
+                { q: "Which lipoprotein is known as 'Good Cholesterol'?", o: ["LDL", "VLDL", "HDL", "Chylomicrons"], a: 2 },
+                { q: "Beta-oxidation is the pathway for breakdown of:", o: ["Proteins", "Carbohydrates", "Fatty Acids", "Nucleic Acids"], a: 2 },
+                { q: "Ketone bodies are produced during:", o: ["High carbohydrate intake", "Starvation or uncontrolled diabetes", "Protein synthesis", "Resting state"], a: 1 },
+                { q: "Saturated fats are typically:", o: ["Liquid at room temperature", "Solid at room temperature", "From plant sources", "Healthier than unsaturated"], a: 1 }
+            ],
+            7: [ // BioChem Unit 7: BMW
+                { q: "In BMW, sharps (needles) should be disposed of in:", o: ["Yellow bag", "Red bag", "White translucent container", "Blue cardboard box"], a: 2 },
+                { q: "Anatomical waste (human tissues) goes into the:", o: ["Red bin", "Yellow bin", "Black bin", "Blue bin"], a: 1 },
+                { q: "Plastic waste like IV tubes goes into the:", o: ["Yellow bin", "Red bin", "White bin", "Blue bin"], a: 1 },
+                { q: "The biohazard symbol warning color is typically:", o: ["Green", "Blue", "Red/Orange", "White"], a: 2 },
+                { q: "Cytotoxic drugs are disposed of in:", o: ["Red bag", "Yellow bag", "Black bag", "Blue bag"], a: 1 }
+            ],
+            8: [ // BioPhys Unit 1: Units
+                { q: "The SI unit of length is:", o: ["Centimeter", "Meter", "Kilometer", "Inch"], a: 1 },
+                { q: "Which is a fundamental unit?", o: ["Velocity", "Force", "Time", "Pressure"], a: 2 },
+                { q: "Mass is measured in:", o: ["Newtons", "Kilograms", "Joules", "Watts"], a: 1 },
+                { q: "The prefix 'Milli' denotes:", o: ["10^-3", "10^-6", "10^3", "10^6"], a: 0 },
+                { q: "Volume of a liquid is often measured in:", o: ["Meters", "Liters", "Grams", "Seconds"], a: 1 }
+            ],
+            9: [ // BioPhys Unit 2: Vectors
+                { q: "A quantity with both magnitude and direction is a:", o: ["Scalar", "Vector", "Constant", "Variable"], a: 1 },
+                { q: "Speed is a:", o: ["Vector quantity", "Scalar quantity", "Force", "Direction"], a: 1 },
+                { q: "Velocity involves:", o: ["Speed only", "Speed and direction", "Distance only", "Time only"], a: 1 },
+                { q: "Displacement refers to:", o: ["Total distance traveled", "Shortest distance between start and end points", "Speed", "Acceleration"], a: 1 },
+                { q: "Force is a:", o: ["Scalar", "Vector", "Unitless quantity", "None"], a: 1 }
+            ],
+            10: [ // BioPhys Unit 3: Gravity
+                { q: "The Center of Gravity (COG) is where:", o: ["Body mass is concentrated", "The head is located", "The feet are located", "No mass exists"], a: 0 },
+                { q: "To maintain stability, the Line of Gravity must fall:", o: ["Outside the base of support", "Within the base of support", "Behind the heels", "In front of toes"], a: 1 },
+                { q: "When lifting a heavy object, a nurse should:", o: ["Bend at the waist", "Keep legs straight", "Bend at knees and hips", "Twist the back"], a: 2 },
+                { q: "Specific Gravity compares density of a substance to:", o: ["Air", "Water", "Mercury", "Blood"], a: 1 },
+                { q: "A hydrometer measures:", o: ["Humidity", "Specific Gravity of liquids", "Pressure", "Temperature"], a: 1 }
+            ],
+            11: [ // BioPhys Unit 4: Force
+                { q: "Newton's First Law is also known as the law of:", o: ["Action-Reaction", "Acceleration", "Inertia", "Gravity"], a: 2 },
+                { q: "Friction acts in a direction:", o: ["Same as motion", "Opposite to motion", "Perpendicular to motion", "Downward"], a: 1 },
+                { q: "Which force helps in traction?", o: ["Magnetic force", "Tensile force", "Friction", "Buoyancy"], a: 1 },
+                { q: "The unit of Force is:", o: ["Joule", "Watt", "Newton", "Pascal"], a: 2 },
+                { q: "To reduce friction when moving a patient:", o: ["Use a rough sheet", "Use a draw sheet/slider board", "Drag them quickly", "Increase weight"], a: 1 }
+            ],
+            12: [ // BioPhys Unit 5: Heat
+                { q: "Normal body temperature is approximately:", o: ["35°C", "37°C", "39°C", "40°C"], a: 1 },
+                { q: "Transfer of heat by direct contact is:", o: ["Conduction", "Convection", "Radiation", "Evaporation"], a: 0 },
+                { q: "Sterilization by autoclaving uses:", o: ["Dry heat", "Moist heat under pressure", "Chemicals", "Radiation"], a: 1 },
+                { q: "A clinical thermometer typically contains:", o: ["Water", "Mercury or Alcohol", "Oil", "Gas"], a: 1 },
+                { q: "Evaporation of sweat causes the body to:", o: ["Heat up", "Cool down", "Stay the same", "Shiver"], a: 1 }
+            ],
+            13: [ // BioPhys Unit 6: Light
+                { q: "Myopia is also known as:", o: ["Farsightedness", "Nearsightedness", "Astigmatism", "Cataract"], a: 1 },
+                { q: "Refraction is the:", o: ["Bouncing back of light", "Bending of light", "Absorption of light", "Scattering of light"], a: 1 },
+                { q: "Which lens corrects Hypermetropia (farsightedness)?", o: ["Concave", "Convex", "Cylindrical", "Bifocal"], a: 1 },
+                { q: "Visible light is a form of:", o: ["Sound wave", "Electromagnetic radiation", "Mechanical wave", "Nuclear energy"], a: 1 },
+                { q: "A microscope uses lenses to:", o: ["Dim light", "Magnify small objects", "Measure color", "Record temperature"], a: 1 }
+            ],
+            14: [ // BioPhys Unit 7: Pressure
+                { q: "Blood pressure is measured using a:", o: ["Thermometer", "Sphygmomanometer", "Barometer", "Spirometer"], a: 1 },
+                { q: "Pascal's Law relates to pressure in:", o: ["Solids", "Fluids at rest", "Vacuum", "Gases in motion"], a: 1 },
+                { q: "Atmospheric pressure is measured by a:", o: ["Barometer", "Manometer", "Hygrometer", "Lactometer"], a: 0 },
+                { q: "Bedsores (decubitus ulcers) are caused by prolonged:", o: ["Heat", "Pressure", "Friction only", "Moisture only"], a: 1 },
+                { q: "The pressure in an oxygen cylinder is:", o: ["Lower than atmospheric", "Equal to atmospheric", "Higher than atmospheric", "Zero"], a: 2 }
+            ],
+            15: [ // BioPhys Unit 8: Sound
+                { q: "The unit of frequency of sound is:", o: ["Decibel", "Hertz (Hz)", "Meter", "Second"], a: 1 },
+                { q: "Ultrasound uses frequencies:", o: ["Below 20 Hz", "Between 20 Hz - 20 kHz", "Above 20 kHz", "Variable"], a: 2 },
+                { q: "A stethoscope transmits sound via:", o: ["Radiation", "Reflection", "Multiple reflection in tube", "Refraction"], a: 2 },
+                { q: "Loudness of sound is measured in:", o: ["Hertz", "Decibels (dB)", "Watts", "Joules"], a: 1 },
+                { q: "The Doppler effect is used in:", o: ["X-rays", "Fetal heart monitoring", "MRI", "CT Scan"], a: 1 }
+            ],
+            16: [ // BioPhys Unit 9: Electricity
+                { q: "ECG records the electrical activity of the:", o: ["Brain", "Heart", "Muscles", "Eyes"], a: 1 },
+                { q: "EEG records the electrical activity of the:", o: ["Brain", "Heart", "Muscles", "Stomach"], a: 0 },
+                { q: "A pacemaker helps regulate:", o: ["Respiration", "Heart beat", "Digestion", "Urination"], a: 1 },
+                { q: "Current is measured in:", o: ["Volts", "Amperes", "Ohms", "Watts"], a: 1 },
+                { q: "Materials that allow electricity to flow easily are:", o: ["Insulators", "Conductors", "Semiconductors", "Resistors"], a: 1 }
+            ],
+            17: [ // BioPhys Unit 10: Atomic
+                { q: "X-rays are used for:", o: ["Imaging bones", "Hearing tests", "Blood pressure", "Vision tests"], a: 0 },
+                { q: "Isotopes have the same number of:", o: ["Neutrons", "Protons", "Electrons only", "None"], a: 1 },
+                { q: "Radioactive iodine is used to treat:", o: ["Bone fractures", "Thyroid disorders", "Lung infection", "Anemia"], a: 1 },
+                { q: "To protect from radiation, health workers wear aprons made of:", o: ["Plastic", "Lead", "Cotton", "Rubber"], a: 1 },
+                { q: "A Geiger-Muller counter detects:", o: ["Heat", "Radiation", "Sound", "Pressure"], a: 1 }
+            ],
+            18: [ // BioPhys Unit 11: Electronics
+                { q: "A transducer converts:", o: ["One form of energy to another", "AC to DC", "High voltage to low", "Heat to cold"], a: 0 },
+                { q: "Cardiac monitors display:", o: ["X-rays", "Vital signs (ECG, BP, SpO2)", "Blood type", "Urine output"], a: 1 },
+                { q: "Pulse oximetry measures:", o: ["Blood pressure", "Oxygen saturation", "Temperature", "Glucose"], a: 1 },
+                { q: "A defibrillator delivers:", o: ["Drugs", "Electric shock", "Oxygen", "Fluids"], a: 1 },
+                { q: "MRI uses:", o: ["X-rays", "Magnetic fields and radio waves", "Sound waves", "Radioactive isotopes"], a: 1 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
+            const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
-
-            // Toggle ARIA attribute
             header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-            // Toggle the 'active' class for the CSS transitions
-            unitContent.classList.toggle('active');
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-            // If expanding, calculate the required height to allow smooth transition
-            if (!isExpanded) {
-                 // Set max-height large enough to hold all content for smooth expansion
-                unitContent.style.maxHeight = unitContent.scrollHeight + 50 + 'px';
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
             } else {
-                // To smoothly collapse, first set height to current scrollHeight,
-                // then remove 'active' class, and reset max-height to 0 after a small delay.
-                // Note: The main transition is handled by the max-height class property,
-                // but setting a specific height often makes the collapse animation smoother.
-                unitContent.style.maxHeight = unitContent.scrollHeight + 'px';
-                setTimeout(() => {
-                    unitContent.style.maxHeight = '0';
-                }, 10);
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
             }
         }
 
-        // Initialize: ensure the first unit (if 'active' by default) has its max-height set
-        window.onload = function() {
-            const firstActiveContent = document.querySelector('.unit-content.active');
-            if (firstActiveContent) {
-                 firstActiveContent.style.maxHeight = firstActiveContent.scrollHeight + 50 + 'px';
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
             }
         }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Auto-expand first unit optional
+            // const firstUnitHeader = document.querySelector('.unit-header');
+            // if(firstUnitHeader) toggleUnit(firstUnitHeader);
+        });
     </script>
 </body>
 </html>
-
