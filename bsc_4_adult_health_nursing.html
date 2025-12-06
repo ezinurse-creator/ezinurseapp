@@ -17,6 +17,8 @@
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; }
@@ -76,7 +78,7 @@
         }
         .unit-content.active {
             padding: 24px 12px;
-            max-height: auto; 
+            max-height: none; /* Changed from auto to allow content to dictate height */
         }
 
         .subsection {
@@ -106,46 +108,115 @@
             gap: 12px;
             flex-wrap: wrap;
             min-height: 50px;
+            cursor: pointer;
         }
         .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
         .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
         .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
         .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
         .resource-btn.notes:hover { background: #e0f2fe; }
         .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.model:hover { background: #d1fae5; }
         .resource-btn.quiz:hover { background: #ffead1; }
         .resource-btn.coming-soon {
             background: #e5e7eb;
             color: #6b7280;
+            cursor: not-allowed;
+            pointer-events: none;
         }
         
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
-        }
-
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
         .icon.video-icon { color: #8b5cf6; }
-        .icon.model-icon { color: #16a34a; }
         .icon.quiz-icon { color: #FFA500; }
         .icon.coming-soon-icon { color: #9ca3af; }
 
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
-        h3 {
-            font-size: 1.2rem;
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+            cursor: pointer;
         }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
         @media (max-width: 768px) {
             body { padding: 16px; }
@@ -153,920 +224,676 @@
             .resource-btn { font-size: 14px; }
             .subsection { padding: 16px; }
             .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Main Syllabus PDF Link -->
-    <a href="https://drive.google.com/file/d/1VRhi-_RUEguKJamLcXZXLI9EYlQxdDbN/view?usp=drive_link" class="syllabus-btn" target="_blank">
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1VRhi-_RUEguKJamLcXZXLI9EYlQxdDbN/preview', 'Syllabus')">
         📄 ADULT HEALTH NURSING - II - SYLLABUS
-    </a>
+    </div>
     
     <div id="units">
-        
-        <!-- UNIT 1 - NURSING MANAGEMENT OF PATIENT WITH DISORDERS OF EAR, NOSE AND THROAT -->
         <div class="unit-container" id="unit1">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - NURSING MANAGEMENT OF PATIENT WITH DISORDERS OF EAR, NOSE AND THROAT
+                UNIT 1 - ENT DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content active">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1_3uLQbWlmO-togOyQVK5vsL3PJnCWjlF/view?usp=drive_link" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_3uLQbWlmO-togOyQVK5vsL3PJnCWjlF/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes: ENT Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GZ1dRaJWBGoW_v0shPfFwTZge_hfHWO2/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Review of anatomy and physiology of the ear, nose and throat</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mzxYxp9YymLBHlGpnzUI-21WFUjh4pqI/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: ENT Anatomy & Physiology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hH2bPrSAxb9TfI9Tv4i1qiKw3xrcYwTp/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GZ1dRaJWBGoW_v0shPfFwTZge_hfHWO2/preview', 'ENT Anatomy')">
+                        <span class="icon video-icon">▶️</span><span>Anatomy & Physiology of ENT</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mzxYxp9YymLBHlGpnzUI-21WFUjh4pqI/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hH2bPrSAxb9TfI9Tv4i1qiKw3xrcYwTp/preview', 'External Ear Diseases')">
                         <span class="icon video-icon">▶️</span><span>External ear diseases & Impacted wax</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14ik0oCbfN5KycXzvzMyiNMGc6JENNiWi/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: External Ear & Wax</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EPl1Ru910e8Lci1R_aBBGWXLD3qRHEDV/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Otitis media & Meniere‘s disease</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1XkOZJmSFUe-6oLYb5vIx9CsWmNe2go6X/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Otitis Media & Meniere's</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17TClImqDDWRDxpEwo9wlBu96mpEFDdXF/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Labyrinthitis , Ototoxicity & Sinusitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QgjIxYSkQiy179PaSSZv275aDf9x2pjj/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Inner Ear Conditions & Sinusitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/115t7SVnjt4vvV68pWs7xzHySylcoT_wX/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EPl1Ru910e8Lci1R_aBBGWXLD3qRHEDV/preview', 'Otitis & Meniere\'s')">
+                        <span class="icon video-icon">▶️</span><span>Otitis media & Meniere's disease</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17TClImqDDWRDxpEwo9wlBu96mpEFDdXF/preview', 'Inner Ear & Sinusitis')">
+                        <span class="icon video-icon">▶️</span><span>Labyrinthitis, Ototoxicity & Sinusitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/115t7SVnjt4vvV68pWs7xzHySylcoT_wX/preview', 'Laryngitis')">
                         <span class="icon video-icon">▶️</span><span>Laryngitis & its types</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eusojLuc_A31YTh3mDgsZAL5ZcwP5LXd/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Laryngitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yetbPUejBoc-yKkSUVU96JMqaY6LfyOU/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Epistaxis, rhinitis & Tonsillitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13ZSvGpbhv7h6dENzQ02aw-7jMBev-DGr/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Epistaxis, Rhinitis & Tonsillitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OFigxhQjkfjw8OigDPNEEoC054cWRjoY/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yetbPUejBoc-yKkSUVU96JMqaY6LfyOU/preview', 'Nose Conditions')">
+                        <span class="icon video-icon">▶️</span><span>Epistaxis, Rhinitis & Tonsillitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OFigxhQjkfjw8OigDPNEEoC054cWRjoY/preview', 'Nasal Obstruction')">
                         <span class="icon video-icon">▶️</span><span>Nasal obstruction</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yFa2-TCGrl2s0Q3Nb4t0qqY6BSsq-cjf/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Nasal Obstruction</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1K5Cd5S2h1xc8xiom18rN85M92gPXjAzp/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1K5Cd5S2h1xc8xiom18rN85M92gPXjAzp/preview', 'Laryngeal Obstruction')">
                         <span class="icon video-icon">▶️</span><span>Laryngeal obstruction</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NFzd6EGNWN-x8tUhJZ1F4qShXQRP41hG/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Laryngeal Obstruction</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1b3t9oKzrIvtpuczzvmx_Rm5SDRomm9DY/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1b3t9oKzrIvtpuczzvmx_Rm5SDRomm9DY/preview', 'Deafness')">
                         <span class="icon video-icon">▶️</span><span>Deafness and its management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gKHhCNsD7v32RDEAodr_y00pV4pR-6RJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Deafness Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KZn0Pqc9lVNxS67HDkCIXX3q4JzKgCGC/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 2 - NURSING MANAGEMENT OF PATIENT WITH DISORDER OF EYE -->
         <div class="unit-container" id="unit2">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - NURSING MANAGEMENT OF PATIENT WITH DISORDER OF EYE
+                UNIT 2 - EYE DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1IWntR3jIqhpqVV72g9kayN_tFc2N0vAP/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IWntR3jIqhpqVV72g9kayN_tFc2N0vAP/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes: Eye Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1S5Ix7VnGwCUPaabrttWLdkL5E66GoBiS/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S5Ix7VnGwCUPaabrttWLdkL5E66GoBiS/preview', 'Eye Anatomy')">
                         <span class="icon video-icon">▶️</span><span>Anatomy and physiology of eye</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fripF_1S3PuIuSsMfY1raQ2og2JZmwbS/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Eye Anatomy & Physiology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1u1GOm2pe1XsJB5vBxWBbgSTgF8_ISKcH/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Refractive errors: Emmetropia, Ametropia, Myopia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1faughDVQayBH1EGk3kmVmHcDARmyO3b5/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hypermetropia, astigmatism & presbyopia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14k0cz8dHm1r0Z7CWoGgd8JXf779h8wqI/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Refractive Errors</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15uKoiISO6435hy0tUodnhY1JKhZCfL8h/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Conjunctivitis: Bacterial, viral & allergic</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1tHpe1A5zSz8RCaOUBToPsfPN3tgoqXEC/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Conjunctivitis: Chemical , neonatal & giant papillary</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NQH67G07p83PoGt3v9f4Orif6yde2_IP/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Conjunctivitis Types</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QPR7H6FH_b58rJMsqyaBGEqmv3Hsjmb8/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Glaucoma, Pathophysiology, Types of Glaucoma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15v1VfvStiSVPSpY5cR4QiNkNWZGo51pf/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Secondary Glaucoma, Diagnostic Evaluation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QXziJi-mXGWfyr45-0HD2VvfMUue4Ngq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Glaucoma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ufwaYsCzLraFT9vwiYywdGnYbGh1gRDv/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Disease of Cornea</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GZ-Zb3UI2fkU6IGmsoNwjoESuZN2FTQf/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cornea Diseases</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ze4n0z2QE2o0t_rtZ0sJS9l81Gjnzpdv/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Disease of Lens (Cataract)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zQihJZWmIZdN-Z55_cuGkdN0b7w0s5MO/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Pathophysiology, Stages of Cataract, Symptoms, Diagnostic Evaluation, Medical Management, Surgical Management, Nursing Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ICDOSU2SHcrH8RFZ6wWR6hdbQxI7wnBI/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cataract</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14BiYhdoQv6Yd-M6c0wJJR3trszcOXBtE/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1u1GOm2pe1XsJB5vBxWBbgSTgF8_ISKcH/preview', 'Refractive Errors 1')">
+                        <span class="icon video-icon">▶️</span><span>Refractive errors: Myopia, Hypermetropia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1faughDVQayBH1EGk3kmVmHcDARmyO3b5/preview', 'Refractive Errors 2')">
+                        <span class="icon video-icon">▶️</span><span>Astigmatism & Presbyopia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15uKoiISO6435hy0tUodnhY1JKhZCfL8h/preview', 'Conjunctivitis 1')">
+                        <span class="icon video-icon">▶️</span><span>Conjunctivitis: Bacterial, Viral, Allergic</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QPR7H6FH_b58rJMsqyaBGEqmv3Hsjmb8/preview', 'Glaucoma')">
+                        <span class="icon video-icon">▶️</span><span>Glaucoma Types & Pathophysiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ufwaYsCzLraFT9vwiYywdGnYbGh1gRDv/preview', 'Corneal Diseases')">
+                        <span class="icon video-icon">▶️</span><span>Diseases of Cornea</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ze4n0z2QE2o0t_rtZ0sJS9l81Gjnzpdv/preview', 'Cataract')">
+                        <span class="icon video-icon">▶️</span><span>Cataract Overview</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14BiYhdoQv6Yd-M6c0wJJR3trszcOXBtE/preview', 'Retinal Detachment')">
                         <span class="icon video-icon">▶️</span><span>Retinal detachment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NLyNP9s7AQwNIK-tEHirrOUzWLVgpXRF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Retinal Detachment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Og0A45_qHDClh9enQY_O2588EZvfHUU7/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Blindness, Diagnostic Evaluation, Prevention, Ocular Prosthesis and its maintenance</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FRD0sy7bwD72nQy_BxmvD1OMekps0vxj/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Eye Bank and its function, Eye Donation, Principles and its steps</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1W5-5MbLupBYgqTroc76Klw5zUi4P3HKc/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Blindness & Eye Donation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ndY1kVtHph8o-VrGDFio9C1ms7xT6r0o/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Og0A45_qHDClh9enQY_O2588EZvfHUU7/preview', 'Blindness')">
+                        <span class="icon video-icon">▶️</span><span>Blindness & Prevention</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FRD0sy7bwD72nQy_BxmvD1OMekps0vxj/preview', 'Eye Donation')">
+                        <span class="icon video-icon">▶️</span><span>Eye Banking & Donation</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 3 - NURSING MANAGEMENT OF PATIENT WITH KIDNEY AND URINARY PROBLEM -->
         <div class="unit-container" id="unit3">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - NURSING MANAGEMENT OF PATIENT WITH KIDNEY AND URINARY PROBLEM
+                UNIT 3 - KIDNEY & URINARY DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1g0GjPGyKRbBiGHBpi2aRytaAVRVglxs7/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Kidney & Urinary Problems</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1C7JykHi6rlakr_tJ8FblUdtK2YbuCuK_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Review of Anatomy and Physiology of Genitourinary System</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1glKmLV4FNvZ5Ch5BoCyVdC78_x1ieQlG/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Formation of urine, Nursing Assessment, Physical Examination</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pYeVOUYemIw7Kt8T4nm8VcL0QY2h-yXZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: GU Anatomy, Physiology & Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/11-MKLusLUd7Bp-J0yDVIplrGbyTDYkRV/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Kidney and urinary disorders diagnostic evaluations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wn3d9_KetYzXl5qyWVu8DFThvsBoF8Oy/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Glomerulonephritis: types, causes, Pathophysiology, symptoms, diagnosis, management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GyIpmQhnMb6uLataBOFs-kiAmcZqkoh6/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Diagnostic Evaluation & Glomerulonephritis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18GJ_NANtyVbBct1fqGSqrO9N2roeem49/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Urinary Tract Infection: Types, Causes, Pathophysiology and Symptoms</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bJIsKeJm-Bg6c-XS6bn6xD3-xjm4pcyB/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Pathophysiology Diagnosis and its management, Pyelonephritis and its causes, Symptoms and its Diagnosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Vefjyov7Ac9mpSruw7z2Te68oODWC55o/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: UTI & Pyelonephritis</span>
-                    </a>
-                    <a href="#" class="resource-btn video coming-soon">
-                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Nephrotic Syndrome (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1b61xULFUmfHJjsmnv4PFJJpMwYtE1z9O/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Nephrotic Syndrome</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1a_4AtE8oBDSLgimY_DlO3vAFEg8-iwWH/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Acute Renal Failure: causes, pathophysiology, Symptoms, Diagnosis and its management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15Xrf0xOcTPBEEwwmR4kpZo5PTGxRfm9Q/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Chronic Renal Failure: causes, Pathophysiology and Symptoms, Diagnosis and Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MkuJEJ1HFcu5TgYIuzV-EnIJBnGuyOT3/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Acute & Chronic Renal Failure</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lovbJx5x7ApQEc50hWOUg4RW_IZcN0P5/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hemodialysis, Peritoneal Dialysis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eRtf6pswBJH3ttQlC33tS2YK1Wfj3uAP/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Kidney Transplantation: Purpose, sources and its complications</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13WbMFg3KGRswPO7XTtjFsf6crBCb3UYj/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Dialysis & Transplantation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VAv7WRCP24B-qlYZJNPnZRaJA3mUAvB5/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Congenital Malformations of Urinary System: Kidney, Ureter, Bladder, Penis, Urethra in males</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kwAvh_Nd-CTVbEDCveNM1ERouZ3jwBMz/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1g0GjPGyKRbBiGHBpi2aRytaAVRVglxs7/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1C7JykHi6rlakr_tJ8FblUdtK2YbuCuK_/preview', 'GU Anatomy')">
+                        <span class="icon video-icon">▶️</span><span>Anatomy & Physiology of GU System</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1glKmLV4FNvZ5Ch5BoCyVdC78_x1ieQlG/preview', 'Urine Formation')">
+                        <span class="icon video-icon">▶️</span><span>Urine Formation & Assessment</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11-MKLusLUd7Bp-J0yDVIplrGbyTDYkRV/preview', 'Diagnostic Tests')">
+                        <span class="icon video-icon">▶️</span><span>Diagnostic Evaluations</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wn3d9_KetYzXl5qyWVu8DFThvsBoF8Oy/preview', 'Glomerulonephritis')">
+                        <span class="icon video-icon">▶️</span><span>Glomerulonephritis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18GJ_NANtyVbBct1fqGSqrO9N2roeem49/preview', 'UTI')">
+                        <span class="icon video-icon">▶️</span><span>Urinary Tract Infection (UTI)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1bJIsKeJm-Bg6c-XS6bn6xD3-xjm4pcyB/preview', 'Pyelonephritis')">
+                        <span class="icon video-icon">▶️</span><span>Pyelonephritis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a_4AtE8oBDSLgimY_DlO3vAFEg8-iwWH/preview', 'Acute Renal Failure')">
+                        <span class="icon video-icon">▶️</span><span>Acute Renal Failure</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15Xrf0xOcTPBEEwwmR4kpZo5PTGxRfm9Q/preview', 'Chronic Renal Failure')">
+                        <span class="icon video-icon">▶️</span><span>Chronic Renal Failure</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lovbJx5x7ApQEc50hWOUg4RW_IZcN0P5/preview', 'Dialysis')">
+                        <span class="icon video-icon">▶️</span><span>Hemodialysis & Peritoneal Dialysis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eRtf6pswBJH3ttQlC33tS2YK1Wfj3uAP/preview', 'Transplantation')">
+                        <span class="icon video-icon">▶️</span><span>Kidney Transplantation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kwAvh_Nd-CTVbEDCveNM1ERouZ3jwBMz/preview', 'BPH')">
                         <span class="icon video-icon">▶️</span><span>Benign Prostate Hypertrophy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Sj0kUavq32J04VctgK-VOD9HPfFU_eJ8/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Congenital Malformations & BPH</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16_I9HYQOIhiOFDbuXxkc-afJRZgyHocv/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Bladder Carcinoma: causes, risk factor and stages, Symptoms and diagnosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MRu2y-UDS_UO3AcOLqnEfm1iEh9Q8j2K/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Neurogenic Bladder: causes, types and symptoms, Diagnosis and management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1TPU5bSLghe7bQKILeg04tQex4jikwdg8/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Bladder Cancer & Neurogenic Bladder</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-LTSpgUEbmLM-3nGjq_aRkHP6uV-lBUh/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ureteral Stricture: Causes, symptoms, diagnosis, Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lv5CnV_ScGJ3l6l62sjCp9_S4w-6A5TL/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Urethral Stricture: causes, symptoms, diagnosis and management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1y1UX6p0LdhLzX4EZX-4-Aw_MTaYqkVV6/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Ureteral & Urethral Strictures</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19ha4j1FmP8UelTa9EEYMwNAT74VKqWlP/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Renal Trauma: Causes and its management, Urinary Retention and its causes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19Dm1DxCvFHbS6vL73p42t1-qtGVADYz_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Urinary Retention: symptoms and management, Urinary Diversion, Nursing Management of Genito Urinary Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1x5APiKgYvHdXZjoVu8EWpqOWoMIPVc3M/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Trauma, Retention & Diversion</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Po-r4Mp8Olk5t_vuB9KW92-uCv9hdBTr/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 4 - NURSING MANAGEMENT OF DISORDERS OF MALE REPRODUCTIVE SYSTEM -->
         <div class="unit-container" id="unit4">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - NURSING MANAGEMENT OF DISORDERS OF MALE REPRODUCTIVE SYSTEM
+                UNIT 4 - MALE REPRODUCTIVE DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1Zym01dHMxCRmez9OQM04OKr_Tmuhd7lJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Male Reproductive System Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1x_CaE6Tmf-6VnuweMMsfV2M6wkIgp18r/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Male Reproductive System: Parts and Functions, History and Pysical Examination, Laboratary and Diagnostic Test</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yGo2LSqlzKEjLPONBTIxKiLjX8-XfMh8/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Male Reproductive Review & Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1k2lxg_ZQPLfyDgMwS2m77tyY4N4FAz5R/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Phimosis: Types, Causes and Risk Factors, Grades of Severity</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1oxguVt1o9USPRUqNUtShDPV_Y0Miu__g/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Phimosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gnU0LPY5gXZ-zL789g24FdP17AjvOxca/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Zym01dHMxCRmez9OQM04OKr_Tmuhd7lJ/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1x_CaE6Tmf-6VnuweMMsfV2M6wkIgp18r/preview', 'Anatomy')">
+                        <span class="icon video-icon">▶️</span><span>Male Reproductive System: Anatomy & Assessment</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1k2lxg_ZQPLfyDgMwS2m77tyY4N4FAz5R/preview', 'Phimosis')">
+                        <span class="icon video-icon">▶️</span><span>Phimosis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gnU0LPY5gXZ-zL789g24FdP17AjvOxca/preview', 'Epididymitis')">
                         <span class="icon video-icon">▶️</span><span>Epididymitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wXqUYQJU3dxw7JTIzuvtObQHZM_mhpvV/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Epididymitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1k2QMCYE5Ksaq7ES-7elgNFPVk4_BzKpI/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1k2QMCYE5Ksaq7ES-7elgNFPVk4_BzKpI/preview', 'Orchitis')">
                         <span class="icon video-icon">▶️</span><span>Orchitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10ZSOw1BRF0BObsJQgM7LtEanngLqUHpr/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Orchitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CB5_tNxknOd53DyKeXRiIuBnC60yl16H/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Sexual Dysfunction, Mens Sexual Response Cycle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZQ-mfOnhfWONBWmNPDNph2kQAFAH01C-/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Sexual Dysfunction & Response Cycle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RxpablLYzaULF6BdsBryViNpSGbbsbdj/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Infertility: Risk Factors and Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rMOC4IYpiVQ0BjqLzkG0XlYSOLaZ9MU8/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Male Infertility</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Dwfg8P6q3fAOBxX9iz4z7vqMBPkNtAdK/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Contraception: Barrier, Natural and Chemical Contraceptive Method</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ldHJPHtcsiAsd569SMSfmV9lJYSzz89A/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Male Contraception</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1S7sjoxhDhFx9UIcXPKRCweQdIkaIR1xt/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Gynecomastia: Risk Factors and Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EbHr097tE7MA2LZXozgigUBoM5qHcM2H/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Gynecomastia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AQzxvCjCqxyAf_07Qfh6yvFDuQNlqIyC/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Male Breast Cancer: Types, Stages and Treatment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bP-e0wkb-tCDgydOSX5KIjfvFx0_54U2/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Male Breast Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12H-eJRNjnuN_Np3ieObVZr2OuTAXQ5qU/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CB5_tNxknOd53DyKeXRiIuBnC60yl16H/preview', 'Sexual Dysfunction')">
+                        <span class="icon video-icon">▶️</span><span>Sexual Dysfunction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RxpablLYzaULF6BdsBryViNpSGbbsbdj/preview', 'Infertility')">
+                        <span class="icon video-icon">▶️</span><span>Infertility Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Dwfg8P6q3fAOBxX9iz4z7vqMBPkNtAdK/preview', 'Contraception')">
+                        <span class="icon video-icon">▶️</span><span>Male Contraception</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S7sjoxhDhFx9UIcXPKRCweQdIkaIR1xt/preview', 'Gynecomastia')">
+                        <span class="icon video-icon">▶️</span><span>Gynecomastia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AQzxvCjCqxyAf_07Qfh6yvFDuQNlqIyC/preview', 'Male Breast Cancer')">
+                        <span class="icon video-icon">▶️</span><span>Male Breast Cancer</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 5 - NURSING MANAGEMENT OF PATIENT WITH BURNS, RECONSTRUCTIVE AND COSMETIC SURGERY -->
         <div class="unit-container" id="unit5">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - NURSING MANAGEMENT OF PATIENT WITH BURNS, RECONSTRUCTIVE AND COSMETIC SURGERY
+                UNIT 5 - BURNS & COSMETIC SURGERY
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1sH2ZUNWqFegKVqzLAoVUmoCX7LTFJ-Nb/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Burns & Surgery</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qdChkNGMQapKg_G9Q-u1qiAqmF-a83JQ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Skin Anatomy, Physiology and function of skin, History and Physical Assessment of burns and Fluid and Electrolyte Assessment, Burns (types and based on degree)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1o_iw6sQEjKmGHthQV0ovmNYBMbd4cvGb/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Skin Review & Burns Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Xaj6MTHch1Jtr1R4NLUK1QzwUGFea_6E/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Burns bases on damaged layer of skin, cause of the burn (electrical, radiation, thermal and chemical, friction burns)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Tcjl4Wv35aCcZTl8p4ZJBp4_D2WV5Ymv/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Calculation of burn, Reconstructive Surgery</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zfy4uWv2d4iHtmDtrlCktNW66gLa9k1-/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Burns Classification & Reconstructive Surgery</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1mpQEOGgCiAQNRFgnmsmJi2dpVAhmsX28/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Surgery for congenital deformities, cosmetic surgery (Part 1)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1E4yKdJmkD6fikGKgUoozGw8MgaHvdvul/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cosmetic surgery (Part 2)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1vT4yypMvfS0EJkZx9Gho26PVEQQstzUB/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cosmetic & Reconstructive Surgery</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eCOytAr6soLyD1bB1BYnfL9AU8pksfrv/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Legal and ethical aspects & Special therapies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BonrMCf3ZFfDkTh5uLh6F7RS261dJXAw/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Legal, Ethical & Special Therapies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10jPi4U0dFh5QJWdIoq2UkqGpgw0yOw1m/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sH2ZUNWqFegKVqzLAoVUmoCX7LTFJ-Nb/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qdChkNGMQapKg_G9Q-u1qiAqmF-a83JQ/preview', 'Burns Intro')">
+                        <span class="icon video-icon">▶️</span><span>Burns: Anatomy & Assessment</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Xaj6MTHch1Jtr1R4NLUK1QzwUGFea_6E/preview', 'Burns Types')">
+                        <span class="icon video-icon">▶️</span><span>Types of Burns (Electrical, Chemical, etc.)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Tcjl4Wv35aCcZTl8p4ZJBp4_D2WV5Ymv/preview', 'Burns Management')">
+                        <span class="icon video-icon">▶️</span><span>Fluid Calculation & Reconstructive Surgery</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mpQEOGgCiAQNRFgnmsmJi2dpVAhmsX28/preview', 'Cosmetic Surgery 1')">
+                        <span class="icon video-icon">▶️</span><span>Cosmetic Surgery Part 1</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1E4yKdJmkD6fikGKgUoozGw8MgaHvdvul/preview', 'Cosmetic Surgery 2')">
+                        <span class="icon video-icon">▶️</span><span>Cosmetic Surgery Part 2</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 6 - NURSING MANAGEMENT OF PATIENT WITH NEUROLOGICAL DISORDERS -->
         <div class="unit-container" id="unit6">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - NURSING MANAGEMENT OF PATIENT WITH NEUROLOGICAL DISORDERS
+                UNIT 6 - NEUROLOGICAL DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1vOyd10MV2pzfEyAuJhvvUArSFlYicwvV/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Neurological Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zcvM_YXavkxyLpSlS8EOAPMfVY3Nvb-O/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Anatomy and physiology of the neurological system</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jpAPAn5PmyZM1nVhrc2K419xyvik4XSz/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diagnostic tests with neurological disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jSJF5z9JLxx3bJunFTJ2AUIxTVwMn2B_/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Neuro Anatomy & Diagnostic Tests</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xarzmxbVQlwt3mJcadrQhBhLXtD4Y1yp/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vOyd10MV2pzfEyAuJhvvUArSFlYicwvV/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zcvM_YXavkxyLpSlS8EOAPMfVY3Nvb-O/preview', 'Neuro Anatomy')">
+                        <span class="icon video-icon">▶️</span><span>Neuro Anatomy & Physiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xarzmxbVQlwt3mJcadrQhBhLXtD4Y1yp/preview', 'ICP & Headache')">
                         <span class="icon video-icon">▶️</span><span>Increased ICP & Headache</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lzONO_LzsEmchWmwsgC-mMMG5oKIjBOp/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: ICP & Headache</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10gVAkjRhyAiZvBLU5UljumS_q6Lsp3__/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Migraine & Cluster headache</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GM1fpnmZwi-LvCHEgo_j1muUZYIPla44/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Migraine & Cluster Headache</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-8wZ-e8Ih7RVm7t5_PCpIdg2D8FZbfnf/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Head injury</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j5pig7AknGCg8WA4kwKrXp0ZRBIWecf1/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Head Injury</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ExYGtiknoQp47kNF3KO2jWEcTVKrnICQ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Spinal injuries</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1imELLZJnv-Bx_F7S_H7PHDxiN3ee2z79/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Management of spinal injuries</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/140q5Nz-rimgp3uTOZbdD0QEeYj0s6cbW/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Spinal Injuries & Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kDTAt2uMd8iK8kTB7tqBB_4DsiL5AqHQ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Spinal cord compression, Intra cranial and cerebral aneurysms</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZcG1Mk7W6sS93_um5QDP4ckY-O6LPp-9/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Spinal Compression & Aneurysms</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Zm3Y7WzZE0vXUd6_zuTtAa-wbYU_ruXN/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>CVA</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16cvRiFSaPS0Y9iJlLP-Fmd9zBkq8L9Ay/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: CVA</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1E-3om0PccS0chJnAh96WHGsb-tdIIj8x/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Bell‘s palsy & trigeminal neuralgia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1W3969_1PJzC_r5jMAJkUv21rgaqkgVj9/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Facial Nerve Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1vOE1CFuOES68tAMqElMzlMyf9fnp21CN/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Guillain-Barré syndrome</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1118MX9uqYwuVpYVVZ2PgO-zBgt3s2bIg/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Guillain-Barré Syndrome</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hrHADOIE_3SiQDH4vd3_f1yJfXToyxTZ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Myasthenia gravis & Multiple sclerosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AiGPz0pK0Mvl8UMGKKzx42m9_mIYOvyy/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: MG & MS</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EVIun5dWLNeCWJb5Vz-gIdOOZJxMGX00/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Meningitis & encephalitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1jMaX5G2yZ9bK078xT7fvJuUfEE8yXHs1/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Meningitis & Encephalitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bBKa2Di8mOVIQrGcV_ZNARRjpvH2Y0Ro/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Brain abscess, neuro-cysticercosis & Chorea</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hFKpijTS1XJNemARPhJM-1o39-AAlh0n/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Brain Abscess & Movement Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1IBzPPUexpLvLOWOEw4PRw9nkrNsPPM5G/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Seizures & Epilepsies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pFROkxWwqSwWnU9P5MYTU415ER2ERWIK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Seizures & Epilepsy</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wqEQ8zYw5gURQeHRf2qVpMxp_A2zv2l6/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Parkinson‘s & Alzheimer‘s disease</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1I5gDBDTWj-L_5UXNaxgCa1dQzW5vJP6H/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Parkinson's & Alzheimer's</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QFYKfth7vTfNMdwUxpNSSA4FLRBMn38f/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Delirium & Dementia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FN2Hba105BYc0Umlc2w0tr96li_89P-i/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Delirium & Dementia</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1YPuC-ALuhR84kv4cspoHF576TGDSjsvP/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Rehabilitation of patient with neurological deficit</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EUwmLwoht37EMJ-rZNwaip8xdejclzki/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Neurological Rehabilitation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12EM50PykUufvp-ekpGCwQZUY39vT17mY/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-8wZ-e8Ih7RVm7t5_PCpIdg2D8FZbfnf/preview', 'Head Injury')">
+                        <span class="icon video-icon">▶️</span><span>Head Injury</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ExYGtiknoQp47kNF3KO2jWEcTVKrnICQ/preview', 'Spinal Injury')">
+                        <span class="icon video-icon">▶️</span><span>Spinal Injuries</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Zm3Y7WzZE0vXUd6_zuTtAa-wbYU_ruXN/preview', 'CVA')">
+                        <span class="icon video-icon">▶️</span><span>Cerebrovascular Accident (Stroke)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1E-3om0PccS0chJnAh96WHGsb-tdIIj8x/preview', 'Cranial Nerve Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Bell's Palsy & Trigeminal Neuralgia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1vOE1CFuOES68tAMqElMzlMyf9fnp21CN/preview', 'GBS')">
+                        <span class="icon video-icon">▶️</span><span>Guillain-Barré Syndrome</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hrHADOIE_3SiQDH4vd3_f1yJfXToyxTZ/preview', 'MG & MS')">
+                        <span class="icon video-icon">▶️</span><span>Myasthenia Gravis & Multiple Sclerosis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EVIun5dWLNeCWJb5Vz-gIdOOZJxMGX00/preview', 'Infections')">
+                        <span class="icon video-icon">▶️</span><span>Meningitis & Encephalitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IBzPPUexpLvLOWOEw4PRw9nkrNsPPM5G/preview', 'Seizures')">
+                        <span class="icon video-icon">▶️</span><span>Seizures & Epilepsy</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wqEQ8zYw5gURQeHRf2qVpMxp_A2zv2l6/preview', 'Degenerative Diseases')">
+                        <span class="icon video-icon">▶️</span><span>Parkinson's & Alzheimer's</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 7 - NURSING MANAGEMENT OF PATIENTS WITH IMMUNOLOGICAL PROBLEMS -->
         <div class="unit-container" id="unit7">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - NURSING MANAGEMENT OF PATIENTS WITH IMMUNOLOGICAL PROBLEMS
+                UNIT 7 - IMMUNOLOGICAL PROBLEMS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1r0sRf-KMhvx_a6Pt2j4UAq2NfgaqiMxN/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Immunological Problems</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UNdTd9acm_dCz-uDm1di6usn8nmUFp7J/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Review of Immune system, Innate Immunity, Adaptive Immunity, Classification of Hypersensitivity Reactions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FS0cHxH_Nn6VT9wAmUCA9FjU-nDtcZhs/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Immune System Review & Hypersensitivity</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1V-ZMu5J8PnakfduHK9Esn4mtts7N4Nd6/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>HIV & AIDS, HIV epidemiology and disease, Transmission of HIV, Clinical manifestations of HIV/AIDS, Diagnostic Evaluations, Antiretroviral Therapy and benefits</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1o9Om--ffH6yoQzbXshpC7QCpjzlf8Ps2/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: HIV/AIDS Clinical & Management</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1f6FT-_yC255D-fjJgQUKSIEIN4EnIuwU/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>HIV & Counseling, Health Education, Home care, Rehabilitations of Persons Living with AIDS</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UI0AYvSnKpVHr9Jo5pC82Mg0e-RtsmgV/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>NACP, IAS, UNAIDS</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GpJgUsXTtoFRJcdpBWEoqcbAYX9nbwFw/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: HIV Care & Organizations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1t5bYF6W9wkVE8e72Gacs3xJa7c3eJ2KL/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1r0sRf-KMhvx_a6Pt2j4UAq2NfgaqiMxN/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UNdTd9acm_dCz-uDm1di6usn8nmUFp7J/preview', 'Immune System')">
+                        <span class="icon video-icon">▶️</span><span>Immune System & Hypersensitivity</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1V-ZMu5J8PnakfduHK9Esn4mtts7N4Nd6/preview', 'HIV AIDS')">
+                        <span class="icon video-icon">▶️</span><span>HIV/AIDS Clinical Management</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1f6FT-_yC255D-fjJgQUKSIEIN4EnIuwU/preview', 'HIV Counseling')">
+                        <span class="icon video-icon">▶️</span><span>HIV Counseling & Home Care</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 8 - NURSING MANAGEMENT OF PATIENT WITH ONCOLOGICAL CONDITIONS -->
         <div class="unit-container" id="unit8">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - NURSING MANAGEMENT OF PATIENT WITH ONCOLOGICAL CONDITIONS
+                UNIT 8 - ONCOLOGICAL CONDITIONS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1gGe7tNHsg0eRB8DBgYrlqYm-8nj_Tqg_/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Oncological Conditions</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Pth1bnaIB2Io0gsYmPFKKrKbAR5-_1_m/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Structure and characteristics of normal and cancer cells</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sxgcNWE4bPVxojyBAAL_l9WOW-vwEayA/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Causes, symptoms & types of cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xfAJ1LAvHXhcsg1zLTaahHx0cRlDMzSF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cancer Cells, Causes & Types</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Z2LZcGgAp-zXEK1fN33JcMsFWPHD6LEL/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diagnosis, prevention & Warning Signs of CA</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NgbzoBD1CENKfyADWJaFLGNHsVw0-MkZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cancer Diagnosis & Prevention</span>
-                    </a>
-                    <a href="#" class="resource-btn video coming-soon">
-                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Cell Cycle (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MEsGzU_ymGBxDuhjV6kUKr-c_OKxinzB/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cell Cycle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1H0qpRRl0Ksys6zyfNTmSx2Z86UZwwHSf/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Nasal Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1MTu7xK7JQ3kDaKs2f-rb1Qo6J2iZ2XGz/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Nasal Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1YLBudoSdQmPIrZgEy9OeGWmP5RI6a1PO/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ear Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QvzkAGUb0bQYCfTPw4hDpahGO_1jFJKr/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Ear Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Gl0nF--GpLs6fdgfUmVdhef48gQXFL4Y/view?usp=drive_link" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gGe7tNHsg0eRB8DBgYrlqYm-8nj_Tqg_/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Pth1bnaIB2Io0gsYmPFKKrKbAR5-_1_m/preview', 'Cancer Cells')">
+                        <span class="icon video-icon">▶️</span><span>Normal vs Cancer Cells</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sxgcNWE4bPVxojyBAAL_l9WOW-vwEayA/preview', 'Cancer Types')">
+                        <span class="icon video-icon">▶️</span><span>Causes & Types of Cancer</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Z2LZcGgAp-zXEK1fN33JcMsFWPHD6LEL/preview', 'Diagnosis')">
+                        <span class="icon video-icon">▶️</span><span>Diagnosis & Prevention</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Gl0nF--GpLs6fdgfUmVdhef48gQXFL4Y/preview', 'Breast Cancer')">
                         <span class="icon video-icon">▶️</span><span>Breast Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xoZXd1eIZgERJR3Zh-1-s4Usb5_fBWe7/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Breast Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OqrkbP0-pScqUzZ3NvQw_y7RZcBawBhr/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cervical Cancer: Symptoms, Diagnosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xFckoCnvkSg72UEaNbvK60ONUlOD7ik3/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cervical Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Ydv1DMI0TmYegFLXgl-z96SvwtJtXf-C/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Renal Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DnjQ0XHcCq6hcVi3YBWZ_aMARpU2C-P7/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Bladder Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1q9NJWo3c843Yqvi7hBf9_A3ij7XRQkPH/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Renal & Bladder Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UuYGOnWRx6i4P0LvpEc6gEH5cNq2HyJ-/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ovarian Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iX0-0IEPUnUw-Dh3GM-AES2llPfDj3ld/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Ovarian Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1m4T-YYyBvRhgb6aoM38BMBZaTSdBcYdQ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Brain And Spinal Cord</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1IeijYpriJXexLZSvo5s3D821RT7rXWAy/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Brain Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_MXBzRkFRGwfP3ZgAY2meiWeOyU2jB8b/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Brain & Spinal Cord Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PJO8Pcfmue0USH1mtMPKMfFKVOrGvJK_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Sarcoma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RpJn4B8-jiupDy92mj5X_ct3OINdhPAz/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Sarcoma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ia-FhUHvGFDFCO7MyUVQYXI2uCRksP7m/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OqrkbP0-pScqUzZ3NvQw_y7RZcBawBhr/preview', 'Cervical Cancer')">
+                        <span class="icon video-icon">▶️</span><span>Cervical Cancer</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 9 - NURSING MANAGEMENT OF PATIENT IN EMERGENCY AND DISASTER SITUATIONS -->
         <div class="unit-container" id="unit9">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - NURSING MANAGEMENT OF PATIENT IN EMERGENCY AND DISASTER SITUATIONS
+                UNIT 9 - EMERGENCY & DISASTER NURSING
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1jRnaulnvjkpLGWmTjDZfYSZHTszMApCX/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Emergency & Disaster Situations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LAYJEtwNK6puCB2aiqkpbixg5wJuixYP/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles & Types of disaster</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EhnVlkNHb7hwV0F2_8zT-4d4OCC5YKM0/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Disaster Principles & Types</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1WXXRt2df9ml99xpUJjPPwy1KCRWZ1agd/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jRnaulnvjkpLGWmTjDZfYSZHTszMApCX/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LAYJEtwNK6puCB2aiqkpbixg5wJuixYP/preview', 'Disaster Principles')">
+                        <span class="icon video-icon">▶️</span><span>Principles & Types of Disaster</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WXXRt2df9ml99xpUJjPPwy1KCRWZ1agd/preview', 'Preparedness')">
                         <span class="icon video-icon">▶️</span><span>Disaster Preparedness</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1vOZ3fQfGp4WZZTXrgSue-j6j9JRGHsc7/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Legal Aspect, Role of Nursing and National Government</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13DwPdRF5kX2qr55kmtrdj2MZFiT7feCM/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Preparedness, Legal Aspects & Role of Nurse</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UjuvIZXU3Jxwhz4SecXXaq-glerTZGIR/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles & medico legal aspects of Emergency Nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13CyDSRlURWhAG05dYnF_wp5XjGF1ve1D/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Poly trauma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1frKW6zuKrPB6Wg49_pnkulR-798VOTmK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Emergency Principles & Polytrauma</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bvX_EzS_3fBHojBmuDB_Z-8LmfO0n5j_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Heat emergencies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AUpvrXHO6unYX7SlLKy69wDEf7ik5Kco/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cold emergencies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Etq7QYxrBYDQcAuz8UvJcuVpoZNZ4dB3/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Heat & Cold Emergencies</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JnNdRZE9PiCQ7HTlozPlXpmP9ZRE_eP5/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Bites</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Lt5_fo2xx3-zmjWTP3tuN8yU07OmzJvu/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Poisoning</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1LX4qdOGhM965DwvV6BGNVwAThu61sggR/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Bites & Poisoning</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1nELtMWSUyLWFgdiHCbFgTKXLHKYeQ2BT/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz</span>
-                    </a>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UjuvIZXU3Jxwhz4SecXXaq-glerTZGIR/preview', 'Emergency Nursing')">
+                        <span class="icon video-icon">▶️</span><span>Principles of Emergency Nursing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/13CyDSRlURWhAG05dYnF_wp5XjGF1ve1D/preview', 'Polytrauma')">
+                        <span class="icon video-icon">▶️</span><span>Polytrauma</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1bvX_EzS_3fBHojBmuDB_Z-8LmfO0n5j_/preview', 'Heat Emergencies')">
+                        <span class="icon video-icon">▶️</span><span>Heat Emergencies</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JnNdRZE9PiCQ7HTlozPlXpmP9ZRE_eP5/preview', 'Bites')">
+                        <span class="icon video-icon">▶️</span><span>Snake & Animal Bites</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Lt5_fo2xx3-zmjWTP3tuN8yU07OmzJvu/preview', 'Poisoning')">
+                        <span class="icon video-icon">▶️</span><span>Poisoning Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 10 - NURSING CARE OF THE ELDERLY -->
         <div class="unit-container" id="unit10">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 10 - NURSING CARE OF THE ELDERLY
+                UNIT 10 - ELDERLY CARE
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1nfy77ZdgYwD0iMAjXQhv7whYF2bIyCOC/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Elderly Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DIfpwBmgchwPb1mIni7Ppow34N2yUk4Y/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>History and Physical Assessment, Theory of Aging Process</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qUFfNS3Tl8CVLar9MedtvJQveRXm670b/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Age Related Body Changes, Psychosocial Aspect and stress and coping</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1TWhY02Jk65VwptlTWF6Tjx2NZJ3IgZWD/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Aging Theories, Changes & Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yvhlNToHeqxMlpJ6fQe-CdIG3g6xNu60/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Elder Abuse: Types, Prevention</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1HJ8u4j1zlS_yjDEf4flUXu3j2_aVDzHg/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Role of Family for Elderly Care, Formal Caregivers and Non Formal Caregivers Role for Elderly Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1g-X3kz__PnFIhDW9WGcHQv5LLhhLx04K/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Elder Abuse & Caregiver Roles</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lkOyWMuJ6dJS0wo4UKj4TKPM5Tkz6ZJ2/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Prosthesis and Nursing Role For Managing Prosthesis (Part 1)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CTxrLXYokaIVWssYkXB4PKcnBhg_Utkb/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Prosthesis and Nursing Role For Managing Prosthesis (Part 2)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FwVGxbMrhWFNjPfEGWpbSUaAU2UuTO9d/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Prosthesis & Nursing Role</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Cy_pRoJaK2tM77SKRJaqK_9QlZKcwj4-/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hearing aids and management, National and community programs and home and institutional care for elderly</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UzJjMnIQxdnTGySHkRoXRN1APCGs3oav/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Hearing Aids & Elderly Care Programs</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VzG0Jd3jkOPSIlg2_9EBRbQRf0NVEBzW/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 10 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nfy77ZdgYwD0iMAjXQhv7whYF2bIyCOC/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DIfpwBmgchwPb1mIni7Ppow34N2yUk4Y/preview', 'Aging Process')">
+                        <span class="icon video-icon">▶️</span><span>Theories & Assessment of Aging</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yvhlNToHeqxMlpJ6fQe-CdIG3g6xNu60/preview', 'Elder Abuse')">
+                        <span class="icon video-icon">▶️</span><span>Elder Abuse</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Cy_pRoJaK2tM77SKRJaqK_9QlZKcwj4-/preview', 'Programs')">
+                        <span class="icon video-icon">▶️</span><span>National Programs & Home Care</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 11 - NURSING MANAGEMENT OF PATIENTS IN CRITICAL CARE UNITS -->
         <div class="unit-container" id="unit11">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 11 - NURSING MANAGEMENT OF PATIENTS IN CRITICAL CARE UNITS
+                UNIT 11 - CRITICAL CARE NURSING
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1XXau-7-qsIs7nZCVs9PCebp6O2T8CH5f/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Critical Care Units</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18yI9Eqll5E5Z4k6Vu3gl5AHvHcr7ri-h/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Principles & Organization of CCU</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14t7FougKaKDLP4boUUW9VL41UKnO8CJ2/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Physical set-up of CCU</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SBFVY_89_QO_sFPbgdEiNKIf65Ship6s/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: CCU Principles & Setup</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xfkeo_ry30brL5eM6EFUjtCgLEfDB9TH/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Policies & staffing norms of CCU</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DfBr6HgjFUswZ9htdtGCX_Xejf5eJ_mg/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Protocols, equipment and supplies in CCU</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sDO1XBX5APq_1M6H7wckdcdJmaodXkEO/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: CCU Policies, Staffing & Equipment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cGtoIRDvfv7gaL0l5alh2erWA20xejo6/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ventilators (Part 1)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ggYhstWdB70TWJ0Ce_8Cq5KAfe6fnI5l/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Mechanical Ventilators (Part 2)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1g7nCEBWlIA2tRW9CxbFm5LQWbuXV9qtX/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Ventilators</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lEFqv1G00jmVetryW5zHxz81qb1jR4b6/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cardiac monitors</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/19wwa8KWqswyIp7ghGkDIbpUPAF9GE7_K/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Catheter insertion procedure</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UJiIQYb6k7ITK8pPNwtag7z1xo5TL5OV/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Monitoring & Catheters</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PPxE3PeL1nmv1K_uY-PCdu-_2B7gkFYi/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Resuscitation equipment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Z_bqVUV_Q8LD6RwD56YqX8pFwt-0AxkL/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Infusion pump</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U3L6dHONwGg0eUdawwt68E7TrqZUBKvF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Resuscitation & Pumps</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/108sm8YP9VM_W0a7uOv73fx6tKQXGxXit/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Infection Control Protocols & CPR</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1bsL-51uAV9zEIWDue1hZxNVsWLGNXxgn/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Steps & complications of CPR</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1TjKdiAE11ABXJMR08oVYl43FaI017R_5/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Infection Control & CPR</span>
-                    </a>
-                    <a href="#" class="resource-btn video coming-soon">
-                        <span class="icon video-icon coming-soon-icon">▶️</span><span>Transitional Care (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1C4gi2CeYcIThhWfjhrtLFwHK0g8dcAFD/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Transitional Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ck6VWcAElHqVxbsDAZ2DSrTvk40oYN4l/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 11 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XXau-7-qsIs7nZCVs9PCebp6O2T8CH5f/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18yI9Eqll5E5Z4k6Vu3gl5AHvHcr7ri-h/preview', 'CCU Principles')">
+                        <span class="icon video-icon">▶️</span><span>Principles of Critical Care</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1cGtoIRDvfv7gaL0l5alh2erWA20xejo6/preview', 'Ventilators')">
+                        <span class="icon video-icon">▶️</span><span>Mechanical Ventilation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lEFqv1G00jmVetryW5zHxz81qb1jR4b6/preview', 'Monitors')">
+                        <span class="icon video-icon">▶️</span><span>Cardiac Monitors</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1bsL-51uAV9zEIWDue1hZxNVsWLGNXxgn/preview', 'CPR')">
+                        <span class="icon video-icon">▶️</span><span>CPR & Resuscitation</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - OCCUPATIONAL & INDUSTRIAL DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13Nv-6BSCm-MwwIMMQIDur7DJ-WARS2og/preview', 'Detailed Notes')">
+                        <span class="icon">📚</span><span>Detailed Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1keMmnTDXqrfb9F4NbrCTI1qCmQBNts2K/preview', 'Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Occupational Assessment & Hazards</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BXD_bjfPvH6_RXrtCspIjL56dTpUjr3G/preview', 'Lung Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Pneumoconiosis, Silicosis & Byssinosis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ChSUtFBLaWzEkB8XqZxRKNH-KeCDpbaw/preview', 'Prevention')">
+                        <span class="icon video-icon">▶️</span><span>Preventive Measures & Health Team</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 12 - NURSING MANAGEMENT OF PATIENTS OCCUPATIONAL AND INDUSTRIAL DISORDERS -->
-        <div class="unit-container" id="unit12">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 12 - NURSING MANAGEMENT OF PATIENTS OCCUPATIONAL AND INDUSTRIAL DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <a href="https://drive.google.com/file/d/13Nv-6BSCm-MwwIMMQIDur7DJ-WARS2og/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Occupational & Industrial Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1keMmnTDXqrfb9F4NbrCTI1qCmQBNts2K/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>12.1 Occupational assessment & Hazards</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fs5eXVCRovCzUnO8OOAu5_Dk5jUJPtaM/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Assessment & Hazards</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BXD_bjfPvH6_RXrtCspIjL56dTpUjr3G/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>12.2 Occupational disorders: Pneumoconiosis, silicosis & byssinosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1tjXvIvdFtvgaAkVmin_I4qeCZN8xlXnp/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Lung Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1BB8H9K7A-QQ_qtsVI0DutPNtTgZgsPVt/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>12.3 (1) Occupational disorders: Farmer's lung, dermatitis, absenteeism & CA</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ChSUtFBLaWzEkB8XqZxRKNH-KeCDpbaw/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>12.3 (2) Preventive measures of occupational disease & Health team</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cb1t-25pMewH3I_kuAerAtHfSa2ra3Vj/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Other Disorders, Prevention & Health Team</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1w2r7WyC94gAf9lMJFDKuR7nms6yF5JJI/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 12 Quiz</span>
-                    </a>
-                </div>
-            </div>
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
     <script>
-        // Function to toggle the visibility of the unit content
-        function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            
-            header.setAttribute('aria-expanded', !isExpanded);
-            unitContent.classList.toggle('active');
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: ENT
+                { q: "Which instrument is used to examine the ear?", o: ["Ophthalmoscope", "Otoscope", "Laryngoscope", "Stethoscope"], a: 1 },
+                { q: "Epistaxis refers to bleeding from the:", o: ["Ear", "Nose", "Throat", "Gums"], a: 1 },
+                { q: "Meniere's disease affects the:", o: ["Outer ear", "Middle ear", "Inner ear", "Eustachian tube"], a: 2 },
+                { q: "Tonsillitis is inflammation of the:", o: ["Larynx", "Pharynx", "Tonsils", "Adenoids"], a: 2 },
+                { q: "A common cause of conductive deafness is:", o: ["Nerve damage", "Impacted wax", "Brain tumor", "Drug toxicity"], a: 1 }
+            ],
+            2: [ // Unit 2: Eye
+                { q: "Glaucoma is characterized by increased:", o: ["Blood pressure", "Intraocular pressure", "Intracranial pressure", "Retinal pressure"], a: 1 },
+                { q: "Cataract is the opacity of the:", o: ["Cornea", "Lens", "Retina", "Iris"], a: 1 },
+                { q: "Myopia is also known as:", o: ["Farsightedness", "Nearsightedness", "Night blindness", "Color blindness"], a: 1 },
+                { q: "Conjunctivitis is commonly called:", o: ["Black eye", "Pink eye", "Red eye", "White eye"], a: 1 },
+                { q: "Retinal detachment is a medical emergency because it can cause:", o: ["Pain", "Permanent blindness", "Infection", "Headache"], a: 1 }
+            ],
+            3: [ // Unit 3: Kidney
+                { q: "The functional unit of the kidney is:", o: ["Neuron", "Nephron", "Alveoli", "Villi"], a: 1 },
+                { q: "Hemodialysis filters waste from:", o: ["Urine", "Blood", "Lymph", "CSF"], a: 1 },
+                { q: "Pyelonephritis is infection of the:", o: ["Bladder", "Urethra", "Kidney/Renal pelvis", "Ureter"], a: 2 },
+                { q: "BPH stands for:", o: ["Benign Prostatic Hyperplasia", "Bone Phosphate Hormone", "Blood Pressure High", "None"], a: 0 },
+                { q: "Oliguria is urine output less than:", o: ["100 ml/day", "400 ml/day", "1000 ml/day", "2000 ml/day"], a: 1 }
+            ],
+            4: [ // Unit 4: Male Reproductive
+                { q: "Orchitis is inflammation of the:", o: ["Penis", "Testes", "Prostate", "Epididymis"], a: 1 },
+                { q: "Phimosis is a condition involving the:", o: ["Scrotum", "Foreskin/Prepuce", "Urethra", "Bladder"], a: 1 },
+                { q: "Gynecomastia is enlargement of:", o: ["Male breast tissue", "Prostate", "Testes", "Thyroid"], a: 0 },
+                { q: "Vasectomy is a method of:", o: ["Treatment", "Diagnosis", "Male sterilization/Contraception", "Infection control"], a: 2 },
+                { q: "PSA test is used to screen for:", o: ["Testicular cancer", "Prostate cancer", "Penile cancer", "Bladder cancer"], a: 1 }
+            ],
+            5: [ // Unit 5: Burns
+                { q: "The 'Rule of Nines' assesses:", o: ["Depth of burn", "Total Body Surface Area (TBSA) burned", "Type of burn", "Pain level"], a: 1 },
+                { q: "First-degree burns affect the:", o: ["Epidermis only", "Dermis", "Subcutaneous tissue", "Muscle"], a: 0 },
+                { q: "Fluid resuscitation is critical in the first:", o: ["4 hours", "24 hours", "48 hours", "72 hours"], a: 1 },
+                { q: "A graft taken from the patient's own skin is an:", o: ["Allograft", "Autograft", "Xenograft", "Isograft"], a: 1 },
+                { q: "Parkland formula is used to calculate:", o: ["Calorie needs", "Fluid replacement", "Drug dose", "Oxygen needs"], a: 1 }
+            ],
+            6: [ // Unit 6: Neuro
+                { q: "GCS (Glasgow Coma Scale) lowest possible score is:", o: ["0", "3", "1", "5"], a: 1 },
+                { q: "CVA is commonly known as:", o: ["Heart attack", "Stroke", "Seizure", "Coma"], a: 1 },
+                { q: "Meningitis signs include:", o: ["Nuchal rigidity (stiff neck)", "Chest pain", "Abdominal pain", "Joint pain"], a: 0 },
+                { q: "Parkinson's disease is characterized by:", o: ["Memory loss", "Tremors & Rigidity", "Vision loss", "Hearing loss"], a: 1 },
+                { q: "Lumbar puncture is done to collect:", o: ["Blood", "CSF", "Urine", "Synovial fluid"], a: 1 }
+            ],
+            7: [ // Unit 7: Immune
+                { q: "ELISA test is used for:", o: ["Malaria", "HIV screening", "TB", "Diabetes"], a: 1 },
+                { q: "Which cell is primarily destroyed by HIV?", o: ["RBC", "CD4 T-cell", "Platelet", "Neuron"], a: 1 },
+                { q: "Anaphylaxis is a severe type of:", o: ["Infection", "Allergic reaction", "Autoimmune disease", "Immunodeficiency"], a: 1 },
+                { q: "Autoimmune disease means the body attacks:", o: ["Bacteria", "Viruses", "Its own cells", "Fungi"], a: 2 },
+                { q: "ART (Antiretroviral Therapy) is used for:", o: ["Cancer", "HIV/AIDS", "Diabetes", "Hypertension"], a: 1 }
+            ],
+            8: [ // Unit 8: Oncology
+                { q: "Biopsy is the gold standard for diagnosing:", o: ["Infection", "Cancer", "Fracture", "Anemia"], a: 1 },
+                { q: "Metastasis means:", o: ["Cancer shrinking", "Cancer spreading to other parts", "Cancer localized", "Cancer cured"], a: 1 },
+                { q: "Chemotherapy uses:", o: ["Radiation", "Chemical drugs", "Surgery", "Heat"], a: 1 },
+                { q: "Warning sign of cancer (CAUTION): 'C' stands for:", o: ["Cough", "Change in bowel/bladder habits", "Chest pain", "Confusion"], a: 1 },
+                { q: "Palliative care focuses on:", o: ["Cure", "Symptom relief & Quality of life", "Surgery", "Research"], a: 1 }
+            ],
+            9: [ // Unit 9: Emergency
+                { q: "Triage in emergency means:", o: ["Treating everyone", "Sorting patients based on severity", "Discharging patients", "Billing"], a: 1 },
+                { q: "CPR ratio of compressions to breaths in adults:", o: ["15:2", "30:2", "5:1", "10:1"], a: 1 },
+                { q: "In case of snake bite, the limb should be:", o: ["Elevated", "Immobilized below heart level", "Massaged", "Cut"], a: 1 },
+                { q: "Heimlich maneuver is used for:", o: ["Drowning", "Choking", "Bleeding", "Burn"], a: 1 },
+                { q: "Golden hour refers to the critical time after:", o: ["Birth", "Trauma/Injury", "Death", "Sleep"], a: 1 }
+            ],
+            10: [ // Unit 10: Elderly
+                { q: "Geriatrics is the branch of medicine for:", o: ["Children", "Elderly", "Women", "Infants"], a: 1 },
+                { q: "A common cause of dementia in elderly is:", o: ["Flu", "Alzheimer's Disease", "Arthritis", "Diabetes"], a: 1 },
+                { q: "Presbycusis is age-related loss of:", o: ["Vision", "Hearing", "Smell", "Taste"], a: 1 },
+                { q: "Polypharmacy refers to using:", o: ["No drugs", "Multiple medications", "Herbal drugs", "Illegal drugs"], a: 1 },
+                { q: "Falls in elderly are often caused by:", o: ["Poor vision & Balance", "Exercise", "Healthy diet", "Sleep"], a: 0 }
+            ],
+            11: [ // Unit 11: CCU
+                { q: "ICU stands for:", o: ["Intensive Care Unit", "Internal Care Unit", "Intermediate Care Unit", "Infant Care Unit"], a: 0 },
+                { q: "Mechanical ventilator assists with:", o: ["Digestion", "Breathing/Respiration", "Walking", "Urination"], a: 1 },
+                { q: "ECG monitors:", o: ["Brain waves", "Heart electrical activity", "Muscle strength", "Lung volume"], a: 1 },
+                { q: "A barrier to communication in ICU is:", o: ["Endotracheal tube", "IV line", "Monitor", "Bed"], a: 0 },
+                { q: "Nosocomial infections in ICU are preventable by:", o: ["Antibiotics", "Strict Asepsis & Hand hygiene", "Isolation", "Visitation"], a: 1 }
+            ],
+            12: [ // Unit 12: Occupational
+                { q: "Silicosis is caused by inhalation of:", o: ["Cotton dust", "Silica dust", "Coal dust", "Asbestos"], a: 1 },
+                { q: "Ergonomics relates to:", o: ["Infection control", "Fitting the job to the worker/Posture", "Chemical safety", "Fire safety"], a: 1 },
+                { q: "Byssinosis is associated with:", o: ["Coal industry", "Cotton/Textile industry", "Chemical industry", "Food industry"], a: 1 },
+                { q: "PPE stands for:", o: ["Personal Protective Equipment", "Public Private Entity", "Patient Primary Exam", "None"], a: 0 },
+                { q: "Lead poisoning is a type of:", o: ["Physical hazard", "Chemical hazard", "Biological hazard", "Psychosocial hazard"], a: 1 }
+            ]
+        };
 
-            // Dynamic max-height for smooth collapse animation
-            if (unitContent.classList.contains('active')) {
-                // If expanding, set max-height to scrollHeight
-                unitContent.style.maxHeight = unitContent.scrollHeight + "px";
-            } else {
-                // If collapsing, reset max-height to 0
-                unitContent.style.maxHeight = "0";
+        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') return;
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; // Default flex for centering
+
+            // FIX: Restore flex centering for Video/Doc
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // Videos get 16:9, Notes get full height
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
-        
-        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            // FIX: Remove flex centering for Quiz so it starts at the top
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        // Auto-expand first unit
         document.addEventListener('DOMContentLoaded', () => {
-             const allUnits = document.querySelectorAll('.unit-header');
-             allUnits.forEach((header, index) => {
-                 const content = header.nextElementSibling;
-                 
-                 if (index === 0) {
-                     // Unit 1 is active by default
-                     header.setAttribute('aria-expanded', 'true');
-                     content.classList.add('active');
-                     // Set the max-height dynamically for the open unit
-                     // Needs a slight delay to ensure scrollHeight is calculated correctly after CSS application
-                     setTimeout(() => {
-                         content.style.maxHeight = content.scrollHeight + "px";
-                     }, 50);
-                 } else {
-                     // All other units are initially collapsed
-                     header.setAttribute('aria-expanded', 'false');
-                     content.classList.remove('active');
-                     content.style.maxHeight = '0';
-                 }
-             });
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
         });
     </script>
+
 </body>
 </html>
-
