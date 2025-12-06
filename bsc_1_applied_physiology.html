@@ -31,7 +31,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-        }
+        } 
 
         .container {
             max-width: 800px;
@@ -192,11 +192,25 @@
             justify-content: center;
         }
 
-        .modal-iframe {
+        /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        /* 2. For Notes & Models (Fills the screen vertically) */
+        .iframe-doc {
             width: 100%;
             height: 100%;
             border: none;
-            background: #000; /* Black background for video loading state */
+            background: #fff;
+            display: block;
         }
 
         /* --- QUIZ STYLES (Inside Modal) --- */
@@ -265,19 +279,16 @@
         </div>
 
         <div id="units-container">
-            <!-- Content injected via JS -->
-        </div>
+            </div>
     </div>
 
-    <!-- MODAL OVERLAY -->
     <div id="app-modal" class="modal-overlay">
         <div class="modal-header">
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
         <div id="modal-body" class="modal-body">
-            <!-- Content injected here -->
-        </div>
+            </div>
     </div>
 
     <script>
@@ -588,9 +599,17 @@
                 openQuiz(url); 
             }
             else {
-                let cleanUrl = url.replace('/view', '/preview');
-                // Use black background and permissions for better video experience
-                body.innerHTML = `<iframe class="modal-iframe" src="${cleanUrl}" allow="autoplay; encrypted-media; fullscreen"></iframe>`;
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // FIX: Apply correct class based on type
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
 
