@@ -192,14 +192,24 @@
             justify-content: center;
         }
 
-        /* FIX: 16:9 Aspect Ratio for Videos */
-        .modal-iframe {
+        /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
+        .iframe-video {
             width: 100%;
             height: auto;
             aspect-ratio: 16 / 9;
             border: none;
             background: #000;
-            max-height: 80vh;
+            display: block;
+        }
+
+        /* 2. For Notes & Models (Fills the screen vertically) */
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
             display: block;
         }
 
@@ -528,9 +538,11 @@
                 // Formatting URL for preview
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
                 
-                // SANDBOX ATTRIBUTE FIX: This prevents the 'Open in Drive' button from taking over the window
+                // FIX: DETERMINE CLASS BASED ON TYPE
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
                 body.innerHTML = `<iframe 
-                    class="modal-iframe" 
+                    class="${className}" 
                     src="${cleanUrl}" 
                     sandbox="allow-scripts allow-same-origin allow-presentation"
                     allow="autoplay; encrypted-media; fullscreen">
