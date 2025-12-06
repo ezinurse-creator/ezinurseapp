@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gynecology - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Gynecology." />
+    <title>Midwifery - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Midwifery." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
-            --brand: #003B82;
+            --brand: #003B82; 
             --accent: #00B9F2;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
@@ -17,6 +17,8 @@
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; }
@@ -28,6 +30,14 @@
             padding: 24px;
             max-width: 1000px;
             margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+            display: block;
         }
 
         .syllabus-btn, .unit-header {
@@ -76,7 +86,7 @@
         }
         .unit-content.active {
             padding: 24px 12px;
-            max-height: auto; 
+            max-height: none; 
         }
 
         .subsection {
@@ -106,46 +116,108 @@
             gap: 12px;
             flex-wrap: wrap;
             min-height: 50px;
+            cursor: pointer;
         }
         .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
         .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
         .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
         .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
         .resource-btn.notes:hover { background: #e0f2fe; }
         .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.model:hover { background: #d1fae5; }
         .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon {
-            background: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
-        }
 
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
         .icon.video-icon { color: #8b5cf6; }
-        .icon.model-icon { color: #16a34a; }
         .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
 
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
-        h3 {
-            font-size: 1.2rem;
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+            cursor: pointer;
         }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
         @media (max-width: 768px) {
             body { padding: 16px; }
@@ -153,19 +225,17 @@
             .resource-btn { font-size: 14px; }
             .subsection { padding: 16px; }
             .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <!-- Main Syllabus PDF Link -->
-    <a href="https://drive.google.com/file/d/1Yv9QA7vgXdULMD3P_k_CF-rVl67vfpbx/view?usp=drive_link" class="syllabus-btn" target="_blank">
-        📄 GYNECOLOGY - SYLLABUS
-    </a>
+
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1ognUcXXsYVTKVam5yRWaf36b3ReN8KGp/preview', 'Midwifery Syllabus')">
+        📄 DOWNLOAD MIDWIFERY SYLLABUS
+    </div>
     
     <div id="units">
         
-        <!-- UNIT 1 - INTRODUCTION -->
         <div class="unit-container" id="unit1">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
                 UNIT 1 - INTRODUCTION
@@ -173,321 +243,935 @@
             </div>
             <div class="unit-content active">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/18xGoeBab-R1cHyEZWjySRi8ixzJ1ZQZr/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Gynecology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1T88EQ5kHyS_f-dIhckZV6NTJsIWe28rF/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Introduction, History Collection & Physical Examination</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QXnXuMiWFpnc-jY_UctgeYi7ShFiJMxE/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Systemic & General Examination, Investigations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Af8kbjzNG_cvxgwgZQFLN-yuR2_sAsdu/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Examination and Investigations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Ty6szM-8SA1CNV6_WGW616SD27-Gd5Pz/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17y-KfM7BlEIMVEGBQk39dK6PlXOmkAMl/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Si2qdwyfol_Ne1D9hTAQlnAHr9gzktW_/preview', 'Definition of Midwifery')">
+                        <span class="icon video-icon">▶️</span><span>Definition of Midwifery & Obstetrical Nursing</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eJQRxHV1-XoD8vwCyPrzu7fgLVBQ2nC2/preview', 'Scope and Trends')">
+                        <span class="icon video-icon">▶️</span><span>Scope and Trends in Midwifery</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HW-3pekAsKvIOKsJ0EkFc4aHyxvg_ygQ/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15wpS-4WSWXrZK6kuPCsyodVXfAXfzmIg/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 2 - PUBERTY -->
         <div class="unit-container" id="unit2">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - PUBERTY
+                UNIT 2 - REPRODUCTIVE SYSTEM
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1CiOubDSqJ7hE_gKZswVtfmcWA9AirxZp/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Puberty</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1NOg1TaUyPtChzDwMNF_sskp9r2WDvHSe/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Puberty & Genital Organ Changes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1AZ0ta6oczTpUZ1ZgR9fSgH-0DiihSsAI/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Review of Menstrual Cycle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/112ERT5uhNWSs6XtShoop6Q1UWKM0U3p8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Puberty & Cycle</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18Yi1Q69aONIgCj-Mm64KVQmNch7U51be/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Disorders of Menstruation & Premenstrual Syndrome</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15Ye8VNvEltM-ukUQUO0fpDGLQsoxssQl/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Menstruation Disorders & PMS</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1egK2qe72OLrvPh8J2w5fVrEEMlmTq5iu/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Dysmenorrhea</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eQh8BfFeBi4RBu_tJmT8J7VWxk6GD_KL/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cryptomenorrhea & Dysfunctional Uterine Bleeding</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qfGPINSz7vcdV49KXh_5DwPsuOZPihRe/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Bleeding Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Unotlic0_pNeXO9F4qCnl1xhdj4P9cqY/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz</span>
-                    </a>
+                    
+
+[Image of female reproductive system anatomy]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JtC14FLuQug90ppgZt6rCy1vm0RT8XIq/preview', 'Detailed Notes: Reproductive System')">
+                        <span class="icon">📚</span><span>Detailed Notes: Reproductive System</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11NdKULVhSCweAeDZjcxzALHmsYxYxD7T/preview', 'Anatomy Review Part 1')">
+                        <span class="icon video-icon">▶️</span><span>Review of Anatomy & Physiology (Part 1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lMdWn-XNz9TeaQSdhg9mAkUK_ONizhFM/preview', 'Anatomy Review Part 2')">
+                        <span class="icon video-icon">▶️</span><span>Review of Anatomy & Physiology (Part 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1whDnwizLsWVQOE4guNVddBIlH-fBKeH6/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GwXt63I3YRBte8hAsC2tjwmM2GZMK60V/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 3 - FERTILITY AND INFERTILITY -->
         <div class="unit-container" id="unit3">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - FERTILITY AND INFERTILITY
+                UNIT 3 - EMBRYOLOGY AND FOETAL DEVELOPMENT
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1GdamHnbpiTYEzq1hm6UnaDcr8nbQKYXK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Fertility and Infertility</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15-OQGjIbqjQzSLRut1Bn5MSxUTSIgQAy/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Definition of Fertility & Infertility, Causes- Both in Male and Female and Investigation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DLV2NvvNR2ThskNU6RZV0epcIsRDwF5q/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Fertility Concepts & Investigation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kZTqrDQcEnAQCFLoX6U2FjXsMw2k06aI/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Management of Infertility & Artificial Reproductive Techniques</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1buF_NgZRDE1X0rF17F3kBEcUVziI2xAM/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Management & ART</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZzJrOqEmsnQKU3POEMei9x2Ch2q3E_4j/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CsiC5AAhcTN9IuabynIM7Yuijy5Fhf97/preview', 'Detailed Notes: Embryology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Embryology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hZJeRec8k83wgw_Q5wNj3Cz5We-pQ93K/preview', 'Gametogenesis')">
+                        <span class="icon video-icon">▶️</span><span>Oogenesis, Spermatogenesis & Fertilization</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yT8fFmOBB05PYDspTk4e37Cmf3Kt7bsH/preview', 'Fertilization')">
+                        <span class="icon video-icon">▶️</span><span>Fertilization</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XFEz4gchkaTyUnbu3HRTDRrJUY62diMS/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Z48KhtPFWsN8Ffj1DdEKM8sFc_Yaj1Rb/preview', 'Fetal Development 1')">
+                        <span class="icon video-icon">▶️</span><span>Embryonic and Fetal Development (Part 1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S61Mt0sJfB2qVG1_LOyeCKZVBu3dXXee/preview', 'Fetal Development 2')">
+                        <span class="icon video-icon">▶️</span><span>Embryonic and Fetal Development (Part 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BYBk49m4fch2Hq_OSwNb_8pNk56DcK8G/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    
+
+[Image of fetal circulation pathway]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ygs9y5lKUlMwZ6KWHk16-yoHRcKnJbHR/preview', 'Fetal Circulation')">
+                        <span class="icon video-icon">▶️</span><span>Fetal Circulation</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eGjVUbeK-I2g94Yj-Ldlwg0m--oUJQ12/preview', 'Placenta 1')">
+                        <span class="icon video-icon">▶️</span><span>Placenta (Part 1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GTleP0Q9fEgDPNNevVCaelQ8tkzdQ9-5/preview', 'Placenta 2')">
+                        <span class="icon video-icon">▶️</span><span>Placenta (Part 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Ka7lWambkbOuUWexqBPTVRIqtXFiHnMW/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    
+
+[Image of fetal skull landmarks]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ya1NnmpBsTwzYaGGty7AAFlt6BLIgrWM/preview', 'Fetal Skull')">
+                        <span class="icon video-icon">▶️</span><span>Fetal Skull</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17VuQ_Lp6_yJhatibUkTSytV4gPVCb2BF/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17V3Sx1drquSDNWorqThJh-FmGE28pLit/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 4 - PELVIC INFECTIONS -->
         <div class="unit-container" id="unit4">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - PELVIC INFECTIONS
+                UNIT 4 - NORMAL PREGNANCY AND MANAGEMENT
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1_Cu90ecMSZ0mSnadjMyTQzwCl0QX1QEC/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Pelvic Infections</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1WhFbd9LlTFyEITpi6yyfLCYmj7tZR-uo/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Pelvic Infections: Vulvitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1w-s8eqlmgaXsJeljrVH1KNwQCt9Rjk9i/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Bartholinitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17ZBUHvIeVrY8k8KFe_G27LT92azUn-t7/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Vulvitis & Bartholinitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1wSktZh5sobkPn4jKZBw-d9Zn155dt44P/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Vaginitis, Trichomonas Vaginitis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/11fkXbsYB_xCW-sIgpnuhMVsjUKFB69w2/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Moniliasis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17ZBUHvIeVrY8k8KFe_G27LT92azUn-t7/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Vaginitis & Moniliasis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1xEQGEfc3-EYihATA4qIJj_Hl98QSMCkt/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Metritis, Salpingitis, Oophritis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1J36jGz2kmaJlSm1IUv12Lb2Cy-XO-cdH/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Uterine & Adnexal Infections</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fCWGk0xVg2w8aQlNCN28b2Bj2Vn4P_Pk/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Cervical Erosions, Pelvic Inflammatory Disease & Pelvic Abscess</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cFO6o9TQ7wHHorCJClgarhlpClDcQQQk/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Cervical & PID</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1N5EF7PzDAfGWMkBwSXbt2CnNdLPE-YKS/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Pelvic Tuberculosis, STD: Syphilis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lvGjfPCG7DdcFIvE_rCIaTq6fe3IQEx2/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Pelvic TB & Syphilis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1iLbocd3uVgXvMhjaNV0W0WYmZV2sRi58/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>STD: Gonorrhea, Warts</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FUwQoMPdOJt5skpjycKFXoICPLjXN24B/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Gonorrhea & Warts</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17f9-wMJq1KMKSBbIB719lcqA8ovaahY3/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>HIV</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1W9i-FfDSwnaK06gg6MM55Tmja6QSA5YU/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: HIV</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1oitJUZUEpfE6ieJUxzRunosDMeuY66Li/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1UJki-5lF8tfPb-O4brV5x0eXmgTIIkDJ/preview', 'Detailed Notes: Pregnancy')">
+                        <span class="icon">📚</span><span>Detailed Notes: Normal Pregnancy</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1r6GtJLawOJVm_7FGzN5KXbpgnE3krvRn/preview', 'Preconception Care 1')">
+                        <span class="icon video-icon">▶️</span><span>Preconception Care & Genetic Counselling (Part 1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16lvblCYDcGQQhp4F63_5aLNhC-l82-3F/preview', 'Preconception Care 2')">
+                        <span class="icon video-icon">▶️</span><span>Preconception Care & Genetic Counselling (Part 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HmT1ZuH99m9IiyviRP_aDK-jwIQc8_Xb/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1I5j11hMMkwfnEYEmXYDuu5UUBbx8damO/preview', 'Genetic Counselling')">
+                        <span class="icon video-icon">▶️</span><span>Genetic Counselling</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eOPJ9454c-7K7ZkDctO-1V8YdZ4bK36g/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    
+
+[Image of physiological changes in pregnancy]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YsifII20JJMJfchgASBbEVoB8uAMg3ki/preview', 'Physiological Changes 1')">
+                        <span class="icon video-icon">▶️</span><span>Physiological Changes During Pregnancy (1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Mp_8KjqCkglH6-IDaVQhsDdRqKSeyh8r/preview', 'Physiological Changes 2')">
+                        <span class="icon video-icon">▶️</span><span>Physiological Changes During Pregnancy (2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cPWhdYU_iwnK_0mHZdbfqdSwpfYAkr45/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1firw7eGhK1xLoa37j_aL3dKdZEHincsI/preview', 'Physiological Changes 3')">
+                        <span class="icon video-icon">▶️</span><span>Physiological Changes During Pregnancy (3)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16QWdwdpWpfiM1sG3peWwVIVVOrE5gpKx/preview', 'Physiological Changes 4')">
+                        <span class="icon video-icon">▶️</span><span>Physiological Changes During Pregnancy (4)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12ABHZx8TOuShNVl2e_GP_ajSAanT7KKp/preview', 'Signs of Pregnancy')">
+                        <span class="icon video-icon">▶️</span><span>Signs of Pregnancy</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1SZ-wrSAKXuvz5ky1z461LQUC4jfYJfvn/preview', 'Diagnosis of Pregnancy')">
+                        <span class="icon video-icon">▶️</span><span>Diagnosis of Pregnancy</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_hi1DZ1uHG2_gIborr0lKlgv2gZAtWtj/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VJ2soLuvB82qJUtxM_C4H9IVVeuHFu1R/preview', 'Antenatal Care 1')">
+                        <span class="icon video-icon">▶️</span><span>Antenatal Care (Part 1)</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15au18h-8TaDKLJ02pYF0Bh1tey07IjgL/preview', 'Antenatal Care 2')">
+                        <span class="icon video-icon">▶️</span><span>Antenatal Care (Part 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14t5VivuPnbLQ7WR8ACsWzJqJMmPsDtSs/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/186qruTDNvsbrPJi70eWRcVowsT3tImD7/preview', 'Minor Disorders')">
+                        <span class="icon video-icon">▶️</span><span>Minor Disorders During Pregnancy</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qPvJo7atkwI2toOqsOhIurondupIiLgI/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1a2lxFp4DCnsJSYdZCiRlzFRZfX0N18mg/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 5 - GYNAECOLOGICAL DISORDERS -->
         <div class="unit-container" id="unit5">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - GYNAECOLOGICAL DISORDERS
+                UNIT 5 - NORMAL LABOUR AND MANAGEMENT
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1nfncIh2vyIStpCq0YYKCkxK3usiWJVwx/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Gynaecological Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1lCBrwbC6WZ32yHc1l3PM8WfdQovrIPrr/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Gynaecological Disorders: Retroversion & Retro Flexion</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14QH3-eBgEgz85KeQdgVgmzS3gGkQ2LWT/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Retroversion & Retroflexion</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GkxhK8ebafu2TuKz4l6ZSasks9I9neCI/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Fistulas</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14mWFKgQKRqGZc2epfsYCdvbnphsGxtcD/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Fistulas</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qV5jgDA_vYC8USuUE8zrToJV04uXRLrh/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Uterine Displacement & Prolapse</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1JiIFraMyRd7VswI819IxmXW6G1z8wOys/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Displacement & Prolapse</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1cDJFy0cPuiCL5pE4zrhjzttgvUIgrPaQ/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Uterine Malformations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/14w8rs9BLnCLtzVLjD0maXdX5fGpuuHPz/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Uterine Malformations</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fP7VTJwnBvgz6unO5SGsdsHv_5YvYH8z/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Ovarian Cysts & Uterine Fibroids</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1K2UfOuO1UQ3ofoAtMv9zXrfjXFs_CT5W/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Ovarian Cysts & Fibroids</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eVXUZxm0pHgpi0FztrRmrg4RZdRhEfqS/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Uterine Polyps & Tumors of the reproductive tract: Benign and Malignant</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-V-lhyG4LrjlHDf2Mp0OasIOMnzqfkqa/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Palliative Care and Rehabilitation</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12pUbK4fxM8mMnYJiMr_t-ZZg0fP-kMQ_/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Tumors, Polyps & Palliative Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13sngWWm5emLOKo_jc8W6m4rMhwwHbgHH/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1UyDz4iII5oNDwedpRyUe72Ku9OL7XcwN/preview', 'Detailed Notes: Labour')">
+                        <span class="icon">📚</span><span>Detailed Notes: Normal Labour</span>
+                    </div>
+                    
+
+[Image of partograph chart]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Pns2Gr6zg3_wyLqnrCw5OreZ_w0SZDHC/preview', 'Normal Labour & 1st Stage')">
+                        <span class="icon video-icon">▶️</span><span>Normal Labour & 1st Stage</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LyPU4ymiXB3SLp_GkcU1orgZ69p3Cj81/preview', '1st Stage Management')">
+                        <span class="icon video-icon">▶️</span><span>Management of 1st Stage</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1R8V9EYs2WR3C5_oiThNnZwMG8x7we6FN/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('coming-soon', '', 'Normal Labour Management')">
+                        <span class="icon video-icon">▶️</span><span>Normal Labour & Management (Part 2) - Coming Soon</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13eAsYXh4JDWcJD5uNhZTKmDKep_cV6ql/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bAq_MeN_folrJPlE1L5fy9MXL21hoJFn/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 6 - BREAST DISORDERS -->
         <div class="unit-container" id="unit6">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - BREAST DISORDERS
+                UNIT 6 - MANAGEMENT OF NEWBORN
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1GB2alVdkyv0UYtwN1mJ2RcfZ9wvXD6Fv/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Breast Disorders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rCDcV4KrWjFBEgptXHvnCOk5N6Uz74xh/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Mastitis & Breast Engorgement</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1rppzTkMZp-TtTZYE0fe_yfW6bWBivqul/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Breast Abscess</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18U_2dOiCJLJDEke9VukfFkIJUC5yhxLs/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Infections & Engorgement</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UZyeFmbcWZytZrT2Onx8SesRMvVQvibA/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Breast Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1_K9XWmCuA6GawgqRGi8JWb-iQymac3fa/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Breast Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1dR_HqlypQI2-c0VTzvHwfSch87Tf4h91/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19i6ztfkdn6rsM6vbsnY7GlUUeilVQqpp/preview', 'Detailed Notes: Newborn')">
+                        <span class="icon">📚</span><span>Detailed Notes: Management of Newborn</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1o9EfwfyD-zNkjSuXlAjVN0bwUgZK1jos/preview', 'Management of Newborn')">
+                        <span class="icon video-icon">▶️</span><span>Management of Newborn</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rvAq1kBuQQoCeiSV2aZj4ovsL6G8tsYY/preview', 'Routine Care')">
+                        <span class="icon video-icon">▶️</span><span>Routine Care After Birth</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QWhdiI3HWkgM-Iob8Ar2ww9a7fLVbCPZ/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18uDA524XSjQKxq5rl3Yg3U8UTrF-0gHa/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- UNIT 7 - MENOPAUSE -->
         <div class="unit-container" id="unit7">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - MENOPAUSE
+                UNIT 7 - MANAGEMENT OF NORMAL PUERPERIUM
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1Ug9GmklV0wlQ2PRb2DJAagX88x_Q4mSD/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes: Menopause</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hWSgDFOq8vncEhkXmgwbDoauOdSWjEip/view?usp=drive_link" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Menopause</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Fk4roecDDHp5uc09-AHcpu7rr7JqsQvf/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes: Menopause</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16bau6tpD0FPaYGodJaSAXKczWFLMQlTk/view?usp=drive_link" class="resource-btn quiz" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz</span>
-                    </a>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1B1yT64ovQIoBEnFiDW4lsuhNl_WkbyaR/preview', 'Detailed Notes: Puerperium')">
+                        <span class="icon">📚</span><span>Detailed Notes: Puerperium</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ucG2IQFySftOqrh-VfMH8D165HlUlvWb/preview', 'Assessment Puerperium')">
+                        <span class="icon video-icon">▶️</span><span>Assessment and Management of Puerperium</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gBewvxNZ2Mfi0ge43zblk3Ve3xEoKsEM/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1muKZpXWMe2tQ1Z4mZzSHWJ-qTtDOeJZZ/preview', 'Breast Feeding')">
+                        <span class="icon video-icon">▶️</span><span>Breast Feeding & Lactation Management</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mSulurOQAKNLZbOla26w9s6zRzuTaGg4/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_6abjZseGPiwJCaYUVVuDcAl4qYrvC30/preview', 'Family Planning')">
+                        <span class="icon video-icon">▶️</span><span>Family Planning</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a6gStYiIyMO6B5hfjFmGIlcx1efqvVlB/preview', 'Methods of Family Planning')">
+                        <span class="icon video-icon">▶️</span><span>Methods of Family Planning</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GnXitMsAyyW229XyokhMs2yp6R6QxWb3/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19nfaH1YIDO5vT-OKP_0JRtF_Dd95lzCh/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - COMPLICATIONS DURING PREGNANCY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pKktmC3sn2NGsCOLxtLcDEYPi2pySbow/preview', 'Detailed Notes: Complications')">
+                        <span class="icon">📚</span><span>Detailed Notes: Complications</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Bb9FkhEZ9JnMy-Xp5RHOmCRe-O5fex5s/preview', 'Ectopic Pregnancy')">
+                        <span class="icon video-icon">▶️</span><span>Ectopic Pregnancy & Hyperemesis Gravidarum</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12x1gEGuTgaERV4XnE3Di0p6a-NYg77Q5/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yRXr8magYFbbevQ_TkHbksLwSCUin6ut/preview', 'Polyhydramnios')">
+                        <span class="icon video-icon">▶️</span><span>Polyhydramnios</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Zrh15L_7_-k5WaE4sU6G5YTmcseUVQyo/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11xODeWf94sKNr_YSqOcxC2am6w8WXbyK/preview', 'Pre-eclampsia')">
+                        <span class="icon video-icon">▶️</span><span>Pre-eclampsia, Eclampsia & Multiple Pregnancy</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1cXfLoWKr8YXnNzy63dLqmJc0w0x2xx8F/preview', 'Abortion')">
+                        <span class="icon video-icon">▶️</span><span>Abortion & Vesicular Mole</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1d8pry8Lf07Mu1c0Y2l4idX_EBywCkbBf/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    
+                    
+
+[Image of placenta previa vs abruption]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QaDHFR9j_-GhlPxLDZ0AgXw7ch8JbdRc/preview', 'Placenta Previa')">
+                        <span class="icon video-icon">▶️</span><span>Placenta Previa & Abruption</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sQGGaOvoSmOg5qsN0mRw4AvIXnMpHKvq/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lEiLDILPEo5tOGle066VRA0QKPKfHg-S/preview', 'Anemia')">
+                        <span class="icon video-icon">▶️</span><span>Anemia & IUGR</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1W30_j0Ejwq6PmciEHp_HReKAv9NooL4C/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1aF95TNncQsK-gfuJkxX7_ceXFpNCZ65x/preview', 'Infections')">
+                        <span class="icon video-icon">▶️</span><span>RTI, STD & Jaundice</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dhakvCDqr_XDDyU4mWb-0aBiX10QLMcB/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nANVx5N3BnFAi1ThW3yLKw4OZ_rXW_tE/preview', 'Osteomalacia')">
+                        <span class="icon video-icon">▶️</span><span>Osteomalacia & UTI</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HGoM2eWkk7gAYTTAz5mG5UxjhzAzaj-3/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ysv8OgQwlGGjbMgVnCYi9zcCWiToZRnB/preview', 'NST')">
+                        <span class="icon video-icon">▶️</span><span>Non-Stress Test & USG</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17u75REULqYF3k7IQMigSpzcRKVhr_hTR/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VEQ_QhW-knBa-wcV1XJByxlhCWKC8T8R/preview', 'Diabetes Heart')">
+                        <span class="icon video-icon">▶️</span><span>Diabetes & Heart Disease</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mPcS4d-6PcNIO7_MZm18q2aFuHrDpb9f/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PvkjnJe1s-Ka58Q_NhxTWachgTbcSenf/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - MANAGEMENT OF HIGH RISK LABOUR
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1poEYgKCL7R1uj8eBLk42fGJoJzhhaHV9/preview', 'Detailed Notes: High Risk Labour')">
+                        <span class="icon">📚</span><span>Detailed Notes: High Risk Labour</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1D3pa70n_wSi2dLbcj6lgaJaRJNB4VLX-/preview', 'Rupture Uterus')">
+                        <span class="icon video-icon">▶️</span><span>Rupture of Uterus, Inversion, Shock & Retained Placenta</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1YF59pYnUNNn-6YCtHzvCE1WKruAPGa1u/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12x6ikHCtl13FuiVrWXLoh8nbpyWoz3w2/preview', 'Dystocia')">
+                        <span class="icon video-icon">▶️</span><span>Abnormal Uterine Action, Shoulder Dystocia & Cord Prolapse</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/179DIvncVvy2-LMASARhCuQRaxpSGT_LT/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1W6455k8nci-N0ysLcSkrTxQQQABZfnaL/preview', 'Contracted Pelvis')">
+                        <span class="icon video-icon">▶️</span><span>Contracted Pelvis & Induction of Labour</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FvwAbckRKUX7P5gR4E2vOhZwhVWuI0G7/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VP97H34MsR-COEvndjhUPuv51huofbjf/preview', 'Malposition PPH')">
+                        <span class="icon video-icon">▶️</span><span>Malposition, Malpresentation & PPH</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XtrPjxnahmjb66Gq24mTAmPCnsMGdpq4/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PvkjnJe1s-Ka58Q_NhxTWachgTbcSenf/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - COMPLICATIONS OF PUERPERIUM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PiDzPyYlyjKjub5XTn7-tp-n6Q6Ygsbf/preview', 'Detailed Notes: Puerperal Comp')">
+                        <span class="icon">📚</span><span>Detailed Notes: Complications of Puerperium</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1W_KMJG--jVFQ1lwODHxeLKliwpCHRwHs/preview', 'Puerperal Pyrexia')">
+                        <span class="icon video-icon">▶️</span><span>Puerperal Pyrexia & Sepsis</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1romoTgRgyEvi7qCZ2Cx4WhndyyljBf3_/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VSyHTjMuBRj6AsRjh3CdmtSIUBKFAc7K/preview', 'Thrombophlebitis')">
+                        <span class="icon video-icon">▶️</span><span>Thrombophlebitis & Pulmonary Embolism</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pRz-bQhCJ51wqS94L37v-GKh1qCIPtXc/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xRAzplJaBixZb41ITG19Qsxaq03XtRHO/preview', 'Breast Engorgement')">
+                        <span class="icon video-icon">▶️</span><span>Breast Engorgement & Mastitis</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sVRISoAM80pvXqn9qL-tKMrHhytB_xUf/preview', 'Breast Abscess')">
+                        <span class="icon video-icon">▶️</span><span>Breast Abscess & Puerperal Psychosis</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p73nFI4erzyhWf30ZhDEopZW7GOgALCb/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ix-_5vWuNQIvr0gEOGWVZGlBvQ0b8KhW/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - HIGH RISK AND SICK NEWBORN
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HRjtQ22yYi9hGwVX4fqnLoTelYZIIyxv/preview', 'Detailed Notes: Sick Newborn')">
+                        <span class="icon">📚</span><span>Detailed Notes: High Risk Newborn</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nY20gTTfmspDDlyN0_p0E2XXGza1Ikqz/preview', 'Newborn Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Newborn Assessment</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cIk07vnOF7vthyigTUgqXlD3in3qeTLL/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hVDP9ulMY8znyAHgNXG0z1G9hFvXJaYE/preview', 'Immediate Care')">
+                        <span class="icon video-icon">▶️</span><span>Immediate Care of Normal Newborn</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NzSG0ZI935CRIBFP84BSC2h8ssmsZIM8/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mVXD_sWGSPwJnfqSeJ0-xKY4mB5QyEvA/preview', 'Examination')">
+                        <span class="icon video-icon">▶️</span><span>Head to Toe & Neurological Assessment</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/150wW6xjOqnVHNoq1dnf6MRDly7J4TWyz/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1X1dLjMd1XAZtdBwavIf4FYA0OqfjXLE7/preview', 'LBW Preterm')">
+                        <span class="icon video-icon">▶️</span><span>Low Birth Weight & Preterm Birth</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18FczhHZ1P0TzbLWD8gOjI4_1V32E2UYX/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qq-ZSjJNNi2K9hM4j99Wt4BAmnlxlu3o/preview', 'Hyperbilirubinemia')">
+                        <span class="icon video-icon">▶️</span><span>Hyperbilirubinemia</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GexWDy6sx44y-kV5k7PqLib7KvUNPLoz/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IV1u4GbqN2NA8kBPahRzu0oSK0JoD-lv/preview', 'Hypoglycemia')">
+                        <span class="icon video-icon">▶️</span><span>Hypoglycemia & Hypothermia</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1TwGwhfJKEyc6yE7k0Fha9nIbZfTTrOys/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Up0wIsQJfL7v79seRUqKlT0vh9EbLB4O/preview', 'Convulsion Rh')">
+                        <span class="icon video-icon">▶️</span><span>Neonatal Convulsion & Rh Incompatibility</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1R6xD92QejFHkEnQegn8O3zNLwNZEi2qq/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ElseNGxtjVTFLZuLA719roMg6STGKB4o/preview', 'Small Dates')">
+                        <span class="icon video-icon">▶️</span><span>Small For Dates & Preterm</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ldaoz0lna75aeWKvKWtKSh9PZPN1c-FA/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1B2y9DpZYDrCBf177RXTXV8Kk5zzcgO20/preview', 'Asphyxia RDS')">
+                        <span class="icon video-icon">▶️</span><span>Asphyxia & Respiratory Distress Syndrome</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1t9-LhpeiVKlAzxzSzp9JI8P2XttsAD9o/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BV9wJ8gRp7GwgF2bIB7OOIH15GyaJigd/preview', 'Sepsis Injuries')">
+                        <span class="icon video-icon">▶️</span><span>Sepsis, Birth Injuries & Torticollis</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11237ZPNlp-BCfq1A89mMckTKKdm60Pxg/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1reJ913SxONq54VsuCY-rKSvQSTJqWaSN/preview', 'Hemorrhage')">
+                        <span class="icon video-icon">▶️</span><span>Hemorrhage & Congenital Anomalies</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/113-SNHVuNtj6ZaLOqrIQRyg50LWHRL60/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HWblW7rE3nnC0c0sh8gyTCy09ht7RNhX/preview', 'HIV Mother')">
+                        <span class="icon video-icon">▶️</span><span>Newborn of HIV Positive Mother</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nXfhN75bRBTSDmc25Zg92qTaWBIID1aG/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1yNuaY0zPl6j6ETLPjDQy4x643nk-ievy/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - OBSTETRIC OPERATIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KYStF8uiVsBRsPtMuXmYh1XZVkJSaBP7/preview', 'Detailed Notes: Operations')">
+                        <span class="icon">📚</span><span>Detailed Notes: Obstetric Operations</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DmAS7Fav_Wh2zBs1LD2VlrqrNneeaIRO/preview', 'Induction of Labour')">
+                        <span class="icon video-icon">▶️</span><span>Induction of Labour & Methods</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1apw74MTLlJ2_DQ5EqwbFQrioayHwRVLd/preview', 'Version')">
+                        <span class="icon video-icon">▶️</span><span>External Cephalic Version & Bipolar Version</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Gofz3U_Nmom5uztG7SSPh3IZce7qXJoR/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1etNSZ1jiNV_o3qdBcVoPp4MA7ZxEWMKV/preview', 'Manual Removal')">
+                        <span class="icon video-icon">▶️</span><span>Manual Removal Of Placenta & Sterilization</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10HoLFmoiZVAW-JQw6oLJXs_lqeJx0_Lo/preview', 'Sterilization Types')">
+                        <span class="icon video-icon">▶️</span><span>Types of Sterilization (Vasectomy, Tubectomy)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LbbVCkQykLRjTDxaUjUHqQZpThk5Soyt/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OiICpcINBd8vM1GNKb2EpStw9HpBzSi3/preview', 'Forcep Delivery')">
+                        <span class="icon video-icon">▶️</span><span>Forceps Delivery</span>
+                    </div>
+                    
+                    
+
+[Image of lower segment caesarean section incision]
+
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11mx6S5CH8HBImnw8dUU6HutiIYRGCyPm/preview', 'Cesarean Section')">
+                        <span class="icon video-icon">▶️</span><span>Cesarean Section</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HWik6VmQksUux13z_AAJC3MQfVAbMZo0/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YC6LbjvfaO5DfXwtsgrjKQkXaaCTZtjp/preview', 'Destructive Operation')">
+                        <span class="icon video-icon">▶️</span><span>Destructive Operations</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14LVB1_HU_CqBup3lHCT8svohU52kbQ3S/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1C79qrDZdRHU0mZA_t4Fpr57ryHgCkLBD/preview', 'D and E')">
+                        <span class="icon video-icon">▶️</span><span>D&E, D&C, and MVA</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ytOykj6OfO5rp0REa_LPlj4jVrgXdoVP/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HcWGscozlAyj945DhDZdF3XoSfYrHGks/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - DRUGS USED IN OBSTETRICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1H5rjOuOXVSKPCGCB7C7t58F8mnwA0_VL/preview', 'Detailed Notes: Drugs')">
+                        <span class="icon">📚</span><span>Detailed Notes: Drugs</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dRoE9H7gO17VgK3qlhDCrl10oS7ga3bQ/preview', 'Antibiotics')">
+                        <span class="icon video-icon">▶️</span><span>Antibiotics & Drugs During Breastfeeding</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Zn-IcrwazmCVY8mGD5hTjFXNCF7n1CYS/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1REIubqVx53oJdsd63jXb7pIXUChpjOzH/preview', 'Newborn Drugs')">
+                        <span class="icon video-icon">▶️</span><span>Drugs Used for Newborn Baby</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1YkSXuAxiCm35lIFiEXIKkyEN5EE3mYeL/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ZGn-z8CCxcqreg8CNiWO1n1onBxEF5_T/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - ETHICAL AND LEGAL ASPECTS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cTuj2tsjN2n3L8_MEo3P-v9hgFXc5Rt2/preview', 'Detailed Notes: Ethics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Ethical & Legal Aspects</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1vwQAOXFbdFxh43KXWKcFyVlxD6dAMO5v/preview', 'Ethics Video')">
+                        <span class="icon video-icon">▶️</span><span>Ethical and Legal Aspects related to Midwifery</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/119HvcGA_OFABTAC5zlv4azMF9IqTp4CA/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes</span>
+                    </div>
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/180QbXXmMOaP88kwecM7dfU4v9Bs8H1b_/preview', 'Quiz PDF')">
+                        <span class="icon">📄</span><span>Download Quiz PDF</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(14)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
     <script>
-        // Function to toggle the visibility of the unit content
-        function toggleUnit(header) {
-            const unitContent = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            
-            header.setAttribute('aria-expanded', !isExpanded);
-            unitContent.classList.toggle('active');
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1
+                { q: "Who is known as the 'Mother of Midwifery'?", o: ["Florence Nightingale", "Ina May Gaskin", "Marie Curie", "Margaret Sanger"], a: 1 },
+                { q: "The term 'Midwife' literally means:", o: ["With woman", "Wise woman", "Baby catcher", "Nurse"], a: 0 },
+                { q: "Which organization sets global standards for midwifery?", o: ["WHO", "ICM", "UNICEF", "FIGO"], a: 1 },
+                { q: "A primary goal of midwifery is to reduce:", o: ["Maternal Mortality Rate", "Hospital stay", "Cesarean sections", "All of the above"], a: 3 },
+                { q: "Evidence-based practice in midwifery relies on:", o: ["Tradition", "Clinical expertise and research", "Doctor's orders", "Patient preference only"], a: 1 }
+            ],
+            2: [ // Unit 2
+                { q: "The primary female sex organ is:", o: ["Uterus", "Ovary", "Vagina", "Breast"], a: 1 },
+                { q: "Which layer of the uterus is shed during menstruation?", o: ["Myometrium", "Perimetrium", "Endometrium", "Exometrium"], a: 2 },
+                { q: "The hormone responsible for ovulation is:", o: ["FSH", "LH", "Estrogen", "Progesterone"], a: 1 },
+                { q: "Fertilization usually occurs in the:", o: ["Uterus", "Ampulla of Fallopian Tube", "Ovary", "Cervix"], a: 1 },
+                { q: "The average length of the menstrual cycle is:", o: ["21 days", "28 days", "35 days", "14 days"], a: 1 }
+            ],
+            3: [ // Unit 3
+                { q: "Implantation of the blastocyst usually occurs on day:", o: ["4-5", "6-9", "12-14", "2-3"], a: 1 },
+                { q: "The structure that provides oxygen and nutrients to the fetus is:", o: ["Amniotic fluid", "Placenta", "Yolk sac", "Ovary"], a: 1 },
+                { q: "In fetal circulation, the ductus arteriosus connects:", o: ["Umbilical vein to IVC", "Pulmonary artery to Aorta", "Right atrium to Left atrium", "Aorta to Pulmonary vein"], a: 1 },
+                { q: "The 'soft spots' on a fetal skull are called:", o: ["Sutures", "Fontanelles", "Vertex", "Occiput"], a: 1 },
+                { q: "The umbilical cord normally contains:", o: ["2 arteries, 1 vein", "1 artery, 2 veins", "2 arteries, 2 veins", "1 artery, 1 vein"], a: 0 }
+            ],
+            4: [ // Unit 4
+                { q: "Probable signs of pregnancy include:", o: ["Morning sickness", "Positive pregnancy test", "Fetal heart rate", "Ultrasound"], a: 1 },
+                { q: "Naegele's rule for EDD is:", o: ["LMP + 7 days - 3 months + 1 year", "LMP + 9 months + 7 days", "LMP + 280 days", "LMP - 3 months + 7 days"], a: 0 },
+                { q: "Quickening refers to:", o: ["First fetal movement felt by mother", "Lightening", "Contractions", "Rapid heart rate"], a: 0 },
+                { q: "Physiological anemia in pregnancy is due to:", o: ["Iron deficiency", "Hemodilution", "Blood loss", "Lack of B12"], a: 1 },
+                { q: "The recommended weight gain for a normal BMI pregnant woman is:", o: ["5-9 kg", "11-16 kg", "15-20 kg", "2-5 kg"], a: 1 }
+            ],
+            5: [ // Unit 5
+                { q: "The first stage of labor lasts from:", o: ["Onset of contractions to full dilation", "Full dilation to delivery of baby", "Delivery of baby to placenta", "Observation period"], a: 0 },
+                { q: "Normal Fetal Heart Rate (FHR) range is:", o: ["100-140 bpm", "110-160 bpm", "120-180 bpm", "80-120 bpm"], a: 1 },
+                { q: "The partograph is used to monitor:", o: ["Fetal growth", "Progress of labor", "Postpartum recovery", "Newborn health"], a: 1 },
+                { q: "Crowning occurs in which stage of labor?", o: ["First", "Second", "Third", "Fourth"], a: 1 },
+                { q: "Active management of the third stage involves:", o: ["Oxytocin administration", "Controlled cord traction", "Uterine massage", "All of the above"], a: 3 }
+            ],
+            6: [ // Unit 6
+                { q: "The APGAR score is assessed at:", o: ["1 and 5 minutes", "5 and 10 minutes", "Immediately only", "1 hour"], a: 0 },
+                { q: "Vitamin K is given to newborns to prevent:", o: ["Infection", "Hemorrhagic disease", "Jaundice", "Hypoglycemia"], a: 1 },
+                { q: "The normal respiratory rate for a newborn is:", o: ["20-30 bpm", "30-60 bpm", "60-80 bpm", "12-20 bpm"], a: 1 },
+                { q: "Which reflex involves the baby throwing arms out when startled?", o: ["Rooting", "Moro", "Grasp", "Sucking"], a: 1 },
+                { q: "Meconium is:", o: ["First breast milk", "First stool of newborn", "Baby's urine", "Skin coating"], a: 1 }
+            ],
+            7: [ // Unit 7
+                { q: "Lochia rubra typically lasts for:", o: ["1-4 days", "5-9 days", "10-14 days", "21 days"], a: 0 },
+                { q: "Involution refers to:", o: ["Production of milk", "Return of uterus to pre-pregnant state", "Emotional changes", "Weight loss"], a: 1 },
+                { q: "The hormone responsible for milk ejection (let-down) is:", o: ["Prolactin", "Oxytocin", "Estrogen", "Progesterone"], a: 1 },
+                { q: "Exclusive breastfeeding is recommended for:", o: ["3 months", "6 months", "9 months", "1 year"], a: 1 },
+                { q: "Postpartum hemorrhage is blood loss greater than:", o: ["300ml", "500ml", "1000ml", "200ml"], a: 1 }
+            ],
+            8: [ // Unit 8
+                { q: "The classic triad of Pre-eclampsia is:", o: ["Hypertension, Proteinuria, Edema", "Hypotension, Proteinuria, Edema", "Hypertension, Bleeding, Pain", "Fever, Pain, Discharge"], a: 0 },
+                { q: "Painless vaginal bleeding in the third trimester suggests:", o: ["Abruptio Placentae", "Placenta Previa", "Uterine Rupture", "Vasa Previa"], a: 1 },
+                { q: "The most common site for ectopic pregnancy is:", o: ["Ovary", "Fallopian tube", "Cervix", "Abdomen"], a: 1 },
+                { q: "Hyperemesis Gravidarum is:", o: ["Mild morning sickness", "Severe persistent vomiting", "High blood pressure", "Diabetes"], a: 1 },
+                { q: "Which drug is used to treat eclamptic seizures?", o: ["Diazepam", "Magnesium Sulfate", "Phenytoin", "Insulin"], a: 1 }
+            ],
+            9: [ // Unit 9
+                { q: "Shoulder dystocia is an emergency where:", o: ["Head is not delivered", "Shoulders get stuck after head is delivered", "Breech presentation", "Cord comes first"], a: 1 },
+                { q: "Cord prolapse requires which immediate position?", o: ["Supine", "Trendelenburg/Knee-chest", "Standing", "Sitting"], a: 1 },
+                { q: "Precipitate labor is labor lasting less than:", o: ["3 hours", "5 hours", "10 hours", "24 hours"], a: 0 },
+                { q: "Atonic uterus is the leading cause of:", o: ["PPH", "Infection", "Rupture", "Inversion"], a: 0 },
+                { q: "Which maneuver is used for shoulder dystocia?", o: ["McRoberts", "Leopold's", "Ritgen's", "Valsalva"], a: 0 }
+            ],
+            10: [ // Unit 10
+                { q: "Puerperal sepsis is infection of the genital tract within:", o: ["24 hours", "42 days", "3 months", "1 year"], a: 1 },
+                { q: "A characteristic sign of mastitis is:", o: ["Soft breast", "Wedge-shaped redness and pain", "No fever", "Itching"], a: 1 },
+                { q: "Homan's sign is used to detect:", o: ["Mastitis", "DVT", "PPH", "Anemia"], a: 1 },
+                { q: "Puerperal psychosis is a:", o: ["Mild mood swing", "Psychiatric emergency", "Normal adjustment", "Sleep disorder"], a: 1 },
+                { q: "Secondary PPH occurs:", o: ["Within 24 hours", "After 24 hours up to 6 weeks", "During labor", "Before birth"], a: 1 }
+            ],
+            11: [ // Unit 11
+                { q: "Pathological jaundice typically appears:", o: ["Within 24 hours", "After 24 hours", "After 1 week", "After 2 weeks"], a: 0 },
+                { q: "Respiratory Distress Syndrome (RDS) is common in:", o: ["Post-term babies", "Preterm babies", "Large babies", "Term babies"], a: 1 },
+                { q: "Kangaroo Mother Care is effective for:", o: ["Hypothermia", "Hyperthermia", "Infection", "Jaundice"], a: 0 },
+                { q: "Hypoglycemia in a newborn is blood glucose below:", o: ["40 mg/dl", "60 mg/dl", "80 mg/dl", "100 mg/dl"], a: 0 },
+                { q: "Phototherapy is the treatment for:", o: ["Anemia", "Hyperbilirubinemia", "Sepsis", "Hypothermia"], a: 1 }
+            ],
+            12: [ // Unit 12
+                { q: "A common indication for C-section is:", o: ["Cephalopelvic Disproportion (CPD)", "Occipito-anterior position", "Mother's request", "Mild pain"], a: 0 },
+                { q: "ECV stands for:", o: ["Emergency Cesarean Version", "External Cephalic Version", "Early Cord Vessel", "None"], a: 1 },
+                { q: "Forceps delivery requires the cervix to be:", o: ["5cm dilated", "Fully dilated", "Closed", "Partially dilated"], a: 1 },
+                { q: "Tubectomy is a method of:", o: ["Temporary contraception", "Permanent sterilization", "Induction", "Abortion"], a: 1 },
+                { q: "Manual Vacuum Aspiration (MVA) is used for:", o: ["Full term delivery", "Incomplete abortion", "C-section", "Induction"], a: 1 }
+            ],
+            13: [ // Unit 13
+                { q: "Oxytocin is primarily used for:", o: ["Induction of labor & PPH control", "Pain relief", "Stopping labor", "Treating infection"], a: 0 },
+                { q: "Which antibiotic is generally safe in pregnancy?", o: ["Tetracycline", "Ampicillin/Penicillin", "Streptomycin", "Chloramphenicol"], a: 1 },
+                { q: "Magnesium Sulfate toxicity is reversed by:", o: ["Calcium Gluconate", "Adrenaline", "Naloxone", "Atropine"], a: 0 },
+                { q: "Betamethasone is given in preterm labor to:", o: ["Stop contractions", "Mature fetal lungs", "Prevent infection", "Sedate mother"], a: 1 },
+                { q: "Teratogenic drugs cause:", o: ["Infection", "Fetal malformations", "Rapid growth", "High BP"], a: 1 }
+            ],
+            14: [ // Unit 14
+                { q: "Beneficence in midwifery means:", o: ["Do no harm", "Act in best interest of patient", "Tell the truth", "Fairness"], a: 1 },
+                { q: "Informed consent requires:", o: ["Signature only", "Understanding risks/benefits", "Doctor's order", "Family permission"], a: 1 },
+                { q: "Confidentiality relates to:", o: ["Patient privacy", "Hospital rules", "Visiting hours", "Staff meetings"], a: 0 },
+                { q: "Malpractice involves:", o: ["Professional negligence", "Bad outcome", "Unavoidable accident", "Rude behavior"], a: 0 },
+                { q: "Midwives are accountable to:", o: ["The patient", "The profession", "The public", "All of the above"], a: 3 }
+            ]
+        };
 
-            // Dynamic max-height for smooth collapse animation
-            if (unitContent.classList.contains('active')) {
-                // If expanding, set max-height to scrollHeight
-                unitContent.style.maxHeight = unitContent.scrollHeight + "px";
-            } else {
-                // If collapsing, reset max-height to 0
-                unitContent.style.maxHeight = "0";
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
-        
-        // Initial setup on load to ensure only Unit 1 is expanded, and correct initial max-height for collapse effect.
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-             const allUnits = document.querySelectorAll('.unit-header');
-             allUnits.forEach((header, index) => {
-                 const content = header.nextElementSibling;
-                 
-                 if (index === 0) {
-                     // Unit 1 is active by default
-                     header.setAttribute('aria-expanded', 'true');
-                     content.classList.add('active');
-                     // Set the max-height dynamically for the open unit
-                     // Needs a slight delay to ensure scrollHeight is calculated correctly after CSS application
-                     setTimeout(() => {
-                         content.style.maxHeight = content.scrollHeight + "px";
-                     }, 50);
-                 } else {
-                     // All other units are initially collapsed
-                     header.setAttribute('aria-expanded', 'false');
-                     content.classList.remove('active');
-                     content.style.maxHeight = '0';
-                 }
-             });
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
         });
     </script>
 </body>
 </html>
-
