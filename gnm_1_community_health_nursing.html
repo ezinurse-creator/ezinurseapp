@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Community Health Nursing II Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Community Health Nursing II." />
+    <title>Community Health Nursing II</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Community Health Nursing II." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
-            --brand: #003B82;
+            --brand: #003B82; 
             --accent: #00B9F2;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
@@ -17,6 +17,8 @@
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; }
@@ -76,7 +78,7 @@
         }
         .unit-content.active {
             padding: 24px 12px;
-            max-height: none;
+            max-height: none; 
         }
 
         .subsection {
@@ -106,46 +108,110 @@
             gap: 12px;
             flex-wrap: wrap;
             min-height: 50px;
+            cursor: pointer;
         }
         .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
         .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.model { background: #f0fff4; border-color: #a7f3d0; color: #106637; }
         .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
         .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
         .resource-btn.notes:hover { background: #e0f2fe; }
         .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.model:hover { background: #d1fae5; }
         .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { 
-            background: #e5e7eb;
-            color: #6b7280;
-        }
-        
-        .resource-btn.coming-soon:hover {
-            cursor: default;
-            background: #e5e7eb;
-        }
+        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
         .icon.video-icon { color: #8b5cf6; }
-        .icon.model-icon { color: #16a34a; }
         .icon.quiz-icon { color: #FFA500; }
         .icon.coming-soon-icon { color: #9ca3af; }
 
-        h2 {
-            font-size: 24px;
-            font-weight: 700;
-            margin: 40px 0 20px;
-            color: var(--brand);
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
-        h3 {
-            font-size: 1.2rem;
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
             font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+            cursor: pointer;
         }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
         @media (max-width: 768px) {
             body { padding: 16px; }
@@ -153,17 +219,16 @@
             .resource-btn { font-size: 14px; }
             .subsection { padding: 16px; }
             .unit-content.active { padding: 16px 8px; }
-            h2 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
-    <a href="https://drive.google.com/file/d/1od7YFbD7VkobycSNQY-rKMC_jcAATAnw/view?usp=drive_link" class="syllabus-btn" target="_blank">
-        📄COMMUNITY HEALTH NURSING II SYLLABUS
-    </a>
+
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1od7YFbD7VkobycSNQY-rKMC_jcAATAnw/preview', 'Syllabus')">
+        📄 DOWNLOAD COMMUNITY HEALTH NURSING II SYLLABUS
+    </div>
     
     <div id="units">
-        <!-- === UNIT 1 === -->
         <div class="unit-container" id="unit1">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
                 UNIT 1 - INTRODUCTION TO COMMUNITY HEALTH
@@ -171,47 +236,35 @@
             </div>
             <div class="unit-content active">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1rZnASNcm-1NXgPNeGqaRDpUceHq5-cgg/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1f9JH46pJLCtPF54CuP2SQDrTdxljLYS_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Introduction to Community Health Nursing, Public Health Nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sfg7B0aek6q6zszU5sPH5NfQBK3x8Dmt/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pN5O-9dx8pCece0KnaekLcXUyijWoVTp/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Determinents</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/18SLlpoaA93GYVeDXryxr-ait40S0sfFM/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1PHNlEZRfy7aT1AxGhMwS3oI9kwtae6OG/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Indicators Of Health</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1d-F29V09EYhyj6KUFFa6abll2XrYFCGq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QuZuXZHT2l-E28DESrRcXPjket3037P0/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1rZnASNcm-1NXgPNeGqaRDpUceHq5-cgg/preview', 'Detailed Notes: Intro')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1f9JH46pJLCtPF54CuP2SQDrTdxljLYS_/preview', 'Introduction to CHN')">
+                        <span class="icon video-icon">▶️</span><span>Introduction to CHN & Public Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1pN5O-9dx8pCece0KnaekLcXUyijWoVTp/preview', 'Health Determinants')">
+                        <span class="icon video-icon">▶️</span><span>Health Determinants</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PHNlEZRfy7aT1AxGhMwS3oI9kwtae6OG/preview', 'Indicators of Health')">
+                        <span class="icon video-icon">▶️</span><span>Indicators of Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QuZuXZHT2l-E28DESrRcXPjket3037P0/preview', 'Primary Health Care')">
                         <span class="icon video-icon">▶️</span><span>Concept of Primary Health Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1SCvAOf2f5Z5bAkXz-eFOyoBG7HvIMqN/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1p26oqrU80ZIRxMN_txVkt2TEwPbylxI7/preview', 'Promotion of Health')">
+                        <span class="icon video-icon">▶️</span><span>Promotion of Health</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-uaGGdkPtUN4MnJES6dWO2sILzH5nTmG/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1p26oqrU80ZIRxMN_txVkt2TEwPbylxI7/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Promotion Of Health</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-uaGGdkPtUN4MnJES6dWO2sILzH5nTmG/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 1 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 2 === -->
         <div class="unit-container" id="unit2">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 2 - COMMUNITY HEALTH NURSING
@@ -219,35 +272,29 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1N9IE6tCt1gKgBDQNnALvPt0ehL5e97aa/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1DLS1GEY7hXGJC_sr5Xk47l7aCMMwCeaL/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1N9IE6tCt1gKgBDQNnALvPt0ehL5e97aa/preview', 'Detailed Notes: CHN')">
+                        <span class="icon">📚</span><span>Detailed Notes: CHN</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DLS1GEY7hXGJC_sr5Xk47l7aCMMwCeaL/preview', 'Definition of CHN')">
                         <span class="icon video-icon">▶️</span><span>Definition of Community Health Nursing</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1YqSWYmflSmHdrdAsibN99Ms2sxNBUNfP/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Bvox51BTS6Mgjp7tfMSyC8PZmebzXY9w/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Bvox51BTS6Mgjp7tfMSyC8PZmebzXY9w/preview', 'Principles of CHN')">
                         <span class="icon video-icon">▶️</span><span>Principles of CHN</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QazSI-PuxjTktf5KduRfy9eGZNbkVVeZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZklOCQ4YbfD2aEOqnL7w642UQxSvSIOy/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZklOCQ4YbfD2aEOqnL7w642UQxSvSIOy/preview', 'CHN Process')">
                         <span class="icon video-icon">▶️</span><span>Community Health Nursing Process</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13hckvbWt7PDnwUYz-1XYxO8BrUbGdSSX/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13hckvbWt7PDnwUYz-1XYxO8BrUbGdSSX/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 2 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 3 === -->
         <div class="unit-container" id="unit3">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 3 - HEALTH ASSESSMENT
@@ -255,260 +302,159 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1JiYH0z4WxMOWfIrS3M91KNAHRqtvukzr/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U-8s0P9t64PMeUayudakQfmw_cPGMGHf/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Assessment</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1p0ZPRmYhxIoFrILZ_ackO3YMCqfSul_Z/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hmLQck2djGVLkB9SrCjB-s_EUew0onNg/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JiYH0z4WxMOWfIrS3M91KNAHRqtvukzr/preview', 'Detailed Notes: Assessment')">
+                        <span class="icon">📚</span><span>Detailed Notes: Health Assessment</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1U-8s0P9t64PMeUayudakQfmw_cPGMGHf/preview', 'Health Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Health Assessment Introduction</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hmLQck2djGVLkB9SrCjB-s_EUew0onNg/preview', 'Healthy Person')">
                         <span class="icon video-icon">▶️</span><span>Characteristic of a Healthy Person</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1CBjrfoVxbxtILpDE5v9K2KJjUUdzThFG/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KhlJbYLOsBxXJx12n3BrdXivePOxCMYg/preview', 'Age Group Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Assessment According to Age Group</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yq34B8DDdnC6xWRgGCTTc_Lts0iZbSd_/preview', 'Preschool Child')">
+                        <span class="icon video-icon">▶️</span><span>Health Assessment: Preschool Child</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1slFwXev45rZMFTmyF5cd65R0LoLhwMei/preview', 'Adult Assessment')">
+                        <span class="icon video-icon">▶️</span><span>Health Assessment: Adult</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a7LHFEV3DcUzjm2J_h6HieA4uUIhiSGe/preview', 'Pregnant Women')">
+                        <span class="icon video-icon">▶️</span><span>Health Assessment: Pregnant Women</span>
+                    </div>
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1H9bqPksriSZeGpCuEL-SamCaaJMVE9M1/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KhlJbYLOsBxXJx12n3BrdXivePOxCMYg/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Assessment of Individuals According to Age Group</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1haXKexX94JKtnZ1fq_MTTs0QfNmZgMyT/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yq34B8DDdnC6xWRgGCTTc_Lts0iZbSd_/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Assessnment of Preschool Going Child</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QfPUvLtZt6Tu_LgYOBZIqHCQcLh5r6Z3/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1slFwXev45rZMFTmyF5cd65R0LoLhwMei/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Assessnment of Adult</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1kZJMtTOhc8pM107Dc57QndlQ9s-KB60H/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1a7LHFEV3DcUzjm2J_h6HieA4uUIhiSGe/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Health Assessnment of Pregnant Women</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1H9bqPksriSZeGpCuEL-SamCaaJMVE9M1/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 3 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 4 === -->
         <div class="unit-container" id="unit4">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - PRINCIPLES OF EPIDEMIOLOGY AND EPIDEMIOLOGICAL METHODS
+                UNIT 4 - EPIDEMIOLOGY
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1IY6e7KdBTBV39348RphN7LWM1PntaKeh/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1HPMeoDILC3-cCrTw0TYRxFQw9Epau8wR/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Introduction, Epidemiology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ratbJ8HfFm5GJlPuXtzAZLq-8DAyhZ5A/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Measles (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1GtWeU6kLKFRb_0WxA_h8kMk0Cy_j82uK/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IY6e7KdBTBV39348RphN7LWM1PntaKeh/preview', 'Detailed Notes: Epidemiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Epidemiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HPMeoDILC3-cCrTw0TYRxFQw9Epau8wR/preview', 'Intro Epidemiology')">
+                        <span class="icon video-icon">▶️</span><span>Introduction to Epidemiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GtWeU6kLKFRb_0WxA_h8kMk0Cy_j82uK/preview', 'Communicable Disease A')">
                         <span class="icon video-icon">▶️</span><span>Common Communicable Disease Part A</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1STU311vLxYpunjGvOcUuHIAkBuXgFQ66/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Pertussis (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KI0R5fTjj7t7D4i7BkWJCLz00ce8P-ig/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KI0R5fTjj7t7D4i7BkWJCLz00ce8P-ig/preview', 'Communicable Disease B')">
                         <span class="icon video-icon">▶️</span><span>Common Communicable Disease Part B</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1zfJRP4pz46qR2pvy5vgozHskGglTShwi/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1H2h0jYRegjQzQXVyDM1EAgJ_VKWG2Ald/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1H2h0jYRegjQzQXVyDM1EAgJ_VKWG2Ald/preview', 'Tuberculosis')">
                         <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Yuaf5SQ7SoBErSABHNGAJcDsX4dAqZwr/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Tuberculosis (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VVSMWz64171EY-Egj4oPUOT9uOXTcuPC/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VVSMWz64171EY-Egj4oPUOT9uOXTcuPC/preview', 'Influenza')">
                         <span class="icon video-icon">▶️</span><span>Influenza</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16_IA8hhQeTM35DjiPErTdENEenPbSKzH/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Influenza (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1W1Z9rjHR3Dc6XEsLFscrBCxPtPSWDt4J/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1W1Z9rjHR3Dc6XEsLFscrBCxPtPSWDt4J/preview', 'Malnutrition')">
                         <span class="icon video-icon">▶️</span><span>Malnutrition</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10S51TEG5xH32vJfqs_3QImTJmTNote9I/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/13sC6KWzCGJrlRbT-_xn-Du26u8AjyCOU/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/13sC6KWzCGJrlRbT-_xn-Du26u8AjyCOU/preview', 'Assessment Malnutrition')">
                         <span class="icon video-icon">▶️</span><span>Assessment of Malnutrition</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1yPUXVARI_GsUgHuSmUd35VXmNYy6cuhv/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/16d5qkeIvG1rw27IhV3zA6k9PkRXZQQHQ/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Hypertension and Coronary Heart Disease</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Hypertension (Coming Soon)</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Coronary Heart Disease (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12LWLY0cZ0EX9_4yp6Ua-XIQ1c5dhgdVS/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/17vTOXn95aM8e1gw4BmWxJWQRqbOCdqE1/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Diabetes Mellitus and Anemia</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Type 1 Diabetes (Coming Soon)</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Type 2 Diabetes (Coming Soon)</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Anemia (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sLDDKnE2fQMr-4PJ7dNjSArGsTZrPHAY/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/15sjU0XD8XZXqN80L68eVeY03isDKQG5m/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16d5qkeIvG1rw27IhV3zA6k9PkRXZQQHQ/preview', 'HTN & CHD')">
+                        <span class="icon video-icon">▶️</span><span>Hypertension & Coronary Heart Disease</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17vTOXn95aM8e1gw4BmWxJWQRqbOCdqE1/preview', 'Diabetes & Anemia')">
+                        <span class="icon video-icon">▶️</span><span>Diabetes Mellitus & Anemia</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15sjU0XD8XZXqN80L68eVeY03isDKQG5m/preview', 'Cancer')">
                         <span class="icon video-icon">▶️</span><span>Cancer</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1OdSKsK2ltTDUzen8Dlleul-IA8-Qx5zi/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1L8nLq6Q-5L4J8qaFmCf_nVkXNQfR7gQn/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1L8nLq6Q-5L4J8qaFmCf_nVkXNQfR7gQn/preview', 'Accidents')">
                         <span class="icon video-icon">▶️</span><span>Accidents and Injuries</span>
-                    </a>
-                    <a href="" class="resource-btn model coming-soon" target="_blank">
-                        <span class="icon model-icon">⏳</span><span>3D Model: Injuries (Coming Soon)</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1eiTswlI-_KRZDAFUfAZRbSAbJrGO0v6d/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1hgyrv9820SqC7dIAGCrIUZgWI9Y9iyoI/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Basic Tools for Measurement In Epidemiology</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1pTp828zlkFsbRFQuuk2wjEepK00SFmTZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1VH8BjYm7z7plufatHv5ew8Zys-Uj3ASK/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hgyrv9820SqC7dIAGCrIUZgWI9Y9iyoI/preview', 'Tools of Measurement')">
+                        <span class="icon video-icon">▶️</span><span>Tools for Measurement In Epidemiology</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VH8BjYm7z7plufatHv5ew8Zys-Uj3ASK/preview', 'Levels of Prevention')">
                         <span class="icon video-icon">▶️</span><span>Levels of Prevention</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10tSzM2d3HpKuzYbPGqgp08RJbpdbI__Z/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QjoXGDJCVXU8ya4ydZ8kP0etJqUGtJzg/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QjoXGDJCVXU8ya4ydZ8kP0etJqUGtJzg/preview', 'Immunity')">
                         <span class="icon video-icon">▶️</span><span>Immunity</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1S3WCgt9JrxCmeKLURDR6KrV5yYrcJFR7/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/12CwK3G3VimwjxCkscVOHwybzNw0j1_f-/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12CwK3G3VimwjxCkscVOHwybzNw0j1_f-/preview', 'Vaccines')">
                         <span class="icon video-icon">▶️</span><span>Vaccines</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1WLNI5Cj5S0z3z4IiGh9Ih58a9oSdoXqF/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Special Types of Vaccines</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1gXPJxJuu6TsPe559lhmfyA5enJbIXuXM/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ZJBg44gBoC9Pq83TBDm6FI4WSpN4wem6/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZJBg44gBoC9Pq83TBDm6FI4WSpN4wem6/preview', 'Disinfection')">
                         <span class="icon video-icon">▶️</span><span>Disinfection</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1-2oIbCzpowN7Rv5sRiPaPr7EIPaOIfMY/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 4 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 5 === -->
         <div class="unit-container" id="unit5">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - FAMILY HEALTH NURSING CARE
+                UNIT 5 - FAMILY HEALTH NURSING
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1hsBeJQVnqfnzhxbjL-ORsDvLslU7qKSm/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/10n4cTEITP-BvkIQnHjBUOM_t6wvukHLp/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Family Health Nurisng Care</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1sCEaNWCrt5wv6C_Wu_LTln-GIySZvdLJ/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1hsBeJQVnqfnzhxbjL-ORsDvLslU7qKSm/preview', 'Detailed Notes: Family')">
+                        <span class="icon">📚</span><span>Detailed Notes: Family Health</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10n4cTEITP-BvkIQnHjBUOM_t6wvukHLp/preview', 'Family Health Nursing')">
+                        <span class="icon video-icon">▶️</span><span>Family Health Nursing Care</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ziDkpUl0U-F20IItkJlqy_dErGm2Smwk/preview', 'Phases of Family Care')">
+                        <span class="icon video-icon">▶️</span><span>Phases of Family Health Nursing Process</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qHFvb06RK3LMvQY0DA-1_wXcGwBFjksa/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ziDkpUl0U-F20IItkJlqy_dErGm2Smwk/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Phases Family Health Nursing Care Process</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1qHFvb06RK3LMvQY0DA-1_wXcGwBFjksa/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 5 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 6 === -->
         <div class="unit-container" id="unit6">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - FAMILY HEALTH NURSING CARE SETTINGS : HOME VISIT
+                UNIT 6 - HOME VISIT
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1-WUv7KWW30I_uJOPZ1b4IMwPfnQSubr9/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1FMgj-8gW4mKnY8bXZcDWjDRaq4zdljaE/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-WUv7KWW30I_uJOPZ1b4IMwPfnQSubr9/preview', 'Detailed Notes: Home Visit')">
+                        <span class="icon">📚</span><span>Detailed Notes: Home Visit</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FMgj-8gW4mKnY8bXZcDWjDRaq4zdljaE/preview', 'Care Settings')">
                         <span class="icon video-icon">▶️</span><span>Family Health Care Settings</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1RQi6H95gbnd8w3h59u9tQHkPv4gIwqLp/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1KnP_Ycf81h-ixCaHpZv4VMlEQLIZxNxt/view?usp=sharing" class="resource-btn video" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KnP_Ycf81h-ixCaHpZv4VMlEQLIZxNxt/preview', 'Bag Techniques')">
                         <span class="icon video-icon">▶️</span><span>Bag Techniques</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1j7zibEXo9N5ZXuM9ik88VdATvzDr4OTc/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1j7zibEXo9N5ZXuM9ik88VdATvzDr4OTc/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 6 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 7 === -->
         <div class="unit-container" id="unit7">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 7 - REFERRAL SYSTEM
@@ -516,23 +462,23 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1xsl1Fo9QQiXAEEpHSpTkTghj2NSQGAww/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1U7h4tXFbtVDNNiP2QNdmMptaW05jYIlj/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xsl1Fo9QQiXAEEpHSpTkTghj2NSQGAww/preview', 'Detailed Notes: Referral')">
+                        <span class="icon">📚</span><span>Detailed Notes: Referral System</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1U7h4tXFbtVDNNiP2QNdmMptaW05jYIlj/preview', 'Referral System')">
                         <span class="icon video-icon">▶️</span><span>Referral System</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1WFevyj4m9Vh6Ouz9ZE29w55x4dcbKw8n/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WFevyj4m9Vh6Ouz9ZE29w55x4dcbKw8n/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 7 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 8 === -->
         <div class="unit-container" id="unit8">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
                 UNIT 8 - RECORDS AND REPORTS
@@ -540,81 +486,245 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1NtLJOE06oGuZ5dhbe3t9jrLoN-H-CSfF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1UzpPDdotH1w0p_UjJNog74UuptTmWxbI/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Records and Reports</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1Oz62gaVPbFBrzLFH03t_ShSKgPJ_AfbM/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1EtaBpOxU90AeANNX4pnSva4iaz75zCbe/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NtLJOE06oGuZ5dhbe3t9jrLoN-H-CSfF/preview', 'Detailed Notes: Records')">
+                        <span class="icon">📚</span><span>Detailed Notes: Records & Reports</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UzpPDdotH1w0p_UjJNog74UuptTmWxbI/preview', 'Records and Reports')">
+                        <span class="icon video-icon">▶️</span><span>Records and Reports Overview</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EtaBpOxU90AeANNX4pnSva4iaz75zCbe/preview', 'Reports')">
                         <span class="icon video-icon">▶️</span><span>Reports</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1QAmQSMyYwt2cma6xBzGkC4jcqcpEaHL3/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fHPJvS7fAqgCT_eQdFnBc4P8lVTGUiHI/preview', 'Requirements')">
+                        <span class="icon video-icon">▶️</span><span>Essential Requirements of Records</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1r5ygF_XuXMRmL5eI48BAAcb-vTkPrb58/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1fHPJvS7fAqgCT_eQdFnBc4P8lVTGUiHI/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Essential Requirements Of Records</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1r5ygF_XuXMRmL5eI48BAAcb-vTkPrb58/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 8 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- === UNIT 9 === -->
         <div class="unit-container" id="unit9">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - MINOR ALIGNMENTS
+                UNIT 9 - MINOR AILMENTS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
                 <div class="subsection">
-                    <a href="https://drive.google.com/file/d/1kZd-S03x1rszkFE6M2EsMK1eFpl6fN47/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1nX5P1o5Sb6Abf6kbcz5Q3Mx_NiaVDK9T/view?usp=sharing" class="resource-btn video" target="_blank">
-                        <span class="icon video-icon">▶️</span><span>Minor Alinments</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1ew8tig2tDV7-_QA-fhh11Du_DVSHgPp1/view?usp=sharing" class="resource-btn notes" target="_blank">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/1B0t8WEQInEC03dFZTY18wdj-8pl2TyA8/view?usp=sharing" class="resource-btn video" target="_blank">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1kZd-S03x1rszkFE6M2EsMK1eFpl6fN47/preview', 'Detailed Notes: Ailments')">
+                        <span class="icon">📚</span><span>Detailed Notes: Minor Ailments</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nX5P1o5Sb6Abf6kbcz5Q3Mx_NiaVDK9T/preview', 'Minor Ailments')">
+                        <span class="icon video-icon">▶️</span><span>Management of Minor Ailments</span>
+                    </div>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1B0t8WEQInEC03dFZTY18wdj-8pl2TyA8/preview', 'Standing Orders')">
                         <span class="icon video-icon">▶️</span><span>Standing Orders</span>
-                    </a>
-                    <a href="https://drive.google.com/file/d/11xIpVk6KCcXIEw-OhmIwpE2PykHHYvoi/view?usp=sharing" class="resource-btn notes" target="_blank">
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11xIpVk6KCcXIEw-OhmIwpE2PykHHYvoi/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
-                    </a>
-                    <a href="" class="resource-btn quiz coming-soon" target="_blank">
-                        <span class="icon quiz-icon">⏳</span><span>Take Unit 9 Quiz (Coming Soon)</span>
-                    </a>
+                    </div>
+
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
-    
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
     <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [ // Unit 1: Intro
+                { q: "The 'Health for All' goal was associated with which declaration?", o: ["Alma Ata", "Geneva", "New Delhi", "New York"], a: 0 },
+                { q: "Which is a positive indicator of health?", o: ["Mortality rate", "Morbidity rate", "Life expectancy", "Disability rate"], a: 2 },
+                { q: "Primary Health Care is mainly based on:", o: ["Curative care", "Equity and community participation", "High-tech equipment", "Urban hospitals"], a: 1 },
+                { q: "Which is NOT a determinant of health?", o: ["Genetics", "Environment", "Lifestyle", "Buying power only"], a: 3 },
+                { q: "Health promotion focuses on:", o: ["Treating disease", "Rehabilitation", "Improving health and preventing disease", "Palliative care"], a: 2 }
+            ],
+            2: [ // Unit 2: CHN
+                { q: "The primary unit of care in Community Health Nursing is:", o: ["Individual", "Doctor", "Family/Community", "Hospital"], a: 2 },
+                { q: "A core principle of CHN is:", o: ["Focus on curative care", "Health education", "Isolation", "Prescribing drugs"], a: 1 },
+                { q: "The first step in the community health nursing process is:", o: ["Evaluation", "Assessment", "Planning", "Implementation"], a: 1 },
+                { q: "Who is known as the first public health nurse?", o: ["Florence Nightingale", "Lillian Wald", "Clara Barton", "Mary Seacole"], a: 1 },
+                { q: "Community diagnosis involves:", o: ["Treating one patient", "Identifying health problems of the community", "Lab tests", "Surgery"], a: 1 }
+            ],
+            3: [ // Unit 3: Assessment
+                { q: "Antenatal assessment is done for:", o: ["Elderly men", "Pregnant women", "Toddlers", "Adolescents"], a: 1 },
+                { q: "Growth monitoring is essential for:", o: ["Adults", "Under-5 children", "Elderly", "Teenagers"], a: 1 },
+                { q: "Visual inspection of the body is called:", o: ["Palpation", "Percussion", "Inspection", "Auscultation"], a: 2 },
+                { q: "BMI stands for:", o: ["Body Mass Index", "Basal Metabolic Index", "Body Muscle Indicator", "None"], a: 0 },
+                { q: "Listening to body sounds is called:", o: ["Inspection", "Palpation", "Auscultation", "Percussion"], a: 2 }
+            ],
+            4: [ // Unit 4: Epidemiology
+                { q: "The Epidemiological Triad consists of:", o: ["Doctor, Nurse, Patient", "Agent, Host, Environment", "Diagnosis, Treatment, Cure", "Time, Place, Person"], a: 1 },
+                { q: "DOTS is the treatment strategy for:", o: ["Malaria", "Leprosy", "Tuberculosis", "HIV"], a: 2 },
+                { q: "Active immunity is acquired through:", o: ["Breast milk", "Vaccination or infection", "Immunoglobulin injection", "Placental transfer"], a: 1 },
+                { q: "Which vaccine prevents Polio?", o: ["BCG", "OPV/IPV", "DPT", "TT"], a: 1 },
+                { q: "Pasteurization is a method of:", o: ["Sterilization", "Disinfection", "Cleaning", "Fumigation"], a: 1 }
+            ],
+            5: [ // Unit 5: Family Health
+                { q: "In family health nursing, the family is viewed as:", o: ["A burden", "The unit of service", "Irrelevant", "Secondary to the patient"], a: 1 },
+                { q: "A genogram is used to assess:", o: ["Family financial status", "Family tree and health history", "Community map", "Water supply"], a: 1 },
+                { q: "The first phase of family health nursing process is:", o: ["Establishment of relationship", "Assessment", "Intervention", "Termination"], a: 0 },
+                { q: "Family life cycle stages include:", o: ["Beginning family", "Childbearing family", "Aging family", "All of the above"], a: 3 },
+                { q: "A nuclear family consists of:", o: ["Parents and children", "Grandparents and cousins", "Unmarried couple", "Friends"], a: 0 }
+            ],
+            6: [ // Unit 6: Home Visit
+                { q: "The bag technique is used to:", o: ["Carry lunch", "Prevent cross-infection", "Look professional", "Carry books"], a: 1 },
+                { q: "Home visits should be planned according to:", o: ["Nurse's convenience", "Family needs and priority", "Weather", "Distance only"], a: 1 },
+                { q: "The 'clean' side of the community bag contains:", o: ["Used dressings", "Sterile instruments", "Hand washing water", "Newspapers"], a: 1 },
+                { q: "During a home visit, the nurse should place the bag on:", o: ["The floor", "A clean surface protected by newspaper", "The bed", "The patient"], a: 1 },
+                { q: "A primary advantage of home visiting is:", o: ["Saves nurse's time", "Observations in natural setting", "Costly", "Less effective"], a: 1 }
+            ],
+            7: [ // Unit 7: Referral
+                { q: "Referral system connects:", o: ["Patients to doctors only", "Different levels of health care", "Schools to colleges", "None"], a: 1 },
+                { q: "A patient is usually referred from PHC to:", o: ["Sub-center", "CHC", "Home", "Pharmacy"], a: 1 },
+                { q: "The first referral unit (FRU) is usually the:", o: ["Sub-center", "PHC", "CHC", "District Hospital"], a: 2 },
+                { q: "Two-way referral means:", o: ["Referral up and feedback down", "Sending two patients", "Referring to two hospitals", "None"], a: 0 },
+                { q: "Referral is needed when:", o: ["Facilities are adequate", "Better/Specialized care is required", "Patient requests", "Doctor is tired"], a: 1 }
+            ],
+            8: [ // Unit 8: Records
+                { q: "Records should be:", o: ["Incomplete", "Accurate, clear, and confidential", "Publicly displayed", "Destroyed daily"], a: 1 },
+                { q: "Cumulative records contain information about:", o: ["One visit", "Financial status only", "Long-term health history", "Daily attendance"], a: 2 },
+                { q: "The purpose of reporting is:", o: ["Communication and administrative action", "Gossip", "To increase paperwork", "Punishment"], a: 0 },
+                { q: "A 'family folder' is kept at the:", o: ["District Hospital", "Sub-center/PHC", "Medical College", "Pharmacy"], a: 1 },
+                { q: "Vital statistics records include:", o: ["Births and Deaths", "Inventory", "Salary", "Attendance"], a: 0 }
+            ],
+            9: [ // Unit 9: Minor Ailments
+                { q: "ORS is used to treat:", o: ["Fever", "Dehydration due to diarrhea", "Cough", "Headache"], a: 1 },
+                { q: "Standing orders are:", o: ["Verbal orders", "Written authorized instructions for specific situations", "Suggestions", "Banned"], a: 1 },
+                { q: "First aid for a minor burn includes:", o: ["Applying butter", "Running cool water over it", "Applying ice directly", "Breaking blisters"], a: 1 },
+                { q: "Paracetamol is primarily used as an:", o: ["Antibiotic", "Antipyretic/Analgesic", "Antifungal", "Antiviral"], a: 1 },
+                { q: "For a simple cut, the first step is to:", o: ["Apply turmeric", "Wash with soap and water", "Bandage tightly", "Ignore it"], a: 1 }
+            ]
+        };
+
+        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
         function toggleUnit(header) {
             const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
             header.setAttribute('aria-expanded', !isExpanded);
             content.classList.toggle('active');
         }
+
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') return;
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                // Maps to standard iframe styles. 'model' behaves like 'video' (16:9) or doc depending on preference.
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-            const firstUnit = document.querySelector('.unit-container');
-            if (firstUnit) {
-                const header = firstUnit.querySelector('.unit-header');
-                const content = firstUnit.querySelector('.unit-content');
-                header.setAttribute('aria-expanded', true);
-                content.classList.add('active');
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
             }
         });
     </script>
+
 </body>
 </html>
