@@ -1,355 +1,683 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mental Health Nursing I Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Mental Health Nursing I." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental Health Nursing 1 - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Mental Health Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;   /* Dark Blue */
-      --accent: #00B9F2;  /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1pauLaTMC3OngROIx3Mm0n3Umt5bWZOMj/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 MENTAL HEALTH NURSING I SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNITS 1 to 12 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Introduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1hV1Iwxpy-BxtNzQTCz3wRWe3nVzXFYB-/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1pauLaTMC3OngROIx3Mm0n3Umt5bWZOMj/preview', 'Mental Health Nursing Syllabus')">
+        📄 DOWNLOAD SYLLABUS
+    </div>
+    
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1hV1Iwxpy-BxtNzQTCz3wRWe3nVzXFYB-/preview', 'Detailed Notes: Introduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - CONCEPTS OF PSYCHOBIOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FaiMjJXYn-5mCrHlMVJrHp8T0520BIET/preview', 'Detailed Notes: Psychobiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Concepts of Psychobiology</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - THEORIES OF PERSONALITY DEVELOPMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1AVBDSWnsFhWXv5gd8HmYmht1Xr1x5g5r/preview', 'Detailed Notes: Personality Theories')">
+                        <span class="icon">📚</span><span>Detailed Notes: Theories of Personality Development</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - STRESS AND ITS MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MCxS_tQzX2vtW1CC5uv2LC1REdzQwWzw/preview', 'Detailed Notes: Stress Management')">
+                        <span class="icon">📚</span><span>Detailed Notes: Stress and its Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - THERAPEUTIC COMMUNICATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1C56JyCYteC18R91VzYPwk99KVTW0Dtii/preview', 'Detailed Notes: Therapeutic Communication')">
+                        <span class="icon">📚</span><span>Detailed Notes: Therapeutic Communication & IPR</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - ASSERTIVE TRAINING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WXfee-SntTzb5l3D_vxdLjPZ0u63SVaT/preview', 'Detailed Notes: Assertive Training')">
+                        <span class="icon">📚</span><span>Detailed Notes: Assertive Training</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - PROMOTING SELF-ESTEEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ZpL7pxbNAHutxwp-5zbQgUUVd7ZVyz8t/preview', 'Detailed Notes: Self-Esteem')">
+                        <span class="icon">📚</span><span>Detailed Notes: Promoting Self-Esteem</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - THE NURSING PROCESS IN MENTAL HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_wSgYc71QbnGC0pXoVKRhqvIzzzv_n2Y/preview', 'Detailed Notes: Nursing Process')">
+                        <span class="icon">📚</span><span>Detailed Notes: The Nursing Process</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - PSYCHOSOCIAL AND PHYSICAL THERAPIES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CzJ3uK3OMGL_rbjImB8k7QK7lR7pM1Vl/preview', 'Detailed Notes: Therapies')">
+                        <span class="icon">📚</span><span>Detailed Notes: Psychosocial and Physical Therapies</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - ELECTROCONVULSIVE THERAPY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WSHL-4SW04BxsvwCRlXPfHz9Lq91r1P5/preview', 'Detailed Notes: ECT')">
+                        <span class="icon">📚</span><span>Detailed Notes: Electroconvulsive Therapy</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - PSYCHOPHARMACOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bdvwz1rAzr51u4Q98tnU4NZ1DpCgZvUi/preview', 'Detailed Notes: Psychopharmacology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Psychopharmacology</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - ALTERNATIVE SYSTEMS OF MEDICINE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1l2JYc0Iw_dhMHIYLp_ThxNL8Kt_kTgPS/preview', 'Detailed Notes: Alternative Medicine')">
+                        <span class="icon">📚</span><span>Detailed Notes: Alternative Systems of Medicine</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lzu3TUlB3rK6wfCQ188RJBXMECALJoNi/preview', 'PYQ Nov 2020')">
+                        <span class="icon">📄</span><span>PYQ - November 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Gco-GomE5w0pusjv1kIvz5InNrJe0vSq/preview', 'PYQ Sept 2020')">
+                        <span class="icon">📄</span><span>PYQ - September 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1rfsa20zzBrWQH68bdaAL9KGxrYfern2X/preview', 'PYQ Aug 2021')">
+                        <span class="icon">📄</span><span>PYQ - August 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wkvr5UnFcBLnQptHDoVqAQeFpf5RKrE7/preview', 'PYQ May 2022')">
+                        <span class="icon">📄</span><span>PYQ - May 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1C0i2-7HKT092pv3XtnHV11dZsaYpohKr/preview', 'PYQ Feb 2022')">
+                        <span class="icon">📄</span><span>PYQ - February 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PrbKZh7cd0kioVJ_bemrqLxBTZ1XZrDA/preview', 'PYQ June 2023')">
+                        <span class="icon">📄</span><span>PYQ - June 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/preview', 'PYQ March 2023')">
+                        <span class="icon">📄</span><span>PYQ - March 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/preview', 'PYQ Jan 2024')">
+                        <span class="icon">📄</span><span>PYQ - January 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Concepts of Psychobiology
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1FaiMjJXYn-5mCrHlMVJrHp8T0520BIET/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – Theories of Personality Development and Relevance to Nursing Practice
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1AVBDSWnsFhWXv5gd8HmYmht1Xr1x5g5r/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Who is considered the first psychiatric nurse?", o: ["Florence Nightingale", "Linda Richards", "Hildegard Peplau", "Dorothea Dix"], a: 1 },
+                { q: "Which act governs mental health care in India?", o: ["Mental Health Act 1987", "Mental Healthcare Act 2017", "Narcotic Drugs Act", "Disability Act"], a: 1 },
+                { q: "Mental health is best described as:", o: ["Absence of disease", "State of well-being and ability to cope", "High intelligence", "Social conformity"], a: 1 },
+                { q: "The Indian Lunacy Act was passed in the year:", o: ["1912", "1947", "1987", "1858"], a: 0 },
+                { q: "Which is a common misconception about mental illness?", o: ["It is treatable", "It affects anyone", "It is contagious", "Recovery is possible"], a: 2 }
+            ],
+            2: [
+                { q: "Which neurotransmitter is primarily associated with Schizophrenia?", o: ["Serotonin", "Dopamine", "GABA", "Acetylcholine"], a: 1 },
+                { q: "The 'Emotional Brain' is also known as:", o: ["Cerebellum", "Brainstem", "Limbic System", "Cortex"], a: 2 },
+                { q: "Which lobe of the brain is responsible for reasoning and judgment?", o: ["Parietal", "Occipital", "Frontal", "Temporal"], a: 2 },
+                { q: "Low levels of Serotonin are associated with:", o: ["Mania", "Depression", "Schizophrenia", "Anxiety"], a: 1 },
+                { q: "The gap between two neurons is called:", o: ["Axon", "Dendrite", "Synapse", "Myelin"], a: 2 }
+            ],
+            3: [
+                { q: "According to Freud, the 'Id' operates on the:", o: ["Reality principle", "Pleasure principle", "Moral principle", "Social principle"], a: 1 },
+                { q: "Who proposed the Psychosocial Theory of Development?", o: ["Sigmund Freud", "Erik Erikson", "Jean Piaget", "Maslow"], a: 1 },
+                { q: "The conscious part of the personality that mediates reality is:", o: ["Id", "Ego", "Superego", "Unconscious"], a: 1 },
+                { q: "Which defense mechanism involves reverting to an earlier stage of development?", o: ["Projection", "Regression", "Denial", "Sublimation"], a: 1 },
+                { q: "According to Erickson, the conflict in adolescence is:", o: ["Trust vs Mistrust", "Identity vs Role Confusion", "Intimacy vs Isolation", "Integrity vs Despair"], a: 1 }
+            ],
+            4: [
+                { q: "Eustress refers to:", o: ["Bad stress", "Positive/Beneficial stress", "Chronic stress", "No stress"], a: 1 },
+                { q: "The 'Fight or Flight' response is mediated by the:", o: ["Parasympathetic NS", "Sympathetic NS", "Central NS", "Somatic NS"], a: 1 },
+                { q: "Who proposed the General Adaptation Syndrome (GAS)?", o: ["Hans Selye", "Freud", "Lazarus", "Cannon"], a: 0 },
+                { q: "The three stages of GAS are Alarm, Resistance, and:", o: ["Recovery", "Exhaustion", "Adaptation", "Denial"], a: 1 },
+                { q: "A healthy way to manage stress includes:", o: ["Substance abuse", "Relaxation techniques", "Isolation", "Overeating"], a: 1 }
+            ],
+            5: [
+                { q: "The first phase of the Nurse-Patient Relationship is:", o: ["Working phase", "Termination phase", "Orientation/Introductory phase", "Pre-interaction phase"], a: 3 },
+                { q: "Which is a therapeutic communication technique?", o: ["Advising", "Active Listening", "Judging", "False Reassurance"], a: 1 },
+                { q: "Transference occurs when:", o: ["Nurse projects feelings onto patient", "Patient projects feelings onto nurse", "Both agree", "Communication stops"], a: 1 },
+                { q: "The primary goal of therapeutic communication is to:", o: ["Make friends", "Promote patient's well-being", "Control the patient", "Socialize"], a: 1 },
+                { q: "Empathy means:", o: ["Feeling pity for the patient", "Understanding patient's feelings accurately", "Crying with the patient", "Ignoring feelings"], a: 1 }
+            ],
+            6: [
+                { q: "Assertive behavior involves:", o: ["Violating others' rights", "Standing up for oneself without violating others' rights", "Avoiding conflict at all costs", "Being passive"], a: 1 },
+                { q: "Which statement is an example of assertiveness?", o: ["You make me sick.", "I feel upset when...", " Whatever you want.", "Do it now!"], a: 1 },
+                { q: "Passive behavior is characterized by:", o: ["Direct eye contact", "Low self-esteem and avoiding conflict", "Loud voice", "Dominating others"], a: 1 },
+                { q: "Assertiveness training helps in:", o: ["Increasing anxiety", "Improving interpersonal communication", "Creating enemies", "Suppressing anger"], a: 1 },
+                { q: "The basic right in assertiveness is:", o: ["To always win", "To express feelings and needs", "To hurt others", "To never say no"], a: 1 }
+            ],
+            7: [
+                { q: "Self-esteem refers to:", o: ["How others see us", "Personal worth or value", "Physical appearance only", "Financial status"], a: 1 },
+                { q: "Which is a sign of low self-esteem?", o: ["Assertiveness", "Sensitivity to criticism", "Confidence", "Optimism"], a: 1 },
+                { q: "Body image is:", o: ["Subjective picture of one's own physical appearance", "Actual weight", "Height", "Doctor's assessment"], a: 0 },
+                { q: "To promote self-esteem, a nurse should:", o: ["Criticize the patient", "Focus on patient's strengths", "Ignore the patient", "Make decisions for the patient"], a: 1 },
+                { q: "Self-concept includes:", o: ["Body image", "Role performance", "Personal identity", "All of the above"], a: 3 }
+            ],
+            8: [
+                { q: "The first step of the nursing process is:", o: ["Diagnosis", "Assessment", "Planning", "Evaluation"], a: 1 },
+                { q: "MSE stands for:", o: ["Mental State Examination", "Medical Surgical Exam", "Mental Standard Evaluation", "Master Science Exam"], a: 0 },
+                { q: "Which is a component of MSE?", o: ["Blood pressure", "Appearance and Behavior", "Urine output", "Family history"], a: 1 },
+                { q: "A nursing diagnosis is based on:", o: ["Medical diagnosis only", "Patient's response to health problems", "Doctor's orders", "Insurance"], a: 1 },
+                { q: "Evaluation determines:", o: ["If goals were met", "The diagnosis", "The medication dose", "The cause of disease"], a: 0 }
+            ],
+            9: [
+                { q: "Which therapy involves a group of clients interacting?", o: ["Individual therapy", "Group therapy", "ECT", "Pharmacotherapy"], a: 1 },
+                { q: "Behavior therapy is based on:", o: ["Unconscious thoughts", "Learning theories", "Dreams", "Genetics"], a: 1 },
+                { q: "Occupational therapy helps patients to:", o: ["Sleep better", "Regain skills for daily living/work", "Take medicines", "Analyze dreams"], a: 1 },
+                { q: "Systematic desensitization is used for:", o: ["Schizophrenia", "Phobias", "Mania", "Depression"], a: 1 },
+                { q: "Cognitive therapy focuses on:", o: ["Changing maladaptive thoughts", "Changing environment", "Physical exercise", "Medication"], a: 0 }
+            ],
+            10: [
+                { q: "ECT is primarily indicated for:", o: ["Severe Depression", "Mild Anxiety", "Personality Disorders", "Phobia"], a: 0 },
+                { q: "The most common side effect of ECT is:", o: ["Fracture", "Temporary memory loss/confusion", "Heart attack", "Stroke"], a: 1 },
+                { q: "Muscle relaxant used in ECT is:", o: ["Atropine", "Succinylcholine", "Diazepam", "Thiopental"], a: 1 },
+                { q: "Informed consent for ECT is necessary from:", o: ["Doctor only", "Patient or guardian", "Nurse", "Hospital admin"], a: 1 },
+                { q: "Preparation for ECT includes:", o: ["Full meal", "NPO (Nil Per Oral)", "Heavy exercise", "Sleeping pills"], a: 1 }
+            ],
+            11: [
+                { q: "Chlorpromazine is an example of:", o: ["Antidepressant", "Antipsychotic", "Mood stabilizer", "Anxiolytic"], a: 1 },
+                { q: "Lithium is the drug of choice for:", o: ["Schizophrenia", "Bipolar Disorder (Mania)", "Anxiety", "Insomnia"], a: 1 },
+                { q: "SSRI stands for:", o: ["Selective Serotonin Reuptake Inhibitor", "Serotonin System Reuptake Inducer", "Systemic Serotonin Release Inhibitor", "None"], a: 0 },
+                { q: "Extrapyramidal Symptoms (EPS) are side effects of:", o: ["Antipsychotics", "Vitamins", "Antacids", "Antibiotics"], a: 0 },
+                { q: "Therapeutic serum lithium level is:", o: ["0.6 - 1.2 mEq/L", "2.0 - 3.0 mEq/L", "0.1 - 0.5 mEq/L", "5.0 - 10.0 mEq/L"], a: 0 }
+            ],
+            12: [
+                { q: "AYUSH includes Ayurveda, Yoga, Unani, Siddha and:", o: ["Allopathy", "Homeopathy", "Surgery", "Psychiatry"], a: 1 },
+                { q: "Yoga is beneficial in mental health for:", o: ["Reducing stress and anxiety", "Curing infections", "Setting bones", "Surgery"], a: 0 },
+                { q: "St. John's Wort is an herbal remedy often used for:", o: ["Mild depression", "Schizophrenia", "Mania", "Psychosis"], a: 0 },
+                { q: "Which system of medicine uses 'Like cures like'?", o: ["Ayurveda", "Homeopathy", "Unani", "Allopathy"], a: 1 },
+                { q: "Meditation is a practice primarily used to:", o: ["Build muscle", "Calm the mind and focus attention", "Lose weight", "Sleep only"], a: 1 }
+            ]
+        };
 
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – Stress and Its Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1MCxS_tQzX2vtW1CC5uv2LC1REdzQwWzw/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – Therapeutic Communication and Interpersonal Relationship
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1C56JyCYteC18R91VzYPwk99KVTW0Dtii/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Assertive Training
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1WXfee-SntTzb5l3D_vxdLjPZ0u63SVaT/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Promoting Self-Esteem
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1ZpL7pxbNAHutxwp-5zbQgUUVd7ZVyz8t/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – The Nursing Process in Psychiatric/Mental Health Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1_wSgYc71QbnGC0pXoVKRhqvIzzzv_n2Y/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Psychosocial and Physical Therapies
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1CzJ3uK3OMGL_rbjImB8k7QK7lR7pM1Vl/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-    <div class="unit-container" id="unit10">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 10 – Electroconvulsive Therapy
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1WSHL-4SW04BxsvwCRlXPfHz9Lq91r1P5/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-    <div class="unit-container" id="unit11">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 11 – Psychopharmacology
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1bdvwz1rAzr51u4Q98tnU4NZ1DpCgZvUi/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-    <div class="unit-container" id="unit12">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 12 – Alternative Systems of Medicine in Mental Health
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1l2JYc0Iw_dhMHIYLp_ThxNL8Kt_kTgPS/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1lzu3TUlB3rK6wfCQ188RJBXMECALJoNi/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-          <a href="https://drive.google.com/file/d/1Gco-GomE5w0pusjv1kIvz5InNrJe0vSq/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-          <a href="https://drive.google.com/file/d/1rfsa20zzBrWQH68bdaAL9KGxrYfern2X/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - August 2021</span></a>
-          <a href="https://drive.google.com/file/d/1C0i2-7HKT092pv3XtnHV11dZsaYpohKr/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2022</span></a>
-          <a href="https://drive.google.com/file/d/1wkvr5UnFcBLnQptHDoVqAQeFpf5RKrE7/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-          <a href="https://drive.google.com/file/d/1PrbKZh7cd0kioVJ_bemrqLxBTZ1XZrDA/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-          <a href="https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - March 2023</span></a>
-          <a href="https://drive.google.com/file/d/1ULgV9TxrmhZviAA-HqaeQWeXYUv5GdZq/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-        </div>
-      </div>
-    </div>
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
 
-  </div>
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
 
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
