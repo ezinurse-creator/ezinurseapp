@@ -1,576 +1,1073 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mental Health Nursing II Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Mental Health Nursing II." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mental Health Nursing II - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Mental Health Nursing II." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;    /* Dark Blue */
-      --accent: #00B9F2;   /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1l2-yxOzIO4fsqpUV7a8jHxmjhY-PHRKG/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 MENTAL HEALTH NURSING II SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNIT 1 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Principles and Practice of Psychiatric Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1p8UclvLjR4gnAOFZUZKiiq-5kSHsQDOl/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1l2-yxOzIO4fsqpUV7a8jHxmjhY-PHRKG/preview', 'Mental Health Nursing II Syllabus')">
+        📄 DOWNLOAD SYLLABUS
     </div>
     
-    <!-- === UNIT 2 === -->
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Crisis Intervention
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1wGz-0ELqBTmlsVoufrGVcA1gIsAcKiHT/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - PRINCIPLES & PRACTICE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p8UclvLjR4gnAOFZUZKiiq-5kSHsQDOl/preview', 'Detailed Notes: Principles')">
+                        <span class="icon">📚</span><span>Detailed Notes: Principles and Practice</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - CRISIS INTERVENTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Crisis Intervention Model]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wGz-0ELqBTmlsVoufrGVcA1gIsAcKiHT/preview', 'Detailed Notes: Crisis')">
+                        <span class="icon">📚</span><span>Detailed Notes: Crisis Intervention</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ANGER/AGGRESSION MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Anger Management Cycle]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1c0SNDlq36I6tvKKL2PS0D96VNHbZ_c18/preview', 'Detailed Notes: Anger Management')">
+                        <span class="icon">📚</span><span>Detailed Notes: Anger/Aggression Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - THE SUICIDAL CLIENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1f99aFd2y0X0Hi4HdRejocJV5RYxHclQ3/preview', 'Detailed Notes: Suicide')">
+                        <span class="icon">📚</span><span>Detailed Notes: The Suicidal Client</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - DISORDERS OF INFANCY/CHILDHOOD
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of ADHD vs Autism Symptoms]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13RjOCcU-lReDsvUzCysAQltFb24yo3Uj/preview', 'Detailed Notes: Childhood Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Disorders of Infancy & Childhood</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - DELIRIUM & DEMENTIA
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Differences between Delirium and Dementia]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-H8ZfQClozeeRLd_HsPMpKHEeN7A1RIb/preview', 'Detailed Notes: Cognitive Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Delirium, Dementia, Amnestic Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - SUBSTANCE-RELATED DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Cycle of Addiction]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IrzdHXeJoZREBZ1FEnJ3PfmNwieO9Lmf/preview', 'Detailed Notes: Substance Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Substance-Related Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - SCHIZOPHRENIA
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Schizophrenia Positive vs Negative Symptoms]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1utWbw7t8D6V1CgqHtLcTGKgSH2gCVlc2/preview', 'Detailed Notes: Schizophrenia')">
+                        <span class="icon">📚</span><span>Detailed Notes: Schizophrenia & Psychotic Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - MOOD DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Bipolar Disorder Mood Swing Chart]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vCbXQwUf3l1eLU-SkonRINmxBzrt3NXn/preview', 'Detailed Notes: Mood Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Mood Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - ANXIETY DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Anxiety Disorders Spectrum]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WOs_LU-D8lNP_HUA0yTaV70EVUnrBdqa/preview', 'Detailed Notes: Anxiety')">
+                        <span class="icon">📚</span><span>Detailed Notes: Anxiety Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - SOMATOFORM & SLEEP DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iEkADibdG2Vn7Rt1Z0R9YQ_XHu65TSMC/preview', 'Detailed Notes: Somatoform')">
+                        <span class="icon">📚</span><span>Detailed Notes: Somatoform & Sleep Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - DISSOCIATIVE DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Dissociative Disorders Types]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1aHa_Z_3PitGpnFULA7L2aai2f4e_t7OR/preview', 'Detailed Notes: Dissociative')">
+                        <span class="icon">📚</span><span>Detailed Notes: Dissociative Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - SEXUAL & GENDER IDENTITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fm0x65cKFo8yPq21oMDFyZAMNrV1KnCd/preview', 'Detailed Notes: Sexual Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Sexual & Gender Identity Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - EATING DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Anorexia vs Bulimia Nervosa Signs]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1R1jx8cu-dmk4C3jWrEn7DE1FJTchH7SS/preview', 'Detailed Notes: Eating Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Eating Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(14)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit15">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 15 - ADJUSTMENT & IMPULSE CONTROL
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1V0WRmNaVXKIZ9RosGbiwHGObMfR2Fiml/preview', 'Detailed Notes: Impulse Control')">
+                        <span class="icon">📚</span><span>Detailed Notes: Adjustment & Impulse Control</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(15)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 15 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit16">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 16 - PSYCHOLOGICAL FACTORS IN MEDICAL CONDITIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eguuGXNZL1HuBTHbMOEp7Sg1M22p-9fX/preview', 'Detailed Notes: Psych Factors')">
+                        <span class="icon">📚</span><span>Detailed Notes: Medical Conditions due to Psych Factors</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(16)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 16 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit17">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 17 - PERSONALITY DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Personality Disorder Clusters A B C]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15BRmRio0FcSyOhAiwDWg5bcS6-NR4QM_/preview', 'Detailed Notes: Personality Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Personality Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(17)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 17 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit18">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 18 - THE AGING INDIVIDUAL
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VsTsKSdvWygij3-CfDneQx0c8tkybxbA/preview', 'Detailed Notes: Aging')">
+                        <span class="icon">📚</span><span>Detailed Notes: The Aging Individual</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(18)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 18 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit19">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 19 - HIV & MENTAL HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1rb6dHhplIfoLNUtOJeYPbFMemKhBZwLP/preview', 'Detailed Notes: HIV')">
+                        <span class="icon">📚</span><span>Detailed Notes: Person Living with HIV Disease</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(19)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 19 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit20">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 20 - ABUSE & NEGLECT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Cycle of Domestic Violence]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mmsvTmhT0lrbmtsdh5V4pbrhRzfaBVfm/preview', 'Detailed Notes: Abuse')">
+                        <span class="icon">📚</span><span>Detailed Notes: Problems Related to Abuse/Neglect</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(20)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 20 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit21">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 21 - COMMUNITY MENTAL HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1U0GgDcBVh1BoA5YsE3sfiffv81A6cAFG/preview', 'Detailed Notes: Community')">
+                        <span class="icon">📚</span><span>Detailed Notes: Community Mental Health Nursing</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(21)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 21 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit22">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 22 - ETHICAL & LEGAL ISSUES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of Rights of Psychiatric Patients]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1U_kQUwkwoRCkMuyN6AS_1Sbsghh73UzK/preview', 'Detailed Notes: Ethical/Legal')">
+                        <span class="icon">📚</span><span>Detailed Notes: Ethical and Legal Issues</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(22)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 22 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit23">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 23 - PSYCHOSOCIAL REHABILITATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1rydaFjwWnnw6HJOlD-QTLYY_qLmfAmZA/preview', 'Detailed Notes: Rehabilitation')">
+                        <span class="icon">📚</span><span>Detailed Notes: Psychosocial Rehabilitation</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(23)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 23 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit24">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 24 - COUNSELING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BhChASXUGi244AFvCEAdoyQmwf_aYHY9/preview', 'Detailed Notes: Counseling')">
+                        <span class="icon">📚</span><span>Detailed Notes: Counseling</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(24)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 24 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit25">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 25 - ADMINISTRATION & MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1D0dqx9F0thZJ05Ke9fe_RSqrtIicnRMS/preview', 'Detailed Notes: Administration')">
+                        <span class="icon">📚</span><span>Detailed Notes: Administration of Psychiatric Units</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(25)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 25 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit26">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 26 - EDUCATION & TRAINING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1m34v0M6n_-Xm-EhEidrmu28JVgj2z_hm/preview', 'Detailed Notes: Education')">
+                        <span class="icon">📚</span><span>Detailed Notes: Education and Training</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(26)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 26 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1doflMKAnD_Xi0pM2I4hJ1jd-s8p6h42P/preview', 'PYQ May 2022')">
+                        <span class="icon">📄</span><span>PYQ - May 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ySleNiGMFXp54KD3IvMkN4ytlKHrBvKM/preview', 'PYQ Nov 2021')">
+                        <span class="icon">📄</span><span>PYQ - November 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lbEdB35Qdjo1M52prcarYbSXItkBLX47/preview', 'PYQ Nov 2020')">
+                        <span class="icon">📄</span><span>PYQ - November 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1TyPTjrP9xUZYQBxRtbbR89Ur7-1Gb9Vd/preview', 'PYQ Sept 2020')">
+                        <span class="icon">📄</span><span>PYQ - September 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NupZhDbV4c_CEnrUX5zCjreyVH1XGSi4/preview', 'PYQ Oct 2019')">
+                        <span class="icon">📄</span><span>PYQ - October 2019</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-Nnek_dhnZnslPrGDimS8qxSS5gn-8Cw/preview', 'PYQ Sept 2018')">
+                        <span class="icon">📄</span><span>PYQ - September 2018</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17EUokJMYPh0g6IxB8xqunLTkcUKMVBEw/preview', 'PYQ Oct 2016')">
+                        <span class="icon">📄</span><span>PYQ - October 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HQpJ2uc19_Z-3rGjWtCk3eP8ThnkyqEp/preview', 'PYQ April 2017')">
+                        <span class="icon">📄</span><span>PYQ - April 2017</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- === UNIT 3 === -->
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – Anger/Aggression Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1c0SNDlq36I6tvKKL2PS0D96VNHbZ_c18/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <!-- === UNIT 4 === -->
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – The Suicidal Client
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1f99aFd2y0X0Hi4HdRejocJV5RYxHclQ3/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "A core principle of psychiatric nursing is:", o: ["Judging the patient", "Accepting the patient as a human being", "Controlling the patient", "Avoiding the patient"], a: 1 },
+                { q: "Primary prevention in psychiatry involves:", o: ["Rehabilitation", "Health promotion and specific protection", "Early diagnosis", "Crisis intervention"], a: 1 },
+                { q: "Which tool is essential for psychiatric nursing practice?", o: ["Stethoscope", "Self-awareness", "Thermometer", "Syringe"], a: 1 },
+                { q: "Holistic care considers:", o: ["Only physical health", "Only mental health", "Physical, mental, social, and spiritual aspects", "Only medications"], a: 2 },
+                { q: "The nurse-patient relationship should be:", o: ["Social", "Therapeutic", "Casual", "Authoritative"], a: 1 }
+            ],
+            2: [
+                { q: "A crisis is best defined as:", o: ["A mental illness", "A state of disequilibrium/severe emotional disturbance", "A bad mood", "A chronic problem"], a: 1 },
+                { q: "The goal of crisis intervention is:", o: ["Psychotherapy", "Restore pre-crisis functioning", "Sedation", "Hospitalization"], a: 1 },
+                { q: "A situational crisis is caused by:", o: ["Puberty", "Unexpected external events (e.g., job loss, death)", "Aging", "Menopause"], a: 1 },
+                { q: "Crisis intervention is typically:", o: ["Long term", "Short term and focused", "Life-long", "Unnecessary"], a: 1 },
+                { q: "The first phase of crisis is:", o: ["Depression", "Rise in tension/anxiety", "Resolution", "Denial"], a: 1 }
+            ],
+            3: [
+                { q: "A sign of impending aggression is:", o: ["Sleeping", "Pacing, clenched fists, loud voice", "Smiling", "Reading"], a: 1 },
+                { q: "The first step in managing aggression is:", o: ["Restraint", "Verbal de-escalation", "Seclusion", "Medication"], a: 1 },
+                { q: "Restraints should be used:", o: ["As punishment", "As a last resort for safety", "For convenience", "Whenever patient is loud"], a: 1 },
+                { q: "Catharsis refers to:", o: ["Suppressing anger", "Healthy release of emotional tension", "Ignoring feelings", "Medicating anger"], a: 1 },
+                { q: "Which medication is often used for acute aggression?", o: ["Antibiotic", "Haloperidol + Lorazepam", "Vitamin B", "Aspirin"], a: 1 }
+            ],
+            4: [
+                { q: "Which is a major warning sign of suicide?", o: ["Giving away prized possessions", "Eating well", "Sleeping 8 hours", "Socializing"], a: 0 },
+                { q: "When a patient expresses suicidal thoughts, the nurse should:", o: ["Ignore it", "Ask directly about a plan", "Change the subject", "Laugh it off"], a: 1 },
+                { q: "Which group is at highest risk for suicide?", o: ["Children", "Elderly white males living alone", "Married women", "Teenagers with support"], a: 1 },
+                { q: "Safety precautions for a suicidal client include:", o: ["1:1 observation", "Removing sharp objects", "Checking continuously", "All of the above"], a: 3 },
+                { q: "Ambivalence in suicide means:", o: ["Wanting to die only", "Wanting to live only", "Conflicting feelings about living and dying", "Not caring"], a: 2 }
+            ],
+            5: [
+                { q: "ADHD is characterized by:", o: ["Depression", "Inattention, Hyperactivity, Impulsivity", "Hallucinations", "Low IQ"], a: 1 },
+                { q: "Autism Spectrum Disorder primarily affects:", o: ["Social interaction and communication", "Walking", "Hearing", "Digestion"], a: 0 },
+                { q: "Enuresis refers to:", o: ["Bed wetting", "Fecal soiling", "Stuttering", "Tics"], a: 0 },
+                { q: "Separation Anxiety Disorder is common in:", o: ["Elderly", "School-age children", "Adults", "Newborns"], a: 1 },
+                { q: "Conduct disorder involves:", o: ["Shyness", "Violating rights of others/rules", "Fear of school", "Sleep walking"], a: 1 }
+            ],
+            6: [
+                { q: "Delirium is characterized by:", o: ["Chronic memory loss", "Acute onset, fluctuating consciousness", "Personality change", "Intact attention"], a: 1 },
+                { q: "Dementia is:", o: ["Reversible", "Progressive decline in cognitive function", "Sudden onset", "Caused by fever"], a: 1 },
+                { q: "Alzheimer's disease is a type of:", o: ["Delirium", "Dementia", "Psychosis", "Mood disorder"], a: 1 },
+                { q: "Confabulation is:", o: ["Lying", "Filling memory gaps with imaginary details", "Forgetting names", "Hallucinating"], a: 1 },
+                { q: "Sundowning syndrome refers to:", o: ["Worsening of symptoms in late afternoon/evening", "Sleeping all day", "Waking up early", "Morning confusion"], a: 0 }
+            ],
+            7: [
+                { q: "Withdrawal symptoms occur when:", o: ["Drug intake increases", "Substance use is stopped or reduced", "Drug is started", "Tolerance develops"], a: 1 },
+                { q: "Tolerance means:", o: ["Needing less drug", "Needing more drug for same effect", "Allergic reaction", "Disliking the drug"], a: 1 },
+                { q: "Alcohol withdrawal delirium is also known as:", o: ["Korsakoff's syndrome", "Delirium Tremens (DTs)", "Wernicke's encephalopathy", "Dementia"], a: 1 },
+                { q: "Disulfiram (Antabuse) is used for:", o: ["Alcohol aversion therapy", "Sedation", "Pain relief", "Anxiety"], a: 0 },
+                { q: "Wernicke-Korsakoff syndrome is caused by deficiency of:", o: ["Vitamin C", "Thiamine (Vitamin B1)", "Iron", "Calcium"], a: 1 }
+            ],
+            8: [
+                { q: "Positive symptoms of schizophrenia include:", o: ["Apathy", "Hallucinations and Delusions", "Social withdrawal", "Anhedonia"], a: 1 },
+                { q: "A false fixed belief is called:", o: ["Illusion", "Delusion", "Hallucination", "Obsession"], a: 1 },
+                { q: "Hearing voices that are not there is:", o: ["Visual hallucination", "Auditory hallucination", "Illusion", "Delusion"], a: 1 },
+                { q: "Neologism means:", o: ["Repeating words", "Coining new words/phrases", "Muteness", "Flight of ideas"], a: 1 },
+                { q: "Clozapine is an:", o: ["Antidepressant", "Antipsychotic", "Mood stabilizer", "Anxiolytic"], a: 1 }
+            ],
+            9: [
+                { q: "Bipolar disorder involves:", o: ["Depression only", "Mania only", "Episodes of Mania and Depression", "Anxiety"], a: 2 },
+                { q: "Mania is characterized by:", o: ["Sadness", "Elevated mood, hyperactivity, grandiosity", "Sleepiness", "Guilt"], a: 1 },
+                { q: "Dysthymia is:", o: ["Severe depression", "Chronic mild depression", "Acute mania", "Normal mood"], a: 1 },
+                { q: "The drug of choice for Bipolar Disorder is:", o: ["Prozac", "Lithium Carbonate", "Valium", "Haldol"], a: 1 },
+                { q: "Anhedonia means:", o: ["Excessive pleasure", "Inability to experience pleasure", "Fear of height", "Memory loss"], a: 1 }
+            ],
+            10: [
+                { q: "Panic disorder is characterized by:", o: ["Worry about future", "Recurrent unexpected panic attacks", "Fear of spiders", "Obsessions"], a: 1 },
+                { q: "Agoraphobia is fear of:", o: ["Heights", "Open/public places where escape is difficult", "Spiders", "Water"], a: 1 },
+                { q: "OCD involves:", o: ["Hallucinations", "Obsessions (thoughts) and Compulsions (actions)", "Mood swings", "Memory loss"], a: 1 },
+                { q: "PTSD occurs after:", o: ["A traumatic event", "A bad meal", "A minor injury", "A cold"], a: 0 },
+                { q: "Systematic desensitization is used to treat:", o: ["Schizophrenia", "Phobias", "Depression", "Mania"], a: 1 }
+            ],
+            11: [
+                { q: "Hypochondriasis involves:", o: ["Fear of illness despite reassurance", "Paralysis", "Blindness", "Faking illness"], a: 0 },
+                { q: "Conversion disorder presents as:", o: ["Pain", "Neurological symptoms (blindness/paralysis) without organic cause", "Anxiety", "Depression"], a: 1 },
+                { q: "Narcolepsy is:", o: ["Insomnia", "Uncontrollable sleep attacks", "Sleep walking", "Nightmares"], a: 1 },
+                { q: "Insomnia is:", o: ["Excessive sleep", "Difficulty falling or staying asleep", "Sleep talking", "Bed wetting"], a: 1 },
+                { q: "Body Dysmorphic Disorder involves:", o: ["Preoccupation with an imagined defect in appearance", "Fear of weight gain", "Pain", "Fatigue"], a: 0 }
+            ],
+            12: [
+                { q: "Dissociative Amnesia is:", o: ["Normal forgetting", "Inability to recall important personal information (usually traumatic)", "Head injury", "Dementia"], a: 1 },
+                { q: "Dissociative Identity Disorder (DID) was formerly called:", o: ["Schizophrenia", "Multiple Personality Disorder", "Bipolar", "Fugue"], a: 1 },
+                { q: "Dissociative Fugue involves:", o: ["Sudden travel away from home with amnesia", "Sleep walking", "Fainting", "Seizures"], a: 0 },
+                { q: "Depersonalization is:", o: ["Feeling detached from one's body/self", "Feeling the world is unreal", "Hallucinating", "Delusional"], a: 0 },
+                { q: "The primary defense mechanism in dissociative disorders is:", o: ["Projection", "Repression/Dissociation", "Denial", "Rationalization"], a: 1 }
+            ],
+            13: [
+                { q: "Gender Identity Disorder involves:", o: ["Sexual dysfunction", "Discomfort with assigned gender/identifying as opposite gender", "Paraphilia", "Infertility"], a: 1 },
+                { q: "Paraphilias are:", o: ["Normal sexual behaviors", "Sexual arousal from atypical objects/situations", "Lack of desire", "Pain during sex"], a: 1 },
+                { q: "Dyspareunia means:", o: ["Lack of orgasm", "Genital pain during intercourse", "Premature ejaculation", "Low libido"], a: 1 },
+                { q: "Exhibitionism is:", o: ["Spying on others", "Exposing genitals to strangers", "Rubbing against others", "Cross-dressing"], a: 1 },
+                { q: "Vaginismus is:", o: ["Infection", "Involuntary spasm of vaginal muscles", "Pain", "Dryness"], a: 1 }
+            ],
+            14: [
+                { q: "Anorexia Nervosa is characterized by:", o: ["Binge eating", "Refusal to maintain body weight/Fear of gaining weight", "Overeating", "Normal weight"], a: 1 },
+                { q: "Bulimia Nervosa involves:", o: ["Starvation", "Binge eating followed by purging", "Obesity", "Pica"], a: 1 },
+                { q: "Lanugo (fine hair) is seen in:", o: ["Bulimia", "Anorexia Nervosa", "Obesity", "Depression"], a: 1 },
+                { q: "A serious physical complication of eating disorders is:", o: ["Electrolyte imbalance", "Headache", "Cough", "Rash"], a: 0 },
+                { q: "Refeeding syndrome can occur during treatment of:", o: ["Obesity", "Severe malnutrition/Anorexia", "Flu", "Anxiety"], a: 1 }
+            ],
+            15: [
+                { q: "Kleptomania is the impulse to:", o: ["Set fires", "Steal unneeded items", "Pull hair", "Gamble"], a: 1 },
+                { q: "Pyromania involves:", o: ["Stealing", "Deliberate fire setting", "Hair pulling", "Explosive anger"], a: 1 },
+                { q: "Trichotillomania is:", o: ["Skin picking", "Hair pulling", "Nail biting", "Head banging"], a: 1 },
+                { q: "Adjustment disorder occurs:", o: ["Without a stressor", "In response to an identifiable stressor within 3 months", "Years later", "From birth"], a: 1 },
+                { q: "Intermittent Explosive Disorder involves:", o: ["Sadness", "Aggressive outbursts disproportionate to provocation", "Stealing", "Setting fires"], a: 1 }
+            ],
+            16: [
+                { q: "Psychosomatic disorders are:", o: ["Fake illnesses", "Physical symptoms exacerbated by psychological factors", "Mental illnesses only", "Surgical problems"], a: 1 },
+                { q: "Type A personality (competitive, hostile) is linked to:", o: ["Cancer", "Coronary Heart Disease", "Asthma", "Ulcers"], a: 1 },
+                { q: "Stress can worsen:", o: ["Asthma", "Hypertension", "Ulcers", "All of the above"], a: 3 },
+                { q: "Biofeedback is used to:", o: ["Measure height", "Gain voluntary control over physiological processes", "Test blood", "Scan brain"], a: 1 },
+                { q: "Peptic ulcer is often associated with:", o: ["Happiness", "Stress/Anxiety", "Exercise", "Sleep"], a: 1 }
+            ],
+            17: [
+                { q: "Borderline Personality Disorder is characterized by:", o: ["Stability", "Instability in relationships, self-image, and affects", "Shyness", "Perfectionism"], a: 1 },
+                { q: "Antisocial Personality Disorder involves:", o: ["Disregard for rights of others/Lack of remorse", "Fear of people", "Obsession with order", "Dependency"], a: 0 },
+                { q: "Obsessive-Compulsive Personality Disorder (OCPD) involves:", o: ["Rituals", "Preoccupation with orderliness and perfectionism", "Hallucinations", "Suspicion"], a: 1 },
+                { q: "Paranoid Personality Disorder involves:", o: ["Trust", "Pervasive distrust and suspiciousness", "Shyness", "Drama"], a: 1 },
+                { q: "Narcissistic Personality Disorder involves:", o: ["Humility", "Grandiosity and need for admiration", "Fear", "Isolation"], a: 1 }
+            ],
+            18: [
+                { q: "Depression in the elderly is often mistaken for:", o: ["Mania", "Dementia", "Delirium", "Schizophrenia"], a: 1 },
+                { q: "The most common mental health problem in the elderly is:", o: ["Schizophrenia", "Depression", "Bipolar", "Phobia"], a: 1 },
+                { q: "Reminiscence therapy uses:", o: ["Future planning", "Recall of past events/memories", "Medication", "Exercise"], a: 1 },
+                { q: "Polypharmacy in elderly increases risk of:", o: ["Health", "Drug interactions and toxicity", "Wealth", "Memory"], a: 1 },
+                { q: "Elder abuse can be:", o: ["Physical", "Financial", "Neglect", "All of the above"], a: 3 }
+            ],
+            19: [
+                { q: "HIV-associated neurocognitive disorder (HAND) affects:", o: ["Lungs", "Memory, attention, and motor function", "Stomach", "Bones"], a: 1 },
+                { q: "Depression in HIV patients is:", o: ["Rare", "Common", "Impossible", "Unimportant"], a: 1 },
+                { q: "Psychiatric side effects of antiretrovirals can include:", o: ["Happy mood", "Vivid dreams, anxiety, depression", "Improved memory", "None"], a: 1 },
+                { q: "Pre-test counseling for HIV is:", o: ["Optional", "Mandatory/Essential", "Useless", "Illegal"], a: 1 },
+                { q: "Stigma related to HIV can lead to:", o: ["Better adherence", "Social isolation and depression", "Faster cure", "Happiness"], a: 1 }
+            ],
+            20: [
+                { q: "Child abuse includes:", o: ["Physical", "Sexual", "Emotional/Neglect", "All of the above"], a: 3 },
+                { q: "Munchausen Syndrome by Proxy is:", o: ["Real illness", "Caregiver fabricating illness in a child", "Genetic disorder", "Infection"], a: 1 },
+                { q: "The cycle of violence typically includes:", o: ["Tension-building, Incident, Honeymoon phase", "Anger only", "Peace only", "Constant fighting"], a: 0 },
+                { q: "Neglect refers to:", o: ["Hitting", "Failure to provide basic needs", "Yelling", "Sexual act"], a: 1 },
+                { q: "Mandatory reporting applies to:", o: ["Suspected child/elder abuse", "Bad grades", "Flu", "Arguments"], a: 0 }
+            ],
+            21: [
+                { q: "Community Mental Health focuses on:", o: ["Institutional care", "Prevention and care within the community", "Surgery", "Isolation"], a: 1 },
+                { q: "Deinstitutionalization led to:", o: ["More hospitals", "Shift of care to community settings", "More nurses", "Less patients"], a: 1 },
+                { q: "Primary care in mental health includes:", o: ["Rehab", "Mental health promotion", "ECT", "Long term care"], a: 1 },
+                { q: "A halfway house is:", o: ["A prison", "Transitional living facility", "Hospital ward", "School"], a: 1 },
+                { q: "The District Mental Health Programme (DMHP) aims to:", o: ["Centralize care", "Integrate mental health into general health services", "Ignore rural areas", "Build asylums"], a: 1 }
+            ],
+            22: [
+                { q: "Involuntary admission is done when:", o: ["Patient wants it", "Patient is dangerous to self or others", "Family is tired", "Doctor is busy"], a: 1 },
+                { q: "Confidentiality can be breached if:", o: ["Nurse wants to share", "Duty to warn (Tarasoff rule) applies", "Never", "Neighbors ask"], a: 1 },
+                { q: "Informed consent requires:", o: ["Signature only", "Understanding of risks, benefits, and alternatives", "Force", "Money"], a: 1 },
+                { q: "Restraints require:", o: ["Nurse's decision", "Physician's order and monitoring", "Patient consent", "No rules"], a: 1 },
+                { q: "The Mental Healthcare Act 2017 decriminalized:", o: ["Theft", "Suicide attempt", "Violence", "Drug use"], a: 1 }
+            ],
+            23: [
+                { q: "Psychosocial rehabilitation aims to:", o: ["Cure illness", "Improve functioning and quality of life", "Sedate patient", "Isolate patient"], a: 1 },
+                { q: "Vocational training helps patients:", o: ["Sleep", "Gain employment skills", "Eat better", "Take meds"], a: 1 },
+                { q: "Social skills training teaches:", o: ["Math", "Communication and interaction", "Cooking", "Driving"], a: 1 },
+                { q: "Day care centers provide:", o: ["24-hour care", "Activities during the day", "Surgery", "Emergency care"], a: 1 },
+                { q: "Family psychoeducation helps family to:", o: ["Ignore patient", "Understand illness and support patient", "Leave patient", "Blame patient"], a: 1 }
+            ],
+            24: [
+                { q: "Counseling is:", o: ["Giving advice", "A professional relationship to help solve problems", "Chatting", "Judging"], a: 1 },
+                { q: "Active listening involves:", o: ["Talking constantly", "Paying full attention and understanding", "Ignoring", "Writing only"], a: 1 },
+                { q: "Non-judgmental attitude means:", o: ["Accepting client without criticism", "Agreeing with everything", "Disliking client", "Ignoring bad behavior"], a: 0 },
+                { q: "Empathy is:", o: ["Feeling sorry", "Understanding client's world", "Crying", "Sympathy"], a: 1 },
+                { q: "Confidentiality in counseling is:", o: ["Optional", "Essential trust builder", "Not needed", "Rare"], a: 1 }
+            ],
+            25: [
+                { q: "A psychiatric emergency is:", o: ["Medication refill", "Situation requiring immediate intervention (e.g., suicide, violence)", "Mild anxiety", "Insomnia"], a: 1 },
+                { q: "Triage in psychiatry assesses:", o: ["Money", "Urgency of risk", "Clothing", "Education"], a: 1 },
+                { q: "Therapeutic milieu refers to:", o: ["Medication", "A structured, healing environment", "Isolation room", "Doctors office"], a: 1 },
+                { q: "Team meeting in a psych unit is for:", o: ["Gossip", "Collaborative care planning", "Lunch", "Rest"], a: 1 },
+                { q: "Documentation should be:", o: ["Vague", "Accurate, objective, and timely", "Subjective", "Rare"], a: 1 }
+            ],
+            26: [
+                { q: "Continuing Nursing Education (CNE) helps to:", o: ["Pass time", "Update knowledge and skills", "Earn money", "Socialize"], a: 1 },
+                { q: "In-service education is for:", o: ["Students", "Working staff", "Patients", "Public"], a: 1 },
+                { q: "Clinical supervision provides:", o: ["Punishment", "Support and professional growth", "More work", "Stress"], a: 1 },
+                { q: "Role play is a method of:", o: ["Lecture", "Teaching/Practicing skills", "Reading", "Writing"], a: 1 },
+                { q: "Reflective practice involves:", o: ["Ignoring mistakes", "Analyzing one's own actions to learn", "Blaming others", "Forgetting"], a: 1 }
+            ]
+        };
 
-    <!-- === UNIT 5 === -->
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – Disorders of Infancy, Childhood, and Adolescence
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/13RjOCcU-lReDsvUzCysAQltFb24yo3Uj/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <!-- === UNIT 6 === -->
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Delirium, Dementia, and Amnestic Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1-H8ZfQClozeeRLd_HsPMpKHEeN7A1RIb/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <!-- === UNIT 7 === -->
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Substance-Related Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1IrzdHXeJoZREBZ1FEnJ3PfmNwieO9Lmf/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <!-- === UNIT 8 === -->
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – Schizophrenia and Other Psychotic Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1utWbw7t8D6V1CgqHtLcTGKgSH2gCVlc2/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <!-- === UNIT 9 === -->
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Mood Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1vCbXQwUf3l1eLU-SkonRINmxBzrt3NXn/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <!-- === UNIT 10 === -->
-    <div class="unit-container" id="unit10">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 10 – Anxiety Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1WOs_LU-D8lNP_HUA0yTaV70EVUnrBdqa/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-    <!-- === UNIT 11 === -->
-    <div class="unit-container" id="unit11">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 11 – Somatoform and Sleep Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1iEkADibdG2Vn7Rt1Z0R9YQ_XHu65TSMC/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-    <!-- === UNIT 12 === -->
-    <div class="unit-container" id="unit12">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 12 – Dissociative Disorders and Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1aHa_Z_3PitGpnFULA7L2aai2f4e_t7OR/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-    <!-- === UNIT 13 === -->
-    <div class="unit-container" id="unit13">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 13 – Sexual and Gender Identity Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1fm0x65cKFo8yPq21oMDFyZAMNrV1KnCd/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
-    <!-- === UNIT 14 === -->
-    <div class="unit-container" id="unit14">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 14 – Eating Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1R1jx8cu-dmk4C3jWrEn7DE1FJTchH7SS/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
 
-    <!-- === UNIT 15 === -->
-    <div class="unit-container" id="unit15">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 15 – Adjustment and Impulse Control Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1V0WRmNaVXKIZ9RosGbiwHGObMfR2Fiml/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
 
-    <!-- === UNIT 16 === -->
-    <div class="unit-container" id="unit16">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 16 – Medical Conditions Due to Psychological Factors
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1eguuGXNZL1HuBTHbMOEp7Sg1M22p-9fX/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
 
-    <!-- === UNIT 17 === -->
-    <div class="unit-container" id="unit17">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 17 – Personality Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/15BRmRio0FcSyOhAiwDWg5bcS6-NR4QM_/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 18 === -->
-    <div class="unit-container" id="unit18">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 18 – The Aging Individual
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1VsTsKSdvWygij3-CfDneQx0c8tkybxbA/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 19 === -->
-    <div class="unit-container" id="unit19">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 19 – The Person Living with HIV Disease
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1rb6dHhplIfoLNUtOJeYPbFMemKhBZwLP/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 20 === -->
-    <div class="unit-container" id="unit20">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 20 – Problems Related to Abuse or Neglect
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1mmsvTmhT0lrbmtsdh5V4pbrhRzfaBVfm/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 21 === -->
-    <div class="unit-container" id="unit21">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 21 – Community Mental Health Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1U0GgDcBVh1BoA5YsE3sfiffv81A6cAFG/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 22 === -->
-    <div class="unit-container" id="unit22">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 22 – Ethical and Legal Issues in Psychiatric/Mental Health Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1U_kQUwkwoRCkMuyN6AS_1Sbsghh73UzK/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 23 === -->
-    <div class="unit-container" id="unit23">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 23 – Psychosocial Rehabilitation
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1rydaFjwWnnw6HJOlD-QTLYY_qLmfAmZA/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 24 === -->
-    <div class="unit-container" id="unit24">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 24 – Counseling
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1BhChASXUGi244AFvCEAdoyQmwf_aYHY9/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 25 === -->
-    <div class="unit-container" id="unit25">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 25 – Administration and Management of Psychiatric Units Including Emergency Units
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1D0dqx9F0thZJ05Ke9fe_RSqrtIicnRMS/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === UNIT 26 === -->
-    <div class="unit-container" id="unit26">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 26 – Education and Training in Psychiatric Care
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1m34v0M6n_-Xm-EhEidrmu28JVgj2z_hm/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1doflMKAnD_Xi0pM2I4hJ1jd-s8p6h42P/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-          <a href="https://drive.google.com/file/d/1ySleNiGMFXp54KD3IvMkN4ytlKHrBvKM/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-          <a href="https://drive.google.com/file/d/1lbEdB35Qdjo1M52prcarYbSXItkBLX47/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-          <a href="https://drive.google.com/file/d/1TyPTjrP9xUZYQBxRtbbR89Ur7-1Gb9Vd/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-          <a href="https://drive.google.com/file/d/1NupZhDbV4c_CEnrUX5zCjreyVH1XGSi4/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-          <a href="https://drive.google.com/file/d/1-Nnek_dhnZnslPrGDimS8qxSS5gn-8Cw/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-          <a href="https://drive.google.com/file/d/17EUokJMYPh0g6IxB8xqunLTkcUKMVBEw/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2016</span></a>
-          <a href="https://drive.google.com/file/d/1HQpJ2uc19_Z-3rGjWtCk3eP8ThnkyqEp/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
-
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
-
