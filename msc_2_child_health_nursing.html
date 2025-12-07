@@ -1,371 +1,698 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Child Health Nursing Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Child Health Nursing." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Child Health Nursing - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Child Health Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;    /* Dark Blue */
-      --accent: #00B9F2;   /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1TRJ6RdjjjKHOERogIubSKGhC65lYg9ao/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 CHILD HEALTH NURSING SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNIT 1 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Introduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/17l_MW-wpNewYSik_XXVUgWjesGAF7_cf/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1TRJ6RdjjjKHOERogIubSKGhC65lYg9ao/preview', 'Child Health Nursing Syllabus')">
+        📄 DOWNLOAD SYLLABUS
     </div>
     
-    <!-- === UNIT 2 === -->
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Study of Pediatric Medical Disorders and Nursing Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/15HTDsW3fMv6L8AHlJoCBE8JeFhd88jJX/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17l_MW-wpNewYSik_XXVUgWjesGAF7_cf/preview', 'Detailed Notes: Introduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - PEDIATRIC MEDICAL DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15HTDsW3fMv6L8AHlJoCBE8JeFhd88jJX/preview', 'Detailed Notes: Medical Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Medical Disorders & Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - SURGICAL & TRAUMATIC DISORDERS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12Zq2FHHlD_tUOLz37I-2ZkuPwit8sEVo/preview', 'Detailed Notes: Surgical Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Surgical & Traumatic Disorders</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - INTENSIVE CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1db9Iuc12tkXOXwv6Nvhms_A-irB-D5Nc/preview', 'Detailed Notes: Intensive Care')">
+                        <span class="icon">📚</span><span>Detailed Notes: Intensive Care for Pediatric Clients</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - HIGH RISK NEWBORN
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VyZkTUhRcCJ89vDZO57CcS8JcsV58hNg/preview', 'Detailed Notes: High Risk Newborn')">
+                        <span class="icon">📚</span><span>Detailed Notes: High Risk Newborn</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - CHILD UNDERGOING SURGERY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1YZHkrCjGSQ4JtrlxtzMCYf1lMglsZztF/preview', 'Detailed Notes: Child Surgery')">
+                        <span class="icon">📚</span><span>Detailed Notes: Child Undergoing Surgery</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - DEVELOPMENTAL DISTURBANCES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NOXAfXH6oyKG2q0tZOirrvXCQCM8-5vN/preview', 'Detailed Notes: Developmental')">
+                        <span class="icon">📚</span><span>Detailed Notes: Developmental Disturbances</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - CHALLENGED CHILD
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1un6XT2AouVqSdPJ0CrmHj6Wcnkrb8NnZ/preview', 'Detailed Notes: Challenged Child')">
+                        <span class="icon">📚</span><span>Detailed Notes: Challenged Child & Nursing</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - CRISIS & INTERVENTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1SJ-2A3CiDtfPH2lOZva3FvyVU9YdVSX5/preview', 'Detailed Notes: Crisis')">
+                        <span class="icon">📚</span><span>Detailed Notes: Crisis and Nursing Intervention</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - DRUGS USED IN PEDIATRICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1snmVAhVholPp_4KwWnrMw4O1BdljyDYc/preview', 'Detailed Notes: Drugs')">
+                        <span class="icon">📚</span><span>Detailed Notes: Drugs Used in Pediatrics</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - ADMINISTRATION & MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1folDf8fbK8NmDlLTCrQKL9Kr9gh8XuPw/preview', 'Detailed Notes: Admin')">
+                        <span class="icon">📚</span><span>Detailed Notes: Administration of Pediatric Care Unit</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - EDUCATION & TRAINING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WkYt2ea_MVIeIygOtz9mZhopZy9cm8jm/preview', 'Detailed Notes: Education')">
+                        <span class="icon">📚</span><span>Detailed Notes: Education and Training</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ISVq3woWGMJeWj4MQMWF4SEaeEpaFcs2/preview', 'PYQ June 2024')">
+                        <span class="icon">📄</span><span>PYQ - June 2024</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1hgy9fm6rOKAR8_ZK_EShOeYLMLtHNOQR/preview', 'PYQ Jan 2024')">
+                        <span class="icon">📄</span><span>PYQ - January 2024</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XcUA4N7Rrs9jH1Zo_8HNsYEru9DWAD_Y/preview', 'PYQ June 2023')">
+                        <span class="icon">📄</span><span>PYQ - June 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1COQAMKdeoYhXyQTCbVoam99zoSL8-eYs/preview', 'PYQ May 2022')">
+                        <span class="icon">📄</span><span>PYQ - May 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1f5fYJ1R-exwCHq92PkCxEDjeaZRFIfcR/preview', 'PYQ July 2021')">
+                        <span class="icon">📄</span><span>PYQ - July 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1TXGY12HWKlQTeX5xVX7jAMjpvk9oYlNz/preview', 'PYQ Sept 2020')">
+                        <span class="icon">📄</span><span>PYQ - September 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mtUdBkPdqQYe7l-UIwnVDGh5dokpEh0w/preview', 'PYQ Oct 2019')">
+                        <span class="icon">📄</span><span>PYQ - October 2019</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ptw4F_rTWBDJcAEvuuQtBwmd4tLcok3m/preview', 'PYQ Sept 2018')">
+                        <span class="icon">📄</span><span>PYQ - September 2018</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1a0NmnBdNte1sQoTRk8o4ery_txSxy0Ol/preview', 'PYQ Oct 2017')">
+                        <span class="icon">📄</span><span>PYQ - October 2017</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13dVfr-dcX5JVhh70g1fnobctg0koQD5q/preview', 'PYQ April 2018')">
+                        <span class="icon">📄</span><span>PYQ - April 2018</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lKFCcDK1VuwHvxR7U7aZvvxvyhfjMLsk/preview', 'PYQ April 2017')">
+                        <span class="icon">📄</span><span>PYQ - April 2017</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zxT6D0imLw1w0eLto5Hm2WBwUArozlGf/preview', 'PYQ April 2016')">
+                        <span class="icon">📄</span><span>PYQ - April 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jtfLbqXSIUUXOZ8Inao51XL-3EHTWlcb/preview', 'PYQ Oct 2015')">
+                        <span class="icon">📄</span><span>PYQ - October 2015</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- === UNIT 3 === -->
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – Nursing Management of Pediatric Surgical Disorders and Traumatic Disorders
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/12Zq2FHHlD_tUOLz37I-2ZkuPwit8sEVo/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <!-- === UNIT 4 === -->
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – Intensive Care for Pediatric Clients
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1db9Iuc12tkXOXwv6Nvhms_A-irB-D5Nc/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Pediatrics is defined as:", o: ["Study of elderly", "Branch of medicine dealing with children", "Study of women", "Study of bones"], a: 1 },
+                { q: "Which is a concept of preventive pediatrics?", o: ["Treatment of disease only", "Growth monitoring and immunization", "Surgery", "Isolation"], a: 1 },
+                { q: "The rights of a child were adopted by UN in:", o: ["1948", "1959", "1989", "1992"], a: 2 },
+                { q: "IMNCI stands for:", o: ["Integrated Management of Neonatal and Childhood Illness", "Indian Management of Newborn Care", "International Medical Nursing Care Institute", "None"], a: 0 },
+                { q: "The primary goal of pediatric nursing is:", o: ["To cure all diseases", "To promote optimal growth and development", "To provide financial aid", "To educate parents only"], a: 1 }
+            ],
+            2: [
+                { q: "Pneumonia is an infection of the:", o: ["Stomach", "Lungs/Alveoli", "Kidney", "Brain"], a: 1 },
+                { q: "Oral Rehydration Solution (ORS) is used for:", o: ["Fever", "Dehydration due to Diarrhea", "Cough", "Headache"], a: 1 },
+                { q: "A common congenital heart defect is:", o: ["Appendicitis", "VSD (Ventricular Septal Defect)", "Fracture", "Asthma"], a: 1 },
+                { q: "Nephrotic syndrome is characterized by:", o: ["Hematuria", "Proteinuria and Edema", "High fever", "Cough"], a: 1 },
+                { q: "Meningitis affects the:", o: ["Heart", "Protective membranes of Brain and Spinal Cord", "Lungs", "Liver"], a: 1 }
+            ],
+            3: [
+                { q: "Cleft lip is a:", o: ["Medical disorder", "Congenital surgical defect", "Viral infection", "Allergic reaction"], a: 1 },
+                { q: "Hydrocephalus is accumulation of fluid in the:", o: ["Lungs", "Abdomen", "Ventricles of the Brain", "Joints"], a: 2 },
+                { q: "Intussusception refers to:", o: ["Telescoping of bowel segments", "Twisting of intestine", "Hole in stomach", "Infection of colon"], a: 0 },
+                { q: "First aid for burns involves:", o: ["Applying ice", "Cool running water", "Applying butter", "Pricking blisters"], a: 1 },
+                { q: "Spina Bifida is a defect of the:", o: ["Heart", "Neural Tube/Spine", "Stomach", "Kidney"], a: 1 }
+            ],
+            4: [
+                { q: "PICU stands for:", o: ["Pediatric Intensive Care Unit", "Private Intensive Care Unit", "Primary Infant Care Unit", "Public Intensive Care Unit"], a: 0 },
+                { q: "CPR ratio for a single rescuer in a child is:", o: ["15:2", "30:2", "5:1", "10:1"], a: 1 },
+                { q: "Which equipment is essential in PICU?", o: ["Ventilator", "Monitor", "Defibrillator", "All of the above"], a: 3 },
+                { q: "Triage puts patients in categories based on:", o: ["Age", "Urgency of condition", "Gender", "Wealth"], a: 1 },
+                { q: "Pulse oximetry measures:", o: ["Blood pressure", "Oxygen saturation", "Temperature", "Glucose"], a: 1 }
+            ],
+            5: [
+                { q: "A Low Birth Weight (LBW) baby weighs less than:", o: ["2500g", "3000g", "1500g", "1000g"], a: 0 },
+                { q: "Kangaroo Mother Care (KMC) provides:", o: ["Warmth, breastfeeding, and bonding", "Medicine", "Surgery", "Oxygen"], a: 0 },
+                { q: "Neonatal Jaundice is caused by high levels of:", o: ["Glucose", "Bilirubin", "Calcium", "Sodium"], a: 1 },
+                { q: "Preterm baby is born before:", o: ["40 weeks", "37 weeks", "42 weeks", "32 weeks"], a: 1 },
+                { q: "Birth asphyxia leads to deprivation of:", o: ["Food", "Oxygen", "Water", "Heat"], a: 1 }
+            ],
+            6: [
+                { q: "Pre-operative care includes:", o: ["Giving heavy meal", "NPO (Nil Per Oral) and Consent", "Exercise", "Vaccination"], a: 1 },
+                { q: "Informed consent for a minor must be signed by:", o: ["The child", "Parents/Guardians", "Nurse", "Friends"], a: 1 },
+                { q: "Post-operative monitoring includes:", o: ["Vital signs", "Wound site", "Pain level", "All of the above"], a: 3 },
+                { q: "Play therapy before surgery helps to:", o: ["Increase pain", "Reduce anxiety", "Increase bleeding", "Cause infection"], a: 1 },
+                { q: "Colostomy care involves care of:", o: ["Stoma/Bowel opening", "Tracheostomy", "Urinary catheter", "IV line"], a: 0 }
+            ],
+            7: [
+                { q: "ADHD stands for:", o: ["Attention Deficit Hyperactivity Disorder", "Acute Development Health Disorder", "Active Deficit Health Defect", "None"], a: 0 },
+                { q: "Pica is a habit disorder characterized by:", o: ["Eating non-nutritive substances", "Bed wetting", "Thumb sucking", "Stuttering"], a: 0 },
+                { q: "Enuresis means:", o: ["Fecal soiling", "Bed wetting/Involuntary urination", "Sleep walking", "Nail biting"], a: 1 },
+                { q: "Autism is a:", o: ["Physical disability", "Neurodevelopmental disorder", "Hearing defect", "Vision defect"], a: 1 },
+                { q: "Learning disability involving reading is called:", o: ["Dyslexia", "Dysgraphia", "Dyscalculia", "Dyspraxia"], a: 0 }
+            ],
+            8: [
+                { q: "A physically challenged child may have:", o: ["Blindness", "Cerebral Palsy", "Deafness", "All of the above"], a: 3 },
+                { q: "Mental retardation is now referred to as:", o: ["Intellectual Disability", "Mental Block", "Slow Learner", "Madness"], a: 0 },
+                { q: "Rehabilitation aims to:", o: ["Cure the disability completely", "Help child reach maximum potential", "Hide the child", "Isolate the child"], a: 1 },
+                { q: "The IQ range for mild intellectual disability is:", o: ["50-70", "35-50", "20-35", "Below 20"], a: 0 },
+                { q: "Blindness is a:", o: ["Visual impairment", "Hearing impairment", "Motor impairment", "Speech impairment"], a: 0 }
+            ],
+            9: [
+                { q: "A crisis is:", o: ["A routine event", "A temporary state of disequilibrium", "A happy event", "A permanent disease"], a: 1 },
+                { q: "Hospitalization can cause what in children?", o: ["Separation anxiety", "Joy", "Growth spurt", "Better grades"], a: 0 },
+                { q: "Grief is a reaction to:", o: ["Success", "Loss", "Birth", "Playing"], a: 1 },
+                { q: "Which is a sign of child abuse?", o: ["Unexplained bruises/burns", "Clean clothes", "Good grades", "Happy demeanor"], a: 0 },
+                { q: "Crisis intervention aims to:", o: ["Increase stress", "Restore pre-crisis functioning", "Ignore the problem", "Sedate the patient"], a: 1 }
+            ],
+            10: [
+                { q: "Drug dosage in children is calculated based on:", o: ["Age only", "Weight or Body Surface Area", "Height only", "Parents' preference"], a: 1 },
+                { q: "The preferred site for IM injection in infants is:", o: ["Deltoid", "Gluteus", "Vastus Lateralis", "Abdomen"], a: 2 },
+                { q: "Oral medication for infants should be given using a:", o: ["Spoon", "Dropper/Syringe", "Cup", "Bottle"], a: 1 },
+                { q: "Common side effect of antibiotics is:", o: ["Diarrhea", "Fever", "Cough", "Growth spurt"], a: 0 },
+                { q: "The 'Rights' of medication administration include:", o: ["Right patient", "Right dose", "Right route", "All of the above"], a: 3 }
+            ],
+            11: [
+                { q: "A pediatric unit should be:", o: ["Dark and scary", "Bright, colorful, and child-friendly", "Silent", "Crowded"], a: 1 },
+                { q: "Nurse-patient ratio in PICU is usually:", o: ["1:1 or 1:2", "1:10", "1:20", "1:5"], a: 0 },
+                { q: "Isolation rooms are for:", o: ["VVIPs", "Infectious patients", "Noisy children", "Staff rest"], a: 1 },
+                { q: "Safety in pediatric unit includes:", o: ["Side rails on cribs", "Sharp objects within reach", "Wet floors", "Open windows"], a: 0 },
+                { q: "Admission procedure involves:", o: ["Identification", "Assessment", "Orientation", "All of the above"], a: 3 }
+            ],
+            12: [
+                { q: "In-service education refers to training given:", o: ["Before employment", "During employment", "After retirement", "In school"], a: 1 },
+                { q: "Parent education is important for:", o: ["Continuity of care at home", "Saving hospital money", "Nurse's free time", "None"], a: 0 },
+                { q: "Who needs training in pediatric care?", o: ["Nurses", "Doctors", "Paramedical staff", "All healthcare team members"], a: 3 },
+                { q: "A method of clinical teaching is:", o: ["Bedside clinic", "Lecture", "Reading alone", "Exam"], a: 0 },
+                { q: "Continuing education helps nurses to:", o: ["Stay updated with current practices", "Forget old skills", "Earn money only", "Sleep better"], a: 0 }
+            ]
+        };
 
-    <!-- === UNIT 5 === -->
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – High Risk Newborn
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1VyZkTUhRcCJ89vDZO57CcS8JcsV58hNg/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <!-- === UNIT 6 === -->
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Child Undergoing Surgery
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1YZHkrCjGSQ4JtrlxtzMCYf1lMglsZztF/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <!-- === UNIT 7 === -->
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Developmental Disturbances and Implications for Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1NOXAfXH6oyKG2q0tZOirrvXCQCM8-5vN/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <!-- === UNIT 8 === -->
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – Challenged Child and Implications for Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1un6XT2AouVqSdPJ0CrmHj6Wcnkrb8NnZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <!-- === UNIT 9 === -->
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Crisis and Nursing Intervention
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1SJ-2A3CiDtfPH2lOZva3FvyVU9YdVSX5/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <!-- === UNIT 10 === -->
-    <div class="unit-container" id="unit10">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 10 – Drugs Used in Pediatrics
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1snmVAhVholPp_4KwWnrMw4O1BdljyDYc/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-    <!-- === UNIT 11 === -->
-    <div class="unit-container" id="unit11">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 11 – Administration and Management of Pediatric Care Unit
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1folDf8fbK8NmDlLTCrQKL9Kr9gh8XuPw/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-    <!-- === UNIT 12 === -->
-    <div class="unit-container" id="unit12">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 12 – Education and Training in Pediatric Care
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1WkYt2ea_MVIeIygOtz9mZhopZy9cm8jm/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1ISVq3woWGMJeWj4MQMWF4SEaeEpaFcs2/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-          <a href="https://drive.google.com/file/d/1hgy9fm6rOKAR8_ZK_EShOeYLMLtHNOQR/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-          <a href="https://drive.google.com/file/d/1XcUA4N7Rrs9jH1Zo_8HNsYEru9DWAD_Y/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-          <a href="https://drive.google.com/file/d/1COQAMKdeoYhXyQTCbVoam99zoSL8-eYs/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-          <a href="https://drive.google.com/file/d/1f5fYJ1R-exwCHq92PkCxEDjeaZRFIfcR/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-          <a href="https://drive.google.com/file/d/1TXGY12HWKlQTeX5xVX7jAMjpvk9oYlNz/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-          <a href="https://drive.google.com/file/d/1mtUdBkPdqQYe7l-UIwnVDGh5dokpEh0w/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-          <a href="https://drive.google.com/file/d/1ptw4F_rTWBDJcAEvuuQtBwmd4tLcok3m/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-          <a href="https://drive.google.com/file/d/1a0NmnBdNte1sQoTRk8o4ery_txSxy0Ol/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2017</span></a>
-          <a href="https://drive.google.com/file/d/13dVfr-dcX5JVhh70g1fnobctg0koQD5q/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
-          <a href="https://drive.google.com/file/d/1lKFCcDK1VuwHvxR7U7aZvvxvyhfjMLsk/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-          <a href="https://drive.google.com/file/d/1zxT6D0imLw1w0eLto5Hm2WBwUArozlGf/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2016</span></a>
-          <a href="https://drive.google.com/file/d/1jtfLbqXSIUUXOZ8Inao51XL-3EHTWlcb/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2015</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
 
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
-
