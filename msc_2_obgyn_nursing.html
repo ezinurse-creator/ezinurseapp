@@ -1,367 +1,668 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nursing Management Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Nursing Management." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obstetrics and Gynecological Nursing - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Obstetrics and Gynecological Nursing." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;    /* Dark Blue */
-      --accent: #00B9F2;   /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1-uXQ6TbBQ3yaCqFhtzTvMQfHZM7Jlf2r/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 NURSING MANAGEMENT SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNIT 1 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Introduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1B4CMRKGzmwqG3erT3Y50bYfw511gZYnK/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1VCbUbXpRuDF3qz8kxTLkzVtg1pCB3cr-/preview', 'Obstetrics and Gynecological Nursing Syllabus')">
+        📄 DOWNLOAD SYLLABUS
     </div>
     
-    <!-- === UNIT 2 === -->
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Nursing Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1v6uZeUn6ikLuVwQ-8OFwSUTlMAAPE4A-/view?usp=drive_link" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - MANAGEMENT OF WOMEN WITH OBSTETRICAL COMPLICATIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IcOFnC_KJ_3K_Pwk4aWvnPxzy0KDkdhX/preview', 'Detailed Notes: Unit 1')">
+                        <span class="icon">📚</span><span>Detailed Notes: Obstetrical Complications</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - MANAGEMENT OF WOMEN WITH MEDICAL CONDITIONS COMPLICATING PREGNANCY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1w9T_JRo_MflYPQCzAo-vKKLsdjrt8rmN/preview', 'Detailed Notes: Unit 2')">
+                        <span class="icon">📚</span><span>Detailed Notes: Medical Conditions in Pregnancy</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ABNORMAL LABOUR, PRE-TERM LABOUR & OBSTETRICAL EMERGENCIES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cp9btTWuMkxC28TVzFcxrsOcJUeDxHB-/preview', 'Detailed Notes: Unit 3')">
+                        <span class="icon">📚</span><span>Detailed Notes: Abnormal Labour & Emergencies</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - POST PARTUM COMPLICATIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fkZ2bQzfnngBTH9RqYCYW6zKfVZcte-q/preview', 'Detailed Notes: Unit 4')">
+                        <span class="icon">📚</span><span>Detailed Notes: Post Partum Complications</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - HIGH RISK NEWBORN
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WaY1FxgiPM0phutj1y4c8Y1JvwEUfEho/preview', 'Detailed Notes: Unit 5')">
+                        <span class="icon">📚</span><span>Detailed Notes: High Risk Newborn</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - HIV/AIDS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12EmYZS1pBDr9VTLKVXWhqEw1cxJIvF_8/preview', 'Detailed Notes: Unit 6')">
+                        <span class="icon">📚</span><span>Detailed Notes: HIV/AIDS in Obstetrics</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - GYNECOLOGICAL PROBLEMS AND NURSING MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VKD0Fe-ghr8fwtqtMLfysniERQOwLlzK/preview', 'Detailed Notes: Unit 7')">
+                        <span class="icon">📚</span><span>Detailed Notes: Gynecological Problems</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - ADMINISTRATION AND MANAGEMENT OF OBSTETRICAL AND GYNECOLOGICAL UNIT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VxsKJ1onhCK7akBWHigVQNS6onfbvLey/preview', 'Detailed Notes: Unit 8')">
+                        <span class="icon">📚</span><span>Detailed Notes: Unit Administration</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - EDUCATION AND TRAINING IN OBSTETRICAL AND GYNECOLOGICAL CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VIGxQM_9zz3S9G0DuDM8nvRl7d1RviVw/preview', 'Detailed Notes: Unit 9')">
+                        <span class="icon">📚</span><span>Detailed Notes: Education and Training</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - ABORTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KQAxH5yJcXtqv_A1AFwGjCkLauld8bMK/preview', 'Detailed Notes: Unit 10')">
+                        <span class="icon">📚</span><span>Detailed Notes: Abortion</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTION AND ANSWER
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eT4ErZicFS-gtU_P90he9dDJEks0gL-8/preview', 'PYQ - May 2015')">
+                        <span class="icon">📄</span><span>PYQ - May 2015</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dm2-0JLTKwz0znnfLsrVz-q-CjwgAUUt/preview', 'PYQ - April 2017')">
+                        <span class="icon">📄</span><span>PYQ - April 2017</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OyWsPNx_Ftz3s1-2pWpMOaKcDXU-TFXx/preview', 'PYQ - May 2015 (2)')">
+                        <span class="icon">📄</span><span>PYQ - May 2015 (Set 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15e8NpaTv77CamKDvhGT59vEV_GVjJN8I/preview', 'PYQ - April 2016')">
+                        <span class="icon">📄</span><span>PYQ - April 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17rOT0Roq3P7z6skZIPZEKPXMEAd9uoGt/preview', 'PYQ - October 2017')">
+                        <span class="icon">📄</span><span>PYQ - October 2017</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13_cMRv0qeMcMrUfHdJhpHpnoGHDQIPqx/preview', 'PYQ - April 2017 (2)')">
+                        <span class="icon">📄</span><span>PYQ - April 2017 (Set 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13Sq15MlK3ln5DixHaviwn6NbpIeKHXBy/preview', 'PYQ - May 2015 (3)')">
+                        <span class="icon">📄</span><span>PYQ - May 2015 (Set 3)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/193In2J7wjhyKfOLBPacgz_APgD8iuwjn/preview', 'PYQ - May 2016')">
+                        <span class="icon">📄</span><span>PYQ - May 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Zz1WYN2raZK2SGWCHYdd4gLyiE1zcV2g/preview', 'PYQ - April 2018')">
+                        <span class="icon">📄</span><span>PYQ - April 2018</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CTtEF3Hwv9LynqEA7Qtlix3JgIrxKmAO/preview', 'PYQ - April 2019')">
+                        <span class="icon">📄</span><span>PYQ - April 2019</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18dZCyXg0z8lccb9d8a-_uOhuTHW-MDq1/preview', 'PYQ - February 2023')">
+                        <span class="icon">📄</span><span>PYQ - February 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1awYfJkV_cdY8-9kXwdPBMoWvxyMOdVS9/preview', 'PYQ - July 2021')">
+                        <span class="icon">📄</span><span>PYQ - July 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1m_i_ZRNb0vZVr_ci6vq7kWb54IDakBJg/preview', 'PYQ - June 2023')">
+                        <span class="icon">📄</span><span>PYQ - June 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JrbYfQmA6pZIyDHKQcWYwSmpEGTDUvlO/preview', 'PYQ - June 2024')">
+                        <span class="icon">📄</span><span>PYQ - June 2024</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OkKBoV-zkAbUM-R7dz1o1m1hG2kt4Y72/preview', 'PYQ - May 2016 (2)')">
+                        <span class="icon">📄</span><span>PYQ - May 2016 (Set 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11VJc8ANXMwHQLE3NQOmxHFz21v8hVz1A/preview', 'PYQ - May 2022')">
+                        <span class="icon">📄</span><span>PYQ - May 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12G6ya7U3bOFeueA_HsvOAkXba09QknZN/preview', 'PYQ - February 2023 (2)')">
+                        <span class="icon">📄</span><span>PYQ - February 2023 (Set 2)</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_niG92KHdbYO3WlZa_XDQDlcfHlTLd0h/preview', 'PYQ - November 2020')">
+                        <span class="icon">📄</span><span>PYQ - November 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xK7U4qgPkIsHx82Tor38Nu9SHrX5b3LD/preview', 'PYQ - January 2024')">
+                        <span class="icon">📄</span><span>PYQ - January 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- === UNIT 3 === -->
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – Planning
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1cuW5zl27QYhP4kwnksbMfap89CXEK98S/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <!-- === UNIT 4 === -->
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – Organisation
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1JFiosHpOVVkkkCEpUcrKjfNzI3E_pm96/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Which condition is characterized by high blood pressure, proteinuria, and edema during pregnancy?", o: ["Gestational Diabetes", "Preeclampsia", "Placenta Previa", "Hyperemesis Gravidarum"], a: 1 },
+                { q: "Painless, bright red vaginal bleeding in the third trimester is a hallmark sign of:", o: ["Abruptio Placentae", "Placenta Previa", "Uterine Rupture", "Ectopic Pregnancy"], a: 1 },
+                { q: "The drug of choice for preventing seizures in severe preeclampsia is:", o: ["Diazepam", "Magnesium Sulfate", "Phenytoin", "Calcium Gluconate"], a: 1 },
+                { q: "Polyhydramnios is defined as amniotic fluid volume greater than:", o: ["500 ml", "1000 ml", "1500 ml", "2000 ml"], a: 3 },
+                { q: "Ectopic pregnancy most commonly occurs in the:", o: ["Ovary", "Cervix", "Fallopian Tube", "Abdominal Cavity"], a: 2 }
+            ],
+            2: [
+                { q: "Which anemia is most common during pregnancy?", o: ["Pernicious Anemia", "Iron Deficiency Anemia", "Sickle Cell Anemia", "Aplastic Anemia"], a: 1 },
+                { q: "In a pregnant woman with heart disease, the most critical period for cardiac failure is:", o: ["12-16 weeks", "28-32 weeks", "38-40 weeks", "Postpartum day 1"], a: 1 },
+                { q: "The screening test for Gestational Diabetes Mellitus is:", o: ["Fasting Blood Sugar", "HbA1c", "Oral Glucose Tolerance Test (OGTT)", "Random Blood Sugar"], a: 2 },
+                { q: "Which viral infection is known to cause congenital rubella syndrome?", o: ["Cytomegalovirus", "Herpes Simplex", "German Measles (Rubella)", "Chickenpox"], a: 2 },
+                { q: "Treatment of choice for syphilis in pregnancy is:", o: ["Erythromycin", "Penicillin G", "Tetracycline", "Ciprofloxacin"], a: 1 }
+            ],
+            3: [
+                { q: "Prolonged labour is defined when the combined duration of the first and second stage is more than:", o: ["12 hours", "18 hours", "24 hours", "6 hours"], a: 1 },
+                { q: "Preterm labour is onset of labour before:", o: ["37 completed weeks", "35 weeks", "28 weeks", "40 weeks"], a: 0 },
+                { q: "In case of cord prolapse, the immediate nursing action is:", o: ["Push the cord back", "Place mother in Trendelenburg/Knee-chest position", "Start Oxytocin", "wait for doctor"], a: 1 },
+                { q: "Shoulder dystocia is an emergency where:", o: ["Head is not delivered", "Head is delivered but shoulders are stuck", "Breech presentation", "Hand prolapse"], a: 1 },
+                { q: "Precipitate labour is labour lasting less than:", o: ["10 hours", "5 hours", "3 hours", "1 hour"], a: 2 }
+            ],
+            4: [
+                { q: "Postpartum Hemorrhage (PPH) is defined as blood loss greater than ___ after vaginal delivery.", o: ["300 ml", "500 ml", "1000 ml", "200 ml"], a: 1 },
+                { q: "The most common cause of Primary PPH is:", o: ["Trauma", "Thrombin defects", "Uterine Atony", "Retained tissue"], a: 2 },
+                { q: "Puerperal sepsis is infection of the genital tract occurring within ___ days after abortion or delivery.", o: ["10", "28", "42", "7"], a: 2 },
+                { q: "Subinvolution refers to:", o: ["Rapid return of uterus to normal size", "Failure of uterus to return to non-pregnant state", "Infection of breast", "Depression"], a: 1 },
+                { q: "Postpartum blues usually appear on:", o: ["Day 1", "Day 3-5", "Day 14", "Day 30"], a: 1 }
+            ],
+            5: [
+                { q: "Low Birth Weight (LBW) baby is defined as birth weight less than:", o: ["3000 g", "2500 g", "1500 g", "1000 g"], a: 1 },
+                { q: "Kangaroo Mother Care (KMC) provides:", o: ["Warmth, breastfeeding, and bonding", "Artificial respiration", "Phototherapy", "Antibiotics"], a: 0 },
+                { q: "Physiological jaundice usually appears:", o: ["Within 24 hours", "After 24 hours", "At birth", "After 1 week"], a: 1 },
+                { q: "Respiratory Distress Syndrome (RDS) in preterms is caused by deficiency of:", o: ["Oxygen", "Surfactant", "Glucose", "Calcium"], a: 1 },
+                { q: "Ophthalmia neonatorum is an infection of the:", o: ["Ears", "Eyes", "Umbilicus", "Skin"], a: 1 }
+            ],
+            6: [
+                { q: "Mother-to-Child Transmission (MTCT) of HIV can occur during:", o: ["Pregnancy", "Labour and Delivery", "Breastfeeding", "All of the above"], a: 3 },
+                { q: "The antiretroviral drug often given to the newborn to prevent HIV transmission is:", o: ["Nevirapine/Zidovudine", "Paracetamol", "Amoxicillin", "Aspirin"], a: 0 },
+                { q: "In HIV positive mothers, what is the recommended mode of delivery if viral load is high?", o: ["Vaginal delivery", "Forceps delivery", "Elective Caesarean Section", "Vacuum extraction"], a: 2 },
+                { q: "Standard precautions should be followed:", o: ["Only for HIV patients", "Only for Hepatitis patients", "For all patients", "Only in ICU"], a: 2 },
+                { q: "Can HIV be transmitted through casual contact like hugging?", o: ["Yes", "No", "Maybe", "Only if sweating"], a: 1 }
+            ],
+            7: [
+                { q: "Dysmenorrhea means:", o: ["Absence of menstruation", "Painful menstruation", "Excessive bleeding", "Irregular bleeding"], a: 1 },
+                { q: "The most common benign tumor of the uterus is:", o: ["Polyp", "Fibroid (Leiomyoma)", "Sarcoma", "Adenomyosis"], a: 1 },
+                { q: "Vesicovaginal fistula (VVF) is an abnormal communication between:", o: ["Bladder and Vagina", "Rectum and Vagina", "Ureter and Vagina", "Urethra and Vagina"], a: 0 },
+                { q: "Infertility is defined as inability to conceive after ___ of unprotected intercourse.", o: ["6 months", "1 year", "2 years", "5 years"], a: 1 },
+                { q: "Pap smear is a screening test for:", o: ["Ovarian Cancer", "Cervical Cancer", "Uterine Cancer", "Breast Cancer"], a: 1 }
+            ],
+            8: [
+                { q: "Rooming-in promotes:", o: ["Separation of mother and baby", "Mother and baby staying in the same room", "Bottle feeding", "Strict visiting hours"], a: 1 },
+                { q: "The ideal nurse-patient ratio in a labour room is:", o: ["1:1", "1:5", "1:10", "1:2"], a: 0 },
+                { q: "Which of the following is an administrative responsibility?", o: ["Giving injection", "Staffing and duty roster", "Taking BP", "Cleaning floor"], a: 1 },
+                { q: "Infection control in the obstetrical unit includes:", o: ["Hand washing", "Sterilization of instruments", "Waste disposal", "All of the above"], a: 3 },
+                { q: "Records and reports are essential for:", o: ["Legal protection and continuity of care", "Decorating the office", "Selling data", "Personal diary"], a: 0 }
+            ],
+            9: [
+                { q: "Continuing Nursing Education (CNE) helps nurses to:", o: ["Earn more money only", "Update knowledge and skills", "Take leave", "Retire early"], a: 1 },
+                { q: "Family welfare services primarily focus on:", o: ["Treating cancer", "Family planning and maternal-child health", "Surgery", "Dental care"], a: 1 },
+                { q: "Role play is a method of:", o: ["Clinical practice", "Teaching/Training", "Assessment", "Punishment"], a: 1 },
+                { q: "Evidence-Based Practice (EBP) in nursing means:", o: ["Doing what seniors say", "Using best research evidence with clinical expertise", "Trial and error", "Ignoring research"], a: 1 },
+                { q: "In-service education is given:", o: ["Before joining job", "During employment", "After retirement", "In college"], a: 1 }
+            ],
+            10: [
+                { q: "MTP Act stands for:", o: ["Medical Termination of Pregnancy Act", "Maternal Treatment Plan", "Medical Training Program", "Mother and Toddler Program"], a: 0 },
+                { q: "Spontaneous abortion is also known as:", o: ["MTP", "Miscarriage", "Ectopic pregnancy", "Stillbirth"], a: 1 },
+                { q: "Threatened abortion is characterized by:", o: ["Cervical dilation", "Passage of tissue", "Vaginal bleeding with closed cervix", "Ruptured membranes"], a: 2 },
+                { q: "MTP is legal in India up to ___ weeks of gestation (as per amendment).", o: ["12", "20", "24", "28"], a: 2 },
+                { q: "Incomplete abortion means:", o: ["Fetus is alive", "Entire products of conception expelled", "Some products of conception retained", "Pregnancy continues"], a: 2 }
+            ]
+        };
 
-    <!-- === UNIT 5 === -->
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – Human Resource for Health
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/11XGfsCTQWKnRSqiawehdPq15yPRJwxzl/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <!-- === UNIT 6 === -->
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Directing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1q98eImdkoeKcC2RCc8Qn3J3ZvQoUZdUN/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <!-- === UNIT 7 === -->
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Material Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1jnCFGJ3eYFvs_hudRsDaRyoCYq5rN8GM/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <!-- === UNIT 8 === -->
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – Controlling
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1chd4dkmpOGY578nrqeZNGb9uRVAaaiX7/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <!-- === UNIT 9 === -->
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Fiscal Planning
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1W6o1a5WLGT7JlWTIMcaVlfn1Qf9LIhle/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <!-- === UNIT 10 === -->
-    <div class="unit-container" id="unit10">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 10 – Nursing Informatics
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1GvcBHI_XI7p9EkusnpXK78mkBtKNJNdC/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-    <!-- === UNIT 11 === -->
-    <div class="unit-container" id="unit11">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 11 – Leadership
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1IOOlQqDuBsNFLGzw4-HMKXtCFac-cCR8/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-    <!-- === UNIT 12 === -->
-    <div class="unit-container" id="unit12">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 12 – Legal and Ethical Issues
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1enorYh8eZvfTH7zsV4pYojNaT0liJdkW/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1mxMSznrWAg7-bAGu-rV_SLI8Aba76G7G/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-          <a href="https://drive.google.com/file/d/1AvqlDK6JdR_7EYllnsutNNXCSdePn9ys/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
-          <a href="https://drive.google.com/file/d/1a8khgQNjnCKS2dIhnG3q_tJS5F7YibG8/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-          <a href="https://drive.google.com/file/d/1hg3aIN9qrOE4q6RMLgwuadqRyD-poMns/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-          <a href="https://drive.google.com/file/d/1TwxP3NDRqThfi9gj0jfqKA7TnHx59qsS/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-          <a href="https://drive.google.com/file/d/1OKsxZT1tlVjTnH2FBAP75qfrRS5Zt0-l/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-          <a href="https://drive.google.com/file/d/1Cm0IhMUeB68kBWnHj5Df9xOMYwM9xu0s/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-          <a href="https://drive.google.com/file/d/1M_UROX8FUcOdA8Dab2sncOfixS5_JiNV/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-          <a href="https://drive.google.com/file/d/1Sx3RfbK16ABVIEBLej7XYb0VW9aCuatc/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
 
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
