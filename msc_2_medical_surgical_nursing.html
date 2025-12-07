@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medical Surgical Nursing II Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and past questions for Medical Surgical Nursing II." />
+    <title>Medical Surgical Nursing II - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Cardiovascular and Thoracic Nursing." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
     <style>
         :root {
-            --brand: #003B82;   /* Dark Blue */
-            --accent: #00B9F2;   /* Cyan */
+            --brand: #003B82; 
+            --accent: #00B9F2;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -18,6 +17,8 @@
             --gray-900: #111827;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
         * { box-sizing: border-box; }
@@ -31,7 +32,7 @@
             margin: 0 auto;
         }
 
-        .syllabus-btn {
+        .syllabus-btn, .unit-header {
             display: block;
             width: 100%;
             padding: 18px 24px;
@@ -48,72 +49,38 @@
             box-shadow: var(--shadow-sm);
             transition: all 0.2s ease;
         }
-        .syllabus-btn:hover {
+        .syllabus-btn:hover, .unit-header:hover {
             background: #002d63;
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
 
-        .main-subject-header, .unit-header {
+        .unit-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 16px 0;
-            font-weight: 600;
             text-align: left;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            margin: 16px 0;
         }
-        .main-subject-header {
-            background: var(--brand);
-            color: white;
-            font-size: 1.5rem;
-            margin-top: 2rem;
-        }
-        .main-subject-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-        .unit-header {
-            background: var(--gray-100);
-            color: var(--gray-900);
-            font-size: 1rem;
-        }
-        .unit-header:hover {
-            background: var(--gray-200);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .main-subject-header span:last-child,
         .unit-header span:last-child {
             transition: transform 0.3s ease;
             color: #FFA500;
         }
-        .main-subject-header[aria-expanded="true"] span:last-child,
         .unit-header[aria-expanded="true"] span:last-child {
             transform: rotate(180deg);
         }
 
-        .main-subject-content,
         .unit-content {
             padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.3s ease;
         }
-        .main-subject-content.active,
         .unit-content.active {
             padding: 24px 12px;
-            max-height: none;
+            max-height: none; 
         }
-        
+
         .subsection {
             margin: 16px 0;
             padding: 20px;
@@ -141,1938 +108,647 @@
             gap: 12px;
             flex-wrap: wrap;
             min-height: 50px;
+            cursor: pointer;
         }
         .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
         .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
         .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-        /* Cyan header style just for PYQ section */
-        .pyq-header {
-            background: var(--accent) !important;
-            color: var(--gray-900) !important;
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
         }
-        .pyq-header:hover {
-            background: #0092bf !important;
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
 
         @media (max-width: 768px) {
             body { padding: 16px; }
-            .syllabus-btn, .main-subject-header, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
             .resource-btn { font-size: 14px; }
             .subsection { padding: 16px; }
-            .main-subject-content.active, .unit-content.active { padding: 16px 8px; }
+            .unit-content.active { padding: 16px 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 📄 MAIN SYLLABUS BUTTON -->
-    <a href="https://drive.google.com/file/d/1JUCXOhLMHBrlmVHbWYrDi680-GASZ-H4/view?usp=drive_link" class="syllabus-btn" target="_blank">
-        📄 DOWNLOAD MEDICAL SURGICAL NURSING II SYLLABUS
-    </a>
-
-    <!-- === CARDIOVASCULAR AND THORACIC NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleSubject(this)">
-            CARDIOVASCULAR AND THORACIC NURSING
-            <span>🔽</span>
-        </div>
-        <div class="main-subject-content active" id="cardio-units">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content active">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1QDAPFLlqfpHYmGsZsjOM-ozG2XovCtME/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Epidemiology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/10LkOK_rKIqWVQb5hSqGjZ9i0Yj6uwUSL/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Review of Anatomy and Physiology of Cardiovascular and Respiratory System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1UEYCZIe6ovM_-cDUXjvvUT3UmWZij4uU/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Assessment and Diagnostic Measures
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1BhZUbwURw6u7dsgijcR4yUtpq1qoKgbi/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Cardiac Disorders and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1-_TyHwkSv1fjngnw7Q2B_kOGjJhGibiB/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Altered Respiratory Conditions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1VGz5GOd_aDohCO5H1AEMdnUX2JComKlZ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Vascular Disorders and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/13_mLxTlARAjioObgCLp_PbfGho5lpKJH/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Cardio Thoracic Emergency Interventions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1EIcsrz-JqPDro20HOo1Bbc8oiMd8hjZw/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Nursing Care of a Patient with Obstructive Airway
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1u20cgWOkc4n2rDjF6bLQGJ7AVmO4BE2Q/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Congenital Heart Diseases
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1L_iD4VgZgM3lasD4Ceicngk2kmyGz4SL/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Pharmacology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1o5eqpaxzkUkLfkVbXJW362H24vmTVaVj/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Nursing Care of Patient Undergoing Cardio Thoracic Surgery
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1Gi6Cz9Udl3vMWbFPo63IJr7QJ-QPAIL8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Cardiac Rehabilitation
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1zsFOrx9x4AlxS8sJL0Q8UqBAdI-k1Ukc/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Intensive Coronary Care Unit / Intensive Cardio Thoracic Unit
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1n93AXJC6y404Ou4w-layctKJDdhzY2xH/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1X4fyKY3qJmrPEYuOv5FOXDtIhvuw8Npr/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1EYXmNQcM8Cv9u3L98NYrH0jwHTi9q6-0/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1ndjZtFabw2JTnBzfBmhEry8TobPt-GSn/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1MuoMNLcblbeydH7O_a5W6RsiZGCxf_1a/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1sD2CBO4LgDuI3U_5Y1XZx54DiL3sB9v1/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1ck5E9RFPIUiep4QCAlK5klF2Z6t7uc5U/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
-                        <a href="https://drive.google.com/file/d/1kiKNpYDxqTmiDE-pENpCttnf24qUR6Sy/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-                        <a href="https://drive.google.com/file/d/1WSBrZkL5HbqH-c99r2G4mdKHbOSXTLfd/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2016</span></a>
-                        <a href="https://drive.google.com/file/d/1P6Cdul_PBA4Cj--UNHJXhACzsyEoRdSI/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1HbkrVaaf9BUNakamvCVWYHojkl4Jvmbg/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/19AWzpPzRs1oKPw13QgONW_QmlVDnH-OX/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- === CRITICAL CARE NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            CRITICAL CARE NURSING
-            <span>🔽</span>
-        </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction to Critical Care Nursing
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1-zYHvZRdP6BHskBIC6j2FgAzPd-oQ8Dh/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Concept of Holistic Care Applied to Critical Care Nursing Practice
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1FGf1T40BBGlQaNta8pg6nqThLs3QeuJ9/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Review
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1ohsWYU2kf_hQVGoJHjsuSLLQz3GkSaeJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Pain Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1sbfBblP9Vb40rTKHX07ODxgB6LEyc5jQ/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Infection Control in Intensive Care Unit
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1kvbjVn_oDPhaQ8f707UHBn6vZDcXA93J/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Gastrointestinal System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1sWbyq4mcOK4TQAjxP3qTFEpbg-ZpOqa7/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Renal System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1M6aFBxbJKtAMe_QMaw36KF0LdsygpA-a/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Nervous System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1twFERnDNrOsjfYZ370WL_oI30luKbK4h/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Endocrine System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1KIYtV8x8I7vf9zpcVzXbhbb0wHSvW1e6/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Management of Other Emergency Conditions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1GV4EqFcyvEu5lfqdmEBDjXNurjRVrGGO/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Cardiovascular Emergencies
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1JWGpVLS0PZeOVCJWGusXOLhf_rN7yVbF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Respiratory System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1TdFfh-KILWCW4iEJufX2IpCmY1f-_Eo0/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Burns
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1S0LC3n1fYL_u684LKnJTo9SXdSDAwky5/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Legal and Ethical Issues in Critical Care – Nurse’s Role
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1uHwdnnLI_RTq4eOd5i9w4z-_5IrkFekv/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 15 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 15 – Quality Assurance
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1mUUYvZ56j--ETrxDUE9_S0OA09Vc59lh/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1xuCzzAVetzJ0t096oRYoA6PltYrM0lPW/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1tkM0f1TYBxihdopOdwLGYbhLd71aLcgq/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1DzW_zzE6OCdE4LloGDrgDMGHjcM0QWyY/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1WpRqCb0-jDn6IhDYVamA3J1OR87Y_Cjw/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1xI1vdAIe3PaQuhfW0Ll877-fpBlVWRdo/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1MXhjyk813Yo0La3fxxIwuck9fIRid2pj/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1gHb1RDj_D7Bc1XuuxUfQ0GAIEtUHCK5-/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1wrlf-G9PKpwRqRGDghvxfq5aPH07zYdy/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1-MMDn_3Yj-MlShZVmU8zte6Y2RVjA174/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1kGp8iIuDGIU311WK2G9jDCNwwdqU47IE/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1P3w07dgvxLarVITTxs3R0vKVL9tj5q-S/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                        <a href="https://drive.google.com/file/d/12qA5GVe6hS_ebmAmO8iyHlShNPr8N5LQ/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/16bpTHRee5Ufjdw2oBimFPOnUuxzEJdd1/preview', 'Medical Surgical Nursing II Syllabus')">
+        📄 DOWNLOAD SYLLABUS
     </div>
     
-    <!-- === GASTROENTEROLOGY === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            GASTROENTEROLOGY
-            <span>🔽</span>
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QDAPFLlqfpHYmGsZsjOM-ozG2XovCtME/preview', 'Detailed Notes: Introduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Cardio-Thoracic Nursing</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1vawH6bom2vAgkoE5c9PEyLYHvk2wra54/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Epidemiology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/12m82v8mjXFmQMpPu3Rs6NQem3J6ifT9B/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Review of Anatomy and Physiology of Gastrointestinal System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1dz9ahKmzjMR8gfObnex0FZT1iEoeiuHF/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Assessment and Diagnostic Measures
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/161MsSpcE7R-CgZVWm3p5VRinmU4Bb3TX/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Gastrointestinal Disorders and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/10S4uMlnnNiQcwJXzCLxt3ImTRJj7eV1D/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Disorders of Liver, Pancreas, Gall Bladder and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1JI6Pbv5AqX7__-flCHtAEYJiqmzjnQRv/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Gastrointestinal Emergencies and Nursing Interventions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1yfh9zkLD7H-yYdEkJLKgk4h7dxhIh26Q/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Congenital Anomalies of Esophagus
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1gsJGJuXd6M5UZ5OvOTelfEdDFeNMVTS_/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Pharmacokinetics
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1gGJijm6u2xysvYt0thgrKdu7ZjQ5UMrn/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Nutrition and Nutritional Problems Related to GI System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1_CDi-ELRL7wzczfAZWJncVQ0VkAmhvUM/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Malignant Disorders of Gastrointestinal System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1661H7HivpGsMSzZejY5jCrqIfnurReub/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Administration and Management of GE Unit
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1pfQwu2RNX-LqhxGWqRHr2Y1Tk1KuBAXs/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Education and Training in GE Care
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1g9xYyUdjGlnjLaR-pMaOo10G2nWtkIc6/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/157DSGm6t0NT4kXuBKA5inimekeb95je9/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1zQoRqBJEIqd8V_AsNNii89U_wZ7yk1m0/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1DyMyG96fRNeBNHU2Nz8eTZxsnaSISwPu/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1r4_d2_5LSDAeu3ONlAjadfma9gbuFFTY/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1645C8lhba5LTANfgpOoHjWjBYa8Wky0F/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1ia8CgHK-v3Q-yMGGZvx2lbbxc31F9vOb/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1lM_AHSB4OHTkOFoTSMM4si1mOXTbP87R/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                        <a href="https://drive.google.com/file/d/12dmqEHpP6KNnjTcdAMrKg2faygcwYds-/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1VOFsFqDhSIYXdFMrHAYheF5mKN5k7-b8/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-                        <a href="https://drive.google.com/file/d/1D-53cn2Upt999COrgetGaFssS-Bzz5Nt/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                        <a href="https://drive.google.com/file/d/13FurvkQUsW7XFcwhwdaAdWcAna7YLBef/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1Mn5_svpU1bs-4EGjpo1FSl4nJZy4Wm7L/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1j-5VzaP3OoNz8I6T0jsbtE32lltK9y5g/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - EPIDEMIOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/10LkOK_rKIqWVQb5hSqGjZ9i0Yj6uwUSL/preview', 'Detailed Notes: Epidemiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Epidemiology</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - ANATOMY & PHYSIOLOGY REVIEW
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of human heart anatomy with labeled chambers and valves]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1UEYCZIe6ovM_-cDUXjvvUT3UmWZij4uU/preview', 'Detailed Notes: Anatomy & Physiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Review of Anatomy & Physiology</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - ASSESSMENT & DIAGNOSTIC MEASURES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BhZUbwURw6u7dsgijcR4yUtpq1qoKgbi/preview', 'Detailed Notes: Diagnostics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Assessment and Diagnostic Measures</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - CARDIAC DISORDERS & MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of electrocardiogram tracing showing normal sinus rhythm vs arrhythmia]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-_TyHwkSv1fjngnw7Q2B_kOGjJhGibiB/preview', 'Detailed Notes: Cardiac Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Cardiac Disorders and Nursing Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - ALTERED RESPIRATORY CONDITIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of human lungs anatomy showing bronchial tree]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VGz5GOd_aDohCO5H1AEMdnUX2JComKlZ/preview', 'Detailed Notes: Respiratory Conditions')">
+                        <span class="icon">📚</span><span>Detailed Notes: Altered Respiratory Conditions</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - VASCULAR DISORDERS & MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13_mLxTlARAjioObgCLp_PbfGho5lpKJH/preview', 'Detailed Notes: Vascular Disorders')">
+                        <span class="icon">📚</span><span>Detailed Notes: Vascular Disorders and Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - EMERGENCY INTERVENTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1EIcsrz-JqPDro20HOo1Bbc8oiMd8hjZw/preview', 'Detailed Notes: Emergency')">
+                        <span class="icon">📚</span><span>Detailed Notes: Cardio Thoracic Emergency Interventions</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - OBSTRUCTIVE AIRWAY PATIENT CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1u20cgWOkc4n2rDjF6bLQGJ7AVmO4BE2Q/preview', 'Detailed Notes: Obstructive Airway')">
+                        <span class="icon">📚</span><span>Detailed Notes: Nursing Care - Obstructive Airway</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - CONGENITAL HEART DISEASES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1L_iD4VgZgM3lasD4Ceicngk2kmyGz4SL/preview', 'Detailed Notes: Congenital Heart Diseases')">
+                        <span class="icon">📚</span><span>Detailed Notes: Congenital Heart Diseases</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit11">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 11 - PHARMACOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1o5eqpaxzkUkLfkVbXJW362H24vmTVaVj/preview', 'Detailed Notes: Pharmacology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Pharmacology</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(11)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit12">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 12 - CARDIO THORACIC SURGERY CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Gi6Cz9Udl3vMWbFPo63IJr7QJ-QPAIL8/preview', 'Detailed Notes: Surgery Care')">
+                        <span class="icon">📚</span><span>Detailed Notes: Nursing Care - Cardio Thoracic Surgery</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(12)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit13">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 13 - CARDIAC REHABILITATION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zsFOrx9x4AlxS8sJL0Q8UqBAdI-k1Ukc/preview', 'Detailed Notes: Cardiac Rehabilitation')">
+                        <span class="icon">📚</span><span>Detailed Notes: Cardiac Rehabilitation</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(13)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit14">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 14 - ICCU / ICTU
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1n93AXJC6y404Ou4w-layctKJDdhzY2xH/preview', 'Detailed Notes: ICCU')">
+                        <span class="icon">📚</span><span>Detailed Notes: Intensive Coronary Care Unit</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(14)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1X4fyKY3qJmrPEYuOv5FOXDtIhvuw8Npr/preview', 'PYQ July 2021')">
+                        <span class="icon">📄</span><span>PYQ - July 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1EYXmNQcM8Cv9u3L98NYrH0jwHTi9q6-0/preview', 'PYQ Jan 2024')">
+                        <span class="icon">📄</span><span>PYQ - January 2024</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ndjZtFabw2JTnBzfBmhEry8TobPt-GSn/preview', 'PYQ June 2023')">
+                        <span class="icon">📄</span><span>PYQ - June 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MuoMNLcblbeydH7O_a5W6RsiZGCxf_1a/preview', 'PYQ Feb 2023')">
+                        <span class="icon">📄</span><span>PYQ - February 2023</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sD2CBO4LgDuI3U_5Y1XZx54DiL3sB9v1/preview', 'PYQ Nov 2020')">
+                        <span class="icon">📄</span><span>PYQ - November 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ck5E9RFPIUiep4QCAlK5klF2Z6t7uc5U/preview', 'PYQ April 2018')">
+                        <span class="icon">📄</span><span>PYQ - April 2018</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1kiKNpYDxqTmiDE-pENpCttnf24qUR6Sy/preview', 'PYQ April 2017')">
+                        <span class="icon">📄</span><span>PYQ - April 2017</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WSBrZkL5HbqH-c99r2G4mdKHbOSXTLfd/preview', 'PYQ April 2016')">
+                        <span class="icon">📄</span><span>PYQ - April 2016</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1P6Cdul_PBA4Cj--UNHJXhACzsyEoRdSI/preview', 'PYQ Sept 2020')">
+                        <span class="icon">📄</span><span>PYQ - September 2020</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HbkrVaaf9BUNakamvCVWYHojkl4Jvmbg/preview', 'PYQ May 2022')">
+                        <span class="icon">📄</span><span>PYQ - May 2022</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19AWzpPzRs1oKPw13QgONW_QmlVDnH-OX/preview', 'PYQ Nov 2021')">
+                        <span class="icon">📄</span><span>PYQ - November 2021</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1aInKvC1V3iVYWIjI4lFcd7JGkXJG6clc/preview', 'PYQ June 2024')">
+                        <span class="icon">📄</span><span>PYQ - June 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-    <!-- === NEPHROLOGY AND UROLOGICAL NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            NEPHROLOGY AND UROLOGICAL NURSING
-            <span>🔽</span>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1-6lyEQ7GUBwY4-WtCUl2d2RBCIxjX_OD/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Epidemiology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1aR6YbUrcTFcUqt0h0ADGd3ViOUdgZ_nY/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Review of Anatomy and Physiology of Urinary System
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/109iKGGRA3tlSFgIEYv10uFg1MOt8G2Wp/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Assessment and Diagnostic Measures
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1vJEbIq5Z_fobB-9AYb38-F2HXZKN7Vyp/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Renal Immunopathy / Immunopathology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/13XVvFvjOz6I-4EkxFh6lYQqRP2-mxvzl/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Urological Disorders and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1DPQCFrdQZ-VFT9-5IkVwquyHVUwdcBFg/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Glomerular Disorders and Nursing Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1DbvRMZW0vVVJtHVKZ_3whSjfUbdY-18y/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Management of Renal Emergencies
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1zMjkNPft_0oiIJxLATa8ge01zQcOMQxa/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Drugs Used in Urinary Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1vG2-YvPvXHV4iNBvrPgdsbQ_8KW1t6Yh/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Dialysis
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1E_O-ZZHWvlS-UKSMLlEtTUEAEeD8uHTq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Kidney Transplantation
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1yzER1JQ6qj-RmaOGeNcJTMsBjGe3DCKy/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Rehabilitation of Patient with Nephrological Problems
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1ai3eWAYWdmsfWR-o7k6stKDRlH6uSRsR/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Pediatric Urinary Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1wuBdKuaBM51YQZ57w9Gg2Qo3MAnMObiP/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Critical Care Units – Dialysis, KTP Unit
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1myvdwa-ev9akCgu_SjPCL18dKRVyqoZ5/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 15 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 15 – Quality Assurance in Nephrological Nursing Practice
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1sza4HE8nW6ovBUy2WObKI8lVCg_U0a_O/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1pIuNqGfVaSubnEFb-OepsHP85cz9OXlJ/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1fxUKMdbQlPezYvVSfdJ4ybftoTb7YeMm/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1CM-KbaU4UNfldBcGVpT5q-mpAEQq1eri/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1v7RxzKt51PBmDpWBugk2w7Gk0quKmUWG/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1XqBsZAv10KYejjHi4l3grP2jGNHRQKNu/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                        <a href="https://drive.google.com/file/d/19-wocoq2DAq2cr2veEddIReu0P7WhtgA/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1iLJ1i4OoFZfXBormSWQ_s2h7fQ1z-Gx6/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1swROWpN6VedtVspqkVRV_LF44rJ7FDgl/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1C6KOwVcWKkH8HfHHeaKLhCU2ahvx6buW/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2018</span></a>
-                        <a href="https://drive.google.com/file/d/1LpkSJT9fojAp2erZ_QOZdD-GRXJ8Wehg/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
-                        <a href="https://drive.google.com/file/d/1c8b6h8S4ZgMcu6HolzAIlzjjF9DEgnxJ/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2017</span></a>
-                        <a href="https://drive.google.com/file/d/1j0TNABINAUDt9fppXWA9DLiaT2sM2npl/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
-    
-    <!-- === ONCOLOGY NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            ONCOLOGY NURSING
-            <span>🔽</span>
-        </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1cd0gBI-XRYITMKNP9FrAATnPsY0nNydu/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – The Nature of Cancer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1NwIhhQ--JFlo3H8Kpq-86gGGetCt3mCG/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Etiology of Cancer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1rHx2dpgKN3lOQmukHVAF5u1DW4Cl0fQW/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Diagnostic Evaluation
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1U8oyLfbNa06h-61Sh1OzHJZTDssqiIPd/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Levels of Prevention and Care
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/12uBURJcdClFeLLEUQycm2Z7r3oBPZSP8/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Cancer Treatment Modalities and Nurse’s Role
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1gPFtbQWjOB6L9_KN3Rn4qZgrukEbUf-B/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Pain Management
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1Vs-5hem1r78rrTvyGwtfsRA91KryfPHm/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Palliative Care
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1n9z_ghNHpyW7PcfdHN3TaA2tYYh2yjfG/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Infection Control
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1dz9FwzPCAoOI3Wgo2Vmf5SY9RslpHw3Z/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Nursing Care of Patients with Specific Malignant Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1sLG16RqXtpcheElpu6yVYV7wK8Ma5LUi/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Paediatric Malignancies
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/11n10isJhKKVSKVjK2NAesslA0eW22nGO/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Nursing Management of Physiological Conditions and Symptoms of Cancer Patient
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1MxN8qnLKoGQYE0XJLeW3-MMP158zbz2_/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Cancer Emergencies
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1K3du9YryKlK1Qp4nw6MFuAmk87uUtK2H/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Reading Material</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Psycho-Social Aspects of Nursing Care
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/15wIQtdF1F67q6XmOMdGx937Yyjg8NnXD/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 15 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 15 – Layout and Design of an Oncology Institution
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1wn99kcJowPYyjP0klD11B_WX6js99udC/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1sNQkqWSyHGoIhC0wJXwwu-ePM767KNzl/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1xnOEYyy8v22Qzcd_VeRly-Stz7lxtvGF/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1AxpupKvU460gfFXFMP33Ly3dBzo8tqXv/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1ngcCDxBcXb3Xay3bS3jy785P3dRyb1-L/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1Aely9TOCKw1LFPgMOZHsZuiyiZMv7nnK/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1ZS4VcioJRYNYm9Mmhpk_r-zyUZpHTvdh/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1jl7zZc2Smt7e9L1rbFq5lHMqOQB4WZEW/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1YGPsVHMGFngeElIkg871-FuXlQqA21Mo/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1YJOZhXMiAF-zIe0QqGFZXXyZDKkKFUwl/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2018</span></a>
-                        <a href="https://drive.google.com/file/d/1IZ9JnV6CqsNoQiGFY4b3jXk936m9dI4U/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1J3tkSTg7Q0EydBeZJQbBSV3QH0H3ZEXx/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- === ORTHOPEDIC NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            ORTHOPEDIC NURSING
-            <span>🔽</span>
-        </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1987pTOJhJP1YxeyqdILawkpGDjfPxkv5/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Assessment of Orthopedic Patient
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1TnpMSJomYVQBgTyvmRPATwJ_u1KAnX90/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Care of Patients with Devices
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1QLSVKBSWCyM_Szd_yM7nplKqFgzjRNGq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Injuries
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1vt4X1SeFeW-TxlrWGpoBZKWD3LmyFldO/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Infections of Bones and Joints
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1LIg8OnPQFZL3kCjYrN2NmVsW2ZrTO6kL/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Bone Tumours
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/15JYZz-zL5GEvropNjeVLx9RYGsPg23ef/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Deformities
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1HhJmV1swQz5dxosbHY1nY1Fn1ZFCxzNR/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Disorders of the Spine
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1RGwh9uGU4esHELgxpcYCqhH21hHaXRQ0/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Nutritional/Metabolic and Endocrine Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1dOltZ2-cZLD2hKoXHCpomqNsb2DlXZ-B/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Neuro-Muscular Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1BxItk_aTLb1U2UmDuNd2acVZlqAkaVff/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Chronic/Degenerative Diseases of Joints and Autoimmune Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1XVjTQaOu3pjCPmayz3IP9eBlJ2s1_Hwy/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Orthopedic Disorders in Children
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1y9z0AEYRaF0BZpdqiNoVOUlm3MAsd6Y1/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Geriatric Problems
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1CA6uhc7JpHx0lmLd8YE-STFQWGTuBHvR/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Pharmacokinetics
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1HbIwfzH3X0H2XVDOk7UWRG_9xsRjR2rv/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 15 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 15 – Nurse’s Role in Orthopedic Conditions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1zDVS5_rd6v7hrQV0oiXcaO63enGX6EsA/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 16 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 16 – Rehabilitation
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1rBGT6HfAZwdNfvnFc2NYJQqc3f_qZHVq/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 17 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 17 – National Policies and Programme
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/14TtPQOaEMl3Jop4_TAoK9HdWX0gsX5kk/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 18 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 18 – Quality Assurance
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/13WCWj1EEvYEZXm1Wq6Zj_cHT5CerWKgc/view?usp=sharing" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1kejBfUlnJNiptuEJBZyWwX9XXAONONEA/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/18AcXLX2DTD7FgPoT6k_20BlyaTM0J498/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1ZaAsZvWlBvh1fawQYWtlsnDY2dVb9m0r/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1kFJs9ImX99FS2szMs0XqbdeF5x3mQ92f/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1oLd88o4GnkQf8osrRj1Zl-Oc2_dGtCTs/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1DZBgFvmrGpjyRF3lBC2cI4nQEDCXNA_c/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1PSnNbUFX2yvmEzY-loxSQk7zFTKcN2kh/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1CKUwmDAI9UqKxv7wdi4bj4jNPvaRuTlk/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1FPsvfcLEvMv4R8e_31Oqont2OEGOoL74/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-                        <a href="https://drive.google.com/file/d/12ourdHoOhi8g4Csa9Y017QhSSx1ij-UL/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                        <a href="https://drive.google.com/file/d/19Th2VzTGpLCkHzJ2tDffNcqBfg9xFRSG/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2018</span></a>
-                        <a href="https://drive.google.com/file/d/13_IwbDGnioPLpL5bms9vd0GoQpoLgfRt/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-                        <a href="https://drive.google.com/file/d/1QWQ2JuwdgADipPJFRyyTUyQFajcalZrc/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2017</span></a>
-                        <a href="https://drive.google.com/file/d/1l7zxEE8VrkLUP117QA24osyjZHAekWNx/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2017</span></a>
-                        <a href="https://drive.google.com/file/d/1L0vtpU4t23gRr0h0Je8o8G-bkxJTG5S2/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2016</span></a>
-                        <a href="https://drive.google.com/file/d/1d3ssAHExVLStgyDRdsEPok3DiRFzwJym/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2016</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- === NEUROSCIENCES NURSING === -->
-    <div class="main-subject-container">
-        <div class="main-subject-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleSubject(this)">
-            NEUROSCIENCES NURSING
-            <span>🔽</span>
-        </div>
-        <div class="main-subject-content">
-            <!-- Unit 1 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 1 – Introduction
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1J2c8e5DuEU3yysI_T-elRodR21KrMjMy/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 2 – Epidemiology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/17f2ou_P94YyGS4WVQQsybsC1C_sZsDei/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 3 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 3 – Review of Anatomy and Physiology
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/10VNGbU72B_9TMvKjwzQrPRRWtcZ-ArKH/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Unit 4 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 4 – Assessment and Diagnostic Measures
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1wKZ1nrbmsu_cJSndOQpL_04cJ-Why_sL/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 5 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 5 – Meeting Nutritional Needs of Neurological Patients
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/155r8c12zdwZiDVCQX5vuxhUUvwUMNMjZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 6 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 6 – Drugs Used in Neurological and Neurosurgical Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/15hz9ghKtbJ3o7sTJ-K2fkMzOH86YpxCF/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 7 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 7 – Traumatic Conditions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1BSWpcAx8I_afrqgkP5PKNKN2Zi1YdZO8/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 8 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 8 – Cerebrovascular Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1lTu741eMgpiecRwkGOB06a5BjrbZhQuo/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 9 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 9 – Degenerating and Demyelinating Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1gGTA2ATr2RpX1mW0tcEp9qdsKDuIC4fC/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 10 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 10 – Neuro Infections
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1hByLDqI2SXGwzJ3CFJKBvbNXFMfzPaSp/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 11 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 11 – Paroxysmal Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/168I73KmSRWi29K0G2PfhM_HHRUz6-sMU/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 12 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 12 – Developmental Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/167AaqttceejYEPh9dY8juvM_oo_sYWv-/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 13 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 13 – Neuro-Muscular Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1oIxZScIx8AhefuUq0eB5y2x4aYzxIes5/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 14 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 14 – Neoplasms – Surgical Conditions
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1IIUmJ3-EMMuHtO1Hpa5dt9fTuWdkFM7H/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 15 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 15 – Other Disorders
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1ZBAQ_2Oivvz-g6zbO7gGfONoIBZiNB8p/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 16 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 16 – Neuro Emergencies
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1HQk4SyxV06KX9L6E7BIXihKFq1BoKCQz/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 17 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 17 – Rehabilitation
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1H4RffkI2oz4WwbKoMvKsSkjQXRVxGcLZ/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 18 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 18 – Ethical and Legal Issues in Neuroscience Nursing
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1hTVq3F61dBGLmdqLnpB84Gjb9SPkquSg/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Unit 19 -->
-            <div class="unit-container">
-                <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    UNIT 19 – Quality Assurance in Neurological Nursing Practice
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/1VfYQLzP4EPC4svAfIfwKi_CGHY1CVuAi/view?usp=drive_link" class="resource-btn notes" target="_blank">
-                            <span class="icon">📚</span><span>Detailed Notes</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PYQ -->
-            <div class="unit-container">
-                <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                    Previous Year Question and Answer
-                    <span>🔽</span>
-                </div>
-                <div class="unit-content">
-                    <div class="subsection">
-                        <a href="https://drive.google.com/file/d/150kycebyQrzBxLHqFlxQXAqOE8BRInHT/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1WPolwjpwXyqdxLOzSkhuUk1aFUX1fDy7/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - May 2022</span></a>
-                        <a href="https://drive.google.com/file/d/1g64ceybJWrFpYSyv5YQ3qjG8NTA_Safp/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - February 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1f9NC90F_Q7eMZtL3wuysMl_5fBOJjhS_/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - January 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1uklqTepDbPPp1eJlOkreMEqmjcmJRNGS/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2024</span></a>
-                        <a href="https://drive.google.com/file/d/1GenLVC_hS1N1O76ImE-qC9N9NcEUjJ2O/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - June 2023</span></a>
-                        <a href="https://drive.google.com/file/d/1Mx_D7Gzbz9o7N7k39Qh-pt3lEJxKr-VY/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - April 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1xh2_5A6-2hyUTivo1MBlflEw8XFJXcr6/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - November 2020</span></a>
-                        <a href="https://drive.google.com/file/d/1q1MABHl1Vfbtx87n-6EHoUZmWfulIh0M/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - October 2019</span></a>
-                        <a href="https://drive.google.com/file/d/1mc3Lp7RmgaGIrWlHhE0weST5F_G7QTUd/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - July 2021</span></a>
-                        <a href="https://drive.google.com/file/d/1hOW0t-10CuZtgpnlTYdKRANkfIsSW_DJ/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ - September 2020</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <script>
-        function toggleSubject(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
-        }
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Cardiovascular nursing focuses on:", o: ["Bones and joints", "Heart and blood vessel diseases", "Brain disorders", "Kidney diseases"], a: 1 },
+                { q: "Which is a major risk factor for cardiovascular disease?", o: ["High fiber diet", "Regular exercise", "Hypertension", "Low stress"], a: 2 },
+                { q: "Thoracic nursing primarily deals with organs in the:", o: ["Abdomen", "Chest cavity (Heart & Lungs)", "Pelvis", "Cranium"], a: 1 },
+                { q: "Primary prevention of heart disease includes:", o: ["By-pass surgery", "Lifestyle modification", "Cardiac transplant", "Dialysis"], a: 1 },
+                { q: "The leading cause of death globally is:", o: ["Cancer", "Cardiovascular diseases", "Diabetes", "Respiratory infections"], a: 1 }
+            ],
+            2: [
+                { q: "Epidemiology studies the:", o: ["Structure of the heart", "Distribution and determinants of diseases", "Cost of surgery", "Types of medication"], a: 1 },
+                { q: "A modifiable risk factor for CAD is:", o: ["Age", "Gender", "Smoking", "Genetics"], a: 2 },
+                { q: "Rheumatic Heart Disease is most common in:", o: ["Infants", "School-age children", "Elderly", "Newborns"], a: 1 },
+                { q: "Which index measures obesity?", o: ["BP", "BMI", "ECG", "GCS"], a: 1 },
+                { q: "Framingham Heart Study is famous for identifying:", o: ["Antibiotics", "Risk factors for CVD", "Surgical techniques", "DNA structure"], a: 1 }
+            ],
+            3: [
+                { q: "The pacemaker of the heart is:", o: ["AV Node", "SA Node", "Bundle of His", "Purkinje Fibers"], a: 1 },
+                { q: "Gas exchange in lungs occurs in:", o: ["Bronchi", "Trachea", "Alveoli", "Pleura"], a: 2 },
+                { q: "The valve between left atrium and left ventricle is:", o: ["Tricuspid", "Mitral (Bicuspid)", "Pulmonary", "Aortic"], a: 1 },
+                { q: "Cardiac output is:", o: ["Stroke volume x Heart rate", "BP x Heart rate", "Stroke volume / Heart rate", "Heart rate + BP"], a: 0 },
+                { q: "The main artery supplying oxygenated blood to the body is:", o: ["Pulmonary artery", "Aorta", "Vena Cava", "Carotid"], a: 1 }
+            ],
+            4: [
+                { q: "Auscultation of the heart detects:", o: ["Size of heart", "Electrical activity", "Heart sounds/murmurs", "Oxygen level"], a: 2 },
+                { q: "ECG records:", o: ["Blood pressure", "Heart's electrical activity", "Lung volume", "Blood flow"], a: 1 },
+                { q: "Troponin I and T are markers for:", o: ["Liver failure", "Kidney stones", "Myocardial Infarction", "Stroke"], a: 2 },
+                { q: "Angiography is used to visualize:", o: ["Bones", "Blood vessels", "Brain tissue", "Stomach lining"], a: 1 },
+                { q: "Echocardiography uses:", o: ["X-rays", "Sound waves (Ultrasound)", "Magnetic fields", "Radiation"], a: 1 }
+            ],
+            5: [
+                { q: "Angina Pectoris is caused by:", o: ["Muscle strain", "Ischemia of heart muscle", "Acid reflux", "Lung infection"], a: 1 },
+                { q: "Myocardial Infarction (MI) is commonly known as:", o: ["Stroke", "Heart Attack", "Heart Failure", "Palpitation"], a: 1 },
+                { q: "Infective Endocarditis affects the:", o: ["Pericardium", "Myocardium", "Endocardium/Heart Valves", "Aorta"], a: 2 },
+                { q: "Pericarditis is inflammation of:", o: ["Heart muscle", "Outer sac of heart", "Inner lining", "Valves"], a: 1 },
+                { q: "Nitroglycerin is used to:", o: ["Increase BP", "Relieve chest pain (Vasodilation)", "Clot blood", "Slow heart rate"], a: 1 }
+            ],
+            6: [
+                { q: "COPD includes:", o: ["Asthma & Pneumonia", "Emphysema & Chronic Bronchitis", "TB & Cancer", "Flu & Cold"], a: 1 },
+                { q: "Pulmonary Embolism is blockage of:", o: ["Aorta", "Pulmonary Artery", "Coronary Artery", "Carotid Artery"], a: 1 },
+                { q: "Pneumothorax refers to:", o: ["Fluid in lungs", "Air in pleural space", "Blood in lungs", "Pus in chest"], a: 1 },
+                { q: "Bronchiectasis involves:", o: ["Constriction of bronchi", "Permanent dilation of bronchi", "Infection of alveoli", "Tumor in lung"], a: 1 },
+                { q: "Acute Respiratory Distress Syndrome (ARDS) causes:", o: ["High oxygen", "Severe hypoxemia", "Low CO2", "High BP"], a: 1 }
+            ],
+            7: [
+                { q: "Atherosclerosis is:", o: ["Hardening of veins", "Plaque buildup in arteries", "Weakening of heart", "Clot in lungs"], a: 1 },
+                { q: "DVT stands for:", o: ["Deep Vein Thrombosis", "Direct Vessel Therapy", "Daily Vitamin Therapy", "Double Valve Treatment"], a: 0 },
+                { q: "Varicose veins are:", o: ["Narrow arteries", "Dilated, tortuous veins", "Blocked capillaries", "Infected lymphatics"], a: 1 },
+                { q: "Raynaud's disease affects:", o: ["Heart valves", "Blood flow to fingers/toes", "Brain vessels", "Kidney arteries"], a: 1 },
+                { q: "Aneurysm is:", o: ["Blockage of artery", "Abnormal bulging of artery wall", "Infection of vein", "Narrowing of vessel"], a: 1 }
+            ],
+            8: [
+                { q: "CPR stands for:", o: ["Cardio Pulmonary Resuscitation", "Central Pulse Rate", "Cardiac Patient Rescue", "Critical Pulse Revival"], a: 0 },
+                { q: "Defibrillation is used to treat:", o: ["Flatline", "Ventricular Fibrillation/VT", "Normal rhythm", "Slow heart rate"], a: 1 },
+                { q: "Cardiac Tamponade is:", o: ["Heart failure", "Fluid accumulation in pericardium compressing heart", "Heart valve leak", "Artery blockage"], a: 1 },
+                { q: "Pneumothorax emergency treatment involves:", o: ["CPR", "Chest tube insertion", "Antibiotics", "Nebulization"], a: 1 },
+                { q: "Signs of cardiac arrest include:", o: ["Chest pain", "Unresponsiveness and no pulse", "Shortness of breath", "Dizziness"], a: 1 }
+            ],
+            9: [
+                { q: "A common cause of airway obstruction is:", o: ["Tongue fall back", "Running", "Eating slowly", "Sleeping on side"], a: 0 },
+                { q: "Heimlich maneuver is used for:", o: ["CPR", "Choking/Foreign body removal", "Drowning", "Fainting"], a: 1 },
+                { q: "Endotracheal Intubation is mainly for:", o: ["Feeding", "Securing airway/Ventilation", "Medication only", "Checking BP"], a: 1 },
+                { q: "Tracheostomy is performed on the:", o: ["Esophagus", "Trachea", "Bronchus", "Larynx"], a: 1 },
+                { q: "Suctioning is done to:", o: ["Give oxygen", "Remove secretions", "Hydrate patient", "Measure tidal volume"], a: 1 }
+            ],
+            10: [
+                { q: "Cyanotic heart disease typically causes:", o: ["Red skin", "Blue discoloration (Cyanosis)", "Pale skin", "Yellow eyes"], a: 1 },
+                { q: "Tetralogy of Fallot involves how many defects?", o: ["Two", "Three", "Four", "Five"], a: 2 },
+                { q: "PDA stands for:", o: ["Patent Ductus Arteriosus", "Pulmonary Defect Area", "Partial Duct Anomaly", "Primary Disease of Aorta"], a: 0 },
+                { q: "ASD is a hole in:", o: ["Ventricles", "Atrial Septum", "Aorta", "Valves"], a: 1 },
+                { q: "Coarctation of Aorta is:", o: ["Widening of aorta", "Narrowing of aorta", "Hole in aorta", "Absence of aorta"], a: 1 }
+            ],
+            11: [
+                { q: "Digoxin is used to:", o: ["Lower BP", "Increase force of myocardial contraction", "Treat infection", "Stop bleeding"], a: 1 },
+                { q: "Diuretics help in heart failure by:", o: ["Increasing heart rate", "Reducing fluid overload", "Constricting vessels", "Increasing appetite"], a: 1 },
+                { q: "Beta-blockers (e.g., Metoprolol) generally:", o: ["Increase heart rate", "Decrease heart rate and BP", "Cause arrhythmia", "Increase anxiety"], a: 1 },
+                { q: "Anticoagulants (e.g., Warfarin, Heparin) prevent:", o: ["Infection", "Blood clot formation", "Pain", "Fever"], a: 1 },
+                { q: "ACE Inhibitors are used for:", o: ["Hypertension and Heart Failure", "Infection", "Arrhythmia", "High cholesterol"], a: 0 }
+            ],
+            12: [
+                { q: "CABG stands for:", o: ["Coronary Artery Bypass Graft", "Cardiac Artery Blockage Guide", "Central Aortic Bypass Graft", "Common Artery Blood Graft"], a: 0 },
+                { q: "Post-op care after cardiac surgery prioritizes:", o: ["Early ambulation", "Hemodynamic monitoring and stability", "Heavy diet", "Isolation"], a: 1 },
+                { q: "A heart-lung machine is used during:", o: ["Open heart surgery", "ECG", "Echo", "Angioplasty"], a: 0 },
+                { q: "Chest physiotherapy helps to:", o: ["Prevent pneumonia/Clear secretions", "Increase heart rate", "Heal wounds", "Stop bleeding"], a: 0 },
+                { q: "Valve replacement surgery treats:", o: ["Valvular stenosis or regurgitation", "Blocked arteries", "Weak muscle", "High BP"], a: 0 }
+            ],
+            13: [
+                { q: "Cardiac Rehabilitation aims to:", o: ["Cure heart disease", "Restore optimal functioning", "Perform surgery", "Diagnose disease"], a: 1 },
+                { q: "Phase 1 of cardiac rehab begins:", o: ["In the hospital (Inpatient)", "After discharge", "Months later", "Before surgery"], a: 0 },
+                { q: "Lifestyle modification includes:", o: ["Smoking cessation", "Healthy diet", "Exercise", "All of the above"], a: 3 },
+                { q: "METs are units used to measure:", o: ["Blood pressure", "Energy cost of physical activity", "Heart rate", "Drug dosage"], a: 1 },
+                { q: "Psychological support is important for:", o: ["Anxiety and depression post-event", "Surgery", "Medication", "Physical strength"], a: 0 }
+            ],
+            14: [
+                { q: "ICCU stands for:", o: ["Intensive Cardiac Care Unit", "Intensive Coronary Care Unit", "Internal Care Unit", "Immediate Critical Care Unit"], a: 1 },
+                { q: "A critical equipment in ICCU is:", o: ["X-ray machine", "Defibrillator/Crash Cart", "MRI scanner", "Ultrasound"], a: 1 },
+                { q: "Nurse-patient ratio in ICCU is typically:", o: ["1:1 or 1:2", "1:10", "1:20", "1:6"], a: 0 },
+                { q: "Continuous monitoring in ICCU includes:", o: ["ECG, BP, SpO2", "Height", "Weight", "Hair growth"], a: 0 },
+                { q: "Infection control in ICCU is:", o: ["Optional", "Crucial to prevent nosocomial infections", "Not important", "Only for doctors"], a: 1 }
+            ]
+        };
+
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
             const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
             header.setAttribute('aria-expanded', !isExpanded);
-            // This is a simple toggle. For a more sophisticated accordion, you might add logic
-            // to close other units when one is opened.
             content.classList.toggle('active');
         }
 
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
+
+            history.pushState({ modalOpen: true }, null, '#resource');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
+
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
+
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-            const firstSubject = document.querySelector('.main-subject-container');
-            if (firstSubject) {
-                const header = firstSubject.querySelector('.main-subject-header');
-                const content = firstSubject.querySelector('.main-subject-content');
-                if (header && content) {
-                    header.setAttribute('aria-expanded', 'true');
-                    content.classList.add('active');
-                    const firstUnit = content.querySelector('.unit-container');
-                    if (firstUnit) {
-                        const unitHeader = firstUnit.querySelector('.unit-header');
-                        const unitContent = firstUnit.querySelector('.unit-content');
-                        unitHeader.setAttribute('aria-expanded', 'true');
-                        unitContent.classList.add('active');
-                    }
-                }
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
             }
         });
     </script>
