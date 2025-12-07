@@ -1,336 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obstetrics and Gynecological Nursing I Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Obstetrics and Gynecological Nursing I." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obstetrics & Gynecological Nursing I - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Obstetrics And Gynecological Nursing I." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;    /* Dark Blue */
-      --accent: #00B9F2;   /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1JynTZJJjhKskeQvRjnhrcmfGWyEgAK_4/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 OBSTETRICS AND GYNECOLOGICAL NURSING I SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNIT 1 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Introduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1ARzw8Ybh198Jt4ICaJ_I48N3dVG2wLKV/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1JynTZJJjhKskeQvRjnhrcmfGWyEgAK_4/preview', 'Obstetrics & Gynae Nursing I Syllabus')">
+        📄 DOWNLOAD SYLLABUS
     </div>
     
-    <!-- === UNIT 2 === -->
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Human Reproduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1yxiCn0LKRWdspD0ryrkIrp4H7SDJaXif/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ARzw8Ybh198Jt4ICaJ_I48N3dVG2wLKV/preview', 'Detailed Notes: Introduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction to Obstetrics</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - HUMAN REPRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of female reproductive system anatomy]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1yxiCn0LKRWdspD0ryrkIrp4H7SDJaXif/preview', 'Detailed Notes: Reproduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Human Reproduction</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - HIGH RISK PREGNANCY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DPNdoIr3qj58Jtl73b06spONJmBchmX5/preview', 'Detailed Notes: High Risk')">
+                        <span class="icon">📚</span><span>Detailed Notes: High Risk Pregnancy</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - NORMAL LABOUR & NURSING MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of stages of labor]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qGTAsjI5wH5LxgvRa8TI9qpXu7PwKrjJ/preview', 'Detailed Notes: Normal Labour')">
+                        <span class="icon">📚</span><span>Detailed Notes: Normal Labour and Management</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - NORMAL PUERPERIUM & NURSING MANAGEMENT
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1k6TvP605mfgAAAdOp2r4qtJV1CJzA6YI/preview', 'Detailed Notes: Puerperium')">
+                        <span class="icon">📚</span><span>Detailed Notes: Normal Puerperium</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - NORMAL NEWBORN
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    
+
+[Image of APGAR scoring system table]
+
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PXWEkHj798mmohNk5I4LiUl9KOhiX0M_/preview', 'Detailed Notes: Newborn')">
+                        <span class="icon">📚</span><span>Detailed Notes: Normal Newborn</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - PHARMACODYNAMICS IN OBSTETRICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xN3hpuSUZZLSMRDTs3ACuIl5fD4Dd4dn/preview', 'Detailed Notes: Pharmacodynamics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Pharmacodynamics in Obstetrics</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - FAMILY WELFARE SERVICES
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BVgNvkOnYd529QQTBy458qSuH0CeTTwg/preview', 'Detailed Notes: Family Welfare')">
+                        <span class="icon">📚</span><span>Detailed Notes: Family Welfare Services</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - INFERTILITY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IJffu9j6zWD-u0C3vh2QmSW8oKlUgVNW/preview', 'Detailed Notes: Infertility')">
+                        <span class="icon">📚</span><span>Detailed Notes: Infertility</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit10">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 10 - MENOPAUSE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1SLTBVA1N1iVw8zlECvT83JopEEUZaZ5L/preview', 'Detailed Notes: Menopause')">
+                        <span class="icon">📚</span><span>Detailed Notes: Menopause</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(10)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WnBKAgD2eAkIiRpd4S7MwZ1V1SGIt0qB/preview', 'PYQ 1')">
+                        <span class="icon">📄</span><span>Previous Year Question 1</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1A5c7g6JCR7Btgnt4uzWNv4s8QnJXUhpI/preview', 'PYQ 2')">
+                        <span class="icon">📄</span><span>Previous Year Question 2</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BKusf0osse5JrvCXHaTPxCC7F0ZBzrES/preview', 'PYQ 3')">
+                        <span class="icon">📄</span><span>Previous Year Question 3</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ho8SSJVcLYjJfkm912_fvv0aYe0S0JxV/preview', 'PYQ 4')">
+                        <span class="icon">📄</span><span>Previous Year Question 4</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/10bJiWQjZtePBWbickHtEtlyxNg_8Rw0F/preview', 'PYQ 5')">
+                        <span class="icon">📄</span><span>Previous Year Question 5</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Y9NEEL_bULsP5HQgrQ4evnzXvz2Va81f/preview', 'PYQ 6')">
+                        <span class="icon">📄</span><span>Previous Year Question 6</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IWZqxp_7vLdqwp6LSN_l_a73fG2BGJF1/preview', 'PYQ 7')">
+                        <span class="icon">📄</span><span>Previous Year Question 7</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12uU-Gv6BILdieyOKR1oHoM_qIKPVJ5iI/preview', 'PYQ 8')">
+                        <span class="icon">📄</span><span>Previous Year Question 8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- === UNIT 3 === -->
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – High Risk Pregnancy
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1DPNdoIr3qj58Jtl73b06spONJmBchmX5/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <!-- === UNIT 4 === -->
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – Normal Labour and Nursing Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1qGTAsjI5wH5LxgvRa8TI9qpXu7PwKrjJ/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Obstetrics is the branch of medicine concerned with:", o: ["Care of elderly", "Pregnancy, childbirth, and postpartum", "Children diseases", "Heart diseases"], a: 1 },
+                { q: "The term 'Gravida' refers to:", o: ["A woman who has never been pregnant", "Number of pregnancies", "Number of live births", "First pregnancy"], a: 1 },
+                { q: "A 'Nullipara' is a woman who:", o: ["Has never given birth to a viable child", "Has given birth once", "Has never been pregnant", "Is currently pregnant"], a: 0 },
+                { q: "Which of the following is a vital statistic in obstetrics?", o: ["Maternal Mortality Rate", "Literacy rate", "Unemployment rate", "GDP"], a: 0 },
+                { q: "Gynecology deals with:", o: ["Newborn care", "Diseases of the female reproductive system", "Pregnancy only", "Male reproductive system"], a: 1 }
+            ],
+            2: [
+                { q: "Fertilization usually occurs in the:", o: ["Uterus", "Ovary", "Ampulla of the Fallopian tube", "Cervix"], a: 2 },
+                { q: "The normal duration of pregnancy is:", o: ["280 days", "300 days", "250 days", "365 days"], a: 0 },
+                { q: "The organ that provides nutrients and oxygen to the fetus is:", o: ["Ovary", "Placenta", "Liver", "Heart"], a: 1 },
+                { q: "Ovulation typically occurs on which day of a 28-day cycle?", o: ["Day 1", "Day 7", "Day 14", "Day 28"], a: 2 },
+                { q: "The hormone responsible for maintaining pregnancy is:", o: ["Estrogen", "Progesterone", "FSH", "LH"], a: 1 }
+            ],
+            3: [
+                { q: "Which condition is considered a high-risk pregnancy factor?", o: ["Age below 18 or above 35", "Height above 160 cm", "Normal BMI", "Single fetus pregnancy"], a: 0 },
+                { q: "Pre-eclampsia is characterized by:", o: ["Hypertension, Proteinuria, Edema", "Hypotension, Vomiting", "Fever, Rash", "Bleeding, Pain"], a: 0 },
+                { q: "Gestational Diabetes occurs:", o: ["Before pregnancy", "During pregnancy", "After delivery", "In childhood"], a: 1 },
+                { q: "Polyhydramnios is:", o: ["Less amniotic fluid", "Excessive amniotic fluid", "No amniotic fluid", "Infected fluid"], a: 1 },
+                { q: "Placenta Previa involves:", o: ["Premature separation of placenta", "Placenta implantation in lower uterine segment", "Infection of placenta", "Small placenta"], a: 1 }
+            ],
+            4: [
+                { q: "How many stages of labor are there?", o: ["2", "3", "4", "5"], a: 2 },
+                { q: "The first stage of labor ends with:", o: ["Birth of baby", "Full cervical dilation", "Delivery of placenta", "Onset of contractions"], a: 1 },
+                { q: "The second stage of labor is the stage of:", o: ["Dilation", "Expulsion of the fetus", "Placental separation", "Observation"], a: 1 },
+                { q: "The third stage involves:", o: ["Dilation", "Expulsion of baby", "Expulsion of placenta and membranes", "Recovery"], a: 2 },
+                { q: "Partograph is used to monitor:", o: ["Fetal growth", "Progress of labor", "Maternal nutrition", "Postpartum recovery"], a: 1 }
+            ],
+            5: [
+                { q: "The puerperium period typically lasts for:", o: ["2 weeks", "4 weeks", "6 weeks", "6 months"], a: 2 },
+                { q: "Lochia Rubra is:", o: ["Reddish discharge (1-4 days)", "Yellowish discharge", "White discharge", "Green discharge"], a: 0 },
+                { q: "Involution of the uterus refers to:", o: ["Uterus expanding", "Uterus returning to pre-pregnant size", "Infection of uterus", "Bleeding"], a: 1 },
+                { q: "A common complication in puerperium is:", o: ["PPH (Postpartum Hemorrhage)", "Diabetes", "Hypertension", "Fracture"], a: 0 },
+                { q: "Breastfeeding should be initiated:", o: ["After 24 hours", "Within 1 hour of normal delivery", "After 3 days", "When milk flows freely"], a: 1 }
+            ],
+            6: [
+                { q: "Normal birth weight of a newborn in India is approx:", o: ["1.5 kg", "2.5 - 3.0 kg", "4.0 kg", "5.0 kg"], a: 1 },
+                { q: "APGAR score is assessed at:", o: ["1 min and 5 mins", "1 hour and 2 hours", "12 hours", "24 hours"], a: 0 },
+                { q: "The first stool passed by the newborn is called:", o: ["Lochia", "Meconium", "Lanugo", "Vernix"], a: 1 },
+                { q: "Physiological jaundice usually appears:", o: ["At birth", "On 2nd or 3rd day", "After 2 weeks", "Never"], a: 1 },
+                { q: "Which vaccine is given at birth?", o: ["DPT", "Measles", "BCG, OPV-0, Hep-B", "Typhoid"], a: 2 }
+            ],
+            7: [
+                { q: "Oxytocin is used to:", o: ["Stop labor", "Induce/Augment labor and control bleeding", "Treat infection", "Reduce pain"], a: 1 },
+                { q: "Magnesium Sulphate is the drug of choice for:", o: ["Anemia", "Eclampsia (Seizures)", "Pain relief", "Induction"], a: 1 },
+                { q: "Methergine is contraindicated in:", o: ["Hypertension/Pre-eclampsia", "Hypotension", "Diabetes", "Asthma"], a: 0 },
+                { q: "Prostaglandins are used for:", o: ["Cervical ripening", "Stopping contractions", "Treating fever", "Vitamin supplement"], a: 0 },
+                { q: "Folic acid is prescribed to prevent:", o: ["Neural Tube Defects", "Diabetes", "Jaundice", "Obesity"], a: 0 }
+            ],
+            8: [
+                { q: "Which is a temporary method of family planning?", o: ["Tubectomy", "Vasectomy", "Condoms/OCP", "Hysterectomy"], a: 2 },
+                { q: "IUCD stands for:", o: ["Intra Uterine Contraceptive Device", "Internal Uterine Care Device", "Indian Union Care Department", "In Utero Conception Device"], a: 0 },
+                { q: "Oral Contraceptive Pills (OCPs) work by:", o: ["Killing sperms", "Inhibiting ovulation", "Blocking tubes", "Removing uterus"], a: 1 },
+                { q: "Permanent sterilization method for males is:", o: ["Tubectomy", "Vasectomy", "Condom", "Copper-T"], a: 1 },
+                { q: "Emergency contraception should be taken within:", o: ["12 hours", "72 hours", "1 week", "1 month"], a: 1 }
+            ],
+            9: [
+                { q: "Primary infertility is defined as:", o: ["Never conceived", "Conceived once but not again", "Unable to deliver live birth", "Having one child"], a: 0 },
+                { q: "A common cause of female infertility is:", o: ["Tubal blockage", "Normal ovulation", "Young age", "Exercise"], a: 0 },
+                { q: "Semen analysis checks for:", o: ["Sperm count and motility", "Blood group", "Urine infection", "Hormone levels"], a: 0 },
+                { q: "ART stands for:", o: ["Artificial Reproductive Technique", "Assisted Reproductive Technology", "Active Reproductive Test", "All Reproductive Treatments"], a: 1 },
+                { q: "IVF stands for:", o: ["In Vivo Fertilization", "In Vitro Fertilization", "Intra Vaginal Fertilization", "Internal Vein Fertilization"], a: 1 }
+            ],
+            10: [
+                { q: "Menopause is the permanent cessation of:", o: ["Ovulation", "Menstruation", "Sexual activity", "Life"], a: 1 },
+                { q: "Average age of menopause is:", o: ["30-35", "45-55", "60-70", "70-80"], a: 1 },
+                { q: "A common symptom of menopause is:", o: ["Hot flashes", "High fertility", "Regular periods", "Weight loss"], a: 0 },
+                { q: "Menopause increases the risk of:", o: ["Osteoporosis", "Pregnancy", "Malaria", "Typhoid"], a: 0 },
+                { q: "HRT stands for:", o: ["Human Right Treaty", "Hormone Replacement Therapy", "Heart Rate Test", "Health Recovery Time"], a: 1 }
+            ]
+        };
 
-    <!-- === UNIT 5 === -->
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – Normal Puerperium and Nursing Management
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1k6TvP605mfgAAAdOp2r4qtJV1CJzA6YI/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <!-- === UNIT 6 === -->
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Normal Newborn
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1PXWEkHj798mmohNk5I4LiUl9KOhiX0M_/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <!-- === UNIT 7 === -->
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Pharmacodynamics in Obstetrics
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1xN3hpuSUZZLSMRDTs3ACuIl5fD4Dd4dn/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <!-- === UNIT 8 === -->
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – Family Welfare Services
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1BVgNvkOnYd529QQTBy458qSuH0CeTTwg/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <!-- === UNIT 9 === -->
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Infertility
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1IJffu9j6zWD-u0C3vh2QmSW8oKlUgVNW/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <!-- === UNIT 10 === -->
-    <div class="unit-container" id="unit10">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 10 – Menopause
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1SLTBVA1N1iVw8zlECvT83JopEEUZaZ5L/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1WnBKAgD2eAkIiRpd4S7MwZ1V1SGIt0qB/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/1A5c7g6JCR7Btgnt4uzWNv4s8QnJXUhpI/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/1BKusf0osse5JrvCXHaTPxCC7F0ZBzrES/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/1ho8SSJVcLYjJfkm912_fvv0aYe0S0JxV/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/10bJiWQjZtePBWbickHtEtlyxNg_8Rw0F/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.com/file/d/1Y9NEEL_bULsP5HQgrQ4evnzXvz2Va81f/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/1IWZqxp_7vLdqwp6LSN_l_a73fG2BGJF1/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-          <a href="https://drive.google.com/file/d/12uU-Gv6BILdieyOKR1oHoM_qIKPVJ5iI/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>Previous Year Question</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
 
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
