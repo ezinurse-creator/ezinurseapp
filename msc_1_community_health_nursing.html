@@ -1,317 +1,623 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Community Health Nursing I Syllabus</title>
-  <meta name="description" content="Comprehensive syllabus with detailed notes for Community Health Nursing I." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Health Nursing I - Syllabus</title>
+    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Community Health Nursing I." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
-  <style>
-    :root {
-      --brand: #003B82;   /* Dark Blue */
-      --accent: #00B9F2;  /* Cyan */
-      --gray-50: #f9fafb;
-      --gray-100: #f3f4f6;
-      --gray-200: #e5e7eb;
-      --gray-700: #374151;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: white;
-      color: var(--gray-900);
-      line-height: 1.6;
-      padding: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
 
-    .syllabus-btn, .unit-header {
-      display: block;
-      width: 100%;
-      padding: 18px 24px;
-      margin: 24px 0;
-      background: var(--brand);
-      color: white;
-      font-weight: 600;
-      font-size: 16px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.2s ease;
-    }
-    .syllabus-btn:hover, .unit-header:hover {
-      background: #002d63;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
 
-    .unit-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: left;
-      margin: 16px 0;
-    }
-    .unit-header span:last-child {
-      transition: transform 0.3s ease;
-      color: #FFA500;
-    }
-    .unit-header[aria-expanded="true"] span:last-child {
-      transform: rotate(180deg);
-    }
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
 
-    .unit-content {
-      padding: 0 12px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-    .unit-content.active {
-      padding: 24px 12px;
-      max-height: none;
-    }
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+        .subsection:hover { box-shadow: var(--shadow-md); }
 
-    .subsection {
-      margin: 16px 0;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease;
-    }
-    .subsection:hover { box-shadow: var(--shadow-md); }
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .resource-btn.notes:hover { background: #e0f2fe; }
+        .resource-btn.video:hover { background: #ede9fe; }
+        .resource-btn.quiz:hover { background: #ffead1; }
 
-    .resource-btn {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      padding: 14px 18px;
-      margin: 8px 0;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      border: 1px solid var(--gray-200);
-      transition: all 0.2s ease;
-      gap: 12px;
-      flex-wrap: wrap;
-      min-height: 50px;
-    }
-    .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-    .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-    .resource-btn.notes:hover { background: #e0f2fe; }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.video-icon { color: #8b5cf6; }
+        .icon.quiz-icon { color: #FFA500; }
 
-    .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
 
-    /* Cyan header style just for PYQ section */
-    .pyq-header {
-      background: var(--accent) !important;
-    }
-    .pyq-header:hover {
-      background: #0092bf !important;
-    }
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
 
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-      .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-      .resource-btn { font-size: 14px; }
-      .subsection { padding: 16px; }
-      .unit-content.active { padding: 16px 8px; }
-    }
-  </style>
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-video {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
+            background: #000;
+            display: block;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
+        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
+
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+            .resource-btn { font-size: 14px; }
+            .subsection { padding: 16px; }
+            .unit-content.active { padding: 16px 8px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 📄 MAIN SYLLABUS BUTTON -->
-  <a href="https://drive.google.com/file/d/1gX-MW24Sh2bWa3yIlpFp_tlGG7e-evOo/view?usp=drive_link" class="syllabus-btn" target="_blank">
-    📄 COMMUNITY HEALTH NURSING I SYLLABUS
-  </a>
-
-  <!-- === UNITS === -->
-  <div id="units">
-
-    <!-- === UNIT 1 === -->
-    <div class="unit-container" id="unit1">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-        UNIT 1 – Introduction
-        <span>🔽</span>
-      </div>
-      <div class="unit-content active">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1LSWn--OuJSPltZVzrgUD1smG--j8Zb-z/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1gX-MW24Sh2bWa3yIlpFp_tlGG7e-evOo/preview', 'CHN Syllabus')">
+        📄 DOWNLOAD CHN-I SYLLABUS
+    </div>
+    
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - INTRODUCTION
+                <span>🔽</span>
+            </div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LSWn--OuJSPltZVzrgUD1smG--j8Zb-z/preview', 'Detailed Notes: Introduction')">
+                        <span class="icon">📚</span><span>Detailed Notes: Introduction</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - HEALTH
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1S-FA0lvUJRrlHU8YuW1hxzTXTopqAvbi/preview', 'Detailed Notes: Health')">
+                        <span class="icon">📚</span><span>Detailed Notes: Health</span>
+                    </div>
+                    
+                    
+
+[Image of dimensions of health diagram]
+
+
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - COMMUNITY HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ituS2JHjyf3EzbgaUXV_Ef8_94OnXqtM/preview', 'Detailed Notes: CHN Principles')">
+                        <span class="icon">📚</span><span>Detailed Notes: CHN Principles & Roles</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit4">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 4 - HEALTH CARE DELIVERY SYSTEM
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-QfePrdO54LUBRdyHhpDHs6syCLKhTVu/preview', 'Detailed Notes: Health Care Delivery')">
+                        <span class="icon">📚</span><span>Detailed Notes: Urban, Rural & Tribal Areas</span>
+                    </div>
+                    
+                    
+
+                    <div class="resource-btn quiz" onclick="openQuiz(4)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit5">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 5 - POPULATION DYNAMICS & CONTROL
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1uJOvNouue2EDSIMfiDdfzxGzT5KLrm99/preview', 'Detailed Notes: Population Dynamics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Population Dynamics & Control</span>
+                    </div>
+
+                    
+
+[Image of demographic cycle graph]
+
+
+                    <div class="resource-btn quiz" onclick="openQuiz(5)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit6">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 6 - MATERNAL & NEONATAL CARE
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wxROmUyzWYa0LHmT8QUkAPpisb_iIV12/preview', 'Detailed Notes: Maternal Care')">
+                        <span class="icon">📚</span><span>Detailed Notes: Maternal & Neonatal Care</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(6)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit7">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 7 - EPIDEMIOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1k9Y5AHwXGDZMDqD32wgOpWlZBdtCLOSI/preview', 'Detailed Notes: Epidemiology')">
+                        <span class="icon">📚</span><span>Detailed Notes: Epidemiology</span>
+                    </div>
+
+                    
+
+                    <div class="resource-btn quiz" onclick="openQuiz(7)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit8">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 8 - DISASTER NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-1Kdpj_doqBH52rcnv0_gQ53JqFk7xDB/preview', 'Detailed Notes: Disaster Nursing')">
+                        <span class="icon">📚</span><span>Detailed Notes: Disaster Nursing</span>
+                    </div>
+                    
+                    
+
+                    <div class="resource-btn quiz" onclick="openQuiz(8)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="unit9">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 9 - IEC (INFO, EDU & COMM)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eLRelwXzsysDWi1vA7hRxTxKATwh8Lfg/preview', 'Detailed Notes: IEC')">
+                        <span class="icon">📚</span><span>Detailed Notes: Information, Education & Communication</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(9)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container" id="pyq">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                PREVIOUS YEAR QUESTIONS (PYQ)
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19Ejtn-cudeJNdqslJHVBAZ6PN4LoWamR/preview', 'PYQ Paper 1')">
+                        <span class="icon">📄</span><span>PYQ Paper 1</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12H8bcXbwHZUUWyJkoqkRhpwwY09VUEBd/preview', 'PYQ Paper 2')">
+                        <span class="icon">📄</span><span>PYQ Paper 2</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MTm7LcREt1ji98yJXzK0mFAfbQ9sZXdT/preview', 'PYQ Paper 3')">
+                        <span class="icon">📄</span><span>PYQ Paper 3</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1tlsyJjMPl5nSbOlh-cdiQ6EIW_XLZyjg/preview', 'PYQ Paper 4')">
+                        <span class="icon">📄</span><span>PYQ Paper 4</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-lFYBL-v-QJIPZR3yVyTHdCYQhwNTULP/preview', 'PYQ Paper 5')">
+                        <span class="icon">📄</span><span>PYQ Paper 5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- === UNIT 2 === -->
-    <div class="unit-container" id="unit2">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 2 – Health
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1S-FA0lvUJRrlHU8YuW1hxzTXTopqAvbi/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-      </div>
+        <div id="modal-body" class="modal-body"></div>
     </div>
 
-    <!-- === UNIT 3 === -->
-    <div class="unit-container" id="unit3">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 3 – Community Health Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1ituS2JHjyf3EzbgaUXV_Ef8_94OnXqtM/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // --- 1. QUIZ DATA ---
+        const QUIZ_DATA = {
+            1: [
+                { q: "Who is known as the founder of modern community health nursing?", o: ["Florence Nightingale", "Lillian Wald", "William Rathbone", "Clara Barton"], a: 2 },
+                { q: "The primary unit of care in community health nursing is:", o: ["The Individual", "The Family", "The Hospital", "The Doctor"], a: 1 },
+                { q: "The main focus of Community Health Nursing is:", o: ["Curative care", "Prevention of disease and promotion of health", "Rehabilitation only", "Surgical care"], a: 1 },
+                { q: "Community Health Nursing synthesizes nursing practice with:", o: ["Medical Science", "Public Health", "Surgical Practice", "Pediatrics"], a: 1 },
+                { q: "Which year was the Alma-Ata Declaration signed?", o: ["1978", "2000", "1947", "1980"], a: 0 }
+            ],
+            2: [
+                { q: "Which is NOT a dimension of health?", o: ["Physical", "Mental", "Economic", "Social"], a: 2 },
+                { q: "The Human Development Index (HDI) includes:", o: ["Life expectancy, Education, Income", "Height, Weight, Age", "Death rate, Birth rate", "None"], a: 0 },
+                { q: "PQLI stands for:", o: ["Physical Quality of Life Index", "Poor Quality Life Indicator", "Public Quality Living Index", "None"], a: 0 },
+                { q: "A positive state of health is known as:", o: ["Disease free", "Wellness", "Illness", "Disability"], a: 1 },
+                { q: "MMR stands for:", o: ["Maternal Mortality Ratio", "Measles Mumps Rubella", "Maternal Morbidity Rate", "None"], a: 0 }
+            ],
+            3: [
+                { q: "The 'Bag Technique' is a tool used for:", o: ["Shopping", "Home visits", "Operation theater", "Ward rounds"], a: 1 },
+                { q: "Which principle is essential for Community Health Nursing?", o: ["Working for the community", "Working with the community", "Dictating the community", "Ignoring the community"], a: 1 },
+                { q: "The backbone of community health services is:", o: ["Home visit", "Hospital admission", "Surgery", "X-ray"], a: 0 },
+                { q: "When placing the bag during a home visit, the nurse should use:", o: ["The floor directly", "Newspaper/Plastic sheet", "The patient's bed", "The dining table"], a: 1 },
+                { q: "A primary quality of a CHN is:", o: ["Judgmental attitude", "Good communication skills", "Rigidity", "Authority"], a: 1 }
+            ],
+            4: [
+                { q: "A Sub-Centre in a plain area covers a population of:", o: ["3000", "5000", "10000", "20000"], a: 1 },
+                { q: "One Primary Health Centre (PHC) covers a population of ___ in hilly areas.", o: ["20,000", "30,000", "5,000", "1,00,000"], a: 0 },
+                { q: "ASHA stands for:", o: ["Accredited Social Health Activist", "Association of Social Health", "Active Social Health Agent", "None"], a: 0 },
+                { q: "A Community Health Centre (CHC) has a bed capacity of:", o: ["6", "10", "30", "100"], a: 2 },
+                { q: "The Village Health Guide scheme was introduced in:", o: ["1977", "1980", "2000", "2005"], a: 0 }
+            ],
+            5: [
+                { q: "In India, the census is conducted every:", o: ["5 years", "10 years", "15 years", "20 years"], a: 1 },
+                { q: "The demographic cycle stage 'High stationary' is characterized by:", o: ["High Birth Rate, High Death Rate", "High Birth Rate, Low Death Rate", "Low Birth Rate, Low Death Rate", "None"], a: 0 },
+                { q: "Tubectomy is a method of:", o: ["Temporary family planning", "Permanent sterilization for females", "Permanent sterilization for males", "Abortion"], a: 1 },
+                { q: "Eligible couple refers to a married couple where the wife's age is:", o: ["15-45 years", "20-50 years", "18-35 years", "Any age"], a: 0 },
+                { q: "National Population Policy (NPP) was last revised in:", o: ["1976", "2000", "2010", "1952"], a: 1 }
+            ],
+            6: [
+                { q: "Exclusive breastfeeding is recommended for:", o: ["3 months", "6 months", "9 months", "1 year"], a: 1 },
+                { q: "Iron and Folic Acid tablets are given to pregnant mothers to prevent:", o: ["Hypertension", "Anemia", "Diabetes", "Jaundice"], a: 1 },
+                { q: "The recommended number of antenatal visits is a minimum of:", o: ["1", "2", "3", "4"], a: 3 },
+                { q: "Which vaccine is given to pregnant mothers to prevent neonatal tetanus?", o: ["BCG", "TT/Td", "Polio", "Hepatitis B"], a: 1 },
+                { q: "Low Birth Weight (LBW) is defined as birth weight less than:", o: ["2.5 kg", "3 kg", "1.5 kg", "2 kg"], a: 0 }
+            ],
+            7: [
+                { q: "The Epidemiological Triad consists of:", o: ["Doctor, Nurse, Patient", "Agent, Host, Environment", "Diagnosis, Drug, Cure", "Time, Place, Person"], a: 1 },
+                { q: "Herd immunity protects:", o: ["Individuals only", "The entire community", "Animals only", "None"], a: 1 },
+                { q: "The temperature range for storing most vaccines in an ILR is:", o: ["0 to -5°C", "+2 to +8°C", "Room temperature", "-20°C"], a: 1 },
+                { q: "Primordial prevention aims to:", o: ["Treat disease", "Prevent risk factors from emerging", "Screen for disease", "Rehabilitate"], a: 1 },
+                { q: "Carriers are:", o: ["Infected persons with symptoms", "Infected persons without clinical symptoms", "Animals", "Insects"], a: 1 }
+            ],
+            8: [
+                { q: "In Triage, the color 'Red' indicates:", o: ["Dead", "Minor Injury", "Immediate/Critical", "Delayed"], a: 2 },
+                { q: "The disaster management cycle includes:", o: ["Mitigation, Preparedness, Response, Recovery", "Cry, Run, Hide", "Call, Wait, Watch", "None"], a: 0 },
+                { q: "Which color tag is used for dead bodies in triage?", o: ["Red", "Yellow", "Green", "Black"], a: 3 },
+                { q: "The 'Golden Hour' in trauma refers to:", o: ["First 24 hours", "First 1 hour", "First 10 minutes", "Sunrise"], a: 1 },
+                { q: "Who is the key person in community disaster preparedness?", o: ["Community Health Nurse", "Police", "Fireman", "Teacher"], a: 0 }
+            ],
+            9: [
+                { q: "IEC stands for:", o: ["Indian Economic Council", "Information, Education, and Communication", "Integrated Education Centre", "None"], a: 1 },
+                { q: "Which is a visual aid?", o: ["Radio", "Poster", "Tape recorder", "Lecture"], a: 1 },
+                { q: "The most common barrier to communication is:", o: ["Language", "Distance", "Time", "Money"], a: 0 },
+                { q: "Flashcards are best used for:", o: ["Large groups", "Small groups", "Radio broadcast", "Self-study"], a: 1 },
+                { q: "The Socratic method of teaching is:", o: ["Lecture", "Question and Answer", "Demonstration", "Role play"], a: 1 }
+            ]
+        };
 
-    <!-- === UNIT 4 === -->
-    <div class="unit-container" id="unit4">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 4 – Health Care Delivery System: Urban, Rural, Tribal and Difficult Areas
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1-QfePrdO54LUBRdyHhpDHs6syCLKhTVu/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        // --- 2. LOGIC ---
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    <!-- === UNIT 5 === -->
-    <div class="unit-container" id="unit5">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 5 – Population Dynamics and Control
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1uJOvNouue2EDSIMfiDdfzxGzT5KLrm99/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+        function openResource(type, url, title) {
+            if(type === 'coming-soon') {
+                alert('This resource is under development.');
+                return;
+            }
 
-    <!-- === UNIT 6 === -->
-    <div class="unit-container" id="unit6">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 6 – Maternal and Neonatal Care
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1wxROmUyzWYa0LHmT8QUkAPpisb_iIV12/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            history.pushState({ modalOpen: true }, null, '#resource');
 
-    <!-- === UNIT 7 === -->
-    <div class="unit-container" id="unit7">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 7 – Epidemiology
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1k9Y5AHwXGDZMDqD32wgOpWlZBdtCLOSI/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex'; 
 
-    <!-- === UNIT 8 === -->
-    <div class="unit-container" id="unit8">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 8 – Disaster Nursing
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1-1Kdpj_doqBH52rcnv0_gQ53JqFk7xDB/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+            if (type === 'quiz') {
+                // Handled by openQuiz
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
-    <!-- === UNIT 9 === -->
-    <div class="unit-container" id="unit9">
-      <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        UNIT 9 – Information, Education and Communication (IEC)
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/1eLRelwXzsysDWi1vA7hRxTxKATwh8Lfg/view?usp=sharing" class="resource-btn notes" target="_blank">
-            <span class="icon">📚</span><span>Detailed Notes</span>
-          </a>
-        </div>
-      </div>
-    </div>
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
+            }
+        }
 
-    <!-- === PREVIOUS YEAR QUESTIONS === -->
-    <div class="unit-container" id="pyq">
-      <div class="unit-header pyq-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-        Previous Year Question and Answer
-        <span>🔽</span>
-      </div>
-      <div class="unit-content">
-        <div class="subsection">
-          <a href="https://drive.google.com/file/d/19Ejtn-cudeJNdqslJHVBAZ6PN4LoWamR/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ 1</span></a>
-          <a href="https://drive.google.com/file/d/12H8bcXbwHZUUWyJkoqkRhpwwY09VUEBd/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ 2</span></a>
-          <a href="https://drive.google.com/file/d/1MTm7LcREt1ji98yJXzK0mFAfbQ9sZXdT/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ 3</span></a>
-          <a href="https://drive.google.com/file/d/1tlsyJjMPl5nSbOlh-cdiQ6EIW_XLZyjg/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ 4</span></a>
-          <a href="https://drive.google.com/file/d/1-lFYBL-v-QJIPZR3yVyTHdCYQhwNTULP/view?usp=drive_link" class="resource-btn" target="_blank"><span class="icon">📝</span><span>PYQ 5</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
+        function openQuiz(unitId) {
+            history.pushState({ modalOpen: true }, null, '#quiz');
 
-  <!-- Toggle script -->
-  <script>
-    function toggleUnit(header) {
-      const content = header.nextElementSibling;
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
-      header.setAttribute('aria-expanded', !isExpanded);
-      content.classList.toggle('active');
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      const firstUnit = document.querySelector('.unit-container');
-      if (firstUnit) {
-        const header = firstUnit.querySelector('.unit-header');
-        const content = firstUnit.querySelector('.unit-content');
-        header.setAttribute('aria-expanded', true);
-        content.classList.add('active');
-      }
-    });
-  </script>
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = `Quiz: Unit ${unitId}`;
+            modal.style.display = 'flex';
+            
+            body.style.display = 'block';
+            body.scrollTop = 0; 
+            
+            const questions = QUIZ_DATA[unitId] || [];
+            
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
 
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+
+            if(oIdx === correctIdx) {
+                el.classList.add('correct');
+            } else {
+                el.classList.add('wrong');
+                opts[correctIdx].classList.add('correct');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUnitHeader = document.querySelector('.unit-header');
+            if(firstUnitHeader) {
+                // toggleUnit(firstUnitHeader);
+            }
+        });
+    </script>
 </body>
 </html>
