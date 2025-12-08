@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharmacology - I Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and video lectures for Pharmacology - I." />
+    <meta name="description" content="Comprehensive syllabus with detailed notes and resources for Pharmacology - I." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <style>
@@ -93,6 +93,14 @@
         }
         .subsection:hover { box-shadow: var(--shadow-md); }
 
+        .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--brand);
+            margin: 0 0 12px 0;
+            padding-top: 10px;
+        }
+
         .resource-btn {
             display: flex;
             align-items: flex-start;
@@ -118,17 +126,10 @@
         .resource-btn.notes:hover { background: #e0f2fe; }
         .resource-btn.video:hover { background: #ede9fe; }
         .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { 
-            background: #e5e7eb;
-            color: #6b7280;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
 
         .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
         .icon.video-icon { color: #8b5cf6; }
         .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
 
         /* --- MODAL --- */
         .modal-overlay {
@@ -231,7 +232,7 @@
 <body>
 
     <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1YhlT_ad6trpRIW5ClkE4pSMFWIGMYTAZ/preview', 'Syllabus')">
-        📄 PHARMACOLOGY - I SYLLABUS
+        📄 DOWNLOAD PHARMACOLOGY - I SYLLABUS
     </div>
     
     <div id="units">
@@ -245,14 +246,14 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pzFLpRV3OuNu71QVssgyCc8VAX1xvaKs/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jHIWToSj1fGJWQTmFFCKoRuMg2_YfLC4/preview', 'Intro & Routes')">
-                        <span class="icon video-icon">▶️</span><span>Meaning, Branches, Nature, Sources & Routes of Drugs</span>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jHIWToSj1fGJWQTmFFCKoRuMg2_YfLC4/preview', 'Meaning & Routes of Drugs')">
+                        <span class="icon video-icon">▶️</span><span>Meaning of Pharmacology, Nature & Routes of Drugs</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/10zH1uBsV2dgxtdjJpQDiIVGlW_XwZ-_w/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ae9VDXDrje-5s0chb_qrCteZXqBZfKvd/preview', 'Principles & Regulations')">
-                        <span class="icon video-icon">▶️</span><span>Drug Admin Principles, Calculation, Laws & Regulations</span>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ae9VDXDrje-5s0chb_qrCteZXqBZfKvd/preview', 'Principles of Drug Administration')">
+                        <span class="icon video-icon">▶️</span><span>Principles of Drug Administration, Rights, Laws & Schedules</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1e1hgzoiuhpy3-trtCl61sWTV_R3YS1ws/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
@@ -266,7 +267,7 @@
 
         <div class="unit-container" id="unit2">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - ANTISEPTICS AND DISINFECTANTS
+                UNIT 2 - ANTISEPTICS & DISINFECTANTS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -274,20 +275,20 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1MNrmv6dhSuQPRK8DxK7VqAvtBBG1hPOB/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Le1vDkDBX-cXnXmvbTUm3OUSSMHGZKg/preview', 'Classification & Action')">
-                        <span class="icon video-icon">▶️</span><span>Classification, Indications, Contraindications & Action</span>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Le1vDkDBXb-cXnXmvbTUm3OUSSMHGZKg/preview', 'General Terms & Classification')">
+                        <span class="icon video-icon">▶️</span><span>General Terms, Classification, Indications & Nurse Role</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RfVX6LoI10e8j4K3smRY0bpWJsxYh9Lp/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wNG1yefetR1NtUl4ZBYP4OyNYdr89sQn/preview', 'Common Agents 1')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wNG1yefetR1NtUl4ZBYP4OyNYdr89sQn/preview', 'Formaldehyde, H2O2, Savlon')">
                         <span class="icon video-icon">▶️</span><span>Formaldehyde, Hydrogen Peroxide, Savlon</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1e34H49Buz5H7ptsxJXGaHHjd4rQf54sY/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ivDe-e6gdQskjvmRx7peTSw_tYM4bToY/preview', 'Common Agents 2')">
-                        <span class="icon video-icon">▶️</span><span>Dettol, Phenol, Iodine & Hypochlorite</span>
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ivDe-e6gdQskjvmRx7peTSw_tYM4bToY/preview', 'Dettol, Phenol & Iodine')">
+                        <span class="icon video-icon">▶️</span><span>Dettol, Phenol, Povidone Iodine & Sodium Hypochlorite</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gfXDcy0nc7K3uqjSJzRlnRgL8ZzBI8gu/preview', 'Lecture Notes')">
                         <span class="icon">📚</span><span>Lecture Notes</span>
@@ -309,17 +310,17 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12kucOqrjOsLpP_4q6Iu0FHXz89kuLWUp/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ei5rnARNPBv6eNIfgUR64BuLZciXtDBs/preview', 'GI Drugs Overview')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ei5rnARNPBv6eNIfgUR64BuLZciXtDBs/preview', 'Drugs Acting on GI System')">
                         <span class="icon video-icon">▶️</span><span>Drugs Acting on G.I. System</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/15UvCjCgYItBTi-T-s7F5fBlwPhI7qOFP/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1hbAz-ajJNMroB6MJiaw-MHUuZp_lAqlg/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/17BN8IvrQ9ZuxTe6pI8JUTROS7Zhz4TGt/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 3</span>
                     </div>
                     <div class="resource-btn quiz" onclick="openQuiz(3)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
@@ -330,7 +331,7 @@
 
         <div class="unit-container" id="unit4">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - DRUGS ACTING ON RESPIRATORY SYSTEM
+                UNIT 4 - RESPIRATORY SYSTEM
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -338,14 +339,14 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-0YULUg7MpTEm2UpmPkN-a3C8H0TCnQe/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AD0MdgODo6CBKOKXP-EKohcIMDVdY_pe/preview', 'Respiratory Drugs')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AD0MdgODo6CBKOKXP-EKohcIMDVdY_pe/preview', 'Respiratory System Drugs')">
                         <span class="icon video-icon">▶️</span><span>Drugs Acting On Respiratory System</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1PdhPkc6-tjajW-mWjmy4oei7TShkl1p_/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vCyoH4fWGLniqmsFdUdK8vDLis-no-Cq/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
                     </div>
                     <div class="resource-btn quiz" onclick="openQuiz(4)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
@@ -356,7 +357,7 @@
 
         <div class="unit-container" id="unit5">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - CVS AND BLOOD DRUGS
+                UNIT 5 - CVS & BLOOD DISORDERS
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -364,17 +365,24 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1n-zLoMSsJPe35pzKpkXYfQLqV_jKY0TW/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OqwP8mst4Gwirby-yIdaHcjM9g_015rG/preview', 'CVS & Blood Drugs')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OqwP8mst4Gwirby-yIdaHcjM9g_015rG/preview', 'CVS & Blood Disorders')">
                         <span class="icon video-icon">▶️</span><span>Cardiovascular System And Blood Disorders</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DLwxYkqKy4gn_RRWQIUs25avhaaNv98h/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Wfx5w8LpA_KChJrPQMsvacEu2t4U7YF6/preview', 'Lecture Notes')"><span class="icon">📚</span><span>Lecture Notes</span></div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qqvsge7v2NzFYZZidJEjUezdx0AeUHwp/preview', 'Lecture Notes')"><span class="icon">📚</span><span>Lecture Notes</span></div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1EHmkhrS7_Nw226oeMsCRAlnHfYAXvEvz/preview', 'Lecture Notes')"><span class="icon">📚</span><span>Lecture Notes</span></div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1laKWJ2ZgmIRmu4MdIOopiQt-EZcSuL0u/preview', 'Lecture Notes')"><span class="icon">📚</span><span>Lecture Notes</span></div>
-                    
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Wfx5w8LpA_KChJrPQMsvacEu2t4U7YF6/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qqvsge7v2NzFYZZidJEjUezdx0AeUHwp/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes 3</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1EHmkhrS7_Nw226oeMsCRAlnHfYAXvEvz/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes 4</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1laKWJ2ZgmIRmu4MdIOopiQt-EZcSuL0u/preview', 'Lecture Notes')">
+                        <span class="icon">📚</span><span>Lecture Notes 5</span>
+                    </div>
                     <div class="resource-btn quiz" onclick="openQuiz(5)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
                     </div>
@@ -384,7 +392,7 @@
 
         <div class="unit-container" id="unit6">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - ENDOCRINE SYSTEM DRUGS
+                UNIT 6 - ENDOCRINE SYSTEM
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -392,17 +400,17 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cZZ3Oee7Ohic_aofgmccXLhfzgsISIxu/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17HtKn8pYnV8a3Yfru96Ij5n7YuPn0kv3/preview', 'Endocrine Drugs')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17HtKn8pYnV8a3Yfru96Ij5n7YuPn0kv3/preview', 'Endocrine System Disorders')">
                         <span class="icon video-icon">▶️</span><span>Endocrine System Disorders</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Iv7Zh7s6gLsWigs-mYgEIH_N4CQWBVYx/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14sCbJY8gURLU3AGe-UU9uefC36okWIOH/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fbki3pMNRIMeWneiSKdzFJcrSAlnKifV/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 3</span>
                     </div>
                     <div class="resource-btn quiz" onclick="openQuiz(6)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
@@ -413,7 +421,7 @@
 
         <div class="unit-container" id="unit7">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - INTEGUMENTARY SYSTEM DRUGS
+                UNIT 7 - INTEGUMENTARY SYSTEM
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -421,14 +429,14 @@
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1a9musme1aW4AupOHUKQEYLJPEQsdldrt/preview', 'Detailed Notes')">
                         <span class="icon">📚</span><span>Detailed Notes</span>
                     </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rDoRzPbyMagF_qFsOIa8WGaDFKh77sW7/preview', 'Skin Drugs')">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1rDoRzPbyMagF_qFsOIa8WGaDFKh77sW7/preview', 'Integumentary System')">
                         <span class="icon video-icon">▶️</span><span>Integumentary System</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VE3ZAsfuv-QnfAFTxrF6X3r-cNYRI3Qq/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/159J0Tt_NRFo9EbL1V6fnrrNAjpo_zzR3/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
                     </div>
                     <div class="resource-btn quiz" onclick="openQuiz(7)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
@@ -439,7 +447,7 @@
 
         <div class="unit-container" id="unit8">
             <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - COMMUNICABLE DISEASES DRUGS
+                UNIT 8 - COMMUNICABLE DISEASES
                 <span>🔽</span>
             </div>
             <div class="unit-content">
@@ -451,16 +459,16 @@
                         <span class="icon video-icon">▶️</span><span>Communicable Diseases</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RgQ21U6Ea-E455gqazKw6d-hhlcCDD8R/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 1</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lYigqH74-dnS9lDNRwsxumF-Q6RXDLvD/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 2</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FXML7vhJZ5P5ERIIJWVbNNjIBdaTOlHJ/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 3</span>
                     </div>
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11W6ROfh9W13UEdlMPSI0_ksjxTEOR4z9/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes</span>
+                        <span class="icon">📚</span><span>Lecture Notes 4</span>
                     </div>
                     <div class="resource-btn quiz" onclick="openQuiz(8)">
                         <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
@@ -468,6 +476,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -481,61 +490,61 @@
     <script>
         // --- 1. QUIZ DATA ---
         const QUIZ_DATA = {
-            1: [ // Unit 1: Intro
-                { q: "Pharmacokinetics refers to:", o: ["What the drug does to the body", "What the body does to the drug", "Drug side effects", "Drug preparation"], a: 1 },
-                { q: "Which route of administration provides 100% bioavailability?", o: ["Oral", "Intramuscular", "Intravenous", "Subcutaneous"], a: 2 },
-                { q: "The 'First Pass Effect' primarily occurs in the:", o: ["Kidney", "Heart", "Liver", "Lungs"], a: 2 },
-                { q: "Which right is NOT part of the 5 rights of medication?", o: ["Right Patient", "Right Dose", "Right Doctor", "Right Route"], a: 2 },
-                { q: "Pharmacodynamics involves:", o: ["Absorption", "Distribution", "Mechanism of Action", "Excretion"], a: 2 }
+            1: [ // Unit 1: Introduction
+                { q: "Pharmacokinetics deals with:", o: ["Mechanism of action", "What the body does to the drug", "What the drug does to the body", "Adverse effects"], a: 1 },
+                { q: "Which route has 100% bioavailability?", o: ["Oral", "Intravenous (IV)", "Subcutaneous", "Rectal"], a: 1 },
+                { q: "The time required for plasma concentration of a drug to reduce by 50% is:", o: ["Bioavailability", "Clearance", "Half-life", "Potency"], a: 2 },
+                { q: "An agonist is a substance that:", o: ["Blocks a receptor", "Activates a receptor", "Destroys enzymes", "Has no effect"], a: 1 },
+                { q: "Teratogenicity refers to:", o: ["Liver toxicity", "Kidney failure", "Harm to the fetus", "Allergic reaction"], a: 2 }
             ],
             2: [ // Unit 2: Antiseptics
-                { q: "An antiseptic is applied to:", o: ["Inanimate objects", "Living tissue", "Surgical instruments", "Floors"], a: 1 },
-                { q: "Which agent is used as a sterilizing agent?", o: ["Alcohol 70%", "Glutaraldehyde", "Savlon", "Dettol"], a: 1 },
-                { q: "Hydrogen peroxide works by releasing:", o: ["Chlorine", "Iodine", "Nascent Oxygen", "Alcohol"], a: 2 },
-                { q: "Povidone Iodine is commonly used for:", o: ["Floor cleaning", "Pre-operative skin prep", "Instrument sterilization", "Room fumigation"], a: 1 },
-                { q: "Disinfectants are generally:", o: ["Safe for eyes", "Toxic to living tissue", "Oral medications", "Used for IV injection"], a: 1 }
+                { q: "An agent that kills bacteria is called:", o: ["Bacteriostatic", "Bactericidal", "Antiseptic", "Fungicidal"], a: 1 },
+                { q: "Which of the following is used for sterilization of surgical instruments?", o: ["Spirit", "Glutaraldehyde", "Soap", "Saline"], a: 1 },
+                { q: "Hydrogen Peroxide works by releasing:", o: ["Nascent Oxygen", "Chlorine", "Iodine", "Nitrogen"], a: 0 },
+                { q: "Povidone-iodine is commonly used for:", o: ["Treating asthma", "Pre-operative skin preparation", "Treating headache", "Reducing fever"], a: 1 },
+                { q: "Disinfectants are generally used on:", o: ["Living tissues", "Inanimate objects", "Mucous membranes", "Open wounds"], a: 1 }
             ],
-            3: [ // Unit 3: GI Drugs
-                { q: "Omeprazole belongs to which class?", o: ["H2 Blocker", "Proton Pump Inhibitor (PPI)", "Antacid", "Laxative"], a: 1 },
-                { q: "Which drug is an anti-emetic?", o: ["Ranitidine", "Ondansetron", "Sucralfate", "Loperamide"], a: 1 },
-                { q: "Magnesium hydroxide is used as an:", o: ["Antibiotic", "Antacid & Laxative", "Analgesic", "Antiemetic"], a: 1 },
-                { q: "Loperamide is used to treat:", o: ["Constipation", "Diarrhea", "Vomiting", "Ulcers"], a: 1 },
-                { q: "Metoclopramide acts by:", o: ["Increasing GI motility", "Decreasing acid", "Neutralizing acid", "Killing bacteria"], a: 0 }
+            3: [ // Unit 3: GI System
+                { q: "Omeprazole belongs to which class of drugs?", o: ["H2 Blockers", "Proton Pump Inhibitors", "Antacids", "Antibiotics"], a: 1 },
+                { q: "Which drug is an anti-emetic?", o: ["Ranitidine", "Ondansetron", "Loperamide", "Bisacodyl"], a: 1 },
+                { q: "Antacids work by:", o: ["Stopping acid production", "Neutralizing gastric acid", "Killing H. pylori", "Coating the throat"], a: 1 },
+                { q: "Laxatives are used to treat:", o: ["Diarrhea", "Constipation", "Vomiting", "Ulcers"], a: 1 },
+                { q: "ORS is used primarily for:", o: ["Fever", "Dehydration", "Pain relief", "Infection"], a: 1 }
             ],
             4: [ // Unit 4: Respiratory
-                { q: "Salbutamol is a:", o: ["Beta-2 Agonist (Bronchodilator)", "Steroid", "Antibiotic", "Antitussive"], a: 0 },
-                { q: "Which drug is a mucolytic?", o: ["Codeine", "Acetylcysteine", "Theophylline", "Cetirizine"], a: 1 },
-                { q: "Codeine is used as an:", o: ["Expectorant", "Antitussive (Cough Suppressant)", "Bronchodilator", "Antihistamine"], a: 1 },
-                { q: "Aminophylline is used for:", o: ["Pain relief", "Asthma/COPD", "Infection", "Fever"], a: 1 },
-                { q: "Montelukast is a:", o: ["Leukotriene Receptor Antagonist", "Steroid", "Beta blocker", "Anticholinergic"], a: 0 }
+                { q: "Salbutamol is a:", o: ["Beta-2 Agonist", "Beta Blocker", "Corticosteroid", "Antibiotic"], a: 0 },
+                { q: "Which drug class is used to suppress cough?", o: ["Expectorants", "Antitussives", "Mucolytics", "Bronchodilators"], a: 1 },
+                { q: "Corticosteroids in asthma are used to:", o: ["Dilate bronchi immediately", "Reduce inflammation", "Kill bacteria", "Thin mucus"], a: 1 },
+                { q: "Mucolytics act by:", o: ["Suppressing cough reflex", "Liquefying thick sputum", "Relaxing smooth muscles", "Drying secretions"], a: 1 },
+                { q: "Which of these is a common side effect of inhaled steroids?", o: ["Hypertension", "Oral thrush (Candidiasis)", "Sleepiness", "Diarrhea"], a: 1 }
             ],
             5: [ // Unit 5: CVS & Blood
-                { q: "Digoxin is used in:", o: ["Hypertension", "Heart Failure", "Angina", "Infection"], a: 1 },
-                { q: "Nitroglycerin is administered sublingually for:", o: ["Headache", "Angina Pectoris", "Fever", "Vomiting"], a: 1 },
-                { q: "Furosemide (Lasix) is a:", o: ["Beta blocker", "Loop Diuretic", "ACE Inhibitor", "Calcium Channel Blocker"], a: 1 },
-                { q: "Which drug dissolves blood clots (Thrombolytic)?", o: ["Aspirin", "Heparin", "Streptokinase", "Warfarin"], a: 2 },
-                { q: "Warfarin is an:", o: ["Oral Anticoagulant", "Antibiotic", "Antiplatelet", "Antihypertensive"], a: 0 }
+                { q: "Furosemide is a:", o: ["Beta Blocker", "Loop Diuretic", "Calcium Channel Blocker", "ACE Inhibitor"], a: 1 },
+                { q: "Nitroglycerin is indicated for:", o: ["Hypertension", "Angina Pectoris", "Arrhythmia", "Anemia"], a: 1 },
+                { q: "Warfarin acts as an:", o: ["Antiplatelet", "Anticoagulant", "Antifibrinolytic", "Antiarrhythmic"], a: 1 },
+                { q: "Iron supplements are primarily used for:", o: ["Pernicious anemia", "Iron deficiency anemia", "Aplastic anemia", "Hemolytic anemia"], a: 1 },
+                { q: "Digoxin is used in the treatment of:", o: ["Heart Failure", "Asthma", "Diabetes", "Ulcers"], a: 0 }
             ],
             6: [ // Unit 6: Endocrine
-                { q: "Insulin is administered by which route?", o: ["Oral", "Subcutaneous", "Rectal", "Topical"], a: 1 },
-                { q: "Metformin is used for:", o: ["Type 1 Diabetes", "Type 2 Diabetes", "Hypoglycemia", "Insipidus"], a: 1 },
-                { q: "Levothyroxine is used to treat:", o: ["Hyperthyroidism", "Hypothyroidism", "Diabetes", "Cushing's"], a: 1 },
-                { q: "Glucocorticoids (e.g., Prednisolone) have effect:", o: ["Anti-inflammatory", "Pro-inflammatory", "Sedative", "Analgesic"], a: 0 },
-                { q: "Oxytocin is used to:", o: ["Stop labor", "Induce labor/Contractions", "Treat diabetes", "Lower BP"], a: 1 }
+                { q: "Insulin is administered primarily via which route?", o: ["Oral", "Subcutaneous", "Intramuscular", "Topical"], a: 1 },
+                { q: "Metformin is a first-line drug for:", o: ["Type 1 Diabetes", "Type 2 Diabetes", "Hypothyroidism", "Addison's disease"], a: 1 },
+                { q: "Levothyroxine is used to treat:", o: ["Hyperthyroidism", "Hypothyroidism", "Diabetes", "Hypertension"], a: 1 },
+                { q: "Oxytocin is used to:", o: ["Stop labor", "Induce labor", "Treat diabetes", "Reduce pain"], a: 1 },
+                { q: "Long-term use of corticosteroids may cause:", o: ["Weight loss", "Cushing's syndrome", "Hypotension", "Hypoglycemia"], a: 1 }
             ],
             7: [ // Unit 7: Integumentary
-                { q: "Permethrin is used for:", o: ["Fungal infection", "Scabies/Lice", "Bacterial infection", "Eczema"], a: 1 },
-                { q: "Calamine lotion is an:", o: ["Antiseptic", "Antipruritic/Soothing agent", "Antibiotic", "Antifungal"], a: 1 },
-                { q: "Silver Sulfadiazine is used for:", o: ["Acne", "Burns", "Psoriasis", "Warts"], a: 1 },
-                { q: "Topical steroids are used for:", o: ["Infection", "Inflammation/Eczema", "Wounds", "Dry skin"], a: 1 },
-                { q: "Clotrimazole is an:", o: ["Antibacterial", "Antifungal", "Antiviral", "Antiparasitic"], a: 1 }
+                { q: "Permethrin is used to treat:", o: ["Fungal infection", "Scabies", "Eczema", "Psoriasis"], a: 1 },
+                { q: "Silver Sulfadiazine is commonly applied to:", o: ["Surgical wounds", "Burns", "Acne", "Dry skin"], a: 1 },
+                { q: "Clotrimazole is an:", o: ["Antibacterial", "Antifungal", "Antiviral", "Antiparasitic"], a: 1 },
+                { q: "Emollients are used to:", o: ["Dry the skin", "Moisturize and soften skin", "Kill bacteria", "Stop bleeding"], a: 1 },
+                { q: "Topical corticosteroids are used for:", o: ["Infection", "Inflammatory skin conditions", "Warts", "Hair loss"], a: 1 }
             ],
             8: [ // Unit 8: Communicable Diseases
-                { q: "Penicillin acts by inhibiting:", o: ["Protein synthesis", "Cell wall synthesis", "DNA synthesis", "Folic acid"], a: 1 },
-                { q: "Which drug is used for Tuberculosis (DOTS)?", o: ["Paracetamol", "Rifampicin & Isoniazid", "Metformin", "Aspirin"], a: 1 },
-                { q: "Metronidazole is the drug of choice for:", o: ["Viral flu", "Amoebiasis/Anaerobes", "Fungal infection", "TB"], a: 1 },
-                { q: "Albendazole is an:", o: ["Anthelmintic (Deworming)", "Antibiotic", "Antiviral", "Antifungal"], a: 0 },
-                { q: "Chloroquine is used for:", o: ["Typhoid", "Malaria", "Dengue", "Cholera"], a: 1 }
+                { q: "Chloroquine is a drug of choice for:", o: ["Tuberculosis", "Malaria", "Typhoid", "Leprosy"], a: 1 },
+                { q: "Rifampicin is a key drug in the treatment of:", o: ["Malaria", "Tuberculosis", "Amoebiasis", "Ringworm"], a: 1 },
+                { q: "Albendazole is used as an:", o: ["Antimalarial", "Anthelminthic (Deworming)", "Antiviral", "Antifungal"], a: 1 },
+                { q: "Penicillin is effective against:", o: ["Viruses", "Gram-positive bacteria", "Fungi", "Protozoa"], a: 1 },
+                { q: "DOTS therapy is associated with:", o: ["Leprosy", "Tuberculosis", "AIDS", "Cancer"], a: 1 }
             ]
         };
 
@@ -548,8 +557,6 @@
         }
 
         function openResource(type, url, title) {
-            if(type === 'coming-soon') return;
-
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -561,11 +568,11 @@
             body.innerHTML = ''; 
             body.style.display = 'flex'; // Default flex for centering
 
-            // FIX: Restore flex centering for Video/Doc
             if (type === 'quiz') {
                 // Handled by openQuiz
             }
             else {
+                // Clean URL to ensure preview mode
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
                 
                 // Videos get 16:9, Notes get full height
@@ -590,7 +597,7 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
-            // FIX: Remove flex centering for Quiz so it starts at the top
+            // Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
             body.scrollTop = 0; 
             
@@ -650,7 +657,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const firstUnitHeader = document.querySelector('.unit-header');
             if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
+                // toggleUnit(firstUnitHeader); // Optional
             }
         });
     </script>
