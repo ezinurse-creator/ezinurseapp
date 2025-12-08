@@ -1,513 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ezi Nurse | Professional Nursing Education</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Advance Nursing Practice - Syllabus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         :root {
-            --primary: #01b9f1; --primary-dark: #003b80; --bg-card: #fffffd;
-            --secondary: #334155; --accent: #f59e0b; --bg-body: #f1f5f9;
-            --text-main: #003b80; --text-muted: #64748b; --danger: #ef4444;
-            --radius-md: 12px; --shadow-lg: 0 10px 15px -3px rgba(0,59,128,0.1);
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --danger: #ef4444;
+            --success: #10b981;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            line-height: 1.6;
+            padding: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- BUTTONS & ACCORDION --- */
+        .syllabus-btn, .unit-header {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            margin: 24px 0;
+            background: var(--brand);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        .syllabus-btn:hover, .unit-header:hover {
+            background: #002d63;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            margin: 16px 0;
+        }
+        .unit-header span:last-child {
+            transition: transform 0.3s ease;
+            color: #FFA500;
+        }
+        .unit-header[aria-expanded="true"] span:last-child {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .unit-content.active {
+            padding: 24px 12px;
+            max-height: none; 
+        }
+
+        .subsection {
+            margin: 16px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+            gap: 12px;
+            flex-wrap: wrap;
+            min-height: 50px;
+            cursor: pointer;
+        }
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
+        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
+        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
+        .icon.quiz-icon { color: #FFA500; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            z-index: 1001;
+        }
+
+        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- MODAL BODY (SCROLL FIX) --- */
+        .modal-body {
+            flex: 1;
+            background: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            /* FIXED: Allow scroll by default */
+            overflow-y: auto; 
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Lens Controls */
+        .lens-controls {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+            flex-shrink: 0; /* Prevents shrinking */
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        /* The Container that gets transformed/scaled */
+        .doc-container {
+            width: 100%;
+            height: 100%;
+            /* If using Lens, we need to allow this to expand, otherwise standard flow */
+            min-height: 100%; 
+            transform-origin: 0 0;
+            transition: transform 0.1s ease-out;
+            background: white;
+            position: relative;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            min-height: 80vh; /* Ensure tall enough on mobile */
+            border: none;
+            display: block;
+        }
         
-        /* APP MODE (Default) - Locked Screen */
-        body { background-color: var(--bg-body); color: var(--text-main); height: 100vh; display: flex; justify-content: center; overflow: hidden; }
-        #app { width: 100%; max-width: 480px; background: var(--bg-card); height: 100%; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); overflow: hidden; }
+        .iframe-video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            margin: auto;
+        }
 
-        /* ZOOM MODE (Active when viewing content) - Unlocked Screen */
-        body.zoom-active { height: auto !important; overflow: auto !important; display: block !important; position: static !important; }
-        body.zoom-active #app { height: 100vh; max-width: 100% !important; overflow: visible !important; box-shadow: none; }
-        body.zoom-active .view.active { overflow: visible !important; height: auto !important; }
+        /* Guide Text */
+        .lens-guide {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            pointer-events: none;
+            display: none;
+            z-index: 20;
+            white-space: nowrap;
+        }
 
-        .header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); z-index: 10; }
-        .header-title { font-weight: 800; font-size: 1.5rem; color: var(--primary-dark); }
-        .header-title span { color: var(--primary); }
-        .back-btn { background: none; border: none; font-size: 1.5rem; color: var(--primary-dark); cursor: pointer; display: none; }
-        .logout-btn { font-size: 0.85rem; color: var(--danger); font-weight: 600; cursor: pointer; }
+        /* --- QUIZ STYLES --- */
+        .quiz-container {
+            background: white;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
+        .quiz-option {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
+        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
+        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
 
-        .view { flex: 1; padding: 24px; overflow-y: auto; display: none; animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; }
-        .view.active { display: flex; flex-direction: column; }
-        #view-iframe.view { padding: 0 !important; overflow: hidden; flex-direction: column; height: 100%; }
-        
-        iframe { width: 100%; height: 100%; border: none; display: block; background: #fff; touch-action: pan-x pan-y pinch-zoom; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        .auth-container { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 5vh; }
-        .btn { width: 100%; padding: 16px; border-radius: var(--radius-md); border: none; font-size: 1rem; font-weight: 600; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-ghost { background: transparent; color: var(--text-muted); font-size: 0.9rem; }
-
-        .menu-item { background: #fff; border: 1px solid #e2e8f0; padding: 20px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
-        .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
-        .menu-arrow { color: var(--primary); }
-        .section-header { background: #f1f5f9; border: none; pointer-events: none; padding: 10px 0; }
-        .section-header h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
-        .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; }
-        .password-wrapper { position: relative; display: flex; align-items: center; }
-        .form-input-pass { padding-right: 45px; }
-        .toggle-password-btn { position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: var(--text-muted); }
-        .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; min-height: 20px; text-align: center; }
-        
-        .paywall-container { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
-        .headline { font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 12px; }
-        .subtext { color: var(--text-muted); line-height: 1.5; margin-bottom: 30px; }
-        .logo-text-large { font-size: 3rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 10px; }
-        .logo-text-large span { color: var(--primary); }
-
-        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(2px); }
-        .modal-card { background: white; width: 90%; max-width: 350px; padding: 24px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
-        .hidden { display: none !important; }
+        @media (max-width: 768px) {
+            body { padding: 16px; }
+            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
+        }
     </style>
 </head>
 <body>
 
-<div id="app">
-    <header class="header">
-        <button class="back-btn" id="btn-back" onclick="app.goBack()">&#8592;</button>
-        <div class="header-title" id="header-branding">Ezi<span>Nurse</span></div>
-        <div onclick="app.logout()" class="logout-btn" id="btn-logout">Logout</div>
-    </header>
-
-    <div id="view-auth" class="view active">
-        <div class="auth-container">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <div class="logo-text-large">Ezi<span>Nurse</span></div>
-                <h1 class="headline" style="font-size: 1.25rem;">Welcome Back</h1>
-                <p class="subtext">Sign in to access your dashboard</p>
+    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/153NVm7d-u3mfyVVy7t8hPo5oiWDr1p8b/preview', 'Advance Nursing Practice Syllabus')">
+        📄 DOWNLOAD ANP SYLLABUS
+    </div>
+    
+    <div id="units">
+        
+        <div class="unit-container" id="unit1">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
+                UNIT 1 - NURSING AS A PROFESSION
+                <span>🔽</span>
             </div>
-            <div id="form-login">
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="login-email" class="form-input" placeholder="nurse@example.com"></div>
-                <div class="form-group"><label class="form-label">Password</label>
-                    <div class="password-wrapper"><input type="password" id="login-pass" class="form-input form-input-pass"><button class="toggle-password-btn" onclick="app.togglePassword('login-pass', this)">👁</button></div>
+            <div class="unit-content active">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1U-nq7q_yZaqFe888Of6oc07dWuGpcSE9/preview', 'Detailed Notes: Nursing as a Profession')">
+                        <span class="icon">📚</span><span>Detailed Notes: Nursing as a Profession</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(1)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
+                    </div>
                 </div>
-                <div id="login-error" class="error-msg"></div>
-                <button id="btn-login-submit" class="btn btn-primary" onclick="app.login()">Login Securely</button>
-                <button class="btn btn-ghost" onclick="app.toggleAuthMode()">Don't have an account? Sign Up</button>
             </div>
-            <div id="form-signup" class="hidden">
-                <div class="form-group"><label class="form-label">Full Name</label><input type="text" id="signup-name" class="form-input" placeholder="Nurse Joy"></div>
-                <div class="form-group"><label class="form-label">Email</label><input type="email" id="signup-email" class="form-input" placeholder="new@example.com"></div>
-                <div class="form-group"><label class="form-label">Phone</label><input type="tel" id="signup-phone" class="form-input" placeholder="9876543210"></div>
-                <div class="form-group"><label class="form-label">Password</label>
-                    <div class="password-wrapper"><input type="password" id="signup-pass" class="form-input form-input-pass"><button class="toggle-password-btn" onclick="app.togglePassword('signup-pass', this)">👁</button></div>
+        </div>
+
+        <div class="unit-container" id="unit2">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 2 - HEALTHCARE DELIVERY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BAva7uX63TW_8xHV6W90l_hd6Xf6Lilt/preview', 'Detailed Notes: Healthcare Delivery')">
+                        <span class="icon">📚</span><span>Detailed Notes: Healthcare Delivery</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(2)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
+                    </div>
                 </div>
-                <div id="signup-error" class="error-msg"></div>
-                <button id="btn-signup-submit" class="btn btn-primary" onclick="app.signup()">Create Account</button>
-                <button class="btn btn-ghost" onclick="app.toggleAuthMode()">Already have an account? Login</button>
             </div>
         </div>
-    </div>
-
-    <div id="view-dashboard" class="view">
-        <h2 class="headline">Dashboard</h2>
-        <p class="subtext">Select your course level.</p>
-        <div class="card-menu">
-            <div class="menu-item" onclick="app.navToCourse('MSc')"><div><h3>MSc Nursing</h3><p>Master of Science</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.navToCourse('BSc')"><div><h3>BSc Nursing</h3><p>Bachelor of Science</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.navToCourse('PBBSc')"><div><h3>PBBSc Nursing</h3><p>Post Basic BSc</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.navToCourse('GNM')"><div><h3>GNM</h3><p>General Nursing & Midwifery</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" style="border-color: var(--primary);" onclick="app.checkAccessAndOpen('3D', 'Systems')"><div><h3 style="color:var(--primary)">3D Models</h3><p>Interactive Anatomy</p></div><span class="menu-arrow">&#10095;</span></div>
-            
-            <div class="menu-item section-header"><h3>Preparation & Resources</h3></div>
-            <div class="menu-item" onclick="app.navToCourse('EXAMS')"><div><h3>Nursing Exams</h3><p>NORCET, ESCI Exclusive Q&A</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.navToCourse('QP')"><div><h3>Exclusive Solved Question Papers</h3><p>BSc & GNM 2024</p></div><span class="menu-arrow">&#10095;</span></div>
-            
-            <div class="menu-item" onclick="app.checkAccessAndOpen('REQ', 'Documents')"><div><h3>Nursing Requirements</h3><p>Document Checklist</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.checkAccessAndOpen('COMM', 'Basics')"><div><h3>Communicative English</h3><p>Language Fundamentals</p></div><span class="menu-arrow">&#10095;</span></div>
-        </div>
-    </div>
-
-    <div id="view-submenu" class="view">
-        <h2 class="headline" id="submenu-title">Structure</h2>
-        <p class="subtext" id="submenu-subtitle">Select item.</p>
-        <div class="card-menu" id="submenu-list"></div>
-    </div>
-    <div id="view-subjects" class="view">
-        <h2 class="headline" id="subject-title">Subjects</h2>
-        <p class="subtext">Select subject to open.</p>
-        <div class="card-menu" id="subject-list"></div>
-    </div>
-    <div id="view-iframe" class="view"></div>
-    <div id="view-paywall" class="view">
-        <div class="paywall-container">
-            <h2 class="headline">Locked</h2>
-            <p class="subtext">Purchase access to view this content.</p>
-            <button class="btn btn-primary" onclick="app.showReferralModal()">Buy Now</button>
-            <button class="btn btn-outline" style="margin-top: 10px;" onclick="app.goBack()">Go Back</button>
-        </div>
-    </div>
-    <div id="modal-referral" class="modal-overlay hidden">
-        <div class="modal-card">
-            <h3 class="headline">Discount?</h3>
-            <div id="referral-step-1">
-                <button class="btn btn-primary" onclick="app.selectReferral(true)">I have a code</button>
-                <button class="btn btn-outline" onclick="app.selectReferral(false)">No code</button>
-                <button class="btn btn-ghost" onclick="app.closeReferralModal()">Cancel</button>
-            </div>
-            <div id="referral-step-2" class="hidden">
-                <div class="form-group"><input type="text" id="referral-input" class="form-input" placeholder="Enter Promo Code"></div>
-                <div id="referral-error" class="error-msg"></div>
-                <button class="btn btn-primary" onclick="app.validateAndRedirect()">Apply</button>
-                <button class="btn btn-ghost" onclick="app.resetReferralModal()">Back</button>
-            </div>
-        </div>
-    </div>
-    <div id="modal-exit" class="modal-overlay hidden">
-        <div class="modal-card">
-            <h3 class="headline">Exit App?</h3>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <button class="btn btn-primary" style="background-color: var(--danger);" onclick="app.confirmExit()">Yes, Exit</button>
-                <button class="btn btn-outline" onclick="app.cancelExit()">No, Stay</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec";
-
-    // SKIPS DISCOUNT POPUP FOR THESE ITEMS
-    const NO_DISCOUNT_KEYS = [
-        'msc_first_year', 
-        'msc_second_year', 
-        '3d_models', 
-        'exams_norcet', 
-        'exams_esci', 
-        'qp_bsc', 
-        'qp_gnm', 
-        'nursing_req', 
-        'comm_english'
-    ];
-
-    function getDeviceId() {
-        let id = localStorage.getItem('ezi_device_id');
-        if (!id) { id = 'web-' + Math.random().toString(36).substr(2, 9) + Date.now(); localStorage.setItem('ezi_device_id', id); }
-        return id;
-    }
-
-    function getPermissionKey(course, section) {
-        if (course === '3D') return '3d_models';
-        if (course === 'REQ') return 'nursing_req';
-        if (course === 'COMM') return 'comm_english';
         
-        if (course === 'EXAMS') {
-            if(section.includes('NORCET')) return 'exams_norcet';
-            if(section.includes('ESCI')) return 'exams_esci';
-        }
-        if (course === 'QP') {
-            if(section.includes('BSc')) return 'qp_bsc';
-            if(section.includes('GNM')) return 'qp_gnm';
-        }
+        <div class="unit-container" id="unit3">
+            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
+                UNIT 3 - GENETICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/152qt5G1PfFV7tg-RhoazBfZkqpKQmoGH/preview', 'Detailed Notes: Genetics')">
+                        <span class="icon">📚</span><span>Detailed Notes: Genetics</span>
+                    </div>
+                    <div class="resource-btn quiz" onclick="openQuiz(3)">
+                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        const c = course.toLowerCase();
-        if (section.includes('Semester')) {
-            const num = section.split(' ')[1];
-            const map = {'1':'first', '2':'second', '3':'third', '4':'fourth', '5':'fifth', '6':'sixth', '7':'seventh'};
-            return `${c}_${map[num]}_semester`;
-        }
-        return `${c}_${section.toLowerCase().replace(' ', '_')}`;
-    }
+    </div>
 
-    const COURSES = {
-        'MSc': {
-            'First Year': [
-                { label: 'Advanced Nursing Practice', link: 'msc_1_advanced_nursing_practice.html' },
-                { label: 'Nursing Education', link: 'msc_1_nursing_education.html' },
-                { label: 'Child Health Nursing', link: 'msc_1_child_health_nursing.html' },
-                { label: 'Community Health Nursing', link: 'msc_1_community_health_nursing.html' },
-                { label: 'Medical Surgical Nursing', link: 'msc_1_medical_surgical_nursing.html' },
-                { label: 'Mental Health Nursing', link: 'msc_1_mental_health_nursing.html' },
-                { label: 'Nursing Research & Stats', link: 'msc_1_nursing_research_and_statistics.html' },
-                { label: 'OBG Nursing', link: 'msc_1_obgyn_nursing.html' }
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        
+        <div id="lens-controls" class="lens-controls" style="display:none;">
+            <span style="font-size: 14px; font-weight: 600; color: #333;">🔍 Lens Mode:</span>
+            <label class="switch">
+                <input type="checkbox" id="lens-toggle" onchange="toggleLensMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div id="modal-body" class="modal-body">
+            </div>
+
+        <div id="lens-guide" class="lens-guide">
+            👆 Touch & Hold screen to Magnify
+        </div>
+    </div>
+
+    <script>
+        const QUIZ_DATA = {
+            1: [
+                { q: "Which of the following is a primary characteristic of a profession?", o: ["High salary", "Specialized body of knowledge", "Working in a hospital", "Following orders"], a: 1 },
+                { q: "The Code of Ethics for nurses is established by:", o: ["Hospital Management", "International Council of Nurses (ICN)", "Patients", "Doctors"], a: 1 }
             ],
-            'Second Year': [
-                { label: 'Child Health Nursing', link: 'msc_2_child_health_nursing.html' },
-                { label: 'Community Health Nursing', link: 'msc_2_community_health_nursing' },
-                { label: 'OBG Nursing', link: 'msc_2_obgyn_nursing.html' },
-                { label: 'Nursing Management', link: 'msc_2_nursing_management' },
-                { label: 'Mental Health Nursing', link: 'msc_2_mental_health_nursing' },
-                { label: 'Medical Surgical Nursing', link: 'msc_2_medical_surgical_nursing' }
-            ]
-        },
-        'BSc': {
-            'Semester 1': [ { label: 'Applied Sociology', link: 'bsc_1_applied_sociology.html' }, { label: 'Applied Psychology', link: 'bsc_1_applied_psychology.html' }, { label: 'Applied Physiology', link: 'bsc_1_applied_physiology.html' }, { label: 'Applied Anatomy', link: 'bsc_1_applied_anatomy.html' }, { label: 'Nursing Foundation', link: 'bsc_1_nursing_foundation.html' } ],
-            'Semester 2': [ { label: 'Applied Nutrition', link: 'bsc_2_applied_nutrition.html' }, { label: 'Applied Biochemistry', link: 'bsc_2_applied_biochemistry.html' }, { label: 'Nursing Foundation', link: 'bsc_2_nursing_foundation.html' } ],
-            'Semester 3': [ { label: 'Pharmacology', link: 'bsc_3_pharmacology.html' }, { label: 'Pathology', link: 'bsc_3_pathology.html' }, { label: 'Applied Microbiology', link: 'bsc_3_applied_microbiology.html' }, { label: 'Adult Health Nursing', link: 'bsc_3_adult_health_nursing.html' } ],
-            'Semester 4': [ { label: 'Pharmacology II', link: 'bsc_4_pharmacology.html' }, { label: 'Pathology II', link: 'bsc_4_pathology.html' }, { label: 'Adult Health Nursing II', link: 'bsc_4_adult_health_nursing.html' }, { label: 'Professionalism', link: 'bsc_4_professionalism.html' }, { label: 'Genetics', link: 'bsc_4_genetics.html' } ],
-            'Semester 5': [ { label: 'Forensic Nursing & Law', link: 'bsc_5_forensic_nursing_indian_law.html' }, { label: 'Nursing Education', link: 'bsc_5_nursing_education.html' }, { label: 'Community Health Nursing', link: 'bsc_5_community_health_nursing.html' }, { label: 'Mental Health Nursing', link: 'bsc_5_mental_health_nursing.html' }, { label: 'Child Health Nursing', link: 'bsc_5_child_health_nursing.html' } ],
-            'Semester 6': [ { label: 'Child Health Nursing II', link: 'bsc_6_child_health_nursing.html' }, { label: 'Mental Health Nursing II', link: 'bsc_6_mental_health_nursing.html' }, { label: 'Midwifery & OBG', link: 'bsc_6_midwifery_obgyn.html' }, { label: 'Nursing Management', link: 'bsc_6_nursing_management_leadership.html' } ],
-            'Semester 7': [ { label: 'Community Health Nursing II', link: 'bsc_7_community_health_nursing.html' }, { label: 'Research & Statistics', link: 'bsc_7_nursing_research_statistics.html' }, { label: 'Midwifery & OBG II', link: 'bsc_7_midwifery_obgyn.html' } ]
-        },
-        'PBBSc': {
-            'First Year': [ { label: 'Medical Surgical Nursing', link: 'pbbsc_1_medical_surgical_nursing.html' }, { label: 'Child Health Nursing', link: 'pbbsc_1_child_health_nursing.html' }, { label: 'Microbiology', link: 'pbbsc_1_microbiology.html' }, { label: 'Biochemistry & Biophysics', link: 'pbbsc_1_biochemistry_biophysics.html' }, { label: 'Nutrition & Dietetics', link: 'pbbsc_1_nutrition_dietetics.html' }, { label: 'Nursing Foundation', link: 'pbbsc_1_nursing_foundation.html' }, { label: 'Maternal Nursing', link: 'pbbsc_1_maternal_nursing.html' }, { label: 'Psychology', link: 'pbbsc_1_psychology.html' } ],
-            'Second Year': [ { label: 'Nursing Administration', link: 'pbbsc_2_nursing_service_administration.html' }, { label: 'Mental Health Nursing', link: 'pbbsc_2_mental_health_nursing.html' }, { label: 'Nursing Education', link: 'pbbsc_2_nursing_education.html' }, { label: 'Community Health Nursing', link: 'pbbsc_2_community_health_nursing.html' }, { label: 'Sociology', link: 'pbbsc_2_sociology.html' } ]
-        },
-        'GNM': {
-            'First Year': [ { label: 'Nutrition', link: 'gnm_1_nutrition.html' }, { label: 'Health Education', link: 'gnm_1_health_education.html' }, { label: 'Environmental Hygiene', link: 'gnm_1_environmental_hygiene.html' }, { label: 'Community Health Nursing', link: 'gnm_1_community_health_nursing.html' }, { label: 'First Aid', link: 'gnm_1_first_aid.html' }, { label: 'Fundamentals of Nursing', link: 'gnm_1_fundamentals_of_nursing.html' }, { label: 'Sociology', link: 'gnm_1_sociology.html' }, { label: 'Psychology', link: 'gnm_1_psychology.html' }, { label: 'Microbiology', link: 'gnm_1_microbiology.html' }, { label: 'Anatomy & Physiology', link: 'gnm_1_anatomy_physiology.html' } ],
-            'Second Year': [ { label: 'Medical Surgical Nursing I', link: 'gnm_2_medical_surgical_nursing.html' }, { label: 'Mental Health Nursing', link: 'gnm_2_mental_health_nursing.html' }, { label: 'Medical Surgical Nursing II', link: 'gnm_2_medical_surgical_nursing_two.html' }, { label: 'Child Health Nursing', link: 'gnm_2_child_health_nursing.html' } ],
-            'Third Year': [ { label: 'Community Health Nursing II', link: 'gnm_3_community_health_nursing.html' }, { label: 'Midwifery', link: 'gnm_3_midwifery.html' }, { label: 'Gynecology', link: 'gnm_3_gynecology.html' } ]
-        },
-        '3D': { 'Systems': [{ label: '3D Models', link: '3dmodels.html' }] },
-        'EXAMS': { 
-            'NORCET': [
-                { label: 'NORCET 8 (English)', link: 'norcetenglish.html' },
-                { label: 'NORCET (Hindi)', link: 'norcethindi.html' }
+            2: [
+                { q: "Which level of healthcare deals with complex and specialized cases?", o: ["Primary", "Secondary", "Tertiary", "Home care"], a: 2 },
+                { q: "The primary goal of the healthcare delivery system is to:", o: ["Generate profit", "Promote, restore and maintain health", "Employ nurses", "Conduct research"], a: 1 }
             ],
-            'ESCI': [
-                { label: 'ESCI Exclusive Q&A', link: 'esci.html' }
+            3: [
+                { q: "The basic unit of heredity is:", o: ["Cell", "Gene", "Chromosome", "Nucleus"], a: 1 },
+                { q: "DNA stands for:", o: ["Deoxyribonucleic Acid", "Dual Nitrogen Acid", "Direct Nucleus Acid", "None"], a: 0 }
             ]
-        },
-        'QP': { 
-            'BSc 2024': [
-                { label: 'BSc Exclusive Exam QP', link: 'bscexclusiveqp.html' }
-            ],
-            'GNM 2024': [
-                { label: 'GNM Exclusive Exam QP', link: 'gnmexclusiveqp.html' }
-            ]
-        },
-        'REQ': { 'Documents': [{ label: 'Nursing Requirements', link: 'nursingrequirements.html' }] },
-        'COMM': { 'Basics': [{ label: 'Communicative English', link: 'communicativeenglish.html' }] }
-    };
+        };
 
-    const REFERRAL_CODES = [];
-    for(let i=1; i<=100; i++) REFERRAL_CODES.push(`REFPLACEHOLDER${String(i).padStart(3, '0')}`);
+        let isLensActive = false;
+        let scaleFactor = 3;
 
-    const PAYMENT_LINKS = {
-        'GNM_Third Year_D': 'https://rzp.io/rzp/tx1GzgB0', 'GNM_Second Year_D': 'https://rzp.io/rzp/7ZEYqAR', 'GNM_First Year_D': 'https://rzp.io/rzp/m7pEmVy5',
-        'GNM_Third Year_F': 'https://rzp.io/rzp/abNPOlM', 'GNM_Second Year_F': 'https://rzp.io/rzp/7uQDIiN', 'GNM_First Year_F': 'https://rzp.io/rzp/lVAKDci',
-        'BSc_Semester 7_D': 'https://rzp.io/rzp/5brZ609', 'BSc_Semester 6_D': 'https://rzp.io/rzp/MyOzNDH3', 'BSc_Semester 5_D': 'https://rzp.io/rzp/6Pyoc2KG', 'BSc_Semester 4_D': 'https://rzp.io/rzp/XYCluxgu', 'BSc_Semester 3_D': 'https://rzp.io/rzp/vD6slz2', 'BSc_Semester 2_D': 'https://rzp.io/rzp/IdW8fls', 'BSc_Semester 1_D': 'https://rzp.io/rzp/zrR68xJd',
-        'BSc_Semester 7_F': 'https://rzp.io/rzp/9v1ESD8', 'BSc_Semester 6_F': 'https://rzp.io/rzp/XAUmBAb', 'BSc_Semester 5_F': 'https://rzp.io/rzp/f3ckmawE', 'BSc_Semester 4_F': 'https://rzp.io/rzp/0xomOEkm', 'BSc_Semester 3_F': 'https://rzp.io/rzp/XoiqWOK', 'BSc_Semester 2_F': 'https://rzp.io/rzp/xn9Spct', 'BSc_Semester 1_F': 'https://rzp.io/rzp/OepEc2wZ',
-        'PBBSc_Second Year_D': 'https://rzp.io/rzp/O7QSNXOv', 'PBBSc_First Year_D': 'https://rzp.io/rzp/TdjmSoy',
-        'PBBSc_Second Year_F': 'https://rzp.io/rzp/SG5tGnXT', 'PBBSc_First Year_F': 'https://rzp.io/rzp/2QOTgbD',
-        'MSc_Second Year_F': 'https://rzp.io/rzp/Hpr9NDg', 'MSc_First Year_F': 'https://rzp.io/rzp/SGdmSPd',
-        '3D_Systems_F': 'https://rzp.io/rzp/Xnrnrxe',
-        'EXAMS_NORCET_F': 'https://rzp.io/l/dummy-norcet-english',
-        'EXAMS_ESCI_F': 'https://rzp.io/l/dummy-esci',
-        'QP_BSc 2024_F': 'https://rzp.io/l/dummy-bsc-qp',
-        'QP_GNM 2024_F': 'https://rzp.io/l/dummy-gnm-qp',
-        'REQ_Documents_F': 'https://rzp.io/l/dummy-nursing-req',
-        'COMM_Basics_F': 'https://rzp.io/l/dummy-comm-eng'
-    };
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            header.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('active');
+        }
 
-    const app = {
-        currentUser: null, lockedCourseKey: null, lockedCourseSection: null,
-        init: function() {
-            const savedUser = localStorage.getItem('eziUser');
-            if (savedUser) {
-                this.currentUser = JSON.parse(savedUser);
-                history.replaceState({ viewId: 'view-exit-guard' }, 'Exit Guard', '#exit');
-                history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
-                this.renderView('view-dashboard');
-                const savedAuth = localStorage.getItem('eziAuth');
-                if(savedAuth) { try { this.syncPermissions(JSON.parse(savedAuth)); } catch(e){} }
+        function openResource(type, url, title) {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            const controls = document.getElementById('lens-controls');
+            const guide = document.getElementById('lens-guide');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = '';
+            
+            // RESET LENS
+            isLensActive = false;
+            document.getElementById('lens-toggle').checked = false;
+            guide.style.display = 'none';
+            // Default: Scroll is ON
+            body.style.overflowY = 'auto';
+
+            if (type === 'quiz') {
+                controls.style.display = 'none';
+                openQuiz(type); 
+            }
+            else {
+                let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                if (type === 'notes') {
+                    controls.style.display = 'flex';
+                    
+                    body.innerHTML = `
+                        <div id="doc-container" class="doc-container">
+                            <iframe class="iframe-doc" src="${cleanUrl}" allow="autoplay"></iframe>
+                        </div>
+                    `;
+
+                    // Touch Events for Lens
+                    body.addEventListener('touchstart', handleStart, {passive: false});
+                    body.addEventListener('touchmove', handleMove, {passive: false});
+                    body.addEventListener('touchend', handleEnd);
+                    
+                    // Mouse Events
+                    body.addEventListener('mousedown', handleStart);
+                    body.addEventListener('mousemove', handleMove);
+                    body.addEventListener('mouseup', handleEnd);
+                    body.addEventListener('mouseleave', handleEnd);
+
+                } else {
+                    controls.style.display = 'none';
+                    body.innerHTML = `<iframe class="iframe-video" src="${cleanUrl}" allowfullscreen></iframe>`;
+                }
+            }
+        }
+
+        function openQuiz(unitId) {
+            const body = document.getElementById('modal-body');
+            // Assuming openQuiz is called after modal open or needs setup
+            // For logic simplicity here:
+            const questions = QUIZ_DATA[unitId] || [];
+            let quizHtml = `<div class="quiz-container">`;
+            questions.forEach((q, idx) => {
+                quizHtml += `
+                    <div class="quiz-question">${idx + 1}. ${q.q}</div>
+                    <div class="quiz-options" id="q-${idx}">
+                        ${q.o.map((opt, oIdx) => `
+                            <div class="quiz-option" onclick="checkAnswer(this, ${idx}, ${oIdx}, ${q.a})">${opt}</div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+            if(questions.length === 0) quizHtml += `<p>Quiz coming soon!</p>`;
+            quizHtml += `</div>`;
+            body.innerHTML = quizHtml;
+        }
+
+        function checkAnswer(el, qIdx, oIdx, correctIdx) {
+            const parent = document.getElementById(`q-${qIdx}`);
+            const opts = parent.children;
+            for(let opt of opts) opt.style.pointerEvents = 'none';
+            if(oIdx === correctIdx) el.classList.add('correct');
+            else { el.classList.add('wrong'); opts[correctIdx].classList.add('correct'); }
+        }
+
+        function toggleLensMode() {
+            isLensActive = document.getElementById('lens-toggle').checked;
+            const guide = document.getElementById('lens-guide');
+            const iframe = document.querySelector('.iframe-doc');
+            const body = document.getElementById('modal-body');
+            
+            if (isLensActive) {
+                // LENS ON: Lock Scroll, Disable Iframe interaction
+                guide.style.display = 'block';
+                if(iframe) iframe.style.pointerEvents = 'none';
+                body.style.overflow = 'hidden'; 
             } else {
-                history.replaceState({ viewId: 'view-auth' }, 'Login', '#login');
-                this.renderView('view-auth');
+                // LENS OFF: Enable Scroll, Enable Iframe interaction
+                guide.style.display = 'none';
+                if(iframe) iframe.style.pointerEvents = 'auto';
+                body.style.overflowY = 'auto';
             }
-            window.addEventListener('popstate', (event) => {
-                if (event.state && event.state.viewId) {
-                    if (event.state.viewId === 'view-exit-guard') { this.showExitModal(); this.renderView('view-dashboard'); return; }
-                    if (event.state.viewId === 'view-submenu') { this.renderSubmenu(event.state.course); this.renderView('view-submenu'); }
-                    else if (event.state.viewId === 'view-subjects') { this.renderSubjectList(event.state.course, event.state.section); this.renderView('view-subjects'); }
-                    else if (event.state.viewId === 'view-iframe') { if(event.state.sourceUrl) this.openContent(event.state.sourceUrl, event.state.title, true); else this.renderView('view-dashboard'); }
-                    else this.renderView(event.state.viewId);
-                } else { if(this.currentUser) this.renderView('view-dashboard'); else this.renderView('view-auth'); }
-            });
-        },
-        syncPermissions: async function(creds) {
-            try {
-                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action:'login', email: creds.email, password: creds.password, deviceId: getDeviceId() }) });
-                const data = await res.json();
-                if(data.result === 'success'){ this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user)); }
-            } catch(e) {}
-        },
-        login: async function() {
-            const email = document.getElementById('login-email').value.trim(); const pass = document.getElementById('login-pass').value.trim();
-            const errorDiv = document.getElementById('login-error'); const btn = document.getElementById('btn-login-submit');
-            errorDiv.textContent = ""; if(!email || !pass) { errorDiv.textContent = "Fill all fields"; return; }
-            btn.textContent = "Logging in..."; btn.disabled = true;
-            try {
-                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({action:'login', email, password:pass, deviceId:getDeviceId()}) });
-                const data = await res.json();
-                if(data.result === 'success'){
-                    this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
-                    localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
-                    document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = "";
-                    this.navTo('view-dashboard', true); 
-                } else { errorDiv.textContent = data.message; }
-            } catch(e) { errorDiv.textContent = "Network Error"; } finally { btn.textContent = "Login Securely"; btn.disabled = false; }
-        },
-        signup: async function() {
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim(); const pass = document.getElementById('signup-pass').value.trim();
-            const phone = document.getElementById('signup-phone').value.trim(); const errorDiv = document.getElementById('signup-error');
-            const btn = document.getElementById('btn-signup-submit');
-            errorDiv.textContent = ""; if(!name || !email || !pass || !phone) { errorDiv.textContent = "Fill all fields"; return; }
-            btn.textContent = "Creating..."; btn.disabled = true;
-            try {
-                const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({action:'signup', name, email, password:pass, phone, deviceId:getDeviceId()}) });
-                const data = await res.json();
-                if(data.result === 'success'){
-                    this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
-                    localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
-                    alert("Account Created!"); this.navTo('view-dashboard', true);
-                } else { errorDiv.textContent = data.message; }
-            } catch(e) { errorDiv.textContent = "Network Error"; } finally { btn.textContent = "Create Account"; btn.disabled = false; }
-        },
-        toggleAuthMode: function() {
-            const login = document.getElementById('form-login'); const signup = document.getElementById('form-signup');
-            if(login.classList.contains('hidden')){ signup.classList.add('hidden'); login.classList.remove('hidden'); } else { login.classList.add('hidden'); signup.classList.remove('hidden'); }
-        },
-        togglePassword: function(id, btn) {
-            const el = document.getElementById(id); if(el.type === 'password') { el.type = 'text'; btn.style.color = 'var(--primary)'; } else { el.type = 'password'; btn.style.color = 'var(--text-muted)'; }
-        },
-        logout: function() { this.currentUser = null; localStorage.removeItem('eziUser'); localStorage.removeItem('eziAuth'); this.navTo('view-auth', true); },
-        navTo: function(viewId, isRoot = false, stateData = {}) {
-            const state = { viewId: viewId, ...stateData };
-            if (isRoot) {
-                 if (viewId === 'view-dashboard') { history.replaceState({ viewId: 'view-exit-guard' }, null, '#exit'); history.pushState(state, null, `#${viewId.replace('view-', '')}`); }
-                 else { history.replaceState(state, null, `#${viewId.replace('view-', '')}`); }
-            } else { history.pushState(state, null, `#${viewId.replace('view-', '')}`); }
-            this.renderView(viewId);
-        },
-        
-        // REPLACED: NEW RENDER LOGIC FOR ZOOM SUPPORT
-        renderView: function(viewId) {
-            const iframeContainer = document.getElementById('view-iframe');
-            if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
-            
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            const target = document.getElementById(viewId); if(target) target.classList.add('active');
-            
-            const isAuth = viewId === 'view-auth'; const isDash = viewId === 'view-dashboard';
-            document.getElementById('btn-back').style.display = (isAuth || isDash) ? 'none' : 'block';
-            document.getElementById('btn-logout').style.display = isAuth ? 'none' : 'block';
-            document.getElementById('header-branding').style.opacity = isAuth ? '0' : '1';
-
-            // ZOOM LOGIC: Unlock body when in iframe view, Lock it when in menus
-            const viewportMeta = document.getElementById('viewport-meta');
-            if (viewId === 'view-iframe') {
-                document.body.classList.add('zoom-active');
-                if(viewportMeta) viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes');
-            } else {
-                document.body.classList.remove('zoom-active');
-                if(viewportMeta) viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-            }
-        },
-
-        goBack: function() {
-            if(!document.getElementById('modal-referral').classList.contains('hidden')) { this.closeReferralModal(); return; }
-            if(!document.getElementById('modal-exit').classList.contains('hidden')) { this.cancelExit(); return; }
-            window.history.back();
-        },
-        showExitModal: function() { document.getElementById('modal-exit').classList.remove('hidden'); },
-        cancelExit: function() { document.getElementById('modal-exit').classList.add('hidden'); history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard'); },
-        confirmExit: function() { window.history.back(); },
-        
-        navToCourse: function(key) {
-            this.renderSubmenu(key); this.navTo('view-submenu', false, { course: key });
-        },
-        renderSubmenu: function(key) {
-            const list = document.getElementById('submenu-list'); list.innerHTML = '';
-            document.getElementById('submenu-title').textContent = key;
-            document.getElementById('submenu-subtitle').textContent = "Select Option";
-            const sections = key === '3D' ? Object.keys(COURSES['3D']) : Object.keys(COURSES[key]);
-            sections.forEach(sec => {
-                const item = document.createElement('div'); item.className = 'menu-item';
-                item.innerHTML = `<div><h3>${sec}</h3></div><span class="menu-arrow">&#10095;</span>`;
-                item.onclick = () => { this.checkAccessAndOpen(key, sec); };
-                list.appendChild(item);
-            });
-        },
-        checkAccessAndOpen: function(course, section) {
-            this.lockedCourseKey = course; this.lockedCourseSection = section;
-            const pKey = getPermissionKey(course, section);
-            if(this.currentUser && this.currentUser.permissions && this.currentUser.permissions[pKey] === true) {
-                if (course === '3D' || course === 'REQ' || course === 'COMM') {
-                    const sub = COURSES[course][section][0]; this.openContent(sub.link, sub.label);
-                } else { this.openSubjectList(course, section); }
-            } else { this.navTo('view-paywall', false, { from: 'checkAccess' }); }
-        },
-        openSubjectList: function(course, section) { this.renderSubjectList(course, section); this.navTo('view-subjects', false, { course: course, section: section }); },
-        renderSubjectList: function(course, section) {
-            const list = document.getElementById('subject-list'); list.innerHTML = '';
-            document.getElementById('subject-title').textContent = section;
-            const subjects = COURSES[course][section];
-            subjects.forEach(sub => {
-                const item = document.createElement('div'); item.className = 'menu-item';
-                item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
-                item.onclick = () => { this.openContent(sub.link, sub.label); };
-                list.appendChild(item);
-            });
-        },
-        openContent: function(url, title, fromHistory = false) {
-            const container = document.getElementById('view-iframe');
-            if (!fromHistory) this.navTo('view-iframe', false, { sourceUrl: url, title: title });
-            else this.renderView('view-iframe');
-            
-            // UPDATED: Create iframe dynamically and attempt to inject zoom support
-            const iframe = document.createElement('iframe');
-            iframe.id = "content-frame";
-            iframe.src = url;
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.border = "none";
-            iframe.style.background = "#fff";
-            
-            iframe.onload = function() {
-                try {
-                    // Try to unlock scaling inside the iframe document itself (if same origin)
-                    const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    let meta = innerDoc.querySelector('meta[name="viewport"]');
-                    if (!meta) {
-                        meta = innerDoc.createElement('meta');
-                        meta.name = "viewport";
-                        innerDoc.head.appendChild(meta);
-                    }
-                    meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
-                } catch(e) { }
-            };
-            container.innerHTML = '';
-            container.appendChild(iframe);
-        },
-        showReferralModal: function() { 
-            const pKey = getPermissionKey(this.lockedCourseKey, this.lockedCourseSection);
-            if (NO_DISCOUNT_KEYS.includes(pKey)) {
-                this.redirectToRazorpay(false);
-                return;
-            }
-            document.getElementById('modal-referral').classList.remove('hidden'); 
-            this.resetReferralModal(); 
-        },
-        closeReferralModal: function() { document.getElementById('modal-referral').classList.add('hidden'); },
-        resetReferralModal: function() { 
-            document.getElementById('referral-step-1').classList.remove('hidden'); document.getElementById('referral-step-2').classList.add('hidden'); 
-            document.getElementById('referral-input').value = ""; document.getElementById('referral-error').textContent = "";
-        },
-        selectReferral: function(has) { if(has) { document.getElementById('referral-step-1').classList.add('hidden'); document.getElementById('referral-step-2').classList.remove('hidden'); } else this.redirectToRazorpay(false); },
-        validateAndRedirect: function() {
-            const code = document.getElementById('referral-input').value.trim().toUpperCase();
-            if(code === "EZIFLAT25" || REFERRAL_CODES.includes(code)) { this.redirectToRazorpay(true); } else { document.getElementById('referral-error').textContent = "Invalid Code"; }
-        },
-        redirectToRazorpay: function(isDiscounted) {
-            const course = this.lockedCourseKey; const section = this.lockedCourseSection || 'Systems';
-            const key = `${course}_${section}_${isDiscounted ? 'D' : 'F'}`;
-            let url = PAYMENT_LINKS[key];
-            if (!url && isDiscounted) url = PAYMENT_LINKS[`${course}_${section}_F`];
-            if (!url) url = `https://www.razorpay.com/fallback_${course}_${section}`;
-            this.closeReferralModal(); window.open(url, '_blank');
         }
-    };
-    window.onload = function() { app.init(); };
-</script>
+
+        function handleStart(e) {
+            if (!isLensActive) return;
+            e.preventDefault(); 
+            applyZoom(e);
+        }
+
+        function handleMove(e) {
+            if (!isLensActive) return;
+            const container = document.getElementById('doc-container');
+            // Only capture move if we are actively scaling
+            if (container && container.style.transform !== 'scale(1)' && container.style.transform !== '') {
+                e.preventDefault();
+                applyZoom(e);
+            }
+        }
+
+        function handleEnd(e) {
+            if (!isLensActive) return;
+            const container = document.getElementById('doc-container');
+            if(container) {
+                container.style.transform = `scale(1)`;
+                container.style.transformOrigin = `center center`;
+            }
+        }
+
+        function applyZoom(e) {
+            const container = document.getElementById('doc-container');
+            if(!container) return;
+
+            const rect = container.parentElement.getBoundingClientRect();
+            let clientX, clientY;
+            
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+
+            container.style.transformOrigin = `${x}px ${y}px`;
+            container.style.transform = `scale(${scaleFactor})`;
+        }
+
+        function closeModal() {
+            document.getElementById('app-modal').style.display = 'none';
+            document.getElementById('modal-body').innerHTML = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+             // Init
+        });
+    </script>
 </body>
 </html>
