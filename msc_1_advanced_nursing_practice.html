@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advance Nursing Practice - Syllabus</title>
     <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Advance Nursing Practice." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -129,7 +129,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -144,7 +144,6 @@
             padding: 0 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             flex-shrink: 0;
-            z-index: 1001;
         }
 
         .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
@@ -161,65 +160,15 @@
 
         .modal-body {
             flex: 1;
-            background: #e5e5e5;
+            background: #000;
             position: relative;
-            overflow: auto; /* Allow scrolling when zoomed */
-            display: flex;
-            flex-direction: column;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* --- ZOOM CONTROLS --- */
-        .zoom-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 10px;
-            background: #fff;
-            border-bottom: 1px solid #ccc;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .zoom-btn {
-            background: var(--brand);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
+            overflow-y: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .zoom-btn:active { transform: scale(0.95); }
-
-        /* --- IFRAME WRAPPER --- */
-        .iframe-wrapper {
-            width: 100%;
-            flex-grow: 1;
-            overflow: visible; /* Important for scaling */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Top align so it grows down */
-            transform-origin: top center;
-            transition: transform 0.2s ease;
         }
 
-        .iframe-doc {
-            width: 100%;
-            height: 100%;
-            min-height: 80vh;
-            border: none;
-            background: #fff;
-            display: block;
-        }
-        
+        /* --- FIXED IFRAME STYLES --- */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -227,7 +176,14 @@
             border: none;
             background: #000;
             display: block;
-            margin: auto;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
         }
 
         /* --- QUIZ STYLES --- */
@@ -279,6 +235,12 @@
             </div>
             <div class="unit-content active">
                 <div class="subsection">
+                    
+                    
+
+[Image of nursing professional ethics]
+
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1U-nq7q_yZaqFe888Of6oc07dWuGpcSE9/preview', 'Detailed Notes: Nursing as a Profession')">
                         <span class="icon">📚</span><span>Detailed Notes: Nursing as a Profession</span>
                     </div>
@@ -296,6 +258,9 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BAva7uX63TW_8xHV6W90l_hd6Xf6Lilt/preview', 'Detailed Notes: Healthcare Delivery')">
                         <span class="icon">📚</span><span>Detailed Notes: Healthcare Delivery</span>
                     </div>
@@ -313,6 +278,12 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
+[Image of human chromosome structure]
+
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/152qt5G1PfFV7tg-RhoazBfZkqpKQmoGH/preview', 'Detailed Notes: Genetics')">
                         <span class="icon">📚</span><span>Detailed Notes: Genetics</span>
                     </div>
@@ -330,6 +301,12 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
+[Image of epidemiological triad]
+
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1AvBqfqJsaSKqFQTl5FEmYnqTgHFawC0a/preview', 'Detailed Notes: Epidemiology')">
                         <span class="icon">📚</span><span>Detailed Notes: Epidemiology</span>
                     </div>
@@ -347,6 +324,9 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NJEDSscp5utagDlRv1Al6fO4Tfh_7oFa/preview', 'Detailed Notes: Biopsycho Social Pathology')">
                         <span class="icon">📚</span><span>Detailed Notes: Biopsycho Social Pathology</span>
                     </div>
@@ -364,6 +344,9 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1g3ST8agz0Ihnb1LzsDxpXilAjiKWBoh4/preview', 'Detailed Notes: Philosophy & Theories')">
                         <span class="icon">📚</span><span>Detailed Notes: Philosophy & Theories</span>
                     </div>
@@ -381,6 +364,12 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
+[Image of 5 steps of nursing process]
+
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ftELNhUIjdxwacwHlOSLHByIn_t-4_cU/preview', 'Detailed Notes: Nursing Process I')">
                         <span class="icon">📚</span><span>Detailed Notes: Nursing Process Approach I</span>
                     </div>
@@ -398,6 +387,12 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
+[Image of SMART goals specific measurable achievable relevant time-bound]
+
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jTCWem1HnoWBhheQRD_2gp85G_NbVLrS/preview', 'Detailed Notes: Nursing Process II')">
                         <span class="icon">📚</span><span>Detailed Notes: Nursing Process Approach II</span>
                     </div>
@@ -415,6 +410,9 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CjmeSesoUWXIaZQtaWX5hlIJ79E_3yaM/preview', 'Detailed Notes: Nursing Practice')">
                         <span class="icon">📚</span><span>Detailed Notes: Nursing Practice</span>
                     </div>
@@ -432,6 +430,9 @@
             </div>
             <div class="unit-content">
                 <div class="subsection">
+
+                    
+
                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lTd8rpmVkqLkkBGWYlozXXRFaxVgqIL0/preview', 'Detailed Notes: Computer Applications')">
                         <span class="icon">📚</span><span>Detailed Notes: Computer Applications</span>
                     </div>
@@ -481,7 +482,6 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        
         <div id="modal-body" class="modal-body"></div>
     </div>
 
@@ -560,34 +560,12 @@
             ]
         };
 
-        // --- 2. GLOBAL STATE FOR ZOOM ---
-        let currentZoom = 1;
-
+        // --- 2. LOGIC ---
         function toggleUnit(header) {
             const content = header.nextElementSibling;
             const isExpanded = header.getAttribute('aria-expanded') === 'true';
             header.setAttribute('aria-expanded', !isExpanded);
             content.classList.toggle('active');
-        }
-
-        function zoomDoc(amount) {
-            const iframe = document.getElementById('doc-iframe-wrapper');
-            if(!iframe) return;
-
-            currentZoom += amount;
-            if(currentZoom < 0.5) currentZoom = 0.5; // Min limit
-            if(currentZoom > 3) currentZoom = 3;     // Max limit
-
-            iframe.style.transform = `scale(${currentZoom})`;
-            
-            // Adjust margin to allow scrolling when zoomed out
-            if(currentZoom > 1) {
-                iframe.style.marginBottom = `${(currentZoom - 1) * 50}%`;
-                iframe.style.marginRight = `${(currentZoom - 1) * 50}%`;
-            } else {
-                iframe.style.marginBottom = '0';
-                iframe.style.marginRight = '0';
-            }
         }
 
         function openResource(type, url, title) {
@@ -606,43 +584,20 @@
             modal.style.display = 'flex';
             body.innerHTML = ''; 
             body.style.display = 'flex'; 
-            
-            // Reset Zoom on open
-            currentZoom = 1;
 
             if (type === 'quiz') {
                 // Handled by openQuiz
             }
             else {
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
-                
-                // NOTES (PDF) LOGIC
-                if (type === 'notes') {
-                    body.innerHTML = `
-                        <div class="zoom-controls">
-                            <button class="zoom-btn" onclick="zoomDoc(-0.2)">−</button>
-                            <span style="display:flex; align-items:center; font-weight:600; color:#555;">ZOOM</span>
-                            <button class="zoom-btn" onclick="zoomDoc(0.2)">+</button>
-                        </div>
-                        <div id="doc-iframe-wrapper" class="iframe-wrapper">
-                            <iframe 
-                                class="iframe-doc" 
-                                src="${cleanUrl}" 
-                                sandbox="allow-scripts allow-same-origin allow-presentation"
-                                allow="autoplay; encrypted-media; fullscreen">
-                            </iframe>
-                        </div>`;
-                } 
-                // VIDEO LOGIC
-                else {
-                    body.innerHTML = `
-                        <iframe 
-                            class="iframe-video" 
-                            src="${cleanUrl}" 
-                            sandbox="allow-scripts allow-same-origin allow-presentation"
-                            allow="autoplay; encrypted-media; fullscreen">
-                        </iframe>`;
-                }
+                let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+
+                body.innerHTML = `<iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    sandbox="allow-scripts allow-same-origin allow-presentation"
+                    allow="autoplay; encrypted-media; fullscreen">
+                </iframe>`;
             }
         }
 
