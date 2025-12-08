@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes">
     <title>Ezi Nurse | Professional Nursing Education</title>
     <style>
         :root {
@@ -24,7 +24,9 @@
         .view { flex: 1; padding: 24px; overflow-y: auto; display: none; animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; }
         .view.active { display: flex; flex-direction: column; }
         #view-iframe.view { padding: 0 !important; overflow: hidden; flex-direction: column; }
-        iframe { width: 100%; height: 100%; border: none; display: block; background: #fff; }
+        
+        iframe { width: 100%; height: 100%; border: none; display: block; background: #fff; touch-action: pan-x pan-y pinch-zoom; }
+        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         .auth-container { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 5vh; }
@@ -145,7 +147,7 @@
                 <button class="btn btn-ghost" onclick="app.closeReferralModal()">Cancel</button>
             </div>
             <div id="referral-step-2" class="hidden">
-                <div class="form-group"><input type="text" id="referral-input" class="form-input" placeholder="EZIFLAT25"></div>
+                <div class="form-group"><input type="text" id="referral-input" class="form-input" placeholder="Enter Promo Code"></div>
                 <div id="referral-error" class="error-msg"></div>
                 <button class="btn btn-primary" onclick="app.validateAndRedirect()">Apply</button>
                 <button class="btn btn-ghost" onclick="app.resetReferralModal()">Back</button>
@@ -165,6 +167,19 @@
 
 <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec";
+
+    // UPDATED: List of permission keys that must skip the Discount Popup
+    const NO_DISCOUNT_KEYS = [
+        'msc_first_year', 
+        'msc_second_year', 
+        '3d_models', 
+        'exams_norcet', 
+        'exams_esci', 
+        'qp_bsc', 
+        'qp_gnm', 
+        'nursing_req', 
+        'comm_english'
+    ];
 
     function getDeviceId() {
         let id = localStorage.getItem('ezi_device_id');
@@ -268,6 +283,12 @@
         'PBBSc_Second Year_F': 'https://rzp.io/rzp/SG5tGnXT', 'PBBSc_First Year_F': 'https://rzp.io/rzp/2QOTgbD',
         'MSc_Second Year_F': 'https://rzp.io/rzp/Hpr9NDg', 'MSc_First Year_F': 'https://rzp.io/rzp/SGdmSPd',
         '3D_Systems_F': 'https://rzp.io/rzp/Xnrnrxe',
+        'EXAMS_NORCET_F': 'https://rzp.io/l/dummy-norcet-english',
+        'EXAMS_ESCI_F': 'https://rzp.io/l/dummy-esci',
+        'QP_BSc 2024_F': 'https://rzp.io/l/dummy-bsc-qp',
+        'QP_GNM 2024_F': 'https://rzp.io/l/dummy-gnm-qp',
+        'REQ_Documents_F': 'https://rzp.io/l/dummy-nursing-req',
+        'COMM_Basics_F': 'https://rzp.io/l/dummy-comm-eng'
     };
 
     const app = {
@@ -412,7 +433,17 @@
             else this.renderView('view-iframe');
             container.innerHTML = `<iframe id="content-frame" src="${url}" style="width:100%; height:100%; border:none; display:block; background:#fff;"></iframe>`;
         },
-        showReferralModal: function() { document.getElementById('modal-referral').classList.remove('hidden'); this.resetReferralModal(); },
+        showReferralModal: function() { 
+            // UPDATED: Check if current course is in the NO_DISCOUNT list
+            const pKey = getPermissionKey(this.lockedCourseKey, this.lockedCourseSection);
+            if (NO_DISCOUNT_KEYS.includes(pKey)) {
+                // Skip modal, go directly to Full Payment
+                this.redirectToRazorpay(false);
+                return;
+            }
+            document.getElementById('modal-referral').classList.remove('hidden'); 
+            this.resetReferralModal(); 
+        },
         closeReferralModal: function() { document.getElementById('modal-referral').classList.add('hidden'); },
         resetReferralModal: function() { 
             document.getElementById('referral-step-1').classList.remove('hidden'); document.getElementById('referral-step-2').classList.add('hidden'); 
