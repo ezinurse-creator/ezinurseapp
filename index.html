@@ -16,10 +16,11 @@
         html, body {
             height: 100%;
             width: 100%;
-            /* FIXED: We default to hidden, but JS will toggle this now */
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
+            /* Default touch action for app-feel */
+            touch-action: none;
         }
         
         #app { 
@@ -38,6 +39,8 @@
             overflow-y: auto; 
             -webkit-overflow-scrolling: touch; 
             z-index: 50;
+            /* ZOOM FIX: Explicitly allow pinch zoom in this container */
+            touch-action: pan-x pan-y pinch-zoom; 
         }
 
         iframe { 
@@ -70,6 +73,7 @@
         .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
         .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
         .menu-arrow { color: var(--primary); }
+        /* Section header style removed as it is no longer used, but keeping class just in case */
         .section-header { background: #f1f5f9; border: none; pointer-events: none; padding: 10px 0; }
         .section-header h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
@@ -141,12 +145,11 @@
             <div class="menu-item" onclick="app.navToCourse('GNM')"><div><h3>GNM</h3><p>General Nursing & Midwifery</p></div><span class="menu-arrow">&#10095;</span></div>
             <div class="menu-item" style="border-color: var(--primary);" onclick="app.checkAccessAndOpen('3D', 'Systems')"><div><h3 style="color:var(--primary)">3D Models</h3><p>Interactive Anatomy</p></div><span class="menu-arrow">&#10095;</span></div>
             
-            <div class="menu-item section-header"><h3>Preparation & Resources</h3></div>
-            <div class="menu-item" onclick="app.navToCourse('EXAMS')"><div><h3>Nursing Exams</h3><p>NORCET, ESCI Exclusive Q&A</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.navToCourse('QP')"><div><h3>Exclusive Solved Question Papers</h3><p>BSc & GNM 2024</p></div><span class="menu-arrow">&#10095;</span></div>
+            <div class="menu-item hidden" onclick="app.navToCourse('EXAMS')"><div><h3>Nursing Exams</h3><p>NORCET, ESCI Exclusive Q&A</p></div><span class="menu-arrow">&#10095;</span></div>
             
-            <div class="menu-item" onclick="app.checkAccessAndOpen('REQ', 'Documents')"><div><h3>Nursing Requirements</h3><p>Document Checklist</p></div><span class="menu-arrow">&#10095;</span></div>
-            <div class="menu-item" onclick="app.checkAccessAndOpen('COMM', 'Basics')"><div><h3>Communicative English</h3><p>Language Fundamentals</p></div><span class="menu-arrow">&#10095;</span></div>
+            <div class="menu-item hidden" onclick="app.checkAccessAndOpen('REQ', 'Documents')"><div><h3>Nursing Requirements</h3><p>Document Checklist</p></div><span class="menu-arrow">&#10095;</span></div>
+            
+            <div class="menu-item hidden" onclick="app.checkAccessAndOpen('COMM', 'Basics')"><div><h3>Communicative English</h3><p>Language Fundamentals</p></div><span class="menu-arrow">&#10095;</span></div>
         </div>
     </div>
 
@@ -203,8 +206,8 @@
 
     const NO_DISCOUNT_KEYS = [
         'msc_first_year', 'msc_second_year', '3d_models', 
-        'exams_norcet', 'exams_esci', 'qp_bsc', 
-        'qp_gnm', 'nursing_req', 'comm_english'
+        'exams_norcet', 'exams_esci', 
+        'nursing_req', 'comm_english'
     ];
 
     function getDeviceId() {
@@ -213,7 +216,7 @@
         return id;
     }
     
-    // --- FIXED: ZOOM LOGIC ---
+    // --- ZOOM LOGIC ---
     function setZoomable(enabled) {
         const head = document.head;
         const oldMeta = document.getElementById('viewport-meta');
@@ -229,10 +232,9 @@
 
         if (enabled) {
             // UNLOCKED: Use this when reading PDFs/Documents
-            // 1. Allow scaling up to 5x for better readability
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
             
-            // 2. CRITICAL FIX: Unlock overflow so the browser allows the viewport to change
+            // Unlock overflow so the browser allows the viewport to change
             body.style.overflow = "auto";
             html.style.overflow = "auto";
             body.style.touchAction = "manipulation"; // Better touch support
@@ -256,10 +258,6 @@
         if (course === 'EXAMS') {
             if(section.includes('NORCET')) return 'exams_norcet';
             if(section.includes('ESCI')) return 'exams_esci';
-        }
-        if (course === 'QP') {
-            if(section.includes('BSc')) return 'qp_bsc';
-            if(section.includes('GNM')) return 'qp_gnm';
         }
 
         const c = course.toLowerCase();
@@ -320,14 +318,6 @@
                 { label: 'ESCI Exclusive Q&A', link: 'esci.html' }
             ]
         },
-        'QP': { 
-            'BSc 2024': [
-                { label: 'BSc Exclusive Exam QP', link: 'bscexclusiveqp.html' }
-            ],
-            'GNM 2024': [
-                { label: 'GNM Exclusive Exam QP', link: 'gnmexclusiveqp.html' }
-            ]
-        },
         'REQ': { 'Documents': [{ label: 'Nursing Requirements', link: 'nursingrequirements.html' }] },
         'COMM': { 'Basics': [{ label: 'Communicative English', link: 'communicativeenglish.html' }] }
     };
@@ -346,8 +336,6 @@
         '3D_Systems_F': 'https://rzp.io/rzp/Xnrnrxe',
         'EXAMS_NORCET_F': 'https://rzp.io/l/dummy-norcet-english',
         'EXAMS_ESCI_F': 'https://rzp.io/l/dummy-esci',
-        'QP_BSc 2024_F': 'https://rzp.io/l/dummy-bsc-qp',
-        'QP_GNM 2024_F': 'https://rzp.io/l/dummy-gnm-qp',
         'REQ_Documents_F': 'https://rzp.io/l/dummy-nursing-req',
         'COMM_Basics_F': 'https://rzp.io/l/dummy-comm-eng'
     };
@@ -438,11 +426,11 @@
             const iframeContainer = document.getElementById('view-iframe');
             if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
             
-            // --- FIXED: CORRECT LOGIC FOR SWITCHING ZOOM MODES ---
+            // --- ZOOM LOGIC TRIGGER ---
             if (viewId === 'view-iframe') {
-                setZoomable(true); // ENABLE Zoom for reading
+                setZoomable(true); // ENABLE Zoom
             } else {
-                setZoomable(false); // FIXED: Disable zoom (pass false) for dashboard/ui
+                setZoomable(false); // DISABLE Zoom
             }
 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -512,12 +500,12 @@
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if(!doc) return;
-                    // Force internal meta tag too, just in case (works for same-origin only)
+                    // Attempt to inject meta tag (May be blocked by CORS if not same domain)
                     const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
                     doc.head.appendChild(meta);
-                } catch(e) {}
+                } catch(e) { console.log("CORS blocked internal zoom injection"); }
             };
             
             container.innerHTML = '';
