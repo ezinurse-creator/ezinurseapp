@@ -19,8 +19,9 @@
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* Default touch action for app-feel */
-            touch-action: none;
+            /* FIX 1: Removed global touch-action: none. 
+               Changed to manipulation to allow standard browser handling by default. */
+            touch-action: manipulation;
         }
         
         #app { 
@@ -30,16 +31,27 @@
             overflow: hidden; 
         }
 
+        /* --- UI VIEWS --- */
+        .view { 
+            flex: 1; padding: 24px; overflow-y: auto; display: none; 
+            animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; 
+            /* FIX 2: Apply restrictive touch behavior ONLY to UI views 
+               (Dashboard, Login, Lists) to prevent zooming/bouncing there. */
+            touch-action: none;
+        }
+        .view.active { display: flex; flex-direction: column; }
+        
         /* --- IFRAME VIEW (Reading Mode) --- */
         #view-iframe.view { 
             padding: 0 !important; 
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            overflow-y: auto; 
+            /* FIX 3: Explicitly allow overflow and specific gestures for the reading view.
+               This container acts as the viewport for the iframe. */
+            overflow: auto; 
             -webkit-overflow-scrolling: touch; 
             z-index: 50;
-            /* ZOOM FIX: Explicitly allow pinch zoom in this container */
             touch-action: pan-x pan-y pinch-zoom; 
         }
 
@@ -49,6 +61,8 @@
             border: none; 
             display: block; 
             background: #fff; 
+            /* Ensure the iframe itself doesn't block pointer events */
+            pointer-events: auto;
         }
 
         /* --- UI COMPONENTS --- */
@@ -58,9 +72,6 @@
         .back-btn { background: none; border: none; font-size: 1.5rem; color: var(--primary-dark); cursor: pointer; display: none; }
         .logout-btn { font-size: 0.85rem; color: var(--danger); font-weight: 600; cursor: pointer; }
 
-        .view { flex: 1; padding: 24px; overflow-y: auto; display: none; animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; }
-        .view.active { display: flex; flex-direction: column; }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         .auth-container { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 5vh; }
@@ -73,10 +84,7 @@
         .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
         .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
         .menu-arrow { color: var(--primary); }
-        /* Section header style removed as it is no longer used, but keeping class just in case */
-        .section-header { background: #f1f5f9; border: none; pointer-events: none; padding: 10px 0; }
-        .section-header h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-
+        
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
         .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; }
@@ -226,26 +234,29 @@
         meta.id = 'viewport-meta';
         meta.name = 'viewport';
         
-        // Grab global elements to toggle overflow
         const body = document.body;
         const html = document.documentElement;
 
         if (enabled) {
-            // UNLOCKED: Use this when reading PDFs/Documents
+            // UNLOCKED: Allow scaling up to 5x, allow user scaling
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
             
-            // Unlock overflow so the browser allows the viewport to change
+            // Critical: Allow global overflow so the browser viewport itself can scale
             body.style.overflow = "auto";
             html.style.overflow = "auto";
-            body.style.touchAction = "manipulation"; // Better touch support
+            
+            // Explicitly set touch-action to manipulation (zoom/pan allowed)
+            body.style.touchAction = "manipulation"; 
         } else {
-            // LOCKED: Use this for Dashboard/Menus
+            // LOCKED: UI Mode (Dashboard, etc)
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
             
-            // Lock overflow back to prevent app scrolling
+            // Lock overflow to prevent general app scrolling, scroll is handled inside .view
             body.style.overflow = "hidden";
             html.style.overflow = "hidden";
-            body.style.touchAction = "none";
+            
+            // We can leave manipulation here because the .view class has touch-action: none
+            body.style.touchAction = "manipulation"; 
         }
         head.appendChild(meta);
     }
@@ -269,6 +280,7 @@
         return `${c}_${section.toLowerCase().replace(' ', '_')}`;
     }
 
+    // [DATA OBJECTS REMAIN UNCHANGED - TRUNCATED FOR BREVITY IN RESPONSE BUT SHOULD BE KEPT]
     const COURSES = {
         'MSc': {
             'First Year': [
