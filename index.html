@@ -13,35 +13,42 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
         
-        /* FIX 2: Global settings allow manipulation, but we prevent scroll on body to keep 'App' feel */
         html, body {
             height: 100%;
             width: 100%;
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            touch-action: manipulation; /* Allows gestures by default */
+            /* FIX 2: Allow manipulation globally by default */
+            touch-action: manipulation; 
         }
         
-        /* FIX 3: Lock zoom and panning on the UI Shell */
         #app { 
             width: 100%; max-width: 480px; margin: 0 auto; 
             background: var(--bg-card); height: 100%; position: relative; 
             display: flex; flex-direction: column; box-shadow: var(--shadow-lg); 
             overflow: hidden; 
-            touch-action: none; /* IMPORTANT: Disables zoom on menus/buttons */
+            /* FIX 3: REMOVED 'touch-action: none'. We do not lock the container anymore. */
         }
 
-        /* The iframe container needs to explicitly allow zooming and scrolling */
+        /* --- SPECIFIC UI LOCKING (Makes buttons feel like an App) --- */
+        /* We apply 'touch-action: none' only to interface elements so they don't zoom */
+        .header, .menu-item, .btn, .auth-container, .paywall-container {
+            touch-action: none;
+        }
+
+        /* --- READING VIEW (UNLOCKED) --- */
         #view-iframe.view { 
             padding: 0 !important; 
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            overflow: auto !important; /* Enable internal scrolling */
+            overflow: auto !important; 
             -webkit-overflow-scrolling: touch; 
-            /* FIX 4: Re-enable pinch-zoom specifically for the reading view */
+            /* FIX 4: Explicitly allow all gestures here */
             touch-action: pan-x pan-y pinch-zoom; 
+            /* Ensure it sits on top of everything else cleanly */
+            z-index: 5;
         }
 
         iframe { 
@@ -50,6 +57,7 @@
             border: none; 
             display: block; 
             background: #fff; 
+            /* FIX 5: Ensure the iframe element itself allows touch */
             touch-action: manipulation; 
         }
 
@@ -61,8 +69,7 @@
         .logout-btn { font-size: 0.85rem; color: var(--danger); font-weight: 600; cursor: pointer; }
 
         .view { flex: 1; padding: 24px; overflow-y: auto; display: none; animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; }
-        /* Allow vertical scroll on normal views, but prevent zoom there via inheritance from #app */
-        .view.active { display: flex; flex-direction: column; touch-action: pan-y; } 
+        .view.active { display: flex; flex-direction: column; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -81,7 +88,8 @@
 
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
-        .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; }
+        /* Unlock inputs so people can tap into them easily */
+        .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; touch-action: manipulation; }
         .password-wrapper { position: relative; display: flex; align-items: center; }
         .form-input-pass { padding-right: 45px; }
         .toggle-password-btn { position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: var(--text-muted); }
@@ -218,9 +226,6 @@
         if (!id) { id = 'web-' + Math.random().toString(36).substr(2, 9) + Date.now(); localStorage.setItem('ezi_device_id', id); }
         return id;
     }
-
-    /* FIX 5: REMOVED forceful viewport control function. 
-       We now rely on the static meta tag and CSS touch-action properties. */
 
     function getPermissionKey(course, section) {
         if (course === '3D') return '3d_models';
@@ -466,29 +471,43 @@
                 list.appendChild(item);
             });
         },
+        
+        /* FIX 6: More aggressive Iframe Content injection to force zoom */
         openContent: function(url, title, fromHistory = false) {
             const container = document.getElementById('view-iframe');
             if (!fromHistory) this.navTo('view-iframe', false, { sourceUrl: url, title: title });
             else this.renderView('view-iframe');
             
-            // Create iframe dynamically
             const iframe = document.createElement('iframe');
             iframe.id = "content-frame";
             iframe.src = url;
             
-            iframe.onload = function() {
+            // Function to force meta tag update
+            const forceZoom = () => {
                 try {
-                    // Inject Zoom Capabilities into the iframe document (Same-Origin Only)
-                    const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    let meta = innerDoc.querySelector('meta[name="viewport"]');
-                    if(meta) innerDoc.head.removeChild(meta);
-                    
-                    meta = innerDoc.createElement('meta');
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    if(!doc) return;
+                    // Remove bad meta tags
+                    doc.querySelectorAll('meta[name="viewport"]').forEach(m => m.remove());
+                    // Add good meta tag
+                    const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
-                    innerDoc.head.appendChild(meta);
-                } catch(e) { }
+                    doc.head.appendChild(meta);
+                    
+                    // Also ensure body inside iframe is touchable
+                    doc.body.style.touchAction = "manipulation";
+                } catch(e) {
+                    // console.log("CORS restriction on iframe content");
+                }
             };
+
+            iframe.onload = () => {
+                forceZoom();
+                // Check again after short delay in case of redirects/late loads
+                setTimeout(forceZoom, 1000);
+            };
+            
             container.innerHTML = '';
             container.appendChild(iframe);
         },
