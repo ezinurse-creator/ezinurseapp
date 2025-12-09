@@ -3,133 +3,157 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Community Health Nursing - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes and quizzes for Community Health Nursing." />
+    <title>Community Health Nursing Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82; 
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #01b9f1;
+            --primary-dark: #003b80;
+            --bg-card: #ffffff;
+            --bg-body: #f1f5f9;
+            --text-main: #003b80;
+            --text-muted: #64748b;
+            --accent: #f59e0b;
             --danger: #ef4444;
             --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
+        } 
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding-bottom: 80px;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
             text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            margin-bottom: 30px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f8fafc; }
+        
+        .unit-header.active {
+            border-bottom-color: #e2e8f0;
+            background: #f0f9ff;
+            color: var(--primary);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none; 
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
+            transition: all 0.2s;
             cursor: pointer;
         }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
 
-        /* --- MODAL --- */
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; } /* Blue */
+        .type-video { border-left: 4px solid #8b5cf6; } /* Purple */
+        .type-lecture { border-left: 4px solid #ec4899; } /* Pink - NEW */
+        .type-model { border-left: 4px solid #10b981; } /* Green */
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; } /* Orange */
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* --- MODAL (The "Close Button" Wrapper) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -146,7 +170,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
         .btn-close {
             background: var(--danger);
@@ -162,13 +186,16 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto;
+            overflow-y: auto; /* Allow scrolling */
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -178,6 +205,7 @@
             display: block;
         }
 
+        /* 2. For Notes & Models (Fills the screen vertically) */
         .iframe-doc {
             width: 100%;
             height: 100%;
@@ -186,11 +214,11 @@
             display: block;
         }
 
-        /* --- QUIZ STYLES --- */
+        /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%;
+            min-height: 100%; /* Ensures it fills screen if short */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -205,775 +233,54 @@
             transition: all 0.2s;
             position: relative;
         }
-        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
-        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
-        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
-        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
-
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators for Tick/Cross */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
         }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
+
     </style>
 </head>
 <body>
 
-    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/19avgvdIHTOElVIThcsl1SGbZXA2quvwA/preview', 'Community Health Nursing Syllabus')">
-        📄 DOWNLOAD SYLLABUS
-    </div>
-    
-    <div id="units">
-        
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - CONCEPTS OF COMMUNITY HEALTH
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19UC_jpcsIEhbSELa2XZoxGJ2IYOs-DHn/preview', 'Detailed Notes: Concepts')">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UqA_jqZtZw7L9CCo_sgL2K5fRft4j-fg/preview', 'Concept of Community Health')">
-                        <span class="icon video-icon">▶️</span><span>Concept of Community Health and Community Health Nursing</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1q8Xgou8sGOELDNJEsy6EUL9nFS7r_M0c/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NpI95U0MqL7gDYEPsc3Eh-axUs5ICJn0/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19nWzT7Ij9VljFWfEXs6pSmlxSa1txKFV/preview', 'Dimensions of Health')">
-                        <span class="icon video-icon">▶️</span><span>Dimensions of Health</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1j2Z0lP9IagYfNiH9y1Fm8CG2_4LBmZYs/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_hMkjhTaGMyABmOlI16Oq8DB1XnbC9A8/preview', 'Determinants of Health')">
-                        <span class="icon video-icon">▶️</span><span>Determinants Of Health</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JxBO8nWefwn6xKUcRP47H02-1g9_HUu5/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KpAXQUV-UdVhOieEq1rVBCZaMYjdzGpY/preview', 'Natural History of Illness')">
-                        <span class="icon video-icon">▶️</span><span>Natural History of Illness</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1mJngpwS-HfFUnJbl7LwIZUE9EolSxIZb/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DyYkgmuU6Vz-mZAsvLI3_2JQ23yPmYT3/preview', 'Level of Prevention')">
-                        <span class="icon video-icon">▶️</span><span>Level of Prevention</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QoD59xnhVYL8E2IADeIz7dF6_31PicFi/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Oypcyjgp_ybqB-8IaBUC-N073SSAqKUv/preview', 'National Health Problems in India')">
-                        <span class="icon video-icon">▶️</span><span>National Health Problems in India</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1POwpxW-wfb6qPfokJZFQnn6WK5v1fQ2Z/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(1)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Community Health Nursing</div>
+            <p style="color: var(--text-muted);">BSc Nursing</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - HEALTH CARE PLANNING AND ORGANIZATION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nKlHqqF-CbTe_7dLR-iT3i6vL7O2mctb/preview', 'Detailed Notes: Planning')">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1x7d8zsTTxUTNaxopB9hzU8d1cDEjh3ol/preview', 'Health Care Planning')">
-                        <span class="icon video-icon">▶️</span><span>Health Care Planning and Organisation of Health Care</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1W05iSt2RvZrlxW7AyPni87bEBeVbFVlT/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VWS6C7GgWCJtGQo3fIPxvLBHTX6-w2AA/preview', 'Community Participation Part 1')">
-                        <span class="icon video-icon">▶️</span><span>Participation of Community and Stakeholders (Part 1)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Pu1R8U2FPAxPVlNTzfvISyLywlgU_rxM/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wVFN_ryNN4VZXtJudCPwWNwUne7UdFyu/preview', 'Community Participation Part 2')">
-                        <span class="icon video-icon">▶️</span><span>Participation of Community and Stakeholders (Part 2)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18W3nzabG7ruTxp49OzDJi-zPTR8BIip3/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18A97k6VgBLPYzlzfeG2J_BCNZWPOia5y/preview', 'Role of MLHP/CHP')">
-                        <span class="icon video-icon">▶️</span><span>Role of MLHP/CHP</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NmzbZ3SYU4RAFTzr2kPTrmNn8QAEDDyg/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(2)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </div>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/19avgvdIHTOElVIThcsl1SGbZXA2quvwA/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - ENVIRONMENTAL SCIENCE & SANITATION
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_uikO6IRe_nPA0TWF0sQgdqjMRrA6w7b/preview', 'Detailed Notes: Environment')">
-                        <span class="icon">📚</span><span>Detailed Notes: Environmental Science & Health</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_uikO6IRe_nPA0TWF0sQgdqjMRrA6w7b/preview', 'Natural Resources')">
-                        <span class="icon video-icon">▶️</span><span>Natural Resources & Problems</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1WUU-CdhnDAyyUn0hu72WJoKopwof-j9d/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WUU-CdhnDAyyUn0hu72WJoKopwof-j9d/preview', 'Forest Resources')">
-                        <span class="icon video-icon">▶️</span><span>Forest Resources</span>
-                    </div>
-                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XtubF0SRWmiHFfdmnDA2Cn-5ZUL7jSAZ/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EZTdy-vwfpTq5szTSZmXFHJpyhtIN2SX/preview', 'Ecosystems')">
-                        <span class="icon video-icon">▶️</span><span>Ecosystems, Food Chain & Biodiversity</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14onQhHX8Sf23WIXiDkfe0S1kDzOC2J37/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hPjJFZ34OCpgkoHZiq3DVTCCHgjlMdkN/preview', 'Environmental Pollution')">
-                        <span class="icon video-icon">▶️</span><span>Environmental Pollution (Air, Water, Soil, etc.)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iiBYdRYwkLpvkp-f5pCjMTmpyNlESTNT/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HY5P8FXaLH2axDUwjdYB_RzqAB2UwSQN/preview', 'Nuclear Hazards')">
-                        <span class="icon video-icon">▶️</span><span>Nuclear Hazards & Climate Change</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1kgYyJAkaRJVckYm1ssJgODUHiiiwaCa5/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RlypuQNm2cDgibAq92rGC15xkQW5G65I/preview', 'Social Issues')">
-                        <span class="icon video-icon">▶️</span><span>Social Issues & Sustainable Development</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xBwSeEDe_kLhin2EJfj4m5lQddEOAzV3/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FPF_xBaZ4VzpHS5v5yYk-BDHLj0eu3yh/preview', 'Sanitation')">
-                        <span class="icon video-icon">▶️</span><span>Sanitation & Challenges</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1QVttrbD_qYg1vVcY74QEeyJx4pT8uk4P/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CnTbfwnneAGnBaxUYhUp7ewH_PPoFgjF/preview', 'Water Purification')">
-                        <span class="icon video-icon">▶️</span><span>Safe Water & Purification Techniques</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1V7JKVqVLGd97lIqe6Ps9bZTqOOVfFPo1/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FD8QkLBC3S9T7pCANLS855tiDoSddvsA/preview', 'Water Quality')">
-                        <span class="icon video-icon">▶️</span><span>Water Quality Standards & Conservation</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1SIY3EN8Mxx-3FMmrLqoR0gQOrZBVN-GF/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PA4vy9wxrgnArPGzt1cs0Kc5ICHzNpxJ/preview', 'Waste Management')">
-                        <span class="icon video-icon">▶️</span><span>Waste Management & Rainwater Harvesting</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JsIRmz-h39EdbB_KnUxW5LifYaMyT0aA/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/184Q3ezpDlAcWuGz42p0ftL0PXXL78p3G/preview', 'Sewage Disposal')">
-                        <span class="icon video-icon">▶️</span><span>Sewage Disposal & Insecticides</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1AzKWlYWiCLtUTvqIoLVpfXOlOEwK_TeB/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(3)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - NUTRITION ASSESSMENT & EDUCATION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oZ807Csi7QmaWTa9N6sRVS87dQwuMA5v/preview', 'Detailed Notes: Nutrition')">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/121d-OwcV221cC1w9sGV9K42lTqVg2vGN/preview', 'Nutrition Review')">
-                        <span class="icon video-icon">▶️</span><span>Review of Nutrition & Diet Plan</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ytNSe6SWvMVqLUHCY326NratNvQuqZk9/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WCaUactZ-pFGzoYgNmA8eEsQGj6uo01k/preview', 'Nutrition Education')">
-                        <span class="icon video-icon">▶️</span><span>Nutrition Education & Deficiency Disorders</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13bGd2ON3Y9R8coUYlkq5vLTDrlhPwO-A/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1p4YU-5a6Mtr7AyfzuOSRQw-VC5NGf4_H/preview', 'Nutritional Policy')">
-                        <span class="icon video-icon">▶️</span><span>National Nutritional Policy & Programs</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1IvroTf5RjZH7fMFFZOD1iiOVQnw0Qs8C/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1H48pAoccdK7srm4s6XBOM2QEB3thKHa2/preview', 'Food Borne Disease')">
-                        <span class="icon video-icon">▶️</span><span>Food Borne Disease</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dWC_h6SwMXsu_AdSOq0zLb2sVBRDWBhY/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Tv6mdYReSkqa-qRxNXXiAsvhgGyd85w8/preview', 'Food Poisoning')">
-                        <span class="icon video-icon">▶️</span><span>Food Poisoning & Intoxication</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RuJe00mqPB4gbuukN-ZIWjsh37xbwgwL/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(4)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - COMMUNICATION & HEALTH EDUCATION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ChknRZLR4la-ecVjUPW1HCfEyGdlkOP7/preview', 'Detailed Notes: Communication')">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eJGJQ_xENzlSYc0qUSV6kMg9gv4NhoMC/preview', 'Communication Process')">
-                        <span class="icon video-icon">▶️</span><span>Communication & Process</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12NWxhMYo4WC9R_UYnMJTp3uGs56IAUI3/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RBa0QDqIp6iGNMbN8oFv_9YZLTyyIB_p/preview', 'BCC Skills')">
-                        <span class="icon video-icon">▶️</span><span>Behavioral Change Communication (BCC) Skills</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RIsMb4dFZtPNgvK2wVPoouVs2orxqxO9/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mWLC9m2LQ3DRaXZgDlFzNVWP_VdGGSUO/preview', 'Steps of BCC')">
-                        <span class="icon video-icon">▶️</span><span>Steps of Behavior Change Communication</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13Q3btIr-9rYa0_o3VQwj1RdXhEW9XRYY/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ktEdtSnHp9yzhl70RIn3A6r8zHfj8FHM/preview', 'SBCC')">
-                        <span class="icon video-icon">▶️</span><span>Social & Behavior Change Communication</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ExDcXPn8rmQYyeRJEmN8HdPYYdkUD5Ny/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nJO8YT-3I-_12hG6PekEkuxdW1Nc6M7n/preview', 'Health Promotion')">
-                        <span class="icon video-icon">▶️</span><span>Health Promotion</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Nj74czytK0j7Ye35V9-xft53RJosswoC/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1oO35d1uNVjQNjVDzqAdgnDUTnuRnvlNc/preview', 'Health Education')">
-                        <span class="icon video-icon">▶️</span><span>Health Education</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Nj74czytK0j7Ye35V9-xft53RJosswoC/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                     <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wiKYZ_dcgcorvgN7wFdzjEaJsrW7k98J/preview', 'Methods of Health Education')">
-                        <span class="icon video-icon">▶️</span><span>Approaches/Methods of Health Education</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14RuxlDLO25Y02i34zj33WMVdDC4nMJiw/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                     <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WrAWECbJyf5cbkSmDslI1_LgV0WgHsOo/preview', 'Mass Media')">
-                        <span class="icon video-icon">▶️</span><span>Mass Media in Health Education</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19BDpERkqijbt6ph2cc63YGvbWKn6mGMC/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CQOEI7t81xGPVyVTVWtlkAuAHqnQG_Df/preview', 'Community Health Nursing Approaches')">
-                        <span class="icon video-icon">▶️</span><span>Community Health Nursing Approaches</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oNRwsJMtvyk8vuLeEsZBtGaL_BvXrsdN/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview', 'Home Visit')">
-                        <span class="icon video-icon">▶️</span><span>Home Visit</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XhNzsMq7pGZyDUZY1tAD_nMuddYZERYc/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(5)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - ROLES & RESPONSIBILITIES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                     <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/19BDpERkqijbt6ph2cc63YGvbWKn6mGMC/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Approaches & Roles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CQOEI7t81xGPVyVTVWtlkAuAHqnQG_Df/preview', 'Approaches')">
-                        <span class="icon video-icon">▶️</span><span>Community Health Nursing Approaches</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oNRwsJMtvyk8vuLeEsZBtGaL_BvXrsdN/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview', 'Home Visit')">
-                        <span class="icon video-icon">▶️</span><span>Home Visit</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1iXCoL_TZG5FXt_fZ3xBoSp-YAa5xvnYX/preview', 'Home Visit Techniques')">
-                        <span class="icon video-icon">▶️</span><span>Home Visit: Equipments & Techniques</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/11LLnY21NW2kJdn9kG-zG7zJ7ATjfhVOQ/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KSSqzPjpFngODtqdKfK8RjEbhR33T_6R/preview', 'Qualities of Nurse')">
-                        <span class="icon video-icon">▶️</span><span>Qualities of Community Health Nurse</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HMzsrlcTrlts5GlJxYl7GdCTkkCeVtaO/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qTFuylDhuLJpsNbyHcbBcPf5r4lj4Sg4/preview', 'Roles & Responsibilities')">
-                        <span class="icon video-icon">▶️</span><span>Roles & Responsibilities in Family Health</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qIdvkUxy3YQC0UKpFS8jCA-bTXivs2zx/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(6)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - ASSISTING INDIVIDUALS AND FAMILIES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CY0IVuP-B-dGTrE6y5gY9zcscHIcXKyT/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Family Health</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ke8K097Gz9YdCcgRrDkezrgEcfYXttxJ/preview', 'Assessment of Children')">
-                        <span class="icon video-icon">▶️</span><span>Assessment of Children & Newborn</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/192uUlSrdCMfDG2AIpH-VIE11Oj0JhwqT/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16ViPFH8_EaTTvDjljGQyM0t7VTd4mHZG/preview', 'Stages of Development')">
-                        <span class="icon video-icon">▶️</span><span>Stages of Development</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Ua2wQZsZFscJt9Hf0Ze3V8xNpNqlTcwj/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17oU86Ioc2KVw9lYqcDMhzmPC4F1zeRr5/preview', 'Growth Monitoring')">
-                        <span class="icon video-icon">▶️</span><span>Methods of Growth Monitoring</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_z6aJ8eHBp2rugdhmgcEQKZIo3SeHRAV/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gestzLgN6B6cSnwQKL8UecoL2mYj3Aqr/preview', 'Measurement of Newborn')">
-                        <span class="icon video-icon">▶️</span><span>Measurements of Newborn</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jbGgrgdc427bcPk9-VopKpIeny1c-i_a/preview', 'Measurement of Toddler')">
-                        <span class="icon video-icon">▶️</span><span>Measurement of Toddler and Preschooler</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17ExwdIwIJ575wMFFl1ha6ywf-xQcdGWI/preview', 'Home Measurements')">
-                        <span class="icon video-icon">▶️</span><span>Home measurements (Weight, Mid-arm, BP)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/12O8p7mtsIp999TvxVG6AcXdeZvD_K-Zu/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lgXG-eOiQ8t51pyklbsMtC-UaMeycixI/preview', 'Menstrual Cycle')">
-                        <span class="icon video-icon">▶️</span><span>Menstrual Cycle</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IlkmwXIg5IrxqtyCY2Ur6sK7UIq4Oh3I/preview', 'Self Examination')">
-                        <span class="icon video-icon">▶️</span><span>Breast & Testicular Self Examination</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EyGBKPWhQMzlMOb3fle7VvNM9atwdlNv/preview', 'Warning Signs')">
-                        <span class="icon video-icon">▶️</span><span>Warning Signs (Breast, Oral, Cervical Cancer)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1H84fSuwjdiCIiT4pPA6kVuyh6p8Jd5w5/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1V5QuyvgKPy3D9lVbC5qLMi91pFNZOoBW/preview', 'Urine Tests')">
-                        <span class="icon video-icon">▶️</span><span>Urine Tests</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IQanVOa0XWISaZ2-QvGgWnqXS5N913ob/preview', 'Blood Tests')">
-                        <span class="icon video-icon">▶️</span><span>Blood Tests (Sugar, Hemoglobin)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pFftJRJsgXw0Fq2amUj6X2Taj2qrmeP0/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18eT8Z0GW1I2Qnf7hve9AAOQEzRO6yRVw/preview', 'Checkup & Immunization')">
-                        <span class="icon video-icon">▶️</span><span>Checkup, Immunization, Counselling</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QYOEb51r8GBmP77_F1gsHnaHxoKcc79x/preview', 'Follow up')">
-                        <span class="icon video-icon">▶️</span><span>Follow up & IM Injection</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wK-zigpsWWAEpU25K-8lJBWQWxNxhHL1/preview', 'Records & Nasal Drop')">
-                        <span class="icon video-icon">▶️</span><span>Records & Nasal Drop Instillation</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EXzArMQ_8W10yBM5EhuVa-RA8V7Yt7-j/preview', 'Women Empowerment')">
-                        <span class="icon video-icon">▶️</span><span>Women Empowerment</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zkAGCtqVo6VBcm009irfVqa3p1o_z7iR/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PaiGgxuXjV8ctgpAD6e9RTVo202gD5vI/preview', 'Women Abuse')">
-                        <span class="icon video-icon">▶️</span><span>Women Abuse & Welfare Programs</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1h2wqQ5g63aAEzO3EzwaUfHsfwItvJqug/preview', 'Abuse')">
-                        <span class="icon video-icon">▶️</span><span>Child Abuse & Abuse of Elders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dJsyoxpGp72nqIN1erzQa5uo_5pMO724/preview', 'Community Resources')">
-                        <span class="icon video-icon">▶️</span><span>Community Resources (Old Age Homes, Orphanages)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QItsxkXwjqCLc5-RqXSqETX325d-1BQl/preview', 'Community Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Community Disorders & NIEPMD</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(7)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit8">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - EPIDEMIOLOGY
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sl9HFV03aL7zsVDNpriLMKmT2gj7Q3uD/preview', 'Detailed Notes: Epidemiology')">
-                        <span class="icon">📚</span><span>Detailed Notes</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1x4bUJtrSkGu_868Kg7lyAH8SjEuGF1n2/preview', 'Introduction')">
-                        <span class="icon video-icon">▶️</span><span>Introduction to Epidemiology</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19VEoPxITbLLw7uPNE6MfSlm3JnaIpEm9/preview', 'Models of Causation')">
-                        <span class="icon video-icon">▶️</span><span>Epidemiology Models of Causation of Disease</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cPGwLVTL_mTQyfSYS1rEuwbfteqHq8fT/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dq2GDKvj1-rjCQ1TF1Ky541s3wFaARUa/preview', 'Approaches & Trends')">
-                        <span class="icon video-icon">▶️</span><span>Time Trends & Epidemiological Approaches</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fQJnwVJJuE26_60oHhX81IsnDuawLdEF/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YG5XYHRHvgDJNQP0HHUoQxTPVOtPP_To/preview', 'Control Measures')">
-                        <span class="icon video-icon">▶️</span><span>Control Measures & Investigation of Epidemic</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1xqbmQJfk5Sc4Fm_3bCTN0jKvdWBfLKwA/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(8)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit9">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - COMMUNICABLE DISEASES & PROGRAMS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DgUahzWiRDBj4QWtyXZZ4r93sqUUghxB/preview', 'Detailed Notes: Communicable')">
-                        <span class="icon">📚</span><span>Detailed Notes: Communicable Diseases</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/129AfAO_xZ8dL9FczmI3zqOI9f8d9kHM9/preview', 'Malaria')">
-                        <span class="icon video-icon">▶️</span><span>Introduction, Malaria</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/113T0zFC6sqtrLO6XCCRY_U_nZWt0oYRQ/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1TnjdHi3jN_EnL9bGn-WiwjT6duTKAh-2/preview', 'Dengue & Chikungunya')">
-                        <span class="icon video-icon">▶️</span><span>Dengue Fever, Chikungunya</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eRRiuISTYesWNu2x0w-ohKsyR7-WPS6a/preview', 'Filarisasis')">
-                        <span class="icon video-icon">▶️</span><span>Filarisasis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1EdY2eSt42iumyOSn_9ScwMhCrsCUzzwv/preview', 'Japanese Encephalitis')">
-                        <span class="icon video-icon">▶️</span><span>Japanese Encephalitis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sGSIVRorFrKxsQfzc7UJl6woysMeEvDR/preview', 'Leprosy')">
-                        <span class="icon video-icon">▶️</span><span>Leprosy</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QdSXae3zc53oTQy4dvs26oXrgwzUswjp/preview', 'Tuberculosis')">
-                        <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/13Dg6jR-y0TZ4w9lbYBbn2fYQNem3NTnh/preview', 'Diphtheria/Tetanus/Polio')">
-                        <span class="icon video-icon">▶️</span><span>Diphtheria, Tetanus, Poliomyelitis, Measles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1slxmxSDgWC0PyPNwvAJgtR6iryJmI6-N/preview', 'Enteric/Hepatitis/HIV')">
-                        <span class="icon video-icon">▶️</span><span>Enteric Fever, Viral Hepatitis, HIV AIDS</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1D_tt2_fvEdEY813tFpzT3Qx5Yz00bTUw/preview', 'Respiratory Infection')">
-                        <span class="icon video-icon">▶️</span><span>Respiratory Tract Infections</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WgnREnCDmXXMD9DiV78iXXYOAEfcGTIT/preview', 'Diarrhoea')">
-                        <span class="icon video-icon">▶️</span><span>Diarrhoea</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1F7kQJtGzbaKGnUVPh0oshQXDGqCBgdZ4/preview', 'COVID-19')">
-                        <span class="icon video-icon">▶️</span><span>COVID -19</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10CqUFbBbn8LWJbXdJzIENtWsq72d7giC/preview', 'Scabies')">
-                        <span class="icon video-icon">▶️</span><span>Helminthic Scabies</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1REna2vhm1-U0VnSIZ3eqvfhic4d9eBUy/preview', 'Pediculosis')">
-                        <span class="icon video-icon">▶️</span><span>Pediculosis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZC4zGi37UfsqLaMbjbBLaBeaT2C03ahC/preview', 'Zoonotic Disease')">
-                        <span class="icon video-icon">▶️</span><span>Zoonotic Disease</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KdL8QTCYE1I09CNgwHnoaVDcdFKykTIT/preview', 'Rabies')">
-                        <span class="icon video-icon">▶️</span><span>Rabies</span>
-                    </div>
-                    
-                    
-
-
-
-                    <hr>
-                    <div style="font-weight:600; margin:10px 0; color:var(--brand);">National Health Programs</div>
-                    
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kxk9rfvawGRqj7mgbRaNrKdz2Hzzc2SD/preview', 'Immunization Program')">
-                        <span class="icon video-icon">▶️</span><span>Universal Immunization Program</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1soElF-ttdF5pdWfvFYe6bVsy0zzXfv_e/preview', 'Diptheria/DPT')">
-                        <span class="icon video-icon">▶️</span><span>Diptheria, DPT vaccine</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jaM0ozWVceVZVlNTh_Gfsued0bcx5Bte/preview', 'Whooping Cough')">
-                        <span class="icon video-icon">▶️</span><span>Whooping cough Prevention</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fbJPTvKqCERyfZhtXggobwq8Mzg3xV3w/preview', 'Tetanus')">
-                        <span class="icon video-icon">▶️</span><span>Tetanus Immunization</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1040E7PZK67vdMXnpSXalSG2iO-04658Y/preview', 'Polio Immunization')">
-                        <span class="icon video-icon">▶️</span><span>Poliomyelitis Immunization</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1N9JeW2eyMuMXNwxeMw6HPmbKkuVYji8Y/preview', 'Measles')">
-                        <span class="icon video-icon">▶️</span><span>Measles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VKgznQmXOZlpxBjDlkR_JoILCSpfUq6b/preview', 'Hepatitis B')">
-                        <span class="icon video-icon">▶️</span><span>Hepatitis B Immunization</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1MktnFjAg4KFucP8t_XzdU5yaBB_cC1pu/preview', 'NLEP')">
-                        <span class="icon video-icon">▶️</span><span>National Leprosy Eradication Program (NLEP)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15ZARvfF0_95kRqfuLF1a3A9cFYm_5t8X/preview', 'RNTCP')">
-                        <span class="icon video-icon">▶️</span><span>Revised National Tuberculosis Control Program (RNTCP)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fkP442ZTMK16pmzIcMriCPDpLGIZ77Sh/preview', 'IDSP')">
-                        <span class="icon video-icon">▶️</span><span>Integrated Disease Surveillance Program (IDSP)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1R2KGHWkMkW8CA-Do4PHzZTeqaFbRr3zr/preview', 'NACO')">
-                        <span class="icon video-icon">▶️</span><span>National AIDS Control Organization (NACO)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DU_RlxCH51AhaxhpIda9b9iHVb5bfPHU/preview', 'NVBDCP')">
-                        <span class="icon video-icon">▶️</span><span>National Vector Borne Disease Control Program (NVBDCP)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hDKbXu2urFORn2akYLdIX4zbzzeHRtg6/preview', 'NAMO')">
-                        <span class="icon video-icon">▶️</span><span>National Air Quality Monitoring Program (NAMO)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Mvbr5l576HyZMFyYD1LPwDH6I3GISz7O/preview', 'PM-ABHIM')">
-                        <span class="icon video-icon">▶️</span><span>Pradhan Mantri Ayushman Bharath Health Infrastructure Mission</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(9)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit10">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 10 - NON-COMMUNICABLE DISEASES (NCD)
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14XiAEOMBHUI3z6lw-Wibp1RZPJNp2OMz/preview', 'Detailed Notes: NCD')">
-                        <span class="icon">📚</span><span>Detailed Notes: Non-Communicable Diseases</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sAyr8lS4PwjKFpOUlUakwIl0Kh70ATrq/preview', 'Diabetes Mellitus')">
-                        <span class="icon video-icon">▶️</span><span>Diabetes Mellitus</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hR7agNAiuvDJ6xwSjK4hHLKUjpkrqaQ-/preview', 'Prevention of DM')">
-                        <span class="icon video-icon">▶️</span><span>Prevention of Diabetes Mellitus</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1uorR-HmjSvx9Y_RQ5m-_0Gh18QniJjlA/preview', 'Hypertension')">
-                        <span class="icon video-icon">▶️</span><span>Hypertension</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1uorR-HmjSvx9Y_RQ5m-_0Gh18QniJjlA/preview', 'Obesity')">
-                        <span class="icon video-icon">▶️</span><span>Obesity</span>
-                    </div>
-                    
-                    
-
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11dhyHdRrdQRNh15J8unjWiq5nbh4mRu6/preview', 'Cardiovascular Disorder')">
-                        <span class="icon video-icon">▶️</span><span>Cardiovascular Disorder</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ik9jG8SPq71dFZItFrXnJsjmjmX0y3jx/preview', 'Deafness')">
-                        <span class="icon video-icon">▶️</span><span>Deafness</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OKw1TY7BUy0kKL79nGxw2qfd_rdYJ3KD/preview', 'Thyroid Diseases')">
-                        <span class="icon video-icon">▶️</span><span>Thyroid Diseases</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12uUFYS6gtgGMOaGGM3XuWCijEbqk42Zz/preview', 'Traffic Injuries')">
-                        <span class="icon video-icon">▶️</span><span>Traffic Injuries</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DEu4PmphP4s9Ev1QCMC4QfRN4aT4R5ME/preview', 'NPCDCS')">
-                        <span class="icon video-icon">▶️</span><span>Objectives and Components of NPCDCS</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1p4DNE3r4TuSHQ68yRr1-tWq8EOl-pHvI/preview', 'NTCP')">
-                        <span class="icon video-icon">▶️</span><span>National Tobacco Control Program (NTCP)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19wyw2eknMiAKNJ9AW2Gzm8WqZjlj9elW/preview', 'Cancer Management')">
-                        <span class="icon video-icon">▶️</span><span>Cancer Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1v0l2xwwn5bDK5rgDxEH1Pvh5WKducuVT/preview', 'Blindness')">
-                        <span class="icon video-icon">▶️</span><span>Blindness</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1y4wUtPj91SpJ_oQJoH1UWuOnqCDky7o1/preview', 'NBCPVI')">
-                        <span class="icon video-icon">▶️</span><span>National Blindness Control Program (NBCPVI)</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(10)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit11">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 11 - SCHOOL HEALTH SERVICES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KZa55yEfMJLEIA88TmHQPYLkzYW9DGzq/preview', 'Detailed Notes: School Health')">
-                        <span class="icon">📚</span><span>Detailed Notes: School Health</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14mI0R43vTu1fLgryP_BD0j8Wo3AXCA4Z/preview', 'Introduction')">
-                        <span class="icon video-icon">▶️</span><span>Introduction, Definition & Health Problems</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/109qrs2_qUpah2RfsMZnvRPYBZKj2uqy6/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/181mgiHe5g8vj9Vct-YommZIUS2bEml69/preview', 'Activities')">
-                        <span class="icon video-icon">▶️</span><span>Activities of School Health Services</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1wQU_1d3L904xrLrveAAovjsZM2jecK-3/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1TmbAPn2d0D4IAsCKIbS7zf8spOpcPy--/preview', 'Services')">
-                        <span class="icon video-icon">▶️</span><span>Nutrition, First AID, Mental & Dental Health</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1h5dFnSpob9L4vzO3aGV_CtpPYmTYVvdX/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1axF5gMMrqGl3CehIDIbWRgXLXjQ_bQa5/preview', 'School Health Team')">
-                        <span class="icon video-icon">▶️</span><span>The School Health Team & Role of Nurse</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1vGbp3-oGFwbzNEN_BP2LBEdk2WViqw98/preview', 'Lecture Note')">
-                        <span class="icon">📄</span><span>Lecture Note</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(11)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -981,105 +288,472 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-body" class="modal-body">
+            </div>
     </div>
 
     <script>
-        // --- 1. QUIZ DATA ---
+        // --- 1. DUMMY 3D MODEL CODES ---
+        const MODEL_CODE_A = `<div><p>Model A</p></div>`;
+        const MODEL_CODE_B = `<div><p>Model B</p></div>`;
+
+        // --- 2. QUIZ DATA (5 Questions per Unit) ---
         const QUIZ_DATA = {
-            1: [
-                { q: "Which of the following is NOT a dimension of health?", o: ["Physical", "Mental", "Social", "Economic"], a: 3 },
-                { q: "Who proposed the 'Germ Theory' of disease?", o: ["Louis Pasteur", "Robert Koch", "John Snow", "Florence Nightingale"], a: 0 },
-                { q: "Secondary prevention includes:", o: ["Health promotion", "Early diagnosis and treatment", "Rehabilitation", "Specific protection"], a: 1 },
-                { q: "The 'Iceberg Phenomenon' of disease states that:", o: ["Most cases are visible", "Most cases are hidden/subclinical", "Diseases are only found in cold climates", "Treatment is impossible"], a: 1 },
-                { q: "Which is a determinant of health?", o: ["Environment", "Genetics", "Lifestyle", "All of the above"], a: 3 }
+            1: [ // Concepts
+                { q: "Health is a state of complete physical, mental and social well-being and not merely the absence of disease. Who gave this definition?", o: ["UNICEF", "WHO", "Red Cross", "ICN"], a: 1 },
+                { q: "Which of the following is a dimension of health?", o: ["Physical", "Mental", "Social", "All of the above"], a: 3 },
+                { q: "What is the primary level of prevention?", o: ["Early diagnosis", "Health promotion", "Rehabilitation", "Disability limitation"], a: 1 },
+                { q: "The natural history of disease refers to:", o: ["Progression of disease in an individual over time", "History of medicine", "Herbal remedies", "Evolution of humans"], a: 0 },
+                { q: "Which is a determinant of health?", o: ["Genetics", "Environment", "Lifestyle", "All of the above"], a: 3 }
             ],
-            2: [
-                { q: "Which committee is known as the Health Survey and Development Committee?", o: ["Bhore Committee", "Mudaliar Committee", "Srivastava Committee", "Kartar Singh Committee"], a: 0 },
-                { q: "One Primary Health Centre (PHC) covers a population of (in plains):", o: ["5,000", "20,000", "30,000", "1,00,000"], a: 2 },
-                { q: "ASHA stands for:", o: ["Accredited Social Health Activist", "Association for Social Health Action", "Active Social Health Agent", "Auxiliary Social Health Assistant"], a: 0 },
-                { q: "The first referral unit in the health care system is:", o: ["Sub Centre", "PHC", "CHC", "District Hospital"], a: 2 },
-                { q: "What is the role of MLHP?", o: ["Surgery", "Comprehensive Primary Health Care", "Tertiary care only", "Administrative only"], a: 1 }
+            2: [ // Health Care Planning
+                { q: "The Bhore Committee is also known as:", o: ["Health Survey and Planning Committee", "Health Survey and Development Committee", "Mudaliar Committee", "Kartar Singh Committee"], a: 1 },
+                { q: "A Sub-Centre covers a population of ___ in plain areas.", o: ["3000", "5000", "20000", "30000"], a: 1 },
+                { q: "ASHA stands for:", o: ["Accredited Social Health Activist", "Association of Social Health", "Auxiliary Social Health Agent", "None of the above"], a: 0 },
+                { q: "Which is the first referral unit in the health system?", o: ["Sub Centre", "PHC", "CHC", "District Hospital"], a: 2 },
+                { q: "MLHP stands for:", o: ["Mid Level Health Provider", "Main Level Health Practitioner", "Medical Level Health Professional", "Master Level Health Planner"], a: 0 }
             ],
-            3: [
-                { q: "Which method is best for disposal of hospital waste?", o: ["Composting", "Incineration", "Dumping", "Recycling"], a: 1 },
-                { q: "Potable water means:", o: ["Water fit for washing", "Water fit for drinking", "River water", "Rainwater"], a: 1 },
-                { q: "The most common method of water purification on a large scale is:", o: ["Boiling", "Filtration", "Rapid Sand Filtration and Chlorination", "Distillation"], a: 2 },
-                { q: "Greenhouse effect is mainly caused by:", o: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], a: 2 },
-                { q: "A biodegradable waste includes:", o: ["Plastic", "Glass", "Vegetable peels", "Metal"], a: 2 }
+            3: [ // Environmental
+                { q: "The most common method of water purification on a large scale is:", o: ["Boiling", "Rapid Sand Filtration", "Chlorination", "Sedimentation"], a: 1 },
+                { q: "World Environment Day is celebrated on:", o: ["April 7", "June 5", "May 12", "December 1"], a: 1 },
+                { q: "Sullage refers to:", o: ["Waste water from toilets", "Waste water from kitchen/bath", "Industrial waste", "Solid waste"], a: 1 },
+                { q: "A major source of air pollution is:", o: ["Afforestation", "Vehicle Emissions", "Rainwater Harvesting", "Composting"], a: 1 },
+                { q: "Which gas is primarily responsible for the greenhouse effect?", o: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], a: 2 }
             ],
-            4: [
+            4: [ // Nutrition
                 { q: "Which vitamin deficiency causes Night Blindness?", o: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"], a: 0 },
-                { q: "Protein Energy Malnutrition (PEM) includes:", o: ["Scurvy and Rickets", "Marasmus and Kwashiorkor", "Beriberi and Pellagra", "Anemia and Goiter"], a: 1 },
-                { q: "Food adulteration is:", o: ["Adding nutrients", "Preserving food", "Debasing the quality of food", "Freezing food"], a: 2 },
-                { q: "Rich source of Iron is:", o: ["Milk", "Spinach/Green Leafy Vegetables", "Rice", "Potatoes"], a: 1 },
-                { q: "BMI (Body Mass Index) formula is:", o: ["Weight(kg) / Height(m)^2", "Height(m) / Weight(kg)", "Weight(lb) / Height(in)", "Weight(kg) / Height(cm)"], a: 0 }
+                { q: "Goiter is caused by the deficiency of:", o: ["Iron", "Calcium", "Iodine", "Potassium"], a: 2 },
+                { q: "The National Nutritional Policy was adopted in:", o: ["1947", "1983", "1993", "2000"], a: 2 },
+                { q: "Food poisoning caused by Clostridium botulinum is known as:", o: ["Salmonellosis", "Botulism", "Typhoid", "Cholera"], a: 1 },
+                { q: "Which is a rich source of Protein?", o: ["Rice", "Sugar", "Soybean", "Oil"], a: 2 }
             ],
-            5: [
-                { q: "In the communication process, 'decoding' is done by:", o: ["Sender", "Receiver", "Channel", "Message"], a: 1 },
-                { q: "Which is a two-way communication method?", o: ["Lecture", "Panel Discussion", "Radio", "Television"], a: 1 },
-                { q: "BCC stands for:", o: ["Basic Care Communication", "Behavior Change Communication", "Better Care Control", "Behavior Control Center"], a: 1 },
-                { q: "Which is an Audio-Visual aid?", o: ["Radio", "Blackboard", "Television", "Chart"], a: 2 },
-                { q: "A key principle of health education is:", o: ["Compulsion", "Participation", "One-way flow", "Complexity"], a: 1 }
+            5: [ // Communication
+                { q: "Which is a barrier to communication?", o: ["Active listening", "Clarity", "Noise", "Feedback"], a: 2 },
+                { q: "BCC stands for:", o: ["Behavior Change Communication", "Basic Care Communication", "Body Care Concept", "None"], a: 0 },
+                { q: "Visual aids in health education include:", o: ["Radio", "Posters", "Tape recorder", "Lecture"], a: 1 },
+                { q: "The primary purpose of a Home Visit is to:", o: ["Socialize", "Inspect the house", "Provide nursing care to the family", "Collect money"], a: 2 },
+                { q: "Which approach involves the community in identifying their own problems?", o: ["Regulatory Approach", "Service Approach", "Educational Approach", "Primary Health Care Approach"], a: 3 }
             ],
-            6: [
-                { q: "The primary tool for a community health nurse during a home visit is:", o: ["Stethoscope", "Community Bag/Kit", "Laptop", "Microscope"], a: 1 },
-                { q: "Which is NOT a principle of home visiting?", o: ["Planning", "Flexibility", "Surprise visit", "Educational"], a: 2 },
-                { q: "The first step in a home visit is:", o: ["Action", "Evaluation", "Planning/Preparation", "Diagnosis"], a: 2 },
-                { q: "Technique used to prevent cross-infection while using the community bag is:", o: ["Bag Technique", "Sterile Technique", "Handwashing only", "Gloves only"], a: 0 },
-                { q: "A community health nurse acts as a:", o: ["Educator", "Caregiver", "Advocate", "All of the above"], a: 3 }
+            6: [ // Roles & Responsibilities
+                { q: "The 'Bag Technique' is used by nurses to:", o: ["Carry personal items", "Prevent cross-infection", "Store food", "Look professional"], a: 1 },
+                { q: "A Family Folder is used for:", o: ["Keeping family photos", "Maintaining family health records", "Storing birth certificates", "None"], a: 1 },
+                { q: "Which quality is essential for a community health nurse?", o: ["Empathy", "Observation", "Communication", "All of the above"], a: 3 },
+                { q: "Who is the key person in the health team at the village level?", o: ["Doctor", "ASHA/ANM", "Pharmacist", "Specialist"], a: 1 },
+                { q: "Referral services ensure:", o: ["Discontinuity of care", "Continuity of care", "Increased cost", "Delayed treatment"], a: 1 }
             ],
-            7: [
-                { q: "Exclusive breastfeeding is recommended for:", o: ["3 months", "6 months", "9 months", "1 year"], a: 1 },
-                { q: "Growth chart is used to monitor:", o: ["Height only", "Weight only", "Growth and Development", "Vaccination only"], a: 2 },
-                { q: "Weaning usually starts at the age of:", o: ["2 months", "6 months", "1 year", "18 months"], a: 1 },
-                { q: "Which is a warning sign of cancer?", o: ["Unexplained weight loss", "Change in wart or mole", "Nagging cough", "All of the above"], a: 3 },
-                { q: "Antenatal care is care given to:", o: ["Newborn", "Pregnant woman", "Elderly", "Adolescents"], a: 1 }
+            7: [ // Assisting Individuals
+                { q: "The normal birth weight of an Indian newborn is:", o: ["1.5 kg", "2.5 - 3.0 kg", "4.0 kg", "1.0 kg"], a: 1 },
+                { q: "Which immunization is given at birth?", o: ["BCG, OPV-0, Hep-B", "DPT", "Measles", "Pentavalent"], a: 0 },
+                { q: "Breast Self Examination (BSE) should be done:", o: ["Daily", "Weekly", "Monthly", "Yearly"], a: 2 },
+                { q: "Growth monitoring is best done using:", o: ["Bar graph", "Growth Chart (Road to Health)", "Pie chart", "Tables"], a: 1 },
+                { q: "The normal menstrual cycle duration is approximately:", o: ["15 days", "28 days", "45 days", "60 days"], a: 1 }
             ],
-            8: [
-                { q: "Epidemiology is the study of:", o: ["Skin diseases", "Distribution and determinants of health states", "Hospital management", "Drugs"], a: 1 },
-                { q: "The Epidemiological Triad consists of:", o: ["Doctor, Nurse, Patient", "Agent, Host, Environment", "Time, Place, Person", "Diagnosis, Treatment, Cure"], a: 1 },
-                { q: "A disease constantly present in a specific area is called:", o: ["Epidemic", "Pandemic", "Endemic", "Sporadic"], a: 2 },
-                { q: "Who is known as the father of Epidemiology?", o: ["Louis Pasteur", "John Snow", "Hippocrates", "Edward Jenner"], a: 1 },
-                { q: "Which is a vector-borne disease?", o: ["Cholera", "Malaria", "Tuberculosis", "AIDS"], a: 1 }
+            8: [ // Epidemiology
+                { q: "The Epidemiological Triad consists of:", o: ["Agent, Host, Environment", "Doctor, Nurse, Patient", "Hospital, Home, School", "Bacteria, Virus, Fungi"], a: 0 },
+                { q: "Pandemic refers to a disease that:", o: ["Is restricted to a village", "Spreads across countries/continents", "Occurs occasionally", "Is always present"], a: 1 },
+                { q: "The time interval between entry of agent and appearance of symptoms is:", o: ["Latent period", "Incubation period", "Communicable period", "Isolation period"], a: 1 },
+                { q: "Screening is a form of:", o: ["Primary prevention", "Secondary prevention", "Tertiary prevention", "Treatment"], a: 1 },
+                { q: "Which is a vector-borne disease?", o: ["Cholera", "Malaria", "Tuberculosis", "Measles"], a: 1 }
             ],
-            9: [
-                { q: "DOTS is the treatment strategy for:", o: ["Leprosy", "Tuberculosis", "Malaria", "HIV"], a: 1 },
-                { q: "The vector for Dengue is:", o: ["Anopheles Mosquito", "Culex Mosquito", "Aedes Aegypti", "Housefly"], a: 2 },
-                { q: "BCG vaccine protects against:", o: ["Polio", "Tuberculosis", "Measles", "Diphtheria"], a: 1 },
-                { q: "Oral Rehydration Solution (ORS) is mainly used for:", o: ["Fever", "Cough", "Dehydration due to Diarrhea", "Headache"], a: 2 },
-                { q: "Measles vaccine is usually given at:", o: ["Birth", "6 weeks", "9 months", "5 years"], a: 2 }
+            9: [ // Communicable Diseases
+                { q: "DOTS is the strategy used for:", o: ["Leprosy", "Tuberculosis", "Malaria", "AIDS"], a: 1 },
+                { q: "Malaria is transmitted by:", o: ["Male Anopheles", "Female Anopheles", "Aedes Aegypti", "Culex"], a: 1 },
+                { q: "The causative organism of Leprosy is:", o: ["Mycobacterium tuberculosis", "Mycobacterium leprae", "Vibrio cholerae", "Salmonella typhi"], a: 1 },
+                { q: "Rabies is also known as:", o: ["Hydrophobia", "Photophobia", "Claustrophobia", "Acrophobia"], a: 0 },
+                { q: "Universal Immunization Programme was launched in India in:", o: ["1978", "1985", "1995", "2005"], a: 1 }
             ],
-            10: [
-                { q: "Which disease is known as the 'Silent Killer'?", o: ["Diabetes", "Hypertension", "Cancer", "Blindness"], a: 1 },
-                { q: "Normal Blood Pressure is:", o: ["100/60 mmHg", "120/80 mmHg", "140/90 mmHg", "160/100 mmHg"], a: 1 },
-                { q: "Type 2 Diabetes is characterized by:", o: ["Lack of insulin", "Insulin resistance", "Excess insulin", "Low blood sugar"], a: 1 },
-                { q: "Which is a modifiable risk factor for NCDs?", o: ["Age", "Genetics", "Smoking/Tobacco use", "Gender"], a: 2 },
-                { q: "NPCDCS stands for National Programme for Prevention and Control of:", o: ["Cancer, Diabetes, CVD and Stroke", "Communicable Diseases", "Child Diseases", "Common Diseases"], a: 0 }
+            10: [ // Non-Communicable Diseases
+                { q: "Hypertension is defined as BP greater than:", o: ["120/80 mmHg", "130/80 mmHg", "140/90 mmHg", "110/70 mmHg"], a: 2 },
+                { q: "Type 2 Diabetes is characterized by:", o: ["Insulin deficiency", "Insulin resistance", "Destruction of beta cells", "Juvenile onset"], a: 1 },
+                { q: "BMI (Body Mass Index) is calculated as:", o: ["Weight(kg) / Height(m)²", "Height(m) / Weight(kg)", "Weight(lb) / Height(in)", "Weight(kg) x Height(m)"], a: 0 },
+                { q: "The major risk factor for Oral Cancer is:", o: ["Sunlight", "Tobacco chewing", "Fatty diet", "Air pollution"], a: 1 },
+                { q: "NPCDCS stands for National Programme for Prevention and Control of Cancer, Diabetes, CVD and:", o: ["Stroke", "Stress", "Suicide", "Skin disease"], a: 0 }
             ],
-            11: [
-                { q: "Mid-day Meal Programme provides what fraction of daily calorie requirement?", o: ["1/4", "1/3", "1/2", "Full"], a: 1 },
-                { q: "Ideally, school health check-ups should be done:", o: ["Weekly", "Monthly", "Annually", "Once in 5 years"], a: 2 },
-                { q: "Which is a common health problem in school children?", o: ["Dental Caries", "Worm Infestation", "Anemia", "All of the above"], a: 3 },
-                { q: "The 'School Health Team' includes:", o: ["Principal", "Teachers", "Medical Officer & Nurse", "All of the above"], a: 3 },
-                { q: "First Aid in schools is important for:", o: ["Treating cancer", "Minor injuries and emergencies", "Surgeries", "Diagnosing diseases"], a: 1 }
+            11: [ // School Health
+                { q: "Which is NOT a component of School Health Services?", o: ["Health appraisal", "Nutritional services", "Providing employment", "Health education"], a: 2 },
+                { q: "The Mid-Day Meal Programme aims to improve:", o: ["Attendance and Nutrition", "Sports performance", "Teacher salary", "School infrastructure"], a: 0 },
+                { q: "Common health problem in school children is:", o: ["Hypertension", "Dental Caries", "Diabetes", "Arthritis"], a: 1 },
+                { q: "WIFS stands for:", o: ["Weekly Iron and Folic Acid Supplementation", "Women in Family Services", "World Iron Food Society", "None"], a: 0 },
+                { q: "First Aid in schools is the responsibility of:", o: ["Parents only", "Teachers and School Nurse", "Doctors only", "Government"], a: 1 }
             ]
         };
 
-        // --- 2. LOGIC ---
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
+        // --- 3. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "CONCEPTS OF COMMUNITY HEALTH",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/19UC_jpcsIEhbSELa2XZoxGJ2IYOs-DHn/preview' },
+                    { type: 'video', title: 'Concept of Community Health', url: 'https://drive.google.com/file/d/1UqA_jqZtZw7L9CCo_sgL2K5fRft4j-fg/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Concept', url: 'https://drive.google.com/file/d/1Kmaw8KuOQOZC4oF9WRtST3Bl8i5CGgYq/preview' },
+                    { type: 'video', title: 'Scope of CHN', url: 'https://drive.google.com/file/d/1DQEXZbJZB7WT3SMnceaGSrGFJaK2pi5w/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Scope', url: 'https://drive.google.com/file/d/1q8Xgou8sGOELDNJEsy6EUL9nFS7r_M0c/preview' },
+                    { type: 'video', title: 'Concept of Health/Illness', url: 'https://drive.google.com/file/d/1iC39nqSd0t1rcJTpkjS4KsAIYKZOWxLP/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Health/Illness', url: 'https://drive.google.com/file/d/1NpI95U0MqL7gDYEPsc3Eh-axUs5ICJn0/preview' },
+                    { type: 'video', title: 'Dimensions of Health', url: 'https://drive.google.com/file/d/19nWzT7Ij9VljFWfEXs6pSmlxSa1txKFV/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Dimensions', url: 'https://drive.google.com/file/d/1j2Z0lP9IagYfNiH9y1Fm8CG2_4LBmZYs/preview' },
+                    { type: 'video', title: 'Determinants of Health', url: 'https://drive.google.com/file/d/1_hMkjhTaGMyABmOlI16Oq8DB1XnbC9A8/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Determinants', url: 'https://drive.google.com/file/d/1JxBO8nWefwn6xKUcRP47H02-1g9_HUu5/preview' },
+                    { type: 'video', title: 'Natural History of Illness', url: 'https://drive.google.com/file/d/1KpAXQUV-UdVhOieEq1rVBCZaMYjdzGpY/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Natural History', url: 'https://drive.google.com/file/d/1mJngpwS-HfFUnJbl7LwIZUE9EolSxIZb/preview' },
+                    { type: 'video', title: 'Level of Prevention', url: 'https://drive.google.com/file/d/1DyYkgmuU6Vz-mZAsvLI3_2JQ23yPmYT3/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Prevention', url: 'https://drive.google.com/file/d/1QoD59xnhVYL8E2IADeIz7dF6_31PicFi/preview' },
+                    { type: 'video', title: 'National Health Problems', url: 'https://drive.google.com/file/d/1Oypcyjgp_ybqB-8IaBUC-N073SSAqKUv/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Problems', url: 'https://drive.google.com/file/d/1POwpxW-wfb6qPfokJZFQnn6WK5v1fQ2Z/preview' },
+                    { type: 'quiz', title: 'Take Unit 1 Quiz', url: 'https://drive.google.com/file/d/1zGko227p3IKRr-TZlIAjG33tnNWIMDLb/preview' }
+                ]
+            },
+            {
+                id: 2, title: "HEALTH CARE PLANNING & ORGANIZATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1nKlHqqF-CbTe_7dLR-iT3i6vL7O2mctb/preview' },
+                    { type: 'video', title: 'Health Care Planning & Org', url: 'https://drive.google.com/file/d/1x7d8zsTTxUTNaxopB9hzU8d1cDEjh3ol/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Planning', url: 'https://drive.google.com/file/d/1W05iSt2RvZrlxW7AyPni87bEBeVbFVlT/preview' },
+                    { type: 'video', title: 'Community Participation (Part 1)', url: 'https://drive.google.com/file/d/1VWS6C7GgWCJtGQo3fIPxvLBHTX6-w2AA/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Part 1', url: 'https://drive.google.com/file/d/1Pu1R8U2FPAxPVlNTzfvISyLywlgU_rxM/preview' },
+                    { type: 'video', title: 'Community Participation (Part 2)', url: 'https://drive.google.com/file/d/1wVFN_ryNN4VZXtJudCPwWNwUne7UdFyu/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Part 2', url: 'https://drive.google.com/file/d/18W3nzabG7ruTxp49OzDJi-zPTR8BIip3/preview' },
+                    { type: 'video', title: 'Role of MLHP/CHP', url: 'https://drive.google.com/file/d/18A97k6VgBLPYzlzfeG2J_BCNZWPOia5y/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Roles', url: 'https://drive.google.com/file/d/1NmzbZ3SYU4RAFTzr2kPTrmNn8QAEDDyg/preview' },
+                    { type: 'quiz', title: 'Take Unit 2 Quiz', url: 'https://drive.google.com/file/d/1FNt47_fcXSw-TrSQQ_FB_bXEkuAIq249/preview' }
+                ]
+            },
+            {
+                id: 3, title: "ENVIRONMENTAL SCIENCE & HEALTH",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1_uikO6IRe_nPA0TWF0sQgdqjMRrA6w7b/preview' },
+                    { type: 'video', title: 'Env Science, Health & Resources', url: 'https://drive.google.com/file/d/1_uikO6IRe_nPA0TWF0sQgdqjMRrA6w7b/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Intro', url: 'https://drive.google.com/file/d/1WUU-CdhnDAyyUn0hu72WJoKopwof-j9d/preview' },
+                    { type: 'notes', title: 'Forest Resources (COMING SOON)', url: '#' },
+                    { type: 'lecture', title: 'Lecture Note: Forest', url: 'https://drive.google.com/file/d/1XtubF0SRWmiHFfdmnDA2Cn-5ZUL7jSAZ/preview' },
+                    { type: 'video', title: 'Ecosystems & Biodiversity', url: 'https://drive.google.com/file/d/1EZTdy-vwfpTq5szTSZmXFHJpyhtIN2SX/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Ecosystems', url: 'https://drive.google.com/file/d/14onQhHX8Sf23WIXiDkfe0S1kDzOC2J37/preview' },
+                    { type: 'video', title: 'Environmental Pollution', url: 'https://drive.google.com/file/d/1hPjJFZ34OCpgkoHZiq3DVTCCHgjlMdkN/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Pollution', url: 'https://drive.google.com/file/d/1iiBYdRYwkLpvkp-f5pCjMTmpyNlESTNT/preview' },
+                    { type: 'video', title: 'Nuclear Hazards & Climate Change', url: 'https://drive.google.com/file/d/1HY5P8FXaLH2axDUwjdYB_RzqAB2UwSQN/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Climate', url: 'https://drive.google.com/file/d/1kgYyJAkaRJVckYm1ssJgODUHiiiwaCa5/preview' },
+                    { type: 'video', title: 'Social Issues & Environment', url: 'https://drive.google.com/file/d/1RlypuQNm2cDgibAq92rGC15xkQW5G65I/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Social Issues', url: 'https://drive.google.com/file/d/1xBwSeEDe_kLhin2EJfj4m5lQddEOAzV3/preview' },
+                    { type: 'video', title: 'Sanitation', url: 'https://drive.google.com/file/d/1FPF_xBaZ4VzpHS5v5yYk-BDHLj0eu3yh/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Sanitation', url: 'https://drive.google.com/file/d/1QVttrbD_qYg1vVcY74QEeyJx4pT8uk4P/preview' },
+                    { type: 'video', title: 'Safe Water & Purification', url: 'https://drive.google.com/file/d/1CnTbfwnneAGnBaxUYhUp7ewH_PPoFgjF/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Water', url: 'https://drive.google.com/file/d/1V7JKVqVLGd97lIqe6Ps9bZTqOOVfFPo1/preview' },
+                    { type: 'video', title: 'Water Conservation & Standards', url: 'https://drive.google.com/file/d/1FD8QkLBC3S9T7pCANLS855tiDoSddvsA/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Standards', url: 'https://drive.google.com/file/d/1SIY3EN8Mxx-3FMmrLqoR0gQOrZBVN-GF/preview' },
+                    { type: 'video', title: 'Rainwater, Solid Waste & Excreta', url: 'https://drive.google.com/file/d/1PA4vy9wxrgnArPGzt1cs0Kc5ICHzNpxJ/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Waste', url: 'https://drive.google.com/file/d/1JsIRmz-h39EdbB_KnUxW5LifYaMyT0aA/preview' },
+                    { type: 'video', title: 'Sewage, Insecticides & Pesticides', url: 'https://drive.google.com/file/d/184Q3ezpDlAcWuGz42p0ftL0PXXL78p3G/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Sewage', url: 'https://drive.google.com/file/d/1AzKWlYWiCLtUTvqIoLVpfXOlOEwK_TeB/preview' },
+                    { type: 'quiz', title: 'Take Unit 3 Quiz', url: 'https://drive.google.com/file/d/1IQdS-HiHxfxZmQDYDhHirIXyOPrnfxlB/preview' }
+                ]
+            },
+            {
+                id: 4, title: "NUTRITION ASSESSMENT & EDUCATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1oZ807Csi7QmaWTa9N6sRVS87dQwuMA5v/preview' },
+                    { type: 'video', title: 'Review of Nutrition & Diet Plan', url: 'https://drive.google.com/file/d/121d-OwcV221cC1w9sGV9K42lTqVg2vGN/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Diet', url: 'https://drive.google.com/file/d/1ytNSe6SWvMVqLUHCY326NratNvQuqZk9/preview' },
+                    { type: 'video', title: 'General Nutrition Advice', url: 'https://drive.google.com/file/d/1WCaUactZ-pFGzoYgNmA8eEsQGj6uo01k/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Advice', url: 'https://drive.google.com/file/d/13bGd2ON3Y9R8coUYlkq5vLTDrlhPwO-A/preview' },
+                    { type: 'video', title: 'National Nutritional Policy/Programs', url: 'https://drive.google.com/file/d/1p4YU-5a6Mtr7AyfzuOSRQw-VC5NGf4_H/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Policy', url: 'https://drive.google.com/file/d/1IvroTf5RjZH7fMFFZOD1iiOVQnw0Qs8C/preview' },
+                    { type: 'video', title: 'Food Borne Disease', url: 'https://drive.google.com/file/d/1H48pAoccdK7srm4s6XBOM2QEB3thKHa2/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Diseases', url: 'https://drive.google.com/file/d/1dWC_h6SwMXsu_AdSOq0zLb2sVBRDWBhY/preview' },
+                    { type: 'video', title: 'Food Poisoning & Intoxication', url: 'https://drive.google.com/file/d/1Tv6mdYReSkqa-qRxNXXiAsvhgGyd85w8/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Poisoning', url: 'https://drive.google.com/file/d/1RuJe00mqPB4gbuukN-ZIWjsh37xbwgwL/preview' },
+                    { type: 'quiz', title: 'Take Unit 4 Quiz', url: 'https://drive.google.com/file/d/1DEWIFLwpA1bfIo4uw_ZERqLDnKM_ihlX/preview' }
+                ]
+            },
+            {
+                id: 5, title: "COMMUNICATION & HEALTH EDUCATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1ChknRZLR4la-ecVjUPW1HCfEyGdlkOP7/preview' },
+                    { type: 'video', title: 'Communication Process', url: 'https://drive.google.com/file/d/1eJGJQ_xENzlSYc0qUSV6kMg9gv4NhoMC/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Communication', url: 'https://drive.google.com/file/d/12NWxhMYo4WC9R_UYnMJTp3uGs56IAUI3/preview' },
+                    { type: 'video', title: 'Behavioral Change Communication', url: 'https://drive.google.com/file/d/1RBa0QDqIp6iGNMbN8oFv_9YZLTyyIB_p/preview' },
+                    { type: 'lecture', title: 'Lecture Note: BCC', url: 'https://drive.google.com/file/d/1RIsMb4dFZtPNgvK2wVPoouVs2orxqxO9/preview' },
+                    { type: 'video', title: 'Steps of BCC', url: 'https://drive.google.com/file/d/1mWLC9m2LQ3DRaXZgDlFzNVWP_VdGGSUO/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Steps', url: 'https://drive.google.com/file/d/13Q3btIr-9rYa0_o3VQwj1RdXhEW9XRYY/preview' },
+                    { type: 'video', title: 'SBCC', url: 'https://drive.google.com/file/d/1ktEdtSnHp9yzhl70RIn3A6r8zHfj8FHM/preview' },
+                    { type: 'lecture', title: 'Lecture Note: SBCC', url: 'https://drive.google.com/file/d/1ExDcXPn8rmQYyeRJEmN8HdPYYdkUD5Ny/preview' },
+                    { type: 'video', title: 'Health Promotion', url: 'https://drive.google.com/file/d/1nJO8YT-3I-_12hG6PekEkuxdW1Nc6M7n/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Promotion', url: 'https://drive.google.com/file/d/1Nj74czytK0j7Ye35V9-xft53RJosswoC/preview' },
+                    { type: 'video', title: 'Health Education', url: 'https://drive.google.com/file/d/1oO35d1uNVjQNjVDzqAdgnDUTnuRnvlNc/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Health Edu', url: 'https://drive.google.com/file/d/1Nj74czytK0j7Ye35V9-xft53RJosswoC/preview' },
+                    { type: 'video', title: 'Approaches of Health Edu', url: 'https://drive.google.com/file/d/1wiKYZ_dcgcorvgN7wFdzjEaJsrW7k98J/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Approaches', url: 'https://drive.google.com/file/d/14RuxlDLO25Y02i34zj33WMVdDC4nMJiw/preview' },
+                    { type: 'video', title: 'Mass Media in Health Edu', url: 'https://drive.google.com/file/d/1WrAWECbJyf5cbkSmDslI1_LgV0WgHsOo/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Mass Media', url: 'https://drive.google.com/file/d/19BDpERkqijbt6ph2cc63YGvbWKn6mGMC/preview' },
+                    { type: 'video', title: 'CHN Approaches', url: 'https://drive.google.com/file/d/1CQOEI7t81xGPVyVTVWtlkAuAHqnQG_Df/preview' },
+                    { type: 'lecture', title: 'Lecture Note: CHN Approaches', url: 'https://drive.google.com/file/d/1oNRwsJMtvyk8vuLeEsZBtGaL_BvXrsdN/preview' },
+                    { type: 'video', title: 'Home Visit', url: 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Home Visit', url: 'https://drive.google.com/file/d/1XhNzsMq7pGZyDUZY1tAD_nMuddYZERYc/preview' },
+                    { type: 'video', title: 'Home Visit: Equipments', url: 'https://drive.google.com/file/d/1iXCoL_TZG5FXt_fZ3xBoSp-YAa5xvnYX/preview' },
+                    { type: 'video', title: 'Qualities of CHN', url: 'https://drive.google.com/file/d/1KSSqzPjpFngODtqdKfK8RjEbhR33T_6R/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Qualities', url: 'https://drive.google.com/file/d/1HMzsrlcTrlts5GlJxYl7GdCTkkCeVtaO/preview' },
+                    { type: 'video', title: 'Roles in Family Health', url: 'https://drive.google.com/file/d/1qTFuylDhuLJpsNbyHcbBcPf5r4lj4Sg4/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Roles', url: 'https://drive.google.com/file/d/1qIdvkUxy3YQC0UKpFS8jCA-bTXivs2zx/preview' },
+                    { type: 'quiz', title: 'Take Unit 5 Quiz', url: 'https://drive.google.com/file/d/1mY3JEnzNC7JkVK4Z4CT4D5dvmYjKDOUH/preview' }
+                ]
+            },
+            {
+                id: 6, title: "CHN APPROACHES, CONCEPTS & ROLES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/19BDpERkqijbt6ph2cc63YGvbWKn6mGMC/preview' },
+                    { type: 'video', title: 'CHN Approaches', url: 'https://drive.google.com/file/d/1CQOEI7t81xGPVyVTVWtlkAuAHqnQG_Df/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Approaches', url: 'https://drive.google.com/file/d/1oNRwsJMtvyk8vuLeEsZBtGaL_BvXrsdN/preview' },
+                    { type: 'video', title: 'Home Visit', url: 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Home Visit', url: 'https://drive.google.com/file/d/1oqHePPCns2j3ZJTnGPNaO5rsR5GHa7Cf/preview' },
+                    { type: 'video', title: 'Home Visit Equipments', url: 'https://drive.google.com/file/d/1iXCoL_TZG5FXt_fZ3xBoSp-YAa5xvnYX/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Equipments', url: 'https://drive.google.com/file/d/11LLnY21NW2kJdn9kG-zG7zJ7ATjfhVOQ/preview' },
+                    { type: 'video', title: 'Qualities of CHN', url: 'https://drive.google.com/file/d/1KSSqzPjpFngODtqdKfK8RjEbhR33T_6R/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Qualities', url: 'https://drive.google.com/file/d/1HMzsrlcTrlts5GlJxYl7GdCTkkCeVtaO/preview' },
+                    { type: 'video', title: 'Roles in Family Health', url: 'https://drive.google.com/file/d/1qTFuylDhuLJpsNbyHcbBcPf5r4lj4Sg4/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Roles', url: 'https://drive.google.com/file/d/1qIdvkUxy3YQC0UKpFS8jCA-bTXivs2zx/preview' },
+                    { type: 'quiz', title: 'Take Unit 6 Quiz', url: 'https://drive.google.com/file/d/1HKIVerdIANKeHW1QIAh_Y6dpmMukZRsR/preview' }
+                ]
+            },
+            {
+                id: 7, title: "ASSISTING INDIVIDUALS & FAMILIES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1CY0IVuP-B-dGTrE6y5gY9zcscHIcXKyT/preview' },
+                    { type: 'video', title: 'Assessment of Children/Newborn', url: 'https://drive.google.com/file/d/1Ke8K097Gz9YdCcgRrDkezrgEcfYXttxJ/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Assessment', url: 'https://drive.google.com/file/d/192uUlSrdCMfDG2AIpH-VIE11Oj0JhwqT/preview' },
+                    { type: 'video', title: 'Stages of Development', url: 'https://drive.google.com/file/d/16ViPFH8_EaTTvDjljGQyM0t7VTd4mHZG/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Development', url: 'https://drive.google.com/file/d/1Ua2wQZsZFscJt9Hf0Ze3V8xNpNqlTcwj/preview' },
+                    { type: 'video', title: 'Methods of Growth Monitoring', url: 'https://drive.google.com/file/d/17oU86Ioc2KVw9lYqcDMhzmPC4F1zeRr5/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Growth', url: 'https://drive.google.com/file/d/1_z6aJ8eHBp2rugdhmgcEQKZIo3SeHRAV/preview' },
+                    { type: 'video', title: 'Measurements of Newborn', url: 'https://drive.google.com/file/d/1gestzLgN6B6cSnwQKL8UecoL2mYj3Aqr/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Newborn', url: 'https://drive.google.com/file/d/1MyB4MyaJfgwNUUN7dQUxIHxYIweHuT6Y/preview' },
+                    { type: 'video', title: 'Measurements of Toddler', url: 'https://drive.google.com/file/d/1jbGgrgdc427bcPk9-VopKpIeny1c-i_a/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Toddler', url: 'https://drive.google.com/file/d/1sUV7okwukmZTGntatX7uQ9Fe9vn3WVGk/preview' },
+                    { type: 'video', title: 'Weight, Arm Circumference, BP', url: 'https://drive.google.com/file/d/17ExwdIwIJ575wMFFl1ha6ywf-xQcdGWI/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Vitals', url: 'https://drive.google.com/file/d/12O8p7mtsIp999TvxVG6AcXdeZvD_K-Zu/preview' },
+                    { type: 'video', title: 'Menstrual Cycle', url: 'https://drive.google.com/file/d/1lgXG-eOiQ8t51pyklbsMtC-UaMeycixI/preview' },
+                    { type: 'video', title: 'Breast/Testicular Self Exam', url: 'https://drive.google.com/file/d/1IlkmwXIg5IrxqtyCY2Ur6sK7UIq4Oh3I/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Self Exam', url: 'https://drive.google.com/file/d/13BI--XPAC97Ejxm5kOUyUrDOf99ZiO4A/preview' },
+                    { type: 'video', title: 'Warning Signs (Cancer)', url: 'https://drive.google.com/file/d/1EyGBKPWhQMzlMOb3fle7VvNM9atwdlNv/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Warning Signs', url: 'https://drive.google.com/file/d/1H84fSuwjdiCIiT4pPA6kVuyh6p8Jd5w5/preview' },
+                    { type: 'video', title: 'Urine Tests', url: 'https://drive.google.com/file/d/1V5QuyvgKPy3D9lVbC5qLMi91pFNZOoBW/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Urine', url: 'https://drive.google.com/file/d/1X1W2-69MNAxUPRT9Dgj84pHtmq7waXyS/preview' },
+                    { type: 'video', title: 'Blood Tests', url: 'https://drive.google.com/file/d/1IQanVOa0XWISaZ2-QvGgWnqXS5N913ob/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Blood', url: 'https://drive.google.com/file/d/1pFftJRJsgXw0Fq2amUj6X2Taj2qrmeP0/preview' },
+                    { type: 'video', title: 'Routine Checkup & Immunization', url: 'https://drive.google.com/file/d/18eT8Z0GW1I2Qnf7hve9AAOQEzRO6yRVw/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Checkup', url: 'https://drive.google.com/file/d/1xPyq3_88bF2ZqWE6mVEU3TJObqE85U_9/preview' },
+                    { type: 'video', title: 'Follow up & IM Injection', url: 'https://drive.google.com/file/d/1QYOEb51r8GBmP77_F1gsHnaHxoKcc79x/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Injection', url: 'https://drive.google.com/file/d/1sLBW8RjK8NkXWNp13RAOUwX_7FXbH9aa/preview' },
+                    { type: 'video', title: 'Nasal Drop & Health Records', url: 'https://drive.google.com/file/d/1wK-zigpsWWAEpU25K-8lJBWQWxNxhHL1/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Records', url: 'https://drive.google.com/file/d/13HOLq4ygR2y3UcT_RnoqHz1S5sI_8QlS/preview' },
+                    { type: 'video', title: 'Women Empowerment', url: 'https://drive.google.com/file/d/1EXzArMQ_8W10yBM5EhuVa-RA8V7Yt7-j/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Empowerment', url: 'https://drive.google.com/file/d/1zkAGCtqVo6VBcm009irfVqa3p1o_z7iR/preview' },
+                    { type: 'video', title: 'Women Abuse & Welfare', url: 'https://drive.google.com/file/d/1PaiGgxuXjV8ctgpAD6e9RTVo202gD5vI/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Welfare', url: 'https://drive.google.com/file/d/1iIUJHrKyt3Bkr_1QmM0deIoqxigBeASP/preview' },
+                    { type: 'video', title: 'Child & Elder Abuse', url: 'https://drive.google.com/file/d/1h2wqQ5g63aAEzO3EzwaUfHsfwItvJqug/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Abuse', url: 'https://drive.google.com/file/d/1Iw4gbzdoBi6-CRojj6-SixsdvSaAJtup/preview' },
+                    { type: 'video', title: 'Community Resources', url: 'https://drive.google.com/file/d/1dJsyoxpGp72nqIN1erzQa5uo_5pMO724/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Resources', url: 'https://drive.google.com/file/d/1CfpIq6vEE7OkTbrEyCSnzs1NWO5tuYqC/preview' },
+                    { type: 'video', title: 'Community Disorders', url: 'https://drive.google.com/file/d/1QItsxkXwjqCLc5-RqXSqETX325d-1BQl/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Disorders', url: 'https://drive.google.com/file/d/1y831t2GirgL0h8jc77IrJEemyQh0-GyS/preview' },
+                    { type: 'quiz', title: 'Take Unit 7 Quiz', url: 'https://drive.google.com/file/d/1kJGAEBkvT27QIrX4Tgrw2d8jWeJx-LHB/preview' }
+                ]
+            },
+            {
+                id: 8, title: "INTRODUCTION TO EPIDEMIOLOGY",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1sl9HFV03aL7zsVDNpriLMKmT2gj7Q3uD/preview' },
+                    { type: 'video', title: 'Introduction to Epidemiology', url: 'https://drive.google.com/file/d/1x4bUJtrSkGu_868Kg7lyAH8SjEuGF1n2/preview' },
+                    { type: 'video', title: 'Models of Causation', url: 'https://drive.google.com/file/d/19VEoPxITbLLw7uPNE6MfSlm3JnaIpEm9/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Models', url: 'https://drive.google.com/file/d/1cPGwLVTL_mTQyfSYS1rEuwbfteqHq8fT/preview' },
+                    { type: 'video', title: 'Trends & Approaches', url: 'https://drive.google.com/file/d/1dq2GDKvj1-rjCQ1TF1Ky541s3wFaARUa/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Approaches', url: 'https://drive.google.com/file/d/1fQJnwVJJuE26_60oHhX81IsnDuawLdEF/preview' },
+                    { type: 'video', title: 'Control Measures & Investigation', url: 'https://drive.google.com/file/d/1YG5XYHRHvgDJNQP0HHUoQxTPVOtPP_To/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Control', url: 'https://drive.google.com/file/d/1xqbmQJfk5Sc4Fm_3bCTN0jKvdWBfLKwA/preview' },
+                    { type: 'quiz', title: 'Take Unit 8 Quiz', url: 'https://drive.google.com/file/d/1sbdLHT8sJhUmmOIOasozhr2SSN9UZq4V/preview' }
+                ]
+            },
+            {
+                id: 9, title: "COMMUNICABLE DISEASES & NATIONAL PROGRAMS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1DgUahzWiRDBj4QWtyXZZ4r93sqUUghxB/preview' },
+                    { type: 'video', title: 'Intro & Malaria', url: 'https://drive.google.com/file/d/129AfAO_xZ8dL9FczmI3zqOI9f8d9kHM9/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Malaria', url: 'https://drive.google.com/file/d/113T0zFC6sqtrLO6XCCRY_U_nZWt0oYRQ/preview' },
+                    { type: 'video', title: 'Dengue & Chikungunya', url: 'https://drive.google.com/file/d/1TnjdHi3jN_EnL9bGn-WiwjT6duTKAh-2/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Dengue', url: 'https://drive.google.com/file/d/1wtC0OPUjFMMZkh-OSFnyhEKgya-gevJ4/preview' },
+                    { type: 'video', title: 'Filariasis', url: 'https://drive.google.com/file/d/1eRRiuISTYesWNu2x0w-ohKsyR7-WPS6a/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Filariasis', url: 'https://drive.google.com/file/d/1nCKohdnyQRExUvpIJYT-_1ba-nR0mXk_/preview' },
+                    { type: 'video', title: 'Japanese Encephalitis', url: 'https://drive.google.com/file/d/1EdY2eSt42iumyOSn_9ScwMhCrsCUzzwv/preview' },
+                    { type: 'lecture', title: 'Lecture Note: JE', url: 'https://drive.google.com/file/d/1MKKc1f339jEwY0ZT6RWzWG369FfF_Tcm/preview' },
+                    { type: 'video', title: 'Leprosy', url: 'https://drive.google.com/file/d/1sGSIVRorFrKxsQfzc7UJl6woysMeEvDR/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Leprosy', url: 'https://drive.google.com/file/d/11jMyG21ZsvKjMfws45mNODf1ekqtF4s5/preview' },
+                    { type: 'video', title: 'Tuberculosis', url: 'https://drive.google.com/file/d/1QdSXae3zc53oTQy4dvs26oXrgwzUswjp/preview' },
+                    { type: 'lecture', title: 'Lecture Note: TB', url: 'https://drive.google.com/file/d/1rs9zmpb0Ym6eMFTIZ_f_4JnJiWhd2m0t/preview' },
+                    { type: 'video', title: 'Diphtheria/Tetanus/Polio/Measles', url: 'https://drive.google.com/file/d/13Dg6jR-y0TZ4w9lbYBbn2fYQNem3NTnh/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Vaccines', url: 'https://drive.google.com/file/d/1GIsFWgFA3-Z1P3yoIqd0YbIrwVQtgCQ3/preview' },
+                    { type: 'video', title: 'Enteric Fever, Hep & HIV', url: 'https://drive.google.com/file/d/1slxmxSDgWC0PyPNwvAJgtR6iryJmI6-N/preview' },
+                    { type: 'lecture', title: 'Lecture Note: HIV/Hep', url: 'https://drive.google.com/file/d/19nTyOVmunCD0Mxv-NE311F4l6p7F751B/preview' },
+                    { type: 'video', title: 'Respiratory Tract Infections', url: 'https://drive.google.com/file/d/1D_tt2_fvEdEY813tFpzT3Qx5Yz00bTUw/preview' },
+                    { type: 'lecture', title: 'Lecture Note: RTI', url: 'https://drive.google.com/file/d/1yRQFf9-Z_ZS4UtVhZEMV0EU8uj1ul0fz/preview' },
+                    { type: 'video', title: 'Diarrhoea', url: 'https://drive.google.com/file/d/1WgnREnCDmXXMD9DiV78iXXYOAEfcGTIT/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Diarrhoea', url: 'https://drive.google.com/file/d/15rWHRFl53IUt0oWLlOl-xyw2fpeQ5YOH/preview' },
+                    { type: 'video', title: 'COVID-19', url: 'https://drive.google.com/file/d/1F7kQJtGzbaKGnUVPh0oshQXDGqCBgdZ4/preview' },
+                    { type: 'lecture', title: 'Lecture Note: COVID', url: 'https://drive.google.com/file/d/1UyaVYaLtQQX45pppcu3wO6-oiYY4jUyC/preview' },
+                    { type: 'video', title: 'Helminthic Scabies', url: 'https://drive.google.com/file/d/10CqUFbBbn8LWJbXdJzIENtWsq72d7giC/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Scabies', url: 'https://drive.google.com/file/d/1mRteULcHR9yBANAonzbE0Ixamw1rw2ty/preview' },
+                    { type: 'video', title: 'Pediculosis', url: 'https://drive.google.com/file/d/1REna2vhm1-U0VnSIZ3eqvfhic4d9eBUy/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Pediculosis', url: 'https://drive.google.com/file/d/1lq2ONqkMe44QpPEaLMUnBN97WQI-uTrN/preview' },
+                    { type: 'video', title: 'Zoonotic Disease', url: 'https://drive.google.com/file/d/1ZC4zGi37UfsqLaMbjbBLaBeaT2C03ahC/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Zoonotic', url: 'https://drive.google.com/file/d/1NldoIV7y9NA-0k9IjSLAJl0d9JeJc1Xx/preview' },
+                    { type: 'video', title: 'Rabies', url: 'https://drive.google.com/file/d/1KdL8QTCYE1I09CNgwHnoaVDcdFKykTIT/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Rabies', url: 'https://drive.google.com/file/d/1iQaDqI5yNdb3oTCVolJY0gNO4dYyz4RS/preview' },
+                    { type: 'video', title: 'Universal Immunization Prog', url: 'https://drive.google.com/file/d/1kxk9rfvawGRqj7mgbRaNrKdz2Hzzc2SD/preview' },
+                    { type: 'lecture', title: 'Lecture Note: UIP', url: 'https://drive.google.com/file/d/1kcYGFyNEZP86RpewXSfMCdrLkEYFgikr/preview' },
+                    { type: 'video', title: 'Universal Immunization (Continued)', url: 'https://drive.google.com/file/d/1ReAh6Bu7Gt56Jy_9Dr8HFkyWSGmgsNHr/preview' },
+                    { type: 'lecture', title: 'Lecture Note: UIP 2', url: 'https://drive.google.com/file/d/1KJ2qJlih0tphktw1P9q2l2iMjX0v9DmQ/preview' },
+                    { type: 'video', title: 'Diphtheria & DPT Vaccine', url: 'https://drive.google.com/file/d/1soElF-ttdF5pdWfvFYe6bVsy0zzXfv_e/preview' },
+                    { type: 'lecture', title: 'Lecture Note: DPT', url: 'https://drive.google.com/file/d/1uadsfAMgja9PTntqIoi0-1NyjRSpHlkU/preview' },
+                    { type: 'video', title: 'Whooping Cough Prevention', url: 'https://drive.google.com/file/d/1jaM0ozWVceVZVlNTh_Gfsued0bcx5Bte/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Whooping Cough', url: 'https://drive.google.com/file/d/14RWEuA_0tNIO7Q0Btmr8O4JydymDeqlS/preview' },
+                    { type: 'video', title: 'Tetanus Immunization', url: 'https://drive.google.com/file/d/1fbJPTvKqCERyfZhtXggobwq8Mzg3xV3w/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Tetanus', url: 'https://drive.google.com/file/d/14RWEuA_0tNIO7Q0Btmr8O4JydymDeqlS/preview' },
+                    { type: 'video', title: 'Prevention of Tetanus', url: 'https://drive.google.com/file/d/1cstmDuyjNG0Iwa4aOxzs6Z0EsK4EaN7H/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Prevention', url: 'https://drive.google.com/file/d/1040E7PZK67vdMXnpSXalSG2iO-04658Y/preview' },
+                    { type: 'video', title: 'Polio Immunization', url: 'https://drive.google.com/file/d/1yXN_jWhW3zg_A_LT78h0xbDaKRh1d9cW/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Polio', url: 'https://drive.google.com/file/d/1WDfdRq98_KZjHTwvSLZ5-wu33FpOXS1G/preview' },
+                    { type: 'video', title: 'Polio Immunization (Cont)', url: 'https://drive.google.com/file/d/1OB-wmhvq3ZD5AR-tj0dSI0jSkorI731d/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Polio 2', url: 'https://drive.google.com/file/d/1ilJD7uSdFxHS49YdKYOAIEdE60shnCIg/preview' },
+                    { type: 'video', title: 'Measles', url: 'https://drive.google.com/file/d/1N9JeW2eyMuMXNwxeMw6HPmbKkuVYji8Y/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Measles', url: 'https://drive.google.com/file/d/1TeXl2JPSb9Vx2TvQtTsS48jNTotRGUvj/preview' },
+                    { type: 'video', title: 'Measles Prevention', url: 'https://drive.google.com/file/d/1VKgznQmXOZlpxBjDlkR_JoILCSpfUq6b/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Prevention', url: 'https://drive.google.com/file/d/1B2sqZL605gDGK_bxMkwKUycPY7zLz9iL/preview' },
+                    { type: 'video', title: 'Hepatitis B', url: 'https://drive.google.com/file/d/1f1_kQnAzJwai-o6RcJEy7QuW5h9iAsCY/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Hep B', url: 'https://drive.google.com/file/d/15Oa8tjPxomKU0tWdRssS-zDB0nqJyJaa/preview' },
+                    { type: 'video', title: 'Hep B Immunization', url: 'https://drive.google.com/file/d/1DqJbP73N13ZZB2eepItEHIAUje4s9aSZ/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Immunization', url: 'https://drive.google.com/file/d/1MktnFjAg4KFucP8t_XzdU5yaBB_cC1pu/preview' },
+                    { type: 'video', title: 'NLEP (Leprosy)', url: 'https://drive.google.com/file/d/1-Th0P9om8-F7eTvrqhfS9Y-z8VtnMZNH/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NLEP', url: 'https://drive.google.com/file/d/15ZARvfF0_95kRqfuLF1a3A9cFYm_5t8X/preview' },
+                    { type: 'video', title: 'RNTCP (TB)', url: 'https://drive.google.com/file/d/1nAKz8DnP30N1Wo9f2XSSwX9X-9nEXdQo/preview' },
+                    { type: 'lecture', title: 'Lecture Note: RNTCP', url: 'https://drive.google.com/file/d/1fkP442ZTMK16pmzIcMriCPDpLGIZ77Sh/preview' },
+                    { type: 'video', title: 'IDSP', url: 'https://drive.google.com/file/d/1iEkyOtg9RUUTzf2PpHLAU7NmHIafPkA0/preview' },
+                    { type: 'lecture', title: 'Lecture Note: IDSP', url: 'https://drive.google.com/file/d/1R2KGHWkMkW8CA-Do4PHzZTeqaFbRr3zr/preview' },
+                    { type: 'video', title: 'NACO (AIDS)', url: 'https://drive.google.com/file/d/1glS8Qdi-q5cQtFiwanQQMMjWodm1osHw/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NACO', url: 'https://drive.google.com/file/d/1DU_RlxCH51AhaxhpIda9b9iHVb5bfPHU/preview' },
+                    { type: 'video', title: 'NVBDCP (Vectors)', url: 'https://drive.google.com/file/d/1xCZ4qXx9ns_cQ1UQQoBhSToLvdXG2bFy/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NVBDCP', url: 'https://drive.google.com/file/d/1hDKbXu2urFORn2akYLdIX4zbzzeHRtg6/preview' },
+                    { type: 'video', title: 'NAMO (Air Quality)', url: 'https://drive.google.com/file/d/1Ul2vSF5DjSP7GHQuWdlEHaKFb5MS75HB/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NAMO', url: 'https://drive.google.com/file/d/1Mvbr5l576HyZMFyYD1LPwDH6I3GISz7O/preview' },
+                    { type: 'video', title: 'PM-ABHIM', url: 'https://drive.google.com/file/d/1RUuIa28koZ65kxK85zJ_LBNZzcdLX2R0/preview' },
+                    { type: 'lecture', title: 'Lecture Note: PM-ABHIM', url: 'https://drive.google.com/file/d/1t98tFIOoGW1CA5b5Uew0zztqbDOCtWOR/preview' },
+                    { type: 'quiz', title: 'Take Unit 9 Quiz', url: 'https://drive.google.com/file/d/18fqPEwsmty_h8eEGvlTWUG3NQkVeMXwZ/preview' }
+                ]
+            },
+            {
+                id: 10, title: "NON-COMMUNICABLE DISEASES & NCD PROGRAMS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/14XiAEOMBHUI3z6lw-Wibp1RZPJNp2OMz/preview' },
+                    { type: 'video', title: 'NCD & Diabetes Mellitus', url: 'https://drive.google.com/file/d/1sAyr8lS4PwjKFpOUlUakwIl0Kh70ATrq/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Diabetes', url: 'https://drive.google.com/file/d/1hR7agNAiuvDJ6xwSjK4hHLKUjpkrqaQ-/preview' },
+                    { type: 'video', title: 'Prevention of Diabetes', url: 'https://drive.google.com/file/d/1NMICgopZ1IjlNxNoW8ZITwSZ-iWUw0Pb/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Prevention', url: 'https://drive.google.com/file/d/1uorR-HmjSvx9Y_RQ5m-_0Gh18QniJjlA/preview' },
+                    { type: 'video', title: 'Hypertension', url: 'https://drive.google.com/file/d/1Aa5GHdUGZPI3kMlQTnu5aNiCmDvA0s-r/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Hypertension', url: 'https://drive.google.com/file/d/1uorR-HmjSvx9Y_RQ5m-_0Gh18QniJjlA/preview' },
+                    { type: 'video', title: 'Obesity', url: 'https://drive.google.com/file/d/1QbP2P_gtiqH5ZwAMqFj3QM8VGPYNeeQ9/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Obesity', url: 'https://drive.google.com/file/d/11dhyHdRrdQRNh15J8unjWiq5nbh4mRu6/preview' },
+                    { type: 'video', title: 'Cardiovascular Disorder', url: 'https://drive.google.com/file/d/1LqI7Zp2OkbDDxf5tDIg9CA7iYas_ZwFI/preview' },
+                    { type: 'lecture', title: 'Lecture Note: CVD', url: 'https://drive.google.com/file/d/1ik9jG8SPq71dFZItFrXnJsjmjmX0y3jx/preview' },
+                    { type: 'video', title: 'Deafness', url: 'https://drive.google.com/file/d/1OKw1TY7BUy0kKL79nGxw2qfd_rdYJ3KD/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Deafness', url: 'https://drive.google.com/file/d/1OKw1TY7BUy0kKL79nGxw2qfd_rdYJ3KD/preview' },
+                    { type: 'video', title: 'Thyroid Diseases', url: 'https://drive.google.com/file/d/13zPaf_MGE7NrWM0f7NB9xqZhrpHpjL-G/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Thyroid', url: 'https://drive.google.com/file/d/12uUFYS6gtgGMOaGGM3XuWCijEbqk42Zz/preview' },
+                    { type: 'video', title: 'Traffic Injuries', url: 'https://drive.google.com/file/d/1SPBBMuPia3iutLT9UriY2xWMrIiamy6k/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Injuries', url: 'https://drive.google.com/file/d/1DEu4PmphP4s9Ev1QCMC4QfRN4aT4R5ME/preview' },
+                    { type: 'video', title: 'NPCDCS', url: 'https://drive.google.com/file/d/14O8215T4U1QwZ6C2xzGE-AeMKs2uHStL/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NPCDCS', url: 'https://drive.google.com/file/d/1p4DNE3r4TuSHQ68yRr1-tWq8EOl-pHvI/preview' },
+                    { type: 'video', title: 'NTCP (Tobacco)', url: 'https://drive.google.com/file/d/1Am_puyZ0HAx-txHHKsEwVS6gVbEPjIs0/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NTCP', url: 'https://drive.google.com/file/d/19wyw2eknMiAKNJ9AW2Gzm8WqZjlj9elW/preview' },
+                    { type: 'video', title: 'Cancer Management', url: 'https://drive.google.com/file/d/14Raddq10gpwzGds7laRO_LAT7gE7gQxl/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Cancer', url: 'https://drive.google.com/file/d/1v0l2xwwn5bDK5rgDxEH1Pvh5WKducuVT/preview' },
+                    { type: 'video', title: 'Blindness', url: 'https://drive.google.com/file/d/1dgejT_Jg2JKtVv5F5VcPW4jI2S9ESIvi/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Blindness', url: 'https://drive.google.com/file/d/1y4wUtPj91SpJ_oQJoH1UWuOnqCDky7o1/preview' },
+                    { type: 'video', title: 'NBCPVI', url: 'https://drive.google.com/file/d/1mJnX0qHOetTInZrZExHZixt8b3GEG-6x/preview' },
+                    { type: 'lecture', title: 'Lecture Note: NBCPVI', url: 'https://drive.google.com/file/d/1YUSWj5_qBqcMvT1re5LSu9ZXf79tM-3-/preview' },
+                    { type: 'quiz', title: 'Take Unit 10 Quiz', url: 'https://drive.google.com/file/d/1hPmyrGepqG-iLzf-_qqhKvbwzX1JODzg/preview' }
+                ]
+            },
+            {
+                id: 11, title: "SCHOOL HEALTH SERVICES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1KZa55yEfMJLEIA88TmHQPYLkzYW9DGzq/preview' },
+                    { type: 'video', title: 'Intro & Health Problems', url: 'https://drive.google.com/file/d/14mI0R43vTu1fLgryP_BD0j8Wo3AXCA4Z/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Problems', url: 'https://drive.google.com/file/d/109qrs2_qUpah2RfsMZnvRPYBZKj2uqy6/preview' },
+                    { type: 'video', title: 'Activities of School Health', url: 'https://drive.google.com/file/d/181mgiHe5g8vj9Vct-YommZIUS2bEml69/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Activities', url: 'https://drive.google.com/file/d/1wQU_1d3L904xrLrveAAovjsZM2jecK-3/preview' },
+                    { type: 'video', title: 'Nutritional/First Aid/Mental Health', url: 'https://drive.google.com/file/d/1TmbAPn2d0D4IAsCKIbS7zf8spOpcPy--/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Services', url: 'https://drive.google.com/file/d/1h5dFnSpob9L4vzO3aGV_CtpPYmTYVvdX/preview' },
+                    { type: 'video', title: 'School Health Team & Nurse Role', url: 'https://drive.google.com/file/d/1axF5gMMrqGl3CehIDIbWRgXLXjQ_bQa5/preview' },
+                    { type: 'lecture', title: 'Lecture Note: Role', url: 'https://drive.google.com/file/d/1vGbp3-oGFwbzNEN_BP2LBEdk2WViqw98/preview' },
+                    { type: 'quiz', title: 'Take Unit 11 Quiz', url: 'https://drive.google.com/file/d/1k2mHBHJqRxfvlmpahqlIz89xxEU8je0Y/preview' }
+                ]
+            }
+        ];
+
+        // --- 4. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
 
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            if(type === 'lecture') return '🗒️'; // NEW ICON
+            if(type === 'model') return '🧊';
+            if(type === 'quiz') return '📝';
+            return '📄';
+        }
+
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        let modelToggle = false; 
+
         function openResource(type, url, title) {
-            if(type === 'coming-soon') {
-                alert('This resource is under development.');
+            if(url === '#') {
+                alert("This resource is coming soon!");
                 return;
             }
 
+            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -1089,13 +763,23 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            body.style.display = 'flex'; 
+            
+            // FIX: Restore flex centering for Video/Model (looks better centered)
+            body.style.display = 'flex';
 
-            if (type === 'quiz') {
-                // Handled by openQuiz
+            if (type === 'model') {
+                modelToggle = !modelToggle;
+                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
+            } 
+            else if (type === 'quiz') {
+                openQuiz(url); // url here would be the ID if passed, but typically we use the button logic below
             }
             else {
+                // Ensure URL is preview mode
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // FIX: Apply correct class based on type
+                // If it's a video, use iframe-video ratio. If it's notes OR lecture notes, use iframe-doc (full height)
                 let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
                 body.innerHTML = `<iframe 
@@ -1117,8 +801,9 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
+            // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
-            body.scrollTop = 0; 
+            body.scrollTop = 0; // Ensure we start at the top
             
             const questions = QUIZ_DATA[unitId] || [];
             
@@ -1159,11 +844,13 @@
             modal.style.display = 'none';
             body.innerHTML = ''; 
             
+            // If we are closing manually via button, go back in history to remove the state
             if (history.state && history.state.modalOpen) {
                 history.back();
             }
         }
 
+        // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
@@ -1172,12 +859,9 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnitHeader = document.querySelector('.unit-header');
-            if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
-            }
-        });
+        // Initialize
+        renderPage();
+
     </script>
 </body>
 </html>
