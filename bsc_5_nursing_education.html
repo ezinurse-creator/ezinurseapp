@@ -3,136 +3,148 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nursing Education - Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Nursing Education." />
+    <title>Nursing Education Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME (Refined for Sociology/Education) --- */
         :root {
-            --brand: #003B82; 
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #00B9F2;       /* Light Blue Accent */
+            --primary-dark: #003B82;  /* Brand Navy */
+            --bg-card: #ffffff;
+            --bg-body: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #f59e0b;        /* Quiz/Gold */
             --danger: #ef4444;
             --success: #10b981;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 80px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f9fafb; }
+        
+        .unit-header.active {
+            border-bottom-color: #e5e7eb;
+            background: #f0f9ff;
+            color: var(--primary-dark);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none; 
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
+            transition: all 0.2s;
             cursor: pointer;
         }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
-
-        h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-top: 24px;
-            margin-bottom: 12px;
-            color: var(--brand);
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* --- MODAL --- */
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; background: #f0f9ff; }
+        .type-video { border-left: 4px solid #8b5cf6; background: #f5f3ff; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* --- MODAL (The "Close Button" Wrapper) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -156,7 +168,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
         .btn-close {
             background: var(--danger);
@@ -173,12 +185,15 @@
             background: #000;
             position: relative;
             overflow-y: auto;
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -188,6 +203,7 @@
             display: block;
         }
 
+        /* 2. For Notes (Fills the screen vertically) */
         .iframe-doc {
             width: 100%;
             height: 100%;
@@ -196,7 +212,7 @@
             display: block;
         }
 
-        /* --- QUIZ STYLES --- */
+        /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
@@ -204,6 +220,12 @@
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+        }
+        .quiz-header-score {
+            text-align: right;
+            font-weight: bold;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
         }
         .quiz-question { margin-bottom: 20px; font-size: 1.1rem; font-weight: 600; }
         .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
@@ -215,348 +237,52 @@
             transition: all 0.2s;
             position: relative;
         }
-        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
-        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
-        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
-        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
-
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
         }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1Ig5YZKjmvncA6cOyDZ_pwxw_SG9VnZeF/preview', 'Syllabus')">
-        👩‍🏫 NURSING EDUCATION - SYLLABUS
-    </div>
-    
-    <div id="units">
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - INTRODUCTION & THEORETICAL FOUNDATIONS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_kvkpEYzww-IRs6PvkEbGnByHWqPvqEF/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Theoretical Foundations</span>
-                    </div>
-                    <h3>1.1 Education, Technology, and Principles</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1I9voXkovAYOJoAh6nE6cZStRHbkuiHz7/preview', 'Education & Tech')">
-                        <span class="icon video-icon">▶️</span><span>Education and Educational Technology</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lccSt30AcWZzMIPCJoA0PaMAqnejl5iU/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Note: Education Technology</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S6-HZZIPGy7jej-ImWa_q04DXS7k8GnQ/preview', 'Principles')">
-                        <span class="icon video-icon">▶️</span><span>Principles and Approaches in Nursing Ed</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pyK8XLaQVIWqcX2KH-tSSkgoXKI6SF5o/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Note: Principles & Approaches</span>
-                    </div>
-
-                    <h3>1.2 Educational Philosophies</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CKn52anZy1NlrmfzDINpeyF57oNTDHdu/preview', 'Traditional')">
-                        <span class="icon video-icon">▶️</span><span>Traditional Philosophies (Idealism, Naturalism, etc.)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1InEH6FdW89Ryq2jLBaLLCpEiqs7TnBUb/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Note: Traditional Philosophies</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1W2QZ_3Y6GQFHA5yqmvbB_XgNCc7-9C3d/preview', 'Modern')">
-                        <span class="icon video-icon">▶️</span><span>Modern/Contemporary Philosophies</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/14nkxRXA6O9t-Ql7VP8pC4h1qBPvlLQUk/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Note: Modern Philosophies</span>
-                    </div>
-
-                    <h3>1.3 Teaching and Learning Process</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Tj1Wvwb3C1G2gXiaIzHeLmDUOzk2SJHw/preview', 'Process')">
-                        <span class="icon video-icon">▶️</span><span>Teaching and Learning Process</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1T4NeAuUrfbeTWfxXblfpJ8ONFYReGTCv/preview', 'Approaches')">
-                        <span class="icon video-icon">▶️</span><span>Latest Approaches for Learning</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(1)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Nursing Education</div>
+            <p style="color: var(--text-muted);">Syllabus & Resources</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - ASSESSMENT AND PLANNING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1pKo_Lj0JPHA0enLj2dorSSo4Rahpk11m/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Assessment and Planning</span>
-                    </div>
-                    <h3>2.1 Teacher Assessment & Styles</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hrzO91fgGvU8IfTPG1okE2Pg5Ir63a5G/preview', 'Teacher')">
-                        <span class="icon video-icon">▶️</span><span>Teacher Assessment & Teaching Styles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1bocgoWaEvnwf0qYgcbhCEEesO59Nstb4/preview', 'Roles')">
-                        <span class="icon video-icon">▶️</span><span>Teacher Roles: Facilitator, Delegator</span>
-                    </div>
-
-                    <h3>2.2 Learner & Motivation</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/16GY8ZI9euMZG7YO7HVQKEdEXnHOXt1wP/preview', 'Learner')">
-                        <span class="icon video-icon">▶️</span><span>Learner Characteristics & EI</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eSzmq_QCNTED9dxvhSXUph8xVdsL3GhV/preview', 'Motivation')">
-                        <span class="icon video-icon">▶️</span><span>Motivation & EI Development</span>
-                    </div>
-
-                    <h3>2.3 Curriculum</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PGjK-2fz1CJFAKFLeXiU5da00PEMhCSC/preview', 'Curriculum')">
-                        <span class="icon video-icon">▶️</span><span>Curriculum Types & Design</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19CUywIL5IPMMob6T2uTnXzm5_kuOkfmT/preview', 'Design')">
-                        <span class="icon video-icon">▶️</span><span>Curriculum Approaches</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/159amS02sIzQF5FBOWyXFLAszBL_McR9p/preview', 'Objectives')">
-                        <span class="icon video-icon">▶️</span><span>Behavioral Objectives</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(2)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </div>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1Ig5YZKjmvncA6cOyDZ_pwxw_SG9VnZeF/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - IMPLEMENTATION
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fQW7Ub6bHyJjy3_ZpNyS82AXfKZrBnAY/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Implementation Strategies</span>
-                    </div>
-                    <h3>3.1 Classroom Methods</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1eba1oqgtLBDL_vxZmljO0qDx8N08cclz/preview', 'Classroom')">
-                        <span class="icon video-icon">▶️</span><span>Classroom Management & Methods</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IFaXe4ZZgHL7gw1ZtZDMB6T3eMYUY4rS/preview', 'Lecture')">
-                        <span class="icon video-icon">▶️</span><span>Lecture, Discussion, Microteaching</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1090F2FTU3Iz7klwrhLRSfE2FUQ14nwfb/preview', 'Seminar')">
-                        <span class="icon video-icon">▶️</span><span>Seminar, Symposium, Panel</span>
-                    </div>
-
-                    <h3>3.2 Practical Learning</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UvcmGcusbe-3AdaAWEkcw4gISPi_l6HQ/preview', 'Skill Lab')">
-                        <span class="icon video-icon">▶️</span><span>Skill Lab & Demonstration</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sjUmIc9Kk1KDukPtw-4DiKF61VstoFV6/preview', 'Workshop')">
-                        <span class="icon video-icon">▶️</span><span>Workshop & Exhibition</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Kd5QAR2OLw272-HVKNB5uqfrOKH8XOd_/preview', 'Role Play')">
-                        <span class="icon video-icon">▶️</span><span>Role Play & Field Trips</span>
-                    </div>
-
-                    <h3>3.3 Individual Learning</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sZWBo_qKbqLBzZIXz546PHyGB4ILde4I/preview', 'Self-Directed')">
-                        <span class="icon video-icon">▶️</span><span>Self-Directed & Computer Learning</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15thAwDK2lz8VcIfSU6AmGIxBsLe9HvMG/preview', 'Activity')">
-                        <span class="icon video-icon">▶️</span><span>Activity-Based Learning</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(3)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - CLINICAL TEACHING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1lxfwE6TqT9ownvMd73T1oK0SK7llEMWB/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Clinical Teaching</span>
-                    </div>
-                    <h3>4.1 Environment & Models</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dS7BVeX6WHgq3P1OC2NJ9znkK1CMEglA/preview', 'Clinical Role')">
-                        <span class="icon video-icon">▶️</span><span>Clinical Environment & Teacher Role</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17ZfWpKHz6z5J_OF3YC35TG7eqlazw6lL/preview', 'Models')">
-                        <span class="icon video-icon">▶️</span><span>Clinical Teaching Models (Preceptorship)</span>
-                    </div>
-
-                    <h3>4.2 Clinical Strategies</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PqdupElu0NRd8UO4I3mYsg5cAKpnaRxT/preview', 'Conference')">
-                        <span class="icon video-icon">▶️</span><span>Clinical Conference & Assignment</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LevVTBUXhgwmvX5vd1KdnnCTYIP8uW2O/preview', 'Bedside')">
-                        <span class="icon video-icon">▶️</span><span>Bedside Clinic & Case Study</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1yrltIIYkoj7mgmfZPZs7CiMor2vmcqiO/preview', 'Rounds')">
-                        <span class="icon video-icon">▶️</span><span>Nursing Rounds</span>
-                    </div>
-
-                    <h3>4.3 Advanced Methods</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dnqWoZKJzTurJoKaXxNLZwDRIGJxMyxA/preview', 'Concept Map')">
-                        <span class="icon video-icon">▶️</span><span>Concept Mapping & Projects</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/117m1YqVKIt8DuVKSAuz9rZtMKBaZT_y5_/preview', 'PBL')">
-                        <span class="icon video-icon">▶️</span><span>PBL & Role Play</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tkf-K6t1MuKxkGqngMb5a_RCWMd6MUSd/preview', 'Process Recording')">
-                        <span class="icon video-icon">▶️</span><span>Process Recording</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(4)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - EDUCATIONAL MEDIA
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1q5DGXHk-sITzcsS31kjfXxH3PRo8PGp8/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Educational Media</span>
-                    </div>
-                    <h3>5.1 Audio-Visual & Non-Projected</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1KSC_xg5J_2QxBDfEjn43hx_NpZi0ORPb/preview', 'AV Aids')">
-                        <span class="icon video-icon">▶️</span><span>Audio-Visual Resources</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1i8D9HzT4epCBKpRFhF8rybLw1IZ_hLtF/preview', 'Charts')">
-                        <span class="icon video-icon">▶️</span><span>Charts, Diagrams & Drawings</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_Xz2qWJFqVA6KP1SlCxIDeeD4QtwFcSf/preview', 'Chalkboard')">
-                        <span class="icon video-icon">▶️</span><span>Chalkboard & Cartoons</span>
-                    </div>
-
-                    <h3>5.2 Boards & Print</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zPHLAdHR4j51gK7pKj3Vxl1E7YJxFiwx/preview', 'Bulletin Board')">
-                        <span class="icon video-icon">▶️</span><span>Bulletin & Flannel Boards</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WcltVYFrmXDiM66DC1xapBFvcb8AtFSi/preview', 'Flip Chart')">
-                        <span class="icon video-icon">▶️</span><span>Flip Charts & Flash Cards</span>
-                    </div>
-
-                    <h3>5.3 Projected & Electronic</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1R8CJnDbk08hjHibH3RzDoQeX_ZaALW-Q/preview', 'Projected')">
-                        <span class="icon video-icon">▶️</span><span>PPT & OHP</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1umzfl78xYpHiIkEFUeXEg2oA1XLvsu4J/preview', 'Video')">
-                        <span class="icon video-icon">▶️</span><span>Moving Visuals (Video)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mUmYHT2yu1MZFhKuUwtziJc1Soggs_-I/preview', 'Models')">
-                        <span class="icon video-icon">▶️</span><span>Models & Real Objects</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1O-PEPFBpVg35k0lmt_g-WmyZdPlZlORy/preview', 'Computer')">
-                        <span class="icon video-icon">▶️</span><span>Electronic Media & Computers</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(5)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - ASSESSMENT & EVALUATION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <h3>6.1 Evaluation Basics</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HK7Xqvn_IeFKKQfV4dCn4GklrdrYhAq7/preview', 'Evaluation Intro')">
-                        <span class="icon video-icon">▶️</span><span>Purpose & Scope of Evaluation</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Vm3SquidQa6_lW4SlMTLqG4pN0wuuUlS/preview', 'Tools')">
-                        <span class="icon video-icon">▶️</span><span>Evaluation Tools & Techniques</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fv19uUPHPS0GwFltEwr49CWxeipCHs8s/preview', 'Performance')">
-                        <span class="icon video-icon">▶️</span><span>Performance Assessment & Barriers</span>
-                    </div>
-
-                    <h3>6.2 Knowledge & Skills</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dsfdGKC6TM4Yo1ut5gdz_WmiILDKUKYV/preview', 'Knowledge')">
-                        <span class="icon video-icon">▶️</span><span>Assessing Knowledge (MCQ, Essay) & Skills</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12lHq9hqMWymCV_r4ppNPVNsYjMN5L6X1/preview', 'Attitude')">
-                        <span class="icon video-icon">▶️</span><span>Assessment of Attitudes</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(6)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - GUIDANCE & COUNSELING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KA7_1rS3_-JK1rD6wWKM8bwn5VQkBmLa/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Guidance & Counseling</span>
-                    </div>
-                    <h3>7.1 Foundations</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tPaesv4MF4G_IaLxurDqnEVgWi44cJ4k/preview', 'Principles')">
-                        <span class="icon video-icon">▶️</span><span>Principles of Guidance & Counseling</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15ytO3-QAXfTfQH1deCnUNs_VrqQnThxR/preview', 'Process')">
-                        <span class="icon video-icon">▶️</span><span>Counseling Process & Types</span>
-                    </div>
-
-                    <h3>7.2 Services & Issues</h3>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nP5kHlzb4K4UonIk-CFFX0aDFxISF2eR/preview', 'Student Issues')">
-                        <span class="icon video-icon">▶️</span><span>Counseling Issues & Discipline</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(7)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit8">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - ETHICS & EBT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1NZvWpswIqu7QScCsWSS_Qyb_Ij-sGEXC/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Ethics & EBT</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12DUtfWo8uOsZy9HTCZasl0A6quaNCm0l/preview', 'Value Based Ed')">
-                        <span class="icon video-icon">▶️</span><span>Value-Based Education</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZTYQ_-JMNO3w05tj_tzLIH9JbvjTjqO9/preview', 'Decision Making')">
-                        <span class="icon video-icon">▶️</span><span>Ethical Decision Making</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(8)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -564,81 +290,291 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-body" class="modal-body">
+            </div>
     </div>
 
     <script>
-        // --- 1. QUIZ DATA ---
+        // --- 1. EDUCATION QUIZ DATA ---
         const QUIZ_DATA = {
-            1: [ // Unit 1: Foundations
-                { q: "Education is a process of:", o: ["Changing behavior", "Filling a bucket", "Memorization", "None"], a: 0 },
+            1: [ // Intro & Foundations
                 { q: "Which philosophy emphasizes 'learning by doing'?", o: ["Idealism", "Pragmatism", "Realism", "Naturalism"], a: 1 },
-                { q: "Educational technology involves:", o: ["Only hardware", "Only software", "Both hardware & software", "None"], a: 2 },
-                { q: "The primary aim of nursing education is to prepare nurses for:", o: ["Teaching", "Service", "Research", "All of the above"], a: 3 },
-                { q: "Andragogy refers to the art of teaching:", o: ["Children", "Adults", "Animals", "Patients"], a: 1 }
+                { q: "The term 'Education' is derived from the Latin word 'Educare' which means:", o: ["To mould", "To bring up or nourish", "To instruct", "To discipline"], a: 1 },
+                { q: "Which is NOT a component of the teaching-learning process?", o: ["Teacher", "Learner", "Curriculum", "Politics"], a: 3 },
+                { q: "The modern concept of education focuses on:", o: ["Teacher-centered", "Child/Learner-centered", "Subject-centered", "School-centered"], a: 1 },
+                { q: "Naturalism in education was advocated by:", o: ["Rousseau", "Dewey", "Plato", "Aristotle"], a: 0 }
             ],
-            2: [ // Unit 2: Planning
-                { q: "A curriculum is:", o: ["Syllabus only", "Total learning experience", "Textbooks", "Exam schedule"], a: 1 },
-                { q: "Behavioral objectives should be:", o: ["Vague", "SMART (Specific, Measurable...)", "Lengthy", "Complex"], a: 1 },
-                { q: "The role of a teacher as a 'facilitator' means:", o: ["Dictating notes", "Guiding learning", "Testing only", "Ignoring students"], a: 1 },
-                { q: "Emotional Intelligence (EI) includes:", o: ["Self-awareness", "IQ", "Memory", "Physical strength"], a: 0 },
-                { q: "Lesson planning helps in:", o: ["Wasting time", "Effective teaching", "Confusing students", "Skipping topics"], a: 1 }
+            2: [ // Assessment & Planning
+                { q: "Which assessment is done at the end of a course?", o: ["Formative", "Summative", "Diagnostic", "Placement"], a: 1 },
+                { q: "A 'Behavioral Objective' should be:", o: ["Vague", "Measurable and Observable", "Teacher-focused", "Lengthy"], a: 1 },
+                { q: "Emotional Intelligence (EQ) includes:", o: ["IQ score", "Self-awareness and Empathy", "Physical strength", "Memory capacity"], a: 1 },
+                { q: "Which factor influences curriculum development?", o: ["Social needs", "Student's height", "Weather", "None of these"], a: 0 },
+                { q: "The core curriculum refers to:", o: ["Optional subjects", "Compulsory subjects for all", "Extracurricular activities", "Sports"], a: 1 }
             ],
-            3: [ // Unit 3: Implementation
-                { q: "Microteaching is a technique for:", o: ["Teacher training", "Student assessment", "Clinical care", "Patient education"], a: 0 },
-                { q: "A 'Panel Discussion' involves:", o: ["One speaker", "Group of experts", "Written exam", "Silent reading"], a: 1 },
-                { q: "PBL stands for:", o: ["Problem Based Learning", "Project Based Lesson", "Patient Basic Life", "None"], a: 0 },
-                { q: "Skill lab is used for:", o: ["Theory class", "Practicing procedures", "Recreation", "Eating"], a: 1 },
-                { q: "Role play helps in developing:", o: ["Writing skills", "Empathy & Communication", "Reading speed", "Math skills"], a: 1 }
+            3: [ // Implementation
+                { q: "Microteaching is primarily used for:", o: ["Teaching students", "Training teachers in specific skills", "Evaluating curriculum", "Patient care"], a: 1 },
+                { q: "Which method is best for large group instruction?", o: ["Lecture", "Tutorial", "Case study", "Demonstration"], a: 0 },
+                { q: "A Panel Discussion involves:", o: ["One speaker", "A group of experts discussing a topic", "Acting out a role", "Field trip"], a: 1 },
+                { q: "Simulation in nursing education allows students to:", o: ["Harm real patients", "Practice skills in a safe environment", "Skip classes", "Avoid learning"], a: 1 },
+                { q: "OSCE stands for:", o: ["Objective Structured Clinical Examination", "Overall Student Clinical Evaluation", "Oral Structured Clinical Exam", "None"], a: 0 }
             ],
-            4: [ // Unit 4: Clinical
-                { q: "A 'Nursing Round' allows students to:", o: ["Sleep", "Observe patient care at bedside", "Write exams", "Play games"], a: 1 },
-                { q: "Process recording is used in:", o: ["Surgical nursing", "Mental health nursing", "Community nursing", "Pediatrics"], a: 1 },
-                { q: "Preceptorship involves:", o: ["1:1 guidance by experienced nurse", "Classroom lecture", "Online test", "Self-study"], a: 0 },
-                { q: "Bedside clinic focuses on:", o: ["Disease pathology", "Patient problems & care", "Hospital admin", "Theory only"], a: 1 },
-                { q: "OSCE stands for:", o: ["Objective Structured Clinical Examination", "Oral Surgical Clinical Exam", "None", "Online Student Care Exam"], a: 0 }
+            4: [ // Clinical Teaching
+                { q: "The Bedside Clinic method involves:", o: ["Lecture in classroom", "Discussion in the library", "Teaching in the presence of the patient", "Watching a video"], a: 2 },
+                { q: "A Nursing Round is used to:", o: ["Punish students", "Discuss patient care plans and progress", "Clean the ward", "Take attendance"], a: 1 },
+                { q: "Concept Mapping helps students to:", o: ["Draw pictures", "Link relationships between concepts", "Waste time", "Memorize text"], a: 1 },
+                { q: "Which is a clinical teaching strategy?", o: ["Case Study", "Nursing Conference", "Process Recording", "All of the above"], a: 3 },
+                { q: "Preceptorship involves:", o: ["One-to-one guidance by an experienced nurse", "Classroom lecture", "Online exam", "Self-study"], a: 0 }
             ],
-            5: [ // Unit 5: Media
-                { q: "Which is a projected aid?", o: ["Chalkboard", "OHP (Overhead Projector)", "Chart", "Model"], a: 1 },
-                { q: "A 'Flash Card' is best used for:", o: ["Large groups", "Small groups", "Individual study", "Cinema"], a: 1 },
-                { q: "The most common non-projected aid is:", o: ["Chalkboard", "Video", "Computer", "Slide"], a: 0 },
-                { q: "Three-dimensional aids include:", o: ["Poster", "Model", "Slide", "Photograph"], a: 1 },
-                { q: "Audio aids appeal to:", o: ["Eyes", "Ears", "Touch", "Smell"], a: 1 }
+            5: [ // Educational Media
+                { q: "Which of the following is a Projected Aid?", o: ["Chalkboard", "Overhead Projector (OHP)", "Model", "Chart"], a: 1 },
+                { q: "A Flannel Board relies on:", o: ["Magnets", "Adhesion/Friction", "Electricity", "Glue"], a: 1 },
+                { q: "Which is a 3D instructional aid?", o: ["Photograph", "Model/Specimen", "Slide", "Poster"], a: 1 },
+                { q: "The primary purpose of AV aids is to:", o: ["Entertain", "Enhance learning and retention", "Replace the teacher", "Decorate the room"], a: 1 },
+                { q: "A 'Real Object' used for teaching is called:", o: ["Realia", "Replica", "Simulation", "Illusion"], a: 0 }
             ],
-            6: [ // Unit 6: Evaluation
-                { q: "Evaluation determines the extent to which:", o: ["Objectives are achieved", "Time is wasted", "Money is spent", "Books are read"], a: 0 },
-                { q: "Formative evaluation is done:", o: ["At the end", "During the process", "Before starting", "Never"], a: 1 },
-                { q: "Summative evaluation is done:", o: ["Daily", "At the end of course", "Weekly", "Monthly"], a: 1 },
-                { q: "An 'Objective' test item is:", o: ["Essay", "Multiple Choice Question (MCQ)", "Oral interview", "Project"], a: 1 },
-                { q: "A checklist is used to assess:", o: ["Knowledge", "Performance/Skills", "Attitude only", "Intelligence"], a: 1 }
+            6: [ // Evaluation Strategies
+                { q: "Reliability of a test refers to:", o: ["Consistency of results", "Accuracy of content", "Length of test", "Difficulty level"], a: 0 },
+                { q: "Essay type questions are best for assessing:", o: ["Factual recall", "Critical thinking and organization", "Handwriting", "Speed"], a: 1 },
+                { q: "Multiple Choice Questions (MCQs) are:", o: ["Subjective", "Objective", "Projective", "Descriptive"], a: 1 },
+                { q: "Validity ensures the test measures:", o: ["What it is intended to measure", "How fast students write", "Student intelligence", "Teacher's knowledge"], a: 0 },
+                { q: "Formative evaluation occurs:", o: ["At the end", "During the process of learning", "Before admission", "Years later"], a: 1 }
             ],
-            7: [ // Unit 7: Guidance
-                { q: "Guidance is:", o: ["Giving advice", "Helping individual to help themselves", "Solving problems for others", "Disciplining"], a: 1 },
-                { q: "Counseling is a:", o: ["Casual talk", "Professional relationship", "Public speech", "Command"], a: 1 },
-                { q: "A key quality of a counselor is:", o: ["Judgmental", "Empathy", "Talkative", "Strict"], a: 1 },
-                { q: "Academic advising helps students with:", o: ["Personal finance", "Study & Career goals", "Family disputes", "Health only"], a: 1 },
-                { q: "Discipline in education aims at:", o: ["Punishment", "Self-control & order", "Fear", "Silence"], a: 1 }
+            7: [ // Guidance & Counseling
+                { q: "Guidance is best described as:", o: ["Giving advice", "Assisting individuals to solve problems", "Disciplining students", "Giving money"], a: 1 },
+                { q: "The key difference between guidance and counseling is:", o: ["Guidance is broader; Counseling is deeper/remedial", "No difference", "Guidance is for sick people", "Counseling is public"], a: 0 },
+                { q: "Which is a quality of a good counselor?", o: ["Judgmental", "Empathy", "Talkative", "Aggressive"], a: 1 },
+                { q: "Academic advising focuses on:", o: ["Personal life issues", "Educational progress and career", "Financial loans", "Health checkups"], a: 1 },
+                { q: "Discipline in nursing education aims at:", o: ["Punishment", "Self-control and orderliness", "Fear", "Expulsion"], a: 1 }
             ],
-            8: [ // Unit 8: Ethics
-                { q: "EBP stands for:", o: ["Evidence Based Practice", "Exam Based Performance", "Education By Practice", "None"], a: 0 },
-                { q: "Ethics in education deals with:", o: ["Right and wrong conduct", "Money", "Politics", "Technology"], a: 0 },
-                { q: "Value-based education promotes:", o: ["Moral development", "Rote learning", "Competition", "Isolation"], a: 0 },
-                { q: "A teacher should maintain:", o: ["Favoritism", "Confidentiality & Fairness", "Distance", "Strictness"], a: 1 },
-                { q: "Evidence for nursing practice comes from:", o: ["Research", "Opinion", "Tradition", "Guesswork"], a: 0 }
+            8: [ // Ethics & EBP
+                { q: "Evidence-Based Practice (EBP) integrates:", o: ["Tradition only", "Clinical expertise, patient values, and best evidence", "Textbook only", "Doctor's orders"], a: 1 },
+                { q: "Ethics in education deals with:", o: ["Moral principles and values", "Legal laws only", "School buildings", "Salaries"], a: 0 },
+                { q: "Veracity in ethics means:", o: ["Doing good", "Telling the truth", "Doing no harm", "Fairness"], a: 1 },
+                { q: "The Student-Faculty relationship should be based on:", o: ["Fear", "Mutual respect and trust", "Friendship only", "Competition"], a: 1 },
+                { q: "Non-maleficence means:", o: ["Do good", "Do no harm", "Be fair", "Be honest"], a: 1 }
             ]
         };
 
-        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
+        // --- 2. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "INTRODUCTION & FOUNDATIONS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1_kvkpEYzww-IRs6PvkEbGnByHWqPvqEF/preview' },
+                    { type: 'video', title: 'Education & Tech', url: 'https://drive.google.com/file/d/1I9voXkovAYOJoAh6nE6cZStRHbkuiHz7/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1lccSt30AcWZzMIPCJoA0PaMAqnejl5iU/preview' },
+                    { type: 'video', title: 'Principles & Latest Approaches', url: 'https://drive.google.com/file/d/1S6-HZZIPGy7jej-ImWa_q04DXS7k8GnQ/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1pyK8XLaQVIWqcX2KH-tSSkgoXKI6SF5o/preview' },
+                    { type: 'video', title: 'Traditional Philosophies', url: 'https://drive.google.com/file/d/1CKn52anZy1NlrmfzDINpeyF57oNTDHdu/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1InEH6FdW89Ryq2jLBaLLCpEiqs7TnBUb/preview' },
+                    { type: 'video', title: 'Modern Philosophies', url: 'https://drive.google.com/file/d/1W2QZ_3Y6GQFHA5yqmvbB_XgNCc7-9C3d/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/14nkxRXA6O9t-Ql7VP8pC4h1qBPvlLQUk/preview' },
+                    { type: 'video', title: 'Teaching & Learning Process', url: 'https://drive.google.com/file/d/1Tj1Wvwb3C1G2gXiaIzHeLmDUOzk2SJHw/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1O1wggSgi-lkbSTLqzMQMmrMcikfmEk25/preview' },
+                    { type: 'video', title: 'Latest Approaches for Learning', url: 'https://drive.google.com/file/d/1T4NeAuUrfbeTWfxXblfpJ8ONFYReGTCv/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1w-nyQaZEYfVR7inycQDh98RFo11kD1ZK/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/1TrGTGFqY087e_Gm_EcmXszMZa6uRs23l/preview' }
+                ]
+            },
+            {
+                id: 2, title: "ASSESSMENT & PLANNING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1pKo_Lj0JPHA0enLj2dorSSo4Rahpk11m/preview' },
+                    { type: 'video', title: 'Assessment & Teaching Styles', url: 'https://drive.google.com/file/d/1hrzO91fgGvU8IfTPG1okE2Pg5Ir63a5G/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1wrsT6h247KskXuD2MNBsgZgAwRE37pma/preview' },
+                    { type: 'video', title: 'Facilitator, Delegator, Learner', url: 'https://drive.google.com/file/d/1bocgoWaEvnwf0qYgcbhCEEesO59Nstb4/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1wy3hyR3-TA7M4Ghi654lR6OGr_346dv7/preview' },
+                    { type: 'video', title: 'Determinants of Learning', url: 'https://drive.google.com/file/d/16GY8ZI9euMZG7YO7HVQKEdEXnHOXt1wP/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1WZQcmSfCMvAYIwQG--d2h1aHItH8Dat6/preview' },
+                    { type: 'video', title: 'Emotional Intelligence', url: 'https://drive.google.com/file/d/1eSzmq_QCNTED9dxvhSXUph8xVdsL3GhV/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1dXDZctyVa2mSMjOZndmuLw0qf51iOnru/preview' },
+                    { type: 'video', title: 'Curriculum & Design', url: 'https://drive.google.com/file/d/1PGjK-2fz1CJFAKFLeXiU5da00PEMhCSC/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1a8oxUoIWvhYrk9UPRZjZ9gh3xOldLGSO/preview' },
+                    { type: 'video', title: 'Approaches of Curriculum', url: 'https://drive.google.com/file/d/19CUywIL5IPMMob6T2uTnXzm5_kuOkfmT/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1gRhPXz6FBtqaRcL5paDfYT3Frb7eOixL/preview' },
+                    { type: 'video', title: 'Behavioral Objectives', url: 'https://drive.google.com/file/d/159amS02sIzQF5FBOWyXFLAszBL_McR9p/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1fjm00Jmws_2YrYe4mvxElh1hPGqu_ij4/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/1zuSsKXFQPxdcJFmoheW3tbTDLGDkpv1z/preview' }
+                ]
+            },
+            {
+                id: 3, title: "IMPLEMENTATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1fQW7Ub6bHyJjy3_ZpNyS82AXfKZrBnAY/preview' },
+                    { type: 'video', title: 'Classroom & Strategies', url: 'https://drive.google.com/file/d/1eba1oqgtLBDL_vxZmljO0qDx8N08cclz/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1i2lBw59JNxbjumzhqdXK29cndj2Pvd6s/preview' },
+                    { type: 'video', title: 'Lecture, GD, Microteaching', url: 'https://drive.google.com/file/d/1IFaXe4ZZgHL7gw1ZtZDMB6T3eMYUY4rS/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/18Upe6QuobOsiBzuhX-CHDINWuGdt6CcZ/preview' },
+                    { type: 'video', title: 'Symposium & Seminar', url: 'https://drive.google.com/file/d/1090F2FTU3Iz7klwrhLRSfE2FUQ14nwfb/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1v5cMHNNcwFpzE547vGXcSribRmGN5M5f/preview' },
+                    { type: 'video', title: 'Skill Lab & Simulation', url: 'https://drive.google.com/file/d/1UvcmGcusbe-3AdaAWEkcw4gISPi_l6HQ/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1xhjP8Lh167jv-mCkMvuQ9ilbolTQRFEz/preview' },
+                    { type: 'video', title: 'Workshop & Exhibition', url: 'https://drive.google.com/file/d/1sjUmIc9Kk1KDukPtw-4DiKF61VstoFV6/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1tLQhbf_AhQSM8k4O5I8w2IHJfWKFi8Wy/preview' },
+                    { type: 'video', title: 'Role Play & Trips', url: 'https://drive.google.com/file/d/1Kd5QAR2OLw272-HVKNB5uqfrOKH8XOd_/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1lO_UzIo6cfhvN4FGL59PvqZTKgjTYvo4/preview' },
+                    { type: 'video', title: 'Self Directed Learning', url: 'https://drive.google.com/file/d/1sZWBo_qKbqLBzZIXz546PHyGB4ILde4I/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1aRI-1RfAvzXNMC731PXnKrAcIRF3UKxd/preview' },
+                    { type: 'video', title: 'Active Based Learning', url: 'https://drive.google.com/file/d/15thAwDK2lz8VcIfSU6AmGIxBsLe9HvMG/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1eC8MNSGlVTtIP208u6KUrxVw3uhjmkWR/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/10aQycMBazRYyJshu72vyzi8Lv_bbM4ov/preview' }
+                ]
+            },
+            {
+                id: 4, title: "TEACHING IN CLINICAL SETTING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1lxfwE6TqT9ownvMd73T1oK0SK7llEMWB/preview' },
+                    { type: 'video', title: 'Clinical Learning Environment', url: 'https://drive.google.com/file/d/1dS7BVeX6WHgq3P1OC2NJ9znkK1CMEglA/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1Y04DEURR5ncu6pZCwkFcT633rSCo7YqC/preview' },
+                    { type: 'video', title: 'Models & PBL', url: 'https://drive.google.com/file/d/17ZfWpKHz6z5J_OF3YC35TG7eqlazw6lL/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1JgN0asTgwwDLl-cEgFPrZoIR5hZGZokE/preview' },
+                    { type: 'video', title: 'Strategies & Conference', url: 'https://drive.google.com/file/d/1PqdupElu0NRd8UO4I3mYsg5cAKpnaRxT/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1z7QIcuRu3vBXNcsnV4Rq-CrSMz4XZbEE/preview' },
+                    { type: 'video', title: 'Bedside Clinic & Case Study', url: 'https://drive.google.com/file/d/1LevVTBUXhgwmvX5vd1KdnnCTYIP8uW2O/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/113VG6m6fJgm_sBk_3I4NPq0pR-1uJsge/preview' },
+                    { type: 'video', title: 'Nursing Round', url: 'https://drive.google.com/file/d/1yrltIIYkoj7mgmfZPZs7CiMor2vmcqiO/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1MxjlBlre_UnBHCJWMYwb4zlWrDFJhvP1/preview' },
+                    { type: 'video', title: 'Concept Mapping', url: 'https://drive.google.com/file/d/1dnqWoZKJzTurJoKaXxNLZwDRIGJxMyxA/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1jl-bHkiaZuOG9hl7Uahi8jwa3CaNV13f/preview' },
+                    { type: 'video', title: 'Debate & Games', url: 'https://drive.google.com/file/d/1ZoHNFjYRGNcW6XY9WJYwcaq33O1Mwfui/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/18Z3y0MXn8rerCUQuQNDi7yVQ2C47Za1D/preview' },
+                    { type: 'video', title: 'Role Play & PBL', url: 'https://drive.google.com/file/d/17m1YqVKIt8DuVKSAuz9rZtMKBaZT_y5_/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1wz5yUILX7SSnKEaTEUYjjSwttFTHCKE9/preview' },
+                    { type: 'video', title: 'Questioning & Assignments', url: 'https://drive.google.com/file/d/1HiJwgiomOe6D1eNRSNtt0CZS0L2tMFCh/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1xfZnqZQZV6RAP-BK9BiglBBh19G2z8fV/preview' },
+                    { type: 'video', title: 'Process Recording', url: 'https://drive.google.com/file/d/1tkf-K6t1MuKxkGqngMb5a_RCWMd6MUSd/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1rlLQ4xGDM3orEH7DWrjocD2FAryklZvQ/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/1Y5DpylRgLn_mAUmarBOHyTwP2YiaNucz/preview' }
+                ]
+            },
+            {
+                id: 5, title: "EDUCATIONAL / TEACHING MEDIA",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1q5DGXHk-sITzcsS31kjfXxH3PRo8PGp8/preview' },
+                    { type: 'video', title: 'Communication Media', url: 'https://drive.google.com/file/d/1KSC_xg5J_2QxBDfEjn43hx_NpZi0ORPb/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1xXDWPmy727C6-6TLGlj38trw7Hxz7AaA/preview' },
+                    { type: 'video', title: 'Non-Proj: Drawings/Charts', url: 'https://drive.google.com/file/d/1i8D9HzT4epCBKpRFhF8rybLw1IZ_hLtF/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1ZZoZ7D5d9sOIkLL-bsUtCx4XDxYuheTE/preview' },
+                    { type: 'video', title: 'Non-Proj: Graphs/Posters', url: 'https://drive.google.com/file/d/1hyV0V2v4UfvccUAnqLBT9rmhxTCG34ai/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1-4kB8c3KiHd_imN_k68eFkoRXg043WBU/preview' },
+                    { type: 'video', title: 'Non-Proj: Chalkboard/Cartoon', url: 'https://drive.google.com/file/d/1_Xz2qWJFqVA6KP1SlCxIDeeD4QtwFcSf/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1ngRAmDL8g9ID9jPUawadCGjUFZNXynrk/preview' },
+                    { type: 'video', title: 'Non-Proj: Bulletin/Flannel', url: 'https://drive.google.com/file/d/1zPHLAdHR4j51gK7pKj3Vxl1E7YJxFiwx/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/121oEzguQLjElkymSIQvDJo6lo69Gr7bq/preview' },
+                    { type: 'video', title: 'Non-Proj: Flip Chart/Cards', url: 'https://drive.google.com/file/d/1WcltVYFrmXDiM66DC1xapBFvcb8AtFSi/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1UdEq8fmHfCrCRbIWYBVFL0ZprnlcXBFC/preview' },
+                    { type: 'video', title: 'Non-Proj: Pictures/Print', url: 'https://drive.google.com/file/d/1PymhOe_kUtuiOHDcrLAmcdbn9n6I2-CN/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1f65TEjun1iaJAzhRgkm_rdIKQk0rbZct/preview' },
+                    { type: 'video', title: 'Projected: Strips/Microscope', url: 'https://drive.google.com/file/d/1YnDKF2TrDBeqARYAH6uD4nbuaZDXlt9D/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1JnubJezyGoxTmND8AavyN8CW_iT7pD_7/preview' },
+                    { type: 'video', title: 'Projected: PPT/OHP', url: 'https://drive.google.com/file/d/1R8CJnDbk08hjHibH3RzDoQeX_ZaALW-Q/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1Awt2ncseGixvy0KqkohGCczcf1zn4_ZJ/preview' },
+                    { type: 'video', title: 'Moving Visuals: Video/DVD', url: 'https://drive.google.com/file/d/1umzfl78xYpHiIkEFUeXEg2oA1XLvsu4J/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1YyRan8qZjVXugFKUdXLD3vQTQleQhDay/preview' },
+                    { type: 'video', title: 'Real Objects & Models', url: 'https://drive.google.com/file/d/1mUmYHT2yu1MZFhKuUwtziJc1Soggs_-I/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1cSDRIGlAXxVOScQDn8F8ZdC_VbQGVjN2/preview' },
+                    { type: 'video', title: 'Audio Aids & Mobile Tech', url: 'https://drive.google.com/file/d/1-T_olYvk__fBiiIzGhWFnczpKqIoYHPQ/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1NkI6aYNvD2-e_DWS46xc-OA4lw3Rq6Fo/preview' },
+                    { type: 'video', title: 'Electronic/Computer Resources', url: 'https://drive.google.com/file/d/1O-PEPFBpVg35k0lmt_g-WmyZdPlZlORy/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1PMHmFdW_Vb29GPmBn-4bNwvnmh4531-4/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/18Z5W0giJT8t11yo0b-P2BhKdKFnNPEPs/preview' }
+                ]
+            },
+            {
+                id: 6, title: "EVALUATION METHODS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1mgwZzDnam2k_9Qbd0g35baeqkKYAPGtd/preview' },
+                    { type: 'video', title: 'Assessment & Evaluation', url: 'https://drive.google.com/file/d/1HK7Xqvn_IeFKKQfV4dCn4GklrdrYhAq7/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1lgpZVg5bbgx_mb1YcW-ltYlpPNu1Ib7J/preview' },
+                    { type: 'video', title: 'Scope & Tools', url: 'https://drive.google.com/file/d/1Vm3SquidQa6_lW4SlMTLqG4pN0wuuUlS/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/158xpuONdztWWa-4V_dsZQCB2QezLp6f0/preview' },
+                    { type: 'video', title: 'Performance Based & Barriers', url: 'https://drive.google.com/file/d/1fv19uUPHPS0GwFltEwr49CWxeipCHs8s/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1gtS6XRixY0IkITpT9umDSKNNrY_I9YZS/preview' },
+                    { type: 'video', title: 'Essay, Short Ans, MCQ', url: 'https://drive.google.com/file/d/1dsfdGKC6TM4Yo1ut5gdz_WmiILDKUKYV/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1U6leyR9RYvBbd5hPUwXxQqvGcuzpL0gU/preview' },
+                    { type: 'video', title: 'Communication & Attitude', url: 'https://drive.google.com/file/d/12lHq9hqMWymCV_r4ppNPVNsYjMN5L6X1/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1ap4lBAzJUWpM_HI4mtBCvpENP1Yg1Gvi/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/1JctiHeXvpmvRmhtmOX6LOLlfAu6Br2CX/preview' }
+                ]
+            },
+            {
+                id: 7, title: "GUIDANCE & COUNSELING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1KA7_1rS3_-JK1rD6wWKM8bwn5VQkBmLa/preview' },
+                    { type: 'video', title: 'Scope & Principles', url: 'https://drive.google.com/file/d/1tPaesv4MF4G_IaLxurDqnEVgWi44cJ4k/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1FvNYLctSqvL3TutmTUbkjvpmHTd64OCc/preview' },
+                    { type: 'video', title: 'Counseling Process & Types', url: 'https://drive.google.com/file/d/15ytO3-QAXfTfQH1deCnUNs_VrqQnThxR/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1cdEuhtnJbgku__SG9Mmq8oYL83k8MMU7/preview' },
+                    { type: 'video', title: 'Role, Issues & Discipline', url: 'https://drive.google.com/file/d/1nP5kHlzb4K4UonIk-CFFX0aDFxISF2eR/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1CemWRAq5n8oubcwk1HMqvRjNXGYCfCcv/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/14Llo_QjXYeJkMEB0wBofmO6qEoJ4kpjx/preview' }
+                ]
+            },
+            {
+                id: 8, title: "ETHICS & EBP",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1NZvWpswIqu7QScCsWSS_Qyb_Ij-sGEXC/preview' },
+                    { type: 'video', title: 'Ethics & Value Based Edu', url: 'https://drive.google.com/file/d/12DUtfWo8uOsZy9HTCZasl0A6quaNCm0l/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1mEnLLnb2_Qx0hF4cw3dS58ZRgOSnmSYr/preview' },
+                    { type: 'video', title: 'Ethical Decision Making', url: 'https://drive.google.com/file/d/1ZTYQ_-JMNO3w05tj_tzLIH9JbvjTjqO9/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/15q7BATvFtcIT3pAiEH7ftLAaGpQpxQiP/preview' },
+                    { type: 'video', title: 'Student Faculty & EBP', url: 'https://drive.google.com/file/d/1NRek_KC_vWx6DNepHwYRoFxkDVkslICY/preview' },
+                    { type: 'notes', title: 'Lecture Note', url: 'https://drive.google.com/file/d/1yULTZv4FgE7ilbnsQspCex7ytPfJLVBP/preview' },
+                    { type: 'notes', title: 'Provided Quiz Link', url: 'https://drive.google.com/file/d/1ZX-scMKRp8eGsTPnsY6z7vPqXqrBovXq/preview' }
+                ]
+            }
+        ];
+
+        // --- 3. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
 
-        function openResource(type, url, title) {
-            if(type === 'coming-soon') return;
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            if(type === 'quiz') return '✍️';
+            return '📄';
+        }
 
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 4. MODAL LOGIC & NAVIGATION CONTROL ---
+        
+        function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -648,16 +584,17 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            body.style.display = 'flex'; // Default flex for centering
+            
+            // FIX: Restore flex centering for Video (looks better centered)
+            body.style.display = 'flex';
 
-            // FIX: Restore flex centering for Video/Doc
             if (type === 'quiz') {
-                // Handled by openQuiz
+                openQuiz(url); 
             }
             else {
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
                 
-                // Videos get 16:9, Notes get full height
+                // FIX: Apply correct class based on type
                 let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
                 body.innerHTML = `<iframe 
@@ -727,6 +664,7 @@
             }
         }
 
+        // --- 5. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
@@ -735,14 +673,9 @@
             }
         };
 
-        // Auto-expand first unit
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnitHeader = document.querySelector('.unit-header');
-            if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
-            }
-        });
-    </script>
+        // Initialize
+        renderPage();
 
+    </script>
 </body>
 </html>
