@@ -16,16 +16,19 @@
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; 
+            /* FIXED: 'manipulation' allows double-tap to zoom (if enabled) and panning, 
+               whereas 'none' completely disabled the browser's ability to handle gestures. */
+            touch-action: manipulation; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* Default touch action for app-feel */
-            touch-action: none;
+            overflow: hidden; /* Default locked state for app interface */
         }
         
         #app { 
             width: 100%; max-width: 480px; margin: 0 auto; 
-            background: var(--bg-card); height: 100%; position: relative; 
+            background: var(--bg-card); 
+            height: 100%; 
+            position: relative; 
             display: flex; flex-direction: column; box-shadow: var(--shadow-lg); 
             overflow: hidden; 
         }
@@ -36,11 +39,9 @@
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            overflow-y: auto; 
-            -webkit-overflow-scrolling: touch; 
+            /* FIXED: Visible overflow ensures content isn't clipped when zoomed */
+            overflow: visible; 
             z-index: 50;
-            /* ZOOM FIX: Explicitly allow pinch zoom in this container */
-            touch-action: pan-x pan-y pinch-zoom; 
         }
 
         iframe { 
@@ -48,7 +49,9 @@
             height: 100%; 
             border: none; 
             display: block; 
-            background: #fff; 
+            background: #fff;
+            /* FIXED: Explicitly allow all gestures on the iframe surface */
+            touch-action: pan-x pan-y pinch-zoom;
         }
 
         /* --- UI COMPONENTS --- */
@@ -73,7 +76,6 @@
         .menu-item h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 4px; }
         .menu-item p { font-size: 0.85rem; color: var(--text-muted); }
         .menu-arrow { color: var(--primary); }
-        /* Section header style removed as it is no longer used, but keeping class just in case */
         .section-header { background: #f1f5f9; border: none; pointer-events: none; padding: 10px 0; }
         .section-header h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
@@ -216,38 +218,41 @@
         return id;
     }
     
-    // --- ZOOM LOGIC ---
+    // --- FIXED ZOOM LOGIC ---
     function setZoomable(enabled) {
-        const head = document.head;
-        const oldMeta = document.getElementById('viewport-meta');
-        if (oldMeta) head.removeChild(oldMeta);
-        
-        const meta = document.createElement('meta');
-        meta.id = 'viewport-meta';
-        meta.name = 'viewport';
-        
-        // Grab global elements to toggle overflow
+        const meta = document.getElementById('viewport-meta');
         const body = document.body;
         const html = document.documentElement;
+        const appDiv = document.getElementById('app');
 
         if (enabled) {
-            // UNLOCKED: Use this when reading PDFs/Documents
-            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
+            // UNLOCKED: Reading Mode
+            // 1. Tell browser zooming is allowed via Meta
+            meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes');
             
-            // Unlock overflow so the browser allows the viewport to change
+            // 2. Unlock scrolling on root elements so the view can expand
             body.style.overflow = "auto";
             html.style.overflow = "auto";
-            body.style.touchAction = "manipulation"; // Better touch support
-        } else {
-            // LOCKED: Use this for Dashboard/Menus
-            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
             
-            // Lock overflow back to prevent app scrolling
+            // 3. CRITICAL: Unlock the #app container so it doesn't clip the zoomed content
+            appDiv.style.height = "auto";
+            appDiv.style.minHeight = "100%";
+            appDiv.style.overflow = "visible"; // Allow content to spill out when zoomed
+            
+        } else {
+            // LOCKED: Dashboard Mode
+            // 1. Tell browser zooming is disabled
+            meta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            
+            // 2. Lock scrolling to prevent the 'app' from bouncing
             body.style.overflow = "hidden";
             html.style.overflow = "hidden";
-            body.style.touchAction = "none";
+            
+            // 3. Constrain #app to viewport
+            appDiv.style.height = "100%";
+            appDiv.style.minHeight = "0";
+            appDiv.style.overflow = "hidden";
         }
-        head.appendChild(meta);
     }
 
     function getPermissionKey(course, section) {
@@ -500,7 +505,6 @@
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if(!doc) return;
-                    // Attempt to inject meta tag (May be blocked by CORS if not same domain)
                     const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
