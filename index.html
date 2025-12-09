@@ -19,7 +19,6 @@
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* NO touch-action here — critical for zoom */
         }
         
         #app { 
@@ -32,7 +31,6 @@
         .view { 
             flex: 1; padding: 24px; overflow-y: auto; display: none; 
             animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; 
-            /* NO touch-action: none — it blocks zoom globally */
         }
         .view.active { display: flex; flex-direction: column; }
         
@@ -44,7 +42,6 @@
             overflow: auto; 
             -webkit-overflow-scrolling: touch; 
             z-index: 50;
-            /* Do NOT set touch-action here — let browser handle it */
         }
 
         iframe { 
@@ -143,9 +140,7 @@
             <div class="menu-item" style="border-color: var(--primary);" onclick="app.checkAccessAndOpen('3D', 'Systems')"><div><h3 style="color:var(--primary)">3D Models</h3><p>Interactive Anatomy</p></div><span class="menu-arrow">&#10095;</span></div>
             
             <div class="menu-item hidden" onclick="app.navToCourse('EXAMS')"><div><h3>Nursing Exams</h3><p>NORCET, ESCI Exclusive Q&A</p></div><span class="menu-arrow">&#10095;</span></div>
-            
             <div class="menu-item hidden" onclick="app.checkAccessAndOpen('REQ', 'Documents')"><div><h3>Nursing Requirements</h3><p>Document Checklist</p></div><span class="menu-arrow">&#10095;</span></div>
-            
             <div class="menu-item hidden" onclick="app.checkAccessAndOpen('COMM', 'Basics')"><div><h3>Communicative English</h3><p>Language Fundamentals</p></div><span class="menu-arrow">&#10095;</span></div>
         </div>
     </div>
@@ -199,7 +194,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec  ";
+    const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec";
 
     const NO_DISCOUNT_KEYS = [
         'msc_first_year', 'msc_second_year', '3d_models', 
@@ -213,7 +208,6 @@
         return id;
     }
     
-    // --- FINAL ZOOM FIX: ONLY CHANGE VIEWPORT META ---
     function setZoomable(enabled) {
         const meta = document.getElementById('viewport-meta');
         if (enabled) {
@@ -253,7 +247,7 @@
                 { label: 'Mental Health Nursing', link: 'msc_1_mental_health_nursing.html' },
                 { label: 'Nursing Research & Stats', link: 'msc_1_nursing_research_and_statistics.html' },
                 { label: 'OBG Nursing', link: 'msc_1_obgyn_nursing.html' },
-                { label: 'Previous Year Question Papers', link: 'msc1qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'msc1qp.html' }
             ],
             'Second Year': [
                 { label: 'Child Health Nursing', link: 'msc_2_child_health_nursing.html' },
@@ -262,7 +256,7 @@
                 { label: 'Nursing Management', link: 'msc_2_nursing_management' },
                 { label: 'Mental Health Nursing', link: 'msc_2_mental_health_nursing' },
                 { label: 'Medical Surgical Nursing', link: 'msc_2_medical_surgical_nursing' },
-                { label: 'Previous Year Question Papers', link: 'msc2qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'msc2qp.html' }
             ]
         },
         'BSc': {
@@ -272,20 +266,20 @@
                 { label: 'Applied Physiology', link: 'bsc_1_applied_physiology.html' }, 
                 { label: 'Applied Anatomy', link: 'bsc_1_applied_anatomy.html' }, 
                 { label: 'Nursing Foundation', link: 'bsc_1_nursing_foundation.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc1qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc1qp.html' }
             ],
             'Semester 2': [ 
                 { label: 'Applied Nutrition', link: 'bsc_2_applied_nutrition.html' }, 
                 { label: 'Applied Biochemistry', link: 'bsc_2_applied_biochemistry.html' }, 
                 { label: 'Nursing Foundation', link: 'bsc_2_nursing_foundation.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc2qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc2qp.html' }
             ],
             'Semester 3': [ 
                 { label: 'Pharmacology', link: 'bsc_3_pharmacology.html' }, 
                 { label: 'Pathology', link: 'bsc_3_pathology.html' }, 
                 { label: 'Applied Microbiology', link: 'bsc_3_applied_microbiology.html' }, 
                 { label: 'Adult Health Nursing', link: 'bsc_3_adult_health_nursing.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc3qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc3qp.html' }
             ],
             'Semester 4': [ 
                 { label: 'Pharmacology II', link: 'bsc_4_pharmacology.html' }, 
@@ -293,7 +287,7 @@
                 { label: 'Adult Health Nursing II', link: 'bsc_4_adult_health_nursing.html' }, 
                 { label: 'Professionalism', link: 'bsc_4_professionalism.html' }, 
                 { label: 'Genetics', link: 'bsc_4_genetics.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc4qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc4qp.html' }
             ],
             'Semester 5': [ 
                 { label: 'Forensic Nursing & Law', link: 'bsc_5_forensic_nursing_indian_law.html' }, 
@@ -301,20 +295,20 @@
                 { label: 'Community Health Nursing', link: 'bsc_5_community_health_nursing.html' }, 
                 { label: 'Mental Health Nursing', link: 'bsc_5_mental_health_nursing.html' }, 
                 { label: 'Child Health Nursing', link: 'bsc_5_child_health_nursing.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc5qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc5qp.html' }
             ],
             'Semester 6': [ 
                 { label: 'Child Health Nursing II', link: 'bsc_6_child_health_nursing.html' }, 
                 { label: 'Mental Health Nursing II', link: 'bsc_6_mental_health_nursing.html' }, 
                 { label: 'Midwifery & OBG', link: 'bsc_6_midwifery_obgyn.html' }, 
                 { label: 'Nursing Management', link: 'bsc_6_nursing_management_leadership.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc6qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc6qp.html' }
             ],
             'Semester 7': [ 
                 { label: 'Community Health Nursing II', link: 'bsc_7_community_health_nursing.html' }, 
                 { label: 'Research & Statistics', link: 'bsc_7_nursing_research_statistics.html' }, 
                 { label: 'Midwifery & OBG II', link: 'bsc_7_midwifery_obgyn.html' },
-                { label: 'Previous Year Question Papers', link: 'bsc7qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'bsc7qp.html' }
             ]
         },
         'PBBSc': {
@@ -327,7 +321,7 @@
                 { label: 'Nursing Foundation', link: 'pbbsc_1_nursing_foundation.html' }, 
                 { label: 'Maternal Nursing', link: 'pbbsc_1_maternal_nursing.html' }, 
                 { label: 'Psychology', link: 'pbbsc_1_psychology.html' },
-                { label: 'Previous Year Question Papers', link: 'pbbsc1qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'pbbsc1qp.html' }
             ],
             'Second Year': [ 
                 { label: 'Nursing Administration', link: 'pbbsc_2_nursing_service_administration.html' }, 
@@ -335,7 +329,7 @@
                 { label: 'Nursing Education', link: 'pbbsc_2_nursing_education.html' }, 
                 { label: 'Community Health Nursing', link: 'pbbsc_2_community_health_nursing.html' }, 
                 { label: 'Sociology', link: 'pbbsc_2_sociology.html' },
-                { label: 'Previous Year Question Papers', link: 'pbbsc2qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'pbbsc2qp.html' }
             ]
         },
         'GNM': {
@@ -350,20 +344,20 @@
                 { label: 'Psychology', link: 'gnm_1_psychology.html' }, 
                 { label: 'Microbiology', link: 'gnm_1_microbiology.html' }, 
                 { label: 'Anatomy & Physiology', link: 'gnm_1_anatomy_physiology.html' },
-                { label: 'Previous Year Question Papers', link: 'gnm1qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'gnm1qp.html' }
             ],
             'Second Year': [ 
                 { label: 'Medical Surgical Nursing I', link: 'gnm_2_medical_surgical_nursing.html' }, 
                 { label: 'Mental Health Nursing', link: 'gnm_2_mental_health_nursing.html' }, 
                 { label: 'Medical Surgical Nursing II', link: 'gnm_2_medical_surgical_nursing_two.html' }, 
                 { label: 'Child Health Nursing', link: 'gnm_2_child_health_nursing.html' },
-                { label: 'Previous Year Question Papers', link: 'gnm2qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'gnm2qp.html' }
             ],
             'Third Year': [ 
                 { label: 'Community Health Nursing II', link: 'gnm_3_community_health_nursing.html' }, 
                 { label: 'Midwifery', link: 'gnm_3_midwifery.html' }, 
                 { label: 'Gynecology', link: 'gnm_3_gynecology.html' },
-                { label: 'Previous Year Question Papers', link: 'gnm3qp.html' }
+                { label: '<span style="color: #b91c1c;">Previous Year Question Papers</span>', link: 'gnm3qp.html' }
             ]
         },
         '3D': { 'Systems': [{ label: '3D Models', link: '3dmodels.html' }] },
@@ -503,7 +497,6 @@
             const iframeContainer = document.getElementById('view-iframe');
             if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
             
-            // --- TRIGGER ZOOM ---
             if (viewId === 'view-iframe') {
                 setZoomable(true);
             } else {
@@ -559,6 +552,7 @@
             const subjects = COURSES[course][section];
             subjects.forEach(sub => {
                 const item = document.createElement('div'); item.className = 'menu-item';
+                // The label now contains HTML (the span with color), so we use innerHTML on the h3
                 item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
                 item.onclick = () => { this.openContent(sub.link, sub.label); };
                 list.appendChild(item);
