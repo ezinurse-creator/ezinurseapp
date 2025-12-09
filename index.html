@@ -7,7 +7,7 @@
     <style>
         :root {
             --primary: #01b9f1; --primary-dark: #003b80; --bg-card: #fffffd;
-            --secondary: #334155; --accent: #f59e0b; --bg-body: #f1f5f9;
+            --secondary: #334155; --accent: #f59e0ob; --bg-body: #f1f5f9;
             --text-main: #003b80; --text-muted: #64748b; --danger: #ef4444;
             --radius-md: 12px; --shadow-lg: 0 10px 15px -3px rgba(0,59,128,0.1);
         }
@@ -19,9 +19,7 @@
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* FIX 1: Removed global touch-action: none. 
-               Changed to manipulation to allow standard browser handling by default. */
-            touch-action: manipulation;
+            /* NO touch-action here — critical for zoom */
         }
         
         #app { 
@@ -31,28 +29,22 @@
             overflow: hidden; 
         }
 
-        /* --- UI VIEWS --- */
         .view { 
             flex: 1; padding: 24px; overflow-y: auto; display: none; 
             animation: fadeIn 0.3s ease-in-out; padding-bottom: 80px; 
-            /* FIX 2: Apply restrictive touch behavior ONLY to UI views 
-               (Dashboard, Login, Lists) to prevent zooming/bouncing there. */
-            touch-action: none;
+            /* NO touch-action: none — it blocks zoom globally */
         }
         .view.active { display: flex; flex-direction: column; }
         
-        /* --- IFRAME VIEW (Reading Mode) --- */
         #view-iframe.view { 
             padding: 0 !important; 
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            /* FIX 3: Explicitly allow overflow and specific gestures for the reading view.
-               This container acts as the viewport for the iframe. */
             overflow: auto; 
             -webkit-overflow-scrolling: touch; 
             z-index: 50;
-            touch-action: pan-x pan-y pinch-zoom; 
+            /* Do NOT set touch-action here — let browser handle it */
         }
 
         iframe { 
@@ -61,11 +53,8 @@
             border: none; 
             display: block; 
             background: #fff; 
-            /* Ensure the iframe itself doesn't block pointer events */
-            pointer-events: auto;
         }
 
-        /* --- UI COMPONENTS --- */
         .header { padding: 20px; border-bottom: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; background: var(--bg-card); z-index: 10; flex-shrink: 0; }
         .header-title { font-weight: 800; font-size: 1.5rem; color: var(--primary-dark); }
         .header-title span { color: var(--primary); }
@@ -210,7 +199,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbwgOszgwjXaCmZpr_OfOe-ymkxVECPSVOQiSdlRPNWq9jO5eja2izQT6BRex5VjudKjrQ/exec  ";
 
     const NO_DISCOUNT_KEYS = [
         'msc_first_year', 'msc_second_year', '3d_models', 
@@ -224,41 +213,14 @@
         return id;
     }
     
-    // --- ZOOM LOGIC ---
+    // --- FINAL ZOOM FIX: ONLY CHANGE VIEWPORT META ---
     function setZoomable(enabled) {
-        const head = document.head;
-        const oldMeta = document.getElementById('viewport-meta');
-        if (oldMeta) head.removeChild(oldMeta);
-        
-        const meta = document.createElement('meta');
-        meta.id = 'viewport-meta';
-        meta.name = 'viewport';
-        
-        const body = document.body;
-        const html = document.documentElement;
-
+        const meta = document.getElementById('viewport-meta');
         if (enabled) {
-            // UNLOCKED: Allow scaling up to 5x, allow user scaling
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
-            
-            // Critical: Allow global overflow so the browser viewport itself can scale
-            body.style.overflow = "auto";
-            html.style.overflow = "auto";
-            
-            // Explicitly set touch-action to manipulation (zoom/pan allowed)
-            body.style.touchAction = "manipulation"; 
         } else {
-            // LOCKED: UI Mode (Dashboard, etc)
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
-            
-            // Lock overflow to prevent general app scrolling, scroll is handled inside .view
-            body.style.overflow = "hidden";
-            html.style.overflow = "hidden";
-            
-            // We can leave manipulation here because the .view class has touch-action: none
-            body.style.touchAction = "manipulation"; 
         }
-        head.appendChild(meta);
     }
 
     function getPermissionKey(course, section) {
@@ -280,7 +242,6 @@
         return `${c}_${section.toLowerCase().replace(' ', '_')}`;
     }
 
-    // [DATA OBJECTS REMAIN UNCHANGED - TRUNCATED FOR BREVITY IN RESPONSE BUT SHOULD BE KEPT]
     const COURSES = {
         'MSc': {
             'First Year': [
@@ -338,13 +299,32 @@
     for(let i=1; i<=100; i++) REFERRAL_CODES.push(`REFPLACEHOLDER${String(i).padStart(3, '0')}`);
 
     const PAYMENT_LINKS = {
-        'GNM_Third Year_D': 'https://rzp.io/rzp/tx1GzgB0', 'GNM_Second Year_D': 'https://rzp.io/rzp/7ZEYqAR', 'GNM_First Year_D': 'https://rzp.io/rzp/m7pEmVy5',
-        'GNM_Third Year_F': 'https://rzp.io/rzp/abNPOlM', 'GNM_Second Year_F': 'https://rzp.io/rzp/7uQDIiN', 'GNM_First Year_F': 'https://rzp.io/rzp/lVAKDci',
-        'BSc_Semester 7_D': 'https://rzp.io/rzp/5brZ609', 'BSc_Semester 6_D': 'https://rzp.io/rzp/MyOzNDH3', 'BSc_Semester 5_D': 'https://rzp.io/rzp/6Pyoc2KG', 'BSc_Semester 4_D': 'https://rzp.io/rzp/XYCluxgu', 'BSc_Semester 3_D': 'https://rzp.io/rzp/vD6slz2', 'BSc_Semester 2_D': 'https://rzp.io/rzp/IdW8fls', 'BSc_Semester 1_D': 'https://rzp.io/rzp/zrR68xJd',
-        'BSc_Semester 7_F': 'https://rzp.io/rzp/9v1ESD8', 'BSc_Semester 6_F': 'https://rzp.io/rzp/XAUmBAb', 'BSc_Semester 5_F': 'https://rzp.io/rzp/f3ckmawE', 'BSc_Semester 4_F': 'https://rzp.io/rzp/0xomOEkm', 'BSc_Semester 3_F': 'https://rzp.io/rzp/XoiqWOK', 'BSc_Semester 2_F': 'https://rzp.io/rzp/xn9Spct', 'BSc_Semester 1_F': 'https://rzp.io/rzp/OepEc2wZ',
-        'PBBSc_Second Year_D': 'https://rzp.io/rzp/O7QSNXOv', 'PBBSc_First Year_D': 'https://rzp.io/rzp/TdjmSoy',
-        'PBBSc_Second Year_F': 'https://rzp.io/rzp/SG5tGnXT', 'PBBSc_First Year_F': 'https://rzp.io/rzp/2QOTgbD',
-        'MSc_Second Year_F': 'https://rzp.io/rzp/Hpr9NDg', 'MSc_First Year_F': 'https://rzp.io/rzp/SGdmSPd',
+        'GNM_Third Year_D': 'https://rzp.io/rzp/tx1GzgB0',
+        'GNM_Second Year_D': 'https://rzp.io/rzp/7ZEYqAR',
+        'GNM_First Year_D': 'https://rzp.io/rzp/m7pEmVy5',
+        'GNM_Third Year_F': 'https://rzp.io/rzp/abNPOlM',
+        'GNM_Second Year_F': 'https://rzp.io/rzp/7uQDIiN',
+        'GNM_First Year_F': 'https://rzp.io/rzp/lVAKDci',
+        'BSc_Semester 7_D': 'https://rzp.io/rzp/5brZ609',
+        'BSc_Semester 6_D': 'https://rzp.io/rzp/MyOzNDH3',
+        'BSc_Semester 5_D': 'https://rzp.io/rzp/6Pyoc2KG',
+        'BSc_Semester 4_D': 'https://rzp.io/rzp/XYCluxgu',
+        'BSc_Semester 3_D': 'https://rzp.io/rzp/vD6slz2',
+        'BSc_Semester 2_D': 'https://rzp.io/rzp/IdW8fls',
+        'BSc_Semester 1_D': 'https://rzp.io/rzp/zrR68xJd',
+        'BSc_Semester 7_F': 'https://rzp.io/rzp/9v1ESD8',
+        'BSc_Semester 6_F': 'https://rzp.io/rzp/XAUmBAb',
+        'BSc_Semester 5_F': 'https://rzp.io/rzp/f3ckmawE',
+        'BSc_Semester 4_F': 'https://rzp.io/rzp/0xomOEkm',
+        'BSc_Semester 3_F': 'https://rzp.io/rzp/XoiqWOK',
+        'BSc_Semester 2_F': 'https://rzp.io/rzp/xn9Spct',
+        'BSc_Semester 1_F': 'https://rzp.io/rzp/OepEc2wZ',
+        'PBBSc_Second Year_D': 'https://rzp.io/rzp/O7QSNXOv',
+        'PBBSc_First Year_D': 'https://rzp.io/rzp/TdjmSoy',
+        'PBBSc_Second Year_F': 'https://rzp.io/rzp/SG5tGnXT',
+        'PBBSc_First Year_F': 'https://rzp.io/rzp/2QOTgbD',
+        'MSc_Second Year_F': 'https://rzp.io/rzp/Hpr9NDg',
+        'MSc_First Year_F': 'https://rzp.io/rzp/SGdmSPd',
         '3D_Systems_F': 'https://rzp.io/rzp/Xnrnrxe',
         'EXAMS_NORCET_F': 'https://rzp.io/l/dummy-norcet-english',
         'EXAMS_ESCI_F': 'https://rzp.io/l/dummy-esci',
@@ -438,11 +418,11 @@
             const iframeContainer = document.getElementById('view-iframe');
             if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
             
-            // --- ZOOM LOGIC TRIGGER ---
+            // --- TRIGGER ZOOM ---
             if (viewId === 'view-iframe') {
-                setZoomable(true); // ENABLE Zoom
+                setZoomable(true);
             } else {
-                setZoomable(false); // DISABLE Zoom
+                setZoomable(false);
             }
 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -512,7 +492,6 @@
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if(!doc) return;
-                    // Attempt to inject meta tag (May be blocked by CORS if not same domain)
                     const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
