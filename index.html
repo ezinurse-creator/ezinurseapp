@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+    <meta id="viewport-meta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ezi Nurse | Professional Nursing Education</title>
     <style>
         :root {
@@ -19,8 +19,7 @@
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* FIX 2: Allow manipulation globally by default */
-            touch-action: manipulation; 
+            /* We let the Meta Tag handle the locking/unlocking now */
         }
         
         #app { 
@@ -28,27 +27,19 @@
             background: var(--bg-card); height: 100%; position: relative; 
             display: flex; flex-direction: column; box-shadow: var(--shadow-lg); 
             overflow: hidden; 
-            /* FIX 3: REMOVED 'touch-action: none'. We do not lock the container anymore. */
         }
 
-        /* --- SPECIFIC UI LOCKING (Makes buttons feel like an App) --- */
-        /* We apply 'touch-action: none' only to interface elements so they don't zoom */
-        .header, .menu-item, .btn, .auth-container, .paywall-container {
-            touch-action: none;
-        }
-
-        /* --- READING VIEW (UNLOCKED) --- */
+        /* --- IFRAME VIEW (Reading Mode) --- */
         #view-iframe.view { 
             padding: 0 !important; 
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            overflow: auto !important; 
+            /* Enable scrolling for the document */
+            overflow-y: auto; 
             -webkit-overflow-scrolling: touch; 
-            /* FIX 4: Explicitly allow all gestures here */
-            touch-action: pan-x pan-y pinch-zoom; 
-            /* Ensure it sits on top of everything else cleanly */
-            z-index: 5;
+            /* Ensure it covers everything */
+            z-index: 50;
         }
 
         iframe { 
@@ -57,8 +48,6 @@
             border: none; 
             display: block; 
             background: #fff; 
-            /* FIX 5: Ensure the iframe element itself allows touch */
-            touch-action: manipulation; 
         }
 
         /* --- UI COMPONENTS --- */
@@ -88,8 +77,7 @@
 
         .form-group { margin-bottom: 20px; }
         .form-label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); }
-        /* Unlock inputs so people can tap into them easily */
-        .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; touch-action: manipulation; }
+        .form-input { width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: var(--radius-md); font-size: 1rem; outline: none; }
         .password-wrapper { position: relative; display: flex; align-items: center; }
         .form-input-pass { padding-right: 45px; }
         .toggle-password-btn { position: absolute; right: 12px; background: none; border: none; cursor: pointer; color: var(--text-muted); }
@@ -225,6 +213,27 @@
         let id = localStorage.getItem('ezi_device_id');
         if (!id) { id = 'web-' + Math.random().toString(36).substr(2, 9) + Date.now(); localStorage.setItem('ezi_device_id', id); }
         return id;
+    }
+    
+    // STEP 2: The Viewport Logic
+    // This function forcefully swaps the meta tag based on what you are looking at.
+    function setZoomable(enabled) {
+        const head = document.head;
+        const oldMeta = document.getElementById('viewport-meta');
+        if (oldMeta) head.removeChild(oldMeta);
+        
+        const meta = document.createElement('meta');
+        meta.id = 'viewport-meta';
+        meta.name = 'viewport';
+        
+        if (enabled) {
+            // UNLOCKED: Use this when reading PDFs/Documents
+            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
+        } else {
+            // LOCKED: Use this for Dashboard/Menus
+            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+        }
+        head.appendChild(meta);
     }
 
     function getPermissionKey(course, section) {
@@ -417,6 +426,13 @@
             const iframeContainer = document.getElementById('view-iframe');
             if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
             
+            // STEP 3: Switch the Zoom Mode based on where we are
+            if (viewId === 'view-iframe') {
+                setZoomable(true); // Enable Zoom for reading
+            } else {
+                setZoomable(false); // Lock Zoom for Dashboard
+            }
+
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             const target = document.getElementById(viewId); if(target) target.classList.add('active');
             
@@ -471,8 +487,6 @@
                 list.appendChild(item);
             });
         },
-        
-        /* FIX 6: More aggressive Iframe Content injection to force zoom */
         openContent: function(url, title, fromHistory = false) {
             const container = document.getElementById('view-iframe');
             if (!fromHistory) this.navTo('view-iframe', false, { sourceUrl: url, title: title });
@@ -482,30 +496,16 @@
             iframe.id = "content-frame";
             iframe.src = url;
             
-            // Function to force meta tag update
-            const forceZoom = () => {
+            iframe.onload = () => {
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if(!doc) return;
-                    // Remove bad meta tags
-                    doc.querySelectorAll('meta[name="viewport"]').forEach(m => m.remove());
-                    // Add good meta tag
+                    // Force internal meta tag too, just in case
                     const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
                     doc.head.appendChild(meta);
-                    
-                    // Also ensure body inside iframe is touchable
-                    doc.body.style.touchAction = "manipulation";
-                } catch(e) {
-                    // console.log("CORS restriction on iframe content");
-                }
-            };
-
-            iframe.onload = () => {
-                forceZoom();
-                // Check again after short delay in case of redirects/late loads
-                setTimeout(forceZoom, 1000);
+                } catch(e) {}
             };
             
             container.innerHTML = '';
