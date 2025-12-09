@@ -16,10 +16,10 @@
         html, body {
             height: 100%;
             width: 100%;
+            /* FIXED: We default to hidden, but JS will toggle this now */
             overflow: hidden; 
             background-color: var(--bg-body);
             color: var(--text-main);
-            /* We let the Meta Tag handle the locking/unlocking now */
         }
         
         #app { 
@@ -35,10 +35,8 @@
             flex-direction: column; 
             height: 100%; 
             width: 100%;
-            /* Enable scrolling for the document */
             overflow-y: auto; 
             -webkit-overflow-scrolling: touch; 
-            /* Ensure it covers everything */
             z-index: 50;
         }
 
@@ -215,8 +213,7 @@
         return id;
     }
     
-    // STEP 2: The Viewport Logic
-    // This function forcefully swaps the meta tag based on what you are looking at.
+    // --- FIXED: ZOOM LOGIC ---
     function setZoomable(enabled) {
         const head = document.head;
         const oldMeta = document.getElementById('viewport-meta');
@@ -226,12 +223,27 @@
         meta.id = 'viewport-meta';
         meta.name = 'viewport';
         
+        // Grab global elements to toggle overflow
+        const body = document.body;
+        const html = document.documentElement;
+
         if (enabled) {
             // UNLOCKED: Use this when reading PDFs/Documents
-            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
+            // 1. Allow scaling up to 5x for better readability
+            meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
+            
+            // 2. CRITICAL FIX: Unlock overflow so the browser allows the viewport to change
+            body.style.overflow = "auto";
+            html.style.overflow = "auto";
+            body.style.touchAction = "manipulation"; // Better touch support
         } else {
             // LOCKED: Use this for Dashboard/Menus
             meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+            
+            // Lock overflow back to prevent app scrolling
+            body.style.overflow = "hidden";
+            html.style.overflow = "hidden";
+            body.style.touchAction = "none";
         }
         head.appendChild(meta);
     }
@@ -426,11 +438,11 @@
             const iframeContainer = document.getElementById('view-iframe');
             if (viewId !== 'view-iframe' && iframeContainer) iframeContainer.innerHTML = ''; 
             
-            // STEP 3: Switch the Zoom Mode based on where we are
+            // --- FIXED: CORRECT LOGIC FOR SWITCHING ZOOM MODES ---
             if (viewId === 'view-iframe') {
-                setZoomable(true); // Enable Zoom for reading
+                setZoomable(true); // ENABLE Zoom for reading
             } else {
-                setZoomable(true); // Lock Zoom for Dashboard
+                setZoomable(false); // FIXED: Disable zoom (pass false) for dashboard/ui
             }
 
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -500,7 +512,7 @@
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     if(!doc) return;
-                    // Force internal meta tag too, just in case
+                    // Force internal meta tag too, just in case (works for same-origin only)
                     const meta = doc.createElement('meta');
                     meta.name = "viewport";
                     meta.content = "width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes";
