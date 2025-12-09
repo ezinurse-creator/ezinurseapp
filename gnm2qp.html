@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Previous Year Question Papers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* --- MODERN THEME (Reference Style) --- */
+        :root {
+            --primary: #00B9F2;       /* Light Blue */
+            --primary-dark: #003B82;  /* Brand Navy */
+            --teal: #009688;          
+            --bg-card: #ffffff;
+            --bg-body: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
+        }
 
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        /* --- HEADER --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Color coding */
+        .type-pdf { border-left: 6px solid #ef4444; background: #fff; } /* Red specifically for PDF/Papers */
+
+        .icon {
+            margin-right: 16px;
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            position: relative;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- FIXED IFRAME STYLES --- */
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Previous Year Question Papers</div>
+            <p style="color: var(--text-muted);">BSc Nursing - Year 3 Subjects</p>
+        </div>
+
+        <div id="papers-container" class="resource-list">
+            </div>
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close X</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
+    <script>
+        // --- DATA ---
+        const PAPERS = [
+            { title: "Child Health Nursing QP", url: "https://drive.google.com/file/d/17uCpWzjoY36l3Sxy9dZ8S9BQHw2pLpkb/view?usp=drive_link" },
+            { title: "Medical Surgical Nursing II QP (1)", url: "https://drive.google.com/file/d/1hoqiDiepExqJp5E6qkFGU1uhZUeMTc2Q/view?usp=drive_link" },
+            { title: "Medical Surgical Nursing II QP (2)", url: "https://drive.google.com/file/d/1Uj6XUhnFjajbNAmBiT_Vtcrx65Vca0Um/view?usp=drive_link" },
+            { title: "Mental Health Nursing QP", url: "https://drive.google.com/file/d/1UanjuYxTKs9t1U_XJKy-VLGRZUQqm9Ds/view?usp=drive_link" }
+        ];
+
+        // --- RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('papers-container');
+            
+            PAPERS.forEach(paper => {
+                const html = `
+                    <div class="resource-btn type-pdf" onclick="openResource('${paper.url}', '${paper.title}')">
+                        <div class="icon">📄</div>
+                        <div>${paper.title}</div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // --- MODAL LOGIC ---
+        function openResource(url, title) {
+            history.pushState({ modalOpen: true }, null, '#view');
+
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.textContent = title;
+            modal.style.display = 'flex';
+            body.innerHTML = ''; 
+            body.style.display = 'flex';
+
+            // Formatting URL for preview
+            let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+            
+            body.innerHTML = `<iframe 
+                class="iframe-doc" 
+                src="${cleanUrl}" 
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                allow="autoplay; encrypted-media; fullscreen">
+            </iframe>`;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            modal.style.display = 'none';
+            body.innerHTML = ''; 
+            
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+
+        // Initialize
+        renderPage();
+
+    </script>
+</body>
+</html>
