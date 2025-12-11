@@ -4,132 +4,155 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mental Health Nursing II Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Mental Health Nursing II." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82; 
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #01b9f1;
+            --primary-dark: #003b80;
+            --bg-card: #ffffff;
+            --bg-body: #f1f5f9;
+            --text-main: #003b80;
+            --text-muted: #64748b;
+            --accent: #f59e0b;
             --danger: #ef4444;
             --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
+        } 
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding-bottom: 80px;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
             text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            margin-bottom: 30px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f8fafc; }
+        
+        .unit-header.active {
+            border-bottom-color: #e2e8f0;
+            background: #f0f9ff;
+            color: var(--primary);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none; 
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
+            transition: all 0.2s;
             cursor: pointer;
         }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
 
-        /* --- MODAL --- */
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; }
+        .type-video { border-left: 4px solid #8b5cf6; }
+        .type-model { border-left: 4px solid #10b981; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* --- MODAL (The "Close Button" Wrapper) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -146,7 +169,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
         .btn-close {
             background: var(--danger);
@@ -162,13 +185,16 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto;
+            overflow-y: auto; /* Allow scrolling */
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -178,6 +204,7 @@
             display: block;
         }
 
+        /* 2. For Notes & Models (Fills the screen vertically) */
         .iframe-doc {
             width: 100%;
             height: 100%;
@@ -186,11 +213,11 @@
             display: block;
         }
 
-        /* --- QUIZ STYLES --- */
+        /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%;
+            min-height: 100%; /* Ensures it fills screen if short */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -205,308 +232,54 @@
             transition: all 0.2s;
             position: relative;
         }
-        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
-        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
-        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
-        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
-
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators for Tick/Cross */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
         }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
+
     </style>
 </head>
 <body>
 
-    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1cVXX0MdfmXTU5Exki00nmnJzI5WNg7u9/preview', 'Syllabus')">
-        📄 DOWNLOAD MENTAL HEALTH NURSING II SYLLABUS
-    </div>
-    
-    <div id="units">
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - SUBSTANCE USE DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13ivjNuXCsFW23FKI4ZSbmjhejVTzm7VU/preview', 'Detailed Notes: Substance Use')">
-                        <span class="icon">📚</span><span>Detailed Notes: Substance Use</span>
-                    </div>
-
-                
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BlPeKxBK_6LRwdE5ctldrinGFvtfj7dP/preview', 'Terminologies & ICD-11')">
-                        <span class="icon video-icon">▶️</span><span>Terminologies, Prevalence & ICD-11</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dbWne-vj71RkJp5L_PRbGLts5TDAvJnm/preview', 'Etiology')">
-                        <span class="icon video-icon">▶️</span><span>Commonly Abused Substances & Etiology</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Z8B5JUG5fXfvjZWaQPPgIvvyuY4VX_8a/preview', 'Alcohol Abuse Signs')">
-                        <span class="icon video-icon">▶️</span><span>Signs, Symptoms & Alcohol Abuse</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1t58TVNfOXnbNAsqqPvej7dH00Gbbx5ua/preview', 'Treatment: Alcohol/Opioids')">
-                        <span class="icon video-icon">▶️</span><span>Diagnosis & Treatment: Alcohol, Cannabis, Opioids</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1416vNF9ApKc6CwrfQKBorUJJi_QDDNoR/preview', 'Management: Sedatives')">
-                        <span class="icon video-icon">▶️</span><span>Management: Opioids & Sedatives</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Drj_zygJkWoOEbBa2OqYbuQKpR1YeEjp/preview', 'Cocaine & Stimulants')">
-                        <span class="icon video-icon">▶️</span><span>Cocaine & Stimulants</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GCKgYEh-7utP51UVlt4E4bupqct5p-KW/preview', 'Caffeine & Nicotine')">
-                        <span class="icon video-icon">▶️</span><span>Caffeine, Hallucinogens & Nicotine</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FBIODDGGlt9n3PUiFA8ONjFPZIuBlWur/preview', 'Inhalants')">
-                        <span class="icon video-icon">▶️</span><span>Volatile Inhalants</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ai_wyPQAH9rB7ACHIs_JwZQrmwjY7PBv/preview', 'Rehabilitation & Laws')">
-                        <span class="icon video-icon">▶️</span><span>Prevention, Rehabilitation & Laws</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1HsGAuzDSsSoIeFw7D5dlk0jdW-07jobx/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 1</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(1)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Mental Health Nursing II</div>
+            <p style="color: var(--text-muted);">BSc Sixth Semester</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - PERSONALITY & SEXUAL DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1e5YfasAa8hOwJpLQt0wdMMF_uLX_l-8F/preview', 'Detailed Notes: Personality')">
-                        <span class="icon">📚</span><span>Detailed Notes: Personality & Sexual Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1v7Qoe4f1VglL09aqDlt0mIZJQEfCdhkG/preview', 'Personality Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Personality Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11R0Tvyy9do5ejAOWCYIes-Br9F8Q2R7E/preview', 'Sexual Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Sexual Disorders</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1y1JEu7Mo22G5PqBW3jsC5cQuDAqPZ4EO/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 2</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(2)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </div>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1cVXX0MdfmXTU5Exki00nmnJzI5WNg7u9/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - CHILDHOOD & ADOLESCENCE DISORDERS
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1VFVf1Mi7g2OtXkiaiMRMpi11VHsiSjnh/preview', 'Detailed Notes: Child Psych')">
-                        <span class="icon">📚</span><span>Detailed Notes: Child & Adolescent</span>
-                    </div>
-
-                    
-
-[Image of ADHD brain vs normal brain]
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WpNSMf4L__vFVWLxRQ2TZbYQcHHJS9rw/preview', 'Intellectual Disability')">
-                        <span class="icon video-icon">▶️</span><span>Intellectual Disability & Epidemiology</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Eq35TIGYowr0gD8LT885pP-bxu7oYkfg/preview', 'Autism & Speech')">
-                        <span class="icon video-icon">▶️</span><span>Autism Spectrum & Speech Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HVGAK4rJbZvXW-Tq7eHsUamUEij23gvr/preview', 'ADHD & Learning')">
-                        <span class="icon video-icon">▶️</span><span>ADHD, Learning & Motor Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1S0SiUhjmVknUqH9B7vYvnhidtncXLH7R/preview', 'Conduct Disorder')">
-                        <span class="icon video-icon">▶️</span><span>Types of ADHD & Conduct Disorder</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18mzMU-8k4cc-IWP2bDyMb4dPg1Rvd1ck/preview', 'Eating/Elimination')">
-                        <span class="icon video-icon">▶️</span><span>Eating & Elimination Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1iBI0mf9E5VcTs_jWadWVdNezSiCBCs2r/preview', 'Bulimia & Rehab')">
-                        <span class="icon video-icon">▶️</span><span>Bulimia Nervosa & Rehabilitation</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1w9ILYMsRyo_KnRIEYVdL-8stkRTCKljy/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 3</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(3)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - ORGANIC BRAIN DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13PevrbRMageUobaSyUAIky-Fg6OzJMWQ/preview', 'Detailed Notes: Organic')">
-                        <span class="icon">📚</span><span>Detailed Notes: Organic Brain Disorders</span>
-                    </div>
-
-                    
-
-[Image of brain atrophy in Alzheimer's disease]
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ksZT-vWk5JiCmWzhHQ33m6gRwv_RcQhC/preview', 'Alzheimer\'s Disease')">
-                        <span class="icon video-icon">▶️</span><span>Alzheimer's Disease</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OCRu_rfVI8NZ2jH5-RgVaejexinE9718/preview', 'Delirium')">
-                        <span class="icon video-icon">▶️</span><span>Delirium (Acute Organic Brain Syndrome)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1cplkqSMHKtPa5t57DTZwzJE8cJvR7rIe/preview', 'Amnestic Syndrome')">
-                        <span class="icon video-icon">▶️</span><span>Organic Amnestic Syndrome</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-gOkTvGsdE-9ylJY0bSRt6LhkxMygY5L/preview', 'Dementia')">
-                        <span class="icon video-icon">▶️</span><span>Dementia</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Gbs5QkHRVlJWNURUNOLM6SaZigCYCHUk/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 4</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(4)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - PSYCHIATRIC EMERGENCIES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/199tS7hisRIp7CyM1od_8TSHrTl7MgmF7/preview', 'Detailed Notes: Emergencies')">
-                        <span class="icon">📚</span><span>Detailed Notes: Psychiatric Emergencies</span>
-                    </div>
-
-                    
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1q2TD5YhRlxpkPm76Q5gBgkzxOWJzaqcY/preview', 'Minor Emergencies')">
-                        <span class="icon video-icon">▶️</span><span>Introduction & Minor Emergencies</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CXV_hBZVH0ffN29UWNwOeKuz6kM5Nifi/preview', 'Medical Emergencies')">
-                        <span class="icon video-icon">▶️</span><span>Medical Emergencies & Maladaptive Behavior</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/11hVTY8UieBhMSmay91jZXfJHIMPKe5RL/preview', 'Prevention Strategies')">
-                        <span class="icon video-icon">▶️</span><span>Strategies to Change & Prevent</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dEs8udsbTIzXLdRisf3xggzDlKOi-wzr/preview', 'Crisis Intervention')">
-                        <span class="icon video-icon">▶️</span><span>Crisis Management & Stress Adaptation</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1NwAGa3wkR2KW3QEIcwGIXJxiXFzgcWwB/preview', 'Coping & Counselling')">
-                        <span class="icon video-icon">▶️</span><span>Coping Mechanisms & Counselling</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1OleDctFPR0q5faOsuW0cE6Cu4Vjv68NN/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 5</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(5)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - LEGAL ISSUES
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16caG4oSIrI63sU59Xu9wCOn5txTFiYP_/preview', 'Detailed Notes: Legal Issues')">
-                        <span class="icon">📚</span><span>Detailed Notes: Legal Issues</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1InTr1WSnyOaao2cCQKQjDu8KH_8zyEUU/preview', 'ILA & MHA')">
-                        <span class="icon video-icon">▶️</span><span>Acts: ILA 1912, MHA 1987, POSCO</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1irN38I8rjUzxTaps5Z6pkKiuIdteucfu/preview', 'Forensic Psych')">
-                        <span class="icon video-icon">▶️</span><span>Forensic Psychiatry & Civil Responsibilities</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1SR2Rtw8HwKuQPYciSecLFbACNOFX4V9w/preview', 'MHCA 2017')">
-                        <span class="icon video-icon">▶️</span><span>Mental Health Care Act 2017</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WNgi41yYkZO3IEn3m1tnfxbpxTF5QnvR/preview', 'NDPS Act')">
-                        <span class="icon video-icon">▶️</span><span>Narcotics & Psychotropic Substances Acts</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1qfIPKtyMo-r0DzjtJSGRKxMhXI1vqiaT/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 6</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(6)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - COMMUNITY MENTAL HEALTH
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ydXJA8s21GBMD_M4DICXYDyVi4HrURXk/preview', 'Detailed Notes: Community')">
-                        <span class="icon">📚</span><span>Detailed Notes: Community Mental Health</span>
-                    </div>
-
-                    
-
-[Image of levels of prevention in mental health]
-
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1o4e7tVUcLCxtCt46T5oYhUV-pVD70ncY/preview', 'NMHP & NHP')">
-                        <span class="icon video-icon">▶️</span><span>Introduction, NMHP & NHP</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GHJeoXbRbVDgxHql6VmTZPc9_q2uqBo_/preview', 'Institutionalization')">
-                        <span class="icon video-icon">▶️</span><span>Institutionalization & Deinstitutionalization</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1HVXZD8CIJpiVYy4_UqS0hGa4BB0hBIdO/preview', 'Agencies')">
-                        <span class="icon video-icon">▶️</span><span>National & International Agencies</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a-aMfVqZnurNvFUcfgk29cnrSezzR_KP/preview', 'Special Populations')">
-                        <span class="icon video-icon">▶️</span><span>Mental Health for Special Populations</span>
-                    </div>
-
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fXThNAGmtfbF0whor6Fk9r-bedYOpQWV/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 7</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(7)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -514,72 +287,247 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-body" class="modal-body">
+            </div>
     </div>
 
     <script>
-        // --- 1. QUIZ DATA ---
+        // --- 1. DUMMY 3D MODEL CODES (Placeholder) ---
+        const MODEL_CODE_A = `<div><p>Model Loading...</p></div>`;
+        const MODEL_CODE_B = `<div><p>Model Loading...</p></div>`;
+
+        // --- 2. QUIZ DATA (5 Questions each) ---
         const QUIZ_DATA = {
-            1: [ // Unit 1: Substance Use
-                { q: "Disulfiram is used in the treatment of:", o: ["Opioid dependence", "Alcohol dependence", "Cannabis abuse", "Nicotine addiction"], a: 1 },
-                { q: "Wernicke's encephalopathy is caused by deficiency of:", o: ["Vitamin B1 (Thiamine)", "Vitamin B12", "Vitamin C", "Vitamin D"], a: 0 },
-                { q: "Delirium tremens is a severe withdrawal symptom of:", o: ["Cocaine", "Heroin", "Alcohol", "Cannabis"], a: 2 },
-                { q: "Methadone is primarily used for:", o: ["Alcohol detoxification", "Opioid substitution therapy", "Smoking cessation", "Benzodiazepine overdose"], a: 1 },
-                { q: "The CAGE questionnaire is used to screen for:", o: ["Depression", "Anxiety", "Alcoholism", "Schizophrenia"], a: 2 }
+            1: [ // Substance Use Disorders
+                { q: "Wernicke's Encephalopathy is caused by deficiency of:", o: ["Vitamin B1 (Thiamine)", "Vitamin C", "Vitamin B12", "Iron"], a: 0 },
+                { q: "The antidote for opioid overdose is:", o: ["Flumazenil", "Naloxone", "Disulfiram", "Methadone"], a: 1 },
+                { q: "Disulfiram is used in the treatment of:", o: ["Opioid dependence", "Alcohol dependence", "Cannabis abuse", "Tobacco cessation"], a: 1 },
+                { q: "Delirium Tremens is a withdrawal symptom of:", o: ["Cocaine", "Alcohol", "Nicotine", "Caffeine"], a: 1 },
+                { q: "The active psychoactive constituent in Cannabis is:", o: ["Nicotine", "Ethanol", "THC (Tetrahydrocannabinol)", "Opium"], a: 2 }
             ],
-            2: [ // Unit 2: Personality & Sexual
-                { q: "Antisocial personality disorder is characterized by:", o: ["Social withdrawal", "Disregard for rights of others", "Perfectionism", "Attention seeking"], a: 1 },
-                { q: "Vaginismus is a:", o: ["Sexual pain disorder", "Desire disorder", "Orgasmic disorder", "Arousal disorder"], a: 0 },
-                { q: "A person deriving sexual pleasure from observing unsuspecting people is:", o: ["Exhibitionism", "Voyeurism", "Fetishism", "Frotteurism"], a: 1 },
-                { q: "Borderline Personality Disorder is characterized by:", o: ["Emotional stability", "Unstable interpersonal relationships", "Lack of remorse", "Excessive orderliness"], a: 1 },
-                { q: "Dyspareunia refers to:", o: ["Painful intercourse", "Lack of desire", "Premature ejaculation", "Inability to orgasm"], a: 0 }
+            2: [ // Personality & Sexual Disorders
+                { q: "Which is a Cluster A personality disorder?", o: ["Antisocial", "Borderline", "Paranoid", "Avoidant"], a: 2 },
+                { q: "Lack of remorse and disregard for others is typical of:", o: ["Antisocial Personality Disorder", "Dependent Personality Disorder", "OCD", "Schizoid Personality Disorder"], a: 0 },
+                { q: "Dyspareunia refers to:", o: ["Fear of sex", "Painful sexual intercourse", "Involuntary spasm", "Lack of desire"], a: 1 },
+                { q: "Vaginismus is a:", o: ["Sexual pain disorder", "Desire disorder", "Arousal disorder", "Orgasmic disorder"], a: 0 },
+                { q: "Instability in mood, relationships, and self-image characterizes:", o: ["Narcissistic PD", "Borderline PD", "Histrionic PD", "Avoidant PD"], a: 1 }
             ],
-            3: [ // Unit 3: Child/Adolescent
-                { q: "The core symptoms of ADHD are:", o: ["Depression and anxiety", "Inattention, hyperactivity, impulsivity", "Hallucinations and delusions", "Social withdrawal"], a: 1 },
-                { q: "Enuresis refers to:", o: ["Bed wetting", "Soiling clothes with stool", "Thumb sucking", "Nail biting"], a: 0 },
-                { q: "Autism Spectrum Disorder involves deficits in:", o: ["Motor skills", "Social communication & interaction", "Vision", "Hearing"], a: 1 },
-                { q: "Bulimia Nervosa is characterized by:", o: ["Self-starvation", "Binge eating followed by purging", "Pica", "Refusal to swallow"], a: 1 },
-                { q: "Conduct disorder in children may develop into which adult disorder?", o: ["Schizophrenia", "Antisocial Personality Disorder", "Bipolar Disorder", "Obsessive Compulsive Disorder"], a: 1 }
+            3: [ // Child & Adolescent Disorders
+                { q: "ADHD stands for:", o: ["Attention Deficit Hyperactivity Disorder", "Autism Development Health Disorder", "Acute Depression Hyperactivity Disease", "Attention Disorder Health Deficit"], a: 0 },
+                { q: "Enuresis is defined as:", o: ["Involuntary passage of stool", "Involuntary voiding of urine", "Bed wetting after 5 years", "Both B & C"], a: 3 },
+                { q: "Pica involves:", o: ["Binge eating", "Eating non-nutritive substances", "Refusal to eat", "Regurgitation"], a: 1 },
+                { q: "Impairment in social interaction and communication is core to:", o: ["ADHD", "Autism Spectrum Disorder", "Dyslexia", "Conduct Disorder"], a: 1 },
+                { q: "Bulimia Nervosa is characterized by:", o: ["Starvation", "Binge eating followed by purging", "Obesity", "Loss of appetite"], a: 1 }
             ],
-            4: [ // Unit 4: Organic Brain
-                { q: "The most common cause of Dementia is:", o: ["Vascular disease", "Alzheimer's disease", "Trauma", "Alcohol"], a: 1 },
-                { q: "Delirium is primarily characterized by:", o: ["Chronic memory loss", "Clouding of consciousness", "Intact attention", "Stable course"], a: 1 },
-                { q: "Confabulation is a feature of:", o: ["Korsakoff's psychosis", "Schizophrenia", "Mania", "Depression"], a: 0 },
-                { q: "Sundowning syndrome is commonly seen in:", o: ["Depression", "Dementia", "Anxiety", "Schizophrenia"], a: 1 },
-                { q: "Which of the following is an acute organic brain syndrome?", o: ["Dementia", "Delirium", "Amnestic syndrome", "Mental retardation"], a: 1 }
+            4: [ // Organic Brain Disorders
+                { q: "A distinguishing feature of Delirium vs Dementia is:", o: ["Memory loss", "Clouding of consciousness", "Hallucinations", "Age of onset"], a: 1 },
+                { q: "The most common cause of Dementia is:", o: ["Vascular disease", "Alzheimer's Disease", "Head trauma", "Alcohol"], a: 1 },
+                { q: "Confabulation is seen in:", o: ["Korsakoff's Syndrome", "Schizophrenia", "Depression", "Anxiety"], a: 0 },
+                { q: "Alzheimer's disease is associated with:", o: ["Dopamine excess", "Beta-amyloid plaques", "Serotonin deficiency", "GABA excess"], a: 1 },
+                { q: "Sundowning syndrome refers to:", o: ["Improvement at night", "Worsening of symptoms in evening/night", "Sleepwalking", "Early morning awakening"], a: 1 }
             ],
-            5: [ // Unit 5: Emergencies
-                { q: "Which is a psychiatric emergency?", o: ["Mild anxiety", "Suicidal attempt", "Insomnia", "Fatigue"], a: 1 },
-                { q: "The priority nursing intervention for a suicidal patient is:", o: ["Administer sedation", "Ensure safety", "Provide counseling", "Involve family"], a: 1 },
-                { q: "Catatonic stupor is characterized by:", o: ["Hyperactivity", "Immobility and mutism", "Excessive talking", "Aggression"], a: 1 },
-                { q: "Lithium toxicity can lead to:", o: ["Hypertension", "Tremors and confusion", "Weight loss", "Insomnia"], a: 1 },
-                { q: "Crisis intervention focuses on:", o: ["Deep personality change", "Resolving the immediate problem", "Past childhood trauma", "Long term therapy"], a: 1 }
+            5: [ // Psychiatric Emergencies
+                { q: "The priority nursing intervention for a suicidal patient is:", o: ["Sedation", "Ensuring safety", "Counselling", "Family therapy"], a: 1 },
+                { q: "Lithium toxicity is indicated by:", o: ["Fine tremors", "Coarse tremors and ataxia", "Weight gain", "Dry mouth"], a: 1 },
+                { q: "Crisis intervention focuses on:", o: ["Restoring pre-crisis functioning", "Deep psychoanalysis", "Curing personality disorders", "Long-term therapy"], a: 0 },
+                { q: "Neuroleptic Malignant Syndrome is a complication of:", o: ["Antidepressants", "Antipsychotics", "Mood stabilizers", "Anxiolytics"], a: 1 },
+                { q: "The first stage of grief according to Kubler-Ross is:", o: ["Anger", "Denial", "Bargaining", "Acceptance"], a: 1 }
             ],
-            6: [ // Unit 6: Legal
-                { q: "The Mental Healthcare Act was passed in India in:", o: ["1987", "2017", "1912", "2000"], a: 1 },
-                { q: "Which admission type allows a patient to leave the hospital at will?", o: ["Voluntary admission", "Involuntary admission", "Reception order", "Emergency admission"], a: 0 },
-                { q: "The NDPS Act relates to:", o: ["Mental health rights", "Narcotic Drugs and Psychotropic Substances", "Juvenile justice", "Disability rights"], a: 1 },
-                { q: "Informed consent is NOT required for:", o: ["ECT", "Surgery", "Emergency life-saving treatment", "Routine medication"], a: 2 },
-                { q: "A nurse's legal responsibility includes:", o: ["Prescribing medication", "Protecting patient rights", "Diagnosing disorders", "Detaining patients indefinitely"], a: 1 }
+            6: [ // Legal Issues
+                { q: "The Mental Healthcare Act was passed in India in:", o: ["1987", "2017", "2020", "1912"], a: 1 },
+                { q: "POCSO Act protects children from:", o: ["Child Labor", "Sexual Offences", "Domestic Violence", "Drug Abuse"], a: 1 },
+                { q: "Forensic Psychiatry deals with:", o: ["Old age mental health", "Legal aspects of mental health", "Child psychology", "Community health"], a: 1 },
+                { q: "Admission of a minor with mental illness requires consent from:", o: ["The minor", "Nominated Representative/Guardian", "Police", "Magistrate only"], a: 1 },
+                { q: "Advance Directive is a feature of:", o: ["MHA 1987", "MHCA 2017", "NDPS Act", "Lunacy Act"], a: 1 }
             ],
-            7: [ // Unit 7: Community
-                { q: "Deinstitutionalization refers to:", o: ["Building more hospitals", "Shifting care from hospital to community", "Locking patients in rooms", "Increasing hospital stay"], a: 1 },
-                { q: "Primary prevention in mental health includes:", o: ["Early diagnosis", "Health promotion & education", "Rehabilitation", "Treatment"], a: 1 },
-                { q: "NMHP stands for:", o: ["National Mental Health Programme", "Nursing Mental Health Plan", "National Medical Health Policy", "New Mental Health Programme"], a: 0 },
-                { q: "Halfway homes are examples of:", o: ["Primary prevention", "Tertiary prevention/Rehabilitation", "Acute care", "Emergency care"], a: 1 },
-                { q: "The goal of community mental health nursing is:", o: ["Isolation of patients", "Promoting mental health in the population", "Long term hospitalization", "Sedation of patients"], a: 1 }
+            7: [ // Community Mental Health
+                { q: "Deinstitutionalization means:", o: ["Building more hospitals", "Moving care from hospitals to community", "Locking patients in rooms", "Stopping medication"], a: 1 },
+                { q: "Primary prevention in mental health includes:", o: ["Rehabilitation", "Health education and promotion", "Treatment of disease", "Crisis management"], a: 1 },
+                { q: "The National Mental Health Program (NMHP) was launched in:", o: ["1982", "1987", "2000", "1947"], a: 0 },
+                { q: "A 'Halfway Home' is a:", o: ["Jail", "Rehabilitation facility", "Acute care ward", "School"], a: 1 },
+                { q: "Tertiary prevention aims to:", o: ["Prevent onset", "Early diagnosis", "Reduce disability and rehabilitate", "Screen populations"], a: 2 }
             ]
         };
 
-        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
+        // --- 3. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "SUBSTANCE USE DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/13ivjNuXCsFW23FKI4ZSbmjhejVTzm7VU/preview' },
+                    { type: 'video', title: 'Terminologies & ICD 11', url: 'https://drive.google.com/file/d/1BlPeKxBK_6LRwdE5ctldrinGFvtfj7dP/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ZrPm9ZpZkaabropX4MUOb0M08QxK6lSB/preview' },
+                    { type: 'video', title: 'Common Substances & Etiology', url: 'https://drive.google.com/file/d/1dbWne-vj71RkJp5L_PRbGLts5TDAvJnm/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pvAW4WjVVGT2qLYSP22RVoGOrcl-ST01/preview' },
+                    { type: 'video', title: 'Signs, Symptoms & Criteria', url: 'https://drive.google.com/file/d/1Z8B5JUG5fXfvjZWaQPPgIvvyuY4VX_8a/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wMRySD55iTZNchTFVqGTV8W1YGunMyJL/preview' },
+                    { type: 'video', title: 'Alcohol, Cannabis, Opioids', url: 'https://drive.google.com/file/d/1t58TVNfOXnbNAsqqPvej7dH00Gbbx5ua/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1IOMLOFEJyuD3uElekHKVVo88_-Couh7X/preview' },
+                    { type: 'video', title: 'Opioid Mgmt & Sedatives', url: 'https://drive.google.com/file/d/1416vNF9ApKc6CwrfQKBorUJJi_QDDNoR/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qBSse53rS0yw2WyUHNMN7S2BDXSYtu-L/preview' },
+                    { type: 'video', title: 'Cocaine & Stimulants', url: 'https://drive.google.com/file/d/1Drj_zygJkWoOEbBa2OqYbuQKpR1YeEjp/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1TrEILqUIbsdGqKbo9li9UqL8zNyfmB4Z/preview' },
+                    { type: 'video', title: 'Caffeine, Hallucinogens, Nicotine', url: 'https://drive.google.com/file/d/1GCKgYEh-7utP51UVlt4E4bupqct5p-KW/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1dekC_9BMlN_wLfuU1RRzRG2PFq0WPvda/preview' },
+                    { type: 'video', title: 'Volatile Inhalants', url: 'https://drive.google.com/file/d/1FBIODDGGlt9n3PUiFA8ONjFPZIuBlWur/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Xtpf659jVog7JIahzyYvZIygPdrReCC4/preview' },
+                    { type: 'video', title: 'Prevention, Rehab & Laws', url: 'https://drive.google.com/file/d/1ai_wyPQAH9rB7ACHIs_JwZQrmwjY7PBv/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1F8V0oZtO3wd8ZSIWN7fmFs_ud0NhFmM2/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/19MZJ8_bXFHtvolcBKyo89XMQ0sVzdg_W/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1HsGAuzDSsSoIeFw7D5dlk0jdW-07jobx/preview' }
+                ]
+            },
+            {
+                id: 2, title: "PERSONALITY & SEXUAL DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1e5YfasAa8hOwJpLQt0wdMMF_uLX_l-8F/preview' },
+                    { type: 'video', title: 'Personality Disorders', url: 'https://drive.google.com/file/d/1v7Qoe4f1VglL09aqDlt0mIZJQEfCdhkG/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ybwDEUHin0GJimD_zogkTZPjMPA5-T_U/preview' },
+                    { type: 'video', title: 'Sexual Disorders', url: 'https://drive.google.com/file/d/11R0Tvyy9do5ejAOWCYIes-Br9F8Q2R7E/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1i0JpODlLTd9BcIKAqQw9Y8Xi2pM-vTUb/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1ChjFTcYUvOKMC8hti2ZM9YfXdkMQgOIW/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1y1JEu7Mo22G5PqBW3jsC5cQuDAqPZ4EO/preview' }
+                ]
+            },
+            {
+                id: 3, title: "CHILD & ADOLESCENT DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1VFVf1Mi7g2OtXkiaiMRMpi11VHsiSjnh/preview' },
+                    { type: 'video', title: 'Intro, ID & Epidemiology', url: 'https://drive.google.com/file/d/1WpNSMf4L__vFVWLxRQ2TZbYQcHHJS9rw/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1RNIoHUQ2wUm-qUapwJo5Lu5UxMTkSCDG/preview' },
+                    { type: 'video', title: 'Speech/Language & Autism', url: 'https://drive.google.com/file/d/1Eq35TIGYowr0gD8LT885pP-bxu7oYkfg/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Oi4uJeINREK3NinJNv75UhaZ2rVOLOZo/preview' },
+                    { type: 'video', title: 'Learning/Motor & ADHD', url: 'https://drive.google.com/file/d/1HVGAK4rJbZvXW-Tq7eHsUamUEij23gvr/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1tzg_1i7nq9ypotesCaMv28lCkuPge7D1/preview' },
+                    { type: 'video', title: 'ADHD Types & Conduct Disorder', url: 'https://drive.google.com/file/d/1S0SiUhjmVknUqH9B7vYvnhidtncXLH7R/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1M6eR39gIa3zSl5XHKutx9u54DQoombnI/preview' },
+                    { type: 'video', title: 'Elimination & Eating Disorders', url: 'https://drive.google.com/file/d/18mzMU-8k4cc-IWP2bDyMb4dPg1Rvd1ck/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1EQ8nQYIaz5xy-6yzLgNUR6xOB2b9s5OL/preview' },
+                    { type: 'video', title: 'Bulimia & Rehabilitation', url: 'https://drive.google.com/file/d/1iBI0mf9E5VcTs_jWadWVdNezSiCBCs2r/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1WqIKMjEHI_Ge-qehujguNl7dKg3WMDTC/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1QRTdt_zqP1yt0EWb-TzyqAZzfbmwodWM/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1w9ILYMsRyo_KnRIEYVdL-8stkRTCKljy/preview' }
+                ]
+            },
+            {
+                id: 4, title: "ORGANIC BRAIN DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/13PevrbRMageUobaSyUAIky-Fg6OzJMWQ/preview' },
+                    { type: 'video', title: 'Alzheimer\'s Disease', url: 'https://drive.google.com/file/d/1ksZT-vWk5JiCmWzhHQ33m6gRwv_RcQhC/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1MJUY6e_69nSYZKQYwW3Pc18-efR1SWmw/preview' },
+                    { type: 'video', title: 'Delirium', url: 'https://drive.google.com/file/d/1OCRu_rfVI8NZ2jH5-RgVaejexinE9718/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1X1hnNTOGrIh_fx-7I0d4JWX59zLTdtcS/preview' },
+                    { type: 'video', title: 'Organic Amnestic Syndrome', url: 'https://drive.google.com/file/d/1cplkqSMHKtPa5t57DTZwzJE8cJvR7rIe/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1gsbroj9Cj_rQOEQPBFfQ257hEhVK0K0_/preview' },
+                    { type: 'video', title: 'Dementia', url: 'https://drive.google.com/file/d/1-gOkTvGsdE-9ylJY0bSRt6LhkxMygY5L/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1zM8oKPFTtjgSxUdRq5dO9gFlR7P_pynv/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1Poe4ZDENXwSW8wE9XFHa53x53LZ9ujvk/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1Gbs5QkHRVlJWNURUNOLM6SaZigCYCHUk/preview' }
+                ]
+            },
+            {
+                id: 5, title: "PSYCH EMERGENCIES & CRISIS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/199tS7hisRIp7CyM1od_8TSHrTl7MgmF7/preview' },
+                    { type: 'video', title: 'Minor Emergencies', url: 'https://drive.google.com/file/d/1q2TD5YhRlxpkPm76Q5gBgkzxOWJzaqcY/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1yz0BzXvFTbylvZaOlyxLOThnkCmkEe7J/preview' },
+                    { type: 'video', title: 'Medical Psych Emergencies', url: 'https://drive.google.com/file/d/1CXV_hBZVH0ffN29UWNwOeKuz6kM5Nifi/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qTKUA2SNlsj_G5OqlSjraPI3UzVIm252/preview' },
+                    { type: 'video', title: 'Strategies for Maladaptive Behavior', url: 'https://drive.google.com/file/d/11hVTY8UieBhMSmay91jZXfJHIMPKe5RL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1kNfRpwwELJZaBXGVDHV6PAI9ooFxKxBL/preview' },
+                    { type: 'video', title: 'Crisis Mgmt & Stress Model', url: 'https://drive.google.com/file/d/1dEs8udsbTIzXLdRisf3xggzDlKOi-wzr/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/134ASy0jnGhUXoY2Ct56D6UX8tKPba4em/preview' },
+                    { type: 'video', title: 'Coping & Counselling', url: 'https://drive.google.com/file/d/1NwAGa3wkR2KW3QEIcwGIXJxiXFzgcWwB/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1t6oFgRscjOCdEbB1Nt2n3wtm2RpwPHwQ/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1lrZUXgn1hklzW_v3Hl_u3Tz-qBB62vGI/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1OleDctFPR0q5faOsuW0cE6Cu4Vjv68NN/preview' }
+                ]
+            },
+            {
+                id: 6, title: "LEGAL ISSUES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/16caG4oSIrI63sU59Xu9wCOn5txTFiYP_/preview' },
+                    { type: 'video', title: 'Lunacy/MHA/POCSO', url: 'https://drive.google.com/file/d/1InTr1WSnyOaao2cCQKQjDu8KH_8zyEUU/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/10jzqMQUqCFAeJAvAeL_cKMFBMKufpffj/preview' },
+                    { type: 'video', title: 'Forensic Psych & Civil Resp', url: 'https://drive.google.com/file/d/1irN38I8rjUzxTaps5Z6pkKiuIdteucfu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xpEr2OasY4-e8QKZYbHgqOqcDISMBiwI/preview' },
+                    { type: 'video', title: 'MHCA 2017 & Admission', url: 'https://drive.google.com/file/d/1SR2Rtw8HwKuQPYciSecLFbACNOFX4V9w/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1SPBKQJiOgJra9TjUR8sPoEbbTlD6SWAu/preview' },
+                    { type: 'video', title: 'Narcotic & Psychotropic Acts', url: 'https://drive.google.com/file/d/1WNgi41yYkZO3IEn3m1tnfxbpxTF5QnvR/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1eo9c5WZWc3oltXlKq2O6w8ekneT6-BBL/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1tymyqqgpBgNcB-wyoZjMxBA9GcMilVfh/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1qfIPKtyMo-r0DzjtJSGRKxMhXI1vqiaT/preview' }
+                ]
+            },
+            {
+                id: 7, title: "COMMUNITY MENTAL HEALTH",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1ydXJA8s21GBMD_M4DICXYDyVi4HrURXk/preview' },
+                    { type: 'video', title: 'NMHP & Development', url: 'https://drive.google.com/file/d/1o4e7tVUcLCxtCt46T5oYhUV-pVD70ncY/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/18ncVV38clJk0kuaPlL3Lkji8rpnmPLB9/preview' },
+                    { type: 'video', title: 'Institutionalization', url: 'https://drive.google.com/file/d/1GHJeoXbRbVDgxHql6VmTZPc9_q2uqBo_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xXGSj8ReCHtILOQFMDHrBj-MXp9huIuw/preview' },
+                    { type: 'video', title: 'Voluntary & Intl Agencies', url: 'https://drive.google.com/file/d/1HVXZD8CIJpiVYy4_UqS0hGa4BB0hBIdO/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/13iAX_ZYSNZr2Rm_ede5B5Xgf5_zqRIIl/preview' },
+                    { type: 'video', title: 'Issues for Special Populations', url: 'https://drive.google.com/file/d/1a-aMfVqZnurNvFUcfgk29cnrSezzR_KP/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1YMIDG1DSv6cD0-XJJAYMzehbEI7LnkbA/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1rdnTM0TODBg6yUuyryCWem9lX5RKRhVo/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1fXThNAGmtfbF0whor6Fk9r-bedYOpQWV/preview' }
+                ]
+            }
+        ];
+
+        // --- 4. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
 
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            if(type === 'model') return '🧊';
+            return '📄';
+        }
+
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        let modelToggle = false; 
+
         function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -589,13 +537,22 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            body.style.display = 'flex'; 
+            
+            // FIX: Restore flex centering for Video/Model (looks better centered)
+            body.style.display = 'flex';
 
-            if (type === 'quiz') {
-                // Handled by openQuiz
+            if (type === 'model') {
+                modelToggle = !modelToggle;
+                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
+            } 
+            else if (type === 'quiz') {
+                openQuiz(url); 
             }
             else {
+                // Ensure drive links are in preview mode
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // FIX: Apply correct class based on type
                 let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
                 body.innerHTML = `<iframe 
@@ -617,8 +574,9 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
+            // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
-            body.scrollTop = 0; 
+            body.scrollTop = 0; // Ensure we start at the top
             
             const questions = QUIZ_DATA[unitId] || [];
             
@@ -664,6 +622,7 @@
             }
         }
 
+        // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
@@ -672,13 +631,9 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnitHeader = document.querySelector('.unit-header');
-            if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
-            }
-        });
-    </script>
+        // Initialize
+        renderPage();
 
+    </script>
 </body>
 </html>
