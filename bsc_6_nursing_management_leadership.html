@@ -4,134 +4,155 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nursing Management & Leadership Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Nursing Management." />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82; 
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #01b9f1;
+            --primary-dark: #003b80;
+            --bg-card: #ffffff;
+            --bg-body: #f1f5f9;
+            --text-main: #003b80;
+            --text-muted: #64748b;
+            --accent: #f59e0b;
             --danger: #ef4444;
             --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
+        } 
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding-bottom: 80px;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
             text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            margin-bottom: 30px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f8fafc; }
+        
+        .unit-header.active {
+            border-bottom-color: #e2e8f0;
+            background: #f0f9ff;
+            color: var(--primary);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none; 
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
+            transition: all 0.2s;
             cursor: pointer;
         }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
 
-        /* --- MODAL --- */
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; }
+        .type-video { border-left: 4px solid #8b5cf6; }
+        .type-model { border-left: 4px solid #10b981; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* --- MODAL (The "Close Button" Wrapper) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -148,7 +169,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
         .btn-close {
             background: var(--danger);
@@ -164,13 +185,16 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto;
+            overflow-y: auto; /* Allow scrolling */
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -180,6 +204,7 @@
             display: block;
         }
 
+        /* 2. For Notes & Models (Fills the screen vertically) */
         .iframe-doc {
             width: 100%;
             height: 100%;
@@ -188,11 +213,11 @@
             display: block;
         }
 
-        /* --- QUIZ STYLES --- */
+        /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%;
+            min-height: 100%; /* Ensures it fills screen if short */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -207,614 +232,54 @@
             transition: all 0.2s;
             position: relative;
         }
-        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
-        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
-        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
-        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
-
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators for Tick/Cross */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
         }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
+
     </style>
 </head>
 <body>
 
-    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1jzWumJ4g4yZrXuz0c8l9nOBrCE_4C6ds/preview', 'Syllabus')">
-        📄 DOWNLOAD NURSING MANAGEMENT SYLLABUS
-    </div>
-    
-    <div id="units">
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - HEALTH CARE DEVELOPMENT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JLmgfF7MAj3xJzmJ5-g_TjZe7RjcVe4M/preview', 'Detailed Notes: Development')">
-                        <span class="icon">📚</span><span>Detailed Notes: Health Care Development</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wUhDrbeQs2elwGBPXRxvrlixYIGd4c5S/preview', 'Health Care & Development')">
-                        <span class="icon video-icon">▶️</span><span>Health Care and Development</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p6CLOPoFCyhiIFevuL8k0kboVjjjKM6p/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 1</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(1)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Nursing Management & Leadership</div>
+            <p style="color: var(--text-muted);">BSc Semester</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - MANAGEMENT BASICS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1nkYIIfa1pCH1TpSDmeYMBXeFg64tsO5H/preview', 'Detailed Notes: Basics')">
-                        <span class="icon">📚</span><span>Detailed Notes: Management Basics</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14wMZ0ZEubl7WUP7nGt4C5ndP6qZ49CvF/preview', 'Management Basics')">
-                        <span class="icon video-icon">▶️</span><span>Management Basics Applied to Nursing</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1UxSMJl7Z6gT9HCuSxaYP9YE-ePuUeutu/preview', 'Management Process')">
-                        <span class="icon video-icon">▶️</span><span>Introduction to Management Process</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/19-0avq66ieKtqcUpfG4qoe8mov_OJ7kO/preview', 'Functions of Management')">
-                        <span class="icon video-icon">▶️</span><span>Staffing, Directing/Leading, Controlling</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RBncWVvOkvT3KfCY1c1ok3H422YxVImd/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 2</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(2)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </div>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1kQhfTD5Ou7E5d8VyS89HyNB8b6ch2G7n/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - PLANNING NURSING SERVICES
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BCvq6AlNc4cvmocga5HqlfSbiCcUsabw/preview', 'Detailed Notes: Planning')">
-                        <span class="icon">📚</span><span>Detailed Notes: Planning Services</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AfXWPtCREs2gpZHV1wPGM3e9N6I2rjaf/preview', 'Planning Services')">
-                        <span class="icon video-icon">▶️</span><span>Planning Nursing Services</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ByuSl6x6wsKGOsT6-ELDaDcbk1qHr_Vm/preview', 'Program Planning')">
-                        <span class="icon video-icon">▶️</span><span>Gantt Chart, Milestone Chart, Budgeting</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1D_VPrR5Yslc5fVuTCq2XoA8OCUk2a8FH/preview', 'Cost-Benefit Analysis')">
-                        <span class="icon video-icon">▶️</span><span>Cost-Benefit Analysis & Disaster Planning</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1aMXUiZ3xsp3QlkSUgYV5RZYJtro3Ca5Z/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 3</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(3)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit4">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 4 - ORGANIZING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Hn87weGD3_0JxUIb0TVCQa8QMx7S8VZ_/preview', 'Detailed Notes: Organizing')">
-                        <span class="icon">📚</span><span>Detailed Notes: Organizing</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sV8TTcUmc4I9J6Ik300Mgmki4KITDO7d/preview', 'Organization Types')">
-                        <span class="icon video-icon">▶️</span><span>Organization, Types & Development</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1QbDQLH9RHDuP5qvviZZxWD3T56BHUqrL/preview', 'Structure')">
-                        <span class="icon video-icon">▶️</span><span>Organizational Structure & Authority</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1G-akfkPNlK6DYnsngZ9stzvx-1L9mThp/preview', 'Delivery Systems')">
-                        <span class="icon video-icon">▶️</span><span>Nursing Care Delivery & Org Climate</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/153V1Y21DjKhLsxg9s25c2JkGmWD_Kr7b/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 4</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(4)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 4 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit5">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 5 - STAFFING (HRM)
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1JQIywZbuzOS7XIQPVFBWs7ThmIdDdE_M/preview', 'Detailed Notes: Staffing')">
-                        <span class="icon">📚</span><span>Detailed Notes: Staffing & HRM</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1tChcmP8UsnfIqr8PdJqdYOVz7db0zjME/preview', 'Recruitment')">
-                        <span class="icon video-icon">▶️</span><span>Staffing, Recruitment & Selection</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1JSPfZf0ybVHK0NR3_r463zaHE7Myx-8Y/preview', 'Staff Development')">
-                        <span class="icon video-icon">▶️</span><span>Training, Development & Retaining</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17Y1UkOd7nHNAE3NqH0zX0mzGwEIFmHtX/preview', 'Staffing Norms')">
-                        <span class="icon video-icon">▶️</span><span>Patient Classification & Staffing Norms</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1R8bQ0WWKyoTmqSoZPFj63mg4gNdzqj9G/preview', 'Nursing Director Role')">
-                        <span class="icon video-icon">▶️</span><span>Roles of Nursing Director</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1O1bYOTrKRB_yXorsMnFrlj8LOQylobsF/preview', 'Assignment Methods')">
-                        <span class="icon video-icon">▶️</span><span>Patient Assignment Methods (Functional, Team, Primary)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1FG973oPzRlV0kGJnPfUjdH6BZP4U6dyw/preview', 'Turnover')">
-                        <span class="icon video-icon">▶️</span><span>Employee Turnover & Absenteeism</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jngxmQX_b-0HaXdZRXhsQml7IPGsCEOQ/preview', 'Adult Education')">
-                        <span class="icon video-icon">▶️</span><span>Adult Education / Learning</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18dcEYgo4GJomv0eVAVZ3Fjmkee2wdLZU/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 5</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(5)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 5 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit6">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 6 - DIRECTING & LEADING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zxUw66Qx8cwWQuc18rlLi709zikfJnWB/preview', 'Detailed Notes: Directing')">
-                        <span class="icon">📚</span><span>Detailed Notes: Directing</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-deKThuZFDmYDF0ro61ICM2ff3h46rYN/preview', 'Directing Principles')">
-                        <span class="icon video-icon">▶️</span><span>Directing Principles & Participatory Mgmt</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mmmYMTTRmSXR7V2G6_Qf-nWhh6jVkmo_/preview', 'MBO')">
-                        <span class="icon video-icon">▶️</span><span>Management by Objectives (MBO)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1lPWUrIxqifKkANVC_-SwksRsj1j6yoRN/preview', 'Team Management')">
-                        <span class="icon video-icon">▶️</span><span>Team Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Oz0AnXlN8kn76LYXiI3mNAB8Df-lK2j8/preview', 'Rotation & Discipline')">
-                        <span class="icon video-icon">▶️</span><span>Rotation Plan & Discipline</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KG2_px53CHijkuRor50zOsysmBrpj1cI/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 6</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(6)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 6 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit7">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 7 - LEADERSHIP
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1LsQ6k4hwKcI-Rlt5ESFYglw5xDw2EpKL/preview', 'Detailed Notes: Leadership')">
-                        <span class="icon">📚</span><span>Detailed Notes: Leadership</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kiIPamAX1uLn41A7DSdJVLMBofgQsR9_/preview', 'Leadership Concept')">
-                        <span class="icon video-icon">▶️</span><span>Leadership Concept</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1pp1cokheHh8eFkH7pY0uIxecwvUqbbN9/preview', 'Leadership Styles')">
-                        <span class="icon video-icon">▶️</span><span>Leadership Styles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LZraQ-K5oRwxSbVunSkjUe5lsJb7w-CD/preview', 'Leadership Development')">
-                        <span class="icon video-icon">▶️</span><span>Leadership Development</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1PmUONsIXVf9ymMQCdW4AF1PvDrM-h_ig/preview', 'Delegation & Power')">
-                        <span class="icon video-icon">▶️</span><span>Delegation, Power & Politics</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gi4gPiIGchWNSGMZJMAZe45tjSOJodKD/preview', 'Empowerment')">
-                        <span class="icon video-icon">▶️</span><span>Empowerment, Mentoring & Coaching</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1MRRurLTfbQ1eb_gKFRbwNRteXQ82sV3g/preview', 'Decision Making')">
-                        <span class="icon video-icon">▶️</span><span>Decision Making & Conflict Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RO7j2GMIbvXt3Zu-GBIYODfTXH9v5ark/preview', 'Negotiation')">
-                        <span class="icon video-icon">▶️</span><span>Negotiation & Planned Change</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1djH7DSQeEXlEX_MT4Q98olZOhq-5zFXs/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 7</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(7)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 7 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit8">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 8 - CONTROLLING
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p14fkjbzAGkUjIGC1LGQTSx6Akr7C_QH/preview', 'Detailed Notes: Controlling')">
-                        <span class="icon">📚</span><span>Detailed Notes: Controlling</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1zySg7-fqI9AFKJcSA17-fYnjdE6OZeOl/preview', 'Nursing Audit')">
-                        <span class="icon video-icon">▶️</span><span>Nursing Audit & Performance Appraisal</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ym3JTCMMFWoGRRSMK7WLm2kvymVd5_-g/preview', 'Quality Assurance')">
-                        <span class="icon video-icon">▶️</span><span>Quality Assurance & Standards</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1aKli9eaAvLgRUt3BQwt0dPfed5YuZ6YQ/preview', 'PERT')">
-                        <span class="icon video-icon">▶️</span><span>Programme Evaluation Review Techniques (PERT)</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1BcRjoX2HVl6g3wrUqyrEuH8NC9NUr-Fp/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 8</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(8)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 8 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit9">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 9 - ORGANIZATIONAL BEHAVIOR
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1dG9_TKwuWIaMip8SJlGPi-BKAOlG8Iw3/preview', 'Detailed Notes: Org Behavior')">
-                        <span class="icon">📚</span><span>Detailed Notes: Organizational Behavior</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1h2BzAK-gxrwF9EAHibKZ4MYvCTW0jYGP/preview', 'Group Dynamics')">
-                        <span class="icon video-icon">▶️</span><span>Organizational Behavior & Group Dynamics</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_-2LQrucx_BtQjY3KMOky85kEa7ahwbQ/preview', 'Human Relations')">
-                        <span class="icon video-icon">▶️</span><span>Interpersonal & Human Relations</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1GBUUC12vpZbTFbn8ShU3D6osuv3Q5Akg/preview', 'Collective Bargaining')">
-                        <span class="icon video-icon">▶️</span><span>Collective Bargaining</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1IfSCP4c20YOLGsN7opF3v0l6FDofXwgC/preview', 'Motivation')">
-                        <span class="icon video-icon">▶️</span><span>Motivation and Morale Building</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DzPtJTeYmKpC_Pf2vDI11Ry48HNsLi86/preview', 'Communication')">
-                        <span class="icon video-icon">▶️</span><span>Assertive Communication & Committees</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16230RSflGYbaokBlf2ZrKLdnQRgycnk6/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 9</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(9)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 9 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit10">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 10 - FINANCIAL MANAGEMENT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/18KvRloE3wgVIjKoYyExezo2T9yixJZlF/preview', 'Detailed Notes: Finance')">
-                        <span class="icon">📚</span><span>Detailed Notes: Financial Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CG7GEYL5X8BDWnWp4xNZBjNeaJGmbu7A/preview', 'Financial Management')">
-                        <span class="icon video-icon">▶️</span><span>Financial Management Basics</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1qyV_0Fs6K18H49UgLcj0-d8r8ivygcsu/preview', 'Financial Planning')">
-                        <span class="icon video-icon">▶️</span><span>Financial Planning</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jlqFaZP4-9b4jSG2GBipdcgXzogxSXsM/preview', 'Budgeting')">
-                        <span class="icon video-icon">▶️</span><span>Budgeting & Financial Audit</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1bnZkXcbuSPYFral4eLRHnUwzUgGdZ80K/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 10</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(10)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 10 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit11">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 11 - NURSING INFORMATICS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GHky3pufYa0lDRB2br0wIsFCFbc14r8Y/preview', 'Detailed Notes: Informatics')">
-                        <span class="icon">📚</span><span>Detailed Notes: Nursing Informatics</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1roztfJVfvR7vurPVuhA56trU2zp954Et/preview', 'Informatics & Records')">
-                        <span class="icon video-icon">▶️</span><span>Nursing Informatics & Reporting</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1gta8vxTfi9pUXfkHFa1MEMIREPeRbePH/preview', 'Telemedicine')">
-                        <span class="icon video-icon">▶️</span><span>Telemedicine</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1sr89KejiznqSayJIfL3UgRhtYLXl_nZK/preview', 'EMR & EHR')">
-                        <span class="icon video-icon">▶️</span><span>Telenursing & Electronic Health Records</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1p1IEdi8ZXH-bua7LMcNRVDTOsZE1ED3T/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 11</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(11)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 11 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit12">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 12 - PERSONAL MANAGEMENT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sW_TthudKiWztKoeERFrjGjwmtKshGAV/preview', 'Detailed Notes: Personal Mgmt')">
-                        <span class="icon">📚</span><span>Detailed Notes: Personal Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1OFc7bgfJ4_KPuBv3ZNeqwxDr7uIo1h39/preview', 'Emotional Intelligence')">
-                        <span class="icon video-icon">▶️</span><span>Personnel Management & Emotional Intelligence</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nwdS6IMN4mr5doe7nhSqN1jTWtSn9CMo/preview', 'Stress Management')">
-                        <span class="icon video-icon">▶️</span><span>Stress and Time Management</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1pvR-RGiKNxmSLblpwRsSsXkne4GUcVpv/preview', 'Career Planning')">
-                        <span class="icon video-icon">▶️</span><span>Career Planning</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1zqqBdSAoAjBpbzyaivTvhZuXeMCcubIX/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 12</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(12)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 12 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit13">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 13 - ESTABLISHING INSTITUTIONS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1k91bIZTfyn2e5GDJK1ZMNP7acSezC0OB/preview', 'Detailed Notes: Institutions')">
-                        <span class="icon">📚</span><span>Detailed Notes: Nursing Institutions</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/12ZgawgbdICqqNRPUppN3yTZNkPo29e_J/preview', 'INC Norms')">
-                        <span class="icon video-icon">▶️</span><span>INC Norms & Guidelines</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hEo-vqNjfXEA_UJ-1Eau8abjOjEH3xYY/preview', 'Accreditation')">
-                        <span class="icon video-icon">▶️</span><span>INC/SNC & Accreditation</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1CoGTYlBLcu1I95ohYtEG1KxABCBu2bdh/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 13</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(13)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 13 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit14">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 14 - PLANNING & ORGANIZING (EDUCATION)
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13hDkZHyhlZqgrkqMcmYf_fO_fd4Hapbq/preview', 'Detailed Notes: Educational Planning')">
-                        <span class="icon">📚</span><span>Detailed Notes: Educational Planning</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1jYMCqgEhDMR9-iOT2eNWe3LALptMtjnL/preview', 'Philosophy')">
-                        <span class="icon video-icon">▶️</span><span>Philosophy of Nursing College</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BasN_n67gIw7kKSzX1zjUvsu1NLbQZzU/preview', 'Curriculum')">
-                        <span class="icon video-icon">▶️</span><span>Clinical Facilities & Curriculum Planning</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1G9hpm5KDoyekHowJZDLsmMCfCF1T1HtP/preview', 'Rotation Plans')">
-                        <span class="icon video-icon">▶️</span><span>Master & Clinical Rotation Plans</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1a17oGytU9fjCd2H7Z-NpJBgtoLzvArj8/preview', 'Budget')">
-                        <span class="icon video-icon">▶️</span><span>Revenue Expenditure & Budget</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1nRitGbCwb3pA2mrExGAjrf280z_V4qzI/preview', 'Committees')">
-                        <span class="icon video-icon">▶️</span><span>Committees and Functioning</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1DsMBwQLe7Ky5uakIgLXorjQZKrlRDRsj/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 14</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(14)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 14 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit15">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 15 - STUDENT SELECTION
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1D0ffCOwh7onBTnMYWgJqJbG1VTiG09Gy/preview', 'Detailed Notes: Student Selection')">
-                        <span class="icon">📚</span><span>Detailed Notes: Student Selection</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1mh9gKiHO56_QbYhPZ6PIgHGnhjXvm-DP/preview', 'Performance Appraisal')">
-                        <span class="icon video-icon">▶️</span><span>Performance Appraisal</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DR_0FrI2XsdsPfgvczh9h9vD55vJGQZs/preview', 'Staff Welfare')">
-                        <span class="icon video-icon">▶️</span><span>Staff Development & Welfare</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1ih4OK6kxDE-awUlMLAzyaSRoeZpodLgo/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 15</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(15)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 15 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit16">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 16 - DIRECTING & CONTROLLING (EDU)
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_oNHfz9gRhyuykLNBVMGvJIG06q-LlFN/preview', 'Detailed Notes: Edu Directing')">
-                        <span class="icon">📚</span><span>Detailed Notes: Directing & Controlling</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10UQkN1_MnbqbBs90bvgYLebpoZZOZsTK/preview', 'Curriculum')">
-                        <span class="icon video-icon">▶️</span><span>Curriculum Implementation</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YIAt24gjQlO1TuEcxQPkb_SsX9e-8den/preview', 'Counselling')">
-                        <span class="icon video-icon">▶️</span><span>Counselling</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Trev3g8oFiYUSZ0_cfrqHgxKt8_inJbU/preview', 'Quality Management')">
-                        <span class="icon video-icon">▶️</span><span>Quality Management & Educational Audit</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1VfQrTCKcc7bSw13ELuNKXG-PUTFgfFRN/preview', 'Discipline')">
-                        <span class="icon video-icon">▶️</span><span>Maintaining Discipline</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1iEmgaTSDWm66DP6s3ejC84Hxv8x0eaOR/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 16</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(16)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 16 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit17">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 17 - PROFESSIONAL CONSIDERATIONS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1KC_ZCw1MLl2dj8JIOsCKImTxzyJNIVAT/preview', 'Detailed Notes: Professional')">
-                        <span class="icon">📚</span><span>Detailed Notes: Professional Considerations</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YBDlUId8Xfkl4j4XqXAcKRqCwvTX3cyy/preview', 'Nursing Practice')">
-                        <span class="icon video-icon">▶️</span><span>Professional Consideration & Practice</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kjobiyVUV2fa41UZxURuE_PuJbabJgw6/preview', 'Legal Aspects')">
-                        <span class="icon video-icon">▶️</span><span>Legal Aspect in Nursing & Patient Rights</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1sK-sJYgMkevHZhLvSddc_lrBaoovf0oD/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 17</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(17)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 17 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="unit-container" id="unit18">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 18 - PROFESSIONAL ADVANCEMENT
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1cVmTPHha2TG5YKhkqTyReFlymPRuwhPc/preview', 'Detailed Notes: Advancement')">
-                        <span class="icon">📚</span><span>Detailed Notes: Professional Advancement</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1A8XBs1bvzziKqbba5wDO8KdJnEeXobtr/preview', 'CNE')">
-                        <span class="icon video-icon">▶️</span><span>Continuing Nursing Education (CNE)</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1f_NjY4CqtxJfN-Q4FOii0v5IzWYCnNKu/preview', 'Research')">
-                        <span class="icon video-icon">▶️</span><span>Research Activities in Nursing</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Hl4ZracC5iVul4NXLHoDQQ_7D_7rARgY/preview', 'Publications')">
-                        <span class="icon video-icon">▶️</span><span>Steps in Writing for Publications</span>
-                    </div>
-                    
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1eXN6mifqVCTnxtKpfsqbGiJiZ3OXpmd_/preview', 'Important Questions')">
-                        <span class="icon">❓</span><span>Important Questions: Unit 18</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(18)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 18 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -822,149 +287,468 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-body" class="modal-body">
+            </div>
     </div>
 
     <script>
-        // --- 1. QUIZ DATA ---
+        // --- 1. DUMMY 3D MODEL CODES (Placeholder) ---
+        const MODEL_CODE_A = `<div><p>Model Loading...</p></div>`;
+        const MODEL_CODE_B = `<div><p>Model Loading...</p></div>`;
+
+        // --- 2. QUIZ DATA (5 Questions each) ---
         const QUIZ_DATA = {
-            1: [ // Unit 1: Health Care Dev
-                { q: "The 'Health for All' goal was declared at:", o: ["Alma Ata", "Geneva", "New Delhi", "Washington"], a: 0 },
-                { q: "The Bhore Committee is also known as:", o: ["Health Survey and Planning Committee", "Health Survey and Development Committee", "Mudaliar Committee", "Kartar Singh Committee"], a: 1 },
-                { q: "Primary Health Care is based on the principle of:", o: ["Urban centralization", "Equity", "Specialized care", "Private funding"], a: 1 },
-                { q: "The regulatory body for nursing education in India is:", o: ["MCI", "INC", "UGC", "AICTE"], a: 1 },
+            1: [ // Health Care Development
+                { q: "The Bhore Committee was established in:", o: ["1943", "1946", "1952", "1960"], a: 0 },
+                { q: "Which committee is known as the 'Health Survey and Development Committee'?", o: ["Mudaliar", "Bhore", "Kartar Singh", "Srivastava"], a: 1 },
+                { q: "The goal 'Health for All' was adopted at:", o: ["Alma Ata", "Geneva", "Delhi", "New York"], a: 0 },
+                { q: "Which is a major trend in nursing services in India?", o: ["Reduction in education", "Specialization", "Decreased technology", "None"], a: 1 },
                 { q: "TNAI stands for:", o: ["Trained Nurses Association of India", "Technical Nursing Authority of India", "Total Nursing Assessment of India", "None"], a: 0 }
             ],
-            2: [ // Unit 2: Basics
-                { q: "Who is known as the father of scientific management?", o: ["Henry Fayol", "Frederick Taylor", "Max Weber", "Elton Mayo"], a: 1 },
-                { q: "POSDCORB was coined by:", o: ["Luther Gulick", "Urwick", "Fayol", "Taylor"], a: 0 },
-                { q: "The 'C' in POSDCORB stands for:", o: ["Communication", "Coordinating", "Controlling", "Commanding"], a: 1 },
-                { q: "Scalar chain refers to:", o: ["Chain of command", "Supply chain", "Communication barrier", "None"], a: 0 },
-                { q: "Unity of Command means:", o: ["One subordinate, one boss", "One plan, one team", "Teamwork", "Centralization"], a: 0 }
+            2: [ // Management Basics
+                { q: "POSDCORB was coined by:", o: ["Henry Fayol", "Luther Gulick", "F.W. Taylor", "Peter Drucker"], a: 1 },
+                { q: "The 'S' in POSDCORB stands for:", o: ["Supervision", "Staffing", "System", "Strategy"], a: 1 },
+                { q: "Which is NOT a function of management?", o: ["Planning", "Organizing", "Gossiping", "Controlling"], a: 2 },
+                { q: "Scientific Management theory was proposed by:", o: ["F.W. Taylor", "Max Weber", "Elton Mayo", "Maslow"], a: 0 },
+                { q: "The ability to influence others is called:", o: ["Power", "Leadership", "Management", "Authority"], a: 1 }
             ],
-            3: [ // Unit 3: Planning
-                { q: "A Gantt chart is primarily used for:", o: ["Budgeting", "Scheduling activities", "Employee appraisal", "Inventory"], a: 1 },
-                { q: "PERT stands for:", o: ["Program Evaluation and Review Technique", "Planned Emergency Response Team", "Patient Evaluation Record Tool", "None"], a: 0 },
-                { q: "Strategic planning is usually:", o: ["Short term", "Long term", "Day to day", "Immediate"], a: 1 },
-                { q: "Cost-Benefit Analysis helps in:", o: ["Comparing costs with outcomes", "Hiring staff", "Teaching students", "Writing reports"], a: 0 },
-                { q: "The first step in planning is:", o: ["Setting objectives", "Budgeting", "Execution", "Evaluation"], a: 0 }
+            3: [ // Planning
+                { q: "The first step in the planning process is:", o: ["Setting objectives", "Analyzing data", "Implementing", "Evaluation"], a: 0 },
+                { q: "A Gantt chart is used for:", o: ["Budgeting", "Scheduling activities", "Staffing", "Recruitment"], a: 1 },
+                { q: "MBO stands for:", o: ["Management By Objectives", "Management By Order", "Management By Organization", "None"], a: 0 },
+                { q: "Which budget deals with day-to-day expenses?", o: ["Capital budget", "Operational budget", "Personnel budget", "Zero-based budget"], a: 1 },
+                { q: "Disaster planning is primarily:", o: ["Reactive", "Proactive", "Unnecessary", "Expensive"], a: 1 }
             ],
-            4: [ // Unit 4: Organizing
-                { q: "Line authority is characterized by:", o: ["Advisory role", "Direct command", "Horizontal communication", "Informal relations"], a: 1 },
-                { q: "Span of control refers to:", o: ["Number of subordinates a supervisor manages", "Geographic area", "Duration of shift", "Budget limit"], a: 0 },
-                { q: "An organizational chart shows:", o: ["Formal structure", "Informal groups", "Patient list", "Budget"], a: 0 },
-                { q: "Decentralization involves:", o: ["Concentrating power at top", "Delegating power to lower levels", "No hierarchy", "Strict rules"], a: 1 },
-                { q: "The nursing care delivery system where one nurse assumes total responsibility for a patient is:", o: ["Functional nursing", "Team nursing", "Primary nursing", "Modular nursing"], a: 2 }
+            4: [ // Organizing
+                { q: "The graphical representation of an organization's structure is:", o: ["Gantt Chart", "Organizational Chart", "Flow Chart", "Pie Chart"], a: 1 },
+                { q: "Span of control refers to:", o: ["Number of subordinates a manager supervises", "Total employees", "Office size", "Salary limit"], a: 0 },
+                { q: "Line authority flows:", o: ["Bottom to top", "Top to bottom", "Horizontally", "Diagonally"], a: 1 },
+                { q: "Which delivery system assigns one nurse to one patient?", o: ["Functional", "Team", "Case Method", "Primary"], a: 2 },
+                { q: "Unity of Command means:", o: ["One boss for one person", "Everyone is a boss", "No boss", "Multiple bosses"], a: 0 }
             ],
-            5: [ // Unit 5: Staffing
-                { q: "Patient Classification System (PCS) helps in:", o: ["Determining staffing needs", "Diagnosing patients", "Billing", "Discharge planning"], a: 0 },
-                { q: "Recruitment is the process of:", o: ["Selecting candidates", "Searching for prospective employees", "Training", "Firing"], a: 1 },
-                { q: "Induction training is given to:", o: ["New employees", "Retiring employees", "Top management", "Students"], a: 0 },
-                { q: "The nurse-patient ratio recommended for ICU is:", o: ["1:1", "1:3", "1:6", "1:10"], a: 0 },
-                { q: "Performance appraisal is used for:", o: ["Salary increments", "Feedback", "Promotion", "All of the above"], a: 3 }
+            5: [ // Staffing
+                { q: "The process of searching for prospective employees is:", o: ["Selection", "Recruitment", "Training", "Induction"], a: 1 },
+                { q: "Which is a method of patient classification?", o: ["Acuity based", "Height based", "Weight based", "Age based"], a: 0 },
+                { q: "Orientation of new staff is also called:", o: ["Termination", "Induction", "Promotion", "Transfer"], a: 1 },
+                { q: "Attrition refers to:", o: ["Hiring", "Reduction in workforce", "Promotion", "Training"], a: 1 },
+                { q: "Functional nursing emphasizes:", o: ["Holistic care", "Task completion", "Patient satisfaction", "Primary care"], a: 1 }
             ],
-            6: [ // Unit 6: Directing
-                { q: "Directing includes:", o: ["Supervision, Motivation, Leadership", "Planning, Budgeting", "Staffing, Recruitment", "Reporting"], a: 0 },
-                { q: "MBO stands for:", o: ["Management by Objectives", "Management by Order", "Member Board Organization", "None"], a: 0 },
-                { q: "Which is a non-financial incentive?", o: ["Bonus", "Recognition", "Salary hike", "Pension"], a: 1 },
+            6: [ // Directing & Leading
+                { q: "Directing involves:", o: ["Planning", "Budgeting", "Guiding and supervising", "Recruiting"], a: 2 },
+                { q: "Which is a key element of directing?", o: ["Motivation", "Sleep", "Isolation", "Ignoring"], a: 0 },
+                { q: "Communication flows from subordinate to superior is:", o: ["Downward", "Upward", "Horizontal", "Diagonal"], a: 1 },
                 { q: "Supervision should be:", o: ["Autocratic", "Democratic and guiding", "Punitive", "Absent"], a: 1 },
-                { q: "Delegation is defined as:", o: ["Doing all work alone", "Assigning responsibility and authority", "Ordering people", "Avoiding work"], a: 1 }
+                { q: "The rotation plan ensures:", o: ["Equal exposure to clinical areas", "Fixed duty", "No duty", "Only night shifts"], a: 0 }
             ],
-            7: [ // Unit 7: Leadership
-                { q: "Which leadership style allows maximum freedom to subordinates?", o: ["Autocratic", "Democratic", "Laissez-faire", "Bureaucratic"], a: 2 },
-                { q: "Transformational leadership focuses on:", o: ["Routine tasks", "Inspiring change and vision", "Punishment", "Strict rules"], a: 1 },
-                { q: "Power derived from position is called:", o: ["Legitimate power", "Expert power", "Referent power", "Coercive power"], a: 0 },
-                { q: "Conflict management strategy 'Win-Win' is associated with:", o: ["Collaboration", "Avoidance", "Competition", "Accommodation"], a: 0 },
-                { q: "A key trait of a leader is:", o: ["Vision", "Technical skill only", "Rigidity", "Isolation"], a: 0 }
+            7: [ // Leadership
+                { q: "Which leadership style involves group decision making?", o: ["Autocratic", "Democratic", "Laissez-faire", "Bureaucratic"], a: 1 },
+                { q: "The 'Great Man Theory' assumes leaders are:", o: ["Made", "Born", "Trained", "Selected"], a: 1 },
+                { q: "Laissez-faire leadership is also known as:", o: ["Free-rein", "Dictatorial", "Participative", "Strict"], a: 0 },
+                { q: "Power derived from position is:", o: ["Expert power", "Legitimate power", "Referent power", "Coercive power"], a: 1 },
+                { q: "Transformational leadership focuses on:", o: ["Status quo", "Change and vision", "Rewards only", "Punishment"], a: 1 }
             ],
-            8: [ // Unit 8: Controlling
-                { q: "Nursing Audit focuses on:", o: ["Financial records", "Quality of nursing care", "Staff attendance", "Inventory"], a: 1 },
-                { q: "Standard of care is:", o: ["Minimum acceptable level of care", "Maximum possible care", "Ideal care", "None"], a: 0 },
-                { q: "Quality Assurance involves:", o: ["Structure, Process, Outcome", "Planning only", "Budgeting only", "Hiring"], a: 0 },
-                { q: "Which is a tool for performance appraisal?", o: ["Checklist", "Thermometer", "Stethoscope", "Syringe"], a: 0 },
-                { q: "Retrospective audit is done:", o: ["After patient discharge", "During care", "Before admission", "During surgery"], a: 0 }
+            8: [ // Controlling
+                { q: "The last step of the management process is:", o: ["Planning", "Controlling", "Organizing", "Staffing"], a: 1 },
+                { q: "Performance appraisal evaluates:", o: ["Patient health", "Employee performance", "Hospital building", "Budget"], a: 1 },
+                { q: "Nursing Audit is a tool for:", o: ["Quality assurance", "Staffing", "Recruitment", "Budgeting"], a: 0 },
+                { q: "PERT stands for:", o: ["Program Evaluation and Review Technique", "Patient Emergency Response Team", "Program Efficiency Review Tool", "None"], a: 0 },
+                { q: "Standards of nursing care are set by:", o: ["INC", "Individual nurse", "Patient", "Technician"], a: 0 }
             ],
-            9: [ // Unit 9: Org Behavior
-                { q: "Maslow's hierarchy of needs starts with:", o: ["Physiological needs", "Safety needs", "Esteem needs", "Self-actualization"], a: 0 },
-                { q: "Collective bargaining is a process between:", o: ["Employer and Employee union", "Nurse and Patient", "Doctor and Nurse", "Student and Teacher"], a: 0 },
-                { q: "Group dynamics refers to:", o: ["Interactions within a group", "Group size", "Group location", "None"], a: 0 },
-                { q: "Johari Window is related to:", o: ["Self-awareness", "Ventilation", "Building design", "Budgeting"], a: 0 },
-                { q: "Burnout is a state of:", o: ["Physical and emotional exhaustion", "High energy", "Motivation", "Happiness"], a: 0 }
+            9: [ // Org Behavior
+                { q: "Group dynamics refers to:", o: ["Force operating within a group", "Individual behavior", "Hospital policy", "Machine work"], a: 0 },
+                { q: "Collective bargaining is typically conducted by:", o: ["Individual nurses", "Unions/Associations", "Patients", "Doctors"], a: 1 },
+                { q: "Maslow's hierarchy places self-actualization at the:", o: ["Bottom", "Middle", "Top", "Nowhere"], a: 2 },
+                { q: "Johari window is used to improve:", o: ["Self-awareness", "Budgeting", "Staffing", "Equipment"], a: 0 },
+                { q: "Burnout is a result of:", o: ["High motivation", "Chronic workplace stress", "Adequate rest", "Good salary"], a: 1 }
             ],
-            10: [ // Unit 10: Financial
-                { q: "Zero-based budgeting starts from:", o: ["Previous year's budget", "Zero", "Top management", "Estimated profit"], a: 1 },
-                { q: "An audit of financial records is called:", o: ["Clinical audit", "Financial audit", "Nursing audit", "Safety audit"], a: 1 },
-                { q: "Inventory control prevents:", o: ["Overstocking and understocking", "Staffing shortage", "Patient falls", "Infection"], a: 0 },
-                { q: "Fiscal year in India usually starts on:", o: ["1st January", "1st April", "1st July", "1st October"], a: 1 },
-                { q: "ABC analysis is used in:", o: ["Inventory management", "Patient care", "Staffing", "Training"], a: 0 }
+            10: [ // Financial Mgmt
+                { q: "A financial plan for a defined period is called:", o: ["Audit", "Budget", "Ledger", "Balance sheet"], a: 1 },
+                { q: "Zero-based budgeting starts from:", o: ["Last year's budget", "Scratch/Zero", "Average of 5 years", "Random number"], a: 1 },
+                { q: "Cost-benefit analysis compares:", o: ["Cost and outcome", "Staff and patients", "Doctors and nurses", "Time and space"], a: 0 },
+                { q: "Auditing is:", o: ["Spending money", "Verifying financial records", "Planning budget", "Hiring staff"], a: 1 },
+                { q: "Capital expenditure refers to:", o: ["Day to day items", "Major assets/equipment", "Salaries", "Stationery"], a: 1 }
             ],
-            11: [ // Unit 11: Informatics
-                { q: "EHR stands for:", o: ["Electronic Health Record", "Emergency Health Response", "Electric Heart Rate", "None"], a: 0 },
-                { q: "Telenursing involves:", o: ["Nursing via telecommunication", "Nursing in OT", "Home care", "Bedside nursing"], a: 0 },
-                { q: "A key advantage of HIS is:", o: ["Reduced paperwork", "Increased cost", "More errors", "Slower service"], a: 0 },
-                { q: "Data security in informatics ensures:", o: ["Confidentiality", "Public access", "Deleting records", "Hacking"], a: 0 },
-                { q: "Telemedicine helps in:", o: ["Remote consultation", "Surgery", "Bed making", "Cleaning"], a: 0 }
+            11: [ // Informatics
+                { q: "EHR stands for:", o: ["Electronic Health Record", "Emergency Hospital Room", "Electric Heart Rate", "None"], a: 0 },
+                { q: "Telemedicine uses technology to:", o: ["Clean floors", "Provide remote clinical care", "Cook food", "Transport patients"], a: 1 },
+                { q: "Telenursing allows nurses to:", o: ["Perform surgery", "Monitor patients remotely", "Prescribe drugs", "Do physical exam"], a: 1 },
+                { q: "A key benefit of nursing informatics is:", o: ["Increased paper use", "Improved data management", "Slower workflow", "More errors"], a: 1 },
+                { q: "NIS stands for:", o: ["Nursing Information System", "New Injection Site", "Nurse In Surgery", "None"], a: 0 }
             ],
-            12: [ // Unit 12: Personal Mgmt
-                { q: "Emotional Intelligence involves:", o: ["Understanding self and others' emotions", "High IQ", "Suppressing emotions", "Ignoring others"], a: 0 },
-                { q: "A key component of time management is:", o: ["Prioritization", "Procrastination", "Multitasking incorrectly", "Sleeping"], a: 0 },
-                { q: "Resilience means:", o: ["Bouncing back from adversity", "Giving up", "Being rigid", "Avoiding stress"], a: 0 },
-                { q: "Career planning includes:", o: ["Self-assessment and goal setting", "Waiting for luck", "Following others blindly", "None"], a: 0 },
-                { q: "Stress management technique includes:", o: ["Meditation", "Overeating", "Smoking", "Worrying"], a: 0 }
+            12: [ // Personal Mgmt
+                { q: "Emotional Intelligence involves:", o: ["IQ only", "Understanding own and others' emotions", "Being emotionless", "Ignoring feelings"], a: 1 },
+                { q: "Resilience is the ability to:", o: ["Avoid stress", "Bounce back from adversity", "Complain", "Quit"], a: 1 },
+                { q: "Time management relies on:", o: ["Procrastination", "Prioritization", "Doing everything at once", "Sleeping"], a: 1 },
+                { q: "Career planning is:", o: ["Employer's responsibility", "Individual's continuous process", "One time event", "Not necessary"], a: 1 },
+                { q: "Stress management technique includes:", o: ["Overworking", "Meditation/Relaxation", "Smoking", "Caffeine"], a: 1 }
             ],
-            13: [ // Unit 13: Institutions
-                { q: "INC inspections are done for:", o: ["Accreditation/Recognition", "Punishment", "Funding", "Building design"], a: 0 },
-                { q: "The physical facility norms for a nursing college are prescribed by:", o: ["INC", "Local municipality", "Police", "Builders"], a: 0 },
-                { q: "SNC stands for:", o: ["State Nursing Council", "Student Nurse Council", "Staff Nurse Club", "None"], a: 0 },
-                { q: "Clinical facilities ratio for ANM/GNM/BSc is generally:", o: ["1:1", "1:3", "1:5", "1:10"], a: 1 },
-                { q: "Accreditation ensures:", o: ["Quality standards", "High fees", "Low staff", "Old buildings"], a: 0 }
+            13: [ // Establishment
+                { q: "The apex body for nursing education in India is:", o: ["MCI", "INC", "UGC", "AICTE"], a: 1 },
+                { q: "SNC stands for:", o: ["State Nursing Council", "School Nursing Centre", "Student Nurse Club", "None"], a: 0 },
+                { q: "Accreditation ensures:", o: ["Quality standards", "Low fees", "More holidays", "Easy exams"], a: 0 },
+                { q: "To start a nursing college, permission is needed from:", o: ["State Govt, SNC, INC", "Only INC", "Only State Govt", "Local Panchayat"], a: 0 },
+                { q: "INC was established in:", o: ["1947", "1949", "1950", "1960"], a: 0 }
             ],
-            14: [ // Unit 14: Planning Edu
-                { q: "Master Rotation Plan shows:", o: ["Placement of students in clinical/theory throughout the year", "Daily diet", "Staff shifts", "Exam paper"], a: 0 },
-                { q: "Curriculum planning is based on:", o: ["Educational objectives", "Teacher's mood", "Student demand", "Weather"], a: 0 },
-                { q: "A curriculum committee includes:", o: ["Principal and faculty", "Students only", "Parents only", "Cleaners"], a: 0 },
-                { q: "Clinical rotation ensures:", o: ["Students get exposure to all specialties", "Students stay in one ward", "Students take leave", "None"], a: 0 },
-                { q: "Philosophy of a college reflects its:", o: ["Beliefs and values", "Building color", "Fees", "Location"], a: 0 }
+            14: [ // Planning Education
+                { q: "Master Rotation Plan shows:", o: ["Daily menu", "Overall curriculum plan for the year", "Staff salary", "Exam results"], a: 1 },
+                { q: "Clinical rotation plan focuses on:", o: ["Theory classes", "Clinical postings", "Vacation", "Library hours"], a: 1 },
+                { q: "Curriculum planning is primarily based on:", o: ["Student interest only", "Educational objectives", "Teacher convenience", "Available rooms"], a: 1 },
+                { q: "The curriculum committee is responsible for:", o: ["Planning and evaluating curriculum", "Cleaning college", "Cooking food", "Paying fees"], a: 0 },
+                { q: "Budgeting for a college includes:", o: ["Only salaries", "Recurring and Non-recurring expenses", "Only equipment", "Student pocket money"], a: 1 }
             ],
-            15: [ // Unit 15: Student Selection
-                { q: "Student selection is based on:", o: ["Merit/Entrance exams", "Height", "Weight", "Wealth"], a: 0 },
-                { q: "Guidance and counseling helps students in:", o: ["Personal and professional growth", "Cheating", "Skipping classes", "Fighting"], a: 0 },
-                { q: "Anecdotal record is a:", o: ["Narrative of a specific incident", "Attendance register", "Mark sheet", "Budget"], a: 0 },
-                { q: "Cumulative record contains:", o: ["Complete history of student", "Only current marks", "Medical bill", "None"], a: 0 },
-                { q: "OSCE stands for:", o: ["Objective Structured Clinical Examination", "Oral Structured Clinical Exam", "One Student Clinical Exam", "None"], a: 0 }
+            15: [ // Staffing Education
+                { q: "Student selection should be based on:", o: ["Merit and aptitude", "Bribe", "Random choice", "Looks"], a: 0 },
+                { q: "Staff development programs aim to:", o: ["Punish staff", "Improve professional knowledge/skills", "Reduce salary", "Increase work hours"], a: 1 },
+                { q: "Performance appraisal of teachers includes:", o: ["Teaching effectiveness", "Personal life", "Political views", "Dress code only"], a: 0 },
+                { q: "SNA stands for:", o: ["Student Nurses Association", "Staff Nurse Agency", "School Nurse Authority", "None"], a: 0 },
+                { q: "Teacher-student ratio for BSc Nursing is typically:", o: ["1:10", "1:20", "1:50", "1:100"], a: 0 }
             ],
-            16: [ // Unit 16: Edu Directing
-                { q: "Clinical supervision focuses on:", o: ["Improving clinical skills", "Attendance", "Uniform check only", "Punishment"], a: 0 },
-                { q: "Educational audit assesses:", o: ["Quality of education", "Financial fraud", "Building strength", "Water supply"], a: 0 },
-                { q: "Discipline in a college should ideally be:", o: ["Self-discipline", "Forced", "Corporal punishment", "Absent"], a: 0 },
-                { q: "A lesson plan is a guide for:", o: ["Teacher", "Patient", "Doctor", "Driver"], a: 0 },
-                { q: "Audio-Visual aids are used to:", o: ["Enhance learning", "Distract students", "Waste time", "Decorate room"], a: 0 }
+            16: [ // Directing Education
+                { q: "Guidance and counseling helps students to:", o: ["Solve problems and develop", "Pass exams without studying", "Get money", "Avoid classes"], a: 0 },
+                { q: "Discipline in a college should be:", o: ["Constructive", "Destructive", "Physical punishment", "Ignored"], a: 0 },
+                { q: "Quality assurance in education ensures:", o: ["Standard of education", "High profits", "Low attendance", "Easy syllabus"], a: 0 },
+                { q: "Educational audit assesses:", o: ["Academic performance and facilities", "Financial fraud only", "Student health", "Sports only"], a: 0 },
+                { q: "Effective counseling requires:", o: ["Talking only", "Active listening", "Judging", "Scolding"], a: 1 }
             ],
-            17: [ // Unit 17: Professional
-                { q: "Code of Ethics for nurses was developed by:", o: ["ICN", "WHO", "UNICEF", "Red Cross"], a: 0 },
-                { q: "Malpractice refers to:", o: ["Professional negligence", "Standard care", "Good documentation", "Helping patients"], a: 0 },
-                { q: "Informed consent must be taken:", o: ["Before procedure", "After procedure", "During procedure", "Never"], a: 0 },
-                { q: "Defamation involving written words is called:", o: ["Libel", "Slander", "Assault", "Battery"], a: 0 },
-                { q: "The Consumer Protection Act applies to healthcare to protect against:", o: ["Deficiency in service", "High fees", "Long queues", "Bad food"], a: 0 }
+            17: [ // Professional Considerations
+                { q: "Code of Ethics for nurses provides:", o: ["Legal rules", "Guidelines for professional conduct", "Salary structure", "Exam patterns"], a: 1 },
+                { q: "Malpractice refers to:", o: ["Professional negligence", "Good practice", "Documentation", "Research"], a: 0 },
+                { q: "Informed consent is necessary for:", o: ["Routine care", "Invasive procedures/Surgery", "Talking", "Eating"], a: 1 },
+                { q: "The Consumer Protection Act applies to medical services:", o: ["True", "False", "Only private", "Only govt"], a: 0 },
+                { q: "Advocacy in nursing means:", o: ["Speaking for the patient", "Fighting with doctors", "Ignoring patient", "Following orders blindly"], a: 0 }
             ],
-            18: [ // Unit 18: Advancement
-                { q: "CNE stands for:", o: ["Continuing Nursing Education", "Central Nursing Exam", "Clinical Nurse Educator", "None"], a: 0 },
-                { q: "Evidence-Based Practice (EBP) integrates:", o: ["Research evidence, clinical expertise, patient values", "Old traditions", "Doctor's orders only", "Textbooks only"], a: 0 },
-                { q: "Plagiarism means:", o: ["Copying others' work without credit", "Doing original research", "Writing a poem", "Signing a document"], a: 0 },
-                { q: "A peer-reviewed journal implies:", o: ["Articles reviewed by experts before publication", "Articles written by friends", "Newspaper", "Magazine"], a: 0 },
-                { q: "PhD is a degree in:", o: ["Doctor of Philosophy (Research)", "Doctor of Pharmacy", "Public Health", "Physiology"], a: 0 }
+            18: [ // Professional Advancement
+                { q: "CNE stands for:", o: ["Continuing Nursing Education", "Central Nursing Exam", "Clinical Nursing Expert", "None"], a: 0 },
+                { q: "Evidence-Based Practice (EBP) integrates:", o: ["Research evidence, expertise, patient values", "Tradition only", "Doctor's orders", "Textbooks only"], a: 0 },
+                { q: "Nursing research aims to:", o: ["Improve patient care", "Increase paperwork", "Waste time", "Confuse students"], a: 0 },
+                { q: "Publication of research is important for:", o: ["Disseminating knowledge", "Earning money", "Showing off", "Hiding data"], a: 0 },
+                { q: "Professional organizations like TNAI promote:", o: ["Professional growth", "Strikes only", "Social gatherings", "Politics"], a: 0 }
             ]
         };
 
-        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
+        // --- 3. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "HEALTH CARE DEVELOPMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1JLmgfF7MAj3xJzmJ5-g_TjZe7RjcVe4M/preview' },
+                    { type: 'video', title: 'Health Care & Development', url: 'https://drive.google.com/file/d/1wUhDrbeQs2elwGBPXRxvrlixYIGd4c5S/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Q51peFzsZsFWLnWqWcduorj0F0u8Pouy/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/17OIHznSBXOvG9wyo9lpGu3dscLjKzmlJ/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1p6CLOPoFCyhiIFevuL8k0kboVjjjKM6p/preview' }
+                ]
+            },
+            {
+                id: 2, title: "MANAGEMENT BASICS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1nkYIIfa1pCH1TpSDmeYMBXeFg64tsO5H/preview' },
+                    { type: 'video', title: 'Management Basics Applied', url: 'https://drive.google.com/file/d/14wMZ0ZEubl7WUP7nGt4C5ndP6qZ49CvF/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1I8w9ys-CSjZpOxuCh8EoxcOnuaZCBVMq/preview' },
+                    { type: 'video', title: 'Intro to Mgmt Process', url: 'https://drive.google.com/file/d/1UxSMJl7Z6gT9HCuSxaYP9YE-ePuUeutu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wEm_h2Oo8AMObKkxwPw9jl4etkzlRRhS/preview' },
+                    { type: 'video', title: 'Staffing, Directing, Controlling', url: 'https://drive.google.com/file/d/19-0avq66ieKtqcUpfG4qoe8mov_OJ7kO/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1EALTj-j0gwXgWoVZwumkvVugIMfwos72/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1e_PcGxXPvo-UBKh1u0IZIdSVZcqTQkUo/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1RBncWVvOkvT3KfCY1c1ok3H422YxVImd/preview' }
+                ]
+            },
+            {
+                id: 3, title: "PLANNING NURSING SERVICES",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1BCvq6AlNc4cvmocga5HqlfSbiCcUsabw/preview' },
+                    { type: 'video', title: 'Planning Nursing Services', url: 'https://drive.google.com/file/d/1AfXWPtCREs2gpZHV1wPGM3e9N6I2rjaf/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1JllYTIfD8Bx02NS16aBhvd0Oq1Die7d3/preview' },
+                    { type: 'video', title: 'Gantt Chart & Budgeting', url: 'https://drive.google.com/file/d/1ByuSl6x6wsKGOsT6-ELDaDcbk1qHr_Vm/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1uTj03pGAwnip2POA6DNESJjxrkKwZOPV/preview' },
+                    { type: 'video', title: 'Cost-Benefit & Disaster Planning', url: 'https://drive.google.com/file/d/1D_VPrR5Yslc5fVuTCq2XoA8OCUk2a8FH/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1AZroh7475Kj5_aIrE8X7eoh3UzLGIhcp/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1jtGy4ZNA7KGn2HCb9mhZfubyXQsemcEo/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1aMXUiZ3xsp3QlkSUgYV5RZYJtro3Ca5Z/preview' }
+                ]
+            },
+            {
+                id: 4, title: "ORGANIZING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1Hn87weGD3_0JxUIb0TVCQa8QMx7S8VZ_/preview' },
+                    { type: 'video', title: 'Org Process & Types', url: 'https://drive.google.com/file/d/1sV8TTcUmc4I9J6Ik300Mgmki4KITDO7d/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pR2sbXzdT1hp-IS5nW2AuALLt3kUjmW2/preview' },
+                    { type: 'video', title: 'Structure & Effectiveness', url: 'https://drive.google.com/file/d/1QbDQLH9RHDuP5qvviZZxWD3T56BHUqrL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/10eT9NYVx0tN4qwc98uNgpg6tmPbobeM7/preview' },
+                    { type: 'video', title: 'Hospital Stats & Delivery Systems', url: 'https://drive.google.com/file/d/1G-akfkPNlK6DYnsngZ9stzvx-1L9mThp/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1OjR6J4DAp82-7m2zy8g2nVTXkXQkmxVe/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1e8oPjlw7-xTjl-Sy6Od7paK7eHT6eI6N/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/153V1Y21DjKhLsxg9s25c2JkGmWD_Kr7b/preview' }
+                ]
+            },
+            {
+                id: 5, title: "STAFFING (HRM)",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1JQIywZbuzOS7XIQPVFBWs7ThmIdDdE_M/preview' },
+                    { type: 'video', title: 'Recruitment & Selection', url: 'https://drive.google.com/file/d/1tChcmP8UsnfIqr8PdJqdYOVz7db0zjME/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1XlWb2l3bQmZHYNBiPPOUwqOw95Gv2bMn/preview' },
+                    { type: 'video', title: 'Training & Development', url: 'https://drive.google.com/file/d/1JSPfZf0ybVHK0NR3_r463zaHE7Myx-8Y/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1iZl7MJVznF0H-s_kfPe7_klv3EkoSyiU/preview' },
+                    { type: 'video', title: 'Promotion & Patient Classification', url: 'https://drive.google.com/file/d/17Y1UkOd7nHNAE3NqH0zX0mzGwEIFmHtX/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1lw9I-qcdjEsXG-9t_6VCYTaSO0hMjiN1/preview' },
+                    { type: 'video', title: 'Nursing Director Roles', url: 'https://drive.google.com/file/d/1R8bQ0WWKyoTmqSoZPFj63mg4gNdzqj9G/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1de0r3B7OUJRo7g8fFGjXMxes2kBjMmdq/preview' },
+                    { type: 'video', title: 'Nursing Care Methods', url: 'https://drive.google.com/file/d/1O1bYOTrKRB_yXorsMnFrlj8LOQylobsF/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1SCksVS1SnnQyTwlwndTAOycRZX_Mwf6H/preview' },
+                    { type: 'video', title: 'Turnover & Absenteeism', url: 'https://drive.google.com/file/d/1FG973oPzRlV0kGJnPfUjdH6BZP4U6dyw/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1kuRcXL4Kqyd8AZvdaGOMvQ2BaErXOS_1/preview' },
+                    { type: 'video', title: 'Adult Education', url: 'https://drive.google.com/file/d/1jngxmQX_b-0HaXdZRXhsQml7IPGsCEOQ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1x69xbMUfEu9WUAitZPJ3qgofTDpRvErB/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1Mktsi-VtNW5cocU2vfzCOmNDAdF5XeBZ/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/18dcEYgo4GJomv0eVAVZ3Fjmkee2wdLZU/preview' }
+                ]
+            },
+            {
+                id: 6, title: "DIRECTING & LEADING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1zxUw66Qx8cwWQuc18rlLi709zikfJnWB/preview' },
+                    { type: 'video', title: 'Directing Principles', url: 'https://drive.google.com/file/d/1-deKThuZFDmYDF0ro61ICM2ff3h46rYN/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/12nlVh1Md6QxAfV9kNCEBkumd2IxsMYJ7/preview' },
+                    { type: 'notes', title: 'Lecture Notes (Supervision)', url: 'https://drive.google.com/file/d/1fadfheeyhpqjQS6sxJqtHa60L_Y36YOV/preview' },
+                    { type: 'video', title: 'Collaboration & MBO', url: 'https://drive.google.com/file/d/1mmmYMTTRmSXR7V2G6_Qf-nWhh6jVkmo_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xqGUmTbcueHVcHKeaiwZjoNXnwZiUoAR/preview' },
+                    { type: 'video', title: 'Team Management', url: 'https://drive.google.com/file/d/1lPWUrIxqifKkANVC_-SwksRsj1j6yoRN/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wjEtAbY9F3a6GgIDZ9cBvP4v0x1zX50x/preview' },
+                    { type: 'video', title: 'Rotation & Discipline', url: 'https://drive.google.com/file/d/1Oz0AnXlN8kn76LYXiI3mNAB8Df-lK2j8/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Y0MwIMccs084fqJY6U2Pks3JxDT8ZRe4/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/11kdFIk0xSXyu7S6JEoduItE0ANs1BvHQ/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1KG2_px53CHijkuRor50zOsysmBrpj1cI/preview' }
+                ]
+            },
+            {
+                id: 7, title: "LEADERSHIP",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1LsQ6k4hwKcI-Rlt5ESFYglw5xDw2EpKL/preview' },
+                    { type: 'video', title: 'Leadership Concepts', url: 'https://drive.google.com/file/d/1kiIPamAX1uLn41A7DSdJVLMBofgQsR9_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1UsUnNckI9vAEUyw7G2Kc4Jqr0MR2fB77/preview' },
+                    { type: 'video', title: 'Leadership Styles', url: 'https://drive.google.com/file/d/1pp1cokheHh8eFkH7pY0uIxecwvUqbbN9/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ESK13guImalQXFIMsw1Ncq-x8nXazq-A/preview' },
+                    { type: 'video', title: 'Leadership Development', url: 'https://drive.google.com/file/d/1LZraQ-K5oRwxSbVunSkjUe5lsJb7w-CD/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1L6Jax4riy7aoR620EwDf46RJa5lxTuRw/preview' },
+                    { type: 'video', title: 'Delegation & Power', url: 'https://drive.google.com/file/d/1PmUONsIXVf9ymMQCdW4AF1PvDrM-h_ig/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/19OCzwsKJOrrsUkmqv-jJwEjkHmAp_xk1/preview' },
+                    { type: 'video', title: 'Empowerment & Coaching', url: 'https://drive.google.com/file/d/1gi4gPiIGchWNSGMZJMAZe45tjSOJodKD/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1bwa_AQHEv3bPd3mWDNPkcYPWMfoDeygo/preview' },
+                    { type: 'video', title: 'Decision Making & Conflict', url: 'https://drive.google.com/file/d/1MRRurLTfbQ1eb_gKFRbwNRteXQ82sV3g/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1C-LXh-1qczCEalPBbDOam8V85qPs6KGh/preview' },
+                    { type: 'video', title: 'Negotiation & Change', url: 'https://drive.google.com/file/d/1RO7j2GMIbvXt3Zu-GBIYODfTXH9v5ark/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ozYp_QRrU8lfSJV9mkK5yG4QqsmKXVWg/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1djH7DSQeEXlEX_MT4Q98olZOhq-5zFXs/preview' }
+                ]
+            },
+            {
+                id: 8, title: "CONTROLLING",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1p14fkjbzAGkUjIGC1LGQTSx6Akr7C_QH/preview' },
+                    { type: 'video', title: 'Nursing Audit & Appraisal', url: 'https://drive.google.com/file/d/1zySg7-fqI9AFKJcSA17-fYnjdE6OZeOl/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Mjz9E7UKv14DPBdTEAsf4Odu8fAh0Wod/preview' },
+                    { type: 'video', title: 'Rounds & Quality Assurance', url: 'https://drive.google.com/file/d/1Ym3JTCMMFWoGRRSMK7WLm2kvymVd5_-g/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1eicaBOgoRuarPZLCyRgYMXZMGJwbPvEX/preview' },
+                    { type: 'video', title: 'PERT', url: 'https://drive.google.com/file/d/1aKli9eaAvLgRUt3BQwt0dPfed5YuZ6YQ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1sLs0KCCyXswUaoi2Vi27GNaRQZsr4bQm/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1BcRjoX2HVl6g3wrUqyrEuH8NC9NUr-Fp/preview' }
+                ]
+            },
+            {
+                id: 9, title: "ORGANIZATIONAL BEHAVIOUR",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1dG9_TKwuWIaMip8SJlGPi-BKAOlG8Iw3/preview' },
+                    { type: 'video', title: 'Org Behavior & Groups', url: 'https://drive.google.com/file/d/1h2BzAK-gxrwF9EAHibKZ4MYvCTW0jYGP/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1cUuHRpnjOwqCVV-O12yE1D7bDxEefSwd/preview' },
+                    { type: 'video', title: 'Human & Public Relations', url: 'https://drive.google.com/file/d/1_-2LQrucx_BtQjY3KMOky85kEa7ahwbQ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pktCANdIXt7a9lCHgej7pDAr6Nhr3Xd3/preview' },
+                    { type: 'video', title: 'Collective Bargaining', url: 'https://drive.google.com/file/d/1GBUUC12vpZbTFbn8ShU3D6osuv3Q5Akg/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1z3wfzV7mdV8uaoQx7foGGaKFm57VwVRL/preview' },
+                    { type: 'video', title: 'Motivation & Morale', url: 'https://drive.google.com/file/d/1IfSCP4c20YOLGsN7opF3v0l6FDofXwgC/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_bIz0FsmAiTSE1biH-AMdGRRbtkyVYuc/preview' },
+                    { type: 'video', title: 'Communication & Committees', url: 'https://drive.google.com/file/d/1DzPtJTeYmKpC_Pf2vDI11Ry48HNsLi86/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_hRpO-GltPG62kgVrzlwziFB7hfug9B4/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/16230RSflGYbaokBlf2ZrKLdnQRgycnk6/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/16230RSflGYbaokBlf2ZrKLdnQRgycnk6/preview' }
+                ]
+            },
+            {
+                id: 10, title: "FINANCIAL MANAGEMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/18KvRloE3wgVIjKoYyExezo2T9yixJZlF/preview' },
+                    { type: 'video', title: 'Financial Management', url: 'https://drive.google.com/file/d/1CG7GEYL5X8BDWnWp4xNZBjNeaJGmbu7A/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1U07sxGlEdcDjHk28HvCFz_Ln0vX-woLw/preview' },
+                    { type: 'video', title: 'Financial Planning', url: 'https://drive.google.com/file/d/1qyV_0Fs6K18H49UgLcj0-d8r8ivygcsu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Vsszr5YCvYeanMAbzZDD0ugj9p-boF1D/preview' },
+                    { type: 'video', title: 'Budget & Audit', url: 'https://drive.google.com/file/d/1jlqFaZP4-9b4jSG2GBipdcgXzogxSXsM/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1-tXcCuegcOFv3qkqSaBxsWVbtiHb16UO/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1WhfOKtaY9OtSr6rnTPH0e44A8xdr_N4D/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1bnZkXcbuSPYFral4eLRHnUwzUgGdZ80K/preview' }
+                ]
+            },
+            {
+                id: 11, title: "NURSING INFORMATICS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1GHky3pufYa0lDRB2br0wIsFCFbc14r8Y/preview' },
+                    { type: 'video', title: 'Informatics & Records', url: 'https://drive.google.com/file/d/1roztfJVfvR7vurPVuhA56trU2zp954Et/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1I8VH34tE5u4Vnme0fmqlGuQMh_KStssV/preview' },
+                    { type: 'video', title: 'Telemedicine', url: 'https://drive.google.com/file/d/1gta8vxTfi9pUXfkHFa1MEMIREPeRbePH/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1fXtJ6vuQdEs3CQs_C0YwbXSXtV1GFZTj/preview' },
+                    { type: 'video', title: 'Telenursing & EMR/EHR', url: 'https://drive.google.com/file/d/1sr89KejiznqSayJIfL3UgRhtYLXl_nZK/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xjcL9Og1KgGeiQ6aN1j2aazFKQhIj5vx/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1zwbb1EJZSpW5ruxRX08WtroTQEwhw43n/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1p1IEdi8ZXH-bua7LMcNRVDTOsZE1ED3T/preview' }
+                ]
+            },
+            {
+                id: 12, title: "PERSONNEL MANAGEMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1sW_TthudKiWztKoeERFrjGjwmtKshGAV/preview' },
+                    { type: 'video', title: 'EI & Resilience', url: 'https://drive.google.com/file/d/1OFc7bgfJ4_KPuBv3ZNeqwxDr7uIo1h39/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1kai9lAoOeu9jkKFVaRRYR1Cx85XKn5Qb/preview' },
+                    { type: 'video', title: 'Stress & Time Mgmt', url: 'https://drive.google.com/file/d/1nwdS6IMN4mr5doe7nhSqN1jTWtSn9CMo/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Jp3gfaSonva4Ucruuev75wc5AEcR1RDk/preview' },
+                    { type: 'video', title: 'Career Planning', url: 'https://drive.google.com/file/d/1pvR-RGiKNxmSLblpwRsSsXkne4GUcVpv/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1QgKEb2UVMc-_Z0TSwKHGbN3VFX-7ITzG/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1DVAiOHnI6yZRl47Se6Lqzp0ttLH2po_1/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1zqqBdSAoAjBpbzyaivTvhZuXeMCcubIX/preview' }
+                ]
+            },
+            {
+                id: 13, title: "ESTABLISHMENT OF INSTITUTIONS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1k91bIZTfyn2e5GDJK1ZMNP7acSezC0OB/preview' },
+                    { type: 'video', title: 'INC Norms', url: 'https://drive.google.com/file/d/12ZgawgbdICqqNRPUppN3yTZNkPo29e_J/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1tuZHX1zu0N6ow0Iay7aDFbQa9QTzwGaD/preview' },
+                    { type: 'video', title: 'Accreditation & Councils', url: 'https://drive.google.com/file/d/1hEo-vqNjfXEA_UJ-1Eau8abjOjEH3xYY/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1KlS0xUgKkP_EBRFKMK1ce_c0pZ02w23T/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/15xcHH5h2yPyszt6r7ppB7oxGOu-142AS/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1CoGTYlBLcu1I95ohYtEG1KxABCBu2bdh/preview' }
+                ]
+            },
+            {
+                id: 14, title: "PLANNING EDUCATION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/13hDkZHyhlZqgrkqMcmYf_fO_fd4Hapbq/preview' },
+                    { type: 'video', title: 'Philosophy & Curriculum', url: 'https://drive.google.com/file/d/1jYMCqgEhDMR9-iOT2eNWe3LALptMtjnL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1LD0wiVKZw8Xb-pNFeNS5Hte0qjes1ct0/preview' },
+                    { type: 'video', title: 'INC Facilities', url: 'https://drive.google.com/file/d/1BasN_n67gIw7kKSzX1zjUvsu1NLbQZzU/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1nNkco-ITkysPi2uFdcfnLkSCAT3vbqZv/preview' },
+                    { type: 'video', title: 'Rotation Plans & Budget', url: 'https://drive.google.com/file/d/1G9hpm5KDoyekHowJZDLsmMCfCF1T1HtP/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1BZT8hhawJu4CSCqhHuMjGE_IULacD46W/preview' },
+                    { type: 'video', title: 'Expenditure & Budget Types', url: 'https://drive.google.com/file/d/1a17oGytU9fjCd2H7Z-NpJBgtoLzvArj8/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1T6I1AZVtyo8BbharXxFTQ85NJ7mLG0N9/preview' },
+                    { type: 'video', title: 'Committees', url: 'https://drive.google.com/file/d/1nRitGbCwb3pA2mrExGAjrf280z_V4qzI/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qcQM9WiAaHLUFl41T5xmURFNuOh_la9h/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1-THNxQ20T12HICjgHbKxkYQn_cqCgNVU/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1DsMBwQLe7Ky5uakIgLXorjQZKrlRDRsj/preview' }
+                ]
+            },
+            {
+                id: 15, title: "STAFFING & STUDENT SELECTION",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1D0ffCOwh7onBTnMYWgJqJbG1VTiG09Gy/preview' },
+                    { type: 'video', title: 'Performance Appraisal', url: 'https://drive.google.com/file/d/1mh9gKiHO56_QbYhPZ6PIgHGnhjXvm-DP/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1aJ4oN92pdInIF1m1xMH_R6SIXJ_O6Krx/preview' },
+                    { type: 'video', title: 'Staff Development & Welfare', url: 'https://drive.google.com/file/d/1DR_0FrI2XsdsPfgvczh9h9vD55vJGQZs/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1TtBq4e6uJShTqT7YsI9XbbD6FsTN0U8C/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1s7jEJ9cuxMwh5C23DIMavv4uMLZxsei2/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1ih4OK6kxDE-awUlMLAzyaSRoeZpodLgo/preview' }
+                ]
+            },
+            {
+                id: 16, title: "DIRECTING & CONTROLLING (EDU)",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1_oNHfz9gRhyuykLNBVMGvJIG06q-LlFN/preview' },
+                    { type: 'video', title: 'Curriculum Implementation', url: 'https://drive.google.com/file/d/10UQkN1_MnbqbBs90bvgYLebpoZZOZsTK/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1PZABLSxUoki4enZYGuGlizwTdSEpFeDS/preview' },
+                    { type: 'video', title: 'Counselling', url: 'https://drive.google.com/file/d/1YIAt24gjQlO1TuEcxQPkb_SsX9e-8den/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1hnIeWIbt-Gt3YId2Pwr7ed--i5IWbIU7/preview' },
+                    { type: 'video', title: 'Quality Mgmt & Audit', url: 'https://drive.google.com/file/d/1Trev3g8oFiYUSZ0_cfrqHgxKt8_inJbU/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1dE6y3kTXBkwqCMsibvOSZ8-PhobWy81f/preview' },
+                    { type: 'video', title: 'Maintaining Discipline', url: 'https://drive.google.com/file/d/1VfQrTCKcc7bSw13ELuNKXG-PUTFgfFRN/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1VralBKCaIoZh2tVM8I0YzYLqChH-J2ZT/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1iEmgaTSDWm66DP6s3ejC84Hxv8x0eaOR/preview' }
+                ]
+            },
+            {
+                id: 17, title: "PROFESSIONAL CONSIDERATIONS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1KC_ZCw1MLl2dj8JIOsCKImTxzyJNIVAT/preview' },
+                    { type: 'video', title: 'Professional Considerations', url: 'https://drive.google.com/file/d/1YBDlUId8Xfkl4j4XqXAcKRqCwvTX3cyy/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xnDb-NGOQD8zvAoOGVuoDz9r5JhaZfJP/preview' },
+                    { type: 'video', title: 'Legal Aspects & Rights', url: 'https://drive.google.com/file/d/1kjobiyVUV2fa41UZxURuE_PuJbabJgw6/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Zs8eNXChzMuHuMOoZnENQubg8E0EGEdE/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/12usDFr9dbdSXMJlxuxNkfIseEtbEe99K/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1sK-sJYgMkevHZhLvSddc_lrBaoovf0oD/preview' }
+                ]
+            },
+            {
+                id: 18, title: "PROFESSIONAL ADVANCEMENT",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1cVmTPHha2TG5YKhkqTyReFlymPRuwhPc/preview' },
+                    { type: 'video', title: 'Continuing Nursing Edu', url: 'https://drive.google.com/file/d/1A8XBs1bvzziKqbba5wDO8KdJnEeXobtr/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1nEPkV69xUCPvKhyIlzq3GYGufE-UGvVD/preview' },
+                    { type: 'video', title: 'Research Activities', url: 'https://drive.google.com/file/d/1f_NjY4CqtxJfN-Q4FOii0v5IzWYCnNKu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1fe656iZnnwjZDKMG4zMzSD4toH6TbO-J/preview' },
+                    { type: 'video', title: 'Writing for Publications', url: 'https://drive.google.com/file/d/1Hl4ZracC5iVul4NXLHoDQQ_7D_7rARgY/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1hiRUOwNKi5rGJ7vQnwz59ZLRVkPs_d7C/preview' },
+                    { type: 'video', title: 'Important Questions Discussion', url: 'https://drive.google.com/file/d/1xUXk-hLYq2MOHV68PXd8ITadTxkHWJ_l/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1eXN6mifqVCTnxtKpfsqbGiJiZ3OXpmd_/preview' }
+                ]
+            }
+        ];
+
+        // --- 4. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
 
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            if(type === 'model') return '🧊';
+            return '📄';
+        }
+
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        let modelToggle = false; 
+
         function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -974,13 +758,22 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            body.style.display = 'flex'; 
+            
+            // FIX: Restore flex centering for Video/Model (looks better centered)
+            body.style.display = 'flex';
 
-            if (type === 'quiz') {
-                // Handled by openQuiz
+            if (type === 'model') {
+                modelToggle = !modelToggle;
+                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
+            } 
+            else if (type === 'quiz') {
+                openQuiz(url); 
             }
             else {
+                // Ensure drive links are in preview mode
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
+                
+                // FIX: Apply correct class based on type
                 let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
                 body.innerHTML = `<iframe 
@@ -1002,8 +795,9 @@
             titleEl.textContent = `Quiz: Unit ${unitId}`;
             modal.style.display = 'flex';
             
+            // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
-            body.scrollTop = 0; 
+            body.scrollTop = 0; // Ensure we start at the top
             
             const questions = QUIZ_DATA[unitId] || [];
             
@@ -1049,6 +843,7 @@
             }
         }
 
+        // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
@@ -1057,13 +852,9 @@
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnitHeader = document.querySelector('.unit-header');
-            if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
-            }
-        });
-    </script>
+        // Initialize
+        renderPage();
 
+    </script>
 </body>
 </html>
