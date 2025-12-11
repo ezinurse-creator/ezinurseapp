@@ -3,135 +3,156 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Child Health Nursing Syllabus</title>
-    <meta name="description" content="Comprehensive syllabus with detailed notes, video lectures, and quizzes for Child Health Nursing." />
+    <title>Child Health Nursing II Syllabus</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
+        /* --- MODERN THEME --- */
         :root {
-            --brand: #003B82; 
-            --accent: #00B9F2;
-            --gray-50: #f9fafb;
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --gray-700: #374151;
-            --gray-900: #111827;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --primary: #01b9f1;
+            --primary-dark: #003b80;
+            --bg-card: #ffffff;
+            --bg-body: #f1f5f9;
+            --text-main: #003b80;
+            --text-muted: #64748b;
+            --accent: #f59e0b;
             --danger: #ef4444;
             --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --radius-md: 12px;
         }
 
         * { box-sizing: border-box; }
+        
         body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: white;
-            color: var(--gray-900);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
-            padding: 24px;
-            max-width: 1000px;
+        } 
+
+        .container {
+            max-width: 800px;
             margin: 0 auto;
+            padding-bottom: 80px;
         }
 
-        .syllabus-btn, .unit-header {
-            display: block;
-            width: 100%;
-            padding: 18px 24px;
-            margin: 24px 0;
-            background: var(--brand);
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
+        /* --- HEADER & SYLLABUS --- */
+        .page-header {
             text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s ease;
+            margin-bottom: 30px;
         }
-        .syllabus-btn:hover, .unit-header:hover {
-            background: #002d63;
-            transform: translateY(-1px);
+        
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .syllabus-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
             box-shadow: var(--shadow-md);
+            margin-bottom: 30px;
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .syllabus-card:active { transform: scale(0.98); }
+
+        /* --- UNITS (ACCORDION STYLE) --- */
+        .unit-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .unit-header {
+            padding: 20px;
+            background: var(--bg-card);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            text-align: left;
-            margin: 16px 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--primary-dark);
+            border-bottom: 1px solid transparent;
+            transition: background 0.2s;
         }
-        .unit-header span:last-child {
-            transition: transform 0.3s ease;
-            color: #FFA500;
-        }
-        .unit-header[aria-expanded="true"] span:last-child {
-            transform: rotate(180deg);
+        
+        .unit-header:hover { background: #f8fafc; }
+        
+        .unit-header.active {
+            border-bottom-color: #e2e8f0;
+            background: #f0f9ff;
+            color: var(--primary);
         }
 
         .unit-content {
-            padding: 0 12px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, padding 0.3s ease;
-        }
-        .unit-content.active {
-            padding: 24px 12px;
-            max-height: none; 
-        }
-
-        .subsection {
-            margin: 16px 0;
+            display: none;
             padding: 20px;
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--gray-200);
-            box-shadow: var(--shadow-sm);
-            transition: box-shadow 0.2s ease;
+            background: #fdfdfd;
         }
-        .subsection:hover { box-shadow: var(--shadow-md); }
+        .unit-content.show { display: block; }
+
+        /* --- RESOURCES LIST --- */
+        .resource-list {
+            display: grid;
+            gap: 12px;
+        }
 
         .resource-btn {
             display: flex;
-            align-items: flex-start;
-            width: 100%;
-            padding: 14px 18px;
-            margin: 8px 0;
-            background: var(--gray-50);
-            color: var(--gray-900);
-            text-decoration: none;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
             font-weight: 500;
-            border: 1px solid var(--gray-200);
-            transition: all 0.2s ease;
-            gap: 12px;
-            flex-wrap: wrap;
-            min-height: 50px;
+            transition: all 0.2s;
             cursor: pointer;
         }
-        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
-        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
-        .resource-btn.quiz { background: #fff5e8; border-color: #ffd8a8; color: #8c5e08; }
-        .resource-btn:hover { background: #f9fafb; transform: translateY(-1px); }
-        .resource-btn.notes:hover { background: #e0f2fe; }
-        .resource-btn.video:hover { background: #ede9fe; }
-        .resource-btn.quiz:hover { background: #ffead1; }
-        .resource-btn.coming-soon { background: #e5e7eb; color: #6b7280; cursor: not-allowed; pointer-events: none; }
 
-        .icon { font-size: 1.3rem; min-width: 24px; color: var(--accent); }
-        .icon.video-icon { color: #8b5cf6; }
-        .icon.quiz-icon { color: #FFA500; }
-        .icon.coming-soon-icon { color: #9ca3af; }
+        .resource-btn:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm);
+        }
 
-        /* --- MODAL --- */
+        /* Color coding by type */
+        .type-notes { border-left: 4px solid #0ea5e9; }
+        .type-video { border-left: 4px solid #8b5cf6; }
+        .type-model { border-left: 4px solid #10b981; }
+        .type-quiz  { border-left: 4px solid #f59e0b; background: #fffbeb; }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        /* --- MODAL (The "Close Button" Wrapper) --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.95); /* Darker background for focus */
             z-index: 1000;
             display: none;
             flex-direction: column;
@@ -148,7 +169,7 @@
             flex-shrink: 0;
         }
 
-        .modal-title { font-weight: 700; color: var(--brand); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .modal-title { font-weight: 700; color: var(--primary-dark); font-size: 1rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
         
         .btn-close {
             background: var(--danger);
@@ -164,13 +185,16 @@
             flex: 1;
             background: #000;
             position: relative;
-            overflow-y: auto;
+            overflow-y: auto; /* Allow scrolling */
+            /* Default display is flexible to center videos */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         /* --- FIXED IFRAME STYLES --- */
+        
+        /* 1. For Videos (Keeps 16:9 Aspect Ratio) */
         .iframe-video {
             width: 100%;
             height: auto;
@@ -180,6 +204,7 @@
             display: block;
         }
 
+        /* 2. For Notes & Models (Fills the screen vertically) */
         .iframe-doc {
             width: 100%;
             height: 100%;
@@ -188,11 +213,11 @@
             display: block;
         }
 
-        /* --- QUIZ STYLES --- */
+        /* --- QUIZ STYLES (Inside Modal) --- */
         .quiz-container {
             background: white;
             width: 100%;
-            min-height: 100%;
+            min-height: 100%; /* Ensures it fills screen if short */
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
@@ -207,199 +232,54 @@
             transition: all 0.2s;
             position: relative;
         }
-        .quiz-option:hover { background: #f0f9ff; border-color: var(--accent); }
-        .quiz-option.correct { background: var(--success); color: white; border-color: var(--success); }
-        .quiz-option.correct::after { content: '✓'; position: absolute; right: 15px; font-weight: bold; }
-        .quiz-option.wrong { background: var(--danger); color: white; border-color: var(--danger); }
-        .quiz-option.wrong::after { content: '✗'; position: absolute; right: 15px; font-weight: bold; }
-
-        @media (max-width: 768px) {
-            body { padding: 16px; }
-            .syllabus-btn, .unit-header, .resource-btn { font-size: 15px; padding: 14px 16px; }
-            .resource-btn { font-size: 14px; }
-            .subsection { padding: 16px; }
-            .unit-content.active { padding: 16px 8px; }
+        .quiz-option:hover { background: #f0f9ff; border-color: var(--primary); }
+        .quiz-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Visual Indicators for Tick/Cross */
+        .quiz-option.correct { 
+            background: var(--success); 
+            color: white; 
+            border-color: var(--success); 
         }
+        .quiz-option.correct::after {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .quiz-option.wrong { 
+            background: var(--danger); 
+            color: white; 
+            border-color: var(--danger); 
+        }
+        .quiz-option.wrong::after {
+            content: '✗';
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .quiz-score { text-align: center; font-size: 1.5rem; color: var(--primary-dark); padding: 40px; }
+
     </style>
 </head>
 <body>
 
-    <div class="syllabus-btn" onclick="openResource('notes', 'https://drive.google.com/file/d/1x7-Cwb5oOScj8eNwQwQ2BGjlByFl-JyN/preview', 'Syllabus')">
-        📄 DOWNLOAD CHILD HEALTH NURSING SYLLABUS
-    </div>
-    
-    <div id="units">
-        <div class="unit-container" id="unit1">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="true" onclick="toggleUnit(this)">
-                UNIT 1 - CARDIOVASCULAR & SYSTEM DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content active">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1j8RY4X7SQkDvtbqQcvLEwLJ04ZCxFsfc/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: System Disorders</span>
-                    </div>
-                    
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/18TRV6zblE9R05-0zP3c8uWYgLyfHBNRh/preview', 'Congenital Heart Disease')">
-                        <span class="icon video-icon">▶️</span><span>Congenital Heart Disease (ASD, VSD)</span>
-                    </div>
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Ae6QMTMlT8DzI2igAeLPguF8jPVQ4CeT/preview', 'Lecture Notes')">
-                        <span class="icon">📚</span><span>Lecture Notes: CHD</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1z-ygIvRJ5wHFBWLcqPnbMkX9CURa4_iy/preview', 'PDA & TOF')">
-                        <span class="icon video-icon">▶️</span><span>PDA, Tetralogy of Fallot & Rheumatic Fever</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ZtLoFksoVU4kaWxe2G0I4X5KYglimr-_/preview', 'RHD')">
-                        <span class="icon video-icon">▶️</span><span>Rheumatic Heart Disease & Valvular Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1dv5NYXiV3zq6bNM-TcdPDzjJG9-sQjLL/preview', 'CHF')">
-                        <span class="icon video-icon">▶️</span><span>Congestive Cardiac Failure</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1auq79t3_qMMcd8Hz4AOshzzYciTFhcNW/preview', 'Hematology 1')">
-                        <span class="icon video-icon">▶️</span><span>Hemophilia, Thalassemia, Anemia</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1ONhyA3pfow8Qywthci5l3F82HCFdtgcO/preview', 'Hematology 2')">
-                        <span class="icon video-icon">▶️</span><span>Leukemia, ITP, Lymphomas</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-u6_tVW1QPLjobahxt9Eulc_xBCoH8fw/preview', 'GI 1')">
-                        <span class="icon video-icon">▶️</span><span>Cleft Lip/Palate, Pyloric Stenosis, Hirschsprung's</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1CMeq9Ih6gB8ivUMa-bTMB9qxPa0-M6J6/preview', 'GI 2')">
-                        <span class="icon video-icon">▶️</span><span>Malabsorption, Hernia & Wall Defects</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hjE_LGPILdAHnELa9S1_Zze3jCKGU84N/preview', 'GI 3')">
-                        <span class="icon video-icon">▶️</span><span>Gastroenteritis & PEM</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1BmGlpuOiYgiNeNOjEhMvZ93TEcALdTtI/preview', 'GI 4')">
-                        <span class="icon video-icon">▶️</span><span>Intestinal Obstruction & Parasites</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1d_7mHiA6edKcReZB7QOFCbfL9xEjwxC_/preview', 'GU 1')">
-                        <span class="icon video-icon">▶️</span><span>Wilms Tumor, Hypospadias</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14axnVTxP6JUQsogZHTPItmGXGFRq5XfI/preview', 'GU 2')">
-                        <span class="icon video-icon">▶️</span><span>Nephrotic Syndrome & Renal Failure</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1AlaxpWobITGj3CAv71rqKL0uGYaYCkw2/preview', 'Neuro 1')">
-                        <span class="icon video-icon">▶️</span><span>Hydrocephalus & Meningitis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ri6zj0GZzvlH2Z1PzgNiwIPUOBWsLutL/preview', 'Neuro 2')">
-                        <span class="icon video-icon">▶️</span><span>Seizures & Cerebral Palsy</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(1)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 1 Quiz</span>
-                    </div>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">Child Health Nursing II</div>
+            <p style="color: var(--text-muted);">BSc Semester</p>
         </div>
 
-        <div class="unit-container" id="unit2">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 2 - ORTHOPEDIC & OTHER DISORDERS
-                <span>🔽</span>
-            </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1_SFVFAaFk6UXyVJpmwoenHPPzoS0gFET/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Orthopedic & Skin</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xw1OBSYR-e8sk-YsDHs7JKnxhNVKLDIi/preview', 'Ortho Intro')">
-                        <span class="icon video-icon">▶️</span><span>Introduction to Orthopedic Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1WaKTUcIJ8g8Pe6WqmkmBfbOcbG2H6tOd/preview', 'Club Foot')">
-                        <span class="icon video-icon">▶️</span><span>Club Foot</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1XeGQvAfBXIUWI5Lxp0Dfl8ymypwd9CrL/preview', 'Hip Dislocation')">
-                        <span class="icon video-icon">▶️</span><span>Hip Dislocation</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1L3hRyuABXXWQhfO62YEBYW56GnAC_qea/preview', 'Fracture')">
-                        <span class="icon video-icon">▶️</span><span>Fractures in Children</span>
-                    </div>
-                    
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/141Y9Wn9gGrCK5eqvnaHchU1GFpMgF5Kb/preview', 'Ear Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Ear Disorders</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1LTOkRbxn01G3lFspdXq9dD6LfHnjR5gg/preview', 'Skin Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Skin Disorders (Dermatitis)</span>
-                    </div>
-
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10jgUTb3lA0CvuuZ3OKSuRLlPaSfw5wRn/preview', 'Tuberculosis')">
-                        <span class="icon video-icon">▶️</span><span>Tuberculosis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/13ofvi77lopleLjYJFoaIZCdu-cLJpuXE/preview', 'Diphtheria')">
-                        <span class="icon video-icon">▶️</span><span>Diphtheria</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/198x7gIhRocIccksRHatWxHeqPVo2ocwE/preview', 'Tetanus Measles')">
-                        <span class="icon video-icon">▶️</span><span>Tetanus & Measles</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1fOIThqinY__8Nm2duynaGv732TI3FhlZ/preview', 'Pertussis HIV')">
-                        <span class="icon video-icon">▶️</span><span>Pertussis & HIV/AIDS</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/14F5p0YuKiski7CoUIEJw0o-ygdF1kcK2/preview', 'Polio Chickenpox')">
-                        <span class="icon video-icon">▶️</span><span>Poliomyelitis & Chickenpox</span>
-                    </div>
-
-                    <div class="resource-btn quiz" onclick="openQuiz(2)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 2 Quiz</span>
-                    </div>
-                </div>
-            </div>
+        <div class="syllabus-card" onclick="openResource('Syllabus', 'https://drive.google.com/file/d/1x7-Cwb5oOScj8eNwQwQ2BGjlByFl-JyN/preview')">
+            📄 View Full Syllabus
         </div>
 
-        <div class="unit-container" id="unit3">
-            <div class="unit-header" role="button" tabindex="0" aria-expanded="false" onclick="toggleUnit(this)">
-                UNIT 3 - BEHAVIORAL & SOCIAL PROBLEMS
-                <span>🔽</span>
+        <div id="units-container">
             </div>
-            <div class="unit-content">
-                <div class="subsection">
-                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1RbZKbxUAwa2LO5V5Q-2-pH9GPWHXgOd-/preview', 'Detailed Notes')">
-                        <span class="icon">📚</span><span>Detailed Notes: Behavioral Problems</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1P6KDs0Mb21w5FOYsJ8cJ59NcCsNlWwGE/preview', 'Child Guidance')">
-                        <span class="icon video-icon">▶️</span><span>Child Guidance Clinic</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1hGYTiyekJ7yOXUnP1kOm67J6PWk4MiPD/preview', 'Enuresis')">
-                        <span class="icon video-icon">▶️</span><span>Enuresis & Encopresis</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1Ts_fvo6zsFy1_J0xD2EbXdWV2-x66ocr/preview', 'Habit Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Nail Biting & Thumb Sucking</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1DkALR9CfrCitB4MUwilZwLMbwZPF-19O/preview', 'Temper')">
-                        <span class="icon video-icon">▶️</span><span>Temper Tantrums & Aggression</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-OhojvpvSZujOY9KAnRr7liiu6BoX2mn/preview', 'Delinquency')">
-                        <span class="icon video-icon">▶️</span><span>Juvenile Delinquency & School Phobia</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/10YQ4Pp_nDQEIQ1bdiSYgYiYc2pafH1nC/preview', 'Pica')">
-                        <span class="icon video-icon">▶️</span><span>Pica & Tics</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1abQ81hXQxpDm40agsb16IPj9quytruaf/preview', 'Depression')">
-                        <span class="icon video-icon">▶️</span><span>Childhood Depression</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1utIiWYJZWj1RxGZWiP_1_5OOqqt9qzHu/preview', 'Autism')">
-                        <span class="icon video-icon">▶️</span><span>Autism & PTSD</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1xV62ODA2jwBjm5hZgFYDKTIVEc8vcLhI/preview', 'Obesity')">
-                        <span class="icon video-icon">▶️</span><span>Childhood Obesity</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/17IilnJLKBvV-XbnU4A5KqyZNdk3mnsAN/preview', 'Eating Disorders')">
-                        <span class="icon video-icon">▶️</span><span>Anorexia & Bulimia</span>
-                    </div>
-                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1l2P0EbpZC-cf7wd-zuGn6u3s1837s56s/preview', 'Challenged Children')">
-                        <span class="icon video-icon">▶️</span><span>Management of Challenged Children</span>
-                    </div>
-                    <div class="resource-btn quiz" onclick="openQuiz(3)">
-                        <span class="icon quiz-icon">✍️</span><span>Take Unit 3 Quiz</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div id="app-modal" class="modal-overlay">
@@ -407,46 +287,195 @@
             <div id="modal-title" class="modal-title">Resource</div>
             <button class="btn-close" onclick="closeModal()">Close X</button>
         </div>
-        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-body" class="modal-body">
+            </div>
     </div>
 
     <script>
-        // --- 1. QUIZ DATA ---
+        // --- 1. DUMMY 3D MODEL CODES (Placeholder) ---
+        const MODEL_CODE_A = `<div><p>Model Loading...</p></div>`;
+        const MODEL_CODE_B = `<div><p>Model Loading...</p></div>`;
+
+        // --- 2. QUIZ DATA (5 Questions each) ---
         const QUIZ_DATA = {
-            1: [ // Unit 1: System Disorders
-                { q: "Tetralogy of Fallot includes which defect?", o: ["ASD", "VSD", "Coarctation of Aorta", "PDA"], a: 1 },
-                { q: "A characteristic sign of Pyloric Stenosis is:", o: ["Projectile Vomiting", "Diarrhea", "Fever", "Constipation"], a: 0 },
-                { q: "Hirschsprung's Disease is also known as:", o: ["Megacolon", "Intussusception", "Hernia", "Gastritis"], a: 0 },
-                { q: "Wilms' Tumor affects which organ?", o: ["Liver", "Kidney", "Brain", "Bone"], a: 1 },
-                { q: "Hydrocephalus is accumulation of:", o: ["Blood", "CSF", "Pus", "Air"], a: 1 }
+            1: [ // Systemic Disorders (Cardio, Heme, GI, Renal, Neuro)
+                { q: "Tetralogy of Fallot includes which defect?", o: ["ASD", "VSD", "Coarctation of Aorta", "Patent Ductus Arteriosus"], a: 1 },
+                { q: "Which organism causes Rheumatic Fever?", o: ["Staphylococcus Aureus", "Group A Beta-hemolytic Streptococcus", "E. Coli", "Pneumococcus"], a: 1 },
+                { q: "A characteristic sign of Hydrocephalus is:", o: ["Sun-setting eyes", "Projectile vomiting", "Bloody stool", "Rash"], a: 0 },
+                { q: "Hirschsprung's disease involves the absence of:", o: ["Villi", "Ganglion cells", "Mucosa", "Insulin"], a: 1 },
+                { q: "Hemophilia A is a deficiency of factor:", o: ["VIII", "IX", "X", "VII"], a: 0 }
             ],
-            2: [ // Unit 2: Ortho/Comm/Skin
-                { q: "Talipes Equinovarus is commonly known as:", o: ["Flat foot", "Club foot", "Hip dislocation", "Bow legs"], a: 1 },
-                { q: "Which is a sign of Measles?", o: ["Koplik's Spots", "Strawberry Tongue", "Bull neck", "Lockjaw"], a: 0 },
-                { q: "Chickenpox is caused by:", o: ["Variola virus", "Varicella Zoster virus", "Rubella virus", "Influenza"], a: 1 },
-                { q: "Poliomyelitis primarily affects the:", o: ["Respiratory system", "Nervous system", "Digestive system", "Skin"], a: 1 },
-                { q: "Atopic Dermatitis is also called:", o: ["Eczema", "Acne", "Psoriasis", "Scabies"], a: 0 }
+            2: [ // Orthopedic, Eye, ENT, Communicable
+                { q: "Talipes Equinovarus is also known as:", o: ["Flat foot", "Club foot", "Knock knees", "Bow legs"], a: 1 },
+                { q: "Koplik's spots are diagnostic for:", o: ["Chickenpox", "Measles", "Rubella", "Mumps"], a: 1 },
+                { q: "Which is a bacterial disease?", o: ["Polio", "Measles", "Tetanus", "HIV"], a: 2 },
+                { q: "Otitis Media is inflammation of the:", o: ["Outer ear", "Middle ear", "Inner ear", "Eustachian tube"], a: 1 },
+                { q: "Mantoux test is used to screen for:", o: ["Diphtheria", "Tuberculosis", "Typhoid", "Malaria"], a: 1 }
             ],
-            3: [ // Unit 3: Behavioral
-                { q: "Enuresis refers to:", o: ["Involuntary urination", "Involuntary stooling", "Sleep walking", "Thumb sucking"], a: 0 },
-                { q: "Pica is the habit of:", o: ["Eating non-nutritive substances", "Nail biting", "Head banging", "Teeth grinding"], a: 0 },
-                { q: "Autism is characterized by deficits in:", o: ["Social interaction & Communication", "Walking", "Hearing", "Vision"], a: 0 },
-                { q: "ADHD stands for:", o: ["Attention Deficit Hyperactivity Disorder", "Acute Disorder of Health Development", "None", "Active Disease of Heart"], a: 0 },
-                { q: "Juvenile Delinquency refers to:", o: ["School failure", "Illegal behavior by a minor", "Running away", "Bed wetting"], a: 1 }
+            3: [ // Behaviour & Social
+                { q: "Pica refers to:", o: ["Eating non-nutritive substances", "Bed wetting", "Sleep walking", "Thumb sucking"], a: 0 },
+                { q: "Enuresis is defined as:", o: ["Involuntary stooling", "Involuntary urination", "Stuttering", "Aggression"], a: 1 },
+                { q: "A core feature of ADHD is:", o: ["Depression", "Inattention and Hyperactivity", " hallucinations", "Obesity"], a: 1 },
+                { q: "Anorexia Nervosa is characterized by:", o: ["Binge eating", "Fear of gaining weight", "Pica", "Night terrors"], a: 1 },
+                { q: "Autism Spectrum Disorder primarily affects:", o: ["Motor skills", "Social communication", "Hearing", "Vision"], a: 1 }
             ]
         };
 
-        // --- 2. MODAL LOGIC & NAVIGATION CONTROL ---
-        function toggleUnit(header) {
-            const content = header.nextElementSibling;
-            const isExpanded = header.getAttribute('aria-expanded') === 'true';
-            header.setAttribute('aria-expanded', !isExpanded);
-            content.classList.toggle('active');
+        // --- 3. COURSE DATA ---
+        const UNITS = [
+            {
+                id: 1, title: "SYSTEMIC DISORDERS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes (Cardio)', url: 'https://drive.google.com/file/d/1j8RY4X7SQkDvtbqQcvLEwLJ04ZCxFsfc/preview' },
+                    { type: 'video', title: 'CHD: ASD & VSD', url: 'https://drive.google.com/file/d/18TRV6zblE9R05-0zP3c8uWYgLyfHBNRh/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Ae6QMTMlT8DzI2igAeLPguF8jPVQ4CeT/preview' },
+                    { type: 'video', title: 'PDA, TOF, Rheumatic Fever', url: 'https://drive.google.com/file/d/1z-ygIvRJ5wHFBWLcqPnbMkX9CURa4_iy/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1oh7yDRw-IMgqWpB7C6aLEVNUBgwbzzY-/preview' },
+                    { type: 'video', title: 'RHD & Valve Disorders', url: 'https://drive.google.com/file/d/1ZtLoFksoVU4kaWxe2G0I4X5KYglimr-_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1pRJWUx9DjYIAMytomFTzYCSnHkEnThIQ/preview' },
+                    { type: 'video', title: 'Congestive Cardiac Failure', url: 'https://drive.google.com/file/d/1dv5NYXiV3zq6bNM-TcdPDzjJG9-sQjLL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1xlU3PLSkGdEScboaiz3ynDD2YOzWZ-Qm/preview' },
+                    { type: 'video', title: 'Hematological: Hemophilia, Anemia', url: 'https://drive.google.com/file/d/1auq79t3_qMMcd8Hz4AOshzzYciTFhcNW/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qk-fc1-j70uxgGctpt7KC-eBWaUdRJId/preview' },
+                    { type: 'video', title: 'Leukemia & Lymphomas', url: 'https://drive.google.com/file/d/1ONhyA3pfow8Qywthci5l3F82HCFdtgcO/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1C10wEec6Plu0BOmE7hmt2GKgA-1AR1IX/preview' },
+                    { type: 'video', title: 'Cleft Lip/Palate, Pyloric Stenosis', url: 'https://drive.google.com/file/d/1-u6_tVW1QPLjobahxt9Eulc_xBCoH8fw/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1qe5t29kaf8FBY9dtI-a5mXkWmN2y_WfY/preview' },
+                    { type: 'video', title: 'Anorectal Malformation & Hernia', url: 'https://drive.google.com/file/d/1CMeq9Ih6gB8ivUMa-bTMB9qxPa0-M6J6/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Y8XTU9GS7EoS8DoTnVEPCLasT9gMBXsx/preview' },
+                    { type: 'video', title: 'Gastroenteritis & PEM', url: 'https://drive.google.com/file/d/1hjE_LGPILdAHnELa9S1_Zze3jCKGU84N/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1kz02-AkcSIb1VWXjaprQRJmJ9hREZ47o/preview' },
+                    { type: 'video', title: 'Obstruction & Hepatic Disease', url: 'https://drive.google.com/file/d/1BmGlpuOiYgiNeNOjEhMvZ93TEcALdTtI/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1jMwpXz1wlL7OtWHRKN9sREjFKHqZBva1/preview' },
+                    { type: 'video', title: 'Wilms Tumor & Hypospadias', url: 'https://drive.google.com/file/d/1d_7mHiA6edKcReZB7QOFCbfL9xEjwxC_/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1yDr6UQbqMt9pACocrI8wkXDoZRUyEWqW/preview' },
+                    { type: 'video', title: 'Nephrotic Syndrome & Renal Failure', url: 'https://drive.google.com/file/d/14axnVTxP6JUQsogZHTPItmGXGFRq5XfI/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1RD8p1s0RZaLyHuWyyLxcpRk0T_dh1aXP/preview' },
+                    { type: 'video', title: 'Hydrocephalus & Spina Bifida', url: 'https://drive.google.com/file/d/1AlaxpWobITGj3CAv71rqKL0uGYaYCkw2/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/12s7X4QNQxpQPwlC4OLVDWe3XoXYslbiz/preview' },
+                    { type: 'video', title: 'Epilepsy & Cerebral Palsy', url: 'https://drive.google.com/file/d/1Ri6zj0GZzvlH2Z1PzgNiwIPUOBWsLutL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/15vo-wmHgSoSSAnYguVUTEnJKB3sauTG-/preview' },
+                    { type: 'video', title: 'Important Questions (Unit 1)', url: 'https://drive.google.com/file/d/1zwFf9CBWP5JKSSZMQu-py6bVn3doNnoB/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1pKxtVa1IFXi-U3h7cJKVpnJqrf_qeMeK/preview' }
+                ]
+            },
+            {
+                id: 2, title: "ORTHOPEDIC & COMMUNICABLE",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes (Ortho)', url: 'https://drive.google.com/file/d/1ypHGL_G_6hXESSZFB1XcBDoow25H2TMD/preview' },
+                    { type: 'video', title: 'Intro to Orthopedic Disorders', url: 'https://drive.google.com/file/d/1xw1OBSYR-e8sk-YsDHs7JKnxhNVKLDIi/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1b9tUPgoJq4mVGO2bmmAzKD_clrseaU7A/preview' },
+                    { type: 'video', title: 'Club Foot', url: 'https://drive.google.com/file/d/1WaKTUcIJ8g8Pe6WqmkmBfbOcbG2H6tOd/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1nmosxQOWxg4GUWdwrbmPry-KS07OkFzx/preview' },
+                    { type: 'video', title: 'Hip Dislocation', url: 'https://drive.google.com/file/d/1XeGQvAfBXIUWI5Lxp0Dfl8ymypwd9CrL/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1G9ZsoBqrtX-APmDEiBK8hUS6eUgMnO_t/preview' },
+                    { type: 'video', title: 'Fracture', url: 'https://drive.google.com/file/d/1L3hRyuABXXWQhfO62YEBYW56GnAC_qea/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1ha86eaE0oquxiJMpU76hEzQ6H5SEA87o/preview' },
+                    { type: 'video', title: 'Eye Disorders', url: 'https://drive.google.com/file/d/1AZhg1wLowJpwrcHOnf8aF0R0D_SCADWu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/126I2YnNb2MThJbGOnXVzm5GygGm2oTVK/preview' },
+                    { type: 'video', title: 'Ear Disorders', url: 'https://drive.google.com/file/d/141Y9Wn9gGrCK5eqvnaHchU1GFpMgF5Kb/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1VsqdjEz44Dgq8BgoTqOV94bb2vt_5HVi/preview' },
+                    { type: 'video', title: 'Skin Disorders', url: 'https://drive.google.com/file/d/1LTOkRbxn01G3lFspdXq9dD6LfHnjR5gg/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1i3KVQAPjTKhwT8f7--IJWBxrGNB3mRiI/preview' },
+                    { type: 'video', title: 'Tuberculosis', url: 'https://drive.google.com/file/d/10jgUTb3lA0CvuuZ3OKSuRLlPaSfw5wRn/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1UGAZYcu6o4Y6kp9mFve8wvtGNYizx2qw/preview' },
+                    { type: 'video', title: 'Diphtheria', url: 'https://drive.google.com/file/d/13ofvi77lopleLjYJFoaIZCdu-cLJpuXE/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1sBLFe0Eba0D7Ue1W8bdxXB2vfs6jv76N/preview' },
+                    { type: 'video', title: 'Tetanus & Measles', url: 'https://drive.google.com/file/d/198x7gIhRocIccksRHatWxHeqPVo2ocwE/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1usLXlVd2kuqjuErHjD99s8jXggaIyFqO/preview' },
+                    { type: 'video', title: 'Pertussis & HIV/AIDS', url: 'https://drive.google.com/file/d/1fOIThqinY__8Nm2duynaGv732TI3FhlZ/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1bj2s67GiVqx4Qi2dPE7EPYxMV18ZXwG-/preview' },
+                    { type: 'video', title: 'Poliomyelitis & Chickenpox', url: 'https://drive.google.com/file/d/14F5p0YuKiski7CoUIEJw0o-ygdF1kcK2/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1kO8o_6ZlDJngwJLubJKcsL4p36VrxQ4f/preview' },
+                    { type: 'video', title: 'Important Questions (Unit 2)', url: 'https://drive.google.com/file/d/1ph7gUXmlVMVi9DOhsGewZrIoCoSmusGa/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1AUBXRljvaDRiyhFu4DBYoEfktSErRRJT/preview' }
+                ]
+            },
+            {
+                id: 3, title: "BEHAVIOUR & SOCIAL PROBLEMS",
+                resources: [
+                    { type: 'notes', title: 'Detailed Notes', url: 'https://drive.google.com/file/d/1RbZKbxUAwa2LO5V5Q-2-pH9GPWHXgOd-/preview' },
+                    { type: 'video', title: 'Child Guidance Clinic', url: 'https://drive.google.com/file/d/1P6KDs0Mb21w5FOYsJ8cJ59NcCsNlWwGE/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1_pJrOcoL6MpNhRi_dtQRku_0zuxzXAW-/preview' },
+                    { type: 'video', title: 'Enuresis & Encopresis', url: 'https://drive.google.com/file/d/1hGYTiyekJ7yOXUnP1kOm67J6PWk4MiPD/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1cB3UFm2gkkSl-JPG59k-KkyurI9PS7IF/preview' },
+                    { type: 'video', title: 'Nervousness & Habits', url: 'https://drive.google.com/file/d/1Ts_fvo6zsFy1_J0xD2EbXdWV2-x66ocr/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1XKtJoQvyHgaLz14kGHU3Sj5pt5eFTt1M/preview' },
+                    { type: 'video', title: 'Tantrums & Aggression', url: 'https://drive.google.com/file/d/1DkALR9CfrCitB4MUwilZwLMbwZPF-19O/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1wKbehsKgV-cP-Uqbd8NUyiGa9tugZqgy/preview' },
+                    { type: 'video', title: 'Juvenile Delinquency & LD', url: 'https://drive.google.com/file/d/1-OhojvpvSZujOY9KAnRr7liiu6BoX2mn/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1rFTLCtrRkXGvcfIaA0fyxBYhHkt_xzr1/preview' },
+                    { type: 'video', title: 'Pica, Tics, Childhood Schizo', url: 'https://drive.google.com/file/d/10YQ4Pp_nDQEIQ1bdiSYgYiYc2pafH1nC/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1HU57m2Q13T3hyQ2aWrX0NHg0ZoMiSRkT/preview' },
+                    { type: 'video', title: 'Depression & Conversion', url: 'https://drive.google.com/file/d/1abQ81hXQxpDm40agsb16IPj9quytruaf/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1hkoIsQOV-JRZ1CBD7E9B9szfkYXBnwsx/preview' },
+                    { type: 'video', title: 'PTSD & Autism', url: 'https://drive.google.com/file/d/1utIiWYJZWj1RxGZWiP_1_5OOqqt9qzHu/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1F3SFl1_t648l1qFBs8n7oay8VXLszNly/preview' },
+                    { type: 'video', title: 'Childhood Obesity', url: 'https://drive.google.com/file/d/1xV62ODA2jwBjm5hZgFYDKTIVEc8vcLhI/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1OVZiuGtBqKexrLVHhIjNCo0Wtmw4zQ1_/preview' },
+                    { type: 'video', title: 'Anorexia & Bulimia', url: 'https://drive.google.com/file/d/17IilnJLKBvV-XbnU4A5KqyZNdk3mnsAN/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1TtH2FTkMTBCylZU9QUXW4zqQ1P-FqSVA/preview' },
+                    { type: 'video', title: 'Management of Challenged Child', url: 'https://drive.google.com/file/d/1l2P0EbpZC-cf7wd-zuGn6u3s1837s56s/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1Wjqw67oeBNitRYM5oLE5XdquySFiQ6Xa/preview' },
+                    { type: 'video', title: 'Abuse & Welfare Services', url: 'https://drive.google.com/file/d/1w8OW57sLSXYIbO-kB3RxNhcq-Kfny6xf/preview' },
+                    { type: 'notes', title: 'Lecture Notes', url: 'https://drive.google.com/file/d/1NxgfxUhX2VEDp0IACLrTRZClCOT2ed9D/preview' },
+                    { type: 'video', title: 'Important Questions (Unit 3)', url: 'https://drive.google.com/file/d/1Nxlxa1yKeeLl41F6ZM8DIomyzftKTxQD/preview' },
+                    { type: 'notes', title: 'Important Questions PDF', url: 'https://drive.google.com/file/d/1DSGvhTo0Tm0hRE9y6lF15fLAyYTi2JD3/preview' }
+                ]
+            }
+        ];
+
+        // --- 4. RENDER LOGIC ---
+        function renderPage() {
+            const container = document.getElementById('units-container');
+            
+            UNITS.forEach(unit => {
+                const unitHtml = `
+                    <div class="unit-card">
+                        <div class="unit-header" onclick="toggleUnit(this)">
+                            UNIT ${unit.id} - ${unit.title}
+                            <span>🔽</span>
+                        </div>
+                        <div class="unit-content">
+                            <div class="resource-list">
+                                ${unit.resources.map(res => `
+                                    <div class="resource-btn type-${res.type}" onclick="openResource('${res.type}', '${res.url || ''}', '${res.title}')">
+                                        <div class="icon">${getIcon(res.type)}</div>
+                                        <div>${res.title}</div>
+                                    </div>
+                                `).join('')}
+                                <div class="resource-btn type-quiz" onclick="openQuiz(${unit.id})">
+                                    <div class="icon">✍️</div>
+                                    <div>Take Unit ${unit.id} Quiz</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += unitHtml;
+            });
         }
 
-        function openResource(type, url, title) {
-            if(type === 'coming-soon') return;
+        function getIcon(type) {
+            if(type === 'notes') return '📚';
+            if(type === 'video') return '▶️';
+            if(type === 'model') return '🧊';
+            return '📄';
+        }
 
+        function toggleUnit(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+            const arrow = header.querySelector('span');
+            arrow.innerText = content.classList.contains('show') ? '🔼' : '🔽';
+        }
+
+        // --- 5. MODAL LOGIC & NAVIGATION CONTROL ---
+        let modelToggle = false; 
+
+        function openResource(type, url, title) {
+            // PUSH STATE: Create a history entry so Back button closes modal
             history.pushState({ modalOpen: true }, null, '#resource');
 
             const modal = document.getElementById('app-modal');
@@ -456,16 +485,22 @@
             titleEl.textContent = title;
             modal.style.display = 'flex';
             body.innerHTML = ''; 
-            body.style.display = 'flex'; // Default flex for centering
+            
+            // FIX: Restore flex centering for Video/Model (looks better centered)
+            body.style.display = 'flex';
 
-            // FIX: Restore flex centering for Video/Doc
-            if (type === 'quiz') {
-                // Handled by openQuiz
+            if (type === 'model') {
+                modelToggle = !modelToggle;
+                body.innerHTML = modelToggle ? MODEL_CODE_A : MODEL_CODE_B;
+            } 
+            else if (type === 'quiz') {
+                openQuiz(url); 
             }
             else {
+                // Ensure drive links are in preview mode
                 let cleanUrl = url.replace(/\/view.*/, '/preview').replace(/\/edit.*/, '/preview');
                 
-                // Videos get 16:9, Notes get full height
+                // FIX: Apply correct class based on type
                 let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
 
                 body.innerHTML = `<iframe 
@@ -489,7 +524,7 @@
             
             // FIX: Remove flex centering for Quiz so it starts at the top
             body.style.display = 'block';
-            body.scrollTop = 0; 
+            body.scrollTop = 0; // Ensure we start at the top
             
             const questions = QUIZ_DATA[unitId] || [];
             
@@ -535,6 +570,7 @@
             }
         }
 
+        // --- 6. HANDLE BACK BUTTON ---
         window.onpopstate = function(event) {
             const modal = document.getElementById('app-modal');
             if (modal.style.display === 'flex') {
@@ -543,14 +579,9 @@
             }
         };
 
-        // Auto-expand first unit
-        document.addEventListener('DOMContentLoaded', () => {
-            const firstUnitHeader = document.querySelector('.unit-header');
-            if(firstUnitHeader) {
-                // toggleUnit(firstUnitHeader);
-            }
-        });
-    </script>
+        // Initialize
+        renderPage();
 
+    </script>
 </body>
 </html>
