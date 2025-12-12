@@ -7,7 +7,7 @@
     <style>
         :root {
             --primary: #01b9f1; --primary-dark: #003b80; --bg-card: #fffffd;
-            --secondary: #334155; --accent: #f59e0ob; --bg-body: #f1f5f9;
+            --secondary: #334155; --accent: #f59e0b; --bg-body: #f1f5f9;
             --text-main: #003b80; --text-muted: #64748b; --danger: #ef4444;
             --radius-md: 12px; --shadow-lg: 0 10px 15px -3px rgba(0,59,128,0.1);
         }
@@ -27,6 +27,41 @@
             display: flex; flex-direction: column; box-shadow: var(--shadow-lg); 
             overflow: hidden; 
         }
+
+        /* --- WATERMARK STYLES --- */
+        .watermark-strip {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 30px; /* Slightly wider to accommodate text */
+            z-index: 9999; /* Sit on top of everything */
+            pointer-events: none; /* Allow clicks to pass through */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(0, 59, 128, 0.4); /* Default opacity for sides */
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            user-select: none;
+            white-space: nowrap;
+            letter-spacing: 4px; /* Spaced out for readability */
+        }
+        .wm-left { left: 0; transform: rotate(180deg); border-right: 1px dashed rgba(0,0,0,0.05); }
+        .wm-right { right: 0; border-left: 1px dashed rgba(0,0,0,0.05); }
+        
+        /* Center Strip Specifics */
+        .wm-center { 
+            left: 50%; 
+            transform: translateX(-50%); 
+            opacity: 0.15; /* Lighter opacity for center so text is readable */
+            font-size: 14px; /* Slightly larger */
+            border-left: 1px dashed rgba(0,0,0,0.05);
+            border-right: 1px dashed rgba(0,0,0,0.05);
+        }
+        /* ------------------------ */
 
         .view { 
             flex: 1; padding: 24px; overflow-y: auto; display: none; 
@@ -93,6 +128,9 @@
 <body>
 
 <div id="app">
+    <div id="wm-left" class="watermark-strip wm-left"></div>
+    <div id="wm-center" class="watermark-strip wm-center"></div>
+    <div id="wm-right" class="watermark-strip wm-right"></div>
     <header class="header">
         <button class="back-btn" id="btn-back" onclick="app.goBack()">&#8592;</button>
         <div class="header-title" id="header-branding">Ezi<span>Nurse</span></div>
@@ -417,6 +455,7 @@
             const savedUser = localStorage.getItem('eziUser');
             if (savedUser) {
                 this.currentUser = JSON.parse(savedUser);
+                this.updateWatermark(); // Add watermark on load
                 history.replaceState({ viewId: 'view-exit-guard' }, 'Exit Guard', '#exit');
                 history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
                 this.renderView('view-dashboard');
@@ -436,11 +475,25 @@
                 } else { if(this.currentUser) this.renderView('view-dashboard'); else this.renderView('view-auth'); }
             });
         },
+        updateWatermark: function() {
+            const email = this.currentUser ? this.currentUser.email : '';
+            const strips = document.querySelectorAll('.watermark-strip');
+            if (email) {
+                // Repeat email about 30 times to ensure it covers vertical height on any device
+                const text = (email + " • ").repeat(30);
+                strips.forEach(el => {
+                    el.textContent = text;
+                    el.style.display = 'flex';
+                });
+            } else {
+                strips.forEach(el => el.style.display = 'none');
+            }
+        },
         syncPermissions: async function(creds) {
             try {
                 const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action:'login', email: creds.email, password: creds.password, deviceId: getDeviceId() }) });
                 const data = await res.json();
-                if(data.result === 'success'){ this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user)); }
+                if(data.result === 'success'){ this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user)); this.updateWatermark(); }
             } catch(e) {}
         },
         login: async function() {
@@ -455,6 +508,7 @@
                     this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
                     localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
                     document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = "";
+                    this.updateWatermark(); // Add watermark
                     this.navTo('view-dashboard', true); 
                 } else { errorDiv.textContent = data.message; }
             } catch(e) { errorDiv.textContent = "Network Error"; } finally { btn.textContent = "Login Securely"; btn.disabled = false; }
@@ -472,6 +526,7 @@
                 if(data.result === 'success'){
                     this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
                     localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
+                    this.updateWatermark(); // Add watermark
                     alert("Account Created!"); this.navTo('view-dashboard', true);
                 } else { errorDiv.textContent = data.message; }
             } catch(e) { errorDiv.textContent = "Network Error"; } finally { btn.textContent = "Create Account"; btn.disabled = false; }
@@ -483,7 +538,11 @@
         togglePassword: function(id, btn) {
             const el = document.getElementById(id); if(el.type === 'password') { el.type = 'text'; btn.style.color = 'var(--primary)'; } else { el.type = 'password'; btn.style.color = 'var(--text-muted)'; }
         },
-        logout: function() { this.currentUser = null; localStorage.removeItem('eziUser'); localStorage.removeItem('eziAuth'); this.navTo('view-auth', true); },
+        logout: function() { 
+            this.currentUser = null; localStorage.removeItem('eziUser'); localStorage.removeItem('eziAuth'); 
+            this.updateWatermark(); // Clear watermark
+            this.navTo('view-auth', true); 
+        },
         navTo: function(viewId, isRoot = false, stateData = {}) {
             const state = { viewId: viewId, ...stateData };
             if (isRoot) {
@@ -552,7 +611,6 @@
             const subjects = COURSES[course][section];
             subjects.forEach(sub => {
                 const item = document.createElement('div'); item.className = 'menu-item';
-                // The label now contains HTML (the span with color), so we use innerHTML on the h3
                 item.innerHTML = `<div><h3>${sub.label}</h3></div><span class="menu-arrow">&#10095;</span>`;
                 item.onclick = () => { this.openContent(sub.link, sub.label); };
                 list.appendChild(item);
