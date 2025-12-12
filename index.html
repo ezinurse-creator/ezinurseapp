@@ -20,11 +20,6 @@
             background-color: var(--bg-body);
             color: var(--text-main);
         }
-
-        /* PRINT PROTECTION */
-        @media print {
-            body { display: none !important; }
-        }
         
         #app { 
             width: 100%; max-width: 480px; margin: 0 auto; 
@@ -422,7 +417,6 @@
             const savedUser = localStorage.getItem('eziUser');
             if (savedUser) {
                 this.currentUser = JSON.parse(savedUser);
-                enableAppProtection(this.currentUser.email); // PROTECT RESTORED SESSION
                 history.replaceState({ viewId: 'view-exit-guard' }, 'Exit Guard', '#exit');
                 history.pushState({ viewId: 'view-dashboard' }, 'Dashboard', '#dashboard');
                 this.renderView('view-dashboard');
@@ -459,7 +453,6 @@
                 const data = await res.json();
                 if(data.result === 'success'){
                     this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
-                    enableAppProtection(this.currentUser.email); // PROTECT LOGIN
                     localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
                     document.getElementById('login-email').value = ""; document.getElementById('login-pass').value = "";
                     this.navTo('view-dashboard', true); 
@@ -478,7 +471,6 @@
                 const data = await res.json();
                 if(data.result === 'success'){
                     this.currentUser = data.user; localStorage.setItem('eziUser', JSON.stringify(data.user));
-                    enableAppProtection(this.currentUser.email); // PROTECT SIGNUP
                     localStorage.setItem('eziAuth', JSON.stringify({email: email, password: pass}));
                     alert("Account Created!"); this.navTo('view-dashboard', true);
                 } else { errorDiv.textContent = data.message; }
@@ -491,13 +483,7 @@
         togglePassword: function(id, btn) {
             const el = document.getElementById(id); if(el.type === 'password') { el.type = 'text'; btn.style.color = 'var(--primary)'; } else { el.type = 'password'; btn.style.color = 'var(--text-muted)'; }
         },
-        logout: function() { 
-            this.currentUser = null; 
-            disableAppProtection(); // REMOVE PROTECTION
-            localStorage.removeItem('eziUser'); 
-            localStorage.removeItem('eziAuth'); 
-            this.navTo('view-auth', true); 
-        },
+        logout: function() { this.currentUser = null; localStorage.removeItem('eziUser'); localStorage.removeItem('eziAuth'); this.navTo('view-auth', true); },
         navTo: function(viewId, isRoot = false, stateData = {}) {
             const state = { viewId: viewId, ...stateData };
             if (isRoot) {
@@ -623,70 +609,6 @@
             this.closeReferralModal(); window.open(url, '_blank');
         }
     };
-    
-    // ==========================================
-    // SCREENSHOT & COPY PROTECTION MODULE
-    // ==========================================
-
-    function enableAppProtection(email) {
-        if (document.getElementById('security-overlay')) return;
-
-        // Create the Watermark Overlay
-        const overlay = document.createElement('div');
-        overlay.id = 'security-overlay';
-        Object.assign(overlay.style, {
-            position: 'fixed', top: '0', left: '0', width: '100vw', height: '100vh',
-            zIndex: '99999', pointerEvents: 'none', 
-            display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignContent: 'center',
-            overflow: 'hidden', opacity: '0.15' 
-        });
-
-        for (let i = 0; i < 100; i++) {
-            const textNode = document.createElement('div');
-            textNode.innerText = email + '   ';
-            Object.assign(textNode.style, {
-                transform: 'rotate(-45deg)', fontSize: '18px', fontFamily: 'Arial, sans-serif',
-                color: '#000', padding: '40px', whiteSpace: 'nowrap', userSelect: 'none'
-            });
-            overlay.appendChild(textNode);
-        }
-        document.body.appendChild(overlay);
-
-        // Enable Annoyances (Blur & Key Blocks)
-        window.protectionHandler = {
-            blur: () => { document.body.style.filter = 'blur(10px)'; },
-            focus: () => { document.body.style.filter = 'none'; },
-            keys: (e) => {
-                if (e.key === 'PrintScreen') {
-                    navigator.clipboard.writeText('');
-                    alert('Screenshots are monitored. IP Logged.');
-                }
-                if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's')) {
-                    e.preventDefault();
-                    alert('Printing/Saving is disabled.');
-                }
-            }
-        };
-
-        window.addEventListener('blur', window.protectionHandler.blur);
-        window.addEventListener('focus', window.protectionHandler.focus);
-        document.addEventListener('keyup', window.protectionHandler.keys);
-        document.addEventListener('keydown', window.protectionHandler.keys);
-    }
-
-    function disableAppProtection() {
-        const overlay = document.getElementById('security-overlay');
-        if (overlay) overlay.remove();
-
-        if (window.protectionHandler) {
-            window.removeEventListener('blur', window.protectionHandler.blur);
-            window.removeEventListener('focus', window.protectionHandler.focus);
-            document.removeEventListener('keyup', window.protectionHandler.keys);
-            document.removeEventListener('keydown', window.protectionHandler.keys);
-            document.body.style.filter = 'none';
-        }
-    }
-
     window.onload = function() { app.init(); };
 </script>
 </body>
