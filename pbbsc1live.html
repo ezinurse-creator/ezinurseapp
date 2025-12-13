@@ -1,1 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PBBSc Live Classes 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --brand: #003B82; 
+            --accent: #00B9F2;
+            --gray-50: #f9fafb;
+            --gray-200: #e5e7eb;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
 
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: white;
+            color: var(--gray-900);
+            padding: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        h2 {
+            color: var(--brand);
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--gray-200);
+            padding-bottom: 10px;
+        }
+
+        /* ACCORDION STYLES */
+        .unit-container {
+            margin-bottom: 12px;
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            background: var(--brand);
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+
+        .unit-header:hover {
+            background: #002d63;
+        }
+
+        .unit-header span {
+            transition: transform 0.3s ease;
+        }
+
+        .unit-header[aria-expanded="true"] span {
+            transform: rotate(180deg);
+        }
+
+        .unit-content {
+            padding: 0 4px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .unit-content.active {
+            max-height: 1000px; /* Arbitrary large number to allow expansion */
+            padding: 12px 4px;
+        }
+
+        .subsection {
+            padding: 16px;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 0 0 12px 12px;
+            margin-top: -5px; /* Visual connection to header */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        /* BUTTON STYLES */
+        .resource-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 14px 18px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: transform 0.1s;
+        }
+
+        .resource-btn:active {
+            transform: scale(0.98);
+        }
+
+        .resource-btn.notes { background: #f0f9ff; border-color: #bae6fd; color: #085d8c; }
+        .resource-btn.video { background: #f5f3ff; border-color: #d8b4fe; color: #5a32a6; }
+        
+        .icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        /* MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            height: 60px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            color: var(--brand);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70%;
+        }
+
+        .btn-close {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        iframe {
+            border: none;
+        }
+
+        .iframe-video {
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+        }
+
+        .iframe-doc {
+            width: 100%;
+            height: 100%;
+            background: white;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 16px; }
+            .unit-header { font-size: 0.95rem; padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>PBBSc First Year<br><span style="font-size: 1rem; font-weight: 400; color: #64748b;">Live Sessions 2025</span></h2>
+
+    <div id="units">
+        
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 1 - ORIENTATION 2025
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/112v5Rps5VlyFI_CjQmPznoeRGM_7u5Kx/view?usp=drive_link', 'Orientation 2025')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 2 - MICROBIOLOGY
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/13-N6h01RIOz4Up4am7eYBLZdX7uGCUCC/view?usp=drive_link', 'Microbiology Class')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1Pj6UvDbDEJrbrmshFQ_BQkNrJ9QDWwLs/view?usp=drive_link', 'Microbiology Notes')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 4 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1-I5UWDuCdUOVLSmaPm42l2aa5k1fBBXN/view?usp=drive_link', 'CHN Class 4')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1-I5UWDuCdUOVLSmaPm42l2aa5k1fBBXN/view?usp=drive_link', 'CHN Notes 4')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 6 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1NkFpU1OFcdE78-gKjs_TIDFqzTwSbneW/view?usp=drive_link', 'CHN Class 6')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1FJaN_jG_OQUQiZW4vZL8ViNhLQUo9cUm/view?usp=drive_link', 'CHN Notes 6')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 8 - NUTRITION & DIETETICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/15mNFqUiAfGNIleCqDDXMuzh4Eil_gndC/view?usp=drive_link', 'Nutrition Class 8')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XlAt1ZeEUmdgL5bgHVJYrEC63hgv-nm7/view?usp=drive_link', 'Nutrition Notes 8')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 9 - NUTRITION & DIETETICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1_OJFuJdxcwBeWpvz8zYLsiqAzwkWuoL7/view?usp=drive_link', 'Nutrition Class 9')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/16gC0N5UwiMZ-Ipbv1MzZXdLR-lQWLNUy/view?usp=drive_link', 'Nutrition Notes 9')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 10 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1wpy6iG1UJOtrerTj7dWnRK4nZBSZGG_g/view?usp=drive_link', 'CHN Class 10')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/13j3ZEaXSqIr_jF5M6KOwI5TUZ-P9GNsr/view?usp=drive_link', 'CHN Notes 10')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 11 - MATERNAL NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1RHguJu-niWjNN_hhFvfh4EWLC0XZMkPd/view?usp=drive_link', 'Maternal Nursing Class 11')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1gIFIcDK6GvVIzonNJcz5Ujkxo35nL346/view?usp=drive_link', 'Maternal Notes 11')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 12 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1kUhc3nGhGVkaQ1u-pWE0opvOUpi2bxux/view?usp=drive_link', 'CHN Class 12')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1GjwaEhbLOjdOCmKAkMAb4fIXgA--epaC/view?usp=drive_link', 'CHN Notes 12')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 13 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1YvslNQsWRxkJP8cSm2GChbpghZL38Jxt/view?usp=drive_link', 'CHN Class 13')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XKvp67bk4kl8YxRxbwVXsbCaMEB16VV0/view?usp=drive_link', 'CHN Notes 13')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 15 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1o4_mSWSiNjD8-YGk6xK8pMW7_h-Mznrt/view?usp=drive_link', 'CHN Class 15')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1XWMqaAa9EPr7el08BXhzG2iegoGD5Fd5/view?usp=drive_link', 'CHN Notes 15')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 16 - CHILD HEALTH NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1la2liLzTJ6H7ySUEAXKHHAInnHZJSEz8/view?usp=drive_link', 'CHN Class 16')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1jFDhIqgx11Q9MbJdfV0iLcNsCIY7M14U/view?usp=drive_link', 'CHN Notes 16')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 18 - NUTRITION & DIETETICS
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1TGNEng4SzNbGj6XYpKK3YgYMfQ-16tRb/view?usp=drive_link', 'Nutrition Class 18')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                    <div class="resource-btn notes" onclick="openResource('notes', 'https://drive.google.com/file/d/1fCdx4I1eo68gKW58XINFjTAqQefkqXHI/view?usp=drive_link', 'Nutrition Notes 18')">
+                        <span class="icon">📚</span><span>Ezi Reading Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="unit-container">
+            <div class="unit-header" role="button" aria-expanded="false" onclick="toggleUnit(this)">
+                CLASS 19 - MEDICAL SURGICAL NURSING
+                <span>🔽</span>
+            </div>
+            <div class="unit-content">
+                <div class="subsection">
+                    <div class="resource-btn video" onclick="openResource('video', 'https://drive.google.com/file/d/1s8H2dQ-MTZdtVTJyaf3dYO-6lXmdEt7X/view?usp=drive_link', 'Med Surg Class 19')">
+                        <span class="icon">▶️</span><span>Watch Live Session</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="app-modal" class="modal-overlay">
+        <div class="modal-header">
+            <div id="modal-title" class="modal-title">Resource</div>
+            <button class="btn-close" onclick="closeModal()">Close</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+    </div>
+
+    <script>
+        // 1. Accordion Logic
+        function toggleUnit(header) {
+            const content = header.nextElementSibling;
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+            
+            // Close others (optional, keeps it cleaner)
+            document.querySelectorAll('.unit-header').forEach(h => {
+                h.setAttribute('aria-expanded', 'false');
+                h.nextElementSibling.classList.remove('active');
+            });
+
+            if (!isExpanded) {
+                header.setAttribute('aria-expanded', 'true');
+                content.classList.add('active');
+            }
+        }
+
+        // 2. Modal Logic with Google Drive Link Converter
+        function openResource(type, url, title) {
+            const modal = document.getElementById('app-modal');
+            const body = document.getElementById('modal-body');
+            const titleEl = document.getElementById('modal-title');
+            
+            // CONVERT DRIVE LINKS: Change /view or /edit to /preview
+            let cleanUrl = url;
+            if (url.includes('drive.google.com')) {
+                cleanUrl = url.replace(/\/view.*/, '/preview')
+                              .replace(/\/edit.*/, '/preview');
+            }
+
+            titleEl.textContent = title;
+            
+            let className = (type === 'video') ? 'iframe-video' : 'iframe-doc';
+            
+            body.innerHTML = `
+                <iframe 
+                    class="${className}" 
+                    src="${cleanUrl}" 
+                    allow="autoplay; encrypted-media; fullscreen"
+                    sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation">
+                </iframe>
+            `;
+
+            modal.style.display = 'flex';
+            
+            // Add history state so "Back" button closes modal instead of app
+            history.pushState({ modalOpen: true }, null, '#resource');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('app-modal');
+            modal.style.display = 'none';
+            document.getElementById('modal-body').innerHTML = '';
+            if (history.state && history.state.modalOpen) {
+                history.back();
+            }
+        }
+
+        // Handle Browser Back Button
+        window.onpopstate = function(event) {
+            const modal = document.getElementById('app-modal');
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.getElementById('modal-body').innerHTML = '';
+            }
+        };
+    </script>
+</body>
+</html>
